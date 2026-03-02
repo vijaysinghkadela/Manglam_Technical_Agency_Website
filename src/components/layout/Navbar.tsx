@@ -49,7 +49,7 @@ export function Navbar() {
           style={{ maxWidth:'1440px', padding:'0 clamp(1.5rem, 4vw, 3rem)' }}
         >
           {/* Logo — left */}
-          <Link href="/" data-cursor="pointer" className="flex items-center gap-2.5 shrink-0 z-10">
+          <Link href="/" data-cursor="pointer" className="flex items-center gap-3 shrink-0 z-10">
             <div
               className="w-8 h-8 flex items-center justify-center shrink-0"
               style={{ backgroundColor:'var(--color-violet)' }}
@@ -79,7 +79,7 @@ export function Navbar() {
                 <button
                   data-cursor="pointer"
                   className={cn(
-                    'flex items-center gap-1.5 px-3 py-2 transition-colors duration-200',
+                    'flex items-center gap-2 px-3 py-2 transition-colors duration-200',
                     path.startsWith('/services') ? 'text-white' : 'hover:text-white',
                   )}
                   style={{
@@ -129,7 +129,7 @@ export function Navbar() {
                           <div className="min-w-0">
                             <p className="text-[13px] font-semibold text-white leading-tight">{s.name}</p>
                             <p
-                              className="text-[11px] mt-0.5 leading-snug truncate"
+                              className="text-[11px] mt-1 leading-snug truncate"
                               style={{ color:'var(--color-muted)' }}
                             >
                               {s.tagline}
@@ -149,7 +149,7 @@ export function Navbar() {
               >
                 {link.label}
                 <span
-                  className="absolute bottom-1.5 left-3 right-3 h-[1.5px] bg-violet transition-transform duration-200 origin-left"
+                  className="absolute bottom-2 left-3 right-3 h-[1.5px] bg-violet transition-transform duration-200 origin-left"
                   style={{ transform: path === link.href ? 'scaleX(1)' : 'scaleX(0)' }}
                 />
               </Link>

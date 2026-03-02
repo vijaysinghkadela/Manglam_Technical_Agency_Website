@@ -96,13 +96,13 @@ export function HeroSection() {
             >
               <MagneticButton
                 href="/contact"
-                className="inline-flex items-center gap-2 px-7 py-3.5 font-display font-black text-[15px] transition-all duration-250"
+                className="inline-flex items-center gap-2 px-7 py-4 font-display font-black text-[15px] transition-all duration-250"
                 style={{ backgroundColor:'#FAFAFA', color:'var(--color-canvas)' }}
               >
                 Book Discovery Workshop →
               </MagneticButton>
               <Link href="/portfolio" data-cursor="pointer"
-                className="text-[14px] font-medium transition-colors border-b border-transparent hover:border-muted pb-0.5"
+                className="text-[14px] font-medium transition-colors border-b border-transparent hover:border-muted pb-1"
                 style={{ color:'var(--color-muted)' }}
               >
                 See Our Work
@@ -164,7 +164,7 @@ export function HeroSection() {
               ].map(p => (
                 <motion.div
                   key={p.text}
-                  className="absolute flex items-center gap-1.5 font-mono"
+                  className="absolute flex items-center gap-2 font-mono"
                   style={{
                     x: p.dx, y: p.dy,
                     fontSize:        '11px',

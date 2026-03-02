@@ -103,7 +103,7 @@ export default function QuoteModal() {
                         <button
                           key={s.slug}
                           onClick={() => toggleService(s.slug)}
-                          className={`p-3 rounded-xl border text-left text-sm transition-all flex items-center gap-2.5 ${
+                          className={`p-3 rounded-xl border text-left text-sm transition-all flex items-center gap-3 ${
                             selected ? 'bg-brand/10 border-brand/40 text-brand-light' : 'bg-surface border-border text-text-muted hover:border-brand/20'
                           }`}
                         >
@@ -119,22 +119,22 @@ export default function QuoteModal() {
               {step === 2 && (
                 <motion.div key="step2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-4">
                   <div>
-                    <label className="text-sm text-text-muted mb-1.5 block">Budget Range *</label>
-                    <select value={budget} onChange={(e) => setField('budget', e.target.value)} className="w-full bg-dark border border-border rounded-xl px-4 py-2.5 text-sm text-text-primary outline-none focus:border-brand">
+                    <label className="text-sm text-text-muted mb-2 block">Budget Range *</label>
+                    <select value={budget} onChange={(e) => setField('budget', e.target.value)} className="w-full bg-dark border border-border rounded-xl px-4 py-3 text-sm text-text-primary outline-none focus:border-brand">
                       <option value="">Select budget</option>
                       {BUDGET_RANGES.map((b) => <option key={b} value={b}>{b}</option>)}
                     </select>
                   </div>
                   <div>
-                    <label className="text-sm text-text-muted mb-1.5 block">Timeline</label>
-                    <select value={timeline} onChange={(e) => setField('timeline', e.target.value)} className="w-full bg-dark border border-border rounded-xl px-4 py-2.5 text-sm text-text-primary outline-none focus:border-brand">
+                    <label className="text-sm text-text-muted mb-2 block">Timeline</label>
+                    <select value={timeline} onChange={(e) => setField('timeline', e.target.value)} className="w-full bg-dark border border-border rounded-xl px-4 py-3 text-sm text-text-primary outline-none focus:border-brand">
                       <option value="">Select timeline</option>
                       {TIMELINES.map((t) => <option key={t} value={t}>{t}</option>)}
                     </select>
                   </div>
                   <div>
-                    <label className="text-sm text-text-muted mb-1.5 block">Project Description *</label>
-                    <textarea value={description} onChange={(e) => setField('description', e.target.value)} rows={4} className="w-full bg-dark border border-border rounded-xl px-4 py-2.5 text-sm text-text-primary outline-none focus:border-brand resize-none" placeholder="Tell us about your project..." />
+                    <label className="text-sm text-text-muted mb-2 block">Project Description *</label>
+                    <textarea value={description} onChange={(e) => setField('description', e.target.value)} rows={4} className="w-full bg-dark border border-border rounded-xl px-4 py-3 text-sm text-text-primary outline-none focus:border-brand resize-none" placeholder="Tell us about your project..." />
                   </div>
                 </motion.div>
               )}
@@ -142,20 +142,20 @@ export default function QuoteModal() {
               {step === 3 && (
                 <motion.div key="step3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-4">
                   <div>
-                    <label className="text-sm text-text-muted mb-1.5 block">Full Name *</label>
-                    <input value={name} onChange={(e) => setField('name', e.target.value)} className="w-full bg-dark border border-border rounded-xl px-4 py-2.5 text-sm text-text-primary outline-none focus:border-brand" placeholder="Your name" />
+                    <label className="text-sm text-text-muted mb-2 block">Full Name *</label>
+                    <input value={name} onChange={(e) => setField('name', e.target.value)} className="w-full bg-dark border border-border rounded-xl px-4 py-3 text-sm text-text-primary outline-none focus:border-brand" placeholder="Your name" />
                   </div>
                   <div>
-                    <label className="text-sm text-text-muted mb-1.5 block">Email *</label>
-                    <input type="email" value={email} onChange={(e) => setField('email', e.target.value)} className="w-full bg-dark border border-border rounded-xl px-4 py-2.5 text-sm text-text-primary outline-none focus:border-brand" placeholder="you@company.com" />
+                    <label className="text-sm text-text-muted mb-2 block">Email *</label>
+                    <input type="email" value={email} onChange={(e) => setField('email', e.target.value)} className="w-full bg-dark border border-border rounded-xl px-4 py-3 text-sm text-text-primary outline-none focus:border-brand" placeholder="you@company.com" />
                   </div>
                   <div>
-                    <label className="text-sm text-text-muted mb-1.5 block">Phone</label>
-                    <input type="tel" value={phone} onChange={(e) => setField('phone', e.target.value)} className="w-full bg-dark border border-border rounded-xl px-4 py-2.5 text-sm text-text-primary outline-none focus:border-brand" placeholder="+91 XXXXXXXXXX" />
+                    <label className="text-sm text-text-muted mb-2 block">Phone</label>
+                    <input type="tel" value={phone} onChange={(e) => setField('phone', e.target.value)} className="w-full bg-dark border border-border rounded-xl px-4 py-3 text-sm text-text-primary outline-none focus:border-brand" placeholder="+91 XXXXXXXXXX" />
                   </div>
                   <div>
-                    <label className="text-sm text-text-muted mb-1.5 block">Company</label>
-                    <input value={company} onChange={(e) => setField('company', e.target.value)} className="w-full bg-dark border border-border rounded-xl px-4 py-2.5 text-sm text-text-primary outline-none focus:border-brand" placeholder="Optional" />
+                    <label className="text-sm text-text-muted mb-2 block">Company</label>
+                    <input value={company} onChange={(e) => setField('company', e.target.value)} className="w-full bg-dark border border-border rounded-xl px-4 py-3 text-sm text-text-primary outline-none focus:border-brand" placeholder="Optional" />
                   </div>
                 </motion.div>
               )}

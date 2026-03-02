@@ -63,7 +63,7 @@ export function WhyMTA() {
                 className="py-6 flex items-start gap-4 border-b"
                 style={{ borderColor:'var(--color-border)' }}
               >
-                <Check className="w-5 h-5 mt-0.5 shrink-0" style={{ color:'var(--color-violet)' }} />
+                <Check className="w-5 h-5 mt-1 shrink-0" style={{ color:'var(--color-violet)' }} />
                 <div>
                   <h3 className="font-display text-lg font-bold text-white mb-1">
                     {val.title}

@@ -24,8 +24,8 @@ export default function PricingCard({ plan }: PricingCardProps) {
       </div>
       <ul className="space-y-2.5 my-6">
         {plan.features.map((f, i) => (
-          <li key={i} className="flex items-start gap-2.5 text-sm text-text-muted">
-            <Check className="w-4 h-4 text-success shrink-0 mt-0.5" />
+          <li key={i} className="flex items-start gap-3 text-sm text-text-muted">
+            <Check className="w-4 h-4 text-success shrink-0 mt-1" />
             {f}
           </li>
         ))}

@@ -28,9 +28,9 @@ const variantStyles = {
 };
 
 const sizeStyles = {
-  sm: 'px-3.5 py-2 text-xs gap-1.5',
-  md: 'px-5 py-2.5 text-sm gap-2',
-  lg: 'px-7 py-3 text-base gap-2.5',
+  sm: 'px-4 py-2 text-xs gap-2',
+  md: 'px-5 py-3 text-sm gap-2',
+  lg: 'px-7 py-3 text-base gap-3',
   xl: 'px-9 py-4 text-lg gap-3',
 };
 

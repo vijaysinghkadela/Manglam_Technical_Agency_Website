@@ -35,6 +35,27 @@ const plans = [
     features: ['Process Audit', 'API Integration', 'Custom Dashboards', 'Workflow Automation'],
     href: '/services/ai-automation',
   },
+  {
+    name: 'Branding & Identity',
+    price: 'Starting at ₹10,000',
+    type: 'tiered offerings',
+    features: ['Discovery Workshop', 'Comprehensive Brand System', 'Asset Guidelines', 'Brand Guardian Retainer'],
+    href: '/services/branding',
+  },
+  {
+    name: 'SaaS Products & Subscriptions',
+    price: 'Starting at ₹5,000',
+    type: 'per month',
+    features: ['Tenant Setup & Migration', 'Custom API Integrations', 'Dedicated Database Instance', 'Enterprise SSO'],
+    href: '/services/saas-products',
+  },
+  {
+    name: 'Content Creation & Strategy',
+    price: 'Starting at ₹15,000',
+    type: 'retainer or project',
+    features: ['SEO-Optimized Blog Posts', 'Social Media Copy', 'Email Newsletters', 'Whitepapers & Guides'],
+    href: '/services/content-creation',
+  },
 ]
 
 const comparisonData = {

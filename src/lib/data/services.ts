@@ -141,16 +141,27 @@ export const services: Service[] = [
     Icon:        Globe,
     description: 'We engineer complex, data-heavy web applications and portals. Every product we build guarantees WCAG 2.1 AA accessibility and secure-by-default architecture from day one. Includes Year 1 Complimentary maintenance.',
     features:    ['Next.js / React ecosystems', 'WCAG 2.1 AA Accessibility', 'Secure-by-default database modeling', 'Year 1 Complimentary Maintenance'],
-    priceLabel:  'From ₹1,50,000',
+    priceLabel:  'Starting at ₹5,000/mo',
     pricing: [
       {
-        label: 'Discovery Workshop', amount: '₹25,000', period: 'one-time', highlight: true,
-        features: ['Product Scoping', 'DB Schema Design', 'UX Wireframes', 'Tech Stack Selection'],
-        subtext: 'Credited towards total development cost.',
+        label: 'Standard Setup (One-Time)', amount: 'Starting at ₹25,000', period: 'one-time', highlight: false,
+        features: ['Tenant setup', 'Basic CSV data migration', 'Standard configuration'],
       },
       {
-        label: 'Core Development', amount: 'Custom', period: 'milestones', highlight: false,
-        features: ['Frontend/Backend Build', 'Testing (E2E, Unit)', 'Deployment Architecture', 'Year 1 Complimentary Support'],
+        label: 'Enterprise Custom Setup (One-Time)', amount: 'Starting at ₹1,00,000', period: 'one-time', highlight: false,
+        features: ['Custom API integrations', 'SSO setup', 'Dedicated onboarding manager'],
+      },
+      {
+        label: 'Basic Tier', amount: 'Starting at ₹5,000', period: 'per month', highlight: false,
+        features: ['Up to 10 users', 'Standard modules', 'Email support'],
+      },
+      {
+        label: 'Professional Tier', amount: 'Starting at ₹20,000', period: 'per month', highlight: true,
+        features: ['Up to 50 users', 'Advanced reporting', 'Priority ticketing', 'API access'],
+      },
+      {
+        label: 'Enterprise Tier', amount: 'Custom Pricing', period: 'per month', highlight: false,
+        features: ['Unlimited/Custom user tiers', 'Dedicated database instance', 'Dedicated account manager'],
       },
     ],
     process: [
@@ -171,16 +182,19 @@ export const services: Service[] = [
     Icon:        PenTool,
     description: 'We develop cohesive brand systems—not just logos. From typography rules to exact color math, we deliver comprehensive guidelines that ensure your brand is protected, scalable, and entirely IP-clear.',
     features:    ['Logo & Mark generation', 'Comprehensive Brand Guidelines', 'Color systems & typography rules', '100% IP-clear asset handover'],
-    priceLabel:  'Custom Quote',
+    priceLabel:  'Starting at ₹10,000',
     pricing: [
       {
-        label: 'Discovery Workshop', amount: '₹25,000', period: 'one-time', highlight: true,
-        features: ['Market positioning', 'Visual audit', 'Moodboarding', 'Competitor review'],
-        subtext: 'Credited towards the full branding project.',
+        label: 'Brand Discovery Workshop', amount: 'Starting at ₹10,000', period: 'one-time', highlight: false,
+        features: ['2-3 hour session', 'Competitor Analysis', 'Positioning', 'Brand Strategy Brief'],
       },
       {
-        label: 'System Design', amount: 'From ₹75,000', period: 'project', highlight: false,
-        features: ['Primary/Secondary Marks', 'Type Hierarchy', 'Digital Asset Library', 'Guideline PDF'],
+        label: 'Comprehensive Brand System', amount: 'Custom Pricing', period: 'project', highlight: true,
+        features: ['Logo Suite', 'Colour Palette', 'Typography System', 'Brand Voice Guide', 'Application Mockups', 'Brand Guidelines PDF'],
+      },
+      {
+        label: 'Brand Guardian Retainer', amount: 'Custom', period: 'monthly', highlight: false,
+        features: ['Dedicated monthly design hours', 'Brand consistency reviews', 'Priority asset creation'],
       },
     ],
     process: [
@@ -201,16 +215,24 @@ export const services: Service[] = [
     Icon:        Edit3,
     description: 'We leverage AI as a research and structuring tool, but every single line of copy—whether for a landing page, technical whitepaper, or blog—is heavily edited and fact-checked by technical human writers.',
     features:    ['Technical blog writing', 'Website copywriting frameworks', 'Whitepapers & documentation', 'Strict AI-hallucination audits'],
-    priceLabel:  'Custom Quote',
+    priceLabel:  'Starting at ₹15,000',
     pricing: [
       {
-        label: 'Discovery Workshop', amount: '₹25,000', period: 'one-time', highlight: false,
-        features: ['Tone of Voice Audit', 'Content Gap Analysis', 'Keyword Mapping'],
-        subtext: 'Credited toward content retainers.',
+        label: 'Content Starter', amount: 'Starting at ₹25,000', period: 'per month', highlight: false,
+        features: ['4 blog posts (800–1,200 words)', 'SEO keyword integration'],
       },
       {
-        label: 'Content Batches', amount: 'Custom', period: 'per piece', highlight: true,
-        features: ['SEO-optimized', 'Fact-checked by humans', 'Plagiarism & AI reports included'],
+        label: 'Content Pro', amount: 'Starting at ₹50,000', period: 'per month', highlight: true,
+        features: ['8 blog posts', 'Accompanying social media captions', '1 monthly email newsletter', 'SEO strategy'],
+      },
+      {
+        label: 'Content Suite', amount: 'Starting at ₹1,00,000', period: 'per month', highlight: false,
+        features: ['Full strategy', 'Blog, social, email, PR content', '1 long-form asset per quarter'],
+      },
+      {
+        label: 'One-Off Projects', amount: 'Starting at ₹15,000', period: 'per project', highlight: false,
+        features: ['Website copy', 'Pitch decks', 'Industry reports'],
+        subtext: 'Minimum engagement applies.',
       },
     ],
     process: [

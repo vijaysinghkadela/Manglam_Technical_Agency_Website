@@ -29,16 +29,16 @@ export default function PricingContent() {
         <div className="max-w-xs mx-auto flex items-center bg-surface rounded-xl p-1 border border-border">
           <button
             onClick={() => setBillingPeriod('monthly')}
-            className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${billingPeriod === 'monthly' ? 'bg-brand text-white' : 'text-text-muted hover:text-text-primary'}`}
+            className={`flex-1 px-4 py-3 rounded-lg text-sm font-medium transition-all ${billingPeriod === 'monthly' ? 'bg-brand text-white' : 'text-text-muted hover:text-text-primary'}`}
             id="pricing-toggle-monthly"
           >Monthly</button>
           <button
             onClick={() => setBillingPeriod('annual')}
-            className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-medium transition-all relative ${billingPeriod === 'annual' ? 'bg-brand text-white' : 'text-text-muted hover:text-text-primary'}`}
+            className={`flex-1 px-4 py-3 rounded-lg text-sm font-medium transition-all relative ${billingPeriod === 'annual' ? 'bg-brand text-white' : 'text-text-muted hover:text-text-primary'}`}
             id="pricing-toggle-annual"
           >
             Annual
-            <span className="absolute -top-2 -right-2 px-1.5 py-0.5 bg-success text-white text-[10px] font-bold rounded-full">Save</span>
+            <span className="absolute -top-2 -right-2 px-2 py-1 bg-success text-white text-[10px] font-bold rounded-full">Save</span>
           </button>
         </div>
       </section>
@@ -54,7 +54,7 @@ export default function PricingContent() {
                     <Sparkles className="w-4 h-4 text-brand-light" />
                   </span>
                   {planGroup.service}
-                  <span className="text-xs bg-surface-2 px-2 py-0.5 rounded-full border border-border text-text-muted ml-2">{planGroup.badge}</span>
+                  <span className="text-xs bg-surface-2 px-2 py-1 rounded-full border border-border text-text-muted ml-2">{planGroup.badge}</span>
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                   {planGroup.plans.map((plan) => (
@@ -68,7 +68,7 @@ export default function PricingContent() {
                       <ul className="space-y-2 my-5">
                         {plan.features.map((f, i) => (
                           <li key={i} className="flex items-start gap-2 text-sm text-text-muted">
-                            <Check className="w-4 h-4 text-success shrink-0 mt-0.5" />{f}
+                            <Check className="w-4 h-4 text-success shrink-0 mt-1" />{f}
                           </li>
                         ))}
                       </ul>

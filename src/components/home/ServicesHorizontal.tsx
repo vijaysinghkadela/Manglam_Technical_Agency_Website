@@ -147,7 +147,7 @@ export function ServicesHorizontal() {
                       {s.name}
                     </h3>
                     <p className="text-sm leading-relaxed" style={{ color:'var(--color-muted)' }}>{s.tagline}</p>
-                    <ul className="flex flex-col gap-1.5 mt-1">
+                    <ul className="flex flex-col gap-2 mt-1">
                       {s.features.slice(0,3).map(f => (
                         <li key={f} className="font-mono text-xs" style={{ color:'var(--color-dead)' }}>— {f}</li>
                       ))}

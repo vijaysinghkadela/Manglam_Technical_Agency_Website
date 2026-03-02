@@ -40,7 +40,7 @@ export function FeaturedProject() {
           >
             {/* Browser chrome */}
             <div className="flex items-center gap-3 px-4 py-3" style={{ backgroundColor:'#1A1A1A', borderBottom:'1px solid #2A2A2A' }}>
-              <div className="flex gap-1.5">
+              <div className="flex gap-2">
                 {/* Traffic lights */}
                 {['#FF5F57','#FEBC2E','#28C840'].map((c, i) => (
                   <div key={i} className="w-3 h-3 rounded-full"
@@ -78,17 +78,17 @@ export function FeaturedProject() {
 
               {/* Mock hero */}
               <div className="px-5 py-5">
-                <div className="flex items-center gap-1.5 mb-3">
+                <div className="flex items-center gap-2 mb-3">
                   <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor:'#F97316' }} />
                   <div className="h-1.5 w-20 rounded-full" style={{ backgroundColor:'rgba(249,115,22,0.35)' }} />
                 </div>
                 <div className="h-4 w-[70%] rounded mb-2" style={{ backgroundColor:'rgba(255,255,255,0.26)' }} />
-                <div className="h-4 w-[54%] rounded mb-1.5" style={{ backgroundColor:'rgba(255,255,255,0.2)' }} />
+                <div className="h-4 w-[54%] rounded mb-2" style={{ backgroundColor:'rgba(255,255,255,0.2)' }} />
                 <div className="h-4 w-[42%] rounded mb-4" style={{ backgroundColor:'rgba(255,255,255,0.14)' }} />
                 {[100,85,68].map((w, i) => (
-                  <div key={i} className="h-1.5 rounded mb-1.5" style={{ width:`${w}%`, backgroundColor:'rgba(255,255,255,0.08)' }} />
+                  <div key={i} className="h-1.5 rounded mb-2" style={{ width:`${w}%`, backgroundColor:'rgba(255,255,255,0.08)' }} />
                 ))}
-                <div className="flex gap-2.5 mt-4">
+                <div className="flex gap-3 mt-4">
                   <div className="h-8 w-24 rounded" style={{ backgroundColor:'#C2410C' }} />
                   <div className="h-8 w-20 rounded" style={{ backgroundColor:'rgba(255,255,255,0.07)', border:'1px solid rgba(255,255,255,0.12)' }} />
                 </div>
@@ -101,7 +101,7 @@ export function FeaturedProject() {
                 {[['500+','Lives Impacted'],['15+','Years'],['5+','Districts']].map(([n,l]) => (
                   <div key={l} className="flex-1 flex flex-col items-center py-3" style={{ backgroundColor:'rgba(0,0,0,0.25)' }}>
                     <span className="font-bold text-sm" style={{ color:'#FB923C' }}>{n}</span>
-                    <span className="mt-0.5" style={{ fontSize:'9px', color:'rgba(255,255,255,0.22)' }}>{l}</span>
+                    <span className="mt-1" style={{ fontSize:'9px', color:'rgba(255,255,255,0.22)' }}>{l}</span>
                   </div>
                 ))}
               </div>
@@ -166,7 +166,7 @@ export function FeaturedProject() {
               <p className="font-mono uppercase mb-2" style={{ fontSize:'10px', color:'var(--color-dead)', letterSpacing:'0.15em' }}>TECH STACK</p>
               <div className="flex flex-wrap gap-2">
                 {['Next.js','TypeScript','Tailwind CSS','Cloudinary','Vercel'].map(t => (
-                  <span key={t} className="font-mono text-[11px] px-2.5 py-1 transition-colors hover:text-white"
+                  <span key={t} className="font-mono text-[11px] px-3 py-1 transition-colors hover:text-white"
                     style={{ border:'1px solid var(--color-border)', color:'var(--color-muted)' }}>
                     {t}
                   </span>
@@ -184,7 +184,7 @@ export function FeaturedProject() {
                   'QA, testing & production deployment',
                   '1-year free domain + maintenance',
                 ].map(d => (
-                  <li key={d} className="flex items-center gap-2.5 text-sm" style={{ color:'var(--color-muted)' }}>
+                  <li key={d} className="flex items-center gap-3 text-sm" style={{ color:'var(--color-muted)' }}>
                     <Check className="w-3.5 h-3.5 shrink-0" style={{ color:'var(--color-violet-light)' }} />
                     {d}
                   </li>
@@ -196,7 +196,7 @@ export function FeaturedProject() {
             <a href="https://www.marutnarayansewasansthan.org"
               target="_blank" rel="noopener noreferrer"
               data-cursor="link"
-              className="inline-flex items-center gap-2.5 w-fit text-sm font-mono text-white transition-all duration-300 group"
+              className="inline-flex items-center gap-3 w-fit text-sm font-mono text-white transition-all duration-300 group"
               style={{ border:'1px solid var(--color-border)', padding:'12px 20px' }}
               onMouseEnter={e => {
                 (e.currentTarget as HTMLElement).style.backgroundColor = '#FAFAFA'

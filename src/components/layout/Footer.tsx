@@ -52,7 +52,7 @@ export function Footer() {
           </h2>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-black font-display font-black text-[15px] hover:bg-violet hover:text-white transition-all duration-250"
+            className="inline-flex items-center gap-2 px-7 py-4 bg-white text-black font-display font-black text-[15px] hover:bg-violet hover:text-white transition-all duration-250"
             data-cursor="pointer"
           >
             Get a Quote →
@@ -71,7 +71,7 @@ export function Footer() {
           {/* Col 1: Logo & Social */}
           <div className="flex flex-col gap-5">
             <div>
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-3">
                 <div className="w-8 h-8 bg-violet flex items-center justify-center">
                   <span className="text-white font-display font-black text-sm leading-none">M</span>
                 </div>

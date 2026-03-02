@@ -21,7 +21,7 @@ export default function PortfolioPreview() {
                 <div className="rounded-xl overflow-hidden border border-white/15 shadow-2xl">
                   {/* Browser chrome */}
                   <div className="bg-[#1E1E2E] px-4 py-3 flex items-center gap-3 border-b border-white/10">
-                    <div className="flex gap-1.5">
+                    <div className="flex gap-2">
                       <div className="w-3 h-3 rounded-full bg-[#FF5F57]" />
                       <div className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
                       <div className="w-3 h-3 rounded-full bg-[#28C840]" />
@@ -101,7 +101,7 @@ export default function PortfolioPreview() {
                   <p className="text-xs text-white/40 uppercase tracking-wider mb-2 font-semibold">Tech Stack</p>
                   <div className="flex flex-wrap gap-2">
                     {['Next.js', 'TypeScript', 'Tailwind CSS', 'Cloudinary', 'Vercel'].map((tech) => (
-                      <span key={tech} className="px-2.5 py-1 rounded-lg text-xs font-mono font-medium bg-white/5 text-white/70 border border-white/10">{tech}</span>
+                      <span key={tech} className="px-3 py-1 rounded-lg text-xs font-mono font-medium bg-white/5 text-white/70 border border-white/10">{tech}</span>
                     ))}
                   </div>
                 </div>

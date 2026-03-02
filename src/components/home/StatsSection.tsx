@@ -16,7 +16,7 @@ export function StatsSection() {
           {STATS.map((s, i) => (
             <div
               key={s.label}
-              className="flex flex-col items-center lg:items-start text-center lg:text-left"
+              className="flex flex-col items-center lg:items-start text-center lg:text-left min-w-0"
               style={{
                 padding:      '40px',
                 borderRight:  i < 3 ? '1px solid var(--color-border)' : 'none',
@@ -28,7 +28,7 @@ export function StatsSection() {
                 target={s.value}
                 suffix={s.suffix}
                 className="font-display font-black text-white leading-none tracking-tight"
-                style={{ fontSize:'clamp(38px, 5vw, 72px)' }}
+                style={{ fontSize:'clamp(28px, 8vw, 72px)' }}
               />
               <p
                 className="font-mono uppercase mt-3"

@@ -35,7 +35,7 @@ export default function MegaMenu({ onClose }: MegaMenuProps) {
                 </div>
                 <div>
                   <div className="text-sm font-medium text-white group-hover:text-violet-light transition-colors">{service.name}</div>
-                  <div className="text-xs text-muted mt-0.5 line-clamp-1">{service.tagline}</div>
+                  <div className="text-xs text-muted mt-1 line-clamp-1">{service.tagline}</div>
                 </div>
               </Link>
             ))}
@@ -48,9 +48,9 @@ export default function MegaMenu({ onClose }: MegaMenuProps) {
               <div className="text-sm font-semibold text-white">MNSS Website</div>
               <div className="text-xs text-muted mt-1">Rajasthan NGO • 3 weeks • ₹50,000</div>
             </div>
-            <div className="flex flex-wrap gap-1.5 mb-4">
+            <div className="flex flex-wrap gap-2 mb-4">
               {['Next.js', 'TypeScript', 'Tailwind'].map((t) => (
-                <span key={t} className="text-[10px] bg-canvas px-2 py-0.5 rounded border border-border text-muted">
+                <span key={t} className="text-[10px] bg-canvas px-2 py-1 rounded border border-border text-muted">
                   {t}
                 </span>
               ))}
@@ -59,7 +59,7 @@ export default function MegaMenu({ onClose }: MegaMenuProps) {
               href="https://www.marutnarayansewasansthan.org"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs text-violet-light hover:text-violet transition-colors"
+              className="inline-flex items-center gap-2 text-xs text-violet-light hover:text-violet transition-colors"
             >
               Visit Live Site <ExternalLink className="w-3 h-3" />
             </a>
@@ -67,7 +67,7 @@ export default function MegaMenu({ onClose }: MegaMenuProps) {
               <Link
                 href="/services"
                 onClick={onClose}
-                className="inline-flex items-center gap-1.5 text-sm text-white hover:text-violet-light transition-colors font-medium"
+                className="inline-flex items-center gap-2 text-sm text-white hover:text-violet-light transition-colors font-medium"
               >
                 View All Services <ArrowRight className="w-4 h-4" />
               </Link>

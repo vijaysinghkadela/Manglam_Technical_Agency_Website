@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true })
   } catch (e) {
     if (e instanceof z.ZodError) {
-      return NextResponse.json({ success:false, errors: e.errors }, { status:400 })
+      return NextResponse.json({ success:false, errors: e.flatten().fieldErrors }, { status:400 })
     }
     return NextResponse.json({ success:false }, { status:500 })
   }

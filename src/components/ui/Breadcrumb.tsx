@@ -18,12 +18,12 @@ export default function Breadcrumb() {
   });
 
   return (
-    <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-sm text-text-muted">
+    <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-text-muted">
       <Link href="/" className="hover:text-brand-light transition-colors flex items-center gap-1" aria-label="Home">
         <Home className="w-3.5 h-3.5" />
       </Link>
       {crumbs.map((crumb) => (
-        <span key={crumb.href} className="flex items-center gap-1.5">
+        <span key={crumb.href} className="flex items-center gap-2">
           <ChevronRight className="w-3.5 h-3.5 text-text-muted/40" />
           {crumb.isLast ? (
             <span className="text-text-primary font-medium">{crumb.label}</span>
