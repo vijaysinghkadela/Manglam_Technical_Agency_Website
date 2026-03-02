@@ -1,5 +1,4 @@
 import { projects } from '@/lib/data/projects'
-import Link from 'next/link'
 import { ExternalLink, Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -37,9 +36,8 @@ export default function PortfolioPage() {
                 {/* Left — Mockup wrapper in White Bento Card */}
                 <div className="w-full bg-white rounded-[40px] p-8 lg:p-12 shadow-dark-xl flex flex-col justify-center transform group-hover:-translate-y-2 transition-transform duration-500">
                   <div className={cn(
-                    "w-full rounded-2xl overflow-hidden shadow-2xl flex flex-col items-center justify-center p-12 text-center bg-linear-to-br border border-black/10",
-                    p.gradient
-                  )} style={{ aspectRatio: '16/10' }}>
+                    "w-full rounded-2xl overflow-hidden shadow-2xl flex flex-col items-center justify-center p-12 text-center border border-black/10"
+                  )} style={{ aspectRatio: '16/10', background: `linear-gradient(135deg, ${p.bgFrom}, ${p.bgTo})` }}>
                     
                     {p.status === 'live' ? (
                       <div className="flex flex-col items-center gap-4">
@@ -71,7 +69,7 @@ export default function PortfolioPage() {
                   <div className="bg-[#111] rounded-3xl p-8 lg:p-10 border border-border flex flex-col gap-6 transform group-hover:-translate-y-2 transition-transform duration-500 group-hover:shadow-violet-sm group-hover:border-violet/30 min-h-[300px]">
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2">
-                      {p.category.map(t => (
+                      {p.tags.map(t => (
                         <span key={t} className="text-[11px] font-mono px-3 py-1 rounded-full border border-border text-muted">{t}</span>
                       ))}
                       {p.featured && (

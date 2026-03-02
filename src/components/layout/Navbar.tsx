@@ -7,18 +7,18 @@ import { ChevronDown, Menu, X } from 'lucide-react'
 import { services } from '@/lib/data/services'
 import { cn } from '@/lib/utils'
 
-const NAV = [
-  { href:'/',          label:'Home'      },
-  { href:'/about',     label:'About'     },
-  { href:'/services',  label:'Services', mega:true },
-  { href:'/portfolio', label:'Portfolio' },
-  { href:'/pricing',   label:'Pricing'   },
-  { href:'/blog',      label:'Blog'      },
-  { href:'/contact',   label:'Contact'   },
+const NAV_LINKS = [
+  { href:'/',          label:'Home'                     },
+  { href:'/about',     label:'About'                    },
+  { href:'/services',  label:'Services', hasMega: true  },
+  { href:'/portfolio', label:'Portfolio'                },
+  { href:'/pricing',   label:'Pricing'                  },
+  { href:'/blog',      label:'Blog'                     },
+  { href:'/contact',   label:'Contact'                  },
 ]
 
 export function Navbar() {
-  const path    = usePathname()
+  const path     = usePathname()
   const [scrolled, setScrolled] = useState(false)
   const [mobile,   setMobile]   = useState(false)
   const [mega,     setMega]     = useState(false)
@@ -29,44 +29,69 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', fn)
   }, [])
 
-  useEffect(() => { setMobile(false); setMega(false) }, [path])
+  useEffect(() => { 
+    setTimeout(() => { setMobile(false); setMega(false) }, 0) 
+  }, [path])
 
   return (
     <>
-      <nav className={cn(
-        'fixed top-0 left-0 right-0 z-100 transition-all duration-300',
-        scrolled ? 'bg-canvas/88 backdrop-blur-2xl border-b border-border' : 'bg-transparent',
-      )}>
-        <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12 h-[68px] flex items-center justify-between">
-
-          {/* Logo */}
-          <Link href="/" data-cursor="pointer" className="flex items-center gap-2.5 shrink-0">
-            <div className="w-8 h-8 bg-violet flex items-center justify-center">
+      <nav
+        className="fixed top-0 left-0 right-0 z-100 transition-all duration-300"
+        style={{
+          backgroundColor: scrolled ? 'rgba(8,8,8,0.88)' : 'transparent',
+          backdropFilter:  scrolled ? 'blur(24px)'       : 'none',
+          borderBottom:    scrolled ? '1px solid var(--color-border)' : 'none',
+        }}
+      >
+        {/* Full-width inner — 68px tall */}
+        <div
+          className="relative w-full mx-auto flex items-center justify-between h-[68px]"
+          style={{ maxWidth:'1440px', padding:'0 clamp(1.5rem, 4vw, 3rem)' }}
+        >
+          {/* Logo — left */}
+          <Link href="/" data-cursor="pointer" className="flex items-center gap-2.5 shrink-0 z-10">
+            <div
+              className="w-8 h-8 flex items-center justify-center shrink-0"
+              style={{ backgroundColor:'var(--color-violet)' }}
+            >
               <span className="text-white font-display font-black text-sm leading-none">M</span>
             </div>
             <div className="flex flex-col leading-none">
               <span className="font-display font-black text-[15px] text-white tracking-tight">MTA</span>
-              <span className="text-[9px] text-muted font-mono tracking-[0.14em] uppercase hidden sm:block">
+              <span
+                className="font-mono uppercase hidden sm:block"
+                style={{ fontSize:'9px', color:'var(--color-muted)', letterSpacing:'0.14em' }}
+              >
                 Manglam Technical Agency
               </span>
             </div>
           </Link>
 
-          {/* Centre links */}
+          {/* Nav links — ABSOLUTE CENTRE (independent of logo + CTA widths) */}
           <div className="hidden lg:flex items-center gap-0 absolute left-1/2 -translate-x-1/2">
-            {NAV.map(link => link.mega ? (
-              <div key={link.href} className="relative"
+            {NAV_LINKS.map(link => link.hasMega ? (
+              <div
+                key={link.href}
+                className="relative"
                 onMouseEnter={() => setMega(true)}
                 onMouseLeave={() => setMega(false)}
               >
-                <button data-cursor="pointer"
+                <button
+                  data-cursor="pointer"
                   className={cn(
-                    'flex items-center gap-1.5 px-3 py-2 text-[13px] font-medium transition-colors',
-                    path.startsWith('/services') ? 'text-white' : 'text-muted hover:text-white',
+                    'flex items-center gap-1.5 px-3 py-2 transition-colors duration-200',
+                    path.startsWith('/services') ? 'text-white' : 'hover:text-white',
                   )}
+                  style={{
+                    fontSize: '13px',
+                    fontWeight: 500,
+                    color: path.startsWith('/services') ? '#FAFAFA' : 'var(--color-muted)',
+                  }}
                 >
                   {link.label}
-                  <ChevronDown className={cn('w-3 h-3 transition-transform duration-200', mega && 'rotate-180')} />
+                  <ChevronDown
+                    className={cn('w-3 h-3 transition-transform duration-200', mega && 'rotate-180')}
+                  />
                 </button>
 
                 <AnimatePresence>
@@ -76,18 +101,39 @@ export function Navbar() {
                       animate={{ opacity:1, y:0 }}
                       exit={{ opacity:0, y:8 }}
                       transition={{ duration:0.18 }}
-                      className="absolute top-full left-1/2 -translate-x-1/2 w-[560px] bg-surface border border-border mt-1 p-5 grid grid-cols-2 gap-2 shadow-[0_20px_60px_rgba(0,0,0,0.7)]"
+                      className="absolute top-full left-1/2 -translate-x-1/2 grid grid-cols-2 gap-2 p-5"
+                      style={{
+                        width:       '560px',
+                        marginTop:   '4px',
+                        background:  'var(--color-surface)',
+                        border:      '1px solid var(--color-border)',
+                        boxShadow:   '0 24px 64px rgba(0,0,0,0.7)',
+                      }}
                     >
                       {services.map(s => (
-                        <Link key={s.slug} href={`/services/${s.slug}`} data-cursor="pointer"
-                          className="flex items-start gap-3 p-3 hover:bg-canvas border border-transparent hover:border-border transition-all group"
+                        <Link key={s.slug} href={`/services/${s.slug}`}
+                          data-cursor="pointer"
+                          className="flex items-start gap-3 p-3 border border-transparent
+                                     hover:border-border hover:bg-canvas
+                                     transition-all group"
                         >
-                          <div className="w-8 h-8 border border-border flex items-center justify-center shrink-0 group-hover:border-violet/50 transition-colors">
-                            <s.Icon className="w-4 h-4 text-muted group-hover:text-violet-light transition-colors" />
+                          <div
+                            className="w-8 h-8 flex items-center justify-center shrink-0 border transition-colors group-hover:border-violet"
+                            style={{ borderColor:'var(--color-border)' }}
+                          >
+                            <s.Icon
+                              className="w-4 h-4 transition-colors"
+                              style={{ color:'var(--color-muted)' }}
+                            />
                           </div>
                           <div className="min-w-0">
                             <p className="text-[13px] font-semibold text-white leading-tight">{s.name}</p>
-                            <p className="text-[11px] text-muted mt-0.5 leading-snug line-clamp-1">{s.tagline}</p>
+                            <p
+                              className="text-[11px] mt-0.5 leading-snug truncate"
+                              style={{ color:'var(--color-muted)' }}
+                            >
+                              {s.tagline}
+                            </p>
                           </div>
                         </Link>
                       ))}
@@ -96,35 +142,45 @@ export function Navbar() {
                 </AnimatePresence>
               </div>
             ) : (
-              <Link key={link.href} href={link.href} data-cursor="pointer"
-                className={cn(
-                  'relative px-3 py-2 text-[13px] font-medium transition-colors group',
-                  path === link.href ? 'text-white' : 'text-muted hover:text-white',
-                )}
+              <Link key={link.href} href={link.href}
+                data-cursor="pointer"
+                className="relative px-3 py-2 text-[13px] font-medium transition-colors duration-200 group"
+                style={{ color: path === link.href ? '#FAFAFA' : 'var(--color-muted)' }}
               >
                 {link.label}
-                <span className={cn(
-                  'absolute bottom-1.5 left-3 right-3 h-[1.5px] bg-violet transition-transform origin-left duration-250',
-                  path === link.href ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100',
-                )} />
+                <span
+                  className="absolute bottom-1.5 left-3 right-3 h-[1.5px] bg-violet transition-transform duration-200 origin-left"
+                  style={{ transform: path === link.href ? 'scaleX(1)' : 'scaleX(0)' }}
+                />
               </Link>
             ))}
           </div>
 
-          {/* Right: CTA + hamburger */}
-          <div className="flex items-center gap-3">
+          {/* CTA — right */}
+          <div className="flex items-center gap-3 z-10">
             <Link href="/contact" data-cursor="pointer"
-              className="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-[13px] font-semibold
-                         text-violet-light border border-violet/40
-                         hover:bg-violet hover:text-white hover:border-violet
-                         transition-all duration-200"
+              className="hidden sm:inline-flex items-center px-4 py-2 text-[13px] font-semibold transition-all duration-200"
+              style={{
+                color:        'var(--color-violet-light)',
+                border:       '1px solid rgba(124,58,237,0.45)',
+              }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-violet)'
+                ;(e.currentTarget as HTMLElement).style.color = '#FAFAFA'
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent'
+                ;(e.currentTarget as HTMLElement).style.color = 'var(--color-violet-light)'
+              }}
             >
               Get a Quote
             </Link>
-            <button onClick={() => setMobile(v => !v)}
-              data-cursor="pointer" aria-label="Toggle menu"
-              className="lg:hidden w-9 h-9 flex items-center justify-center border border-border
-                         text-muted hover:text-white hover:border-[#333] transition-colors"
+            <button
+              onClick={() => setMobile(v => !v)}
+              aria-label={mobile ? 'Close menu' : 'Open menu'}
+              data-cursor="pointer"
+              className="lg:hidden w-9 h-9 flex items-center justify-center border transition-colors"
+              style={{ borderColor:'var(--color-border)', color:'var(--color-muted)' }}
             >
               {mobile ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </button>
@@ -137,36 +193,46 @@ export function Navbar() {
         {mobile && (
           <motion.div
             initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }}
-            className="fixed inset-0 z-99 bg-canvas flex flex-col pt-[68px] overflow-hidden"
+            className="fixed inset-0 z-99 flex flex-col pt-[68px] overflow-hidden"
+            style={{ backgroundColor:'var(--color-canvas)' }}
           >
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-              <span className="font-display font-black text-[44vw] text-white opacity-[0.022] leading-none">
+            {/* Watermark */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
+              <span
+                className="font-display font-black leading-none text-white"
+                style={{ fontSize:'44vw', opacity:0.022 }}
+              >
                 MTA
               </span>
             </div>
+
             <div className="relative flex flex-col px-6 pt-8">
-              {NAV.map((link, i) => (
+              {NAV_LINKS.map((link, i) => (
                 <motion.div key={link.href}
-                  initial={{ opacity:0, y:20 }}
+                  initial={{ opacity:0, y:24 }}
                   animate={{ opacity:1, y:0 }}
-                  transition={{ delay: i * 0.055, duration:0.38, ease:[0.16,1,0.3,1] }}
+                  transition={{ delay: i * 0.06, duration:0.4, ease:[0.16,1,0.3,1] }}
                 >
                   <Link href={link.href} onClick={() => setMobile(false)}
-                    className={cn(
-                      'block py-4 text-[30px] font-display font-black border-b border-border transition-colors',
-                      path === link.href ? 'text-white' : 'text-dead hover:text-white',
-                    )}
+                    className="block py-4 font-display font-black transition-colors duration-200 border-b"
+                    style={{
+                      fontSize:    '30px',
+                      color:       path === link.href ? '#FAFAFA' : 'var(--color-dead)',
+                      borderColor: 'var(--color-border)',
+                    }}
                   >
                     {link.label}
                   </Link>
                 </motion.div>
               ))}
-              <motion.div initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }}
-                transition={{ delay: NAV.length * 0.055 }}
+              <motion.div
+                initial={{ opacity:0, y:24 }} animate={{ opacity:1, y:0 }}
+                transition={{ delay: NAV_LINKS.length * 0.06 }}
                 className="mt-8"
               >
                 <Link href="/contact" onClick={() => setMobile(false)}
-                  className="block w-full text-center py-4 bg-violet text-white font-display font-black text-xl hover:bg-violet-dark transition-colors"
+                  className="block w-full text-center py-4 text-white font-display font-black text-xl transition-colors"
+                  style={{ backgroundColor:'var(--color-violet)' }}
                 >
                   Get a Quote →
                 </Link>

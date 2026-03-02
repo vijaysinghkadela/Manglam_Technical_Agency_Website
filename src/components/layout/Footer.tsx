@@ -21,9 +21,11 @@ const companyLinks = [
 ]
 
 const legalLinks = [
-  { label: 'Privacy Policy', href: '/legal/privacy-policy' },
+  { label: 'DPDPA Privacy Policy', href: '/legal/privacy-policy' },
   { label: 'Terms', href: '/legal/terms-of-service' },
   { label: 'NDA', href: '/legal/nda' },
+  { label: 'Trust Center & Ethics', href: '/trust-center' },
+  { label: 'Master Services Agreement', href: '/legal/master-services-agreement' },
 ]
 
 function FooterLink({ href, label }: { href: string; label: string }) {
@@ -156,7 +158,7 @@ export function Footer() {
             viewport={{ once: true }}
             className="text-xs text-dead font-mono"
           >
-            © {new Date().getFullYear()} {AGENCY_NAME}
+            © {new Date().getFullYear()} {AGENCY_NAME} — Classification: MTA Proprietary
           </motion.p>
           <div className="flex items-center gap-4">
             {legalLinks.map((link) => (

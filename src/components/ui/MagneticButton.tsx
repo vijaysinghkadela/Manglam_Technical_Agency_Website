@@ -1,66 +1,44 @@
 'use client'
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import { motion, useSpring } from 'framer-motion'
 
 interface Props {
   children:   React.ReactNode
   className?: string
-  onClick?:   () => void
   href?:      string
-  maxPull?:   number
+  style?:     React.CSSProperties
+  onClick?:   () => void
+  pull?:      number   // max px attraction
 }
 
-export function MagneticButton({ children, className = '', onClick, href, maxPull = 14 }: Props) {
+export function MagneticButton({ children, className = '', href, style, onClick, pull = 14 }: Props) {
+  const x = useSpring(0, { stiffness: 180, damping: 18 })
+  const y = useSpring(0, { stiffness: 180, damping: 18 })
   const ref = useRef<HTMLDivElement>(null)
-  const [hovered, setHovered] = useState(false)
-
-  const x = useSpring(0, { stiffness: 200, damping: 20 })
-  const y = useSpring(0, { stiffness: 200, damping: 20 })
 
   const onMove = (e: React.MouseEvent) => {
     if (!ref.current) return
-    const rect   = ref.current.getBoundingClientRect()
-    const cx     = rect.left + rect.width  / 2
-    const cy     = rect.top  + rect.height / 2
-    const dx     = (e.clientX - cx) * 0.32
-    const dy     = (e.clientY - cy) * 0.32
-    const capped = (v: number) => Math.max(-maxPull, Math.min(maxPull, v))
-    x.set(capped(dx))
-    y.set(capped(dy))
+    const r   = ref.current.getBoundingClientRect()
+    const dx  = (e.clientX - r.left - r.width  / 2) * 0.3
+    const dy  = (e.clientY - r.top  - r.height / 2) * 0.3
+    const cap = (v: number) => Math.max(-pull, Math.min(pull, v))
+    x.set(cap(dx)); y.set(cap(dy))
   }
 
-  const onLeave = () => { x.set(0); y.set(0); setHovered(false) }
-
-  if (href) {
-    return (
-      <motion.a
-        ref={ref as React.Ref<HTMLAnchorElement>}
-        href={href}
-        data-cursor="pointer"
-        style={{ x, y, display: 'inline-flex' }}
-        onMouseMove={onMove}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={onLeave}
-        onClick={onClick}
-        className={className}
-      >
-        {children}
-      </motion.a>
-    )
-  }
+  const Tag = href ? motion.a : motion.div
 
   return (
-    <motion.div
-      ref={ref}
-      data-cursor="pointer"
-      style={{ x, y, display: 'inline-flex' }}
+    <Tag
+      ref={ref as never}
+      href={href}
+      style={{ x, y, display: 'inline-flex', ...style }}
       onMouseMove={onMove}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={onLeave}
+      onMouseLeave={() => { x.set(0); y.set(0) }}
       onClick={onClick}
+      data-cursor="pointer"
       className={className}
     >
       {children}
-    </motion.div>
+    </Tag>
   )
 }

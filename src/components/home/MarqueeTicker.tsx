@@ -6,12 +6,16 @@ const ITEMS = [
 export function MarqueeTicker() {
   const repeated = [...ITEMS, ...ITEMS, ...ITEMS]
   return (
-    <div className="w-full h-11 bg-card border-y border-border flex items-center overflow-hidden">
-      <div className="flex whitespace-nowrap marquee-l">
+    <div className="w-full h-11 flex items-center overflow-hidden"
+      style={{ backgroundColor:'var(--color-card)', borderTop:'1px solid var(--color-border)', borderBottom:'1px solid var(--color-border)' }}
+    >
+      <div className="flex whitespace-nowrap animate-marquee-left">
         {repeated.map((item, i) => (
-          <span key={i} className="flex items-center gap-5 font-mono text-[11px] text-muted tracking-[0.18em] uppercase mr-8">
+          <span key={i} className="flex items-center gap-5 font-mono uppercase mr-8"
+            style={{ fontSize:'11px', color:'var(--color-muted)', letterSpacing:'0.18em' }}
+          >
             {item}
-            <span className="text-violet text-base leading-none">✦</span>
+            <span style={{ color:'var(--color-violet)', fontSize:'16px', lineHeight:1 }}>✦</span>
           </span>
         ))}
       </div>

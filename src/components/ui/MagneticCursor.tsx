@@ -1,60 +1,57 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 
-type CursorVariant = 'default' | 'pointer' | 'text' | 'link' | 'drag'
+type Variant = 'default' | 'pointer' | 'text' | 'link'
 
 export function MagneticCursor() {
-  const [mounted,   setMounted]   = useState(false)
-  const [visible,   setVisible]   = useState(false)
-  const [variant,   setVariant]   = useState<CursorVariant>('default')
+  const [ready,   setReady]   = useState(false)  // false on server = null render
+  const [visible, setVisible] = useState(false)
+  const [variant, setVariant] = useState<Variant>('default')
 
-  const mx = useMotionValue(-200)
-  const my = useMotionValue(-200)
-
-  const spring = { stiffness: 200, damping: 24, mass: 0.4 }
-  const rx = useSpring(mx, spring)
-  const ry = useSpring(my, spring)
+  const mx = useMotionValue(-300)
+  const my = useMotionValue(-300)
+  const rx = useSpring(mx, { stiffness: 220, damping: 26, mass: 0.35 })
+  const ry = useSpring(my, { stiffness: 220, damping: 26, mass: 0.35 })
 
   useEffect(() => {
-    // Never run on touch devices
+    // Touch devices: skip entirely — no pointer to track
     if (!window.matchMedia('(pointer: fine)').matches) return
-    setMounted(true)
+    setTimeout(() => setReady(true), 0)  // Only true on mouse-capable client
 
-    const onMove = (e: MouseEvent) => {
-      mx.set(e.clientX)
-      my.set(e.clientY)
+    const move = (e: MouseEvent) => {
+      mx.set(e.clientX); my.set(e.clientY)
       setVisible(true)
-      const el = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement | null
-      const v = el?.closest('[data-cursor]')?.getAttribute('data-cursor') as CursorVariant | null
-      setVariant(v ?? 'default')
+      const el  = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement | null
+      const hit = el?.closest('[data-cursor]')?.getAttribute('data-cursor') as Variant | null
+      setVariant(hit ?? 'default')
     }
-    const onLeave  = () => setVisible(false)
-    const onEnter  = () => setVisible(true)
+    const hide = () => setVisible(false)
+    const show = () => setVisible(true)
 
-    window.addEventListener('mousemove',           onMove,  { passive: true })
-    document.documentElement.addEventListener('mouseleave', onLeave)
-    document.documentElement.addEventListener('mouseenter', onEnter)
-
+    window.addEventListener('mousemove',           move, { passive: true })
+    document.documentElement.addEventListener('mouseleave', hide)
+    document.documentElement.addEventListener('mouseenter', show)
     return () => {
-      window.removeEventListener('mousemove',           onMove)
-      document.documentElement.removeEventListener('mouseleave', onLeave)
-      document.documentElement.removeEventListener('mouseenter', onEnter)
+      window.removeEventListener('mousemove', move)
+      document.documentElement.removeEventListener('mouseleave', hide)
+      document.documentElement.removeEventListener('mouseenter', show)
     }
   }, [mx, my])
 
-  // ← NEVER remove this guard. It prevents the SSR "N" artifact.
-  if (!mounted) return null
+  if (!ready) return null  // ← Server always returns null. No "N". No artifact.
 
-  const ringW = { default:32, pointer:16, text:72, link:44, drag:56 }[variant]
-  const ringH = variant === 'text' ? 26 : ringW
-  const ringBg = { default:'transparent', pointer:'rgba(124,58,237,0.9)',
-                   text:'transparent', link:'rgba(124,58,237,0.15)', drag:'rgba(124,58,237,0.1)' }[variant]
-  const ringBorder = variant === 'pointer' ? '#7C3AED' : 'rgba(255,255,255,0.2)'
+  const sizes: Record<Variant, { w: number; h: number }> = {
+    default: { w: 32,  h: 32 },
+    pointer: { w: 18,  h: 18 },
+    text:    { w: 68,  h: 24 },
+    link:    { w: 48,  h: 48 },
+  }
+  const { w, h } = sizes[variant]
 
   return (
     <>
-      {/* Dot — instant */}
+      {/* Dot: instant follow */}
       <motion.div
         className="fixed top-0 left-0 rounded-full bg-white pointer-events-none z-9999"
         style={{
@@ -62,19 +59,21 @@ export function MagneticCursor() {
           translateX: '-50%', translateY: '-50%',
           width: 5, height: 5,
           opacity: (visible && variant !== 'pointer') ? 1 : 0,
+          transition: 'opacity 0.15s',
         }}
       />
-      {/* Ring — spring */}
+      {/* Ring: spring follow */}
       <motion.div
         className="fixed top-0 left-0 rounded-full border pointer-events-none z-9998"
         style={{
           x: rx, y: ry,
           translateX: '-50%', translateY: '-50%',
-          width: ringW, height: ringH,
-          backgroundColor: ringBg,
-          borderColor: ringBorder,
-          opacity: visible ? 1 : 0,
-          transition: 'width 0.15s ease, height 0.15s ease, background-color 0.15s ease',
+          width:  w,
+          height: h,
+          opacity:         visible ? 1 : 0,
+          backgroundColor: variant === 'pointer' ? 'rgba(124,58,237,0.88)' : 'transparent',
+          borderColor:     variant === 'pointer' ? '#7C3AED' : 'rgba(255,255,255,0.18)',
+          transition:      'width 0.18s ease, height 0.18s ease, background-color 0.18s ease, opacity 0.15s',
         }}
       />
     </>

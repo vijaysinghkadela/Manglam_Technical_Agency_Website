@@ -77,7 +77,7 @@ export default function AboutPage() {
                   Most agencies sell you an account manager, a 50-page slide deck, and a team of entry-level developers hidden behind a curtain. We do the exact opposite.
                 </p>
                 <p>
-                  At MTA, we act as your outsourced technical co-founders. We build custom websites, deploy automation pipelines, secure your data, and handle the messy contractor management — all with a direct line of communication to the engineers actually writing your code.
+                  At MTA, we act as your outsourced technical co-founders. We are a specialized, lean team of 3–4 professionals delivering the output quality of a larger enterprise firm at the responsiveness and accountability of a boutique. We build SaaS architectures, deploy AI pipelines, secure your data, and handle the messy contractor management — all with a direct line of communication to the engineers actually writing your code.
                 </p>
               </div>
             </motion.div>

@@ -1,224 +1,160 @@
 'use client'
-
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
-import { Loader2, CheckCircle } from 'lucide-react'
+import { Loader2, CheckCircle2 } from 'lucide-react'
 
 const schema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Enter a valid email address'),
-  phone: z
-    .string()
-    .regex(/^[+\d\s-]{7,15}$/, 'Enter a valid phone number')
-    .optional()
-    .or(z.literal('')),
-  company: z.string().optional(),
-  service: z.string().min(1, 'Please select a service'),
-  budget: z.string().min(1, 'Please select a budget range'),
-  timeline: z.string().min(1, 'Please select a timeline'),
-  message: z.string().min(20, 'Message must be at least 20 characters'),
-  privacy: z.boolean().refine((value) => value === true, {
-    message: 'You must agree to the Privacy Policy',
-  }),
+  name:     z.string().min(2,  'Name must be at least 2 characters'),
+  email:    z.string().email(  'Enter a valid email address'),
+  phone:    z.string().optional(),
+  service:  z.string().min(1,  'Please select a service'),
+  budget:   z.string().min(1,  'Please select a budget range'),
+  timeline: z.string().min(1,  'Please select a timeline'),
+  message:  z.string().min(20, 'Message must be at least 20 characters'),
+  privacy:  z.boolean().refine(val => val === true, 'You must agree to proceed'),
 })
+type F = z.infer<typeof schema>
 
-type FormData = z.infer<typeof schema>
-
-const serviceOptions = [
-  'Web Development',
-  'Social Media & Automation',
-  'Cybersecurity',
-  'AI Automation',
-  'SaaS Licensing',
-  'Data Processing',
-  'Contractor Management',
-  'Other',
-]
-const budgetOptions = [
-  'Under ₹25,000',
-  '₹25,000–₹50,000',
-  '₹50,000–₹1,00,000',
-  '₹1,00,000–₹5,00,000',
-  '₹5,00,000+',
-  'Not Sure',
-]
-const timelineOptions = ['ASAP', 'Within 1 month', 'Within 3 months', 'Flexible']
+const SERVICES  = ['Web Development','Social Media & Automation','Cybersecurity','AI Automation','SaaS Licensing','Data Processing','Contractor Management','Other']
+const BUDGETS   = ['Under ₹25,000','₹25,000–₹50,000','₹50,000–₹1,00,000','₹1,00,000–₹5,00,000','₹5,00,000+','Not Sure']
+const TIMELINES = ['ASAP','Within 1 month','Within 3 months','Flexible']
 
 export function ContactForm() {
-  const [submitted, setSubmitted] = useState(false)
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-    reset,
-  } = useForm<FormData>({
+  const [done, setDone] = useState(false)
+  const { register, handleSubmit, formState:{ errors, isSubmitting }, reset } = useForm<F>({
     resolver: zodResolver(schema),
   })
 
-  const onSubmit = async (data: FormData) => {
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      })
-      if (!res.ok) throw new Error('Failed to submit')
-      setSubmitted(true)
-      reset()
-    } catch {
-      toast.error('Something went wrong. Please try again or WhatsApp us directly.')
-    }
+  const onSubmit = async (data: F) => {
+    const res = await fetch('/api/contact', {
+      method:  'POST',
+      headers: { 'Content-Type':'application/json' },
+      body:    JSON.stringify(data),
+    })
+    if (!res.ok) { toast.error('Failed to send. Please try again.'); return }
+    setDone(true); reset()
   }
 
-  if (submitted) {
-    return (
-      <div className="flex flex-col items-center justify-center text-center py-20 gap-6">
-        <div className="w-16 h-16 rounded-full bg-violet-600/15 border border-violet-600 flex items-center justify-center">
-          <CheckCircle className="w-8 h-8 text-violet-400" />
-        </div>
-        <div>
-          <h3 className="text-2xl font-display font-bold text-white mb-2">Message Sent</h3>
-          <p className="text-muted">We&apos;ll respond within 2–4 hours. Check your inbox.</p>
-        </div>
-        <button
-          onClick={() => setSubmitted(false)}
-          className="text-sm text-muted hover:text-white transition-colors border-b border-transparent hover:border-muted"
-        >
-          Send another message
-        </button>
+  if (done) return (
+    <div className="flex flex-col items-center justify-center text-center py-24 gap-6">
+      <div className="w-16 h-16 flex items-center justify-center rounded-full"
+        style={{ backgroundColor:'rgba(124,58,237,0.12)', border:'1px solid var(--color-violet)' }}
+      >
+        <CheckCircle2 className="w-8 h-8" style={{ color:'var(--color-violet-light)' }} />
       </div>
-    )
-  }
+      <div>
+        <h3 className="font-display font-black text-white text-2xl mb-2">Message Sent</h3>
+        <p style={{ color:'var(--color-muted)' }}>We&apos;ll respond within 2–4 hours.</p>
+      </div>
+      <button onClick={() => setDone(false)}
+        className="text-sm transition-colors border-b border-transparent"
+        style={{ color:'var(--color-muted)' }}
+      >
+        Send another message
+      </button>
+    </div>
+  )
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6 bg-card rounded-3xl border border-border p-8 lg:p-10" noValidate>
-      {/* Name + Email */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6" noValidate>
+      <Row>
         <Field label="Full Name *" error={errors.name?.message}>
-          <input {...register('name')} placeholder="Your name" className={inputCls(!!errors.name)} />
+          <Input {...register('name')} placeholder="Your name" />
         </Field>
         <Field label="Email Address *" error={errors.email?.message}>
-          <input {...register('email')} type="email" placeholder="you@example.com" className={inputCls(!!errors.email)} />
+          <Input {...register('email')} type="email" placeholder="you@example.com" />
         </Field>
-      </div>
-
-      {/* Phone + Company */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <Field label="Phone Number" error={errors.phone?.message}>
-          <input {...register('phone')} placeholder="+91 98765 43210" className={inputCls(!!errors.phone)} />
+      </Row>
+      <Row>
+        <Field label="Phone Number">
+          <Input {...register('phone')} placeholder="+91 98765 43210" />
         </Field>
-        <Field label="Company / Organisation">
-          <input {...register('company')} placeholder="Optional" className={inputCls(false)} />
-        </Field>
-      </div>
-
-      {/* Service + Budget */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <Field label="Service Interested In *" error={errors.service?.message}>
-          <select {...register('service')} className={inputCls(!!errors.service)}>
+        <Field label="Service Needed *" error={errors.service?.message}>
+          <Select {...register('service')}>
             <option value="">Select a service</option>
-            {serviceOptions.map((o) => (
-              <option key={o} value={o}>
-                {o}
-              </option>
-            ))}
-          </select>
+            {SERVICES.map(s => <option key={s} value={s}>{s}</option>)}
+          </Select>
         </Field>
-        <Field label="Estimated Budget *" error={errors.budget?.message}>
-          <select {...register('budget')} className={inputCls(!!errors.budget)}>
-            <option value="">Select budget range</option>
-            {budgetOptions.map((o) => (
-              <option key={o} value={o}>
-                {o}
-              </option>
-            ))}
-          </select>
+      </Row>
+      <Row>
+        <Field label="Budget Range *" error={errors.budget?.message}>
+          <Select {...register('budget')}>
+            <option value="">Select budget</option>
+            {BUDGETS.map(b => <option key={b} value={b}>{b}</option>)}
+          </Select>
         </Field>
-      </div>
-
-      {/* Timeline */}
-      <Field label="Project Timeline *" error={errors.timeline?.message}>
-        <select {...register('timeline')} className={inputCls(!!errors.timeline)}>
-          <option value="">Select timeline</option>
-          {timelineOptions.map((o) => (
-            <option key={o} value={o}>
-              {o}
-            </option>
-          ))}
-        </select>
-      </Field>
-
-      {/* Message */}
-      <Field label="Your Message *" error={errors.message?.message}>
+        <Field label="Timeline *" error={errors.timeline?.message}>
+          <Select {...register('timeline')}>
+            <option value="">Select timeline</option>
+            {TIMELINES.map(t => <option key={t} value={t}>{t}</option>)}
+          </Select>
+        </Field>
+      </Row>
+      <Field label="Message *" error={errors.message?.message}>
         <textarea
-          {...register('message')}
-          rows={5}
-          placeholder="Tell us about your project, goals, and any specific requirements..."
-          className={`${inputCls(!!errors.message)} resize-none`}
+          {...register('message')} rows={5}
+          placeholder="Describe your project, goals, and any specific requirements..."
+          className="w-full text-sm text-white resize-none outline-none transition-colors"
+          style={{ backgroundColor:'transparent', borderBottom:'1px solid var(--color-border)', padding:'12px 0', fontFamily:'var(--font-body)' }}
         />
       </Field>
-
-      {/* Privacy checkbox */}
       <div className="flex items-start gap-3">
-        <input
-          {...register('privacy')}
-          type="checkbox"
-          id="privacy"
-          className="mt-1 w-4 h-4 accent-violet-600 shrink-0"
+        <input {...register('privacy')} type="checkbox" id="privacy"
+          className="mt-1 w-4 h-4 shrink-0"
+          style={{ accentColor:'var(--color-violet)' }}
         />
-        <label htmlFor="privacy" className="text-sm text-muted leading-relaxed">
+        <label htmlFor="privacy" className="text-sm leading-relaxed" style={{ color:'var(--color-muted)' }}>
           I agree to the{' '}
-          <a href="/legal/privacy-policy" className="text-violet-400 hover:text-violet-300 underline">
+          <a href="/legal/privacy-policy" className="transition-colors"
+            style={{ color:'var(--color-violet-light)' }}>
             Privacy Policy
-          </a>{' '}
-          and consent to MTA contacting me.
+          </a>
+          {' '}and consent to MTA contacting me.
         </label>
       </div>
-      {errors.privacy && <p className="text-red-400 text-xs -mt-4">{errors.privacy.message}</p>}
+      {errors.privacy && <p className="text-xs" style={{ color:'#f87171', marginTop:'-16px' }}>{errors.privacy.message}</p>}
 
-      {/* Submit */}
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        data-cursor="pointer"
-        className="w-full flex items-center justify-center gap-3 py-4 bg-lime text-black font-display font-bold text-base rounded-2xl hover:bg-white transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-[0_4px_20px_rgba(198,249,31,0.15)] hover:shadow-[0_8px_30px_rgba(198,249,31,0.25)] hover:-translate-y-1"
+      <button type="submit" disabled={isSubmitting} data-cursor="pointer"
+        className="w-full flex items-center justify-center gap-2 py-4 font-display font-black text-[15px] transition-all duration-300 disabled:opacity-60"
+        style={{ backgroundColor:'#FAFAFA', color:'var(--color-canvas)' }}
       >
-        {isSubmitting ? (
-          <>
-            <Loader2 className="w-4 h-4 animate-spin" /> Sending...
-          </>
-        ) : (
-          'Send Message →'
-        )}
+        {isSubmitting ? <><Loader2 className="w-4 h-4 animate-spin" /> Sending...</> : 'Send Message →'}
       </button>
     </form>
   )
 }
 
-function Field({
-  label,
-  error,
-  children,
-}: {
-  label: string
-  error?: string
-  children: React.ReactNode
-}) {
-  return (
-    <div className="flex flex-col gap-2">
-      <label className="text-xs text-muted/80 font-mono tracking-[0.12em] uppercase">{label}</label>
-      {children}
-      {error && <p className="text-red-400 text-xs font-mono">{error}</p>}
-    </div>
-  )
-}
-
-function inputCls(hasError: boolean) {
-  return `w-full bg-transparent border-b ${hasError ? 'border-red-500' : 'border-border focus:border-violet'} py-3 text-white placeholder:text-muted/50 text-sm outline-none transition-colors duration-200 font-body focus:ring-1 focus:ring-violet/20`
-}
-
-export default ContactForm
+// Sub-components
+const Row = ({ children }: { children: React.ReactNode }) => (
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">{children}</div>
+)
+const Field = ({ label, error, children }: { label:string; error?:string; children:React.ReactNode }) => (
+  <div className="flex flex-col gap-2">
+    <label className="font-mono uppercase" style={{ fontSize:'10px', color:'var(--color-muted)', letterSpacing:'0.15em' }}>
+      {label}
+    </label>
+    {children}
+    {error && <p className="font-mono" style={{ fontSize:'11px', color:'#f87171' }}>{error}</p>}
+  </div>
+)
+const Input = ({ ...props }: React.InputHTMLAttributes<HTMLInputElement>) => (
+  <input
+    {...props}
+    className="w-full text-sm text-white outline-none transition-colors placeholder:text-dead"
+    style={{ backgroundColor:'transparent', borderBottom:'1px solid var(--color-border)', padding:'12px 0' }}
+    onFocus={e => (e.target.style.borderBottomColor = 'var(--color-violet)')}
+    onBlur={e  => (e.target.style.borderBottomColor = 'var(--color-border)')}
+  />
+)
+const Select = ({ children, ...props }: React.SelectHTMLAttributes<HTMLSelectElement>) => (
+  <select
+    {...props}
+    className="w-full text-sm text-white outline-none transition-colors"
+    style={{ backgroundColor:'var(--color-canvas)', borderBottom:'1px solid var(--color-border)', padding:'12px 0', appearance:'none' }}
+  >
+    {children}
+  </select>
+)

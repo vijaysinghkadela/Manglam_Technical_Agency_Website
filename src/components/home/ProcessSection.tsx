@@ -1,95 +1,122 @@
 'use client'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { cn } from '@/lib/utils'
 
 const STEPS = [
-  { n:'01', title:'Discovery Call',   desc:'We deeply understand your goals, audience, tech needs, and constraints. Everything documented.',     duration:'1–2 days',  detail:'We ask the right questions upfront — so there are no surprises later. You get a call recording and written brief.' },
-  { n:'02', title:'Proposal & Scope', desc:'Written deliverables, fixed price, and agreed timeline — signed by both parties before work begins.', duration:'2–3 days',  detail:'No verbal commitments. The proposal is a binding document. If scope changes, we re-scope before proceeding.' },
-  { n:'03', title:'Design Sprints',   desc:'Visual direction established with mockups and approval checkpoints. No building before you approve.', duration:'1 week',    detail:'We present 1–2 directions, refine based on feedback, and lock the design before development starts.' },
-  { n:'04', title:'Development',      desc:'Full build on a live staging environment with weekly progress updates and access at any time.',        duration:'1–3 weeks', detail:'You can view the staging site at any point. We push updates daily. Bugs found here are fixed here, not post-launch.' },
-  { n:'05', title:'QA & Testing',     desc:'Cross-device testing, performance audit, security review, and full bug resolution before launch.',    duration:'2–3 days',  detail:'We test on 6+ device/browser combinations. Performance scored on Lighthouse. All critical issues resolved.' },
-  { n:'06', title:'Launch & Support', desc:'Go-live execution, post-launch monitoring, and 1-year free support on all web projects.',              duration:'Ongoing',   detail:'We handle DNS propagation, deployment verification, and stay on-call for 48 hours post-launch.' },
+  { n:'01', title:'Discovery Call',    summary:'We learn your goals, audience, scope, and constraints.',      detail:'You receive a written brief + call recording. Nothing begins without documented alignment.',        duration:'1–2 days'  },
+  { n:'02', title:'Proposal & Scope',  summary:'Fixed price, clear deliverables, signed by both parties.',   detail:'The proposal is a binding document. Scope changes are re-scoped before proceeding.',               duration:'2–3 days'  },
+  { n:'03', title:'Design Sprints',    summary:'Mockups approved before any code is written.',               detail:'1–2 visual directions presented. You approve before development begins.',                         duration:'1 week'    },
+  { n:'04', title:'Development',       summary:'Built on live staging. Weekly updates.',                     detail:'Staging access at any time. Daily pushes. Bugs found here, fixed here.',                        duration:'1–3 weeks' },
+  { n:'05', title:'QA & Testing',      summary:'Cross-device. Performance. Security. Then go-live.',        detail:'Lighthouse audit. 6+ browser/device combinations. Critical issues resolved pre-launch.',         duration:'2–3 days'  },
+  { n:'06', title:'Launch & Support',  summary:'Production deployment. 48hr monitoring. 1-year support.',   detail:'DNS propagation handled. On-call 48hrs post-launch. 1-year free support on web projects.',        duration:'Ongoing'   },
 ]
 
 export function ProcessSection() {
   const [active, setActive] = useState<number | null>(null)
 
   return (
-    <section className="w-full py-28 bg-canvas">
-      <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
+    <section style={{ backgroundColor:'var(--color-canvas)', padding:'112px 0' }}>
+      <div className="container-site">
 
         {/* Header */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-20">
           <div>
-            <span className="font-mono text-[11px] text-violet-light tracking-[0.22em] uppercase block mb-3">
+            <span className="font-mono uppercase block mb-3" style={{ fontSize:'11px', color:'var(--color-violet-light)', letterSpacing:'0.22em' }}>
               HOW WE WORK
             </span>
-            <h2 className="font-display font-black text-white tracking-tight leading-[0.92]"
-              style={{ fontSize:'clamp(28px, 4vw, 60px)' }}>
+            <h2 className=" font-black text-white leading-[0.92] tracking-tight" style={{ fontSize:'clamp(28px, 4vw, 58px)' }}>
               Six Steps.<br />Zero Ambiguity.
             </h2>
           </div>
-          <div className="flex items-end">
-            <p className="text-muted text-[15px] leading-[1.7] max-w-md">
-              Every MTA project follows the same disciplined process.
-              You always know exactly where things stand.
-            </p>
-          </div>
+          <p className="self-end" style={{ fontSize:'15px', lineHeight:1.7, color:'var(--color-muted)', maxWidth:'420px' }}>
+            Every MTA project follows the same process. You always know exactly where things stand.
+          </p>
         </div>
 
         {/* Steps */}
-        <div className="border-t border-border">
+        <div style={{ borderTop:'1px solid var(--color-border)' }}>
           {STEPS.map((step, i) => (
-            <motion.div key={step.n}
-              initial={{ opacity:0, y:16 }}
+            <motion.div
+              key={step.n}
+              initial={{ opacity:0, y:14 }}
               whileInView={{ opacity:1, y:0 }}
               viewport={{ once:true, amount:0.2 }}
-              transition={{ duration:0.5, delay:i * 0.07, ease:[0.16,1,0.3,1] }}
+              transition={{ duration:0.5, delay:i * 0.065, ease:[0.16,1,0.3,1] }}
             >
+              {/* Row button */}
               <button
                 onClick={() => setActive(active === i ? null : i)}
                 data-cursor="pointer"
-                className="w-full flex items-center gap-6 lg:gap-10 py-6 text-left group hover:bg-[#0A0A0A] transition-colors duration-200 px-2 -mx-2"
+                className="w-full flex items-start gap-6 lg:gap-10 py-5 text-left group transition-colors duration-200"
+                style={{ padding:'20px 8px', margin:'0 -8px' }}
               >
                 {/* Number */}
-                <span className="font-display font-black text-[40px] lg:text-[52px] text-border group-hover:text-violet/20 transition-colors duration-300 leading-none w-[60px] lg:w-[80px] shrink-0">
+                <span
+                  className=" font-black leading-none font-mono shrink-0 transition-colors duration-300"
+                  style={{
+                    fontSize:  'clamp(32px, 4vw, 48px)',
+                    color:      active === i ? 'rgba(124,58,237,0.35)' : 'var(--color-border)',
+                    minWidth:   '72px',
+                    paddingTop: '4px',
+                  }}
+                >
                   {step.n}
                 </span>
                 {/* Title */}
-                <span className="flex-1 text-lg lg:text-2xl font-display font-bold text-muted group-hover:text-white transition-colors duration-250">
+                <span
+                  className="flex-1  font-bold transition-colors duration-200 group-hover:text-white"
+                  style={{ fontSize:'clamp(17px, 2.2vw, 24px)', color: active === i ? '#FAFAFA' : 'var(--color-muted)', paddingTop:'4px' }}
+                >
                   {step.title}
                 </span>
                 {/* Duration */}
-                <span className="hidden lg:block text-[11px] text-dead font-mono tracking-wider group-hover:text-muted transition-colors w-28 text-right">
+                <span
+                  className="hidden lg:block font-mono text-[11px] tracking-wider transition-colors group-hover:text-muted shrink-0"
+                  style={{ color:'var(--color-dead)', paddingTop:'6px' }}
+                >
                   {step.duration}
                 </span>
                 {/* Toggle */}
-                <span className={cn(
-                  'text-dead group-hover:text-violet transition-all duration-250 text-xl shrink-0 w-6 text-right inline-block',
-                  active === i && 'rotate-45 text-violet',
-                )}>
+                <span
+                  className="font-mono text-xl shrink-0 transition-all duration-200"
+                  style={{
+                    color:     active === i ? 'var(--color-violet)' : 'var(--color-dead)',
+                    transform: active === i ? 'rotate(45deg)' : 'rotate(0deg)',
+                    paddingTop:'2px',
+                  }}
+                >
                   +
                 </span>
               </button>
 
-              {/* Summary */}
-              <p className="text-muted text-[14px] leading-relaxed pb-4 pl-[calc(60px+24px)] lg:pl-[calc(80px+40px)] pr-12">
-                {step.desc}
+              {/* Summary — always visible */}
+              <p className="text-sm leading-relaxed pb-4" style={{ color:'var(--color-muted)', paddingLeft:'clamp(72px, 8vw, 108px)', paddingRight:'40px' }}>
+                {step.summary}
               </p>
 
-              {/* Expanded detail */}
+              {/* Detail — expands on click */}
               <AnimatePresence initial={false}>
                 {active === i && (
                   <motion.div
+                    key="detail"
                     initial={{ height:0, opacity:0 }}
                     animate={{ height:'auto', opacity:1 }}
                     exit={{ height:0, opacity:0 }}
                     transition={{ duration:0.35, ease:[0.33,1,0.68,1] }}
-                    className="overflow-hidden"
+                    style={{ overflow:'hidden' }}
                   >
-                    <div className="pb-8 pl-[calc(60px+24px)] lg:pl-[calc(80px+40px)] pr-12">
-                      <p className="text-[13px] text-dead font-mono border-l-2 border-violet pl-4 py-1 leading-relaxed">
+                    <div style={{ paddingLeft:'clamp(72px, 8vw, 108px)', paddingRight:'40px', paddingBottom:'24px' }}>
+                      <p
+                        className="text-[13px] leading-relaxed"
+                        style={{
+                          color:       'var(--color-dead)',
+                          fontFamily:  'var(--font-mono)',
+                          borderLeft:  '2px solid var(--color-violet)',
+                          paddingLeft: '16px',
+                          paddingTop:  '4px',
+                          paddingBottom:'4px',
+                        }}
+                      >
                         {step.detail}
                       </p>
                     </div>
@@ -97,7 +124,7 @@ export function ProcessSection() {
                 )}
               </AnimatePresence>
 
-              <div className="h-px bg-border" />
+              <div style={{ height:'1px', backgroundColor:'var(--color-border)' }} />
             </motion.div>
           ))}
         </div>

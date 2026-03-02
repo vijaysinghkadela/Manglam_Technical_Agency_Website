@@ -1,32 +1,32 @@
 'use client'
-import { useRef, useState, type CSSProperties } from 'react'
+import { useRef, useState, type ReactNode, type CSSProperties } from 'react'
 
 interface Props {
-  children:   React.ReactNode
+  children:   ReactNode
   className?: string
-  intensity?: number
   style?:     CSSProperties
+  intensity?: number  // 0.04–0.12 — opacity of violet spotlight
 }
 
-export function SpotlightCard({ children, className = '', intensity = 0.07, style }: Props) {
+export function SpotlightCard({ children, className = '', style, intensity = 0.065 }: Props) {
   const [bg, setBg] = useState('transparent')
-  const ref         = useRef<HTMLDivElement>(null)
-
-  const onMove = (e: React.MouseEvent) => {
-    if (!ref.current) return
-    const rect = ref.current.getBoundingClientRect()
-    const x    = e.clientX - rect.left
-    const y    = e.clientY - rect.top
-    setBg(`radial-gradient(320px circle at ${x}px ${y}px, rgba(124,58,237,${intensity}), transparent 70%)`)
-  }
+  const ref = useRef<HTMLDivElement>(null)
 
   return (
     <div
       ref={ref}
       className={className}
-      onMouseMove={onMove}
+      style={{ ...style, background: bg }}
+      onMouseMove={(e) => {
+        if (!ref.current) return
+        const r = ref.current.getBoundingClientRect()
+        setBg(`radial-gradient(
+          300px circle at ${e.clientX - r.left}px ${e.clientY - r.top}px,
+          rgba(124,58,237,${intensity}),
+          transparent 70%
+        )`)
+      }}
       onMouseLeave={() => setBg('transparent')}
-      style={{ background: bg, transition: 'background 0s', ...style }}
     >
       {children}
     </div>

@@ -1,64 +1,60 @@
 'use client'
-import { useEffect, useRef, useState, type CSSProperties } from 'react'
+import { useEffect, useRef, useState } from 'react'
+
+const CHARS = '0123456789'
 
 interface Props {
   target:    number
-  suffix:    string
+  suffix?:   string
   duration?: number
   className?: string
-  style?:     CSSProperties
+  style?:    React.CSSProperties
 }
 
-const DIGITS = '0123456789'
-
-export function ScrambleCounter({ target, suffix, duration = 1600, className, style }: Props) {
+export function ScrambleCounter({ target, suffix = '', duration = 1500, className, style }: Props) {
   const [display, setDisplay] = useState('0')
   const ref     = useRef<HTMLSpanElement>(null)
   const started = useRef(false)
 
   useEffect(() => {
-    const el = ref.current
-    if (!el) return
-
     const io = new IntersectionObserver(([e]) => {
       if (!e.isIntersecting || started.current) return
       started.current = true
 
-      const t0 = performance.now()
-      let rafId: number
+      const t0    = performance.now()
+      const count = String(target).length
+      let   raf: number
 
       const tick = (now: number) => {
-        const elapsed  = now - t0
-        const progress = Math.min(elapsed / duration, 1)
-        const eased    = 1 - Math.pow(1 - progress, 3)
-        const current  = Math.round(eased * target)
+        const p     = Math.min((now - t0) / duration, 1)
+        const eased = 1 - Math.pow(1 - p, 3)
+        const cur   = Math.round(eased * target)
 
-        if (progress < 0.75) {
-          const len = String(target).length
-          setDisplay(
-            Array.from({ length: len }, () =>
-              DIGITS[Math.floor(Math.random() * DIGITS.length)]
-            ).join('')
-          )
-        } else {
-          setDisplay(String(current))
-        }
+        // Scramble phase (0–75%): random digits, same digit count as target
+        setDisplay(
+          p < 0.75
+            ? Array.from({ length: count }, () =>
+                CHARS[Math.floor(Math.random() * 10)]
+              ).join('')
+            : String(cur)
+        )
 
-        if (progress < 1) { rafId = requestAnimationFrame(tick) }
-        else { setDisplay(String(target)) }
+        if (p < 1) { raf = requestAnimationFrame(tick) }
+        else       { setDisplay(String(target)) }
       }
 
-      rafId = requestAnimationFrame(tick)
+      raf = requestAnimationFrame(tick)
+      return () => cancelAnimationFrame(raf)
     }, { threshold: 0.5 })
 
-    io.observe(el)
+    if (ref.current) io.observe(ref.current)
     return () => io.disconnect()
   }, [target, duration])
 
   return (
     <span ref={ref} className={className} style={style}>
       {display}
-      <span className="text-violet">{suffix}</span>
+      <span style={{ color: 'var(--color-violet)' }}>{suffix}</span>
     </span>
   )
 }

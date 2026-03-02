@@ -6,40 +6,49 @@ import { MagneticButton } from '@/components/ui/MagneticButton'
 export function CTABanner() {
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target:ref, offset:['start end','end start'] })
-  const textY = useTransform(scrollYProgress, [0,1], ['-5%','5%'])
+  const watermarkY = useTransform(scrollYProgress, [0,1], ['-6%','6%'])
 
   return (
-    <section ref={ref} className="w-full py-32 bg-violet relative overflow-hidden">
-      {/* Giant watermark "MTA" — parallax */}
-      <motion.div style={{ y:textY }}
+    <section
+      ref={ref}
+      className="relative overflow-hidden"
+      style={{ backgroundColor:'var(--color-violet)', padding:'128px 0' }}
+    >
+      {/* Parallax watermark */}
+      <motion.div
+        style={{ y: watermarkY }}
         className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
-        aria-hidden="true"
+        aria-hidden
       >
-        <span className="font-display font-black text-white opacity-[0.04] leading-none"
-          style={{ fontSize:'clamp(200px, 30vw, 500px)' }}
+        <span
+          className="font-display font-black text-white leading-none"
+          style={{ fontSize:'clamp(180px, 28vw, 480px)', opacity:0.04 }}
         >
           MTA
         </span>
       </motion.div>
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 lg:px-12 flex flex-col items-center text-center gap-8">
-        <h2 className="font-display font-black text-white leading-[0.92] tracking-tight"
-          style={{ fontSize:'clamp(40px, 7vw, 100px)' }}>
-          Ready to Build<br />Something Real?
+      <div className="relative z-10 container-site flex flex-col items-center text-center gap-8">
+        <h2
+          className="font-display font-black text-white leading-[0.92] tracking-tight"
+          style={{ fontSize:'clamp(38px, 7vw, 96px)' }}
+        >
+          Scale With<br />Certainty
         </h2>
-        <p className="text-white/55 text-[17px] max-w-md leading-[1.6]">
-          Free consultation. Honest scope. Real timelines.
-          We deliver what we write down.
+        <p style={{ fontSize:'17px', lineHeight:1.62, color:'rgba(255,255,255,0.55)', maxWidth:'420px' }}>
+          Free consultation. Honest scope. Real timelines.<br />
+          Book our ₹25,000 Discovery Workshop today.
         </p>
         <MagneticButton
           href="/contact"
-          className="inline-flex items-center gap-2 px-8 py-4 bg-white text-violet font-display font-black text-[17px] hover:bg-canvas hover:text-white transition-all duration-300"
+          className="inline-flex items-center gap-2 font-display font-black text-[17px] px-8 py-4 transition-all duration-300"
+          style={{ backgroundColor:'#FAFAFA', color:'var(--color-violet)' }}
         >
-          Start Your Project →
+          Book Discovery Workshop →
         </MagneticButton>
-        <p className="text-white/40 text-[12px] font-mono tracking-wider">
-          or WhatsApp us directly — we respond within 2 hours
+        <p className="font-mono" style={{ fontSize:'12px', letterSpacing:'0.14em', color:'rgba(255,255,255,0.35)' }}>
+          Or WhatsApp us — typical response within 2 hours
         </p>
       </div>
     </section>

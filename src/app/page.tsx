@@ -9,22 +9,25 @@ import { WhyMTA }              from '@/components/home/WhyMTA'
 import { TechStackMarquee }    from '@/components/home/TechStackMarquee'
 import { CTABanner }           from '@/components/home/CTABanner'
 
-export default function HomePage() {
+const Divider = () => (
+  <div aria-hidden style={{ width:'100%', height:'1px', backgroundColor:'var(--color-border)' }} />
+)
+
+export default function Home() {
   return (
     <>
       <HeroSection />
       <MarqueeTicker />
       <ServicesHorizontal />
-      {/* Hard border prevents any bleed between sections */}
-      <div className="w-full h-px bg-border" aria-hidden />
+      <Divider />
       <StatsSection />
-      <div className="w-full h-px bg-border" aria-hidden />
+      <Divider />
       <FeaturedProject />
-      <div className="w-full h-px bg-border" aria-hidden />
+      <Divider />
       <ProcessSection />
-      <div className="w-full h-px bg-border" aria-hidden />
+      <Divider />
       <TestimonialsSection />
-      <div className="w-full h-px bg-border" aria-hidden />
+      <Divider />
       <WhyMTA />
       <TechStackMarquee />
       <CTABanner />

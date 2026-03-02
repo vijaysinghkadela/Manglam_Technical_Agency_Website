@@ -1,10 +1,14 @@
 export default function Loading() {
   return (
-    <div className="min-h-screen bg-canvas flex items-center justify-center">
-      <div className="flex flex-col items-center gap-4">
-        <div className="w-8 h-8 border border-border border-t-violet animate-spin" />
-        <span className="text-[11px] text-muted font-mono tracking-[0.2em] uppercase">Loading</span>
-      </div>
+    <div className="min-h-screen flex flex-col items-center justify-center gap-4"
+      style={{ backgroundColor:'var(--color-canvas)' }}
+    >
+      <div className="w-8 h-8 border border-t-violet animate-spin"
+        style={{ borderColor:'var(--color-border)', borderTopColor:'var(--color-violet)' }}
+      />
+      <span className="font-mono uppercase" style={{ fontSize:'10px', color:'var(--color-muted)', letterSpacing:'0.22em' }}>
+        Loading
+      </span>
     </div>
   )
 }

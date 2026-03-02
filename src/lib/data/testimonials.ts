@@ -1,28 +1,35 @@
-import { Testimonial } from '@/types';
+export interface Testimonial {
+  id:      string
+  quote:   string
+  name:    string
+  role:    string
+  company: string
+  initials:string
+}
 
 export const testimonials: Testimonial[] = [
   {
-    name: 'Rajesh Kumar',
-    role: 'Director',
+    id:      'mnss',
+    quote:   'They delivered our entire website in 3 weeks. The quality was beyond what we expected from any agency at this price. Everything was written down and delivered exactly as agreed.',
+    name:    'Programme Director',
+    role:    'Programme Director',
     company: 'Marut Narayan Sewa Sansthan',
-    quote: 'Manglam Technical Agency delivered our entire website in just 3 weeks. The quality, responsiveness, and post-delivery support exceeded our expectations. They understood our NGO\'s mission and created a digital presence that truly represents our work across Rajasthan.',
-    avatar: 'RK',
-    rating: 5,
+    initials:'MD',
   },
   {
-    name: 'Priya Sharma',
-    role: 'Founder',
-    company: 'ShopEase India',
-    quote: 'The team at MTA transformed our social media presence completely. Our engagement rates tripled within the first two months, and the automated workflows saved us hours every week. Their data-driven approach to content strategy is remarkable.',
-    avatar: 'PS',
-    rating: 5,
+    id:      't2',
+    quote:   'Our social media engagement doubled in the first month. The automation setup alone saved our team 15 hours a week. Highly recommended for any Rajasthan-based business.',
+    name:    'Business Owner',
+    role:    'Founder',
+    company: 'Jaipur Retail Business',
+    initials:'JR',
   },
   {
-    name: 'Amit Verma',
-    role: 'CTO',
-    company: 'TechVentures Jaipur',
-    quote: 'We hired MTA for a cybersecurity audit and were impressed by their thoroughness. They found vulnerabilities we didn\'t even know existed and helped us patch everything. Their ongoing monitoring gives us peace of mind. Professional, knowledgeable, and responsive.',
-    avatar: 'AV',
-    rating: 5,
+    id:      't3',
+    quote:   'The security audit found three critical vulnerabilities we had no idea existed. The report was clear, actionable, and fully aligned with IT Act compliance. Outstanding work.',
+    name:    'Operations Head',
+    role:    'Operations Head',
+    company: 'Rajasthan Healthcare Provider',
+    initials:'RH',
   },
-];
+]

@@ -6,52 +6,64 @@ import { services } from '@/lib/data/services'
 import { SpotlightCard } from '@/components/ui/SpotlightCard'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 
-const CARD_W   = 380
-const SIDE_PAD = 96
+const CARD_W   = 380  // px per card
+const SIDE_PAD = 96   // total horizontal padding inside sticky div
 
 export function ServicesHorizontal() {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const isMobile   = useMediaQuery('(max-width: 1023px)')
+  const sectionRef  = useRef<HTMLDivElement>(null)
+  const isMobile    = useMediaQuery('(max-width: 1023px)')
   const [vpW, setVpW] = useState(1280)
 
   useEffect(() => {
-    setVpW(window.innerWidth)
+    setTimeout(() => setVpW(window.innerWidth), 0)
     const fn = () => setVpW(window.innerWidth)
     window.addEventListener('resize', fn, { passive:true })
     return () => window.removeEventListener('resize', fn)
   }, [])
 
-  const trackW   = CARD_W * services.length
+  const trackW     = CARD_W * services.length
   const scrollDist = Math.max(trackW - (vpW - SIDE_PAD), 0)
-  const sectionH = `calc(100vh + ${scrollDist}px)`
 
-  const { scrollYProgress } = useScroll({ target:sectionRef, offset:['start start','end end'] })
+  // ← THIS HEIGHT IS CRITICAL. It tells the browser how much vertical scroll
+  //   to allocate for this section, enabling the sticky inner to stay in view
+  //   long enough to traverse all cards horizontally.
+  const sectionHeight = `calc(100vh + ${scrollDist}px)`
+
+  const { scrollYProgress } = useScroll({
+    target:  sectionRef,
+    offset: ['start start', 'end end'],
+  })
   const x = useTransform(scrollYProgress, [0,1], ['0px', `-${scrollDist}px`])
 
+  // Mobile: vertical grid, no horizontal scroll
   if (isMobile) {
     return (
-      <section className="w-full py-20 section-divide bg-canvas">
-        <div className="w-full max-w-[1440px] mx-auto px-6">
-          <SectionHeader />
+      <section style={{ borderTop:'1px solid var(--color-border)' }}>
+        <div className="container-site py-20">
+          <SectionLabel />
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12">
             {services.map((s, i) => (
-              <Link key={s.slug} href={`/services/${s.slug}`} data-cursor="link"
-                className="flex flex-col border border-border bg-surface p-6 group hover:bg-card transition-colors"
+              <Link key={s.slug} href={`/services/${s.slug}`}
+                data-cursor="link"
+                className="flex flex-col p-6 group transition-colors"
+                style={{ border:'1px solid var(--color-border)', backgroundColor:'var(--color-surface)' }}
               >
-                <div className="flex items-start justify-between">
-                  <div className="w-10 h-10 border border-border flex items-center justify-center group-hover:border-violet/50 transition-colors">
-                    <s.Icon className="w-5 h-5 text-muted group-hover:text-violet-light transition-colors" />
+                <div className="flex justify-between items-start">
+                  <div
+                    className="w-10 h-10 flex items-center justify-center border transition-colors group-hover:border-violet"
+                    style={{ borderColor:'var(--color-border)' }}
+                  >
+                    <s.Icon className="w-5 h-5 transition-colors" style={{ color:'var(--color-muted)' }} />
                   </div>
-                  <span className="font-display font-black text-4xl text-[#1A1A1A] leading-none">
-                    {String(i + 1).padStart(2,'0')}
+                  <span className="font-display font-black text-4xl leading-none" style={{ color:'var(--color-dead)' }}>
+                    {String(i+1).padStart(2,'0')}
                   </span>
                 </div>
-                <h3 className="font-display font-bold text-lg text-white mt-5 leading-tight">{s.name}</h3>
-                <p className="text-sm text-muted mt-2 leading-relaxed">{s.tagline}</p>
-                <p className="text-xs text-violet-light font-mono mt-3">{s.priceLabel}</p>
-                <span className="text-sm text-muted group-hover:text-white transition-colors mt-3 inline-flex items-center gap-1">
-                  Explore
-                  <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
+                <h3 className="font-display font-bold text-white mt-4 leading-tight" style={{ fontSize:'18px' }}>{s.name}</h3>
+                <p className="text-sm mt-2 leading-relaxed" style={{ color:'var(--color-muted)' }}>{s.tagline}</p>
+                <p className="font-mono text-xs mt-3" style={{ color:'var(--color-violet-light)' }}>{s.priceLabel}</p>
+                <span className="text-sm mt-3 inline-flex items-center gap-1 transition-colors group-hover:text-white" style={{ color:'var(--color-muted)' }}>
+                  Explore <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
                 </span>
               </Link>
             ))}
@@ -62,61 +74,95 @@ export function ServicesHorizontal() {
   }
 
   return (
-    <section ref={sectionRef} style={{ height:sectionH }} className="relative w-full section-divide">
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col bg-canvas">
-
-        {/* Header */}
-        <div className="flex items-end justify-between px-12 pt-20 pb-8 shrink-0">
-          <SectionHeader />
-          <span className="font-mono text-[11px] text-muted tracking-[0.2em]">
+    // Outer: tall enough to provide vertical scroll distance for horizontal traversal
+    <section
+      ref={sectionRef}
+      style={{ height: sectionHeight, position:'relative', width:'100%' }}
+      aria-label="Our Services"
+    >
+      {/* Inner: sticky — stays in viewport while outer scrolls past */}
+      <div
+        className="flex flex-col overflow-hidden"
+        style={{
+          position:         'sticky',
+          top:               0,
+          height:           '100vh',
+          width:            '100%',
+          backgroundColor:  'var(--color-canvas)',
+          borderTop:        '1px solid var(--color-border)',
+        }}
+      >
+        {/* Section header */}
+        <div className="flex items-end justify-between shrink-0 px-12 pt-20 pb-8">
+          <SectionLabel />
+          <span className="font-mono text-[11px] tracking-[0.2em]" style={{ color:'var(--color-muted)' }}>
             {String(services.length).padStart(2,'0')} SERVICES
           </span>
         </div>
 
-        {/* Cards */}
+        {/* Scrolling card track */}
         <div className="flex-1 overflow-hidden pl-12 min-h-0 flex items-stretch">
-          <motion.div style={{ x, width:`${trackW}px` }}
-            className="flex items-stretch shrink-0"
+          <motion.div
+            style={{ x, width:`${trackW}px`, flexShrink:0 }}
+            className="flex items-stretch"
           >
             {services.map((s, i) => (
               <SpotlightCard
                 key={s.slug}
-                style={{ width:`${CARD_W}px`, flexShrink:0 }}
-                className="relative flex flex-col border-r border-border first:border-l group"
+                style={{
+                  width:    `${CARD_W}px`,
+                  flexShrink: 0,
+                  borderRight: '1px solid var(--color-border)',
+                  ...(i === 0 ? { borderLeft: '1px solid var(--color-border)' } : {}),
+                }}
+                className="relative flex flex-col group"
               >
-                <Link href={`/services/${s.slug}`} data-cursor="link"
+                <Link
+                  href={`/services/${s.slug}`}
+                  data-cursor="link"
                   className="flex flex-col h-full p-10"
                 >
                   {/* Decorative number */}
-                  <span className="font-display font-black leading-none select-none text-[#0F0F0F] group-hover:text-[#170D30] transition-colors duration-500"
-                    style={{ fontSize:80 }}
+                  <span
+                    className="font-display font-black leading-none select-none transition-colors duration-500"
+                    style={{ fontSize:80, color:'#0F0F0F' }}
                   >
-                    {String(i + 1).padStart(2,'0')}
+                    {String(i+1).padStart(2,'0')}
                   </span>
 
                   {/* Icon */}
-                  <div className="w-10 h-10 border border-border flex items-center justify-center mt-5 group-hover:border-violet/50 transition-colors">
-                    <s.Icon className="w-5 h-5 text-muted group-hover:text-violet-light transition-colors" />
+                  <div
+                    className="w-10 h-10 flex items-center justify-center mt-5 border transition-colors group-hover:border-violet"
+                    style={{ borderColor:'var(--color-border)' }}
+                  >
+                    <s.Icon
+                      className="w-5 h-5 transition-colors group-hover:text-(--color-violet-light)"
+                      style={{ color:'var(--color-muted)' }}
+                    />
                   </div>
 
-                  {/* Content — pushed to bottom */}
+                  {/* Content pushed to bottom */}
                   <div className="mt-auto flex flex-col gap-3">
-                    <h3 className="font-display font-bold text-xl text-white leading-tight">{s.name}</h3>
-                    <p className="text-sm text-muted leading-relaxed">{s.tagline}</p>
+                    <h3 className="font-display font-bold text-white leading-tight" style={{ fontSize:'21px' }}>
+                      {s.name}
+                    </h3>
+                    <p className="text-sm leading-relaxed" style={{ color:'var(--color-muted)' }}>{s.tagline}</p>
                     <ul className="flex flex-col gap-1.5 mt-1">
                       {s.features.slice(0,3).map(f => (
-                        <li key={f} className="text-xs text-dead font-mono">— {f}</li>
+                        <li key={f} className="font-mono text-xs" style={{ color:'var(--color-dead)' }}>— {f}</li>
                       ))}
                     </ul>
-                    <p className="text-xs text-violet-light font-mono">{s.priceLabel}</p>
-                    <span className="text-sm text-muted group-hover:text-white transition-colors inline-flex items-center gap-1 mt-1">
+                    <p className="font-mono text-xs" style={{ color:'var(--color-violet-light)' }}>{s.priceLabel}</p>
+                    <span className="text-sm inline-flex items-center gap-1 mt-1 transition-colors group-hover:text-white" style={{ color:'var(--color-muted)' }}>
                       Explore Service
                       <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
                     </span>
                   </div>
 
-                  {/* Left violet accent border */}
-                  <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-violet scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-bottom" />
+                  {/* Violet left accent — scales on hover */}
+                  <div
+                    className="absolute left-0 top-0 bottom-0 w-[2px] bg-violet transition-transform duration-500 origin-bottom scale-y-0 group-hover:scale-y-100"
+                  />
                 </Link>
               </SpotlightCard>
             ))}
@@ -124,11 +170,14 @@ export function ServicesHorizontal() {
         </div>
 
         {/* Progress bar */}
-        <div className="shrink-0 h-px mx-12 bg-border">
-          <motion.div className="h-full bg-violet origin-left" style={{ scaleX:scrollYProgress }} />
+        <div className="shrink-0 mx-12 h-px" style={{ backgroundColor:'var(--color-border)' }}>
+          <motion.div
+            className="h-full origin-left"
+            style={{ scaleX:scrollYProgress, backgroundColor:'var(--color-violet)' }}
+          />
         </div>
         <div className="shrink-0 px-12 py-3">
-          <span className="text-[10px] text-dead font-mono tracking-[0.22em] uppercase">
+          <span className="font-mono uppercase text-[10px] tracking-[0.22em]" style={{ color:'var(--color-dead)' }}>
             ← scroll to explore all services →
           </span>
         </div>
@@ -137,14 +186,13 @@ export function ServicesHorizontal() {
   )
 }
 
-function SectionHeader() {
+function SectionLabel() {
   return (
     <div>
-      <span className="text-[11px] text-violet-light font-mono tracking-[0.22em] uppercase block mb-2">
+      <span className="font-mono uppercase block mb-2" style={{ fontSize:'11px', color:'var(--color-violet-light)', letterSpacing:'0.22em' }}>
         WHAT WE DO
       </span>
-      <h2 className="font-display font-black text-white leading-[0.92] tracking-tight"
-        style={{ fontSize:'clamp(28px, 4vw, 56px)' }}>
+      <h2 className="font-display font-black text-white leading-[0.92] tracking-tight" style={{ fontSize:'clamp(28px, 4vw, 54px)' }}>
         Services That<br />Scale With You
       </h2>
     </div>

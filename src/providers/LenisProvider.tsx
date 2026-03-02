@@ -5,24 +5,18 @@ import { useEffect } from 'react'
 export function LenisProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const lenis = new Lenis({
-      duration:     1.3,
-      easing:       (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation:  'vertical',
-      smoothWheel:  true,
+      duration:        1.25,
+      easing:          (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation:     'vertical',
+      smoothWheel:     true,
       touchMultiplier: 2,
     })
 
-    let rafId: number
-    function raf(time: number) {
-      lenis.raf(time)
-      rafId = requestAnimationFrame(raf)
-    }
-    rafId = requestAnimationFrame(raf)
+    let id: number
+    const raf = (time: number) => { lenis.raf(time); id = requestAnimationFrame(raf) }
+    id = requestAnimationFrame(raf)
 
-    return () => {
-      cancelAnimationFrame(rafId)
-      lenis.destroy()
-    }
+    return () => { cancelAnimationFrame(id); lenis.destroy() }
   }, [])
 
   return <>{children}</>

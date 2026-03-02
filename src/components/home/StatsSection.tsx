@@ -1,6 +1,5 @@
 'use client'
 import { ScrambleCounter } from '@/components/ui/ScrambleCounter'
-import { cn } from '@/lib/utils'
 
 const STATS = [
   { value:50, suffix:'+', label:'PROJECTS DELIVERED' },
@@ -11,24 +10,32 @@ const STATS = [
 
 export function StatsSection() {
   return (
-    <section className="w-full py-20 bg-canvas">
-      <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-0">
+    <section style={{ backgroundColor:'var(--color-canvas)', padding:'80px 0' }}>
+      <div className="container-site">
+        <div className="grid grid-cols-2 lg:grid-cols-4">
           {STATS.map((s, i) => (
-            <div key={s.label}
-              className={cn('flex flex-col items-center lg:items-start text-center lg:text-left py-10',
-                i % 2 === 0 ? 'border-r border-border pr-6 lg:pr-12' : 'pl-6 lg:pl-12',
-                i < 2       ? 'border-b lg:border-b-0 border-border' : '',
-                i === 1     ? 'lg:border-r border-border'            : '',
-                i === 2     ? 'lg:border-r border-border'            : '',
-              )}
+            <div
+              key={s.label}
+              className="flex flex-col items-center lg:items-start text-center lg:text-left"
+              style={{
+                padding:      '40px',
+                borderRight:  i < 3 ? '1px solid var(--color-border)' : 'none',
+                borderBottom: i < 2 ? '1px solid var(--color-border)' : 'none',
+              }}
             >
+              {/* CAPPED at 72px — prevents overflow into next section */}
               <ScrambleCounter
-                target={s.value} suffix={s.suffix}
+                target={s.value}
+                suffix={s.suffix}
                 className="font-display font-black text-white leading-none tracking-tight"
-                style={{ fontSize:'clamp(36px, 5vw, 72px)' }}
+                style={{ fontSize:'clamp(38px, 5vw, 72px)' }}
               />
-              <p className="font-mono text-[11px] text-muted tracking-[0.2em] mt-3">{s.label}</p>
+              <p
+                className="font-mono uppercase mt-3"
+                style={{ fontSize:'11px', color:'var(--color-muted)', letterSpacing:'0.2em' }}
+              >
+                {s.label}
+              </p>
             </div>
           ))}
         </div>

@@ -1,32 +1,8 @@
 'use client'
-
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
-
-const testimonials = [
-  {
-    quote:
-      'They delivered our entire website in 3 weeks. The quality was beyond what we expected from any agency at this price.',
-    name: 'Programme Director',
-    role: 'Marut Narayan Sewa Sansthan',
-    initials: 'MN',
-  },
-  {
-    quote:
-      'MTA understood our vision from day one. The cybersecurity audit they performed saved us from a major vulnerability we didn\'t know existed.',
-    name: 'CTO',
-    role: 'Rajasthan HealthTech Startup',
-    initials: 'RH',
-  },
-  {
-    quote:
-      'Their social media automation setup cut our weekly marketing hours by 70%. We went from posting manually to a fully automated pipeline.',
-    name: 'Marketing Head',
-    role: 'Jaipur E-Commerce Brand',
-    initials: 'JE',
-  },
-]
+import { testimonials } from '@/lib/data/testimonials'
 
 export function TestimonialsSection() {
   const [index, setIndex] = useState(0)
@@ -36,21 +12,22 @@ export function TestimonialsSection() {
   const next = () => setIndex((i) => (i === testimonials.length - 1 ? 0 : i + 1))
 
   return (
-    <section className="w-full bg-surface py-28">
-      <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
+    <section style={{ backgroundColor:'var(--color-surface)', padding:'112px 0' }}>
+      <div className="container-site">
         <div className="mb-16">
-          <span className="font-mono text-[11px] text-violet-light tracking-[0.22em] uppercase block mb-3">
+          <span className="font-mono uppercase block mb-3" style={{ fontSize:'11px', color:'var(--color-violet-light)', letterSpacing:'0.22em' }}>
             TESTIMONIALS
           </span>
           <h2 className="font-display font-black text-white tracking-tight leading-[0.92]"
-            style={{ fontSize: 'clamp(28px, 4vw, 60px)' }}>
+            style={{ fontSize:'clamp(28px, 4vw, 60px)' }}>
             Client Voices
           </h2>
         </div>
 
         <div className="relative max-w-4xl mx-auto text-center">
-          {/* Decorative quote mark */}
-          <span className="text-[80px] lg:text-[120px] font-display font-black text-violet/20 leading-none select-none absolute -top-8 left-0 lg:-left-8">
+          <span className="text-[80px] lg:text-[120px] font-display font-black leading-none select-none absolute -top-8 left-0 lg:-left-8"
+            style={{ color:'rgba(124,58,237,0.2)' }}
+          >
             &ldquo;
           </span>
 
@@ -68,23 +45,25 @@ export function TestimonialsSection() {
               </blockquote>
 
               <div className="flex items-center justify-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-card border border-border flex items-center justify-center text-sm font-display font-bold text-violet">
+                <div className="w-12 h-12 rounded-full flex items-center justify-center text-sm font-display font-bold"
+                  style={{ backgroundColor:'var(--color-card)', border:'1px solid var(--color-border)', color:'var(--color-violet)' }}
+                >
                   {current.initials}
                 </div>
                 <div className="text-left">
                   <p className="text-sm font-medium text-white">{current.name}</p>
-                  <p className="text-xs text-muted">{current.role}</p>
+                  <p className="text-xs" style={{ color:'var(--color-muted)' }}>{current.company}</p>
                 </div>
               </div>
             </motion.div>
           </AnimatePresence>
 
-          {/* Navigation */}
           <div className="flex items-center justify-between mt-12">
             <div className="flex items-center gap-3">
               <button
                 onClick={prev}
-                className="w-10 h-10 border border-border flex items-center justify-center text-muted hover:text-white hover:border-white/20 transition-colors"
+                className="w-10 h-10 border flex items-center justify-center transition-colors"
+                style={{ borderColor:'var(--color-border)', color:'var(--color-muted)' }}
                 aria-label="Previous testimonial"
                 data-cursor="pointer"
               >
@@ -92,15 +71,15 @@ export function TestimonialsSection() {
               </button>
               <button
                 onClick={next}
-                className="w-10 h-10 border border-border flex items-center justify-center text-muted hover:text-white hover:border-white/20 transition-colors"
+                className="w-10 h-10 border flex items-center justify-center transition-colors"
+                style={{ borderColor:'var(--color-border)', color:'var(--color-muted)' }}
                 aria-label="Next testimonial"
                 data-cursor="pointer"
               >
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
-
-            <span className="text-xs font-mono text-muted">
+            <span className="text-xs font-mono" style={{ color:'var(--color-muted)' }}>
               {String(index + 1).padStart(2, '0')} / {String(testimonials.length).padStart(2, '0')}
             </span>
           </div>

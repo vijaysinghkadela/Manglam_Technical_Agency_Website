@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import PageHero from '@/components/ui/PageHero'
-import { services, getServiceBySlug } from '@/lib/data/services'
+import { services, getService } from '@/lib/data/services'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ChevronDown } from 'lucide-react'
@@ -9,7 +9,7 @@ type Params = { slug: string }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { slug } = await params
-  const service = getServiceBySlug(slug)
+  const service = getService(slug)
   if (!service) return { title: 'Service Not Found' }
 
   return {
@@ -24,7 +24,7 @@ export function generateStaticParams() {
 
 export default async function ServicePage({ params }: { params: Promise<Params> }) {
   const { slug } = await params
-  const service = getServiceBySlug(slug)
+  const service = getService(slug)
   if (!service) notFound()
 
   return (
@@ -105,7 +105,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
 
                       <div className="flex flex-col gap-2">
                         <h3 className="font-display text-xl lg:text-2xl font-bold text-white">{step.title}</h3>
-                        <p className="text-sm text-muted leading-relaxed max-w-lg">{step.desc}</p>
+                        <p className="text-sm text-muted leading-relaxed max-w-lg">{step.summary}</p>
                       </div>
                     </div>
 
@@ -148,6 +148,12 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
                 </div>
               ))}
             </div>
+            {/* Added Disclaimer for Social Media service */}
+            {service.slug === 'social-media-marketing' && (
+              <p className="font-mono text-center text-dead mt-8 text-xs tracking-wide">
+                * Minimum 6-month commitment. Ad spend is billed separately.
+              </p>
+            )}
           </div>
         </section>
       )}

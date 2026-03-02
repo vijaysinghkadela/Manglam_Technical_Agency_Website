@@ -1,314 +1,230 @@
-import { Globe, Share2, Shield, Bot, Key, Database, Users } from 'lucide-react'
+import { Bot, Share2, Shield, Globe, PenTool, Edit3 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
-export interface ServiceProcess {
-  step: number
-  title: string
-  desc: string
-  duration: string
-}
-
-export interface ServiceFaq {
-  q: string
-  a: string
-}
-
-export interface ServicePricingPlan {
-  label: string
-  amount: string
-  period?: string
-  features: string[]
-  highlight?: boolean
-}
-
 export interface Service {
-  slug: string
-  name: string
-  tagline: string
-  Icon: LucideIcon
+  slug:        string
+  name:        string
+  tagline:     string
+  Icon:        LucideIcon
   description: string
-  features: string[]
-  priceLabel: string
-  process: ServiceProcess[]
-  pricing: ServicePricingPlan[]
-  faqs: ServiceFaq[]
+  features:    string[]
+  priceLabel:  string
+  pricing: {
+    label:     string
+    amount:    string
+    period?:   string
+    highlight: boolean
+    features:  string[]
+    subtext?:  string
+  }[]
+  process: {
+    step:     number
+    title:    string
+    summary:  string
+    detail:   string
+    duration: string
+  }[]
+  faqs: { q: string; a: string }[]
 }
 
 export const services: Service[] = [
   {
-    slug: 'web-development',
-    name: 'Web Development',
-    tagline: 'Custom websites built to convert and scale',
-    Icon: Globe,
-    description:
-      'End-to-end website design and development tailored to your goals — responsive, fast, and built with modern tech. Delivered in weeks, not months.',
-    features: [
-      'Responsive design (mobile + desktop)',
-      'Content integration & SEO foundations',
-      '1-year free domain + maintenance',
-      'QA testing & production deployment',
-    ],
-    priceLabel: 'From ₹50,000',
-    process: [
-      { step: 1, title: 'Discovery Call',     desc: 'We learn your goals, audience, and content requirements in depth.',         duration: '1–2 days' },
-      { step: 2, title: 'Proposal & Scope',   desc: 'Written deliverables, fixed price, and timeline — signed before work starts.', duration: '2–3 days' },
-      { step: 3, title: 'Design Sprints',     desc: 'Visual mockups and layout approval before development begins.',               duration: '1 week'   },
-      { step: 4, title: 'Development',        desc: 'Full build with staging previews and weekly check-ins.',                     duration: '1–3 weeks'},
-      { step: 5, title: 'QA & Launch',        desc: 'Cross-device testing, performance checks, and go-live execution.',           duration: '2–3 days' },
-      { step: 6, title: 'Handover & Support', desc: '1-year free maintenance, domain, and performance monitoring included.',     duration: 'Ongoing'  },
-    ],
+    slug:        'ai-automation',
+    name:        'AI Automation',
+    tagline:     'LLM-powered workflows & intelligent integrations',
+    Icon:        Bot,
+    description: 'We replace repetitive manual tasks with highly secure, tailored AI workflows using LLMs (OpenAI, Gemini), RAG implementations, and enterprise-grade n8n/Make automation platforms.',
+    features:    ['RAG custom knowledge bases', 'n8n & Zapier/Make workflow builds', 'LLM parameter and prompt tuning', 'Department-wide AI staff training'],
+    priceLabel:  'From ₹50,000',
     pricing: [
       {
-        label: 'Starter',
-        amount: '₹50,000',
-        period: 'one-time',
-        features: ['Up to 5 pages', 'Responsive layout', '1-yr free domain & maintenance', 'QA & deployment', 'Performance monitoring'],
-        highlight: false,
+        label: 'Discovery Workshop', amount: 'Starting at ₹25,000', period: 'one-time', highlight: false,
+        features: ['Process Audit', 'Feasibility Report', 'ROI Calculation', 'Architecture Blueprint'],
+        subtext: 'Amount is fully credited towards the final automation build.',
       },
       {
-        label: 'Growth',
-        amount: '₹75,000–₹1,00,000',
-        period: 'one-time',
-        features: ['Up to 15 pages', 'CMS integration', 'Blog & SEO setup', 'Custom animations', 'Priority support'],
-        highlight: true,
+        label: 'Tier 1: Basic Automation', amount: 'Starting at ₹50,000', period: 'project', highlight: false,
+        features: ['Single-platform workflow', 'Basic API integrations', 'Standard Testing & QA'],
       },
       {
-        label: 'Custom',
-        amount: 'Get Quote',
-        features: ['E-commerce / portal', 'SaaS dashboard', 'API integrations', 'Custom scope'],
-        highlight: false,
+        label: 'Tier 2: Mid-Complexity AI', amount: 'Starting at ₹4,00,000', period: 'project', highlight: true,
+        features: ['Custom LLM wrappers', 'RAG implementations', 'CRM/ERP integrations', 'Lead-qualification logic'],
+      },
+      {
+        label: 'Tier 3: Enterprise Custom', amount: 'Starting at ₹12,00,000', period: 'project', highlight: false,
+        features: ['Full custom AI agents', 'Multi-system orchestration', 'SOC2/ISO compliance readiness', 'Dedicated architecture'],
+      },
+      {
+        label: 'AI Support Retainer', amount: 'Starting at ₹50,000', period: '/month', highlight: false,
+        features: ['Dedicated AI Maintenance', 'Proactive error handling', 'Endpoint repair', 'Workflow tuning'],
       },
     ],
+    process: [
+      { step:1, title:'Discovery Workshop', summary:'Map manual workflows and calculate ROI.', detail:'We document exact time-cost metrics and propose a defined architecture blueprint.', duration:'3 days' },
+      { step:2, title:'Data & Security Mapping', summary:'Ensure no proprietary data leaks.', detail:'We map API endpoints and design systems that do not train public models on your data.', duration:'2 days' },
+      { step:3, title:'Build & Staging', summary:'Workflows built and iteratively tested.', detail:'We use dummy data on live staging. You review every branch logic.', duration:'2-3 weeks' },
+      { step:4, title:'Deployment & Training', summary:'System goes live alongside staff onboarding.', detail:'We provide comprehensive runbooks so your team knows precisely how to use and override the automations.', duration:'Ongoing' },
+    ],
     faqs: [
-      { q: 'How long does a typical website take?',   a: 'Standard 5-page sites take 3 weeks. Complex portals or e-commerce can take 6–10 weeks.' },
-      { q: 'What is included in Year 1 free support?', a: 'Domain registration, maintenance updates, bug fixes, and performance monitoring — all free for 12 months.' },
-      { q: 'Do you build on WordPress or custom code?', a: 'Both. We recommend Next.js for performance and WordPress for content-heavy sites. We discuss the best fit in the discovery call.' },
-      { q: 'Can you redesign my existing website?', a: 'Yes. We audit your current site and rebuild it on a modern stack, preserving your SEO and content.' },
-      { q: 'Do you provide hosting?', a: 'We deploy on Vercel, AWS, or your preferred provider. Hosting costs are not included in the project fee.' },
+      { q:'Is my data used to train the AI?', a:'No. We use API endpoints (like OpenAI Enterprise) that explicitly forbid training on customer data.' },
+      { q:'What happens when an API breaks?', a:'Our workflow maintenance retainers include proactive error handling and rapid endpoint repair.' },
     ],
   },
   {
-    slug: 'social-media-marketing',
-    name: 'Social Media & Automation',
-    tagline: 'Content that grows communities and automates engagement',
-    Icon: Share2,
-    description:
-      'Data-driven social media management combined with automation workflows — so your brand stays active and consistent without manual effort.',
-    features: [
-      'Facebook & Instagram management',
-      'Content creation & scheduling',
-      'Automated posting workflows',
-      'Monthly analytics reports',
-    ],
-    priceLabel: '₹10,000/month',
-    process: [
-      { step: 1, title: 'Onboarding',        desc: 'Account access, brand audit, content guidelines established.',    duration: '2 days'   },
-      { step: 2, title: 'Content Calendar',  desc: 'Monthly content plan reviewed and approved before scheduling.',  duration: '3 days'   },
-      { step: 3, title: 'Create & Schedule', desc: 'Posts, reels, and stories created and auto-scheduled.',           duration: 'Ongoing'  },
-      { step: 4, title: 'Automate',          desc: 'Workflow automation for scheduling, responses, and campaigns.',  duration: '1 week'   },
-      { step: 5, title: 'Report & Refine',   desc: 'Monthly analytics review and strategy adjustment.',              duration: 'Monthly'  },
-    ],
+    slug:        'social-media-marketing',
+    name:        'Social Media Marketing',
+    tagline:     'Data-driven ROI with ASCI-compliant content',
+    Icon:        Share2,
+    description: 'High-impact social architectures built for growth and trust. We do not just post; we engineer funnels, manage communities, and ensure all claims are strictly aligned with Advertising Standards Council of India (ASCI) guidelines.',
+    features:    ['ASCI-compliant copywriting', 'Automated CRM lead funnels', 'Multi-platform content calendars', 'Data-driven monthly reporting'],
+    priceLabel:  'From ₹75,000/mo',
     pricing: [
       {
-        label: 'Monthly',
-        amount: '₹10,000',
-        period: 'per month',
-        features: ['2 platforms (Facebook + Instagram)', '12 posts/month', 'Basic automation', 'Monthly analytics report', 'Pay by 5th each month'],
-        highlight: false,
+        label: 'Discovery Workshop', amount: '₹25,000', period: 'one-time', highlight: false,
+        features: ['Brand Audit', 'Competitor Analysis', 'ASCI Risk Assessment', 'Growth Strategy Doc'],
+        subtext: 'Credited towards your retainer.',
       },
       {
-        label: 'Annual',
-        amount: '₹1,20,000',
-        period: 'per year',
-        features: ['Everything in Monthly', 'Full automation workflows', 'Campaign management', 'Priority response', 'Save vs monthly billing'],
-        highlight: true,
+        label: 'Automation Setup', amount: '₹1,00,000', period: 'one-time', highlight: false,
+        features: ['CRM setup', 'Lead funnels', 'Zapier/Make workflows'],
+      },
+      {
+        label: 'SMM Retainer', amount: '₹75,000', period: '/month', highlight: true,
+        features: ['12 High-Impact Posts', '4 Reels', 'Community management', 'Monthly Analytics Reporting', 'Workflow maintenance'],
       },
     ],
+    process: [
+      { step:1, title:'Discovery & Audit', summary:'Brand messaging and history review.', detail:'We review past campaigns, audit current platforms, and establish the ASCI compliance baseline.', duration:'1 week' },
+      { step:2, title:'Funnel Setup', summary:'Wiring your socials to your CRM.', detail:'We build the backend logic (Zapier/Make) so every DM/Lead is captured cleanly.', duration:'1 week' },
+      { step:3, title:'Content Strategy', summary:'Pre-approval of all assets.', detail:'You see exactly what goes live 2 weeks in advance. No surprises.', duration:'Ongoing' },
+      { step:4, title:'Execution & Reporting', summary:'Live management and ROI analysis.', detail:'We handle community interaction and provide a rigorous monthly growth report.', duration:'Monthly' },
+    ],
     faqs: [
-      { q: 'When is payment due?',      a: 'On or before the 5th of each calendar month. A 10-day grace period applies before service is paused.' },
-      { q: 'Who owns the content?',     a: 'The client owns all produced content upon full payment of dues.' },
-      { q: 'Can I cancel anytime?',     a: '30 days written notice is required before termination. Fees for the notice period remain payable.' },
-      { q: 'What platforms do you cover?', a: 'Default: Facebook and Instagram. Additional platforms (LinkedIn, YouTube, Twitter/X) are quoted separately.' },
+      { q:'Do you handle ad spend?', a:'No. Minimum 6-month commitment is required for retainers, and ad spend is always billed separately and directly to your cards.' },
+      { q:'What does ASCI compliance mean here?', a:'It means we do not write misleading claims or guarantee outcomes in copy that could trigger regulatory action against your business.' },
     ],
   },
   {
-    slug: 'cybersecurity',
-    name: 'Cybersecurity Services',
-    tagline: 'Protect your digital assets before attackers find them',
-    Icon: Shield,
-    description:
-      'End-to-end cybersecurity for Indian SMEs and organisations — security audits, threat monitoring, and Indian IT Act 2000 compliance.',
-    features: [
-      'Security audit & vulnerability scan',
-      'Threat monitoring & alerting setup',
-      'Incident response planning',
-      'IT Act 2000 / IT Rules 2011 compliance',
-    ],
-    priceLabel: '₹20,000–₹30,000/yr',
-    process: [
-      { step: 1, title: 'Security Audit',    desc: 'Full assessment of your digital infrastructure and access controls.', duration: '1 week'    },
-      { step: 2, title: 'Risk Report',       desc: 'Prioritised findings with remediation recommendations.',               duration: '2–3 days'  },
-      { step: 3, title: 'Hardening',         desc: 'Implementing fixes — firewalls, access control, patching.',           duration: '1–2 weeks' },
-      { step: 4, title: 'Monitoring Setup',  desc: 'Ongoing threat detection and alerting configured.',                   duration: '2–3 days'  },
-      { step: 5, title: 'Quarterly Review',  desc: 'Recurring compliance checks and incident response drills.',           duration: 'Quarterly' },
-    ],
+    slug:        'cybersecurity',
+    name:        'Cybersecurity',
+    tagline:     'VAPT, ISO 27001 readiness & incident response',
+    Icon:        Shield,
+    description: 'Proactive defense architectures for Indian SMEs. We map your vulnerabilities, align your infrastructure with ISO 27001 / IT Act 2000, and enforce a strict 72-hour breach notification protocol.',
+    features:    ['Vulnerability Assessment (VAPT)', 'ISO 27001 & IT Act 2000 Gap Analysis', 'Mandatory MFA implementation', 'Written Incident Response Plans'],
+    priceLabel:  'Custom Quote',
     pricing: [
       {
-        label: 'Annual Plan',
-        amount: '₹20,000–₹30,000',
-        period: 'per year',
-        features: ['Full security audit', 'Vulnerability report', 'Monitoring setup', 'Incident response plan', 'IT Act 2000 compliance', 'Quarterly reviews'],
-        highlight: true,
+        label: 'Discovery Workshop', amount: '₹25,000', period: 'one-time', highlight: true,
+        features: ['Surface Threat Audit', 'Compliance Gap Check', 'Immediate Risk Report'],
+        subtext: 'Credited towards full hardening projects.',
+      },
+      {
+        label: 'VAPT & Hardening', amount: 'Custom', period: 'project', highlight: false,
+        features: ['Deep Penetration Testing', 'Architecture Hardening', 'Policy Drafting (NIST/ISO)', 'Employee Phishing Sims'],
       },
     ],
+    process: [
+      { step:1, title:'Discovery Audit', summary:'Surface assessment of exposure.', detail:'We perform non-intrusive scans and review current access policies.', duration:'3 days' },
+      { step:2, title:'Deep VAPT', summary:'Ethical penetration testing.', detail:'We actively attempt to breach your staging/prod environments (with permission) to find flaws.', duration:'2 weeks' },
+      { step:3, title:'Remediation', summary:'Patching the holes.', detail:'We configure AES-256 encryption, enforce MFA, and harden the network.', duration:'2-3 weeks' },
+      { step:4, title:'Policy Handover', summary:'IR plans and runbooks delivered.', detail:'We hand over your custom Incident Response plan with the 72-hour notification protocol.', duration:'1 week' },
+    ],
     faqs: [
-      { q: 'Is this aligned with Indian law?',    a: 'Yes. All work is compliant with IT Act 2000, IT (Amendment) Act 2008, and IT Rules 2011.' },
-      { q: 'What size businesses do you serve?', a: 'SMEs, NGOs, hospitals, clinics, and startups across Rajasthan and beyond.' },
-      { q: 'Do you offer penetration testing?',  a: 'Yes — ethical pen testing is included in the audit phase. We document all findings.' },
+      { q:'What is the 72-hour breach commitment?', a:'Aligned with CERT-In directives, we ensure your internal processes are capable of identifying and reporting severe breaches within 72 hours.' },
+      { q:'Do you provide ISO 27001 certification?', a:'We provide the *readiness* and framework. The actual certification must be performed by an independent external auditor.' },
     ],
   },
   {
-    slug: 'ai-automation',
-    name: 'AI Automation',
-    tagline: 'Replace repetitive work with intelligent workflows',
-    Icon: Bot,
-    description:
-      'We map your manual processes and replace them with AI-powered automation — saving hours, reducing errors, and scaling your operations.',
-    features: [
-      'Business process audit & mapping',
-      'OpenAI / Gemini API integration',
-      'n8n / Zapier / custom workflow builds',
-      'Staff training & documentation',
-    ],
-    priceLabel: 'Custom Quote',
-    process: [
-      { step: 1, title: 'Process Audit',    desc: 'Map every manual workflow that can be automated.',                      duration: '2–3 days'  },
-      { step: 2, title: 'Blueprint',        desc: 'Architecture design — tools, APIs, data flows.',                       duration: '3 days'    },
-      { step: 3, title: 'Build & Test',     desc: 'Workflow builds with staging environment testing.',                    duration: '1–3 weeks' },
-      { step: 4, title: 'Deploy',           desc: 'Production deployment with failover and monitoring.',                  duration: '2 days'    },
-      { step: 5, title: 'Train & Document', desc: 'Staff onboarding, runbooks, and ongoing support.',                    duration: '2–3 days'  },
-    ],
+    slug:        'saas-products',
+    name:        'SaaS Products',
+    tagline:     'Secure-by-default, highly accessible web apps',
+    Icon:        Globe,
+    description: 'We engineer complex, data-heavy web applications and portals. Every product we build guarantees WCAG 2.1 AA accessibility and secure-by-default architecture from day one. Includes Year 1 Complimentary maintenance.',
+    features:    ['Next.js / React ecosystems', 'WCAG 2.1 AA Accessibility', 'Secure-by-default database modeling', 'Year 1 Complimentary Maintenance'],
+    priceLabel:  'From ₹1,50,000',
     pricing: [
       {
-        label: 'Custom',
-        amount: 'Get Quote',
-        features: ['Based on number of workflows', 'API usage costs quoted separately', 'Includes deployment + training', 'Ongoing maintenance available'],
-        highlight: false,
+        label: 'Discovery Workshop', amount: '₹25,000', period: 'one-time', highlight: true,
+        features: ['Product Scoping', 'DB Schema Design', 'UX Wireframes', 'Tech Stack Selection'],
+        subtext: 'Credited towards total development cost.',
+      },
+      {
+        label: 'Core Development', amount: 'Custom', period: 'milestones', highlight: false,
+        features: ['Frontend/Backend Build', 'Testing (E2E, Unit)', 'Deployment Architecture', 'Year 1 Complimentary Support'],
       },
     ],
+    process: [
+      { step:1, title:'Discovery Workshop', summary:'Translating ideas to technical scope.', detail:'We lock down the exact feature set and user journeys to avoid scope creep.', duration:'1 week' },
+      { step:2, title:'Design & Architecture', summary:'Wireframes and DB schemas.', detail:'We design the UI for WCAG 2.1 AA compliance and model the database for scalability.', duration:'2 weeks' },
+      { step:3, title:'Sprints', summary:'Agile development with previews.', detail:'We build in 2-week sprints. You test specific features on live staging URLs.', duration:'4-12 weeks' },
+      { step:4, title:'QA & Launch', summary:'Security checks and go-live.', detail:'Load testing, penetration testing, and DNS handover. Year 1 maintenance begins.', duration:'1 week' },
+    ],
     faqs: [
-      { q: 'What tools do you use?',       a: 'n8n, Zapier, Make, OpenAI API, Gemini API, and custom Python/Node scripts depending on requirements.' },
-      { q: 'How is pricing calculated?',   a: 'Based on the number of workflows, complexity, and API licensing costs. We provide a fixed quote before starting.' },
-      { q: 'Can you automate my CRM?',    a: 'Yes — CRM automation, email sequences, lead routing, and reporting dashboards are common use cases.' },
+      { q:'What does Year 1 Complimentary Maintenance cover?', a:'It covers critical bug fixes, library updates, and security patches for the first 12 months after launch. Year 2 transitions to a subscription model.' },
+      { q:'Why WCAG 2.1 AA?', a:'Digital accessibility is non-negotiable for modern businesses. We ensure your app is usable by people with varying auditory, cognitive, and physical abilities.' },
     ],
   },
   {
-    slug: 'saas-licensing',
-    name: 'SaaS Licensing',
-    tagline: 'Software access structured for your business needs',
-    Icon: Key,
-    description:
-      'Navigate SaaS tool selection, licensing agreements, and user management — all structured with clear written agreements.',
-    features: [
-      'Tool evaluation & recommendation',
-      'Licensing agreement drafting',
-      'User access & onboarding setup',
-      'Renewal management',
-    ],
-    priceLabel: 'Custom Quote',
-    process: [
-      { step: 1, title: 'Needs Assessment', desc: 'Identify gaps and software requirements across your team.',  duration: '1–2 days' },
-      { step: 2, title: 'Tool Selection',   desc: 'Evaluate, compare, and recommend the best-fit solutions.', duration: '2–3 days' },
-      { step: 3, title: 'Licensing',        desc: 'Draft agreements and execute vendor licensing.',             duration: '1 week'   },
-      { step: 4, title: 'Onboarding',       desc: 'User setup, training, and documentation.',                  duration: '3–5 days' },
-      { step: 5, title: 'Management',       desc: 'Renewals, seat adjustments, and ongoing support.',          duration: 'Ongoing'  },
-    ],
+    slug:        'branding',
+    name:        'Branding',
+    tagline:     'Brand systems & IP-clear visual assets',
+    Icon:        PenTool,
+    description: 'We develop cohesive brand systems—not just logos. From typography rules to exact color math, we deliver comprehensive guidelines that ensure your brand is protected, scalable, and entirely IP-clear.',
+    features:    ['Logo & Mark generation', 'Comprehensive Brand Guidelines', 'Color systems & typography rules', '100% IP-clear asset handover'],
+    priceLabel:  'Custom Quote',
     pricing: [
       {
-        label: 'Custom',
-        amount: 'Get Quote',
-        features: ['Based on tool count & user seats', 'Written agreements included', 'Onboarding & training', 'Renewal management'],
-        highlight: false,
+        label: 'Discovery Workshop', amount: '₹25,000', period: 'one-time', highlight: true,
+        features: ['Market positioning', 'Visual audit', 'Moodboarding', 'Competitor review'],
+        subtext: 'Credited towards the full branding project.',
+      },
+      {
+        label: 'System Design', amount: 'From ₹75,000', period: 'project', highlight: false,
+        features: ['Primary/Secondary Marks', 'Type Hierarchy', 'Digital Asset Library', 'Guideline PDF'],
       },
     ],
+    process: [
+      { step:1, title:'Discovery', summary:'Understanding the company ethos.', detail:'We unpack why you exist, who you serve, and how you need to sound/look.', duration:'1 week' },
+      { step:2, title:'Concept Sprints', summary:'Iterative visual directions.', detail:'We present 2-3 distinct brand directions showing logo usage, colors, and type in context.', duration:'2 weeks' },
+      { step:3, title:'Refinement', summary:'Zeroing in on the winner.', detail:'Feedback cycles to perfect the chosen direction.', duration:'1 week' },
+      { step:4, title:'Handover', summary:'IP-clear delivery.', detail:'You receive the comprehensive brand guideline book and native vector files. We claim no ongoing IP rights.', duration:'3 days' },
+    ],
     faqs: [
-      { q: 'Do you resell SaaS tools?',     a: 'We advise and manage licensing — you maintain direct vendor relationships.' },
-      { q: 'Can you manage existing tools?', a: 'Yes — we can take over management of tools you already subscribe to.' },
+      { q:'Do I own the logo?', a:'Yes. We provide a full IP copyright transfer upon final payment. It is your asset.' },
+      { q:'Do you provide print materials?', a:'We provide the digital, print-ready source files. You can take these to any vendor for physical production.' },
     ],
   },
   {
-    slug: 'data-processing',
-    name: 'Data Processing',
-    tagline: 'Compliant, secure data operations for your organisation',
-    Icon: Database,
-    description:
-      'Legally sound data handling frameworks aligned with the Indian IT Act 2000 and GDPR principles — protecting your organisation and your users.',
-    features: [
-      'Data Processing Agreement (DPA) drafting',
-      'IT Act 2000 / GDPR-aligned frameworks',
-      'Secure data pipeline architecture',
-      'Breach response planning',
-    ],
-    priceLabel: 'Custom Quote',
-    process: [
-      { step: 1, title: 'Data Audit',       desc: 'Map all data flows, storage, and third-party transfers.',              duration: '2–3 days' },
-      { step: 2, title: 'DPA Drafting',     desc: 'Written Data Processing Agreement tailored to your operations.',      duration: '3–5 days' },
-      { step: 3, title: 'System Setup',     desc: 'Secure pipeline and storage architecture implementation.',             duration: '1–2 weeks'},
-      { step: 4, title: 'Compliance Check', desc: 'Full review against IT Act and applicable regulations.',              duration: '2 days'   },
-      { step: 5, title: 'Documentation',    desc: 'Staff data-handling training and incident response runbooks.',        duration: '2 days'   },
-    ],
+    slug:        'content-creation',
+    name:        'Content Creation',
+    tagline:     'Research-backed, AI-assisted, human-verified copy',
+    Icon:        Edit3,
+    description: 'We leverage AI as a research and structuring tool, but every single line of copy—whether for a landing page, technical whitepaper, or blog—is heavily edited and fact-checked by technical human writers.',
+    features:    ['Technical blog writing', 'Website copywriting frameworks', 'Whitepapers & documentation', 'Strict AI-hallucination audits'],
+    priceLabel:  'Custom Quote',
     pricing: [
       {
-        label: 'Custom',
-        amount: 'Get Quote',
-        features: ['Based on data volume & complexity', 'DPA drafting included', 'Compliance report', 'Staff training materials'],
-        highlight: false,
+        label: 'Discovery Workshop', amount: '₹25,000', period: 'one-time', highlight: false,
+        features: ['Tone of Voice Audit', 'Content Gap Analysis', 'Keyword Mapping'],
+        subtext: 'Credited toward content retainers.',
       },
-    ],
-    faqs: [
-      { q: 'Is this GDPR-compliant?',          a: 'We align all work with GDPR principles and the Indian IT Act 2000/IT Rules 2011 — whichever applies to your context.' },
-      { q: 'Do you cover healthcare data?',    a: 'Yes — we work with hospitals and rehabilitation centres and understand sensitive health data requirements.' },
-    ],
-  },
-  {
-    slug: 'contractor-management',
-    name: 'Contractor Management',
-    tagline: 'Structure your freelancer relationships legally and clearly',
-    Icon: Users,
-    description:
-      'Every contractor relationship needs a written agreement. We draft, structure, and manage your freelancer contracts so there are no disputes.',
-    features: [
-      'Contractor agreement drafting',
-      'Scope of work documentation',
-      'IP ownership & NDA provisions',
-      'Onboarding & offboarding process',
-    ],
-    priceLabel: 'Custom Quote',
-    process: [
-      { step: 1, title: 'Scope Definition',  desc: 'Deliverables, timelines, and responsibilities documented.',           duration: '1–2 days' },
-      { step: 2, title: 'Agreement Draft',   desc: 'Contract with IP, NDA, payment, and termination clauses.',            duration: '2–3 days' },
-      { step: 3, title: 'Review & Sign',     desc: 'Both parties review, negotiate, and execute the agreement.',          duration: '1–2 days' },
-      { step: 4, title: 'Tracking Setup',    desc: 'Deliverable tracker and milestone schedule established.',             duration: '1 day'    },
-      { step: 5, title: 'Offboarding',       desc: 'Closure checklist — IP handover, access revocation, final payment.', duration: 'Per project end' },
-    ],
-    pricing: [
       {
-        label: 'Custom',
-        amount: 'Get Quote',
-        features: ['Per engagement pricing', 'Full agreement drafting', 'IP + NDA provisions', 'Onboarding / offboarding docs'],
-        highlight: false,
+        label: 'Content Batches', amount: 'Custom', period: 'per piece', highlight: true,
+        features: ['SEO-optimized', 'Fact-checked by humans', 'Plagiarism & AI reports included'],
       },
     ],
+    process: [
+      { step:1, title:'Tone Audit', summary:'Defining your voice.', detail:'We establish the vocabulary, cadence, and formatting rules your brand must follow.', duration:'3 days' },
+      { step:2, title:'Research & AI Outlining', summary:'Data gathering.', detail:'We use LLMs strictly to structure outlines and aggregate technical research points.', duration:'3 days' },
+      { step:3, title:'Human Drafting', summary:'Writing the actual copy.', detail:'Our team writes the content, ensuring nuance, wit, and deep accuracy that AI cannot achieve.', duration:'1-2 weeks' },
+      { step:4, title:'Fact-Check & Review', summary:'Client sign-off.', detail:'You review the drafts. We provide plagiarism and AI-score reports to prove human intervention.', duration:'Ongoing' },
+    ],
     faqs: [
-      { q: 'Do agreements include NDA clauses?',  a: 'Yes — confidentiality provisions are included in all contractor agreements by default.' },
-      { q: 'Can you manage ongoing contractors?', a: 'Yes — we provide templates and tracking systems for managing multiple freelancers simultaneously.' },
+      { q:'Do you just generate ChatGPT text and charge me?', a:'Absolutely not. AI is a research assistant for us. Our value is in the human editing, fact-checking, and strategic tone alignment.' },
+      { q:'Do you guarantee SEO rankings?', a:'No agency can guarantee Google rankings. We guarantee structurally perfect, deeply researched content that search engines heavily favor.' },
     ],
   },
 ]
-
-export function getServiceBySlug(slug: string) {
-  return services.find(s => s.slug === slug)
-}
 
 export function getService(slug: string): Service | undefined {
   return services.find(s => s.slug === slug)
