@@ -1,246 +1,315 @@
-import { Service } from '@/types';
+import { Globe, Share2, Shield, Bot, Key, Database, Users } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
+
+export interface ServiceProcess {
+  step: number
+  title: string
+  desc: string
+  duration: string
+}
+
+export interface ServiceFaq {
+  q: string
+  a: string
+}
+
+export interface ServicePricingPlan {
+  label: string
+  amount: string
+  period?: string
+  features: string[]
+  highlight?: boolean
+}
+
+export interface Service {
+  slug: string
+  name: string
+  tagline: string
+  Icon: LucideIcon
+  description: string
+  features: string[]
+  priceLabel: string
+  process: ServiceProcess[]
+  pricing: ServicePricingPlan[]
+  faqs: ServiceFaq[]
+}
 
 export const services: Service[] = [
   {
     slug: 'web-development',
     name: 'Web Development',
     tagline: 'Custom websites built to convert and scale',
-    icon: 'Globe',
-    description: 'We design and develop responsive, fast-loading websites tailored to your brand. From landing pages to full-scale web applications, our team delivers pixel-perfect solutions using modern frameworks and best practices.',
-    deliverables: [
-      'Full website design & development',
-      'Responsive layout for all devices',
-      'Content integration & optimisation',
-      'Image optimisation & lazy loading',
-      'SEO-friendly architecture',
-      'Quality assurance & testing',
-      'Deployment & go-live support',
-      '1-year free maintenance & domain',
+    Icon: Globe,
+    description:
+      'End-to-end website design and development tailored to your goals — responsive, fast, and built with modern tech. Delivered in weeks, not months.',
+    features: [
+      'Responsive design (mobile + desktop)',
+      'Content integration & SEO foundations',
+      '1-year free domain + maintenance',
+      'QA testing & production deployment',
     ],
+    priceLabel: 'From ₹50,000',
     process: [
-      { step: 1, title: 'Discovery', desc: 'We understand your business, goals, and target audience through detailed discussions.', duration: '2–3 days' },
-      { step: 2, title: 'Wireframes', desc: 'We create wireframes and UI mockups that align with your brand identity.', duration: '3–4 days' },
-      { step: 3, title: 'Design Approval', desc: 'You review and approve the design before development begins.', duration: '1–2 days' },
-      { step: 4, title: 'Development', desc: 'Our developers build your site using Next.js, TypeScript, and modern tools.', duration: '5–10 days' },
-      { step: 5, title: 'QA & Testing', desc: 'Rigorous testing across devices and browsers ensures everything works.', duration: '2–3 days' },
-      { step: 6, title: 'Launch', desc: 'We deploy your site, set up domain, and provide handover documentation.', duration: '1–2 days' },
+      { step: 1, title: 'Discovery Call',     desc: 'We learn your goals, audience, and content requirements in depth.',         duration: '1–2 days' },
+      { step: 2, title: 'Proposal & Scope',   desc: 'Written deliverables, fixed price, and timeline — signed before work starts.', duration: '2–3 days' },
+      { step: 3, title: 'Design Sprints',     desc: 'Visual mockups and layout approval before development begins.',               duration: '1 week'   },
+      { step: 4, title: 'Development',        desc: 'Full build with staging previews and weekly check-ins.',                     duration: '1–3 weeks'},
+      { step: 5, title: 'QA & Launch',        desc: 'Cross-device testing, performance checks, and go-live execution.',           duration: '2–3 days' },
+      { step: 6, title: 'Handover & Support', desc: '1-year free maintenance, domain, and performance monitoring included.',     duration: 'Ongoing'  },
     ],
     pricing: [
-      { label: 'Starter', amount: '₹50,000', note: 'One-time — up to 5 pages, responsive design, 1-year free support & domain' },
-      { label: 'Growth', amount: '₹75,000–₹1,00,000', note: 'Up to 15 pages, blog, SEO setup, CMS integration' },
-      { label: 'Year 1 Support', amount: 'Complimentary', note: 'Domain registration, updates, maintenance & performance monitoring included' },
-      { label: 'Year 2–4 Support', amount: '₹20,000–₹30,000/year', note: 'Optional paid plan for continued updates, maintenance & monitoring' },
-      { label: 'Custom Project', amount: 'Get Quote', note: 'Complex portals, e-commerce, SaaS platforms — scoped individually' },
+      {
+        label: 'Starter',
+        amount: '₹50,000',
+        period: 'one-time',
+        features: ['Up to 5 pages', 'Responsive layout', '1-yr free domain & maintenance', 'QA & deployment', 'Performance monitoring'],
+        highlight: false,
+      },
+      {
+        label: 'Growth',
+        amount: '₹75,000–₹1,00,000',
+        period: 'one-time',
+        features: ['Up to 15 pages', 'CMS integration', 'Blog & SEO setup', 'Custom animations', 'Priority support'],
+        highlight: true,
+      },
+      {
+        label: 'Custom',
+        amount: 'Get Quote',
+        features: ['E-commerce / portal', 'SaaS dashboard', 'API integrations', 'Custom scope'],
+        highlight: false,
+      },
     ],
     faqs: [
-      { q: 'How long does a typical website project take?', a: 'Most starter websites are delivered within 2–4 weeks, depending on complexity and content readiness. Custom projects may take 4–8 weeks.' },
-      { q: 'What if I need changes after delivery?', a: 'Year 1 includes free updates and maintenance. After that, you can opt into our annual support plan or request one-off changes.' },
-      { q: 'Do you provide hosting?', a: 'We deploy on platforms like Vercel, Netlify, or AWS based on your project needs. Year 1 hosting setup is included in the project fee.' },
-      { q: 'What CMS do you use?', a: 'We integrate with Sanity, Strapi, or WordPress depending on your needs. We also offer training so you can manage content independently.' },
-      { q: 'Can you redesign my existing site?', a: 'Absolutely. We can audit your current site, identify improvements, and rebuild it with modern technology and design.' },
+      { q: 'How long does a typical website take?',   a: 'Standard 5-page sites take 3 weeks. Complex portals or e-commerce can take 6–10 weeks.' },
+      { q: 'What is included in Year 1 free support?', a: 'Domain registration, maintenance updates, bug fixes, and performance monitoring — all free for 12 months.' },
+      { q: 'Do you build on WordPress or custom code?', a: 'Both. We recommend Next.js for performance and WordPress for content-heavy sites. We discuss the best fit in the discovery call.' },
+      { q: 'Can you redesign my existing website?', a: 'Yes. We audit your current site and rebuild it on a modern stack, preserving your SEO and content.' },
+      { q: 'Do you provide hosting?', a: 'We deploy on Vercel, AWS, or your preferred provider. Hosting costs are not included in the project fee.' },
     ],
-    relatedSlugs: ['social-media-marketing', 'ai-automation'],
   },
   {
     slug: 'social-media-marketing',
-    name: 'Social Media Marketing & Automation',
+    name: 'Social Media & Automation',
     tagline: 'Content that grows communities and automates engagement',
-    icon: 'Share2',
-    description: 'We manage your social media from content creation to analytics. Our team creates engaging posts, runs campaigns, and automates workflows to keep your brand active and growing on Facebook, Instagram, and more.',
-    deliverables: [
-      'Content creation & graphic design',
-      'Post scheduling across Facebook & Instagram',
-      'Public awareness campaigns',
-      'Audience engagement & community management',
-      'Monthly analytics & performance reports',
-      'Automated post scheduling & workflows',
-      'Integration of automation tools',
+    Icon: Share2,
+    description:
+      'Data-driven social media management combined with automation workflows — so your brand stays active and consistent without manual effort.',
+    features: [
+      'Facebook & Instagram management',
+      'Content creation & scheduling',
+      'Automated posting workflows',
+      'Monthly analytics reports',
     ],
+    priceLabel: '₹10,000/month',
     process: [
-      { step: 1, title: 'Onboarding & Access', desc: 'We set up platform access and review your current social presence.', duration: '1–2 days' },
-      { step: 2, title: 'Content Calendar', desc: 'We build a monthly content calendar aligned with your business goals.', duration: '2–3 days' },
-      { step: 3, title: 'Creation & Approval', desc: 'Our team creates content and gets your approval before publishing.', duration: 'Ongoing' },
-      { step: 4, title: 'Scheduling', desc: 'Approved content is scheduled for optimal engagement times.', duration: 'Automated' },
-      { step: 5, title: 'Reporting', desc: 'Monthly reports with insights, growth metrics, and recommendations.', duration: 'Monthly' },
+      { step: 1, title: 'Onboarding',        desc: 'Account access, brand audit, content guidelines established.',    duration: '2 days'   },
+      { step: 2, title: 'Content Calendar',  desc: 'Monthly content plan reviewed and approved before scheduling.',  duration: '3 days'   },
+      { step: 3, title: 'Create & Schedule', desc: 'Posts, reels, and stories created and auto-scheduled.',           duration: 'Ongoing'  },
+      { step: 4, title: 'Automate',          desc: 'Workflow automation for scheduling, responses, and campaigns.',  duration: '1 week'   },
+      { step: 5, title: 'Report & Refine',   desc: 'Monthly analytics review and strategy adjustment.',              duration: 'Monthly'  },
     ],
     pricing: [
-      { label: 'Monthly Retainer', amount: '₹10,000/month', note: '2 platforms, 12 posts/month, monthly analytics report' },
-      { label: 'Annual Plan', amount: '₹1,20,000/year', note: 'Same as monthly + automation workflows + priority support' },
+      {
+        label: 'Monthly',
+        amount: '₹10,000',
+        period: 'per month',
+        features: ['2 platforms (Facebook + Instagram)', '12 posts/month', 'Basic automation', 'Monthly analytics report', 'Pay by 5th each month'],
+        highlight: false,
+      },
+      {
+        label: 'Annual',
+        amount: '₹1,20,000',
+        period: 'per year',
+        features: ['Everything in Monthly', 'Full automation workflows', 'Campaign management', 'Priority response', 'Save vs monthly billing'],
+        highlight: true,
+      },
     ],
     faqs: [
-      { q: 'Which platforms do you manage?', a: 'We currently manage Facebook and Instagram. We can discuss expansion to LinkedIn, Twitter/X, and YouTube.' },
-      { q: 'How many posts per month?', a: 'Our standard plan includes 12–16 posts per month across both platforms, including stories and reels.' },
-      { q: 'What is the payment schedule?', a: 'Monthly payments are due on or before the 5th of each month. There is a 10-day grace period before service suspension.' },
-      { q: 'Can you run paid ad campaigns?', a: 'Yes. Ad campaign management is available as an add-on. Ad spend is billed separately from management fees.' },
+      { q: 'When is payment due?',      a: 'On or before the 5th of each calendar month. A 10-day grace period applies before service is paused.' },
+      { q: 'Who owns the content?',     a: 'The client owns all produced content upon full payment of dues.' },
+      { q: 'Can I cancel anytime?',     a: '30 days written notice is required before termination. Fees for the notice period remain payable.' },
+      { q: 'What platforms do you cover?', a: 'Default: Facebook and Instagram. Additional platforms (LinkedIn, YouTube, Twitter/X) are quoted separately.' },
     ],
-    relatedSlugs: ['web-development', 'ai-automation'],
   },
   {
     slug: 'cybersecurity',
     name: 'Cybersecurity Services',
     tagline: 'Protect your digital assets before attackers find them',
-    icon: 'Shield',
-    description: 'We help businesses identify vulnerabilities, monitor threats, and respond to security incidents. Our cybersecurity services ensure your digital infrastructure stays protected and compliant with industry standards.',
-    deliverables: [
-      'Comprehensive security audits',
-      'Vulnerability assessment & penetration testing',
-      'Threat monitoring setup',
+    Icon: Shield,
+    description:
+      'End-to-end cybersecurity for Indian SMEs and organisations — security audits, threat monitoring, and Indian IT Act 2000 compliance.',
+    features: [
+      'Security audit & vulnerability scan',
+      'Threat monitoring & alerting setup',
       'Incident response planning',
-      'Firewall & access hardening recommendations',
-      'Compliance support (IT Act 2000, GDPR)',
-      'Monthly security reports',
+      'IT Act 2000 / IT Rules 2011 compliance',
     ],
+    priceLabel: '₹20,000–₹30,000/yr',
     process: [
-      { step: 1, title: 'Audit', desc: 'We audit your current infrastructure to identify vulnerabilities and risk areas.', duration: '1 week' },
-      { step: 2, title: 'Risk Report', desc: 'Detailed report of findings with severity ratings and remediation priorities.', duration: '2–3 days' },
-      { step: 3, title: 'Remediation', desc: 'We implement security measures, patch vulnerabilities, and configure firewalls.', duration: '1–2 weeks' },
-      { step: 4, title: 'Monitoring', desc: 'Continuous threat monitoring ensures your systems stay protected.', duration: 'Ongoing' },
-      { step: 5, title: 'Quarterly Review', desc: 'Regular reviews to assess new threats and update security measures.', duration: 'Quarterly' },
+      { step: 1, title: 'Security Audit',    desc: 'Full assessment of your digital infrastructure and access controls.', duration: '1 week'    },
+      { step: 2, title: 'Risk Report',       desc: 'Prioritised findings with remediation recommendations.',               duration: '2–3 days'  },
+      { step: 3, title: 'Hardening',         desc: 'Implementing fixes — firewalls, access control, patching.',           duration: '1–2 weeks' },
+      { step: 4, title: 'Monitoring Setup',  desc: 'Ongoing threat detection and alerting configured.',                   duration: '2–3 days'  },
+      { step: 5, title: 'Quarterly Review',  desc: 'Recurring compliance checks and incident response drills.',           duration: 'Quarterly' },
     ],
     pricing: [
-      { label: 'Annual Security Plan', amount: '₹20,000–₹30,000/year', note: 'Includes audit, monitoring & incident response' },
-      { label: 'Custom Enterprise', amount: 'Get Quote', note: 'For larger organisations with complex security needs' },
+      {
+        label: 'Annual Plan',
+        amount: '₹20,000–₹30,000',
+        period: 'per year',
+        features: ['Full security audit', 'Vulnerability report', 'Monitoring setup', 'Incident response plan', 'IT Act 2000 compliance', 'Quarterly reviews'],
+        highlight: true,
+      },
     ],
     faqs: [
-      { q: 'How often should we get a security audit?', a: 'We recommend at least one comprehensive audit per year, with quarterly vulnerability scans for active applications.' },
-      { q: 'Do you offer 24/7 monitoring?', a: 'Yes, our annual plan includes continuous threat monitoring with alerts for critical issues.' },
-      { q: 'Can you help with compliance?', a: 'Absolutely. We support compliance with the Indian IT Act 2000, GDPR, and other relevant frameworks.' },
-      { q: 'What happens during a security incident?', a: 'Our incident response team isolates the threat, assesses damage, and implements recovery with a detailed post-incident report.' },
+      { q: 'Is this aligned with Indian law?',    a: 'Yes. All work is compliant with IT Act 2000, IT (Amendment) Act 2008, and IT Rules 2011.' },
+      { q: 'What size businesses do you serve?', a: 'SMEs, NGOs, hospitals, clinics, and startups across Rajasthan and beyond.' },
+      { q: 'Do you offer penetration testing?',  a: 'Yes — ethical pen testing is included in the audit phase. We document all findings.' },
     ],
-    relatedSlugs: ['data-processing', 'ai-automation'],
   },
   {
     slug: 'ai-automation',
     name: 'AI Automation',
     tagline: 'Replace repetitive work with intelligent workflows',
-    icon: 'Brain',
-    description: 'We build AI-powered automation solutions that streamline your business operations. From intelligent chatbots to workflow automation, we help you save time, reduce errors, and scale faster.',
-    deliverables: [
-      'Business process automation mapping',
-      'AI tool integration (OpenAI, Gemini APIs)',
-      'Workflow automation (n8n, Zapier, custom)',
-      'CRM/email automation',
-      'Reporting automation',
-      'Custom AI-powered dashboards',
+    Icon: Bot,
+    description:
+      'We map your manual processes and replace them with AI-powered automation — saving hours, reducing errors, and scaling your operations.',
+    features: [
+      'Business process audit & mapping',
+      'OpenAI / Gemini API integration',
+      'n8n / Zapier / custom workflow builds',
       'Staff training & documentation',
     ],
+    priceLabel: 'Custom Quote',
     process: [
-      { step: 1, title: 'Process Audit', desc: 'We map your current workflows and identify automation opportunities.', duration: '1 week' },
-      { step: 2, title: 'Automation Blueprint', desc: 'We architect AI solutions tailored to your specific business processes.', duration: '3–5 days' },
-      { step: 3, title: 'Tool Selection', desc: 'We select the best tools and platforms for your automation needs.', duration: '1–2 days' },
-      { step: 4, title: 'Build & Test', desc: 'Our team develops, tests, and deploys the automation tools.', duration: '2–4 weeks' },
-      { step: 5, title: 'Train Staff', desc: 'We train your team on using and maintaining the automated workflows.', duration: '2–3 days' },
+      { step: 1, title: 'Process Audit',    desc: 'Map every manual workflow that can be automated.',                      duration: '2–3 days'  },
+      { step: 2, title: 'Blueprint',        desc: 'Architecture design — tools, APIs, data flows.',                       duration: '3 days'    },
+      { step: 3, title: 'Build & Test',     desc: 'Workflow builds with staging environment testing.',                    duration: '1–3 weeks' },
+      { step: 4, title: 'Deploy',           desc: 'Production deployment with failover and monitoring.',                  duration: '2 days'    },
+      { step: 5, title: 'Train & Document', desc: 'Staff onboarding, runbooks, and ongoing support.',                    duration: '2–3 days'  },
     ],
     pricing: [
-      { label: 'Custom Quote', amount: 'Contact Us', note: 'Pricing based on scope, complexity, and number of workflows' },
+      {
+        label: 'Custom',
+        amount: 'Get Quote',
+        features: ['Based on number of workflows', 'API usage costs quoted separately', 'Includes deployment + training', 'Ongoing maintenance available'],
+        highlight: false,
+      },
     ],
     faqs: [
-      { q: 'What kind of processes can be automated?', a: 'Almost any repetitive workflow — data entry, report generation, customer support, lead qualification, invoice processing, and more.' },
-      { q: 'Will AI replace our team?', a: 'No. AI automation augments your team by handling repetitive tasks, allowing your people to focus on strategic work.' },
-      { q: 'How long does implementation take?', a: 'Simple automations deploy in 1–2 weeks. Complex AI solutions may take 4–8 weeks depending on scope.' },
-      { q: 'Do you support integration with existing tools?', a: 'Yes. We integrate with Google Workspace, Slack, Zapier, HubSpot, and custom APIs.' },
+      { q: 'What tools do you use?',       a: 'n8n, Zapier, Make, OpenAI API, Gemini API, and custom Python/Node scripts depending on requirements.' },
+      { q: 'How is pricing calculated?',   a: 'Based on the number of workflows, complexity, and API licensing costs. We provide a fixed quote before starting.' },
+      { q: 'Can you automate my CRM?',    a: 'Yes — CRM automation, email sequences, lead routing, and reporting dashboards are common use cases.' },
     ],
-    relatedSlugs: ['web-development', 'data-processing'],
   },
   {
     slug: 'saas-licensing',
     name: 'SaaS Licensing',
     tagline: 'Software access structured for your business needs',
-    icon: 'Key',
-    description: 'We handle the complexities of SaaS licensing — from procurement and deployment to access management and renewals. Focus on your business while we manage your software stack.',
-    deliverables: [
-      'SaaS tool evaluation & recommendation',
+    Icon: Key,
+    description:
+      'Navigate SaaS tool selection, licensing agreements, and user management — all structured with clear written agreements.',
+    features: [
+      'Tool evaluation & recommendation',
       'Licensing agreement drafting',
-      'User access management setup',
-      'Onboarding documentation',
+      'User access & onboarding setup',
       'Renewal management',
-      'Vendor relationship management',
-      'Cost optimisation & audit',
     ],
+    priceLabel: 'Custom Quote',
     process: [
-      { step: 1, title: 'Needs Assessment', desc: 'We review your current software stack and identify gaps.', duration: '2–3 days' },
-      { step: 2, title: 'Tool Selection', desc: 'We recommend optimal SaaS tools and licensing models.', duration: '3–5 days' },
-      { step: 3, title: 'Licensing', desc: 'We handle procurement, licensing agreements, and setup.', duration: '1–2 weeks' },
-      { step: 4, title: 'Onboarding', desc: 'We configure tools and provide documentation for your team.', duration: '3–5 days' },
-      { step: 5, title: 'Ongoing Management', desc: 'Continuous license management, renewals, and cost optimisation.', duration: 'Ongoing' },
+      { step: 1, title: 'Needs Assessment', desc: 'Identify gaps and software requirements across your team.',  duration: '1–2 days' },
+      { step: 2, title: 'Tool Selection',   desc: 'Evaluate, compare, and recommend the best-fit solutions.', duration: '2–3 days' },
+      { step: 3, title: 'Licensing',        desc: 'Draft agreements and execute vendor licensing.',             duration: '1 week'   },
+      { step: 4, title: 'Onboarding',       desc: 'User setup, training, and documentation.',                  duration: '3–5 days' },
+      { step: 5, title: 'Management',       desc: 'Renewals, seat adjustments, and ongoing support.',          duration: 'Ongoing'  },
     ],
     pricing: [
-      { label: 'Custom Quote', amount: 'Contact Us', note: 'Based on number of licenses, tools, and management scope' },
+      {
+        label: 'Custom',
+        amount: 'Get Quote',
+        features: ['Based on tool count & user seats', 'Written agreements included', 'Onboarding & training', 'Renewal management'],
+        highlight: false,
+      },
     ],
     faqs: [
-      { q: 'Which SaaS tools do you work with?', a: 'Microsoft 365, Google Workspace, Adobe Creative Cloud, Zoho, and many more.' },
-      { q: 'Can you help reduce our software costs?', a: 'Yes. We audit your licenses, identify unused seats, and negotiate better rates with vendors.' },
-      { q: 'Do you handle renewals?', a: 'Absolutely. We track all expiry dates and manage renewals in advance.' },
+      { q: 'Do you resell SaaS tools?',     a: 'We advise and manage licensing — you maintain direct vendor relationships.' },
+      { q: 'Can you manage existing tools?', a: 'Yes — we can take over management of tools you already subscribe to.' },
     ],
-    relatedSlugs: ['data-processing', 'contractor-management'],
   },
   {
     slug: 'data-processing',
     name: 'Data Processing',
     tagline: 'Compliant, secure data operations for your organisation',
-    icon: 'Database',
-    description: 'We provide end-to-end data processing services — from collection and cleaning to secure storage and analysis. All our processes comply with GDPR and the Indian IT Act 2000.',
-    deliverables: [
-      'Data processing agreement (DPA) drafting',
-      'GDPR-aligned (Indian IT Act) data handling setup',
+    Icon: Database,
+    description:
+      'Legally sound data handling frameworks aligned with the Indian IT Act 2000 and GDPR principles — protecting your organisation and your users.',
+    features: [
+      'Data Processing Agreement (DPA) drafting',
+      'IT Act 2000 / GDPR-aligned frameworks',
       'Secure data pipeline architecture',
-      'Data cleaning & transformation',
-      'Data audit trail',
-      'Staff data handling training',
       'Breach response planning',
     ],
+    priceLabel: 'Custom Quote',
     process: [
-      { step: 1, title: 'Data Audit', desc: 'We define data requirements, sources, and compliance needs.', duration: '3–5 days' },
-      { step: 2, title: 'DPA Drafting', desc: 'We draft data processing agreements that meet regulatory requirements.', duration: '1 week' },
-      { step: 3, title: 'System Setup', desc: 'We design secure data pipelines with encryption and access controls.', duration: '1–2 weeks' },
-      { step: 4, title: 'Compliance Check', desc: 'Thorough review to ensure all processes meet legal requirements.', duration: '2–3 days' },
-      { step: 5, title: 'Ongoing Monitoring', desc: 'Continuous data governance, backup, and compliance monitoring.', duration: 'Ongoing' },
+      { step: 1, title: 'Data Audit',       desc: 'Map all data flows, storage, and third-party transfers.',              duration: '2–3 days' },
+      { step: 2, title: 'DPA Drafting',     desc: 'Written Data Processing Agreement tailored to your operations.',      duration: '3–5 days' },
+      { step: 3, title: 'System Setup',     desc: 'Secure pipeline and storage architecture implementation.',             duration: '1–2 weeks'},
+      { step: 4, title: 'Compliance Check', desc: 'Full review against IT Act and applicable regulations.',              duration: '2 days'   },
+      { step: 5, title: 'Documentation',    desc: 'Staff data-handling training and incident response runbooks.',        duration: '2 days'   },
     ],
     pricing: [
-      { label: 'Custom Quote', amount: 'Contact Us', note: 'Based on data volume, complexity, and compliance requirements' },
+      {
+        label: 'Custom',
+        amount: 'Get Quote',
+        features: ['Based on data volume & complexity', 'DPA drafting included', 'Compliance report', 'Staff training materials'],
+        highlight: false,
+      },
     ],
     faqs: [
-      { q: 'Is my data safe with you?', a: 'We implement industry-standard encryption, access controls, and follow strict protocols compliant with GDPR and Indian IT Act 2000.' },
-      { q: 'What types of data do you process?', a: 'Structured and unstructured data — spreadsheets, databases, documents, APIs, and web data.' },
-      { q: 'Can you build custom dashboards?', a: 'Yes. We create interactive analytics dashboards using Metabase, Grafana, or custom solutions.' },
-      { q: 'Do you offer ongoing data management?', a: 'Yes. We provide continuous data management including backup, monitoring, and compliance audits.' },
+      { q: 'Is this GDPR-compliant?',          a: 'We align all work with GDPR principles and the Indian IT Act 2000/IT Rules 2011 — whichever applies to your context.' },
+      { q: 'Do you cover healthcare data?',    a: 'Yes — we work with hospitals and rehabilitation centres and understand sensitive health data requirements.' },
     ],
-    relatedSlugs: ['cybersecurity', 'ai-automation'],
   },
   {
     slug: 'contractor-management',
-    name: 'Contractor & Freelancer Management',
+    name: 'Contractor Management',
     tagline: 'Structure your freelancer relationships legally and clearly',
-    icon: 'Users',
-    description: 'We help businesses structure their freelancer and contractor relationships with proper agreements, scope documentation, and compliance. From onboarding to offboarding, we ensure every engagement is professional and protected.',
-    deliverables: [
-      'Contractor/freelancer agreement drafting',
+    Icon: Users,
+    description:
+      'Every contractor relationship needs a written agreement. We draft, structure, and manage your freelancer contracts so there are no disputes.',
+    features: [
+      'Contractor agreement drafting',
       'Scope of work documentation',
-      'Deliverable tracking templates',
-      'Payment schedule structures',
-      'IP and NDA provisions',
-      'Onboarding/offboarding process',
-      'Compliance review',
+      'IP ownership & NDA provisions',
+      'Onboarding & offboarding process',
     ],
+    priceLabel: 'Custom Quote',
     process: [
-      { step: 1, title: 'Scope Definition', desc: 'We define the engagement scope, deliverables, and timeline.', duration: '2–3 days' },
-      { step: 2, title: 'Agreement Drafting', desc: 'We create tailored contractor agreements with all necessary clauses.', duration: '3–5 days' },
-      { step: 3, title: 'Review & Signing', desc: 'Both parties review, negotiate, and sign the agreement.', duration: '2–3 days' },
-      { step: 4, title: 'Tracking Setup', desc: 'We set up deliverable tracking and payment milestone systems.', duration: '1–2 days' },
-      { step: 5, title: 'Closure', desc: 'Proper offboarding, final deliverable handover, and IP transfer.', duration: '1–2 days' },
+      { step: 1, title: 'Scope Definition',  desc: 'Deliverables, timelines, and responsibilities documented.',           duration: '1–2 days' },
+      { step: 2, title: 'Agreement Draft',   desc: 'Contract with IP, NDA, payment, and termination clauses.',            duration: '2–3 days' },
+      { step: 3, title: 'Review & Sign',     desc: 'Both parties review, negotiate, and execute the agreement.',          duration: '1–2 days' },
+      { step: 4, title: 'Tracking Setup',    desc: 'Deliverable tracker and milestone schedule established.',             duration: '1 day'    },
+      { step: 5, title: 'Offboarding',       desc: 'Closure checklist — IP handover, access revocation, final payment.', duration: 'Per project end' },
     ],
     pricing: [
-      { label: 'Custom Quote', amount: 'Contact Us', note: 'Pricing per engagement based on complexity and documentation needs' },
+      {
+        label: 'Custom',
+        amount: 'Get Quote',
+        features: ['Per engagement pricing', 'Full agreement drafting', 'IP + NDA provisions', 'Onboarding / offboarding docs'],
+        highlight: false,
+      },
     ],
     faqs: [
-      { q: 'Why do I need formal contractor agreements?', a: 'Formal agreements protect both parties by clearly defining scope, payment, IP ownership, and liability. They prevent misunderstandings and legal issues.' },
-      { q: 'Can you help with existing contractor relationships?', a: 'Yes. We can audit and formalise existing arrangements, adding proper documentation and compliance structures.' },
-      { q: 'Do you handle international contractors?', a: 'Yes. We draft agreements suitable for both domestic and international contractor engagements.' },
+      { q: 'Do agreements include NDA clauses?',  a: 'Yes — confidentiality provisions are included in all contractor agreements by default.' },
+      { q: 'Can you manage ongoing contractors?', a: 'Yes — we provide templates and tracking systems for managing multiple freelancers simultaneously.' },
     ],
-    relatedSlugs: ['saas-licensing', 'data-processing'],
   },
-];
+]
 
-export function getServiceBySlug(slug: string): Service | undefined {
-  return services.find((s) => s.slug === slug);
+export function getServiceBySlug(slug: string) {
+  return services.find(s => s.slug === slug)
+}
+
+export function getService(slug: string): Service | undefined {
+  return services.find(s => s.slug === slug)
 }

@@ -2,13 +2,12 @@ export interface Service {
   slug: string;
   name: string;
   tagline: string;
-  icon: string;
+  Icon: unknown;
   description: string;
-  deliverables: string[];
+  features: string[];
+  priceLabel: string;
   process: ProcessStep[];
-  pricing: PricingItem[];
   faqs: FAQ[];
-  relatedSlugs: string[];
 }
 
 export interface ProcessStep {

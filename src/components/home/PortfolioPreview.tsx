@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { ExternalLink, ArrowRight, Clock, IndianRupee, Award, Check, Lock } from 'lucide-react';
 import MotionWrapper from '@/components/ui/MotionWrapper';
 import SectionHeader from '@/components/ui/SectionHeader';
-import Badge from '@/components/ui/Badge';
 import Button from '@/components/ui/Button';
 
 export default function PortfolioPreview() {
@@ -15,10 +14,10 @@ export default function PortfolioPreview() {
 
         {/* Featured — MNSS */}
         <MotionWrapper>
-          <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl overflow-hidden mb-8">
+          <div className="rounded-2xl border border-white/8 bg-white/3 backdrop-blur-xl overflow-hidden mb-8">
             <div className="grid grid-cols-1 lg:grid-cols-2">
               {/* Browser mockup */}
-              <div className="p-6 md:p-8 bg-white/[0.02]">
+              <div className="p-6 md:p-8 bg-white/2">
                 <div className="rounded-xl overflow-hidden border border-white/15 shadow-2xl">
                   {/* Browser chrome */}
                   <div className="bg-[#1E1E2E] px-4 py-3 flex items-center gap-3 border-b border-white/10">
@@ -33,7 +32,7 @@ export default function PortfolioPreview() {
                     </div>
                   </div>
                   {/* Website preview area */}
-                  <div className="bg-gradient-to-br from-[#1a3a1a] via-[#0f2a0f] to-[#1a2a1a] aspect-[16/10] p-6 flex flex-col">
+                  <div className="bg-linear-to-br from-[#1a3a1a] via-[#0f2a0f] to-[#1a2a1a] aspect-16/10 p-6 flex flex-col">
                     {/* Mock navbar */}
                     <div className="flex items-center justify-between mb-6">
                       <div className="flex items-center gap-2">
@@ -59,7 +58,7 @@ export default function PortfolioPreview() {
                     {/* Mock stat cards */}
                     <div className="flex gap-2 mt-4">
                       {['Lives', 'Years', 'Programs'].map((label) => (
-                        <div key={label} className="flex-1 bg-white/[0.08] rounded-lg p-2">
+                        <div key={label} className="flex-1 bg-white/8 rounded-lg p-2">
                           <div className="h-4 w-8 bg-green-400/60 rounded mb-1" />
                           <div className="h-1.5 w-full bg-white/15 rounded" />
                         </div>
@@ -88,11 +87,11 @@ export default function PortfolioPreview() {
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-white/[0.03] rounded-xl p-4 border border-white/[0.08]">
+                  <div className="bg-white/3 rounded-xl p-4 border border-white/8">
                     <div className="flex items-center gap-2 text-xs text-white/40 mb-1"><Clock className="w-3 h-3" /> Duration</div>
                     <div className="text-white font-semibold">3 Weeks</div>
                   </div>
-                  <div className="bg-white/[0.03] rounded-xl p-4 border border-white/[0.08]">
+                  <div className="bg-white/3 rounded-xl p-4 border border-white/8">
                     <div className="flex items-center gap-2 text-xs text-white/40 mb-1"><IndianRupee className="w-3 h-3" /> Project Value</div>
                     <div className="text-white font-semibold">₹50,000</div>
                   </div>
@@ -102,7 +101,7 @@ export default function PortfolioPreview() {
                   <p className="text-xs text-white/40 uppercase tracking-wider mb-2 font-semibold">Tech Stack</p>
                   <div className="flex flex-wrap gap-2">
                     {['Next.js', 'TypeScript', 'Tailwind CSS', 'Cloudinary', 'Vercel'].map((tech) => (
-                      <span key={tech} className="px-2.5 py-1 rounded-lg text-xs font-mono font-medium bg-white/[0.05] text-white/70 border border-white/10">{tech}</span>
+                      <span key={tech} className="px-2.5 py-1 rounded-lg text-xs font-mono font-medium bg-white/5 text-white/70 border border-white/10">{tech}</span>
                     ))}
                   </div>
                 </div>
@@ -139,8 +138,8 @@ export default function PortfolioPreview() {
             { title: 'Security Audit', category: 'Cybersecurity', gradient: 'from-red-600/20 to-amber-600/20' },
           ].map((project) => (
             <MotionWrapper key={project.title}>
-              <div className="relative rounded-xl overflow-hidden border border-white/[0.08] bg-white/[0.03] aspect-[4/3]">
-                <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-30`} />
+              <div className="relative rounded-xl overflow-hidden border border-white/8 bg-white/3 aspect-4/3">
+                <div className={`absolute inset-0 bg-linear-to-br ${project.gradient} opacity-30`} />
                 <div className="absolute inset-0 backdrop-blur-[2px] bg-[#070710]/40" />
                 <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6">
                   <div className="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center">

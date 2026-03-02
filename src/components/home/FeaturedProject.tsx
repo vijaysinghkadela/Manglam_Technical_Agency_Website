@@ -1,230 +1,203 @@
-'use client';
+'use client'
+import { motion } from 'framer-motion'
+import Link from 'next/link'
+import { ExternalLink, Check } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { ExternalLink, Check } from 'lucide-react';
-import TextReveal from '@/components/ui/TextReveal';
-import MagneticButton from '@/components/ui/MagneticButton';
-
-import { cn } from '@/lib/utils';
-
-const techStack = ['Next.js', 'TypeScript', 'Tailwind CSS', 'Cloudinary', 'Vercel'];
-const deliverables = [
-  'Responsive website design & development',
-  'Content integration & image optimisation',
-  'QA, testing & production deployment',
-  '1-year free domain + maintenance',
-];
-
-function BrowserMockup() {
+export function FeaturedProject() {
   return (
-    <div className="w-full rounded-sm overflow-hidden border border-[#1F1F1F] shadow-[0_40px_120px_rgba(0,0,0,0.8)]">
-      
-      {/* Browser Chrome */}
-      <div className="bg-[#1A1A1A] px-4 py-3 flex items-center gap-3 border-b border-[#2A2A2A]">
-        <div className="flex gap-1.5">
-          <div className="w-3 h-3 rounded-full bg-[#FF5F57]" />
-          <div className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
-          <div className="w-3 h-3 rounded-full bg-[#28C840]" />
-        </div>
-        <div className="flex-1 bg-[#111111] border border-[#2A2A2A] rounded px-3 py-1 flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-green-500 flex-shrink-0" />
-          <span className="text-[11px] text-[#525252] font-mono truncate">
-            marutnarayansewasansthan.org
-          </span>
-        </div>
-        <div className="flex gap-1">
-          <div className="w-6 h-6 rounded flex items-center justify-center">
-            <div className="w-3 h-0.5 bg-[#333] rounded" />
-          </div>
-        </div>
-      </div>
+    <section className="w-full py-28 bg-surface">
+      <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
 
-      {/* Website Preview */}
-      <div className="bg-[#0A1A0A] relative overflow-hidden" style={{ aspectRatio: '16/10' }}>
-        
-        {/* Simulated MNSS Navbar */}
-        <div className="flex items-center justify-between px-6 py-3 border-b border-white/5">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-full bg-orange-600 flex items-center justify-center">
-              <span className="text-white text-[9px] font-black">M</span>
-            </div>
-            <div className="h-2 w-16 bg-white/20 rounded-sm" />
+        {/* Header */}
+        <div className="flex items-end justify-between mb-16">
+          <div>
+            <span className="font-mono text-[11px] text-violet-light tracking-[0.22em] uppercase block mb-3">
+              OUR WORK
+            </span>
+            <h2 className="font-display font-black text-white tracking-tight leading-[0.92]"
+              style={{ fontSize:'clamp(28px, 4vw, 60px)' }}>
+              Projects That<br />Made an Impact
+            </h2>
           </div>
-          <div className="hidden sm:flex gap-4">
-            {['Home','About','Services','Contact'].map(l => (
-              <div key={l} className="h-1.5 w-10 bg-white/15 rounded-sm" />
-            ))}
-          </div>
-          <div className="h-6 w-16 bg-orange-600/70 rounded-sm" />
-        </div>
-
-        {/* Hero Area */}
-        <div className="px-6 py-5">
-          {/* Badge */}
-          <div className="flex items-center gap-2 mb-3">
-            <div className="h-1.5 w-1.5 rounded-full bg-orange-500" />
-            <div className="h-1.5 w-24 bg-orange-500/40 rounded-sm" />
-          </div>
-          {/* Main heading */}
-          <div className="h-5 w-3/4 bg-white/30 rounded-sm mb-2" />
-          <div className="h-5 w-2/3 bg-white/25 rounded-sm mb-1" />
-          <div className="h-5 w-1/2 bg-white/20 rounded-sm mb-4" />
-          {/* Sub */}
-          <div className="h-2 w-full bg-white/10 rounded-sm mb-1.5" />
-          <div className="h-2 w-5/6 bg-white/10 rounded-sm mb-1.5" />
-          <div className="h-2 w-4/6 bg-white/10 rounded-sm mb-5" />
-          {/* CTAs */}
-          <div className="flex gap-3">
-            <div className="h-8 w-28 bg-orange-600 rounded-sm" />
-            <div className="h-8 w-24 bg-white/8 border border-white/15 rounded-sm" />
-          </div>
-        </div>
-
-        {/* Stats bar */}
-        <div className="absolute bottom-0 left-0 right-0 flex divide-x divide-white/5 border-t border-white/5">
-          {[
-            { num: '500+', lbl: 'Lives' },
-            { num: '15+', lbl: 'Years' },
-            { num: '5+', lbl: 'Districts' },
-          ].map(s => (
-            <div key={s.lbl} className="flex-1 flex flex-col items-center py-3 bg-black/20">
-              <span className="text-orange-400 text-sm font-bold">{s.num}</span>
-              <span className="text-white/30 text-[9px] mt-0.5">{s.lbl}</span>
-            </div>
-          ))}
-        </div>
-
-        {/* Decorative glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-green-900/20 rounded-full blur-3xl pointer-events-none" />
-      </div>
-    </div>
-  )
-}
-
-export default function FeaturedProject() {
-  return (
-    <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
-      
-      {/* Section header */}
-      <div className="flex items-center justify-between mb-16">
-        <div>
-          <span className="text-[11px] text-violet-400 font-mono tracking-[0.2em] uppercase block mb-3">
-            OUR WORK
-          </span>
-          <h2
-            className="font-black text-white tracking-tight leading-[0.92]"
-            style={{ fontSize: 'clamp(40px, 5vw, 72px)' }}
+          <Link href="/portfolio" data-cursor="pointer"
+            className="hidden lg:inline-flex items-center gap-2 text-sm text-muted border border-border px-5 py-2.5 hover:text-white hover:border-[#333] transition-all"
           >
-            Projects That Made an Impact
-          </h2>
-        </div>
-        
-        <Link
-          href="/portfolio"
-          className="hidden lg:inline-flex items-center gap-2 text-sm text-[#525252] hover:text-white transition-colors border border-[#1F1F1F] px-5 py-2.5 hover:border-[#333]"
-        >
-          View All <span>→</span>
-        </Link>
-      </div>
-
-      {/* Featured card — 2-col split */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-        
-        {/* Left: Browser mockup */}
-        <div className="w-full">
-          <BrowserMockup />
+            View All →
+          </Link>
         </div>
 
-        {/* Right: Project info */}
-        <div className="flex flex-col gap-6 lg:pt-4">
-          {/* Tags */}
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-[11px] font-mono px-3 py-1 border border-[#1F1F1F] text-[#525252]">NGO</span>
-            <span className="text-[11px] font-mono px-3 py-1 border border-[#1F1F1F] text-[#525252]">Web Development</span>
-            <span className="text-[11px] font-mono px-3 py-1 border border-violet-800 text-violet-400">✦ Signature Project</span>
-          </div>
+        {/* 2-col layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
 
-          {/* Title */}
-          <h3 className="font-black text-white leading-[0.9]" style={{ fontSize: 'clamp(40px, 4vw, 64px)' }}>
-            MNSS Website
-          </h3>
+          {/* Left — browser mockup */}
+          <motion.div
+            initial={{ opacity:0, y:40 }}
+            whileInView={{ opacity:1, y:0 }}
+            viewport={{ once:true, amount:0.2 }}
+            transition={{ duration:0.75, ease:[0.16,1,0.3,1] }}
+            className="w-full overflow-hidden border border-border shadow-[0_40px_120px_rgba(0,0,0,0.85)]"
+          >
+            {/* Chrome bar */}
+            <div className="flex items-center gap-3 px-4 py-3 bg-[#1A1A1A] border-b border-dead">
+              <div className="flex gap-1.5">
+                <div className="w-3 h-3 rounded-full bg-[#FF5F57] shadow-[0_0_6px_rgba(255,95,87,0.5)]" />
+                <div className="w-3 h-3 rounded-full bg-[#FEBC2E] shadow-[0_0_6px_rgba(254,188,46,0.4)]" />
+                <div className="w-3 h-3 rounded-full bg-[#28C840] shadow-[0_0_6px_rgba(40,200,64,0.4)]"  />
+              </div>
+              <div className="flex-1 flex items-center gap-2 bg-[#111] border border-dead rounded px-3 py-1">
+                <div className="w-2 h-2 rounded-full bg-green-500 shrink-0" />
+                <span className="text-[11px] text-muted font-mono truncate">
+                  marutnarayansewasansthan.org
+                </span>
+              </div>
+            </div>
 
-          {/* Description */}
-          <p className="text-[#525252] text-base leading-relaxed">
-            Marut Narayan Sewa Sansthan — Built from scratch for a Rajasthan-based NGO
-            running rehabilitation, women&apos;s safety, and skill development across 5+
-            districts since 2009.
-          </p>
-
-          {/* Metadata */}
-          <div className="grid grid-cols-2 gap-0 border border-[#1F1F1F]">
-            {[
-              { label: 'DURATION', value: '3 Weeks' },
-              { label: 'PROJECT VALUE', value: '₹ 50,000' },
-              { label: 'DELIVERED', value: 'Feb 2026' },
-              { label: 'CLIENT TYPE', value: 'NGO' },
-            ].map((item, i) => (
-              <div
-                key={item.label}
-                className={cn(
-                  "px-5 py-4",
-                  i % 2 === 0 && "border-r border-[#1F1F1F]",
-                  i < 2 && "border-b border-[#1F1F1F]"
-                )}
-              >
-                <div className="text-[10px] text-[#525252] font-mono tracking-[0.15em] uppercase mb-1">
-                  {item.label}
+            {/* MNSS website preview */}
+            <div className="bg-[#060F06] relative overflow-hidden" style={{ aspectRatio:'16/10' }}>
+              {/* Mock nav */}
+              <div className="flex items-center justify-between px-5 py-3 border-b border-white/5">
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-full bg-orange-600 flex items-center justify-center">
+                    <span className="text-white text-[8px] font-black">M</span>
+                  </div>
+                  <div className="h-1.5 w-14 bg-white/20 rounded-full" />
                 </div>
-                <div className="text-white font-semibold text-sm font-mono">
-                  {item.value}
+                <div className="hidden sm:flex gap-3">
+                  {['Home','About','Services','Contact'].map(n => (
+                    <div key={n} className="h-1.5 w-8 bg-white/12 rounded-full" />
+                  ))}
+                </div>
+                <div className="h-6 w-14 bg-orange-600/70 rounded" />
+              </div>
+
+              {/* Hero content */}
+              <div className="px-5 py-5">
+                <div className="flex items-center gap-1.5 mb-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-orange-500" />
+                  <div className="h-1.5 w-20 bg-orange-400/40 rounded-full" />
+                </div>
+                <div className="h-4 w-[72%] bg-white/28 rounded mb-2" />
+                <div className="h-4 w-[56%] bg-white/22 rounded mb-1.5" />
+                <div className="h-4 w-[44%] bg-white/16 rounded mb-4" />
+                <div className="h-1.5 w-full  bg-white/10 rounded mb-1.5" />
+                <div className="h-1.5 w-[86%] bg-white/10 rounded mb-1.5" />
+                <div className="h-1.5 w-[66%] bg-white/10 rounded mb-5" />
+                <div className="flex gap-2.5">
+                  <div className="h-8 w-24 bg-orange-600 rounded" />
+                  <div className="h-8 w-20 bg-white/8 border border-white/15 rounded" />
                 </div>
               </div>
-            ))}
-          </div>
 
-          {/* Tech stack */}
-          <div>
-            <div className="text-[10px] text-[#525252] font-mono tracking-[0.15em] uppercase mb-3">
-              TECH STACK
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {techStack.map(t => (
-                <span key={t} className="text-[11px] font-mono text-[#525252] border border-[#1F1F1F] px-3 py-1 hover:text-white hover:border-[#333] transition-colors">
-                  {t}
-                </span>
-              ))}
-            </div>
-          </div>
+              {/* Stat bar */}
+              <div className="absolute bottom-0 left-0 right-0 flex divide-x divide-white/6 border-t border-white/6">
+                {[['500+','Lives Impacted'],['15+','Years'],['5+','Districts']].map(([n,l]) => (
+                  <div key={l} className="flex-1 flex flex-col items-center py-3 bg-black/25">
+                    <span className="text-orange-400 text-sm font-bold">{n}</span>
+                    <span className="text-white/25 text-[9px] mt-0.5">{l}</span>
+                  </div>
+                ))}
+              </div>
 
-          {/* Deliverables */}
-          <div>
-            <div className="text-[10px] text-[#525252] font-mono tracking-[0.15em] uppercase mb-3">
-              DELIVERABLES
+              {/* Ambient glow */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="w-72 h-72 bg-green-900/15 rounded-full blur-3xl" />
+              </div>
             </div>
-            <ul className="flex flex-col gap-2">
-              {deliverables.map(d => (
-                <li key={d} className="flex items-center gap-3 text-sm text-[#525252]">
-                  <span className="text-violet-500 flex-shrink-0">✓</span>
-                  {d}
-                </li>
-              ))}
-            </ul>
-          </div>
+          </motion.div>
 
-          {/* CTA */}
-          <a
-            href="https://www.marutnarayansewasansthan.org"
-            target="_blank"
-            rel="noopener noreferrer"
-            data-cursor="link"
-            className="inline-flex items-center gap-3 border border-[#1F1F1F] px-6 py-3.5 text-sm text-white font-mono hover:bg-white hover:text-black hover:border-white transition-all duration-300 w-fit mt-2 group"
+          {/* Right — project info */}
+          <motion.div
+            initial={{ opacity:0, x:20 }}
+            whileInView={{ opacity:1, x:0 }}
+            viewport={{ once:true, amount:0.2 }}
+            transition={{ duration:0.75, delay:0.15, ease:[0.16,1,0.3,1] }}
+            className="flex flex-col gap-6 lg:pt-4"
           >
-            View Live Site
-            <span className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
-          </a>
+            {/* Tags */}
+            <div className="flex flex-wrap gap-2">
+              {['NGO','Web Development'].map(t => (
+                <span key={t} className="text-[11px] font-mono px-3 py-1 border border-border text-muted">{t}</span>
+              ))}
+              <span className="text-[11px] font-mono px-3 py-1 border border-violet/40 text-violet-light">
+                ✦ Signature Project
+              </span>
+            </div>
+
+            {/* Title */}
+            <h3 className="font-display font-black text-white tracking-tight leading-[0.9]"
+              style={{ fontSize:'clamp(32px, 4vw, 58px)' }}>
+              MNSS Website
+            </h3>
+
+            {/* Description */}
+            <p className="text-muted text-[15px] leading-[1.7]">
+              Marut Narayan Sewa Sansthan — built from scratch for a Rajasthan-based NGO
+              running rehabilitation, women&apos;s safety, and skill development across 5+
+              districts since 2009. Delivered in exactly 3 weeks as scoped.
+            </p>
+
+            {/* Metadata grid */}
+            <div className="grid grid-cols-2 border border-border">
+              {[
+                ['DURATION',      '3 Weeks'             ],
+                ['PROJECT VALUE', '₹ 50,000'             ],
+                ['DELIVERED',     'Feb 2026'             ],
+                ['CLIENT TYPE',   'NGO'                  ],
+              ].map(([label, val], i) => (
+                <div key={label}
+                  className={cn('px-4 py-4',
+                    i % 2 === 0 && 'border-r border-border',
+                    i < 2       && 'border-b border-border',
+                  )}
+                >
+                  <p className="text-[10px] text-dead font-mono tracking-[0.15em] uppercase mb-1">{label}</p>
+                  <p className="text-white font-mono text-sm font-semibold">{val}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Stack chips */}
+            <div>
+              <p className="text-[10px] text-dead font-mono tracking-[0.15em] uppercase mb-2">TECH STACK</p>
+              <div className="flex flex-wrap gap-2">
+                {['Next.js','TypeScript','Tailwind CSS','Cloudinary','Vercel'].map(t => (
+                  <span key={t} className="text-[11px] font-mono text-muted border border-border px-2.5 py-1 hover:text-white hover:border-[#333] transition-colors">
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Deliverables */}
+            <div>
+              <p className="text-[10px] text-dead font-mono tracking-[0.15em] uppercase mb-3">DELIVERABLES</p>
+              <ul className="flex flex-col gap-2">
+                {[
+                  'Responsive website design & development',
+                  'Content integration & image optimisation',
+                  'QA, testing & production deployment',
+                  '1-year free domain + maintenance',
+                ].map(d => (
+                  <li key={d} className="flex items-center gap-2.5 text-sm text-muted">
+                    <Check className="w-3.5 h-3.5 text-violet-light shrink-0" />
+                    {d}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* CTA */}
+            <a href="https://www.marutnarayansewasansthan.org" target="_blank" rel="noopener noreferrer"
+              data-cursor="link"
+              className="inline-flex items-center gap-2.5 border border-border px-5 py-3 text-sm font-mono text-white hover:bg-white hover:text-black hover:border-white transition-all duration-300 w-fit group"
+            >
+              View Live Site
+              <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </a>
+          </motion.div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }

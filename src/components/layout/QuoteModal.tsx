@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Check, ArrowRight, ArrowLeft, Loader2 } from 'lucide-react';
+import { X, Check, ArrowRight, ArrowLeft } from 'lucide-react';
 import { Globe, Share2, Shield, Brain, Key, Database, Users } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import { useQuoteStore } from '@/stores/useQuoteStore';
@@ -55,7 +55,7 @@ export default function QuoteModal() {
   };
 
   return (
-    <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-200 flex items-center justify-center p-4">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

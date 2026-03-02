@@ -1,63 +1,47 @@
-'use client';
+'use client'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
+import { MagneticButton } from '@/components/ui/MagneticButton'
 
-import Link from 'next/link';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
-import TextReveal from '@/components/ui/TextReveal';
-import MagneticButton from '@/components/ui/MagneticButton';
-import { AGENCY_PHONE } from '@/lib/constants';
-
-export default function CTABanner() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
-  const watermarkY = useTransform(scrollYProgress, [0, 1], [60, -60]);
+export function CTABanner() {
+  const ref = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({ target:ref, offset:['start end','end start'] })
+  const textY = useTransform(scrollYProgress, [0,1], ['-5%','5%'])
 
   return (
-    <section ref={ref} className="relative w-full bg-violet py-28 lg:py-32 overflow-hidden">
-      {/* Giant watermark */}
-      <motion.div
-        style={{ y: watermarkY }}
-        className="absolute inset-0 flex items-center justify-center pointer-events-none"
+    <section ref={ref} className="w-full py-32 bg-violet relative overflow-hidden">
+      {/* Giant watermark "MTA" — parallax */}
+      <motion.div style={{ y:textY }}
+        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
+        aria-hidden="true"
       >
-        <span className="font-display text-[200px] lg:text-[400px] font-black text-white/[0.04] select-none leading-none">
+        <span className="font-display font-black text-white opacity-[0.04] leading-none"
+          style={{ fontSize:'clamp(200px, 30vw, 500px)' }}
+        >
           MTA
         </span>
       </motion.div>
 
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center gap-6">
-        <TextReveal className="text-display-l text-white" as="h2">
-          Ready to Build Something Real?
-        </TextReveal>
-
-        <p className="text-lg text-white/60 max-w-xl">
+      {/* Content */}
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 lg:px-12 flex flex-col items-center text-center gap-8">
+        <h2 className="font-display font-black text-white leading-[0.92] tracking-tight"
+          style={{ fontSize:'clamp(40px, 7vw, 100px)' }}>
+          Ready to Build<br />Something Real?
+        </h2>
+        <p className="text-white/55 text-[17px] max-w-md leading-[1.6]">
           Free consultation. Honest scope. Real timelines.
+          We deliver what we write down.
         </p>
-
-        <MagneticButton className="mt-4">
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 px-10 py-4 bg-white text-violet font-display text-base font-bold hover:bg-[#080808] hover:text-white transition-all duration-300"
-            data-cursor="pointer"
-          >
-            Start Your Project →
-          </Link>
-        </MagneticButton>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-[13px] text-white/50 mt-2"
+        <MagneticButton
+          href="/contact"
+          className="inline-flex items-center gap-2 px-8 py-4 bg-white text-violet font-display font-black text-[17px] hover:bg-canvas hover:text-white transition-all duration-300"
         >
-          or WhatsApp us directly{' '}
-          <a href={`tel:${AGENCY_PHONE}`} className="underline hover:text-white transition-colors">
-            {AGENCY_PHONE}
-          </a>
-        </motion.p>
+          Start Your Project →
+        </MagneticButton>
+        <p className="text-white/40 text-[12px] font-mono tracking-wider">
+          or WhatsApp us directly — we respond within 2 hours
+        </p>
       </div>
     </section>
-  );
+  )
 }

@@ -1,45 +1,20 @@
-'use client';
+const ITEMS = [
+  'WEB DEVELOPMENT','SOCIAL MEDIA','CYBERSECURITY',
+  'AI AUTOMATION','SAAS LICENSING','DATA PROCESSING','CONTRACTOR MANAGEMENT',
+]
 
-import { useRef } from 'react';
-
-const items = [
-  'WEB DEVELOPMENT',
-  'SOCIAL MEDIA',
-  'CYBERSECURITY',
-  'AI AUTOMATION',
-  'SAAS',
-  'DATA PROCESSING',
-  'CONTRACTOR MANAGEMENT',
-];
-
-function TickerContent() {
+export function MarqueeTicker() {
+  const repeated = [...ITEMS, ...ITEMS, ...ITEMS]
   return (
-    <>
-      {items.map((item, i) => (
-        <span key={`${item}-${i}`} className="flex items-center gap-6 whitespace-nowrap">
-          <span className="text-[11px] font-medium text-muted tracking-[0.2em] uppercase">
+    <div className="w-full h-11 bg-card border-y border-border flex items-center overflow-hidden">
+      <div className="flex whitespace-nowrap marquee-l">
+        {repeated.map((item, i) => (
+          <span key={i} className="flex items-center gap-5 font-mono text-[11px] text-muted tracking-[0.18em] uppercase mr-8">
             {item}
+            <span className="text-violet text-base leading-none">✦</span>
           </span>
-          <span className="text-violet text-xs">✦</span>
-        </span>
-      ))}
-    </>
-  );
-}
-
-export default function MarqueeTicker() {
-  const trackRef = useRef<HTMLDivElement>(null);
-
-  return (
-    <section className="w-full h-12 bg-card border-y border-[#1F1F1F] overflow-hidden flex items-center group">
-      <div
-        ref={trackRef}
-        className="marquee-track animate-marquee gap-6 group-hover:[animation-play-state:paused]"
-      >
-        <TickerContent />
-        <TickerContent />
-        <TickerContent />
+        ))}
       </div>
-    </section>
-  );
+    </div>
+  )
 }

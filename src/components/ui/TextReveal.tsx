@@ -1,50 +1,39 @@
-'use client';
+'use client'
+import { motion, useInView } from 'framer-motion'
+import { useRef, useMemo, type CSSProperties } from 'react'
 
-import { useRef, useMemo } from 'react';
-import { motion, useInView } from 'framer-motion';
-
-interface TextRevealProps {
-  children: string;
-  className?: string;
-  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'span';
-  delay?: number;
-  stagger?: number;
+interface Props {
+  text:       string
+  className?: string
+  delay?:     number
+  as?:        'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'span'
+  style?:     CSSProperties
 }
 
-export default function TextReveal({
-  children,
-  className = '',
-  as: Tag = 'h2',
-  delay = 0,
-  stagger = 0.04,
-}: TextRevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+const EASE: [number,number,number,number] = [0.33, 1, 0.68, 1]
 
-  const words = useMemo(() => children.split(' '), [children]);
+export function TextReveal({ text, className, delay = 0, as: Tag = 'h2', style }: Props) {
+  const ref    = useRef<HTMLElement>(null)
+  const inView = useInView(ref, { once: true, amount: 0.3 })
+  const words  = useMemo(() => text.split(' '), [text])
 
   return (
-    <Tag ref={ref as React.Ref<HTMLHeadingElement>} className={className}>
+    <Tag ref={ref as React.RefObject<HTMLHeadingElement>} className={className}
+      style={{ display: 'flex', flexWrap: 'wrap', gap: '0 0.28em', overflow: 'hidden', ...style }}
+      aria-label={text}
+    >
       {words.map((word, i) => (
-        <span
-          key={`${word}-${i}`}
-          style={{ overflow: 'hidden', display: 'inline-block', verticalAlign: 'top' }}
-        >
+        <span key={i} style={{ overflow: 'hidden', display: 'inline-block' }}>
           <motion.span
-            initial={{ y: '110%' }}
-            animate={isInView ? { y: '0%' } : { y: '110%' }}
-            transition={{
-              duration: 0.7,
-              delay: delay + i * stagger,
-              ease: [0.33, 1, 0.68, 1],
-            }}
             style={{ display: 'inline-block' }}
+            initial={{ y: '112%', opacity: 0 }}
+            animate={inView ? { y: '0%', opacity: 1 } : {}}
+            transition={{ duration: 0.72, ease: EASE, delay: delay + i * 0.045 }}
           >
             {word}
           </motion.span>
-          {i < words.length - 1 && <span>&nbsp;</span>}
         </span>
       ))}
     </Tag>
-  );
+  )
 }

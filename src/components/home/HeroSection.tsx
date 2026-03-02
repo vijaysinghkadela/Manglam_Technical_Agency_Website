@@ -1,166 +1,184 @@
-'use client';
+'use client'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
+import { TextReveal } from '@/components/ui/TextReveal'
+import { MagneticButton } from '@/components/ui/MagneticButton'
+import Link from 'next/link'
 
-import { motion, useScroll, useTransform } from 'framer-motion';
-import Link from 'next/link';
-import { ChevronDown } from 'lucide-react';
-import TextReveal from '@/components/ui/TextReveal';
-import MagneticButton from '@/components/ui/MagneticButton';
-
-const techPills = [
-  { label: 'Next.js', x: '-60%', y: '-30%', delay: 0.8 },
-  { label: 'Cybersecurity', x: '50%', y: '10%', delay: 1.0 },
-  { label: 'AI Automation', x: '-20%', y: '60%', delay: 1.2 },
-];
-
-export default function HeroSection() {
-  const { scrollY } = useScroll();
-  const bgY = useTransform(scrollY, [0, 800], [0, 240]);
+export function HeroSection() {
+  const ref = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
+  const bgY  = useTransform(scrollYProgress, [0,1], ['0%',  '25%'])
+  const txtY = useTransform(scrollYProgress, [0,1], ['0%',  '12%'])
 
   return (
-    <section className="relative w-full min-h-screen flex items-center overflow-hidden">
-      {/* Grid background with parallax */}
-      <motion.div className="absolute inset-0 grid-bg" style={{ y: bgY }} />
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            'linear-gradient(to bottom, transparent 60%, #080808 100%)',
-        }}
+    <section ref={ref}
+      className="relative min-h-screen w-full flex items-center overflow-hidden bg-canvas noise"
+    >
+      {/* Line grid — parallax bg */}
+      <motion.div style={{ y: bgY }}
+        className="absolute inset-0 line-grid pointer-events-none" aria-hidden="true"
       />
 
-      {/* Noise */}
-      <div className="absolute inset-0 noise pointer-events-none" />
+      {/* Content */}
+      <motion.div style={{ y: txtY }}
+        className="relative z-10 w-full max-w-[1440px] mx-auto px-6 lg:px-12 pt-[120px] pb-24"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-[58%_42%] gap-16 items-center">
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-32 lg:py-0">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-8 items-center min-h-screen lg:min-h-0 lg:h-screen">
-          {/* Left column (60%) */}
-          <div className="lg:col-span-3 flex flex-col gap-8 pt-24 lg:pt-0">
-            {/* Micro label — typewriter */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-micro text-muted"
+          {/* Left: Main content */}
+          <div className="flex flex-col gap-6">
+
+            {/* Micro label */}
+            <motion.span
+              className="font-mono text-[11px] tracking-[0.22em] uppercase text-muted"
+              initial={{ opacity:0 }}
+              animate={{ opacity:1 }}
+              transition={{ duration:0.5, delay:0.1 }}
             >
-              ✦ MANGLAM TECHNICAL AGENCY — RAJASTHAN, INDIA
-            </motion.p>
+              ✦ Manglam Technical Agency — Rajasthan, India
+            </motion.span>
 
-            {/* Display heading */}
+            {/* Statement heading */}
             <div className="flex flex-col gap-0">
-              <TextReveal className="text-display-xl text-white" as="h1" delay={0.3}>
-                WE BUILD
-              </TextReveal>
-              <TextReveal className="text-display-xl text-violet pl-6 lg:pl-10" as="h1" delay={0.45}>
-                DIGITAL
-              </TextReveal>
-              <TextReveal className="text-display-xl text-white" as="h1" delay={0.6}>
-                INFRASTRUCTURE
-              </TextReveal>
+              <TextReveal
+                text="WE BUILD"
+                as="h1"
+                delay={0.25}
+                className="font-display font-black text-white leading-[0.90]"
+                style={{ fontSize:'clamp(56px, 9vw, 130px)', letterSpacing:'-0.04em' }}
+              />
+              <TextReveal
+                text="DIGITAL"
+                as="h1"
+                delay={0.35}
+                className="font-display font-black text-violet leading-[0.90] pl-6 lg:pl-12"
+                style={{ fontSize:'clamp(56px, 9vw, 130px)', letterSpacing:'-0.04em' }}
+              />
+              <TextReveal
+                text="INFRASTRUCTURE"
+                as="h1"
+                delay={0.45}
+                className="font-display font-black text-white leading-[0.90]"
+                style={{ fontSize:'clamp(56px, 9vw, 130px)', letterSpacing:'-0.04em' }}
+              />
             </div>
 
             {/* Body */}
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9, duration: 0.6 }}
-              className="text-lg text-muted max-w-md leading-relaxed"
+              className="text-muted text-[17px] leading-[1.65] max-w-[480px]"
+              initial={{ opacity:0, y:16 }}
+              animate={{ opacity:1, y:0 }}
+              transition={{ duration:0.6, delay:0.7, ease:[0.16,1,0.3,1] }}
             >
-              From custom websites to AI automation — end-to-end
-              technology services for Indian businesses.
+              From custom websites to AI automation — end-to-end technology
+              services for Indian businesses. Delivered on time, in writing.
             </motion.p>
 
             {/* CTAs */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.1, duration: 0.5 }}
-              className="flex items-center gap-6 flex-wrap"
+              className="flex items-center gap-5 flex-wrap"
+              initial={{ opacity:0, y:16 }}
+              animate={{ opacity:1, y:0 }}
+              transition={{ duration:0.6, delay:0.85, ease:[0.16,1,0.3,1] }}
             >
-              <MagneticButton>
-                <Link
-                  href="/services"
-                  className="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-[#080808] text-sm font-semibold hover:bg-violet hover:text-white transition-all duration-300"
-                  data-cursor="pointer"
-                >
-                  Start a Project →
-                </Link>
+              <MagneticButton
+                href="/contact"
+                className="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-black font-display font-black text-[15px] hover:bg-violet hover:text-white transition-all duration-250"
+              >
+                Start a Project →
               </MagneticButton>
-              <Link
-                href="/portfolio"
-                className="text-sm text-muted hover:text-white transition-colors underline-slide"
-                data-cursor="pointer"
+              <Link href="/portfolio" data-cursor="pointer"
+                className="text-muted text-[14px] font-medium hover:text-white transition-colors border-b border-transparent hover:border-muted pb-0.5"
               >
                 See Our Work
               </Link>
             </motion.div>
 
-            {/* Trust */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.4 }}
-              className="text-xs text-dead tracking-[0.1em]"
+            {/* Trust bar */}
+            <motion.div
+              className="flex items-center gap-2 font-mono text-[11px] text-muted tracking-[0.12em] uppercase"
+              initial={{ opacity:0 }}
+              animate={{ opacity:1 }}
+              transition={{ duration:0.5, delay:1.1 }}
             >
-              50+ Projects · 20+ Clients · 3 Years · Rajasthan
-            </motion.p>
+              <span>50+ Projects</span>
+              <span className="text-violet">·</span>
+              <span>20+ Clients</span>
+              <span className="text-violet">·</span>
+              <span>3 Years</span>
+              <span className="text-violet">·</span>
+              <span>Rajasthan</span>
+            </motion.div>
           </div>
 
-          {/* Right column (40%) — Animated circles */}
-          <div className="lg:col-span-2 flex items-center justify-center relative">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3, duration: 1 }}
-              className="relative w-[320px] h-[320px] lg:w-[400px] lg:h-[400px]"
-            >
-              {/* Outer Ring — dashed, slow clockwise */}
-              <div className="absolute inset-0 rounded-full border border-dashed border-[#1F1F1F] animate-spin-slow" />
+          {/* Right: Animated circular visual */}
+          <motion.div
+            className="hidden lg:flex items-center justify-center"
+            initial={{ opacity:0, scale:0.9 }}
+            animate={{ opacity:1, scale:1 }}
+            transition={{ duration:0.9, delay:0.5, ease:[0.16,1,0.3,1] }}
+          >
+            <div className="relative w-[400px] h-[400px] flex items-center justify-center">
 
-              {/* Inner Ring — solid, counter-clockwise */}
-              <div className="absolute inset-[40px] rounded-full border border-violet/30 animate-spin-slow-reverse" />
+              {/* Outer dashed ring — slow CW */}
+              <div className="absolute inset-0 rounded-full border border-dashed border-border"
+                style={{ animation:'spin-cw 60s linear infinite' }}
+              />
+              {/* Inner violet ring — slow CCW */}
+              <div className="absolute inset-[40px] rounded-full border border-violet/25"
+                style={{ animation:'spin-ccw 40s linear infinite' }}
+              />
 
-              {/* Centre dot grid */}
-              <div className="absolute inset-[80px] grid grid-cols-6 grid-rows-6 gap-2 place-items-center">
-                {Array.from({ length: 36 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className={`w-1 h-1 rounded-full ${
-                      i % 5 === 0 ? 'bg-violet animate-pulse-violet' : 'bg-[#1F1F1F]'
-                    }`}
+              {/* 6×6 dot grid */}
+              <div className="grid grid-cols-6 gap-5">
+                {Array.from({ length:36 }).map((_, i) => (
+                  <div key={i}
+                    className="w-1 h-1 rounded-full"
+                    style={{
+                      backgroundColor: i % 5 === 0 ? '#7C3AED' : '#1F1F1F',
+                      boxShadow:       i % 5 === 0 ? '0 0 8px rgba(124,58,237,0.7)' : 'none',
+                    }}
                   />
                 ))}
               </div>
 
-              {/* Floating tech pills */}
-              {techPills.map((pill) => (
-                <motion.div
-                  key={pill.label}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: [0, -8, 0] }}
-                  transition={{
-                    opacity: { delay: pill.delay, duration: 0.5 },
-                    y: { delay: pill.delay + 0.3, duration: 4, repeat: Infinity, ease: 'easeInOut' },
-                  }}
-                  className="absolute"
-                  style={{ left: `calc(50% + ${pill.x})`, top: `calc(50% + ${pill.y})` }}
+              {/* Floating pills */}
+              {[
+                { label:'Next.js',       xPos:'-130px', yPos:'-100px', delay:0 },
+                { label:'Cybersecurity', xPos:'110px',  yPos:'-60px',  delay:0.15 },
+                { label:'AI Automation', xPos:'-80px',  yPos:'130px',  delay:0.3 },
+              ].map(p => (
+                <motion.div key={p.label}
+                  className="absolute flex items-center gap-1.5 px-3 py-1.5 bg-card border border-border font-mono text-[11px] text-white"
+                  style={{ left: `calc(50% + ${p.xPos})`, top: `calc(50% + ${p.yPos})` }}
+                  animate={{ y: [0, -12, 0] }}
+                  transition={{ repeat:Infinity, duration: 4 + p.delay * 2, ease:'easeInOut', delay:p.delay }}
                 >
-                  <span className="px-3 py-1.5 text-[11px] text-white font-medium bg-card border border-[#1F1F1F] rounded-full whitespace-nowrap">
-                    {pill.label}
-                  </span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-violet" />
+                  {p.label}
                 </motion.div>
               ))}
-            </motion.div>
-          </div>
-        </div>
-      </div>
+            </div>
+          </motion.div>
 
-      {/* Scroll indicator — bottom left */}
-      <div className="absolute bottom-8 left-8 lg:left-12 flex items-center gap-3">
-        <div className="w-[1px] h-[60px] bg-gradient-to-b from-white/40 to-transparent animate-scroll-line" />
-        <span className="text-[10px] text-dead tracking-[0.15em] uppercase rotate-0 font-mono">
-          SCROLL
+        </div>
+      </motion.div>
+
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-12 items-center gap-4 hidden lg:flex">
+        <div className="relative w-px h-14 bg-[#111] overflow-hidden">
+          <motion.div className="absolute top-0 left-0 w-full bg-white"
+            animate={{ height:['0%','100%'], top:['0%','100%'] }}
+            transition={{ repeat:Infinity, duration:2, ease:'linear' }}
+          />
+        </div>
+        <span className="font-mono text-[10px] text-dead tracking-[0.22em] uppercase"
+          style={{ writingMode:'vertical-rl', transform:'rotate(180deg)' }}
+        >
+          Scroll
         </span>
       </div>
     </section>
-  );
+  )
 }

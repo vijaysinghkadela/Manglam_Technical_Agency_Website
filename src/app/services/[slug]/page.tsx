@@ -1,50 +1,31 @@
-import { notFound } from 'next/navigation';
-import Link from 'next/link';
-import { ArrowRight, ChevronDown } from 'lucide-react';
-import PageHero from '@/components/ui/PageHero';
-import { services, getServiceBySlug } from '@/lib/data/services';
-import type { Metadata } from 'next';
+import { notFound } from 'next/navigation'
+import PageHero from '@/components/ui/PageHero'
+import { services, getServiceBySlug } from '@/lib/data/services'
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import { ChevronDown } from 'lucide-react'
 
-export async function generateMetadata({ params: { slug } }: { params: { slug: string } }): Promise<Metadata> {
-  const service = getServiceBySlug(slug);
-  if (!service) return { title: 'Service Not Found' };
+type Params = { slug: string }
+
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
+  const { slug } = await params
+  const service = getServiceBySlug(slug)
+  if (!service) return { title: 'Service Not Found' }
+
   return {
     title: service.name,
     description: service.description,
-  };
+  }
 }
 
-// Generate static params so these pages are pre-rendered at build time
 export function generateStaticParams() {
-  return services.map((s) => ({ slug: s.slug }));
+  return services.map((service) => ({ slug: service.slug }))
 }
 
-const priceMap: Record<string, string> = {
-  'web-development': 'From ₹50,000',
-  'social-media-marketing': '₹10,000/mo',
-  'cybersecurity': 'From ₹20,000/yr',
-  'ai-automation': 'Custom Quote',
-  'saas-licensing': 'Custom Quote',
-  'data-processing': 'Custom Quote',
-  'contractor-management': 'Custom Quote',
-};
-
-const timelineMap: Record<string, string> = {
-  'web-development': '3-6 Weeks',
-  'social-media-marketing': 'Ongoing Monthly',
-  'cybersecurity': '1-3 Weeks + Ongoing',
-  'ai-automation': '2-8 Weeks',
-  'saas-licensing': '1-2 Weeks + Ongoing',
-  'data-processing': 'Varies by volume',
-  'contractor-management': '1-2 Weeks',
-};
-
-export default function ServicePage({ params: { slug } }: { params: { slug: string } }) {
-  const service = getServiceBySlug(slug);
-  if (!service) notFound();
-
-  const price = priceMap[service.slug] || 'Custom Quote';
-  const timeline = timelineMap[service.slug] || 'Project Dependent';
+export default async function ServicePage({ params }: { params: Promise<Params> }) {
+  const { slug } = await params
+  const service = getServiceBySlug(slug)
+  if (!service) notFound()
 
   return (
     <main className="bg-canvas min-h-screen">
@@ -58,83 +39,77 @@ export default function ServicePage({ params: { slug } }: { params: { slug: stri
       />
 
       {/* Metadata Bar */}
-      <section className="w-full bg-[#0E0E0E] border-b border-[#1F1F1F]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 py-8 gap-6">
-            <div>
-              <p className="text-[11px] text-muted font-mono uppercase mb-2">Service Type</p>
-              <p className="text-sm font-medium text-white">{service.name.split(' ')[0]}</p>
-            </div>
-            <div>
-              <p className="text-[11px] text-muted font-mono uppercase mb-2">Starting Price</p>
-              <p className="text-sm font-medium text-white">{price}</p>
-            </div>
-            <div>
-              <p className="text-[11px] text-muted font-mono uppercase mb-2">Est. Timeline</p>
-              <p className="text-sm font-medium text-white">{timeline}</p>
-            </div>
-            <div>
-              <p className="text-[11px] text-muted font-mono uppercase mb-2">Agreement</p>
-              <p className="text-sm font-medium text-white">Written Contract</p>
-            </div>
+      <section className="w-full bg-surface border-b border-border">
+        <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-2 lg:grid-cols-4 border border-border">
+            {[
+              ['Service', service.name],
+              ['Starting Price', service.priceLabel],
+              ['Core Deliverable', service.features[0]],
+              ['Agreement', 'Written Contract'],
+            ].map(([label, val], i) => (
+              <div key={label} className={`px-6 py-5 ${i < 3 ? 'border-r border-border' : ''}`}>
+                <p className="font-mono text-[10px] text-dead uppercase tracking-[0.15em] mb-1">{label}</p>
+                <p className="font-mono text-sm text-white font-semibold">{val}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Overview & Deliverables */}
-      <section className="py-24 bg-canvas">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Overview + Process */}
+      <section className="py-28 bg-canvas">
+        <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-            
-            {/* Left Col (Overview) */}
+            {/* Left */}
             <div className="lg:col-span-4 lg:sticky lg:top-[120px] self-start">
-              <h2 className="text-display-m text-white mb-6">Overview</h2>
-              <p className="text-[16px] text-muted leading-relaxed">
-                {service.description}
-              </p>
-              
+              <h2 className="font-display font-black text-white tracking-tight leading-[0.92] mb-6"
+                style={{ fontSize: 'clamp(28px, 4vw, 48px)' }}>Overview</h2>
+              <p className="text-[15px] text-muted leading-[1.7]">{service.description}</p>
+
               <div className="mt-12">
-                <p className="text-micro text-violet mb-4">INCLUDED</p>
+                <p className="font-mono text-[11px] text-violet-light tracking-[0.22em] uppercase mb-4">INCLUDED</p>
                 <ul className="flex flex-col gap-3">
-                  {service.deliverables.map(d => (
-                    <li key={d} className="text-sm text-muted flex items-start gap-3">
-                      <span className="text-violet mt-0.5">→</span>
-                      {d}
+                  {service.features.map((feature) => (
+                    <li key={feature} className="text-sm text-muted flex items-start gap-3">
+                      <span className="text-violet-light mt-0.5">→</span>
+                      {feature}
                     </li>
                   ))}
                 </ul>
               </div>
+
+              <Link
+                href="/contact"
+                className="inline-flex mt-10 px-6 py-3 border border-border hover:border-violet text-white hover:bg-violet/10 transition-colors text-sm"
+                data-cursor="pointer"
+              >
+                Get a Quote
+              </Link>
             </div>
 
-            {/* Right Col (Process) */}
+            {/* Right */}
             <div className="lg:col-span-8 flex flex-col">
-              <h2 className="text-display-m text-white mb-10">How It Works</h2>
-              <div className="flex flex-col">
-                {service.process.map((step, i) => (
+              <h2 className="font-display font-black text-white tracking-tight leading-[0.92] mb-10"
+                style={{ fontSize: 'clamp(28px, 4vw, 48px)' }}>How It Works</h2>
+              <div className="flex flex-col border-t border-border">
+                {service.process.map((step) => (
                   <div
                     key={step.step}
-                    className="w-full flex items-center justify-between py-8 border-b border-[#1F1F1F] group hover:bg-surface/50 transition-colors px-2 -mx-2"
+                    className="w-full flex items-center justify-between py-8 border-b border-border group hover:bg-[#0A0A0A] transition-colors px-2 -mx-2"
                   >
                     <div className="flex items-center gap-6 lg:gap-10">
-                      <div className="hidden lg:block w-[3px] h-12 rounded-full bg-transparent group-hover:bg-violet/30 transition-colors duration-300" />
-                      
-                      <span className="font-display text-4xl lg:text-5xl font-black text-[#1F1F1F] group-hover:text-violet/30 transition-colors duration-300">
+                      <span className="font-display text-4xl lg:text-5xl font-black text-[#1A1A1A] group-hover:text-violet/20 transition-colors duration-300">
                         {String(step.step).padStart(2, '0')}
                       </span>
 
                       <div className="flex flex-col gap-2">
-                        <h3 className="font-display text-xl lg:text-2xl font-bold text-white">
-                          {step.title}
-                        </h3>
-                        <p className="text-sm text-muted leading-relaxed max-w-lg">
-                          {step.desc}
-                        </p>
+                        <h3 className="font-display text-xl lg:text-2xl font-bold text-white">{step.title}</h3>
+                        <p className="text-sm text-muted leading-relaxed max-w-lg">{step.desc}</p>
                       </div>
                     </div>
-                    
-                    <span className="text-xs font-mono text-muted hidden md:block whitespace-nowrap">
-                      {step.duration}
-                    </span>
+
+                    <span className="text-xs font-mono text-dead hidden md:block whitespace-nowrap">{step.duration}</span>
                   </div>
                 ))}
               </div>
@@ -144,50 +119,53 @@ export default function ServicePage({ params: { slug } }: { params: { slug: stri
       </section>
 
       {/* Pricing */}
-      <section className="py-24 bg-surface border-y border-[#1F1F1F]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-16">
-            <h2 className="text-display-m text-white">Pricing & Plans</h2>
+      {service.pricing.length > 0 && (
+        <section className="py-28 bg-surface border-t border-border">
+          <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
+            <span className="font-mono text-[11px] text-violet-light tracking-[0.22em] uppercase block mb-3">PRICING</span>
+            <h2 className="font-display font-black text-white tracking-tight leading-[0.92] mb-12"
+              style={{ fontSize: 'clamp(28px, 4vw, 48px)' }}>Plans & Pricing</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {service.pricing.map((plan) => (
+                <div key={plan.label}
+                  className={`bg-card border p-8 flex flex-col gap-6 ${plan.highlight ? 'border-violet' : 'border-border'}`}>
+                  <p className="font-display text-xl font-bold text-white">{plan.label}</p>
+                  <p className="font-display font-black text-white" style={{ fontSize: '44px' }}>{plan.amount}</p>
+                  {plan.period && <p className="text-[11px] font-mono text-muted uppercase tracking-[0.18em] -mt-4">{plan.period}</p>}
+                  <div className="h-px bg-border" />
+                  <ul className="flex flex-col gap-2.5">
+                    {plan.features.map(f => (
+                      <li key={f} className="text-sm text-muted flex items-center gap-2.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-violet shrink-0" />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link href="/contact" data-cursor="pointer"
+                    className={`mt-auto inline-flex items-center justify-center py-3 text-sm font-semibold transition-all ${plan.highlight ? 'bg-violet text-white hover:bg-violet-dark' : 'border border-border text-muted hover:text-white hover:border-violet'}`}>
+                    {plan.amount === 'Get Quote' ? 'Request Quote' : 'Get Started'}
+                  </Link>
+                </div>
+              ))}
+            </div>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {service.pricing.map((plan) => (
-              <div key={plan.label} className="p-8 border border-[#1F1F1F] bg-[#0E0E0E] flex flex-col h-full hover:border-[#333] transition-colors">
-                <h3 className="font-display text-2xl font-bold text-white mb-6 w-full pb-6 border-b border-[#1F1F1F]">
-                  {plan.label}
-                </h3>
-                <p className="font-display text-4xl lg:text-5xl font-black text-white mb-2">
-                  {plan.amount}
-                </p>
-                <p className="text-sm font-mono text-[#525252] mt-4 leading-relaxed mb-auto">
-                  {plan.note}
-                </p>
-                <Link
-                  href="/contact"
-                  className="mt-8 px-6 py-3 w-full text-center border border-[#1F1F1F] text-sm text-white hover:bg-white hover:text-black transition-colors"
-                  data-cursor="pointer"
-                >
-                  Get Started
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* FAQs */}
-      <section className="py-24 bg-canvas">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-display-m text-white mb-12 text-center">Questions?</h2>
-          <div className="flex flex-col border-t border-[#1F1F1F]">
+      <section className="py-28 bg-canvas border-t border-border">
+        <div className="max-w-4xl mx-auto px-6 lg:px-12">
+          <h2 className="font-display font-black text-white tracking-tight leading-[0.92] mb-12 text-center"
+            style={{ fontSize: 'clamp(28px, 4vw, 48px)' }}>Questions?</h2>
+          <div className="flex flex-col border-t border-border">
             {service.faqs.map((faq, i) => (
-              <details key={i} className="group border-b border-[#1F1F1F]">
+              <details key={`${faq.q}-${i}`} className="group border-b border-border">
                 <summary className="flex items-center justify-between py-6 cursor-pointer list-none" data-cursor="pointer">
                   <h3 className="text-lg font-medium text-white pr-8">{faq.q}</h3>
-                  <ChevronDown className="w-5 h-5 text-muted group-open:rotate-180 transition-transform" />
+                  <ChevronDown className="w-5 h-5 text-muted group-open:rotate-180 transition-transform shrink-0" />
                 </summary>
                 <div className="pb-6 pr-12">
-                  <p className="text-[15px] text-muted leading-relaxed">{faq.a}</p>
+                  <p className="text-[15px] text-muted leading-[1.7]">{faq.a}</p>
                 </div>
               </details>
             ))}
@@ -195,6 +173,26 @@ export default function ServicePage({ params: { slug } }: { params: { slug: stri
         </div>
       </section>
 
+      {/* Related Services */}
+      <section className="py-28 bg-surface border-t border-border">
+        <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
+          <h2 className="font-display font-bold text-white text-2xl mb-8">Other Services</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {services.filter(s => s.slug !== slug).slice(0, 2).map(s => (
+              <Link key={s.slug} href={`/services/${s.slug}`} data-cursor="link"
+                className="flex items-start gap-4 p-6 border border-border bg-card hover:border-violet/30 transition-all group">
+                <div className="w-10 h-10 border border-border flex items-center justify-center shrink-0 group-hover:border-violet/50 transition-colors">
+                  <s.Icon className="w-5 h-5 text-muted group-hover:text-violet-light transition-colors" />
+                </div>
+                <div>
+                  <h3 className="font-display font-bold text-white text-lg">{s.name}</h3>
+                  <p className="text-sm text-muted mt-1">{s.tagline}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
     </main>
-  );
+  )
 }

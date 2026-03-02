@@ -1,73 +1,64 @@
-'use client';
+'use client'
+import { useEffect, useRef, useState, type CSSProperties } from 'react'
 
-import { useEffect, useRef, useState, useCallback } from 'react';
-import { useInView } from 'framer-motion';
-
-interface ScrambleCounterProps {
-  target: number;
-  suffix?: string;
-  duration?: number;
-  className?: string;
-  suffixClassName?: string;
+interface Props {
+  target:    number
+  suffix:    string
+  duration?: number
+  className?: string
+  style?:     CSSProperties
 }
 
-export default function ScrambleCounter({
-  target,
-  suffix = '',
-  duration = 1.5,
-  className = '',
-  suffixClassName = '',
-}: ScrambleCounterProps) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.5 });
-  const [display, setDisplay] = useState('0');
-  const hasAnimated = useRef(false);
+const DIGITS = '0123456789'
 
-  const scramble = useCallback(() => {
-    if (hasAnimated.current) return;
-    hasAnimated.current = true;
-
-    const digits = '0123456789';
-    const targetStr = String(target);
-    const totalFrames = Math.round((duration * 1000) / 50);
-    const landingStart = Math.round(totalFrames * 0.7);
-    let frame = 0;
-
-    const interval = setInterval(() => {
-      frame++;
-
-      if (frame >= totalFrames) {
-        setDisplay(targetStr);
-        clearInterval(interval);
-        return;
-      }
-
-      let result = '';
-      for (let i = 0; i < targetStr.length; i++) {
-        const charLandFrame = landingStart + (i * (totalFrames - landingStart)) / targetStr.length;
-        if (frame >= charLandFrame) {
-          result += targetStr[i];
-        } else {
-          result += digits[Math.floor(Math.random() * 10)];
-        }
-      }
-      setDisplay(result);
-    }, 50);
-
-    return () => clearInterval(interval);
-  }, [target, duration]);
+export function ScrambleCounter({ target, suffix, duration = 1600, className, style }: Props) {
+  const [display, setDisplay] = useState('0')
+  const ref     = useRef<HTMLSpanElement>(null)
+  const started = useRef(false)
 
   useEffect(() => {
-    if (isInView) {
-      const cleanup = scramble();
-      return cleanup;
-    }
-  }, [isInView, scramble]);
+    const el = ref.current
+    if (!el) return
+
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting || started.current) return
+      started.current = true
+
+      const t0 = performance.now()
+      let rafId: number
+
+      const tick = (now: number) => {
+        const elapsed  = now - t0
+        const progress = Math.min(elapsed / duration, 1)
+        const eased    = 1 - Math.pow(1 - progress, 3)
+        const current  = Math.round(eased * target)
+
+        if (progress < 0.75) {
+          const len = String(target).length
+          setDisplay(
+            Array.from({ length: len }, () =>
+              DIGITS[Math.floor(Math.random() * DIGITS.length)]
+            ).join('')
+          )
+        } else {
+          setDisplay(String(current))
+        }
+
+        if (progress < 1) { rafId = requestAnimationFrame(tick) }
+        else { setDisplay(String(target)) }
+      }
+
+      rafId = requestAnimationFrame(tick)
+    }, { threshold: 0.5 })
+
+    io.observe(el)
+    return () => io.disconnect()
+  }, [target, duration])
 
   return (
-    <span ref={ref} className={className}>
+    <span ref={ref} className={className} style={style}>
       {display}
-      {suffix && <span className={suffixClassName}>{suffix}</span>}
+      <span className="text-violet">{suffix}</span>
     </span>
-  );
+  )
 }

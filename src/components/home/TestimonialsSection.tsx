@@ -1,9 +1,8 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
-import TextReveal from '@/components/ui/TextReveal';
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 const testimonials = [
   {
@@ -27,23 +26,26 @@ const testimonials = [
     role: 'Jaipur E-Commerce Brand',
     initials: 'JE',
   },
-];
+]
 
-export default function TestimonialsSection() {
-  const [index, setIndex] = useState(0);
-  const current = testimonials[index];
+export function TestimonialsSection() {
+  const [index, setIndex] = useState(0)
+  const current = testimonials[index]
 
-  const prev = () => setIndex((i) => (i === 0 ? testimonials.length - 1 : i - 1));
-  const next = () => setIndex((i) => (i === testimonials.length - 1 ? 0 : i + 1));
+  const prev = () => setIndex((i) => (i === 0 ? testimonials.length - 1 : i - 1))
+  const next = () => setIndex((i) => (i === testimonials.length - 1 ? 0 : i + 1))
 
   return (
-    <section className="w-full bg-surface py-28 lg:py-32">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="w-full bg-surface py-28">
+      <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
         <div className="mb-16">
-          <p className="text-micro text-violet mb-4">TESTIMONIALS</p>
-          <TextReveal className="text-display-m text-white">
+          <span className="font-mono text-[11px] text-violet-light tracking-[0.22em] uppercase block mb-3">
+            TESTIMONIALS
+          </span>
+          <h2 className="font-display font-black text-white tracking-tight leading-[0.92]"
+            style={{ fontSize: 'clamp(28px, 4vw, 60px)' }}>
             Client Voices
-          </TextReveal>
+          </h2>
         </div>
 
         <div className="relative max-w-4xl mx-auto text-center">
@@ -66,7 +68,7 @@ export default function TestimonialsSection() {
               </blockquote>
 
               <div className="flex items-center justify-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-card border border-[#1F1F1F] flex items-center justify-center text-sm font-display font-bold text-violet">
+                <div className="w-12 h-12 rounded-full bg-card border border-border flex items-center justify-center text-sm font-display font-bold text-violet">
                   {current.initials}
                 </div>
                 <div className="text-left">
@@ -82,7 +84,7 @@ export default function TestimonialsSection() {
             <div className="flex items-center gap-3">
               <button
                 onClick={prev}
-                className="w-10 h-10 border border-[#1F1F1F] flex items-center justify-center text-muted hover:text-white hover:border-white/20 transition-colors"
+                className="w-10 h-10 border border-border flex items-center justify-center text-muted hover:text-white hover:border-white/20 transition-colors"
                 aria-label="Previous testimonial"
                 data-cursor="pointer"
               >
@@ -90,7 +92,7 @@ export default function TestimonialsSection() {
               </button>
               <button
                 onClick={next}
-                className="w-10 h-10 border border-[#1F1F1F] flex items-center justify-center text-muted hover:text-white hover:border-white/20 transition-colors"
+                className="w-10 h-10 border border-border flex items-center justify-center text-muted hover:text-white hover:border-white/20 transition-colors"
                 aria-label="Next testimonial"
                 data-cursor="pointer"
               >
@@ -105,5 +107,5 @@ export default function TestimonialsSection() {
         </div>
       </div>
     </section>
-  );
+  )
 }

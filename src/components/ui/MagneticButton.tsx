@@ -1,62 +1,66 @@
-'use client';
+'use client'
+import { useRef, useState } from 'react'
+import { motion, useSpring } from 'framer-motion'
 
-import { useRef, useState, ReactNode } from 'react';
-import { motion } from 'framer-motion';
-
-interface MagneticButtonProps {
-  children: ReactNode;
-  className?: string;
-  maxPull?: number;
-  onClick?: () => void;
-  'data-cursor'?: string;
+interface Props {
+  children:   React.ReactNode
+  className?: string
+  onClick?:   () => void
+  href?:      string
+  maxPull?:   number
 }
 
-export default function MagneticButton({
-  children,
-  className = '',
-  maxPull = 12,
-  onClick,
-  ...props
-}: MagneticButtonProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+export function MagneticButton({ children, className = '', onClick, href, maxPull = 14 }: Props) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [hovered, setHovered] = useState(false)
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    const dx = e.clientX - cx;
-    const dy = e.clientY - cy;
-    const distance = Math.sqrt(dx * dx + dy * dy);
-    const maxDistance = 100;
+  const x = useSpring(0, { stiffness: 200, damping: 20 })
+  const y = useSpring(0, { stiffness: 200, damping: 20 })
 
-    if (distance < maxDistance) {
-      const strength = 1 - distance / maxDistance;
-      setPosition({
-        x: Math.max(-maxPull, Math.min(maxPull, dx * strength * 0.3)),
-        y: Math.max(-maxPull, Math.min(maxPull, dy * strength * 0.3)),
-      });
-    }
-  };
+  const onMove = (e: React.MouseEvent) => {
+    if (!ref.current) return
+    const rect   = ref.current.getBoundingClientRect()
+    const cx     = rect.left + rect.width  / 2
+    const cy     = rect.top  + rect.height / 2
+    const dx     = (e.clientX - cx) * 0.32
+    const dy     = (e.clientY - cy) * 0.32
+    const capped = (v: number) => Math.max(-maxPull, Math.min(maxPull, v))
+    x.set(capped(dx))
+    y.set(capped(dy))
+  }
 
-  const handleMouseLeave = () => {
-    setPosition({ x: 0, y: 0 });
-  };
+  const onLeave = () => { x.set(0); y.set(0); setHovered(false) }
+
+  if (href) {
+    return (
+      <motion.a
+        ref={ref as React.Ref<HTMLAnchorElement>}
+        href={href}
+        data-cursor="pointer"
+        style={{ x, y, display: 'inline-flex' }}
+        onMouseMove={onMove}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={onLeave}
+        onClick={onClick}
+        className={className}
+      >
+        {children}
+      </motion.a>
+    )
+  }
 
   return (
     <motion.div
       ref={ref}
-      className={className}
-      animate={{ x: position.x, y: position.y }}
-      transition={{ type: 'spring', stiffness: 300, damping: 20, mass: 0.5 }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      data-cursor="pointer"
+      style={{ x, y, display: 'inline-flex' }}
+      onMouseMove={onMove}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={onLeave}
       onClick={onClick}
-      data-cursor={props['data-cursor'] || 'pointer'}
-      style={{ display: 'inline-block' }}
+      className={className}
     >
       {children}
     </motion.div>
-  );
+  )
 }

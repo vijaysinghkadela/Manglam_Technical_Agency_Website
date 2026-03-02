@@ -1,211 +1,180 @@
-'use client';
+'use client'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ChevronDown, Menu, X } from 'lucide-react'
+import { services } from '@/lib/data/services'
+import { cn } from '@/lib/utils'
 
-import { useState, useEffect, useRef } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, X, Menu } from 'lucide-react';
-import MagneticButton from '@/components/ui/MagneticButton';
-import { useQuoteStore } from '@/stores/useQuoteStore';
-import { services } from '@/lib/data/services';
+const NAV = [
+  { href:'/',          label:'Home'      },
+  { href:'/about',     label:'About'     },
+  { href:'/services',  label:'Services', mega:true },
+  { href:'/portfolio', label:'Portfolio' },
+  { href:'/pricing',   label:'Pricing'   },
+  { href:'/blog',      label:'Blog'      },
+  { href:'/contact',   label:'Contact'   },
+]
 
-const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/services', label: 'Services', hasDropdown: true },
-  { href: '/portfolio', label: 'Portfolio' },
-  { href: '/pricing', label: 'Pricing' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/contact', label: 'Contact' },
-];
-
-export default function Navbar() {
-  const pathname = usePathname();
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
-  const quoteOpen = useQuoteStore((s) => s.open);
+export function Navbar() {
+  const path    = usePathname()
+  const [scrolled, setScrolled] = useState(false)
+  const [mobile,   setMobile]   = useState(false)
+  const [mega,     setMega]     = useState(false)
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handler, { passive: true });
-    return () => window.removeEventListener('scroll', handler);
-  }, []);
+    const fn = () => setScrolled(window.scrollY > 40)
+    window.addEventListener('scroll', fn, { passive:true })
+    return () => window.removeEventListener('scroll', fn)
+  }, [])
 
-  // Close mobile menu on pathname change
-  const prevPathname = useRef(pathname);
-  useEffect(() => {
-    if (prevPathname.current !== pathname) {
-      prevPathname.current = pathname;
-      setMobileOpen(false);
-      setServicesOpen(false);
-    }
-  }, [pathname]);
+  useEffect(() => { setMobile(false); setMega(false) }, [path])
 
   return (
     <>
-      <nav
-        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
-          scrolled
-            ? 'bg-[#080808]/85 backdrop-blur-xl border-b border-[#1F1F1F]'
-            : 'bg-transparent border-b border-transparent'
-        }`}
-      >
-        <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12 h-[72px] flex items-center justify-between">
+      <nav className={cn(
+        'fixed top-0 left-0 right-0 z-100 transition-all duration-300',
+        scrolled ? 'bg-canvas/88 backdrop-blur-2xl border-b border-border' : 'bg-transparent',
+      )}>
+        <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12 h-[68px] flex items-center justify-between">
+
           {/* Logo */}
-            <Link href="/" className="flex flex-col" data-cursor="pointer">
-              <span className="font-display text-xl font-bold tracking-[-0.05em] text-white">
-                MTA
-              </span>
-              <span className="text-[10px] text-muted tracking-[0.15em] uppercase font-body hidden sm:block">
+          <Link href="/" data-cursor="pointer" className="flex items-center gap-2.5 shrink-0">
+            <div className="w-8 h-8 bg-violet flex items-center justify-center">
+              <span className="text-white font-display font-black text-sm leading-none">M</span>
+            </div>
+            <div className="flex flex-col leading-none">
+              <span className="font-display font-black text-[15px] text-white tracking-tight">MTA</span>
+              <span className="text-[9px] text-muted font-mono tracking-[0.14em] uppercase hidden sm:block">
                 Manglam Technical Agency
               </span>
-            </Link>
-
-            {/* Desktop Nav — centred */}
-            <div className="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
-              {navLinks.map((link) => {
-                const isActive = link.href === '/' ? pathname === '/' : pathname.startsWith(link.href);
-
-                if (link.hasDropdown) {
-                  return (
-                    <div
-                      key={link.href}
-                      className="relative"
-                      onMouseEnter={() => setServicesOpen(true)}
-                      onMouseLeave={() => setServicesOpen(false)}
-                    >
-                      <Link
-                        href={link.href}
-                        className={`inline-flex items-center gap-1 px-3 py-2 text-[13px] font-medium transition-colors underline-slide ${
-                          isActive ? 'text-white' : 'text-muted hover:text-white'
-                        }`}
-                        data-cursor="pointer"
-                      >
-                        {link.label}
-                        <ChevronDown className="w-2.5 h-2.5" />
-                      </Link>
-
-                      <AnimatePresence>
-                        {servicesOpen && (
-                          <motion.div
-                            initial={{ opacity: 0, y: 8 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 8 }}
-                            transition={{ duration: 0.2 }}
-                            className="absolute top-full left-0 mt-2 w-64 py-2 bg-card border border-[#1F1F1F] rounded-lg"
-                          >
-                            {services.map((service) => (
-                              <Link
-                                key={service.slug}
-                                href={`/services/${service.slug}`}
-                                className="block px-4 py-2.5 text-[13px] text-muted hover:text-white hover:bg-white/[0.03] transition-colors"
-                                data-cursor="pointer"
-                              >
-                                {service.name}
-                              </Link>
-                            ))}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  );
-                }
-
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={`px-3 py-2 text-[13px] font-medium transition-colors underline-slide ${
-                      isActive ? 'text-white' : 'text-muted hover:text-white'
-                    }`}
-                    data-cursor="pointer"
-                  >
-                    {link.label}
-                  </Link>
-                );
-              })}
             </div>
+          </Link>
 
-            {/* Right — CTA + Mobile Toggle */}
-            <div className="flex items-center gap-3">
-              <MagneticButton className="hidden lg:block">
-                <button
-                  onClick={() => quoteOpen()}
-                  className="px-5 py-2 text-[13px] font-medium text-violet border border-violet rounded-full hover:bg-violet hover:text-white transition-all duration-300 shimmer"
-                  data-cursor="pointer"
-                >
-                  Get a Quote
-                </button>
-              </MagneticButton>
-
-              {/* Mobile hamburger */}
-              <button
-                onClick={() => setMobileOpen(!mobileOpen)}
-                className="lg:hidden w-10 h-10 flex items-center justify-center text-white"
-                aria-label="Toggle menu"
+          {/* Centre links */}
+          <div className="hidden lg:flex items-center gap-0 absolute left-1/2 -translate-x-1/2">
+            {NAV.map(link => link.mega ? (
+              <div key={link.href} className="relative"
+                onMouseEnter={() => setMega(true)}
+                onMouseLeave={() => setMega(false)}
               >
-                {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-              </button>
-            </div>
+                <button data-cursor="pointer"
+                  className={cn(
+                    'flex items-center gap-1.5 px-3 py-2 text-[13px] font-medium transition-colors',
+                    path.startsWith('/services') ? 'text-white' : 'text-muted hover:text-white',
+                  )}
+                >
+                  {link.label}
+                  <ChevronDown className={cn('w-3 h-3 transition-transform duration-200', mega && 'rotate-180')} />
+                </button>
+
+                <AnimatePresence>
+                  {mega && (
+                    <motion.div
+                      initial={{ opacity:0, y:8 }}
+                      animate={{ opacity:1, y:0 }}
+                      exit={{ opacity:0, y:8 }}
+                      transition={{ duration:0.18 }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 w-[560px] bg-surface border border-border mt-1 p-5 grid grid-cols-2 gap-2 shadow-[0_20px_60px_rgba(0,0,0,0.7)]"
+                    >
+                      {services.map(s => (
+                        <Link key={s.slug} href={`/services/${s.slug}`} data-cursor="pointer"
+                          className="flex items-start gap-3 p-3 hover:bg-canvas border border-transparent hover:border-border transition-all group"
+                        >
+                          <div className="w-8 h-8 border border-border flex items-center justify-center shrink-0 group-hover:border-violet/50 transition-colors">
+                            <s.Icon className="w-4 h-4 text-muted group-hover:text-violet-light transition-colors" />
+                          </div>
+                          <div className="min-w-0">
+                            <p className="text-[13px] font-semibold text-white leading-tight">{s.name}</p>
+                            <p className="text-[11px] text-muted mt-0.5 leading-snug line-clamp-1">{s.tagline}</p>
+                          </div>
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ) : (
+              <Link key={link.href} href={link.href} data-cursor="pointer"
+                className={cn(
+                  'relative px-3 py-2 text-[13px] font-medium transition-colors group',
+                  path === link.href ? 'text-white' : 'text-muted hover:text-white',
+                )}
+              >
+                {link.label}
+                <span className={cn(
+                  'absolute bottom-1.5 left-3 right-3 h-[1.5px] bg-violet transition-transform origin-left duration-250',
+                  path === link.href ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100',
+                )} />
+              </Link>
+            ))}
+          </div>
+
+          {/* Right: CTA + hamburger */}
+          <div className="flex items-center gap-3">
+            <Link href="/contact" data-cursor="pointer"
+              className="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-[13px] font-semibold
+                         text-violet-light border border-violet/40
+                         hover:bg-violet hover:text-white hover:border-violet
+                         transition-all duration-200"
+            >
+              Get a Quote
+            </Link>
+            <button onClick={() => setMobile(v => !v)}
+              data-cursor="pointer" aria-label="Toggle menu"
+              className="lg:hidden w-9 h-9 flex items-center justify-center border border-border
+                         text-muted hover:text-white hover:border-[#333] transition-colors"
+            >
+              {mobile ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            </button>
+          </div>
         </div>
       </nav>
 
-      {/* Mobile Full-Screen Menu */}
+      {/* Mobile fullscreen menu */}
       <AnimatePresence>
-        {mobileOpen && (
+        {mobile && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[99] bg-[#080808] flex flex-col items-center justify-center"
+            initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }}
+            className="fixed inset-0 z-99 bg-canvas flex flex-col pt-[68px] overflow-hidden"
           >
-            {/* Giant watermark */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <span className="font-display text-[200px] font-black text-white/[0.03] select-none">
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
+              <span className="font-display font-black text-[44vw] text-white opacity-[0.022] leading-none">
                 MTA
               </span>
             </div>
-
-            <nav className="relative z-10 flex flex-col items-center gap-2">
-              {navLinks.map((link, i) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.05 * i, duration: 0.4, ease: [0.33, 1, 0.68, 1] }}
+            <div className="relative flex flex-col px-6 pt-8">
+              {NAV.map((link, i) => (
+                <motion.div key={link.href}
+                  initial={{ opacity:0, y:20 }}
+                  animate={{ opacity:1, y:0 }}
+                  transition={{ delay: i * 0.055, duration:0.38, ease:[0.16,1,0.3,1] }}
                 >
-                  <Link
-                    href={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className={`block text-3xl font-display font-bold py-3 transition-colors ${
-                      pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
-                        ? 'text-white'
-                        : 'text-muted hover:text-white'
-                    }`}
+                  <Link href={link.href} onClick={() => setMobile(false)}
+                    className={cn(
+                      'block py-4 text-[30px] font-display font-black border-b border-border transition-colors',
+                      path === link.href ? 'text-white' : 'text-dead hover:text-white',
+                    )}
                   >
                     {link.label}
                   </Link>
                 </motion.div>
               ))}
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.4 }}
+              <motion.div initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }}
+                transition={{ delay: NAV.length * 0.055 }}
                 className="mt-8"
               >
-                <button
-                  onClick={() => { setMobileOpen(false); quoteOpen(); }}
-                  className="px-8 py-3.5 bg-violet text-white font-semibold text-sm rounded-md"
+                <Link href="/contact" onClick={() => setMobile(false)}
+                  className="block w-full text-center py-4 bg-violet text-white font-display font-black text-xl hover:bg-violet-dark transition-colors"
                 >
-                  Get a Quote
-                </button>
+                  Get a Quote →
+                </Link>
               </motion.div>
-            </nav>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
     </>
-  );
+  )
 }

@@ -1,57 +1,34 @@
-'use client';
+'use client'
+import { useRef, useState, type CSSProperties } from 'react'
 
-import { useRef, useState, ReactNode, useCallback } from 'react';
-import { cn } from '@/lib/cn';
-
-interface SpotlightCardProps {
-  children: ReactNode;
-  className?: string;
-  spotlightColor?: string;
-  spotlightSize?: number;
+interface Props {
+  children:   React.ReactNode
+  className?: string
+  intensity?: number
+  style?:     CSSProperties
 }
 
-export default function SpotlightCard({
-  children,
-  className = '',
-  spotlightColor = 'rgba(124,58,237,0.06)',
-  spotlightSize = 300,
-}: SpotlightCardProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [spotlight, setSpotlight] = useState({ x: 0, y: 0, opacity: 0 });
+export function SpotlightCard({ children, className = '', intensity = 0.07, style }: Props) {
+  const [bg, setBg] = useState('transparent')
+  const ref         = useRef<HTMLDivElement>(null)
 
-  const handleMouseMove = useCallback(
-    (e: React.MouseEvent) => {
-      if (!ref.current) return;
-      const rect = ref.current.getBoundingClientRect();
-      setSpotlight({
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-        opacity: 1,
-      });
-    },
-    []
-  );
-
-  const handleMouseLeave = useCallback(() => {
-    setSpotlight((prev) => ({ ...prev, opacity: 0 }));
-  }, []);
+  const onMove = (e: React.MouseEvent) => {
+    if (!ref.current) return
+    const rect = ref.current.getBoundingClientRect()
+    const x    = e.clientX - rect.left
+    const y    = e.clientY - rect.top
+    setBg(`radial-gradient(320px circle at ${x}px ${y}px, rgba(124,58,237,${intensity}), transparent 70%)`)
+  }
 
   return (
     <div
       ref={ref}
-      className={cn('relative overflow-hidden', className)}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      className={className}
+      onMouseMove={onMove}
+      onMouseLeave={() => setBg('transparent')}
+      style={{ background: bg, transition: 'background 0s', ...style }}
     >
-      {/* Spotlight overlay */}
-      <div
-        className="absolute inset-0 pointer-events-none transition-opacity duration-300"
-        style={{
-          opacity: spotlight.opacity,
-          background: `radial-gradient(${spotlightSize}px circle at ${spotlight.x}px ${spotlight.y}px, ${spotlightColor}, transparent)`,
-        }}
-      />
       {children}
     </div>
-  );
+  )
 }

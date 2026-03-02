@@ -1,43 +1,38 @@
-'use client';
+'use client'
+import { ScrambleCounter } from '@/components/ui/ScrambleCounter'
+import { cn } from '@/lib/utils'
 
-import { motion } from 'framer-motion';
-import ScrambleCounter from '@/components/ui/ScrambleCounter';
+const STATS = [
+  { value:50, suffix:'+', label:'PROJECTS DELIVERED' },
+  { value:20, suffix:'+', label:'HAPPY CLIENTS'      },
+  { value:3,  suffix:'+', label:'YEARS ACTIVE'       },
+  { value:98, suffix:'%', label:'SATISFACTION RATE'  },
+]
 
-import { cn } from '@/lib/utils';
-
-const stats = [
-  { value: 50, suffix: '+', label: 'PROJECTS' },
-  { value: 20, suffix: '+', label: 'CLIENTS' },
-  { value: 3, suffix: '+', label: 'YEARS' },
-  { value: 98, suffix: '%', label: 'SATISFACTION' },
-];
-
-export default function StatsSection() {
+export function StatsSection() {
   return (
-    <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-0">
-        {stats.map((stat, i) => (
-          <motion.div
-            key={stat.label}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1, duration: 0.5 }}
-            className={cn(
-              "flex flex-col items-center lg:items-start text-center lg:text-left",
-              i < 3 && "lg:border-r lg:border-[#1F1F1F] lg:pr-12"
-            )}
-          >
-            {/* Fixed font size — use clamp with hard cap */}
-            <div className="font-black text-white leading-none" style={{ fontSize: 'clamp(48px, 6vw, 80px)' }}>
-              <ScrambleCounter target={stat.value} suffix={stat.suffix} />
+    <section className="w-full py-20 bg-canvas">
+      <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-0">
+          {STATS.map((s, i) => (
+            <div key={s.label}
+              className={cn('flex flex-col items-center lg:items-start text-center lg:text-left py-10',
+                i % 2 === 0 ? 'border-r border-border pr-6 lg:pr-12' : 'pl-6 lg:pl-12',
+                i < 2       ? 'border-b lg:border-b-0 border-border' : '',
+                i === 1     ? 'lg:border-r border-border'            : '',
+                i === 2     ? 'lg:border-r border-border'            : '',
+              )}
+            >
+              <ScrambleCounter
+                target={s.value} suffix={s.suffix}
+                className="font-display font-black text-white leading-none tracking-tight"
+                style={{ fontSize:'clamp(36px, 5vw, 72px)' }}
+              />
+              <p className="font-mono text-[11px] text-muted tracking-[0.2em] mt-3">{s.label}</p>
             </div>
-            <div className="text-[11px] text-[#525252] font-mono tracking-[0.2em] uppercase mt-3">
-              {stat.label}
-            </div>
-          </motion.div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
-  );
+    </section>
+  )
 }

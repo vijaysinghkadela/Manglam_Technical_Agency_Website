@@ -1,97 +1,150 @@
 export interface BlogPost {
-  slug: string;
-  title: string;
-  excerpt: string;
-  content: string;
-  date: string;
-  readTime: string;
-  category: string;
-  author: string;
+  slug: string
+  title: string
+  excerpt: string
+  category: string
+  readTime: string
+  date: string
+  author: string
+  content: string
+  gradient: string
 }
 
 export const blogPosts: BlogPost[] = [
   {
-    slug: 'why-cheap-websites-cost-more',
-    title: 'Why "Cheap" Websites End Up Costing You More',
-    excerpt: 'The hidden costs of offshore templates, poor architecture, and security vulnerabilities that business owners ignore until it is too late.',
-    content: `
-      <h2>The True Cost of a £500 Website</h2>
-      <p>Many business owners start their digital journey looking for the cheapest option. They find an agency promising a full website for £500 and think they've found a bargain. Six months later, the site is hacked, it takes 8 seconds to load, and it hasn't generated a single lead.</p>
-      
-      <h3>1. Security Vulnerabilities</h3>
-      <p>Cheap websites are often built on outdated WordPress themes with dozens of unpatched plugins. This is an open door for malware. When your site goes down, you lose credibility and revenue.</p>
-      
-      <h3>2. Performance Issues</h3>
-      <p>Google cares about speed. If your site takes more than 3 seconds to load, 53% of mobile users will abandon it. Cheap hosting and bloated code guarantee slow loading times, directly killing your conversion rate.</p>
-
-      <h3>3. The Rebuild Tax</h3>
-      <p>Eventually, you will have to rebuild it properly. By that time, you've wasted the initial £500, lost months of potential growth, and damaged your brand. It is always cheaper to build it right the first time.</p>
-      
-      <h2>The Engineering Approach</h2>
-      <p>At MTA, we don't use templates. We engineer digital infrastructure that is secure by default, loads instantly globally, and is designed specifically for your business goals.</p>
-    `,
-    date: '2026-02-15',
-    readTime: '4 min read',
-    category: 'Engineering',
-    author: 'Vinay Kali'
-  },
-  {
-    slug: 'automating-client-onboarding',
-    title: 'How to Automate Your Client Onboarding Pipeline',
-    excerpt: 'Stop sending manual emails and PDFs. Learn how to build an automated workflow that impresses clients and saves your team 10 hours a week.',
-    content: `
-      <h2>The Onboarding Bottleneck</h2>
-      <p>You close a client. Great. Now comes the friction: sending contracts, collecting assets, scheduling kickoff calls, and waiting for replies. If you're doing this manually, you're wasting time and risking a poor first impression.</p>
-      
-      <h3>The Ideal Automated Flow</h3>
-      <p>A modern onboarding pipeline should look like this:</p>
-      <ul>
-        <li><strong>Trigger:</strong> Deal marked as "Closed Won" in CRM.</li>
-        <li><strong>Action 1:</strong> Automatic generation and sending of an e-signature contract.</li>
-        <li><strong>Action 2:</strong> Upon signing, a welcome email triggers with a Stripe payment link for the deposit.</li>
-        <li><strong>Action 3:</strong> Upon payment, an intake form (Typeform/Tally) is sent to collect assets.</li>
-        <li><strong>Action 4:</strong> Private Slack channel created, client invited, kickoff call link sent.</li>
-      </ul>
-
-      <h2>Tools to Make it Happen</h2>
-      <p>You can build this entire flow using <strong>n8n</strong> or <strong>Zapier</strong>. It requires zero custom coding and connects tools you likely already use (HubSpot, Stripe, Slack).</p>
-      
-      <p>If you don't have the time to build it, that's what we do at MTA. We map your current mess and replace it with a silent, efficient machine.</p>
-    `,
-    date: '2026-03-01',
-    readTime: '6 min read',
-    category: 'Automation',
-    author: 'Tech Team'
-  },
-  {
-    slug: 'nextjs-vs-wordpress-2026',
-    title: 'Next.js vs WordPress: Making the Right Choice in 2026',
-    excerpt: 'Is WordPress finally dead? We compare modern web architectures to help you decide what infrastructure fits your scaling business.',
-    content: `
-      <h2>The Legacy Standard vs The Modern Standard</h2>
-      <p>For a decade, WordPress was the default choice for almost every business website. Today, modern frameworks like Next.js have changed the landscape. But which one should you choose?</p>
-      
-      <h3>When to use WordPress</h3>
-      <p>WordPress still has its place. If you run a high-volume publishing site (like a news outlet) with non-technical staff publishing 10 articles a day, WordPress remains a solid choice due to its editing interface.</p>
-
-      <h3>When to use Next.js</h3>
-      <p>For almost everything else—corporate sites, SaaS frontends, custom applications, and secure platforms—Next.js is vastly superior. It offers:</p>
-      <ul>
-        <li><strong>Security:</strong> No databases exposed to the frontend, no plugin vulnerabilities.</li>
-        <li><strong>Performance:</strong> Static generation and edge rendering mean pages load instantly.</li>
-        <li><strong>Customisation:</strong> You are not fighting a theme; you are writing pure React code tailored to your exact needs.</li>
-      </ul>
-
-      <h2>Our Verdict</h2>
-      <p>At MTA, we use Next.js exclusively for client builds. The performance, security, and developer experience are unmatched, resulting in a significantly better product for the client.</p>
-    `,
-    date: '2026-01-20',
+    slug: 'why-every-indian-business-needs-a-website-2026',
+    title: 'Why Every Indian Business Needs a Website in 2026',
+    excerpt: 'Your customers are online. If you are not, you are invisible. Here is what a modern business website does for you and how to get one without overpaying.',
+    category: 'Web Development',
     readTime: '5 min read',
-    category: 'Web Dev',
-    author: 'Vinay Kali'
-  }
-];
+    date: '28 Feb 2026',
+    author: 'MTA Team',
+    gradient: 'from-violet-900/40 to-violet-950/20',
+    content: `
+In 2026, a business without a website is like a shop without a signboard. 
+Your potential customers search online before they call, walk in, or buy.
 
-export function getPostBySlug(slug: string): BlogPost | undefined {
-  return blogPosts.find((p) => p.slug === slug);
+A website built on modern technology — responsive, fast, and SEO-ready — is not a 
+luxury. It is the baseline for being found, trusted, and chosen.
+
+At Manglam Technical Agency, we have built websites for NGOs, hospitals, and startups 
+across Rajasthan. Every single client saw increased enquiries within 90 days of launch.
+
+The cost of not having a website is far higher than the cost of building one.
+    `.trim(),
+  },
+  {
+    slug: 'social-media-automation-save-10-hours-week',
+    title: 'Social Media Automation: Save 10 Hours a Week',
+    excerpt: 'Manual posting is dead. Learn how automation workflows handle scheduling, responses, and reporting — so your team focuses on what matters.',
+    category: 'Marketing',
+    readTime: '4 min read',
+    date: '20 Feb 2026',
+    author: 'MTA Team',
+    gradient: 'from-cyan-900/40 to-cyan-950/20',
+    content: `
+Most businesses waste 10–15 hours a week on manual social media tasks — writing captions, 
+scheduling posts, downloading reports, and responding to comments.
+
+Automation tools like n8n and Zapier, combined with platform scheduling APIs, can handle 
+all of this with zero manual effort once configured correctly.
+
+At MTA, we set up automation workflows that run 24/7. Our clients post consistently, 
+respond faster, and spend zero time on repetitive scheduling tasks.
+
+The result: more time for strategy, less time on execution.
+    `.trim(),
+  },
+  {
+    slug: 'top-5-cybersecurity-mistakes-indian-smes',
+    title: 'Top 5 Cybersecurity Mistakes Indian SMEs Make',
+    excerpt: 'Most Indian SMEs are one breach away from serious damage. These five mistakes are the most common — and the most preventable.',
+    category: 'Cybersecurity',
+    readTime: '6 min read',
+    date: '15 Feb 2026',
+    author: 'MTA Team',
+    gradient: 'from-red-900/30 to-red-950/20',
+    content: `
+1. Using the same password across all business accounts.
+2. No two-factor authentication on email and banking.
+3. Unpatched software and outdated plugins on the website.
+4. No backup strategy — losing data means losing the business.
+5. No IT Act 2000 compliance for customer data handling.
+
+Each of these is straightforward to fix with the right guidance. 
+A security audit takes one week and costs far less than a breach.
+    `.trim(),
+  },
+  {
+    slug: 'how-ai-automation-cut-manual-work-70-percent',
+    title: 'How AI Automation Cut Our Client\'s Manual Work by 70%',
+    excerpt: 'A Rajasthan-based services firm was spending 30 hours a week on data entry and reporting. We automated it in two weeks. Here is how.',
+    category: 'AI',
+    readTime: '5 min read',
+    date: '10 Feb 2026',
+    author: 'MTA Team',
+    gradient: 'from-amber-900/30 to-amber-950/20',
+    content: `
+The client processed 200+ enquiries a week — manually entering data into spreadsheets, 
+generating reports, and sending follow-up emails.
+
+We audited the process, built an n8n workflow connected to their CRM, and automated:
+- Data entry from web forms directly into structured records
+- Automated weekly PDF reports sent to management
+- Follow-up email sequences triggered by lead status
+
+Total implementation time: 2 weeks. Manual hours saved: 30 per week. ROI: less than 30 days.
+    `.trim(),
+  },
+  {
+    slug: 'understanding-indian-it-act-what-business-must-know',
+    title: 'Understanding the Indian IT Act: What Your Business Must Know',
+    excerpt: 'The IT Act 2000 applies to every business that handles customer data digitally. Here is what it means for you in plain language.',
+    category: 'Business',
+    readTime: '7 min read',
+    date: '5 Feb 2026',
+    author: 'MTA Team',
+    gradient: 'from-green-900/30 to-green-950/20',
+    content: `
+The Information Technology Act 2000 and its 2008 amendments govern how Indian businesses 
+handle electronic data, transactions, and cybersecurity.
+
+Key obligations for most businesses:
+- A published Privacy Policy on your website if you collect personal data
+- Reasonable security practices for stored user data
+- Grievance Officer designation for data complaints
+- Written agreements with data processors (vendors, agencies)
+
+Non-compliance penalties range from fines to criminal liability under Section 43A and 72A.
+
+Manglam Technical Agency helps businesses achieve compliance through Data Processing Agreements 
+and documented security frameworks.
+    `.trim(),
+  },
+  {
+    slug: 'from-brief-to-launch-how-mta-builds-in-3-weeks',
+    title: 'From Brief to Launch: How MTA Builds Websites in 3 Weeks',
+    excerpt: 'Most agencies take 2–3 months. We deliver in 3 weeks. Not by cutting corners — by eliminating waste from the process.',
+    category: 'Web Development',
+    readTime: '4 min read',
+    date: '28 Jan 2026',
+    author: 'MTA Team',
+    gradient: 'from-violet-900/30 to-indigo-950/20',
+    content: `
+Week 1: Discovery + design mockups. Client approves the visual direction before any code is written.
+Week 2: Full development on a live staging environment. Client reviews at any time.
+Week 3: QA, content finalisation, and production deployment.
+
+The secret is eliminating the feedback loops that kill most projects — endless revisions 
+caused by vague scope and no written agreement.
+
+Every MTA project starts with a signed scope document. That is why we deliver on time, every time.
+
+Our MNSS project (marutnarayansewasansthan.org) was delivered in exactly 3 weeks for ₹50,000.
+    `.trim(),
+  },
+]
+
+export function getPostBySlug(slug: string) {
+  return blogPosts.find((p) => p.slug === slug)
 }

@@ -11,7 +11,7 @@ export default function GradientText({ children, className, as: Tag = 'span' }: 
   return (
     <Tag
       className={cn(
-        'bg-gradient-to-r from-violet-400 via-violet-300 to-cyan-400 bg-clip-text text-transparent',
+        'bg-linear-to-r from-violet-400 via-violet-300 to-cyan-400 bg-clip-text text-transparent',
         '[-webkit-background-clip:text] [-webkit-text-fill-color:transparent]',
         className,
       )}

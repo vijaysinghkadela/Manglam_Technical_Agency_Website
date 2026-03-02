@@ -1,17 +1,17 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
-import PageHero from '@/components/ui/PageHero';
-import { ArrowRight, Check } from 'lucide-react';
-import Link from 'next/link';
-import MagneticButton from '@/components/ui/MagneticButton';
+import { useState } from 'react'
+import PageHero from '@/components/ui/PageHero'
+import Link from 'next/link'
+import { MagneticButton } from '@/components/ui/MagneticButton'
+import { motion } from 'framer-motion'
 
 const plans = [
   {
     name: 'Web Development',
     price: '₹50,000',
     type: 'one-time',
-    features: ['Custom Next.js Website', 'Responsive Design', 'CMS Integration', '1-Year Support'],
+    features: ['Custom Next.js Website', 'Responsive Design', 'CMS Integration', '1-Year Free Support'],
     href: '/services/web-development',
   },
   {
@@ -35,7 +35,7 @@ const plans = [
     features: ['Process Audit', 'API Integration', 'Custom Dashboards', 'Workflow Automation'],
     href: '/services/ai-automation',
   },
-];
+]
 
 const comparisonData = {
   features: [
@@ -48,23 +48,14 @@ const comparisonData = {
     'Monthly Analytics',
   ],
   columns: [
-    {
-      name: 'Freelancers',
-      values: [false, false, true, false, false, false, false],
-    },
-    {
-      name: 'Traditional Agencies',
-      values: [true, true, false, false, false, false, true],
-    },
-    {
-      name: 'MTA (Us)',
-      values: [true, true, true, true, true, true, true],
-    },
+    { name: 'Freelancers', values: [false, false, true, false, false, false, false] },
+    { name: 'Traditional Agencies', values: [true, true, false, false, false, false, true] },
+    { name: 'MTA (Us)', values: [true, true, true, true, true, true, true] },
   ],
-};
+}
 
 export default function PricingPage() {
-  const [billing, setBilling] = useState<'monthly' | 'annual'>('monthly');
+  const [billing, setBilling] = useState<'monthly' | 'annual'>('monthly')
 
   return (
     <main className="min-h-screen bg-canvas">
@@ -75,149 +66,160 @@ export default function PricingPage() {
         subheading="No games, no tiers nobody needs. We publish our rates so you know exactly what to expect before we even speak."
       />
 
-      {/* Plan Rows (Editorial List Format) */}
-      <section className="py-24 bg-canvas">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between flex-wrap gap-6 items-end mb-12 border-b border-[#1F1F1F] pb-6">
-            <h2 className="text-display-s text-white">Starting Rates</h2>
-            
-            {/* Minimal Toggle */}
-            <div className="flex gap-6">
+      {/* Pricing Cards */}
+      <section className="py-28 bg-surface border-t border-border">
+        <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
+          <div className="flex justify-between flex-wrap gap-6 items-end mb-12">
+            <h2 className="font-display text-3xl font-bold text-white">Starting Rates</h2>
+
+            {/* Pill Toggle */}
+            <div className="flex items-center bg-card p-1 border border-border">
               <button
                 onClick={() => setBilling('monthly')}
-                className={`text-[13px] font-medium transition-colors ${
-                  billing === 'monthly' ? 'text-white underline decoration-violet decoration-2 underline-offset-8' : 'text-muted hover:text-white/80'
+                className={`px-5 py-2.5 text-[13px] font-semibold transition-all duration-300 ${
+                  billing === 'monthly' ? 'bg-violet text-white' : 'text-muted hover:text-white'
                 }`}
                 data-cursor="pointer"
+                aria-label="Monthly billing"
               >
                 Monthly
               </button>
               <button
                 onClick={() => setBilling('annual')}
-                className={`text-[13px] font-medium transition-colors ${
-                  billing === 'annual' ? 'text-white underline decoration-violet decoration-2 underline-offset-8' : 'text-muted hover:text-white/80'
+                className={`px-5 py-2.5 text-[13px] font-semibold transition-all duration-300 ${
+                  billing === 'annual' ? 'bg-violet text-white' : 'text-muted hover:text-white'
                 }`}
                 data-cursor="pointer"
+                aria-label="Annual billing"
               >
-                Annual <span className="text-violet ml-1">(-20%)</span>
+                Annual <span className="text-[11px] opacity-70">(-20%)</span>
               </button>
             </div>
           </div>
 
-          <div className="flex flex-col">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {plans.map((plan, i) => {
-              // Apply discount logic if needed, simplify for UI
-              const displayPrice = billing === 'annual' && plan.type === 'per month' 
-                ? '₹96,000' 
-                : plan.price;
-                
-              const displayType = billing === 'annual' && plan.type === 'per month' 
-                ? 'per year' 
-                : plan.type;
+              const displayPrice = billing === 'annual' && plan.type === 'per month'
+                ? '₹96,000'
+                : plan.price
+              const displayType = billing === 'annual' && plan.type === 'per month'
+                ? 'per year'
+                : plan.type
 
               return (
-                <div
+                <motion.div
                   key={plan.name}
-                  className="w-full grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-12 py-10 border-b border-[#1F1F1F] group hover:bg-[#0E0E0E] transition-colors -mx-4 px-4 sm:mx-0 sm:px-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1, duration: 0.5 }}
+                  className="bg-card border border-border p-8 lg:p-10 flex flex-col gap-6 transition-all duration-500 hover:border-violet/30"
                 >
-                  <div className="md:col-span-3 flex flex-col justify-center">
-                    <h3 className="font-display text-2xl font-bold text-white mb-2">{plan.name}</h3>
-                  </div>
-                  
-                  <div className="md:col-span-3 flex flex-col justify-center">
-                    <div className="flex items-baseline gap-2">
-                      <span className="font-display text-4xl lg:text-5xl font-black text-white">{displayPrice}</span>
+                  {/* Header */}
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <h3 className="font-display text-xl font-bold text-white">{plan.name}</h3>
+                      {plan.type !== 'scoped project' && (
+                        <span className="text-[11px] font-mono text-muted uppercase tracking-[0.18em] mt-1 block">{displayType}</span>
+                      )}
                     </div>
-                    {plan.type !== 'scoped project' && (
-                      <span className="text-sm font-mono text-muted uppercase tracking-widest mt-2">{displayType}</span>
-                    )}
                   </div>
 
-                  <div className="md:col-span-4 flex flex-col justify-center gap-2">
+                  {/* Price */}
+                  <div className="flex items-baseline gap-2">
+                    <span className="font-display font-black text-white"
+                      style={{ fontSize: 'clamp(32px, 4vw, 44px)' }}>{displayPrice}</span>
+                  </div>
+
+                  {/* Divider */}
+                  <div className="h-px w-full bg-border" />
+
+                  {/* Features */}
+                  <div className="flex flex-col gap-3 flex-1">
                     {plan.features.map(f => (
-                      <div key={f} className="flex items-center gap-2 text-sm text-muted font-mono">
-                        <span className="text-violet">✦</span>
-                        {f}
+                      <div key={f} className="flex items-center gap-3 text-sm text-muted">
+                        <div className="w-1.5 h-1.5 rounded-full bg-violet shrink-0" />
+                        <span className="font-medium">{f}</span>
                       </div>
                     ))}
                   </div>
 
-                  <div className="md:col-span-2 flex items-center justify-start md:justify-end">
-                    <Link
-                      href={plan.href}
-                      className="inline-flex items-center justify-center px-6 py-3 border border-[#1F1F1F] text-sm text-white hover:border-violet hover:bg-violet transition-colors w-full md:w-auto"
-                      data-cursor="link"
-                    >
-                      View Details
-                    </Link>
-                  </div>
-                </div>
-              );
+                  {/* CTA */}
+                  <Link
+                    href={plan.href}
+                    className="inline-flex items-center justify-center w-full py-3 text-sm font-semibold border border-border text-muted hover:text-white hover:border-violet transition-all"
+                    data-cursor="link"
+                  >
+                    View Details →
+                  </Link>
+                </motion.div>
+              )
             })}
           </div>
         </div>
       </section>
 
       {/* Comparison Table */}
-      <section className="py-24 bg-surface border-y border-[#1F1F1F]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-28 bg-canvas">
+        <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
           <div className="mb-16">
-            <h2 className="text-display-m text-white">The Difference</h2>
+            <h2 className="font-display text-3xl font-bold text-white">The Difference</h2>
+            <p className="text-muted mt-2">See why businesses choose MTA over traditional alternatives.</p>
           </div>
 
-          <div className="w-full overflow-x-auto pb-6">
-            <table className="w-full min-w-[800px] text-left border-collapse">
-              <thead>
-                <tr>
-                  <th className="font-mono text-xs text-muted uppercase tracking-wisest pb-6 border-b border-[#1F1F1F] w-[40%]">Features / Approach</th>
-                  {comparisonData.columns.map((col, i) => (
-                    <th key={col.name} className={`font-mono text-xs uppercase tracking-widest pb-6 border-b border-[#1F1F1F] w-[20%] ${i === 2 ? 'text-violet' : 'text-muted'}`}>
-                      {col.name}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {comparisonData.features.map((feature, rowIndex) => (
-                  <tr key={feature} className="group hover:bg-[#111111] transition-colors">
-                    <td className="py-5 border-b border-[#1F1F1F] text-sm text-white font-medium pl-4">
-                      {feature}
-                    </td>
-                    {comparisonData.columns.map((col, colIndex) => {
-                      const hasFeature = col.values[rowIndex];
-                      return (
-                        <td key={`${col.name}-${feature}`} className="py-5 border-b border-[#1F1F1F] text-sm">
-                          {hasFeature ? (
-                            <span className="text-violet font-bold text-lg">✓</span>
-                          ) : (
-                            <span className="text-[#2A2A2A] font-bold">—</span>
-                          )}
-                        </td>
-                      );
-                    })}
+          <div className="bg-card border border-border overflow-hidden">
+            <div className="w-full overflow-x-auto">
+              <table className="w-full min-w-[800px] text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-border">
+                    <th className="font-mono text-xs text-muted uppercase tracking-widest py-5 px-6 w-[40%]">Features / Approach</th>
+                    {comparisonData.columns.map((col, i) => (
+                      <th key={col.name} className={`font-mono text-xs uppercase tracking-widest py-5 px-6 w-[20%] ${i === 2 ? 'text-violet font-bold' : 'text-muted'}`}>
+                        {col.name}
+                      </th>
+                    ))}
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {comparisonData.features.map((feature, rowIndex) => (
+                    <tr key={feature} className="group hover:bg-surface transition-colors border-b border-border last:border-0">
+                      <td className="py-5 px-6 text-sm text-white font-medium">
+                        {feature}
+                      </td>
+                      {comparisonData.columns.map((col) => {
+                        const hasFeature = col.values[rowIndex]
+                        return (
+                          <td key={`${col.name}-${feature}`} className="py-5 px-6 text-sm">
+                            {hasFeature ? (
+                              <span className="inline-flex items-center justify-center w-6 h-6 bg-violet/15 text-violet text-xs font-bold">✓</span>
+                            ) : (
+                              <span className="text-dead font-bold">—</span>
+                            )}
+                          </td>
+                        )
+                      })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>
-      
-      {/* Footer CTA equivalent implemented in layout or globals, but adding a minimal push here */}
-      <section className="py-32 bg-canvas">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-display-m text-white mb-10">Start Your Project</h2>
-          <MagneticButton>
-            <Link
-              href="/contact"
-              className="inline-block px-10 py-5 bg-white text-black font-display font-bold text-xl hover:bg-violet hover:text-white transition-colors"
-              data-cursor="pointer"
-            >
-              Contact Us →
-            </Link>
+
+      {/* CTA */}
+      <section className="py-28 bg-canvas">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="font-display font-black text-white mb-6"
+            style={{ fontSize: 'clamp(28px, 4vw, 48px)' }}>Start Your Project</h2>
+          <p className="text-muted mb-10">Get a free consultation and honest scope — no sales pitch.</p>
+          <MagneticButton href="/contact"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-display font-black text-[16px] hover:bg-violet hover:text-white transition-all duration-300"
+          >
+            Contact Us →
           </MagneticButton>
         </div>
       </section>
     </main>
-  );
+  )
 }

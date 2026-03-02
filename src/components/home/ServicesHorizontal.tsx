@@ -1,228 +1,152 @@
-'use client';
-import { useRef, useEffect, useState } from 'react';
-import Link from 'next/link';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Globe, Share2, Shield, Bot, Key, Database, Users, ArrowRight } from 'lucide-react';
-import { services } from '@/lib/data/services';
-import { cn } from '@/lib/utils';
+'use client'
+import { useRef, useEffect, useState } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import Link from 'next/link'
+import { services } from '@/lib/data/services'
+import { SpotlightCard } from '@/components/ui/SpotlightCard'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 
-type Service = typeof services[number];
+const CARD_W   = 380
+const SIDE_PAD = 96
 
-const iconMap: Record<string, React.ReactNode> = {
-  Globe: <Globe className="w-5 h-5 text-[#525252] group-hover:text-violet-400 transition-colors duration-300" />,
-  Share2: <Share2 className="w-5 h-5 text-[#525252] group-hover:text-violet-400 transition-colors duration-300" />,
-  Shield: <Shield className="w-5 h-5 text-[#525252] group-hover:text-violet-400 transition-colors duration-300" />,
-  Brain: <Bot className="w-5 h-5 text-[#525252] group-hover:text-violet-400 transition-colors duration-300" />,
-  Bot: <Bot className="w-5 h-5 text-[#525252] group-hover:text-violet-400 transition-colors duration-300" />,
-  Key: <Key className="w-5 h-5 text-[#525252] group-hover:text-violet-400 transition-colors duration-300" />,
-  Database: <Database className="w-5 h-5 text-[#525252] group-hover:text-violet-400 transition-colors duration-300" />,
-  Users: <Users className="w-5 h-5 text-[#525252] group-hover:text-violet-400 transition-colors duration-300" />,
-};
-
-const priceMap: Record<string, string> = {
-  'web-development': 'From ₹50,000',
-  'social-media-marketing': '₹10,000/mo',
-  'cybersecurity': 'From ₹20,000/yr',
-  'ai-automation': 'Custom Quote',
-  'saas-licensing': 'Custom Quote',
-  'data-processing': 'Custom Quote',
-  'contractor-management': 'Custom Quote',
-};
-
-// Extracted mobile component to reduce code size
-function MobileServiceCard({ service, index }: { service: Service; index: number }) {
-  const num = String(index + 1).padStart(2, '0');
-  const price = priceMap[service.slug] || 'Custom Quote';
-  const features = service.deliverables?.slice(0, 3) || [];
-
-  return (
-    <div className="w-full border border-[#1F1F1F] bg-[#0E0E0E] p-8 flex flex-col relative group">
-      <span className="text-[60px] font-black text-[#1A1A1A] leading-none mb-4 select-none group-hover:text-[#2A1A4A] transition-colors">{num}</span>
-      <div className="w-10 h-10 border border-[#1F1F1F] flex items-center justify-center mb-6 group-hover:border-violet-800 transition-colors">
-        {iconMap[service.icon] || <Globe className="w-5 h-5 text-[#525252] group-hover:text-violet-400" />}
-      </div>
-      <h3 className="text-xl font-bold text-white leading-tight mb-2">{service.name}</h3>
-      <p className="text-sm text-[#525252] mb-4">{service.tagline}</p>
-      
-      <ul className="flex flex-col gap-1.5 mb-4">
-        {features.map(f => <li key={f} className="text-xs text-[#525252] font-mono">— {f}</li>)}
-      </ul>
-      <div className="text-xs text-violet-400 font-mono mb-4">{price}</div>
-      <Link href={`/services/${service.slug}`} className="inline-flex items-center gap-2 text-sm text-white group-hover:text-violet-300 transition-colors mt-auto">
-        Explore Service <span className="transition-transform group-hover:translate-x-1">→</span>
-      </Link>
-      <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-violet-600 scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-bottom" />
-    </div>
-  );
-}
-
-export default function ServicesHorizontal() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
+export function ServicesHorizontal() {
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const isMobile   = useMediaQuery('(max-width: 1023px)')
+  const [vpW, setVpW] = useState(1280)
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+    setVpW(window.innerWidth)
+    const fn = () => setVpW(window.innerWidth)
+    window.addEventListener('resize', fn, { passive:true })
+    return () => window.removeEventListener('resize', fn)
+  }, [])
 
-  // Calculate scroll distance: each card 400px + 24px gap, minus one viewport
-  const CARD_WIDTH = 400;
-  const GAP = 24;
-  const CARDS_COUNT = services.length;
-  const TRACK_WIDTH = CARD_WIDTH * CARDS_COUNT + GAP * (CARDS_COUNT - 1);
-  // Section height = viewport height + horizontal scroll distance
-  // This creates enough vertical scroll room to traverse all cards
-  const SECTION_HEIGHT = `calc(100vh + ${TRACK_WIDTH}px)`;
+  const trackW   = CARD_W * services.length
+  const scrollDist = Math.max(trackW - (vpW - SIDE_PAD), 0)
+  const sectionH = `calc(100vh + ${scrollDist}px)`
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end end'],
-  });
-
-  const x = useTransform(
-    scrollYProgress,
-    [0, 1],
-    ['0px', `-${TRACK_WIDTH - (typeof window !== 'undefined' ? window.innerWidth - 96 : 1200)}px`]
-  );
+  const { scrollYProgress } = useScroll({ target:sectionRef, offset:['start start','end end'] })
+  const x = useTransform(scrollYProgress, [0,1], ['0px', `-${scrollDist}px`])
 
   if (isMobile) {
     return (
-      <section className="w-full py-20 bg-[#080808]">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
-          {/* Section header */}
-          <div className="flex flex-col gap-2 mb-12">
-            <span className="text-[11px] font-mono tracking-[0.2em] text-violet-400 uppercase block mb-1">
-              WHAT WE DO
-            </span>
-            <h2 className="text-4xl font-black text-white tracking-tight leading-[0.92]">
-              Services That Scale
-            </h2>
-            <span className="text-[#525252] font-mono text-sm mt-2">
-              {String(CARDS_COUNT).padStart(2, '0')} Services
-            </span>
-          </div>
-
+      <section className="w-full py-20 section-divide bg-canvas">
+        <div className="w-full max-w-[1440px] mx-auto px-6">
+          <SectionHeader />
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12">
-            {services.map((service, i) => (
-              <MobileServiceCard key={service.slug} service={service} index={i} />
+            {services.map((s, i) => (
+              <Link key={s.slug} href={`/services/${s.slug}`} data-cursor="link"
+                className="flex flex-col border border-border bg-surface p-6 group hover:bg-card transition-colors"
+              >
+                <div className="flex items-start justify-between">
+                  <div className="w-10 h-10 border border-border flex items-center justify-center group-hover:border-violet/50 transition-colors">
+                    <s.Icon className="w-5 h-5 text-muted group-hover:text-violet-light transition-colors" />
+                  </div>
+                  <span className="font-display font-black text-4xl text-[#1A1A1A] leading-none">
+                    {String(i + 1).padStart(2,'0')}
+                  </span>
+                </div>
+                <h3 className="font-display font-bold text-lg text-white mt-5 leading-tight">{s.name}</h3>
+                <p className="text-sm text-muted mt-2 leading-relaxed">{s.tagline}</p>
+                <p className="text-xs text-violet-light font-mono mt-3">{s.priceLabel}</p>
+                <span className="text-sm text-muted group-hover:text-white transition-colors mt-3 inline-flex items-center gap-1">
+                  Explore
+                  <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
+                </span>
+              </Link>
             ))}
           </div>
         </div>
       </section>
-    );
+    )
   }
 
   return (
-    // Outer section — tall enough to create scroll distance
-    <section
-      ref={sectionRef}
-      style={{ height: SECTION_HEIGHT }}
-      className="relative w-full bg-[#080808]"
-    >
-      {/* Sticky inner — stays fixed in viewport while outer scrolls */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col">
-        
-        {/* Section header — inside sticky, above cards */}
-        <div className="flex items-end justify-between px-6 lg:px-12 pt-20 pb-10 flex-shrink-0">
-          <div>
-            <span className="text-[11px] font-mono tracking-[0.2em] text-violet-400 uppercase block mb-3">
-              WHAT WE DO
-            </span>
-            <h2 className="text-5xl lg:text-6xl font-black text-white tracking-tight leading-[0.92]">
-              Services That Scale
-            </h2>
-          </div>
-          <span className="text-[#525252] font-mono text-sm">
-            {String(CARDS_COUNT).padStart(2, '0')} Services
+    <section ref={sectionRef} style={{ height:sectionH }} className="relative w-full section-divide">
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col bg-canvas">
+
+        {/* Header */}
+        <div className="flex items-end justify-between px-12 pt-20 pb-8 shrink-0">
+          <SectionHeader />
+          <span className="font-mono text-[11px] text-muted tracking-[0.2em]">
+            {String(services.length).padStart(2,'0')} SERVICES
           </span>
         </div>
 
-        {/* Cards track — horizontally scrollable */}
-        <div className="flex-1 flex items-stretch overflow-hidden px-6 lg:px-12">
-          <motion.div
-            ref={trackRef}
-            style={{ x }}
-            className="flex gap-6 items-stretch pb-10" // added padding-bottom to separate from progress bar
+        {/* Cards */}
+        <div className="flex-1 overflow-hidden pl-12 min-h-0 flex items-stretch">
+          <motion.div style={{ x, width:`${trackW}px` }}
+            className="flex items-stretch shrink-0"
           >
-            {services.map((service, i) => {
-              const features = service.deliverables?.slice(0, 3) || [];
-              const price = priceMap[service.slug] || 'Custom Quote';
-
-              return (
-                <div
-                  key={service.slug}
-                  style={{ width: `${CARD_WIDTH}px`, flexShrink: 0 }}
-                  className="h-[calc(100%-1rem)] border border-[#1F1F1F] bg-[#0E0E0E] p-10 flex flex-col rounded-none relative group"
+            {services.map((s, i) => (
+              <SpotlightCard
+                key={s.slug}
+                style={{ width:`${CARD_W}px`, flexShrink:0 }}
+                className="relative flex flex-col border-r border-border first:border-l group"
+              >
+                <Link href={`/services/${s.slug}`} data-cursor="link"
+                  className="flex flex-col h-full p-10"
                 >
-                  {/* Number */}
-                  <span className="text-[80px] font-black text-[#1A1A1A] leading-none group-hover:text-[#2A1A4A] transition-colors duration-500 select-none">
-                    {String(i + 1).padStart(2, '0')}
+                  {/* Decorative number */}
+                  <span className="font-display font-black leading-none select-none text-[#0F0F0F] group-hover:text-[#170D30] transition-colors duration-500"
+                    style={{ fontSize:80 }}
+                  >
+                    {String(i + 1).padStart(2,'0')}
                   </span>
 
                   {/* Icon */}
-                  <div className="w-10 h-10 border border-[#1F1F1F] flex items-center justify-center mt-4 group-hover:border-violet-800 transition-colors duration-300">
-                    {iconMap[service.icon] || <Globe className="w-5 h-5 text-[#525252] group-hover:text-violet-400 transition-colors duration-300" />}
+                  <div className="w-10 h-10 border border-border flex items-center justify-center mt-5 group-hover:border-violet/50 transition-colors">
+                    <s.Icon className="w-5 h-5 text-muted group-hover:text-violet-light transition-colors" />
                   </div>
 
-                  {/* Content */}
-                  <div className="mt-auto flex flex-col gap-4">
-                    <h3 className="text-2xl font-bold text-white leading-tight">
-                      {service.name}
-                    </h3>
-                    <p className="text-sm text-[#525252] leading-relaxed">
-                      {service.tagline}
-                    </p>
-                    
-                    {/* Features */}
-                    <ul className="flex flex-col gap-2">
-                      {features.map(f => (
-                        <li key={f} className="text-xs text-[#525252] font-mono">
-                          — {f}
-                        </li>
+                  {/* Content — pushed to bottom */}
+                  <div className="mt-auto flex flex-col gap-3">
+                    <h3 className="font-display font-bold text-xl text-white leading-tight">{s.name}</h3>
+                    <p className="text-sm text-muted leading-relaxed">{s.tagline}</p>
+                    <ul className="flex flex-col gap-1.5 mt-1">
+                      {s.features.slice(0,3).map(f => (
+                        <li key={f} className="text-xs text-dead font-mono">— {f}</li>
                       ))}
                     </ul>
-
-                    {/* Price */}
-                    <div className="text-xs text-violet-400 font-mono">
-                      {price}
-                    </div>
-
-                    {/* Link */}
-                    <Link
-                      href={`/services/${service.slug}`}
-                      className="inline-flex items-center gap-2 text-sm text-white group-hover:text-violet-300 transition-colors duration-300 mt-2"
-                    >
+                    <p className="text-xs text-violet-light font-mono">{s.priceLabel}</p>
+                    <span className="text-sm text-muted group-hover:text-white transition-colors inline-flex items-center gap-1 mt-1">
                       Explore Service
-                      <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                    </Link>
+                      <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
+                    </span>
                   </div>
 
-                  {/* Left accent border */}
-                  <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-violet-600 scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-bottom" />
-                </div>
-              );
-            })}
+                  {/* Left violet accent border */}
+                  <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-violet scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-bottom" />
+                </Link>
+              </SpotlightCard>
+            ))}
           </motion.div>
         </div>
 
         {/* Progress bar */}
-        <div className="h-px bg-[#1F1F1F] mx-6 lg:mx-12 mb-0 flex-shrink-0">
-          <motion.div
-            className="h-full bg-violet-600 origin-left"
-            style={{ scaleX: scrollYProgress }}
-          />
+        <div className="shrink-0 h-px mx-12 bg-border">
+          <motion.div className="h-full bg-violet origin-left" style={{ scaleX:scrollYProgress }} />
         </div>
-
-        {/* Bottom hint */}
-        <div className="px-6 lg:px-12 py-6 flex-shrink-0 bg-[#080808] z-10 w-full">
-          <span className="text-[10px] text-[#2A2A2A] font-mono tracking-widest uppercase">
-            Scroll to explore services →
+        <div className="shrink-0 px-12 py-3">
+          <span className="text-[10px] text-dead font-mono tracking-[0.22em] uppercase">
+            ← scroll to explore all services →
           </span>
         </div>
       </div>
     </section>
-  );
+  )
+}
+
+function SectionHeader() {
+  return (
+    <div>
+      <span className="text-[11px] text-violet-light font-mono tracking-[0.22em] uppercase block mb-2">
+        WHAT WE DO
+      </span>
+      <h2 className="font-display font-black text-white leading-[0.92] tracking-tight"
+        style={{ fontSize:'clamp(28px, 4vw, 56px)' }}>
+        Services That<br />Scale With You
+      </h2>
+    </div>
+  )
 }

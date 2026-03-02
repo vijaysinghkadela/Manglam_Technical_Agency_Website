@@ -1,34 +1,29 @@
-'use client';
+'use client'
+import Lenis from '@studio-freight/lenis'
+import { useEffect } from 'react'
 
-import { useEffect, useRef } from 'react';
-import Lenis from '@studio-freight/lenis';
-
-export default function LenisProvider({ children }: { children: React.ReactNode }) {
-  const lenisRef = useRef<Lenis | null>(null);
-
+export function LenisProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    // Skip smooth scroll if user prefers reduced motion
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
     const lenis = new Lenis({
-      duration: 1.4,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      smoothWheel: true,
-    });
-    lenisRef.current = lenis;
+      duration:     1.3,
+      easing:       (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation:  'vertical',
+      smoothWheel:  true,
+      touchMultiplier: 2,
+    })
 
+    let rafId: number
     function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
+      lenis.raf(time)
+      rafId = requestAnimationFrame(raf)
     }
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf)
 
     return () => {
-      lenis.destroy();
-      lenisRef.current = null;
-    };
-  }, []);
+      cancelAnimationFrame(rafId)
+      lenis.destroy()
+    }
+  }, [])
 
-  return <>{children}</>;
+  return <>{children}</>
 }

@@ -1,23 +1,17 @@
-'use client';
+'use client'
+import { useEffect } from 'react'
 
-import Link from 'next/link';
-import { Home, RefreshCw } from 'lucide-react';
-import Button from '@/components/ui/Button';
-
-export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
+export default function Error({ error, reset }: { error: Error; reset: () => void }) {
+  useEffect(() => { console.error('[MTA Error]', error) }, [error])
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="text-center max-w-md">
-        <div className="w-16 h-16 rounded-full bg-error/10 border border-error/30 flex items-center justify-center mx-auto mb-4">
-          <span className="text-3xl">⚠️</span>
-        </div>
-        <h1 className="text-2xl font-heading font-bold text-text-primary mb-3">Something Went Wrong</h1>
-        <p className="text-sm text-text-muted mb-8">An unexpected error occurred. Please try again.</p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <Button icon={<RefreshCw className="w-4 h-4" />} onClick={reset}>Try Again</Button>
-          <Link href="/"><Button variant="ghost" icon={<Home className="w-4 h-4" />}>Back to Home</Button></Link>
-        </div>
-      </div>
+    <div className="min-h-screen bg-canvas flex flex-col items-center justify-center text-center px-6">
+      <h2 className="font-display font-black text-2xl text-white">Something went wrong</h2>
+      <p className="text-muted text-sm mt-3 max-w-xs">{error.message || 'An unexpected error occurred.'}</p>
+      <button onClick={reset} data-cursor="pointer"
+        className="mt-8 px-6 py-3 border border-border text-sm font-mono text-white hover:bg-white hover:text-black transition-all"
+      >
+        Try Again
+      </button>
     </div>
-  );
+  )
 }

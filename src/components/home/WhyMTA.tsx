@@ -1,8 +1,7 @@
-'use client';
+'use client'
 
-import { motion } from 'framer-motion';
-import { Check } from 'lucide-react';
-import TextReveal from '@/components/ui/TextReveal';
+import { motion } from 'framer-motion'
+import { Check } from 'lucide-react'
 
 const values = [
   {
@@ -29,24 +28,27 @@ const values = [
     title: 'Proven Delivery',
     body: 'MNSS website: 3 weeks, exactly as scoped. We deliver on time, every time.',
   },
-];
+]
 
-export default function WhyMTA() {
+export function WhyMTA() {
   return (
-    <section className="w-full bg-canvas py-28 lg:py-32">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="w-full bg-canvas py-28">
+      <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Left — Sticky */}
           <div className="lg:sticky lg:top-[120px] lg:self-start">
-            <p className="text-micro text-violet mb-4">WHY CHOOSE US</p>
-            <TextReveal className="text-display-m text-white mb-6">
-              Built Different. Delivered Right.
-            </TextReveal>
-            <p className="text-base text-muted leading-relaxed mb-4">
+            <span className="font-mono text-[11px] text-violet-light tracking-[0.22em] uppercase block mb-3">
+              WHY CHOOSE US
+            </span>
+            <h2 className="font-display font-black text-white tracking-tight leading-[0.92] mb-6"
+              style={{ fontSize: 'clamp(28px, 4vw, 60px)' }}>
+              Built Different.<br />Delivered Right.
+            </h2>
+            <p className="text-[15px] text-muted leading-[1.7] mb-4">
               We&apos;re not a body shop or an overseas outsourcing mill. MTA is a lean, Rajasthan-based
               agency that treats every project like our own product.
             </p>
-            <p className="text-base text-muted leading-relaxed">
+            <p className="text-[15px] text-muted leading-[1.7]">
               When you work with us, you get direct access to the people building your solution —
               no account managers, no ticket queues, no runaround.
             </p>
@@ -61,9 +63,9 @@ export default function WhyMTA() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ delay: i * 0.1, duration: 0.5 }}
-                className="py-6 flex items-start gap-4 border-b border-[#1F1F1F]"
+                className="py-6 flex items-start gap-4 border-b border-border"
               >
-                <Check className="w-5 h-5 text-violet mt-0.5 flex-shrink-0" />
+                <Check className="w-5 h-5 text-violet mt-0.5 shrink-0" />
                 <div>
                   <h3 className="font-display text-lg font-bold text-white mb-1">
                     {val.title}
@@ -76,5 +78,5 @@ export default function WhyMTA() {
         </div>
       </div>
     </section>
-  );
+  )
 }

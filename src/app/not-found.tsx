@@ -1,26 +1,19 @@
-import Link from 'next/link';
-import { Home, ArrowLeft } from 'lucide-react';
-import MotionWrapper from '@/components/ui/MotionWrapper';
-import Button from '@/components/ui/Button';
+import Link from 'next/link'
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
-      <MotionWrapper>
-        <div className="text-center max-w-md">
-          <div className="text-8xl font-heading font-extrabold gradient-text mb-4">404</div>
-          <h1 className="text-2xl font-heading font-bold text-text-primary mb-3">Page Not Found</h1>
-          <p className="text-sm text-text-muted mb-8">The page you&apos;re looking for doesn&apos;t exist or has been moved.</p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link href="/">
-              <Button icon={<Home className="w-4 h-4" />}>Back to Home</Button>
-            </Link>
-            <Link href="/contact">
-              <Button variant="ghost" icon={<ArrowLeft className="w-4 h-4" />}>Contact Support</Button>
-            </Link>
-          </div>
-        </div>
-      </MotionWrapper>
+    <div className="min-h-screen bg-canvas flex flex-col items-center justify-center text-center px-6">
+      <span className="font-display font-black text-[120px] text-[#111] leading-none select-none">404</span>
+      <h1 className="font-display font-black text-3xl text-white -mt-4">Page Not Found</h1>
+      <p className="text-muted text-base mt-3 max-w-sm leading-relaxed">
+        This page doesn&apos;t exist. It may have been moved or the URL might be wrong.
+      </p>
+      <Link href="/"
+        className="mt-8 inline-flex items-center gap-2 px-6 py-3 border border-border text-sm text-white font-mono hover:bg-white hover:text-black hover:border-white transition-all duration-300"
+        data-cursor="pointer"
+      >
+        ← Back to Home
+      </Link>
     </div>
-  );
+  )
 }
