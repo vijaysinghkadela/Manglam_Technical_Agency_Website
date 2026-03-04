@@ -15,7 +15,7 @@ export default function ContactPage() {
       {/* Asymmetric Split Layout Section */}
       <section className="w-full relative bg-canvas border-t border-border">
         {/* Abstract Texture */}
-        <div className="absolute inset-0 dot-grid opacity-30 pointer-events-none" />
+        <div className="absolute inset-0 bg-dot-grid opacity-30 pointer-events-none" />
 
         <div className="w-full max-w-[1440px] mx-auto">
           <ContactContent formNode={<ContactForm />} />

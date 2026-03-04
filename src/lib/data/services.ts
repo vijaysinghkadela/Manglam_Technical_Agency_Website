@@ -9,6 +9,10 @@ export interface Service {
   description: string
   features:    string[]
   priceLabel:  string
+  requiredAgreements: string[]
+  dpaTrigger: string
+  governingLaws: string[]
+  deliveryStages: number[]
   pricing: {
     label:     string
     amount:    string
@@ -36,6 +40,10 @@ export const services: Service[] = [
     description: 'We replace repetitive manual tasks with highly secure, tailored AI workflows using LLMs (OpenAI, Gemini), RAG implementations, and enterprise-grade n8n/Make automation platforms.',
     features:    ['RAG custom knowledge bases', 'n8n & Zapier/Make workflow builds', 'LLM parameter and prompt tuning', 'Department-wide AI staff training'],
     priceLabel:  'From ₹50,000',
+    requiredAgreements: ['MTA-AI', 'MTA-DPA', 'MTA-NDA'],
+    dpaTrigger: 'Required whenever user/customer/employee personal data enters prompts, workflows, or storage layers.',
+    governingLaws: ['Indian Contract Act, 1872', 'DPDPA, 2023', 'IT Act, 2000', 'Copyright Act, 1957'],
+    deliveryStages: [2, 3, 5, 6, 7, 8, 9, 10],
     pricing: [
       {
         label: 'Discovery Workshop', amount: 'Starting at ₹25,000', period: 'one-time', highlight: false,
@@ -78,6 +86,10 @@ export const services: Service[] = [
     description: 'High-impact social architectures built for growth and trust. We do not just post; we engineer funnels, manage communities, and ensure all claims are strictly aligned with Advertising Standards Council of India (ASCI) guidelines.',
     features:    ['ASCI-compliant copywriting', 'Automated CRM lead funnels', 'Multi-platform content calendars', 'Data-driven monthly reporting'],
     priceLabel:  'From ₹75,000/mo',
+    requiredAgreements: ['MTA-DM', 'MTA-DPA', 'MTA-NDA'],
+    dpaTrigger: 'Required when audience data, lead forms, CRM sync, or social automation handles personal data.',
+    governingLaws: ['Indian Contract Act, 1872', 'ASCI Guidelines, 2021', 'Consumer Protection Act, 2019', 'DPDPA, 2023'],
+    deliveryStages: [2, 3, 5, 6, 7, 8, 9, 10],
     pricing: [
       {
         label: 'Discovery Workshop', amount: '₹25,000', period: 'one-time', highlight: false,
@@ -112,6 +124,10 @@ export const services: Service[] = [
     description: 'Proactive defense architectures for Indian SMEs. We map your vulnerabilities, align your infrastructure with ISO 27001 / IT Act 2000, and enforce a strict 72-hour breach notification protocol.',
     features:    ['Vulnerability Assessment (VAPT)', 'ISO 27001 & IT Act 2000 Gap Analysis', 'Mandatory MFA implementation', 'Written Incident Response Plans'],
     priceLabel:  'Custom Quote',
+    requiredAgreements: ['MTA-CS', 'MTA-NDA'],
+    dpaTrigger: 'DPA required only if client personal data is processed/stored in assessment evidence or managed monitoring tooling.',
+    governingLaws: ['IT Act, 2000 (Sections 43 & 66)', 'Indian Contract Act, 1872', 'DPDPA, 2023'],
+    deliveryStages: [2, 5, 6, 7, 8, 9, 10],
     pricing: [
       {
         label: 'Discovery Workshop', amount: '₹25,000', period: 'one-time', highlight: true,
@@ -142,6 +158,10 @@ export const services: Service[] = [
     description: 'We engineer complex, data-heavy web applications and portals. Every product we build guarantees WCAG 2.1 AA accessibility and secure-by-default architecture from day one. Includes Year 1 Complimentary maintenance.',
     features:    ['Next.js / React ecosystems', 'WCAG 2.1 AA Accessibility', 'Secure-by-default database modeling', 'Year 1 Complimentary Maintenance'],
     priceLabel:  'Starting at ₹5,000/mo',
+    requiredAgreements: ['MTA-SL', 'MTA-DPA', 'MTA-NDA'],
+    dpaTrigger: 'Required when platform includes user accounts, analytics, or any personal data processing.',
+    governingLaws: ['Indian Contract Act, 1872', 'Copyright Act, 1957', 'DPDPA, 2023', 'IT Act, 2000'],
+    deliveryStages: [2, 3, 5, 6, 7, 8, 9, 10],
     pricing: [
       {
         label: 'Standard Setup (One-Time)', amount: 'Starting at ₹25,000', period: 'one-time', highlight: false,
@@ -183,6 +203,10 @@ export const services: Service[] = [
     description: 'We develop cohesive brand systems—not just logos. From typography rules to exact color math, we deliver comprehensive guidelines that ensure your brand is protected, scalable, and entirely IP-clear.',
     features:    ['Logo & Mark generation', 'Comprehensive Brand Guidelines', 'Color systems & typography rules', '100% IP-clear asset handover'],
     priceLabel:  'Starting at ₹10,000',
+    requiredAgreements: ['MTA-NDA'],
+    dpaTrigger: 'Usually not required unless campaign data, audience databases, or personal data tooling is included.',
+    governingLaws: ['Indian Contract Act, 1872', 'Copyright Act, 1957', 'Trade Marks Act, 1999'],
+    deliveryStages: [2, 3, 5, 6, 7, 8, 9, 10],
     pricing: [
       {
         label: 'Brand Discovery Workshop', amount: 'Starting at ₹10,000', period: 'one-time', highlight: false,
@@ -216,6 +240,10 @@ export const services: Service[] = [
     description: 'We leverage AI as a research and structuring tool, but every single line of copy—whether for a landing page, technical whitepaper, or blog—is heavily edited and fact-checked by technical human writers.',
     features:    ['Technical blog writing', 'Website copywriting frameworks', 'Whitepapers & documentation', 'Strict AI-hallucination audits'],
     priceLabel:  'Starting at ₹15,000',
+    requiredAgreements: ['MTA-NDA'],
+    dpaTrigger: 'Required only where content workflows process personal data from forms, CRM exports, or user datasets.',
+    governingLaws: ['Indian Contract Act, 1872', 'Copyright Act, 1957', 'DPDPA, 2023'],
+    deliveryStages: [2, 3, 5, 6, 7, 8, 9, 10],
     pricing: [
       {
         label: 'Content Starter', amount: 'Starting at ₹25,000', period: 'per month', highlight: false,

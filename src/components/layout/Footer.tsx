@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Linkedin, Instagram, Twitter } from 'lucide-react'
 import {
@@ -16,11 +17,13 @@ const companyLinks = [
   { label: 'About', href: '/about' },
   { label: 'Portfolio', href: '/portfolio' },
   { label: 'Pricing', href: '/pricing' },
+  { label: 'Research', href: '/research' },
   { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/contact' },
 ]
 
 const legalLinks = [
+  { label: 'Legal Hub', href: '/legal' },
   { label: 'DPDPA Privacy Policy', href: '/legal/privacy-policy' },
   { label: 'Terms', href: '/legal/terms-of-service' },
   { label: 'NDA', href: '/legal/nda' },
@@ -44,10 +47,10 @@ export function Footer() {
   return (
     <footer className="w-full border-t border-border bg-canvas">
       {/* Statement Header */}
-      <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12 pt-20 pb-16">
+      <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12 pt-12 lg:pt-20 pb-12 lg:pb-16">
         <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-8">
           <h2 className="font-display font-black text-white tracking-tight leading-[0.92]"
-            style={{ fontSize: 'clamp(32px, 4vw, 60px)' }}>
+            style={{ fontSize: 'clamp(1.75rem, 3.5vw, 3rem)' }}>
             Let&apos;s Build Together
           </h2>
           <Link
@@ -67,21 +70,25 @@ export function Footer() {
 
       {/* 4-Column Grid */}
       <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12 py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Col 1: Logo & Social */}
           <div className="flex flex-col gap-5">
             <div>
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-violet flex items-center justify-center">
-                  <span className="text-white font-display font-black text-sm leading-none">M</span>
-                </div>
+                <Image
+                  src="/images/mta-logo.png"
+                  alt="MTA Logo"
+                  width={32}
+                  height={32}
+                  className="shrink-0"
+                />
                 <span className="font-display font-black text-[15px] text-white tracking-tight">MTA</span>
               </div>
               <p className="text-sm text-muted mt-3 leading-relaxed">
                 Technology services for Indian businesses ready to scale. Based in Rajasthan.
               </p>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               {[
                 { Icon: Linkedin, href: '#', label: 'LinkedIn' },
                 { Icon: Instagram, href: '#', label: 'Instagram' },
@@ -94,7 +101,7 @@ export function Footer() {
                   aria-label={label}
                   data-cursor="pointer"
                 >
-                  <Icon className="w-[18px] h-[18px]" />
+                  <Icon className="w-5 h-5" />
                 </a>
               ))}
               <a
@@ -160,7 +167,7 @@ export function Footer() {
           >
             © {new Date().getFullYear()} {AGENCY_NAME} — Classification: MTA Proprietary
           </motion.p>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 flex-wrap justify-center">
             {legalLinks.map((link) => (
               <Link
                 key={link.href}

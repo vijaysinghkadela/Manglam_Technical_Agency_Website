@@ -5,16 +5,16 @@ import Link from 'next/link'
 
 export function FeaturedProject() {
   return (
-    <section style={{ backgroundColor:'var(--color-surface)', padding:'112px 0' }}>
+    <section style={{ backgroundColor:'var(--color-surface)', padding:'clamp(48px, 8vw, 80px) 0' }}>
       <div className="container-site">
 
         {/* Header */}
-        <div className="flex items-end justify-between mb-16">
+        <div className="flex items-end justify-between flex-wrap gap-4 mb-12 lg:mb-16">
           <div>
             <span className="font-mono uppercase block mb-3" style={{ fontSize:'11px', color:'var(--color-violet-light)', letterSpacing:'0.22em' }}>
               OUR WORK
             </span>
-            <h2 className="font-display font-black text-white leading-[0.92] tracking-tight" style={{ fontSize:'clamp(28px, 4vw, 58px)' }}>
+            <h2 className="font-display font-black text-white leading-[0.92] tracking-tight" style={{ fontSize:'clamp(1.5rem, 3.5vw, 2.75rem)' }}>
               Projects That<br />Made an Impact
             </h2>
           </div>
@@ -27,7 +27,7 @@ export function FeaturedProject() {
         </div>
 
         {/* 2-col project card */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
 
           {/* LEFT — Realistic browser mockup */}
           <motion.div

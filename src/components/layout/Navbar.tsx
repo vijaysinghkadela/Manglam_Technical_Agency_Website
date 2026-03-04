@@ -1,11 +1,15 @@
 'use client'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown, Menu, X } from 'lucide-react'
 import { services } from '@/lib/data/services'
 import { cn } from '@/lib/utils'
+import dynamic from 'next/dynamic'
+
+const ThemeToggle = dynamic(() => import('@/components/ui/ThemeToggle'), { ssr: false })
 
 const NAV_LINKS = [
   { href:'/',          label:'Home'                     },
@@ -13,6 +17,8 @@ const NAV_LINKS = [
   { href:'/services',  label:'Services', hasMega: true  },
   { href:'/portfolio', label:'Portfolio'                },
   { href:'/pricing',   label:'Pricing'                  },
+  { href:'/research',  label:'Research'                 },
+  { href:'/legal',     label:'Legal'                    },
   { href:'/blog',      label:'Blog'                     },
   { href:'/contact',   label:'Contact'                  },
 ]
@@ -70,12 +76,14 @@ export function Navbar() {
             data-cursor="pointer" 
             className="flex items-center gap-3 shrink-0 z-10 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-violet p-1 rounded-sm"
           >
-            <div
-              className="w-8 h-8 flex items-center justify-center shrink-0"
-              style={{ backgroundColor:'var(--color-violet)' }}
-            >
-              <span className="text-white font-display font-black text-sm leading-none">M</span>
-            </div>
+            <Image
+              src="/images/mta-logo.png"
+              alt="MTA Logo"
+              width={32}
+              height={32}
+              className="shrink-0"
+              priority
+            />
             <div className="flex flex-col leading-none">
               <span className="font-display font-black text-[15px] text-white tracking-tight">MTA</span>
               <span
@@ -88,7 +96,7 @@ export function Navbar() {
           </Link>
 
           {/* Nav links — ABSOLUTE CENTRE (independent of logo + CTA widths) */}
-          <div className="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
+          <div className="hidden lg:flex items-center gap-2 absolute left-1/2 -translate-x-1/2">
             {NAV_LINKS.map(link => link.hasMega ? (
               <div
                 key={link.href}
@@ -169,16 +177,34 @@ export function Navbar() {
                 </AnimatePresence>
               </div>
             ) : (
-              <Link 
-                key={link.href} 
+              <Link
+                key={link.href}
                 href={link.href}
                 data-cursor="pointer"
-                aria-current={path === link.href ? 'page' : undefined}
-                className="relative px-3 py-2 text-[13px] font-medium transition-colors duration-200 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-violet rounded-sm"
-                style={{ color: path === link.href ? '#FAFAFA' : 'var(--color-muted)' }}
+                aria-current={
+                  (link.href === '/blog' && path.startsWith('/blog')) ||
+                  (link.href === '/legal' && path.startsWith('/legal')) ||
+                  (link.href === '/research' && path.startsWith('/research')) ||
+                  path === link.href
+                    ? 'page'
+                    : undefined
+                }
+                className="relative px-3.5 py-2 text-[13px] font-medium transition-colors duration-200 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-violet rounded-sm"
+                style={{
+                  color:
+                    (link.href === '/blog' && path.startsWith('/blog')) ||
+                    (link.href === '/legal' && path.startsWith('/legal')) ||
+                    (link.href === '/research' && path.startsWith('/research')) ||
+                    path === link.href
+                      ? '#FAFAFA'
+                      : 'var(--color-muted)',
+                }}
               >
                 {link.label}
-                {path === link.href && (
+                {((link.href === '/blog' && path.startsWith('/blog')) ||
+                  (link.href === '/legal' && path.startsWith('/legal')) ||
+                  (link.href === '/research' && path.startsWith('/research')) ||
+                  path === link.href) && (
                   <motion.div
                     layoutId="activeNavIndicator"
                     className="absolute bottom-2 left-3 right-3 h-[1.5px] bg-violet origin-left"
@@ -191,6 +217,7 @@ export function Navbar() {
 
           {/* CTA — right */}
           <div className="flex items-center gap-3 z-10">
+            <ThemeToggle />
             <Link href="/contact" data-cursor="pointer"
               className="hidden sm:inline-flex items-center px-4 py-2 text-[13px] font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet rounded-sm"
               style={{

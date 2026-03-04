@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { TextReveal } from '@/components/ui/TextReveal'
 
 const values = [
   {
@@ -31,7 +30,7 @@ export function AboutContent() {
   return (
     <>
       {/* 2. The Story / Mission (Asymmetric Layout) */}
-      <section className="w-full py-24 lg:py-32 bg-canvas border-t border-border">
+      <section className="w-full py-16 lg:py-32 bg-canvas border-t border-border">
         <div className="container-site">
           <div className="grid grid-cols-1 lg:grid-cols-[40%_60%] gap-12 lg:gap-8">
             {/* Left: Sticky header */}
@@ -75,7 +74,7 @@ export function AboutContent() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: i * 0.1, duration: 0.6 }}
-              className="group relative p-10 lg:p-14 bg-canvas hover:bg-surface transition-colors duration-500 overflow-hidden flex flex-col justify-between min-h-[400px]"
+              className="group relative p-8 lg:p-14 bg-canvas hover:bg-surface transition-colors duration-500 overflow-hidden flex flex-col justify-between min-h-[320px] lg:min-h-[400px]"
             >
               {/* Animated Left Border */}
               <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-violet origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />

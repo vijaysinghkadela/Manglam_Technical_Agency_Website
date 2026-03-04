@@ -103,7 +103,7 @@ export function ContactForm() {
       </Field>
       <div className="flex items-start gap-3">
         <input {...register('privacy')} type="checkbox" id="privacy"
-          className="mt-1 w-4 h-4 shrink-0"
+          className="mt-1 w-5 h-5 shrink-0 cursor-pointer"
           style={{ accentColor:'var(--color-violet)' }}
         />
         <label htmlFor="privacy" className="text-sm leading-relaxed" style={{ color:'var(--color-muted)' }}>
@@ -118,7 +118,7 @@ export function ContactForm() {
       {errors.privacy && <p className="text-xs" style={{ color:'#f87171', marginTop:'-16px' }}>{errors.privacy.message}</p>}
 
       <button type="submit" disabled={isSubmitting} data-cursor="pointer"
-        className="w-full flex items-center justify-center gap-2 py-4 font-display font-black text-[15px] transition-all duration-300 disabled:opacity-60"
+        className="w-full flex items-center justify-center gap-2 py-4 min-h-[48px] font-display font-black text-[15px] transition-all duration-300 disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-violet"
         style={{ backgroundColor:'#FAFAFA', color:'var(--color-canvas)' }}
       >
         {isSubmitting ? <><Loader2 className="w-4 h-4 animate-spin" /> Sending...</> : 'Send Message →'}

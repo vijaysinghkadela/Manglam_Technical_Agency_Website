@@ -13,7 +13,7 @@ export default function AboutPage() {
       />
 
       {/* 1. Hero Section (The Statement) */}
-      <section className="relative w-full py-32 lg:py-48 bg-canvas border-t border-border overflow-hidden">
+      <section className="relative w-full py-16 lg:py-24 bg-canvas border-t border-border overflow-hidden">
         {/* Grain Texture & Grid Line Background */}
         <div className="absolute inset-0 grain opacity-40 pointer-events-none mix-blend-overlay z-0" />
         <div className="absolute inset-0 bg-line-grid opacity-20 pointer-events-none z-0" />
@@ -23,7 +23,7 @@ export default function AboutPage() {
             ✦ EST. RAJASTHAN, INDIA
           </p>
           
-          <h1 className="text-[clamp(40px,8vw,120px)] font-display font-black text-white leading-[0.9] tracking-tighter uppercase max-w-5xl mx-auto">
+          <h1 className="text-[clamp(2rem,5vw,4.5rem)] font-display font-black text-white leading-[0.92] tracking-tighter uppercase max-w-5xl mx-auto">
             <TextReveal text="WE ENGINEER" delay={0.1} />
             <br />
             <TextReveal text="DIGITAL" delay={0.2} />

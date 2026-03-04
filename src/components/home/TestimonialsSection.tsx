@@ -12,20 +12,20 @@ export function TestimonialsSection() {
   const next = () => setIndex((i) => (i === testimonials.length - 1 ? 0 : i + 1))
 
   return (
-    <section style={{ backgroundColor:'var(--color-surface)', padding:'112px 0' }}>
+    <section style={{ backgroundColor:'var(--color-surface)', padding:'clamp(48px, 8vw, 80px) 0' }}>
       <div className="container-site">
-        <div className="mb-16">
+        <div className="mb-10 lg:mb-16">
           <span className="font-mono uppercase block mb-3" style={{ fontSize:'11px', color:'var(--color-violet-light)', letterSpacing:'0.22em' }}>
             TESTIMONIALS
           </span>
           <h2 className="font-display font-black text-white tracking-tight leading-[0.92]"
-            style={{ fontSize:'clamp(28px, 4vw, 60px)' }}>
+            style={{ fontSize:'clamp(1.5rem, 3.5vw, 2.75rem)' }}>
             Client Voices
           </h2>
         </div>
 
         <div className="relative max-w-4xl mx-auto text-center">
-          <span className="text-[80px] lg:text-[120px] font-display font-black leading-none select-none absolute -top-8 left-0 lg:-left-8"
+          <span className="text-[60px] lg:text-[120px] font-display font-black leading-none select-none absolute -top-4 lg:-top-8 left-0 lg:-left-8"
             style={{ color:'rgba(124,58,237,0.2)' }}
           >
             &ldquo;
@@ -62,7 +62,7 @@ export function TestimonialsSection() {
             <div className="flex items-center gap-3">
               <button
                 onClick={prev}
-                className="w-10 h-10 border flex items-center justify-center transition-colors"
+                className="w-11 h-11 border flex items-center justify-center transition-colors"
                 style={{ borderColor:'var(--color-border)', color:'var(--color-muted)' }}
                 aria-label="Previous testimonial"
                 data-cursor="pointer"
@@ -71,7 +71,7 @@ export function TestimonialsSection() {
               </button>
               <button
                 onClick={next}
-                className="w-10 h-10 border flex items-center justify-center transition-colors"
+                className="w-11 h-11 border flex items-center justify-center transition-colors"
                 style={{ borderColor:'var(--color-border)', color:'var(--color-muted)' }}
                 aria-label="Next testimonial"
                 data-cursor="pointer"

@@ -62,6 +62,24 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
+
+      <section className="py-16 bg-canvas border-t border-border">
+        <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
+          <div className="border border-border bg-surface p-6 sm:p-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+            <div>
+              <p className="font-mono text-[11px] text-violet-light tracking-[0.18em] uppercase mb-2">Contract-Governed Delivery</p>
+              <h2 className="font-display font-black text-white text-2xl mb-2">Every service is mapped to legal controls before execution.</h2>
+              <p className="text-sm text-muted leading-relaxed">
+                Explore the agreement matrix, request workflow, and full lead-to-delivery governance model.
+              </p>
+            </div>
+            <div className="flex items-center gap-4 text-sm">
+              <Link href="/legal" className="text-violet-light hover:text-white transition-colors">Legal Hub →</Link>
+              <Link href="/research" className="text-violet-light hover:text-white transition-colors">Research Pipeline →</Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   )
 }

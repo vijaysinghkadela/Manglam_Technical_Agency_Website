@@ -6,6 +6,7 @@ import { ScrollToTop }    from '@/components/ui/ScrollToTop'
 import { Navbar }         from '@/components/layout/Navbar'
 import { Footer }         from '@/components/layout/Footer'
 import { Toaster }        from 'react-hot-toast'
+import { ThemeProvider }  from 'next-themes'
 import '@/styles/globals.css'
 
 const inter     = Inter({ subsets:['latin'], variable:'--font-body',    display:'swap' })
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <body>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange={false}>
         <LenisProvider>
           <MagneticCursor />
           <Navbar />
@@ -51,6 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }}
           />
         </LenisProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

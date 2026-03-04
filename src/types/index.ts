@@ -6,6 +6,10 @@ export interface Service {
   description: string;
   features: string[];
   priceLabel: string;
+  requiredAgreements: string[];
+  dpaTrigger: string;
+  governingLaws: string[];
+  deliveryStages: number[];
   process: ProcessStep[];
   faqs: FAQ[];
 }
@@ -146,4 +150,54 @@ export interface StatItem {
   suffix: string;
   label: string;
   icon?: string;
+}
+
+export type ContentVisibility = 'public' | 'restricted-request' | 'internal';
+
+export interface PipelineStage {
+  stage: number;
+  title: string;
+  trigger: string;
+  actions: string[];
+  outputs: string[];
+  legalInstruments: string[];
+  control: string;
+}
+
+export interface ResearchSection {
+  id: string;
+  title: string;
+  summary: string;
+  bullets: string[];
+  visibility: ContentVisibility;
+}
+
+export interface AgreementSummary {
+  slug: string;
+  code: string;
+  name: string;
+  visibility: ContentVisibility;
+  requestable: boolean;
+  primaryUse: string;
+  whenRequired: string;
+  publicSummary: string;
+  governingLaws: string[];
+  companionAgreements: string[];
+  keyClauses: string[];
+}
+
+export interface RiskControl {
+  stage: string;
+  risk: string;
+  legalExposure: string;
+  control: string;
+}
+
+export interface DocumentRequestPayload {
+  name: string;
+  email: string;
+  company?: string;
+  requestedDocuments: string[];
+  useCase: string;
+  privacy: boolean;
 }

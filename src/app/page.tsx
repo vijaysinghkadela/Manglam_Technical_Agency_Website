@@ -4,6 +4,7 @@ import { ServicesHorizontal }  from '@/components/home/ServicesHorizontal'
 import { StatsSection }        from '@/components/home/StatsSection'
 import { FeaturedProject }     from '@/components/home/FeaturedProject'
 import { ProcessSection }      from '@/components/home/ProcessSection'
+import { ComplianceByDesign }  from '@/components/home/ComplianceByDesign'
 import { TestimonialsSection } from '@/components/home/TestimonialsSection'
 import { WhyMTA }              from '@/components/home/WhyMTA'
 import { TechStackMarquee }    from '@/components/home/TechStackMarquee'
@@ -25,6 +26,8 @@ export default function Home() {
       <FeaturedProject />
       <Divider />
       <ProcessSection />
+      <Divider />
+      <ComplianceByDesign />
       <Divider />
       <TestimonialsSection />
       <Divider />

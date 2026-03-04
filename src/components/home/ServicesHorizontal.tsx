@@ -39,7 +39,7 @@ export function ServicesHorizontal() {
   if (isMobile) {
     return (
       <section style={{ borderTop:'1px solid var(--color-border)' }}>
-        <div className="container-site py-20">
+        <div className="container-site py-12 lg:py-20">
           <SectionLabel />
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12">
             {services.map((s, i) => (
@@ -62,7 +62,7 @@ export function ServicesHorizontal() {
                 <h3 className="font-display font-bold text-white mt-4 leading-tight" style={{ fontSize:'18px' }}>{s.name}</h3>
                 <p className="text-sm mt-2 leading-relaxed" style={{ color:'var(--color-muted)' }}>{s.tagline}</p>
                 <p className="font-mono text-xs mt-3" style={{ color:'var(--color-violet-light)' }}>{s.priceLabel}</p>
-                <span className="text-sm mt-3 inline-flex items-center gap-1 transition-colors group-hover:text-white" style={{ color:'var(--color-muted)' }}>
+                <span className="text-sm mt-3 inline-flex items-center gap-1 transition-colors group-hover:text-white min-h-[44px]" style={{ color:'var(--color-muted)' }}>
                   Explore <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
                 </span>
               </Link>
@@ -149,7 +149,7 @@ export function ServicesHorizontal() {
                     <p className="text-sm leading-relaxed" style={{ color:'var(--color-muted)' }}>{s.tagline}</p>
                     <ul className="flex flex-col gap-2 mt-1">
                       {s.features.slice(0,3).map(f => (
-                        <li key={f} className="font-mono text-xs" style={{ color:'var(--color-dead)' }}>— {f}</li>
+                        <li key={f} className="font-mono text-sm" style={{ color:'var(--color-dead)' }}>— {f}</li>
                       ))}
                     </ul>
                     <p className="font-mono text-xs" style={{ color:'var(--color-violet-light)' }}>{s.priceLabel}</p>

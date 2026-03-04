@@ -8,11 +8,11 @@ import { motion } from 'framer-motion'
 
 const plans = [
   {
-    name: 'Web Development',
+    name: 'Web & SaaS Development',
     price: '₹50,000',
     type: 'one-time',
     features: ['Custom Next.js Website', 'Responsive Design', 'CMS Integration', '1-Year Free Support'],
-    href: '/services/web-development',
+    href: '/services/saas-products',
   },
   {
     name: 'Social Media',
@@ -88,7 +88,7 @@ export default function PricingPage() {
       />
 
       {/* Pricing Cards */}
-      <section className="py-28 bg-surface border-t border-border">
+      <section className="py-16 lg:py-28 bg-surface border-t border-border">
         <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
           <div className="flex justify-between flex-wrap gap-6 items-end mb-12">
             <h2 className="font-display text-3xl font-bold text-white">Starting Rates</h2>
@@ -181,15 +181,17 @@ export default function PricingPage() {
       </section>
 
       {/* Comparison Table */}
-      <section className="py-28 bg-canvas">
+      <section className="py-16 lg:py-28 bg-canvas">
         <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
           <div className="mb-16">
             <h2 className="font-display text-3xl font-bold text-white">The Difference</h2>
             <p className="text-muted mt-2">See why businesses choose MTA over traditional alternatives.</p>
           </div>
 
-          <div className="bg-card border border-border overflow-hidden">
+          <div className="bg-card border border-border overflow-hidden relative">
             <div className="w-full overflow-x-auto">
+              {/* Scroll hint gradient on mobile */}
+              <div className="absolute right-0 top-0 bottom-0 w-8 bg-linear-to-l from-card to-transparent pointer-events-none z-10 lg:hidden" />
               <table className="w-full min-w-[800px] text-left border-collapse">
                 <thead>
                   <tr className="border-b border-border">
@@ -229,7 +231,7 @@ export default function PricingPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-28 bg-canvas">
+      <section className="py-16 lg:py-28 bg-canvas">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="font-display font-black text-white mb-6"
             style={{ fontSize: 'clamp(28px, 4vw, 48px)' }}>Start Your Project</h2>

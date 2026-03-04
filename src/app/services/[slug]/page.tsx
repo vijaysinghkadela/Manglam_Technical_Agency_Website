@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import PageHero from '@/components/ui/PageHero'
 import { services, getService } from '@/lib/data/services'
+import { getAgreementByCode } from '@/lib/data/legal'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ChevronDown } from 'lucide-react'
@@ -46,9 +47,9 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
               ['Service', service.name],
               ['Starting Price', service.priceLabel],
               ['Core Deliverable', service.features[0]],
-              ['Agreement', 'Written Contract'],
+              ['Agreement Set', service.requiredAgreements.join(', ')],
             ].map(([label, val], i) => (
-              <div key={label} className={`px-6 py-5 ${i < 3 ? 'border-r border-border' : ''}`}>
+              <div key={label} className={`px-4 sm:px-6 py-5 ${i % 2 === 0 ? 'border-r border-border' : ''} ${i < 2 ? 'border-b lg:border-b-0' : ''} ${i < 3 ? 'lg:border-r lg:border-border' : ''}`}>
                 <p className="font-mono text-[10px] text-dead uppercase tracking-[0.15em] mb-1">{label}</p>
                 <p className="font-mono text-sm text-white font-semibold">{val}</p>
               </div>
@@ -58,7 +59,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
       </section>
 
       {/* Overview + Process */}
-      <section className="py-28 bg-canvas">
+      <section className="py-16 lg:py-28 bg-canvas">
         <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
             {/* Left */}
@@ -77,6 +78,52 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
                     </li>
                   ))}
                 </ul>
+              </div>
+
+              <div className="mt-10 border border-border bg-surface p-5">
+                <p className="font-mono text-[11px] text-violet-light tracking-[0.18em] uppercase mb-3">LEGAL & COMPLIANCE</p>
+                <p className="text-sm text-muted leading-relaxed mb-4">{service.dpaTrigger}</p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {service.requiredAgreements.map((code) => {
+                    const agreement = getAgreementByCode(code)
+                    return agreement ? (
+                      <Link
+                        key={code}
+                        href={`/legal/agreements/${agreement.slug}`}
+                        className="px-2 py-1 border border-violet/30 text-xs font-mono text-violet-light hover:text-white hover:border-violet transition-colors"
+                      >
+                        {code}
+                      </Link>
+                    ) : (
+                      <span key={code} className="px-2 py-1 border border-border text-xs font-mono text-muted">
+                        {code}
+                      </span>
+                    )
+                  })}
+                </div>
+                <ul className="flex flex-col gap-2">
+                  {service.governingLaws.map((law) => (
+                    <li key={law} className="text-xs text-muted leading-relaxed">
+                      • {law}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-4 pt-4 border-t border-border">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-dead mb-2">Mapped Delivery Stages</p>
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    {service.deliveryStages.map((stage) => (
+                      <span
+                        key={stage}
+                        className="px-2 py-1 border border-border text-[10px] font-mono text-muted"
+                      >
+                        Stage {stage}
+                      </span>
+                    ))}
+                  </div>
+                  <Link href="/research#pipeline" className="text-xs text-violet-light hover:text-white transition-colors">
+                    View full stage definitions →
+                  </Link>
+                </div>
               </div>
 
               <Link
@@ -120,7 +167,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
 
       {/* Pricing */}
       {service.pricing.length > 0 && (
-        <section className="py-28 bg-surface border-t border-border">
+        <section className="py-16 lg:py-28 bg-surface border-t border-border">
           <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
             <span className="font-mono text-[11px] text-violet-light tracking-[0.22em] uppercase block mb-3">PRICING</span>
             <h2 className="font-display font-black text-white tracking-tight leading-[0.92] mb-12"
@@ -158,8 +205,30 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
         </section>
       )}
 
+      <section className="py-20 bg-canvas border-t border-border">
+        <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
+          <div className="border border-border bg-surface p-6 sm:p-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+            <div>
+              <p className="font-mono text-[11px] text-violet-light tracking-[0.2em] uppercase mb-2">Compliance by Design</p>
+              <h2 className="font-display font-black text-white text-2xl mb-2">This service is mapped to MTA&apos;s 10-stage delivery pipeline.</h2>
+              <p className="text-sm text-muted leading-relaxed">
+                Service execution is gated through signed agreements, payment-linked transitions, and documented handover controls.
+              </p>
+            </div>
+            <div className="flex items-center gap-4">
+              <Link href="/research" className="text-violet-light hover:text-white transition-colors text-sm">
+                View Pipeline →
+              </Link>
+              <Link href="/legal" className="text-violet-light hover:text-white transition-colors text-sm">
+                Open Legal Hub →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* FAQs */}
-      <section className="py-28 bg-canvas border-t border-border">
+      <section className="py-16 lg:py-28 bg-canvas border-t border-border">
         <div className="max-w-4xl mx-auto px-6 lg:px-12">
           <h2 className="font-display font-black text-white tracking-tight leading-[0.92] mb-12 text-center"
             style={{ fontSize: 'clamp(28px, 4vw, 48px)' }}>Questions?</h2>
@@ -180,7 +249,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
       </section>
 
       {/* Related Services */}
-      <section className="py-28 bg-surface border-t border-border">
+      <section className="py-16 lg:py-28 bg-surface border-t border-border">
         <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
           <h2 className="font-display font-bold text-white text-2xl mb-8">Other Services</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

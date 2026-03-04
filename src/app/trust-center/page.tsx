@@ -1,144 +1,102 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
+import Link from 'next/link'
 import PageHero from '@/components/ui/PageHero'
-import { Shield, Lock, FileKey2, Cpu } from 'lucide-react'
+import { legalFrameworks } from '@/lib/data/research'
 
 export const metadata: Metadata = {
   title: 'Trust Center & AI Ethics | Manglam Technical Agency',
-  description: 'Our commitment to DPDPA 2023, IT Act 2000, NIST CSF 2.0, and ethical AI deployment.',
+  description: 'Executive summary of MTA compliance, security, and ethical AI controls with links to legal and research documentation.',
 }
+
+const operationalPillars = [
+  {
+    title: 'Contract-First Delivery',
+    body: 'No billable execution starts before signed service agreements and required legal attachments are in place.',
+  },
+  {
+    title: 'Data Protection by Default',
+    body: 'Personal-data handling runs under documented processor controls and DPA-driven obligations.',
+  },
+  {
+    title: 'Authorization-Gated Security Testing',
+    body: 'Cyber testing proceeds only under explicit written authorization and scoped rules of engagement.',
+  },
+  {
+    title: 'Human-Accountable AI',
+    body: 'AI deployment includes human oversight, transparency obligations, and consent-aware data usage boundaries.',
+  },
+]
 
 export default function TrustCenterPage() {
   return (
     <main className="min-h-screen bg-canvas">
       <PageHero
-        breadcrumbBase="Legal"
-        breadcrumbBaseHref="#"
+        breadcrumbBase="Home"
+        breadcrumbBaseHref="/"
         breadcrumbCurrent="Trust Center"
         label="GOVERNANCE & SECURITY"
-        title="Built on strict accountability."
-        subheading="At MTA, trust is a technical architecture, not just a promise. We align strictly with Indian regulations and global cybersecurity frameworks."
+        title="Trust Is an Operating System"
+        subheading="This page is the executive layer. Detailed pipeline, legal matrices, and template-access workflow live in Research and Legal hub pages."
       />
 
-      {/* Compliance Badges */}
-      <section className="py-20 bg-surface border-b border-border">
-        <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
-          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12">
-            <div>
-              <h2 className="font-display font-black text-white text-2xl mb-2">Regulatory Alignment</h2>
-              <p className="text-sm text-muted max-w-md">Our systems and internal processes are audited against these core frameworks.</p>
-            </div>
-            
-            <div className="flex flex-wrap gap-4 lg:gap-8">
-              {[
-                { name: 'DPDPA 2023', region: 'India' },
-                { name: 'IT Act 2000', region: 'India' },
-                { name: 'NIST CSF 2.0', region: 'Global' },
-                { name: 'ISO/IEC 27001', region: 'Global' },
-              ].map(badge => (
-                <div key={badge.name} className="flex items-center gap-3 p-4 border border-border bg-card">
-                  <Shield className="w-5 h-5 text-violet" />
-                  <div className="flex flex-col">
-                    <span className="font-bold text-white text-sm">{badge.name}</span>
-                    <span className="text-[10px] font-mono text-muted uppercase tracking-widest">{badge.region}</span>
-                  </div>
+      <section className="py-12 lg:py-20 bg-surface border-t border-border">
+        <div className="container-site grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8">
+          <article className="border border-border bg-card p-6 sm:p-8">
+            <h2 className="font-display font-black text-3xl text-white mb-6">Operational Pillars</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {operationalPillars.map((pillar) => (
+                <div key={pillar.title} className="border border-border bg-canvas p-5">
+                  <h3 className="font-display font-bold text-white text-xl mb-2">{pillar.title}</h3>
+                  <p className="text-sm text-muted leading-relaxed">{pillar.body}</p>
                 </div>
               ))}
             </div>
-          </div>
+          </article>
+
+          <aside className="border border-border bg-card p-6 sm:p-8">
+            <p className="font-mono text-[11px] tracking-[0.18em] uppercase text-violet-light mb-3">Explore Depth</p>
+            <h3 className="font-display font-black text-2xl text-white mb-4">Documentation Layers</h3>
+            <div className="flex flex-col gap-3 text-sm">
+              <Link href="/research" className="text-violet-light hover:text-white transition-colors py-2 min-h-[44px] flex items-center">
+                Research: lead-to-delivery pipeline & risk map →
+              </Link>
+              <Link href="/legal" className="text-violet-light hover:text-white transition-colors py-2 min-h-[44px] flex items-center">
+                Legal Hub: agreements, applicability matrix, request workflow →
+              </Link>
+              <Link href="/legal/privacy-policy" className="text-violet-light hover:text-white transition-colors py-2 min-h-[44px] flex items-center">
+                Privacy Policy →
+              </Link>
+              <Link href="/legal/terms-of-service" className="text-violet-light hover:text-white transition-colors py-2 min-h-[44px] flex items-center">
+                Terms of Service →
+              </Link>
+            </div>
+          </aside>
         </div>
       </section>
 
-      {/* Security Pillars */}
-      <section className="py-28 bg-canvas">
-        <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-[400px_1fr] gap-16">
-            
-            <div className="flex flex-col sticky top-32 self-start">
-              <span className="font-mono text-[11px] text-violet-light tracking-[0.22em] uppercase mb-4">INFRASTRUCTURE</span>
-              <h2 className="font-display font-black text-white leading-[0.92] tracking-tight mb-6"
-                style={{ fontSize: 'clamp(28px, 4vw, 42px)' }}>
-                Security Pillars
-              </h2>
-              <p className="text-[15px] text-muted leading-[1.7]">
-                We do not compromise on security. Every server we provision, every app we deploy, and every internal account we manage adheres to zero-trust principles.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {[
-                {
-                  icon: <Lock className="w-6 h-6" />,
-                  title: 'AES-256 Encryption',
-                  desc: 'All data is encrypted at rest using AES-256 standard, and in transit via TLS 1.3 protocol.'
-                },
-                {
-                  icon: <FileKey2 className="w-6 h-6" />,
-                  title: 'Mandatory MFA',
-                  desc: 'We enforce Time-Based One-Time Password (TOTP) or Hardware Key MFA across all client and internal portals.'
-                },
-                {
-                  icon: <Shield className="w-6 h-6" />,
-                  title: '72-Hour Breach Protocol',
-                  desc: 'Aligned with CERT-In directives, our IR playbooks mandate critical incident notification to you within 72 hours of verification.'
-                },
-                {
-                  icon: <Cpu className="w-6 h-6" />,
-                  title: 'RBAC Enforcement',
-                  desc: 'Role-Based Access Control is enforced by default. Principle of Least Privilege (PoLP) dictates all system access.'
-                }
-              ].map((pillar, i) => (
-                <div key={i} className="p-8 border border-border bg-surface hover:border-violet/40 transition-colors">
-                  <div className="w-12 h-12 bg-violet/10 flex items-center justify-center text-violet mb-6">
-                    {pillar.icon}
-                  </div>
-                  <h3 className="font-display font-bold text-white text-[19px] mb-3">{pillar.title}</h3>
-                  <p className="text-[14px] text-muted leading-relaxed">{pillar.desc}</p>
-                </div>
-              ))}
-            </div>
-
+      <section className="py-20 bg-canvas border-t border-border">
+        <div className="container-site">
+          <h2 className="font-display font-black text-3xl text-white mb-6">Regulatory Alignment Snapshot</h2>
+          <div className="overflow-x-auto border border-border bg-card">
+            <table className="w-full min-w-[680px] border-collapse">
+              <thead>
+                <tr className="border-b border-border bg-surface">
+                  <th className="text-left p-3 text-xs font-mono uppercase tracking-[0.14em] text-muted">Framework</th>
+                  <th className="text-left p-3 text-xs font-mono uppercase tracking-[0.14em] text-muted">Scope</th>
+                  <th className="text-left p-3 text-xs font-mono uppercase tracking-[0.14em] text-muted">Usage</th>
+                </tr>
+              </thead>
+              <tbody>
+                {legalFrameworks.map((framework) => (
+                  <tr key={framework.framework} className="border-b border-border/70">
+                    <td className="p-3 text-sm text-white font-medium">{framework.framework}</td>
+                    <td className="p-3 text-sm text-muted">{framework.applicability}</td>
+                    <td className="p-3 text-sm text-muted">{framework.usage}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-        </div>
-      </section>
-
-      {/* AI Ethics Policy */}
-      <section className="py-28 bg-surface border-t border-border">
-        <div className="w-full max-w-4xl mx-auto px-6 lg:px-12">
-          <div className="text-center mb-16">
-            <span className="font-mono text-[11px] text-violet-light tracking-[0.22em] uppercase mb-4 block">CHAPTER 2 - MTA POLICY HANDBOOK</span>
-            <h2 className="font-display font-black text-white leading-[0.92] tracking-tight"
-                style={{ fontSize: 'clamp(32px, 5vw, 56px)' }}>
-              AI Ethics & Deployment
-            </h2>
-          </div>
-
-          <div className="prose prose-invert prose-p:text-muted prose-p:text-[15px] prose-p:leading-[1.7] prose-headings:font-display prose-headings:text-white prose-headings:font-bold prose-h3:text-xl prose-li:text-muted max-w-none">
-            
-            <p className="text-lg text-white mb-8 border-l-2 border-violet pl-6">
-              Artificial Intelligence is a multiplier of human capability, not a replacement for human accountability. Manglam Technical Agency adheres to the following strict guidelines when utilizing Machine Learning (ML) and Large Language Models (LLMs) in client projects.
-            </p>
-
-            <h3>1. Absolute Data Sovereignty</h3>
-            <p>
-              Under no circumstances do we allow client proprietary data or Personally Identifiable Information (PII) to be used to train public instances of AI models. We utilize Zero Data Retention (ZDR) endpoints exclusively (e.g., OpenAI Enterprise API) where data is explicitly partitioned.
-            </p>
-
-            <h3>2. Human-in-the-Loop (HITL) Verification</h3>
-            <p>
-              While we leverage AI for research, structuring, and code generation acceleration, all final deliverables—whether marketing copy, application code, or strategic briefs—are subjected to rigorous human auditing. We do not ship raw LLM outputs.
-            </p>
-
-            <h3>3. Algorithmic Transparency</h3>
-            <p>
-              If an automated system or LLM is making decisions or providing significant utility within a product we build for you, we will disclose that architecture during the Discovery Workshop. Your end-users deserve to know when they are interacting with an AI.
-            </p>
-
-            <h3>4. Bias and Fairness Auditing</h3>
-            <p>
-              We acknowledge that base foundation models carry inherent biases. For explicit AI Automation projects, we build and test RAG (Retrieval-Augmented Generation) systems against controlled, equitable datasets to minimize discriminatory outputs.
-            </p>
-          </div>
-
         </div>
       </section>
     </main>

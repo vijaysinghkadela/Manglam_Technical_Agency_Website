@@ -81,6 +81,30 @@ img, video { max-width: 100%; height: auto; display: block; }
 /* Section top divider — apply to every <section> element */
 .section-divide { border-top: 1px solid var(--color-border); }
 
+/* Responsive section vertical padding */
+.section-py {
+  padding-top: clamp(64px, 10vw, 112px);
+  padding-bottom: clamp(64px, 10vw, 112px);
+}
+
+/* ── Accessibility ── */
+
+/* Focus-visible ring for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid var(--color-violet);
+  outline-offset: 2px;
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* Dot grid background */
 .bg-dot-grid {
   background-image: radial-gradient(
@@ -115,8 +139,8 @@ img, video { max-width: 100%; height: auto; display: block; }
 /* Marquee */
 @keyframes marquee-left  { to   { transform: translateX(-50%); } }
 @keyframes marquee-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
-.animate-marquee-left  { animation: marquee-left  32s linear infinite; }
-.animate-marquee-right { animation: marquee-right 28s linear infinite; }
+.animate-marquee-left  { animation: marquee-left  32s linear infinite; will-change: transform; }
+.animate-marquee-right { animation: marquee-right 28s linear infinite; will-change: transform; }
 .animate-marquee-left:hover,
 .animate-marquee-right:hover { animation-play-state: paused; }
 
@@ -124,20 +148,93 @@ img, video { max-width: 100%; height: auto; display: block; }
 @keyframes spin-cw  { to { transform: rotate(360deg);  } }
 @keyframes spin-ccw { to { transform: rotate(-360deg); } }
 
-/* Float (hero pills) */
+/* Float (hero pills — compositor-driven) */
 @keyframes float {
   0%, 100% { transform: translateY(0px);   }
   50%       { transform: translateY(-12px); }
 }
+@keyframes pill-float {
+  0%, 100% { transform: translateY(0px);   opacity: 1; }
+  50%       { transform: translateY(-10px); opacity: 0.85; }
+}
+
+@keyframes pulse-violet {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 8px rgba(124, 58, 237, 0); }
+}
+
+.animate-pulse-violet { animation: pulse-violet 1.8s ease-in-out infinite; }
 
 /* Loading bar (page transitions) */
 @keyframes progress-in { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
-/* Reduced motion */
+section[id] { scroll-margin-top: 120px; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration:       0.01ms !important;
     transition-duration:      0.01ms !important;
     animation-iteration-count: 1    !important;
   }
+}
+
+/* ── Light Mode Variable Overrides ─────────────────────────── */
+html:not(.dark) {
+  --color-canvas:        #f8fafc;
+  --color-surface:       #f1f5f9;
+  --color-card:          #ffffff;
+  --color-border:        #e2e8f0;
+  --color-muted:         #64748b;
+  --color-dead:          #cbd5e1;
+  --color-violet:        #7C3AED;
+  --color-violet-light:  #6D28D9;
+  --color-violet-dark:   #5B21B6;
+  --color-cyan:          #0891B2;
+  --color-amber:         #D97706;
+}
+
+html:not(.dark) body {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+/* Light mode text overrides — headings and white text become dark */
+html:not(.dark) .text-white {
+  color: #0f172a;
+}
+
+/* Keep text white on colored backgrounds in light mode */
+html:not(.dark) [style*="background-color: var(--color-violet)"] .text-white,
+html:not(.dark) [style*="backgroundColor:"] .text-white {
+  color: #FAFAFA;
+}
+
+/* Light mode dot/line grid subtle adjustments */
+html:not(.dark) .bg-line-grid {
+  background-image:
+    linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+}
+
+html:not(.dark) .bg-dot-grid {
+  background-image: radial-gradient(
+    circle,
+    rgba(0,0,0,0.06) 1px,
+    transparent 1px
+  );
+}
+
+/* Light mode grain overlay */
+html:not(.dark) .grain::after {
+  opacity: 0.015;
+}
+
+/* Smooth theme transition */
+body,
+nav,
+footer,
+section,
+.container-site,
+[class*="bg-"] {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.15s ease;
 }

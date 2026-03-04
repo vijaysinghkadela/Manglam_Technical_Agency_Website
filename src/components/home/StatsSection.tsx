@@ -10,7 +10,7 @@ const STATS = [
 
 export function StatsSection() {
   return (
-    <section style={{ backgroundColor:'var(--color-canvas)', padding:'80px 0' }}>
+    <section style={{ backgroundColor:'var(--color-canvas)', padding:'clamp(32px, 6vw, 56px) 0' }}>
       <div className="container-site">
         <div className="grid grid-cols-2 lg:grid-cols-4">
           {STATS.map((s, i) => (
@@ -18,8 +18,8 @@ export function StatsSection() {
               key={s.label}
               className="flex flex-col items-center lg:items-start text-center lg:text-left min-w-0"
               style={{
-                padding:      '40px',
-                borderRight:  i < 3 ? '1px solid var(--color-border)' : 'none',
+                padding:      'clamp(20px, 4vw, 40px)',
+                borderRight:  i % 2 === 0 ? '1px solid var(--color-border)' : 'none',
                 borderBottom: i < 2 ? '1px solid var(--color-border)' : 'none',
               }}
             >
@@ -28,7 +28,7 @@ export function StatsSection() {
                 target={s.value}
                 suffix={s.suffix}
                 className="font-display font-black text-white leading-none tracking-tight"
-                style={{ fontSize:'clamp(28px, 8vw, 72px)' }}
+                style={{ fontSize:'clamp(1.5rem, 4vw, 3rem)' }}
               />
               <p
                 className="font-mono uppercase mt-3"

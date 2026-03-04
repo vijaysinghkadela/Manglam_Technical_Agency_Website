@@ -37,3 +37,14 @@ export const newsletterSchema = z.object({
 });
 
 export type NewsletterFormValues = z.infer<typeof newsletterSchema>;
+
+export const documentRequestSchema = z.object({
+  name: z.string().min(2, 'Name must be at least 2 characters'),
+  email: z.email('Please enter a valid email address'),
+  company: z.string().optional(),
+  requestedDocuments: z.array(z.string()).min(1, 'Select at least one document'),
+  useCase: z.string().min(20, 'Use case must be at least 20 characters'),
+  privacy: z.literal(true),
+});
+
+export type DocumentRequestValues = z.infer<typeof documentRequestSchema>;

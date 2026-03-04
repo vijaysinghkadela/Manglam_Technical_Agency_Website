@@ -31,7 +31,7 @@ const values = [
 
 export function WhyMTA() {
   return (
-    <section style={{ backgroundColor:'var(--color-canvas)', padding:'112px 0' }}>
+    <section style={{ backgroundColor:'var(--color-canvas)', padding:'clamp(48px, 8vw, 80px) 0' }}>
       <div className="container-site">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           <div className="lg:sticky lg:top-[120px] lg:self-start">
@@ -39,7 +39,7 @@ export function WhyMTA() {
               WHY CHOOSE US
             </span>
             <h2 className="font-display font-black text-white tracking-tight leading-[0.92] mb-6"
-              style={{ fontSize:'clamp(28px, 4vw, 60px)' }}>
+              style={{ fontSize:'clamp(1.5rem, 3.5vw, 2.75rem)' }}>
               Built Different.<br />Delivered Right.
             </h2>
             <p className="text-[15px] leading-[1.7] mb-4" style={{ color:'var(--color-muted)' }}>

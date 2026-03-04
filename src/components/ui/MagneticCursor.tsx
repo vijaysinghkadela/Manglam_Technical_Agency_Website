@@ -1,12 +1,13 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 
 type Variant = 'default' | 'pointer' | 'text' | 'link'
 
 export function MagneticCursor() {
-  const [ready,   setReady]   = useState(false)  // false on server = null render
+  const [ready,   setReady]   = useState(false)
   const [visible, setVisible] = useState(false)
+  const variantRef = useRef<Variant>('default')
   const [variant, setVariant] = useState<Variant>('default')
 
   const mx = useMotionValue(-300)
@@ -14,18 +15,32 @@ export function MagneticCursor() {
   const rx = useSpring(mx, { stiffness: 220, damping: 26, mass: 0.35 })
   const ry = useSpring(my, { stiffness: 220, damping: 26, mass: 0.35 })
 
-  useEffect(() => {
-    // Touch devices: skip entirely — no pointer to track
-    if (!window.matchMedia('(pointer: fine)').matches) return
-    setTimeout(() => setReady(true), 0)  // Only true on mouse-capable client
+  // Throttled variant detection — only runs every 80ms instead of every frame
+  const lastVariantCheck = useRef(0)
 
-    const move = (e: MouseEvent) => {
-      mx.set(e.clientX); my.set(e.clientY)
-      setVisible(true)
+  const move = useCallback((e: MouseEvent) => {
+    mx.set(e.clientX)
+    my.set(e.clientY)
+    if (!visible) setVisible(true)
+
+    const now = performance.now()
+    if (now - lastVariantCheck.current > 80) {
+      lastVariantCheck.current = now
       const el  = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement | null
       const hit = el?.closest('[data-cursor]')?.getAttribute('data-cursor') as Variant | null
-      setVariant(hit ?? 'default')
+      const next = hit ?? 'default'
+      if (next !== variantRef.current) {
+        variantRef.current = next
+        setVariant(next)
+      }
     }
+  }, [mx, my, visible])
+
+  useEffect(() => {
+    // Touch devices: skip entirely
+    if (!window.matchMedia('(pointer: fine)').matches) return
+    setTimeout(() => setReady(true), 0)
+
     const hide = () => setVisible(false)
     const show = () => setVisible(true)
 
@@ -37,9 +52,9 @@ export function MagneticCursor() {
       document.documentElement.removeEventListener('mouseleave', hide)
       document.documentElement.removeEventListener('mouseenter', show)
     }
-  }, [mx, my])
+  }, [move])
 
-  if (!ready) return null  // ← Server always returns null. No "N". No artifact.
+  if (!ready) return null
 
   const sizes: Record<Variant, { w: number; h: number }> = {
     default: { w: 32,  h: 32 },
@@ -59,6 +74,7 @@ export function MagneticCursor() {
           translateX: '-50%', translateY: '-50%',
           width: 5, height: 5,
           opacity: (visible && variant !== 'pointer') ? 1 : 0,
+          willChange: 'transform',
           transition: 'opacity 0.15s',
         }}
       />
@@ -73,6 +89,7 @@ export function MagneticCursor() {
           opacity:         visible ? 1 : 0,
           backgroundColor: variant === 'pointer' ? 'rgba(124,58,237,0.88)' : 'transparent',
           borderColor:     variant === 'pointer' ? '#7C3AED' : 'rgba(255,255,255,0.18)',
+          willChange:      'transform',
           transition:      'width 0.18s ease, height 0.18s ease, background-color 0.18s ease, opacity 0.15s',
         }}
       />

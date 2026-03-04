@@ -45,7 +45,7 @@ export function ScrambleCounter({ target, suffix = '', duration = 1500, classNam
 
       raf = requestAnimationFrame(tick)
       return () => cancelAnimationFrame(raf)
-    }, { threshold: 0.5 })
+    }, { threshold: 0.2 })
 
     if (ref.current) io.observe(ref.current)
     return () => io.disconnect()

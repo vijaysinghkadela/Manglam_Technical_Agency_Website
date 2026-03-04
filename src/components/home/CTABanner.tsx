@@ -12,7 +12,7 @@ export function CTABanner() {
     <section
       ref={ref}
       className="relative overflow-hidden"
-      style={{ backgroundColor:'var(--color-violet)', padding:'128px 0' }}
+      style={{ backgroundColor:'var(--color-violet)', padding:'clamp(56px, 10vw, 96px) 0' }}
     >
       {/* Parallax watermark */}
       <motion.div
