@@ -7,6 +7,7 @@ import { Navbar }         from '@/components/layout/Navbar'
 import { Footer }         from '@/components/layout/Footer'
 import { Toaster }        from 'react-hot-toast'
 import { ThemeProvider }  from 'next-themes'
+import { SpeedInsights }  from '@vercel/speed-insights/next'
 import '@/styles/globals.css'
 
 const inter     = Inter({ subsets:['latin'], variable:'--font-body',    display:'swap' })
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </main>
           <Footer />
+          <SpeedInsights />
           <ScrollToTop />
           <Toaster
             position="bottom-right"

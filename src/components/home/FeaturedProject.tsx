@@ -124,11 +124,11 @@ export function FeaturedProject() {
             {/* Tags */}
             <div className="flex flex-wrap gap-2">
               {['NGO','Web Development'].map(t => (
-                <span key={t} className="font-mono text-[11px] px-3 py-1" style={{ border:'1px solid var(--color-border)', color:'var(--color-muted)' }}>
+                <span key={t} className="font-mono text-label px-3 py-1" style={{ border:'1px solid var(--color-border)', color:'var(--color-muted)' }}>
                   {t}
                 </span>
               ))}
-              <span className="font-mono text-[11px] px-3 py-1" style={{ border:'1px solid rgba(124,58,237,0.4)', color:'var(--color-violet-light)' }}>
+              <span className="font-mono text-label px-3 py-1" style={{ border:'1px solid rgba(124,58,237,0.4)', color:'var(--color-violet-light)' }}>
                 ✦ Signature Project
               </span>
             </div>
@@ -166,7 +166,7 @@ export function FeaturedProject() {
               <p className="font-mono uppercase mb-2" style={{ fontSize:'10px', color:'var(--color-dead)', letterSpacing:'0.15em' }}>TECH STACK</p>
               <div className="flex flex-wrap gap-2">
                 {['Next.js','TypeScript','Tailwind CSS','Cloudinary','Vercel'].map(t => (
-                  <span key={t} className="font-mono text-[11px] px-3 py-1 transition-colors hover:text-white"
+                  <span key={t} className="font-mono text-label px-3 py-1 transition-colors hover:text-white"
                     style={{ border:'1px solid var(--color-border)', color:'var(--color-muted)' }}>
                     {t}
                   </span>

@@ -16,11 +16,13 @@ export function StatsSection() {
           {STATS.map((s, i) => (
             <div
               key={s.label}
-              className="flex flex-col items-center lg:items-start text-center lg:text-left min-w-0"
+              className={`flex flex-col items-center text-center min-w-0 ${
+                i % 2 === 0 ? 'border-r border-border' : ''
+              } ${i < 2 ? 'border-b border-border' : ''} ${
+                i < 3 ? 'lg:border-r lg:border-border' : 'lg:border-r-0'
+              } lg:border-b-0`}
               style={{
-                padding:      'clamp(20px, 4vw, 40px)',
-                borderRight:  i % 2 === 0 ? '1px solid var(--color-border)' : 'none',
-                borderBottom: i < 2 ? '1px solid var(--color-border)' : 'none',
+                padding: 'clamp(20px, 4vw, 40px)',
               }}
             >
               {/* CAPPED at 72px — prevents overflow into next section */}

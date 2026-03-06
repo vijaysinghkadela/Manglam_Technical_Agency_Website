@@ -90,7 +90,7 @@ export default function PricingPage() {
       {/* Pricing Cards */}
       <section className="py-16 lg:py-28 bg-surface border-t border-border">
         <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
-          <div className="flex justify-between flex-wrap gap-6 items-end mb-12">
+          <div className="flex flex-col lg:flex-row justify-between gap-6 items-center mb-12">
             <h2 className="font-display text-3xl font-bold text-white">Starting Rates</h2>
 
             {/* Pill Toggle */}
@@ -113,12 +113,12 @@ export default function PricingPage() {
                 data-cursor="pointer"
                 aria-label="Annual billing"
               >
-                Annual <span className="text-[11px] opacity-70">(-20%)</span>
+                Annual <span className="text-label opacity-70">(-20%)</span>
               </button>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {plans.map((plan, i) => {
               const displayPrice = billing === 'annual' && plan.type === 'per month'
                 ? '₹96,000'
@@ -141,7 +141,7 @@ export default function PricingPage() {
                     <div>
                       <h3 className="font-display text-xl font-bold text-white">{plan.name}</h3>
                       {plan.type !== 'scoped project' && (
-                        <span className="text-[11px] font-mono text-muted uppercase tracking-[0.18em] mt-1 block">{displayType}</span>
+                        <span className="text-label font-mono text-muted uppercase tracking-[0.18em] mt-1 block">{displayType}</span>
                       )}
                     </div>
                   </div>

@@ -50,7 +50,7 @@ export function Footer() {
       <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12 pt-12 lg:pt-20 pb-12 lg:pb-16">
         <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-8">
           <h2 className="font-display font-black text-white tracking-tight leading-[0.92]"
-            style={{ fontSize: 'clamp(1.75rem, 3.5vw, 3rem)' }}>
+            style={{ fontSize: 'clamp(1.5rem, 3.5vw, 3rem)' }}>
             Let&apos;s Build Together
           </h2>
           <Link
@@ -117,7 +117,7 @@ export function Footer() {
 
           {/* Col 2: Services */}
           <div>
-            <h4 className="font-mono text-[11px] text-muted tracking-[0.18em] uppercase mb-5">Services</h4>
+            <h4 className="font-mono text-label text-muted tracking-[0.18em] uppercase mb-5">Services</h4>
             {services.map((s) => (
               <FooterLink key={s.slug} href={`/services/${s.slug}`} label={s.name} />
             ))}
@@ -125,7 +125,7 @@ export function Footer() {
 
           {/* Col 3: Company */}
           <div>
-            <h4 className="font-mono text-[11px] text-muted tracking-[0.18em] uppercase mb-5">Company</h4>
+            <h4 className="font-mono text-label text-muted tracking-[0.18em] uppercase mb-5">Company</h4>
             {companyLinks.map((link) => (
               <FooterLink key={link.href} href={link.href} label={link.label} />
             ))}
@@ -133,7 +133,7 @@ export function Footer() {
 
           {/* Col 4: Contact */}
           <div>
-            <h4 className="font-mono text-[11px] text-muted tracking-[0.18em] uppercase mb-5">Contact</h4>
+            <h4 className="font-mono text-label text-muted tracking-[0.18em] uppercase mb-5">Contact</h4>
             <div className="flex flex-col gap-2 text-sm text-muted">
               <p>{AGENCY_LOCATION}</p>
               <a
@@ -167,7 +167,7 @@ export function Footer() {
           >
             © {new Date().getFullYear()} {AGENCY_NAME} — Classification: MTA Proprietary
           </motion.p>
-          <div className="flex items-center gap-3 flex-wrap justify-center">
+          <div className="flex items-center gap-x-3 gap-y-1 flex-wrap justify-center">
             {legalLinks.map((link) => (
               <Link
                 key={link.href}

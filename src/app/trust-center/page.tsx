@@ -54,7 +54,7 @@ export default function TrustCenterPage() {
           </article>
 
           <aside className="border border-border bg-card p-6 sm:p-8">
-            <p className="font-mono text-[11px] tracking-[0.18em] uppercase text-violet-light mb-3">Explore Depth</p>
+            <p className="font-mono text-label tracking-[0.18em] uppercase text-violet-light mb-3">Explore Depth</p>
             <h3 className="font-display font-black text-2xl text-white mb-4">Documentation Layers</h3>
             <div className="flex flex-col gap-3 text-sm">
               <Link href="/research" className="text-violet-light hover:text-white transition-colors py-2 min-h-[44px] flex items-center">

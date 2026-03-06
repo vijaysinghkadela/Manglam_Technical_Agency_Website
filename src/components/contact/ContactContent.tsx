@@ -36,7 +36,7 @@ export function ContactContent({ formNode }: { formNode: React.ReactNode }) {
             Direct Line
           </p>
           
-          <h2 className="text-[clamp(32px,5vw,72px)] font-display font-black text-white leading-[0.95] tracking-tight mb-8">
+          <h2 className="text-[clamp(24px,5vw,72px)] font-display font-black text-white leading-[0.95] tracking-tight mb-8">
             <TextReveal text="Let's Build Something Real." delay={0.1} />
           </h2>
           
@@ -48,7 +48,7 @@ export function ContactContent({ formNode }: { formNode: React.ReactNode }) {
             {/* Email */}
             <motion.div variants={item}>
               <p className="text-xs text-dead font-mono tracking-[0.15em] uppercase mb-1">Email Us</p>
-              <a href={`mailto:${AGENCY_EMAIL}`} className="text-lg font-display font-medium text-white hover:text-violet-light transition-colors">
+              <a href={`mailto:${AGENCY_EMAIL}`} className="text-lg font-display font-medium text-white hover:text-violet-light transition-colors break-all">
                 {AGENCY_EMAIL}
               </a>
             </motion.div>
@@ -83,7 +83,7 @@ export function ContactContent({ formNode }: { formNode: React.ReactNode }) {
 
       {/* Right Column: Interactive Form */}
       <motion.div variants={item} className="p-8 lg:p-16 bg-canvas">
-        <div className="max-w-2xl">
+        <div className="max-w-2xl mx-auto">
           {formNode}
         </div>
       </motion.div>

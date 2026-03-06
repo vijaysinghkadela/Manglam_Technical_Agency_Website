@@ -55,7 +55,7 @@ export function ServicesHorizontal() {
                   >
                     <s.Icon className="w-5 h-5 transition-colors" style={{ color:'var(--color-muted)' }} />
                   </div>
-                  <span className="font-display font-black text-4xl leading-none" style={{ color:'var(--color-dead)' }}>
+                  <span className="font-display font-black text-3xl sm:text-4xl leading-none opacity-40 sm:opacity-100" style={{ color:'var(--color-dead)' }}>
                     {String(i+1).padStart(2,'0')}
                   </span>
                 </div>
@@ -93,15 +93,15 @@ export function ServicesHorizontal() {
         }}
       >
         {/* Section header */}
-        <div className="flex items-end justify-between shrink-0 px-12 pt-20 pb-8">
+        <div className="flex items-end justify-between shrink-0 pt-20 pb-8 max-w-[1440px] mx-auto px-6 lg:px-12">
           <SectionLabel />
-          <span className="font-mono text-[11px] tracking-[0.2em]" style={{ color:'var(--color-muted)' }}>
+          <span className="font-mono text-label tracking-[0.2em]" style={{ color:'var(--color-muted)' }}>
             {String(services.length).padStart(2,'0')} SERVICES
           </span>
         </div>
 
         {/* Scrolling card track */}
-        <div className="flex-1 overflow-hidden pl-12 min-h-0 flex items-stretch">
+        <div className="flex-1 overflow-hidden min-h-0 flex items-stretch max-w-[1440px] mx-auto pl-6 lg:pl-12">
           <motion.div
             style={{ x, width:`${trackW}px`, flexShrink:0 }}
             className="flex items-stretch"
@@ -136,7 +136,7 @@ export function ServicesHorizontal() {
                     style={{ borderColor:'var(--color-border)' }}
                   >
                     <s.Icon
-                      className="w-5 h-5 transition-colors group-hover:text-(--color-violet-light)"
+                      className="w-5 h-5 transition-colors group-hover:text-violet-light"
                       style={{ color:'var(--color-muted)' }}
                     />
                   </div>
@@ -170,13 +170,13 @@ export function ServicesHorizontal() {
         </div>
 
         {/* Progress bar */}
-        <div className="shrink-0 mx-12 h-px" style={{ backgroundColor:'var(--color-border)' }}>
+        <div className="shrink-0 max-w-[1440px] mx-auto px-6 lg:px-12 h-px" style={{ backgroundColor:'var(--color-border)' }}>
           <motion.div
             className="h-full origin-left"
             style={{ scaleX:scrollYProgress, backgroundColor:'var(--color-violet)' }}
           />
         </div>
-        <div className="shrink-0 px-12 py-3">
+        <div className="shrink-0 max-w-[1440px] mx-auto px-6 lg:px-12 py-3">
           <span className="font-mono uppercase text-[10px] tracking-[0.22em]" style={{ color:'var(--color-dead)' }}>
             ← scroll to explore all services →
           </span>

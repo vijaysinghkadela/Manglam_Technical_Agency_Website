@@ -163,7 +163,7 @@ export function Navbar() {
                               <div className="min-w-0">
                                 <p className="text-[13px] font-semibold text-white leading-tight">{s.name}</p>
                                 <p
-                                  className="text-[11px] mt-1 leading-snug truncate text-muted"
+                                  className="text-label mt-1 leading-snug truncate text-muted"
                                 >
                                   {s.tagline}
                                 </p>

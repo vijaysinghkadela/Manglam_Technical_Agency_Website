@@ -19,7 +19,7 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-line-grid opacity-20 pointer-events-none z-0" />
         
         <div className="container-site relative z-10 flex flex-col items-center text-center">
-          <p className="font-mono text-[11px] text-violet tracking-[0.2em] mb-8 font-semibold uppercase">
+          <p className="font-mono text-label text-violet tracking-[0.2em] mb-8 font-semibold uppercase">
             ✦ EST. RAJASTHAN, INDIA
           </p>
           

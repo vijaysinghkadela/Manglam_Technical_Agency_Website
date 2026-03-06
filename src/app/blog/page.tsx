@@ -22,8 +22,8 @@ export default function BlogPage() {
                 href={`/blog/${post.slug}`}
                 className="group border border-border bg-card p-6 hover:border-violet/35 transition-colors flex flex-col"
               >
-                <div className={`h-2 w-full bg-gradient-to-r ${post.gradient} mb-5`} />
-                <div className="flex items-center gap-3 text-[11px] font-mono text-muted uppercase tracking-[0.14em] mb-3">
+                <div className={`h-2 w-full bg-linear-to-r ${post.gradient} mb-5`} />
+                <div className="flex items-center gap-3 text-label font-mono text-muted uppercase tracking-[0.14em] mb-3">
                   <time>{post.date}</time>
                   <span className="w-1 h-1 bg-border rounded-full" />
                   <span>{post.readTime}</span>

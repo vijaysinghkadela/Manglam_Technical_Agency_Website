@@ -24,7 +24,7 @@ export default function PageHero({
   return (
     <section className="w-full bg-canvas pt-[100px] lg:pt-[140px] pb-10 lg:pb-16">
       <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 items-center text-center">
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2 text-[12px] font-mono text-dead">
               <Link href={breadcrumbBaseHref} className="hover:text-muted transition-colors" data-cursor="pointer">
@@ -53,7 +53,7 @@ export default function PageHero({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-[15px] text-muted max-w-2xl leading-[1.65]"
+              className="text-[15px] text-muted max-w-2xl mx-auto leading-[1.65]"
             >
               {subheading}
             </motion.p>

@@ -36,7 +36,7 @@ export function AboutContent() {
             {/* Left: Sticky header */}
             <div className="lg:pr-8">
               <div className="sticky top-32">
-                <p className="font-mono text-[11px] text-violet tracking-[0.2em] uppercase font-semibold">
+                <p className="font-mono text-label text-violet tracking-[0.2em] uppercase font-semibold">
                   Our Story
                 </p>
               </div>
@@ -66,7 +66,7 @@ export function AboutContent() {
 
       {/* 3. Core Values (Brutalist Grid) */}
       <section className="w-full bg-canvas border-t border-border">
-        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border">
+        <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border">
           {values.map((v, i) => (
             <motion.div
               key={v.num}
@@ -103,7 +103,7 @@ export function AboutContent() {
       <section className="w-full py-24 bg-surface border-t border-border">
         <div className="container-site">
           <div className="mb-12">
-            <p className="font-mono text-[11px] text-violet tracking-[0.2em] uppercase font-semibold text-center">
+            <p className="font-mono text-label text-violet tracking-[0.2em] uppercase font-semibold text-center">
               Internal Tooling & Capabilities
             </p>
           </div>

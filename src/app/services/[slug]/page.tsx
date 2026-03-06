@@ -69,7 +69,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
               <p className="text-[15px] text-muted leading-[1.7]">{service.description}</p>
 
               <div className="mt-12">
-                <p className="font-mono text-[11px] text-violet-light tracking-[0.22em] uppercase mb-4">INCLUDED</p>
+                <p className="font-mono text-label text-violet-light tracking-[0.22em] uppercase mb-4">INCLUDED</p>
                 <ul className="flex flex-col gap-3">
                   {service.features.map((feature) => (
                     <li key={feature} className="text-sm text-muted flex items-start gap-3">
@@ -81,7 +81,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
               </div>
 
               <div className="mt-10 border border-border bg-surface p-5">
-                <p className="font-mono text-[11px] text-violet-light tracking-[0.18em] uppercase mb-3">LEGAL & COMPLIANCE</p>
+                <p className="font-mono text-label text-violet-light tracking-[0.18em] uppercase mb-3">LEGAL & COMPLIANCE</p>
                 <p className="text-sm text-muted leading-relaxed mb-4">{service.dpaTrigger}</p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {service.requiredAgreements.map((code) => {
@@ -169,7 +169,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
       {service.pricing.length > 0 && (
         <section className="py-16 lg:py-28 bg-surface border-t border-border">
           <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
-            <span className="font-mono text-[11px] text-violet-light tracking-[0.22em] uppercase block mb-3">PRICING</span>
+            <span className="font-mono text-label text-violet-light tracking-[0.22em] uppercase block mb-3">PRICING</span>
             <h2 className="font-display font-black text-white tracking-tight leading-[0.92] mb-12"
               style={{ fontSize: 'clamp(28px, 4vw, 48px)' }}>Plans & Pricing</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -178,7 +178,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
                   className={`bg-card border p-8 flex flex-col gap-6 ${plan.highlight ? 'border-violet' : 'border-border'}`}>
                   <p className="font-display text-xl font-bold text-white">{plan.label}</p>
                   <p className="font-display font-black text-white" style={{ fontSize: '44px' }}>{plan.amount}</p>
-                  {plan.period && <p className="text-[11px] font-mono text-muted uppercase tracking-[0.18em] -mt-4">{plan.period}</p>}
+                  {plan.period && <p className="text-label font-mono text-muted uppercase tracking-[0.18em] -mt-4">{plan.period}</p>}
                   <div className="h-px bg-border" />
                   <ul className="flex flex-col gap-2.5">
                     {plan.features.map(f => (
@@ -209,7 +209,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
         <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
           <div className="border border-border bg-surface p-6 sm:p-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
             <div>
-              <p className="font-mono text-[11px] text-violet-light tracking-[0.2em] uppercase mb-2">Compliance by Design</p>
+              <p className="font-mono text-label text-violet-light tracking-[0.2em] uppercase mb-2">Compliance by Design</p>
               <h2 className="font-display font-black text-white text-2xl mb-2">This service is mapped to MTA&apos;s 10-stage delivery pipeline.</h2>
               <p className="text-sm text-muted leading-relaxed">
                 Service execution is gated through signed agreements, payment-linked transitions, and documented handover controls.

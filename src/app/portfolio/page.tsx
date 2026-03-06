@@ -12,7 +12,7 @@ export default function PortfolioPage() {
         <div className="container-site text-center relative z-10">
           <div className="inline-flex items-center gap-2 mb-6 w-fit px-4 py-2 rounded-full bg-violet/10 border border-violet/20">
              <div className="w-2 h-2 rounded-full bg-violet animate-pulse-violet" />
-             <p className="text-[11px] font-mono text-violet tracking-widest uppercase">OUR WORK</p>
+             <p className="text-label font-mono text-violet tracking-widest uppercase">OUR WORK</p>
           </div>
           <h1 className="font-display font-black text-white leading-none tracking-tight mb-6"
             style={{ fontSize: 'clamp(48px, 8vw, 100px)' }}>
@@ -70,10 +70,10 @@ export default function PortfolioPage() {
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2">
                       {p.tags.map(t => (
-                        <span key={t} className="text-[11px] font-mono px-3 py-1 rounded-full border border-border text-muted">{t}</span>
+                        <span key={t} className="text-label font-mono px-3 py-1 rounded-full border border-border text-muted">{t}</span>
                       ))}
                       {p.featured && (
-                        <span className="text-[11px] font-mono px-3 py-1 rounded-full bg-violet text-white font-semibold shadow-[0_0_15px_rgba(124,58,237,0.4)]">
+                        <span className="text-label font-mono px-3 py-1 rounded-full bg-violet text-white font-semibold shadow-[0_0_15px_rgba(124,58,237,0.4)]">
                           ✦ Signature Project
                         </span>
                       )}
