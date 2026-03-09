@@ -11,21 +11,26 @@ const getServerSnapshot = () => false
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme()
   const mounted = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
-  if (!mounted) return <div className="w-9 h-9" />
+  if (!mounted) return <div className="w-[72px] h-[32px]" />
+
+  const isDark = theme === 'dark'
 
   return (
     <button
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200"
+      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      className="flex items-center gap-1.5 px-3 py-1.5 font-mono transition-all duration-200 hover:border-violet"
       style={{
         border: '1px solid var(--color-border)',
-        backgroundColor: 'rgba(255,255,255,0.05)',
+        backgroundColor: 'var(--color-surface)',
         color: 'var(--color-muted)',
+        fontSize: '11px',
+        letterSpacing: '0.08em',
       }}
-      aria-label="Toggle theme"
+      aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
       data-cursor="pointer"
     >
-      {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+      {isDark ? <Sun size={13} /> : <Moon size={13} />}
+      <span>{isDark ? 'Light' : 'Dark'}</span>
     </button>
   )
 }

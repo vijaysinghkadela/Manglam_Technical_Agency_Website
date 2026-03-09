@@ -29,19 +29,21 @@ export function Navbar() {
   const [mobile, setMobile] = useState(false)
   const [mega, setMega] = useState(false)
 
-  // Scroll detection
+  // Scroll detection — only triggers setState when crossing the 40px boundary
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 40)
+    let prev = window.scrollY > 40
+    const fn = () => {
+      const next = window.scrollY > 40
+      if (next !== prev) { prev = next; setScrolled(next) }
+    }
     window.addEventListener('scroll', fn, { passive: true })
     return () => window.removeEventListener('scroll', fn)
   }, [])
 
-  // Auto-close on navigation
-  useEffect(() => { 
-    setTimeout(() => {
-      setMobile(false)
-      setMega(false)
-    }, 0)
+  // Auto-close on navigation — deferred to avoid synchronous setState-in-effect
+  useEffect(() => {
+    const id = setTimeout(() => { setMobile(false); setMega(false) }, 0)
+    return () => clearTimeout(id)
   }, [path])
 
   // Mobile scroll lock
@@ -108,6 +110,7 @@ export function Navbar() {
                   data-cursor="pointer"
                   onFocus={() => setMega(true)}
                   onBlur={() => setTimeout(() => setMega(false), 200)}
+                  aria-label={mega ? 'Close services menu' : 'Open services menu'}
                   aria-expanded={mega}
                   aria-haspopup="true"
                   className={cn(

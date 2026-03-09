@@ -15,6 +15,11 @@
   --color-cyan:          #06B6D4;
   --color-amber:         #F59E0B;
 
+  /* Semantic foreground — always the readable text colour */
+  --color-foreground:    #FAFAFA;
+  /* Cursor ring colour — rgba form for opacity */
+  --color-cursor-ring:   rgba(255,255,255,0.18);
+
   /* Fonts */
   --font-display: "Syne", sans-serif;
   --font-body:    "Inter", sans-serif;
@@ -44,7 +49,7 @@ html {
 
 body {
   background-color: var(--color-canvas);
-  color: #FAFAFA;
+  color: var(--color-foreground);
   font-family: var(--font-body);
   overflow-x: hidden;
   width: 100%;            /* NEVER 100vw — causes scrollbar overflow */
@@ -170,71 +175,134 @@ img, video { max-width: 100%; height: auto; display: block; }
 
 section[id] { scroll-margin-top: 120px; }
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration:       0.01ms !important;
-    transition-duration:      0.01ms !important;
-    animation-iteration-count: 1    !important;
-  }
-}
-
-/* ── Light Mode Variable Overrides ─────────────────────────── */
+/* ── Light Mode ─────────────────────────────────────────────── */
 html:not(.dark) {
   --color-canvas:        #f8fafc;
   --color-surface:       #f1f5f9;
   --color-card:          #ffffff;
   --color-border:        #e2e8f0;
   --color-muted:         #64748b;
-  --color-dead:          #cbd5e1;
+  --color-dead:          #94a3b8;
   --color-violet:        #7C3AED;
   --color-violet-light:  #6D28D9;
   --color-violet-dark:   #5B21B6;
   --color-cyan:          #0891B2;
   --color-amber:         #D97706;
+
+  /* Flip semantic tokens */
+  --color-foreground:  #0f172a;
+  --color-cursor-ring: rgba(0,0,0,0.18);
 }
 
-html:not(.dark) body {
-  background-color: #f8fafc;
-  color: #0f172a;
+/* ── Light mode: flip Tailwind dark utility classes ── */
+
+/* Section / page backgrounds — bg-black only (no bracket selectors: Turbopack rejects them) */
+html:not(.dark) .bg-black {
+  background-color: var(--color-canvas) !important;
 }
 
-/* Light mode text overrides — headings and white text become dark */
-html:not(.dark) .text-white {
-  color: #0f172a;
-}
+/* Foreground text — white → dark */
+html:not(.dark) .text-white { color: #0f172a !important; }
 
-/* Keep text white on colored backgrounds in light mode */
-html:not(.dark) [style*="background-color: var(--color-violet)"] .text-white,
-html:not(.dark) [style*="backgroundColor:"] .text-white {
-  color: #FAFAFA;
-}
-
-/* Light mode dot/line grid subtle adjustments */
+/* Grid backgrounds */
 html:not(.dark) .bg-line-grid {
   background-image:
     linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
 }
-
 html:not(.dark) .bg-dot-grid {
-  background-image: radial-gradient(
-    circle,
-    rgba(0,0,0,0.06) 1px,
-    transparent 1px
-  );
+  background-image: radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px);
 }
 
-/* Light mode grain overlay */
-html:not(.dark) .grain::after {
-  opacity: 0.015;
+/* Film grain — more subtle in light mode */
+html:not(.dark) .grain::after { opacity: 0.015; }
+
+/* ── Smooth theme transition ─────────────────────────────────── */
+body, nav, footer, section, .container-site, [class*="bg-"] {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.15s ease;
 }
 
-/* Smooth theme transition */
-body,
-nav,
-footer,
-section,
-.container-site,
-[class*="bg-"] {
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.15s ease;
+/* ── Marquee edge fade mask ─────────────────────────────────── */
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
 }
+
+/* ── Violet text glow ───────────────────────────────────────── */
+.text-glow-violet { text-shadow: 0 0 32px rgba(124,58,237,0.45); }
+
+/* ── Theme-aware hover foreground ───────────────────────────── */
+.hover-foreground:hover { color: var(--color-foreground) !important; }
+
+/* ── Card hover lift ────────────────────────────────────────── */
+.card-hover {
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease, border-color 0.25s ease;
+}
+.card-hover:hover { transform: translateY(-3px); }
+
+/* ── Violet box-shadow ──────────────────────────────────────── */
+.shadow-violet-glow { box-shadow: 0 0 40px rgba(124,58,237,0.18), 0 0 80px rgba(124,58,237,0.06); }
+
+/* ── Gradient divider ───────────────────────────────────────── */
+.divider-gradient {
+  height: 1px;
+  background: linear-gradient(to right, var(--color-violet), var(--color-border) 50%, transparent 100%);
+}
+
+/* ── Fade-up entrance ─────────────────────────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up { animation: fade-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+/* ── Fade-in ── */
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+.animate-fade-in { animation: fade-in 0.5s ease both; }
+
+/* ── Slide-in from left ── */
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.animate-slide-left { animation: slide-in-left 0.65s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+/* ── Violet dot pulse ── */
+@keyframes dot-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.5); opacity: 0.6; }
+}
+.animate-dot-pulse { animation: dot-pulse 1.6s ease-in-out infinite; }
+
+/* ── Text shimmer ── */
+@keyframes text-shimmer {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.text-shimmer {
+  background: linear-gradient(90deg, var(--color-foreground) 0%, var(--color-violet-light) 50%, var(--color-foreground) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: text-shimmer 4s linear infinite;
+}
+
+/* ── Scale-in ── */
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.animate-scale-in { animation: scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+/* ── Stagger delay utilities ── */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.10s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.20s; }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.30s; }
+
+/* ── Gradient border utility ── */
+.border-violet-glow { border-color: rgba(124, 58, 237, 0.35) !important; }

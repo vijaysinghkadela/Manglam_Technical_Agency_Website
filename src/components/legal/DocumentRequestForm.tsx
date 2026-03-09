@@ -72,117 +72,222 @@ export function DocumentRequestForm({ docs }: DocumentRequestFormProps) {
 
   if (submitted) {
     return (
-      <div className="border border-border bg-card p-8 sm:p-10">
-        <div className="flex items-center gap-4 mb-6">
-          <div className="w-12 h-12 rounded-full border border-violet/40 bg-violet/10 flex items-center justify-center">
-            <CheckCircle2 className="w-6 h-6 text-violet-light" />
+      <div
+        className="flex flex-col gap-6 p-8"
+        style={{ border: '1px solid var(--color-border)', backgroundColor: 'var(--color-card)' }}
+      >
+        <div className="flex items-center gap-4">
+          <div
+            className="w-12 h-12 flex items-center justify-center shrink-0"
+            style={{ border: '1px solid rgba(124,58,237,0.4)', backgroundColor: 'rgba(124,58,237,0.08)' }}
+          >
+            <CheckCircle2 className="w-6 h-6" style={{ color: 'var(--color-violet-light)' }} />
           </div>
           <div>
-            <h3 className="font-display font-black text-xl text-white">Request Submitted</h3>
-            <p className="text-sm text-muted">Our team will review and share applicable templates after verification.</p>
+            <h3 className="font-display font-black text-xl" style={{ color: 'var(--color-foreground)' }}>
+              Request Submitted
+            </h3>
+            <p className="text-sm" style={{ color: 'var(--color-muted)' }}>
+              Our team will review and share applicable templates after verification.
+            </p>
           </div>
         </div>
         <button
           type="button"
           onClick={() => setSubmitted(false)}
-          className="text-sm text-violet-light hover:text-white transition-colors"
+          className="text-sm font-mono transition-colors hover-foreground"
+          style={{ color: 'var(--color-violet-light)', textAlign: 'left' }}
         >
-          Submit another request
+          Submit another request →
         </button>
       </div>
     )
   }
 
   return (
-    <form className="border border-border bg-card p-6 sm:p-8 flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)} noValidate>
+    <form
+      className="flex flex-col gap-6 p-6 sm:p-8"
+      style={{ border: '1px solid var(--color-border)', backgroundColor: 'var(--color-card)' }}
+      onSubmit={handleSubmit(onSubmit)}
+      noValidate
+    >
+      {/* Header */}
       <div>
-        <p className="font-mono text-[11px] tracking-[0.18em] uppercase text-violet-light mb-2">Request Templates</p>
-        <h3 className="font-display font-black text-2xl text-white mb-2">Restricted Access Workflow</h3>
-        <p className="text-sm text-muted leading-relaxed">
+        <span
+          className="font-mono uppercase block mb-2"
+          style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.18em' }}
+        >
+          REQUEST TEMPLATES
+        </span>
+        <h3
+          className="font-display font-black text-2xl mb-2"
+          style={{ color: 'var(--color-foreground)' }}
+        >
+          Restricted Access Workflow
+        </h3>
+        <p className="text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
           Templates are shared after manual verification to protect confidential and client-sensitive legal structures.
         </p>
       </div>
 
+      {/* Name + Email */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <label className="flex flex-col gap-2">
-          <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-muted">Name *</span>
+          <span
+            className="font-mono uppercase"
+            style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.15em' }}
+          >
+            Name *
+          </span>
           <input
             {...register('name')}
             placeholder="Your full name"
-            className="bg-canvas border border-border px-4 py-3 text-sm text-white outline-none focus:border-violet"
+            className="px-4 py-3 text-sm outline-none transition-colors"
+            style={{
+              backgroundColor: 'var(--color-canvas)',
+              border: '1px solid var(--color-border)',
+              color: 'var(--color-foreground)',
+            }}
+            onFocus={e => (e.currentTarget.style.borderColor = 'var(--color-violet)')}
+            onBlur={e => (e.currentTarget.style.borderColor = 'var(--color-border)')}
           />
-          {errors.name && <span className="text-[11px] text-red-400">{errors.name.message}</span>}
+          {errors.name && (
+            <span className="text-label text-red-400">{errors.name.message}</span>
+          )}
         </label>
 
         <label className="flex flex-col gap-2">
-          <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-muted">Email *</span>
+          <span
+            className="font-mono uppercase"
+            style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.15em' }}
+          >
+            Email *
+          </span>
           <input
             {...register('email')}
             type="email"
             placeholder="you@company.com"
-            className="bg-canvas border border-border px-4 py-3 text-sm text-white outline-none focus:border-violet"
+            className="px-4 py-3 text-sm outline-none transition-colors"
+            style={{
+              backgroundColor: 'var(--color-canvas)',
+              border: '1px solid var(--color-border)',
+              color: 'var(--color-foreground)',
+            }}
+            onFocus={e => (e.currentTarget.style.borderColor = 'var(--color-violet)')}
+            onBlur={e => (e.currentTarget.style.borderColor = 'var(--color-border)')}
           />
-          {errors.email && <span className="text-[11px] text-red-400">{errors.email.message}</span>}
+          {errors.email && (
+            <span className="text-label text-red-400">{errors.email.message}</span>
+          )}
         </label>
       </div>
 
+      {/* Company */}
       <label className="flex flex-col gap-2">
-        <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-muted">Company</span>
+        <span
+          className="font-mono uppercase"
+          style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.15em' }}
+        >
+          Company
+        </span>
         <input
           {...register('company')}
           placeholder="Optional"
-          className="bg-canvas border border-border px-4 py-3 text-sm text-white outline-none focus:border-violet"
+          className="px-4 py-3 text-sm outline-none transition-colors"
+          style={{
+            backgroundColor: 'var(--color-canvas)',
+            border: '1px solid var(--color-border)',
+            color: 'var(--color-foreground)',
+          }}
+          onFocus={e => (e.currentTarget.style.borderColor = 'var(--color-violet)')}
+          onBlur={e => (e.currentTarget.style.borderColor = 'var(--color-border)')}
         />
       </label>
 
+      {/* Document selection */}
       <div className="flex flex-col gap-3">
-        <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-muted">Requested Documents *</span>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <span
+          className="font-mono uppercase"
+          style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.15em' }}
+        >
+          Requested Documents *
+        </span>
+        <div className="flex flex-col gap-2">
           {docs.map((doc) => {
-            const selected = selectedDocs?.includes(doc.id)
+            const selected = selectedDocs.includes(doc.id)
             return (
               <button
                 type="button"
                 key={doc.id}
                 onClick={() => toggleDoc(doc.id)}
-                className={`text-left border px-4 py-3 transition-colors ${
-                  selected ? 'border-violet/60 bg-violet/10' : 'border-border bg-canvas hover:border-violet/35'
-                }`}
+                className="text-left px-4 py-3 transition-all duration-200"
+                style={{
+                  border: selected
+                    ? '1px solid rgba(124,58,237,0.6)'
+                    : '1px solid var(--color-border)',
+                  backgroundColor: selected ? 'rgba(124,58,237,0.08)' : 'var(--color-canvas)',
+                }}
               >
-                <p className="text-sm font-semibold text-white">{doc.name}</p>
-                <p className="text-xs text-muted mt-1 leading-relaxed">{doc.notes}</p>
+                <p className="text-sm font-semibold" style={{ color: 'var(--color-foreground)' }}>
+                  {doc.name}
+                </p>
+                <p className="text-xs mt-1 leading-relaxed" style={{ color: 'var(--color-muted)' }}>
+                  {doc.notes}
+                </p>
               </button>
             )
           })}
         </div>
-        {errors.requestedDocuments && <span className="text-[11px] text-red-400">{errors.requestedDocuments.message}</span>}
+        {errors.requestedDocuments && (
+          <span className="text-label text-red-400">{errors.requestedDocuments.message}</span>
+        )}
       </div>
 
+      {/* Use case */}
       <label className="flex flex-col gap-2">
-        <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-muted">Use Case *</span>
+        <span
+          className="font-mono uppercase"
+          style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.15em' }}
+        >
+          Use Case *
+        </span>
         <textarea
           {...register('useCase')}
           rows={4}
           placeholder="Tell us which engagement this is for and why these templates are needed."
-          className="bg-canvas border border-border px-4 py-3 text-sm text-white outline-none focus:border-violet resize-y"
+          className="px-4 py-3 text-sm outline-none resize-y transition-colors"
+          style={{
+            backgroundColor: 'var(--color-canvas)',
+            border: '1px solid var(--color-border)',
+            color: 'var(--color-foreground)',
+          }}
+          onFocus={e => (e.currentTarget.style.borderColor = 'var(--color-violet)')}
+          onBlur={e => (e.currentTarget.style.borderColor = 'var(--color-border)')}
         />
-        {errors.useCase && <span className="text-[11px] text-red-400">{errors.useCase.message}</span>}
+        {errors.useCase && (
+          <span className="text-label text-red-400">{errors.useCase.message}</span>
+        )}
       </label>
 
-      <label className="flex items-start gap-3 text-sm text-muted leading-relaxed">
+      {/* Privacy checkbox */}
+      <label className="flex items-start gap-3 text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
         <input
           type="checkbox"
           {...register('privacy')}
-          className="mt-0.5 w-4 h-4 accent-violet"
+          className="mt-0.5 w-4 h-4 accent-violet shrink-0"
         />
         I confirm this request is for legitimate evaluation or onboarding and I agree to MTA processing this submission.
       </label>
-      {errors.privacy && <span className="text-[11px] text-red-400 -mt-4">{errors.privacy.message}</span>}
+      {errors.privacy && (
+        <span className="text-label text-red-400 -mt-4">{errors.privacy.message}</span>
+      )}
 
+      {/* Submit */}
       <button
         type="submit"
         disabled={isSubmitting}
-        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-black font-display font-black text-[15px] hover:bg-violet hover:text-white transition-colors disabled:opacity-60"
+        className="inline-flex items-center justify-center gap-2 px-6 py-4 font-display font-black text-[15px] transition-all duration-300 hover:bg-violet hover:text-white disabled:opacity-60"
+        style={{ backgroundColor: 'var(--color-foreground)', color: 'var(--color-canvas)' }}
       >
         {isSubmitting ? (
           <>

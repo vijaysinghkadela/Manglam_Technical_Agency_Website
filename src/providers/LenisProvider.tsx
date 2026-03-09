@@ -6,8 +6,9 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null)
 
   useEffect(() => {
-    // Skip smooth scrolling on touch devices — native scroll is better
+    // Skip smooth scrolling on touch devices or when user prefers reduced motion
     if (window.matchMedia('(pointer: coarse)').matches) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     const lenis = new Lenis({
       duration:        1.1,       // slightly faster for snappier feel

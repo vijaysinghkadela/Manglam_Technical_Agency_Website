@@ -15,7 +15,7 @@ export function SpotlightCard({ children, className = '', style, intensity = 0.0
   return (
     <div
       ref={ref}
-      className={className}
+      className={`transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 ${className}`}
       style={{ ...style, background: bg }}
       onMouseMove={(e) => {
         if (!ref.current) return

@@ -1,12 +1,12 @@
 export const AGENCY_NAME = 'Manglam Technical Agency';
 export const AGENCY_SHORT = 'MTA';
-export const AGENCY_EMAIL = 'info@manglamtechnicalagency.com';
-export const AGENCY_PHONE = '+91 9999999999';
-export const AGENCY_WHATSAPP = 'https://wa.me/919999999999';
-export const AGENCY_LOCATION = 'Rajasthan, India';
+export const AGENCY_EMAIL = 'manglamtechnicalagency@gmail.com';
+export const AGENCY_PHONE = '+91-8003903572';
+export const AGENCY_WHATSAPP = 'https://wa.me/918003903572';
+export const AGENCY_LOCATION = 'Nagaur, Rajasthan, India';
 export const AGENCY_TAGLINE = 'Technology That Transforms';
 export const AGENCY_FOUNDED = 2021;
-export const AGENCY_URL = 'https://manglamtechnicalagency.com';
+export const AGENCY_URL = 'https://www.manglamtechnicalagency.com';
 
 export const OFFICE_HOURS = {
   weekdays: 'Mon–Sat: 9:00 AM – 7:00 PM IST',
@@ -15,10 +15,10 @@ export const OFFICE_HOURS = {
 
 export const CONTACT_INFO = {
   address: {
-    street: '123 Tech Park, Civil Lines',
-    city: 'Jaipur',
+    street: 'Rampole Choraha',
+    city: 'Nagaur',
     state: 'Rajasthan',
-    pincode: '302001',
+    pincode: '341001',
     country: 'India',
   },
   email: AGENCY_EMAIL,

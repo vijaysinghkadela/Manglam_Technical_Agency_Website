@@ -10,18 +10,25 @@ export function MagneticCursor() {
   const variantRef = useRef<Variant>('default')
   const [variant, setVariant] = useState<Variant>('default')
 
+  // Use a ref so `move` never needs `visible` in its deps
+  const visibleRef = useRef(false)
+
   const mx = useMotionValue(-300)
   const my = useMotionValue(-300)
   const rx = useSpring(mx, { stiffness: 220, damping: 26, mass: 0.35 })
   const ry = useSpring(my, { stiffness: 220, damping: 26, mass: 0.35 })
 
-  // Throttled variant detection — only runs every 80ms instead of every frame
   const lastVariantCheck = useRef(0)
 
+  // Stable callback — no state deps, uses refs for visibility
   const move = useCallback((e: MouseEvent) => {
     mx.set(e.clientX)
     my.set(e.clientY)
-    if (!visible) setVisible(true)
+
+    if (!visibleRef.current) {
+      visibleRef.current = true
+      setVisible(true)
+    }
 
     const now = performance.now()
     if (now - lastVariantCheck.current > 80) {
@@ -34,15 +41,14 @@ export function MagneticCursor() {
         setVariant(next)
       }
     }
-  }, [mx, my, visible])
+  }, [mx, my]) // stable — no state deps
 
   useEffect(() => {
-    // Touch devices: skip entirely
     if (!window.matchMedia('(pointer: fine)').matches) return
     setTimeout(() => setReady(true), 0)
 
-    const hide = () => setVisible(false)
-    const show = () => setVisible(true)
+    const hide = () => { visibleRef.current = false; setVisible(false) }
+    const show = () => { visibleRef.current = true;  setVisible(true)  }
 
     window.addEventListener('mousemove',           move, { passive: true })
     document.documentElement.addEventListener('mouseleave', hide)
@@ -57,28 +63,29 @@ export function MagneticCursor() {
   if (!ready) return null
 
   const sizes: Record<Variant, { w: number; h: number }> = {
-    default: { w: 32,  h: 32 },
-    pointer: { w: 18,  h: 18 },
-    text:    { w: 68,  h: 24 },
-    link:    { w: 48,  h: 48 },
+    default: { w: 32, h: 32 },
+    pointer: { w: 18, h: 18 },
+    text:    { w: 68, h: 24 },
+    link:    { w: 48, h: 48 },
   }
   const { w, h } = sizes[variant]
 
   return (
     <>
-      {/* Dot: instant follow */}
+      {/* Dot: instant follow — theme-aware color */}
       <motion.div
-        className="fixed top-0 left-0 rounded-full bg-white pointer-events-none z-9999"
+        className="fixed top-0 left-0 rounded-full pointer-events-none z-9999"
         style={{
           x: mx, y: my,
           translateX: '-50%', translateY: '-50%',
           width: 5, height: 5,
+          backgroundColor: 'var(--color-foreground)',
           opacity: (visible && variant !== 'pointer') ? 1 : 0,
           willChange: 'transform',
           transition: 'opacity 0.15s',
         }}
       />
-      {/* Ring: spring follow */}
+      {/* Ring: spring follow — theme-aware border */}
       <motion.div
         className="fixed top-0 left-0 rounded-full border pointer-events-none z-9998"
         style={{
@@ -87,8 +94,8 @@ export function MagneticCursor() {
           width:  w,
           height: h,
           opacity:         visible ? 1 : 0,
-          backgroundColor: variant === 'pointer' ? 'rgba(124,58,237,0.88)' : 'transparent',
-          borderColor:     variant === 'pointer' ? '#7C3AED' : 'rgba(255,255,255,0.18)',
+          backgroundColor: variant === 'pointer' ? 'var(--color-violet)' : 'transparent',
+          borderColor:     variant === 'pointer' ? 'var(--color-violet)' : 'var(--color-cursor-ring)',
           willChange:      'transform',
           transition:      'width 0.18s ease, height 0.18s ease, background-color 0.18s ease, opacity 0.15s',
         }}

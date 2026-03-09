@@ -44,7 +44,7 @@ export default function OrbitalRing() {
       {/* Outer orbit track */}
       <div
         className="absolute inset-0 rounded-full"
-        style={{ border: '1px solid rgba(255,255,255,0.06)' }}
+        style={{ border: '1px solid var(--color-border)' }}
       />
 
       {/* Rotating container — whole group rotates */}

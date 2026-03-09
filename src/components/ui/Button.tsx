@@ -16,15 +16,15 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantStyles = {
   primary:
-    'bg-violet-600 text-white hover:bg-violet-500 active:scale-[0.98] shadow-[0_4px_20px_rgba(108,43,217,0.4)] hover:shadow-[0_8px_30px_rgba(108,43,217,0.5)] before:absolute before:inset-0 before:bg-linear-to-r before:from-transparent before:via-white/15 before:to-transparent before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-500',
+    'bg-violet-600 text-white hover:bg-violet-500 hover:scale-[1.03] active:scale-[0.98] shadow-[0_4px_20px_rgba(108,43,217,0.4)] hover:shadow-[0_8px_30px_rgba(108,43,217,0.5)] before:absolute before:inset-0 before:bg-linear-to-r before:from-transparent before:via-white/15 before:to-transparent before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-500',
   secondary:
-    'bg-white/4 text-white border border-white/[0.1] hover:bg-white/8 hover:border-violet-500/30',
+    'bg-white/4 text-white border border-white/[0.1] hover:bg-white/8 hover:scale-[1.03] active:scale-[0.98] hover:border-violet-500/30',
   ghost:
-    'bg-transparent text-white border border-white/[0.12] hover:border-violet-500/40 hover:bg-violet-500/10',
+    'bg-transparent text-white border border-white/[0.12] hover:border-violet-500/40 hover:scale-[1.03] active:scale-[0.98] hover:bg-violet-500/10',
   danger:
-    'bg-red-500/10 text-red-400 border border-red-500/25 hover:bg-red-500/20',
+    'bg-red-500/10 text-red-400 border border-red-500/25 hover:bg-red-500/20 hover:scale-[1.03] active:scale-[0.98]',
   gradient:
-    'bg-linear-to-r from-violet-600 to-cyan-500 text-white hover:shadow-[0_8px_30px_rgba(108,43,217,0.5)] active:scale-[0.98] before:absolute before:inset-0 before:bg-linear-to-r before:from-transparent before:via-white/15 before:to-transparent before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-500',
+    'bg-linear-to-r from-violet-600 to-cyan-500 text-white hover:scale-[1.03] hover:shadow-[0_8px_30px_rgba(108,43,217,0.5)] active:scale-[0.98] before:absolute before:inset-0 before:bg-linear-to-r before:from-transparent before:via-white/15 before:to-transparent before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-500',
 };
 
 const sizeStyles = {

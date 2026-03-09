@@ -1,8 +1,10 @@
-import PageHero from '@/components/ui/PageHero'
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { services } from '@/lib/data/services'
-import type { Metadata } from 'next'
+import { JsonLd }   from '@/components/seo/JsonLd'
+import { breadcrumbSchema } from '@/lib/seo/schemas'
+import { ServicesGrid } from '@/components/services/ServicesGrid'
 
 export const metadata: Metadata = {
   title: 'Services',
@@ -13,69 +15,85 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <main className="min-h-screen bg-canvas">
-      <PageHero
-        breadcrumbCurrent="Services"
-        label="WHAT WE DO"
-        title="Services That Scale"
-        subheading="End-to-end digital infrastructure for Indian businesses. We build, secure, and automate your operations so you can focus on growth."
-      />
+      <JsonLd schema={breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Services', url: '/services' }])} />
 
-      <section className="py-28 bg-surface border-t border-border">
-        <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {services.map((service, idx) => {
-              const num = String(idx + 1).padStart(2, '0')
+      {/* ── HERO ─────────────────────────────────────────── */}
+      <section
+        className="relative w-full min-h-[55vh] flex flex-col overflow-hidden grain"
+        style={{ backgroundColor: 'var(--color-canvas)' }}
+      >
+        <div className="absolute inset-0 bg-line-grid opacity-[0.16] pointer-events-none" />
+        <div
+          className="absolute pointer-events-none"
+          style={{
+            right: '-8%', top: '10%',
+            width: 'clamp(300px, 40vw, 700px)', height: 'clamp(300px, 40vw, 700px)',
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(124,58,237,0.09) 0%, transparent 68%)',
+          }}
+        />
 
-              return (
-                <Link
-                  key={service.slug}
-                  href={`/services/${service.slug}`}
-                  className="group relative bg-card border border-border p-8 flex flex-col min-h-[320px] overflow-hidden transition-all duration-500 hover:border-violet/30"
-                  data-cursor="link"
-                >
-                  {/* Left violet accent */}
-                  <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-violet scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-bottom" />
+        <div className="relative z-10 container-site flex flex-col flex-1 pt-28 lg:pt-36 pb-16">
+          <nav
+            className="flex items-center gap-2 font-mono mb-14 lg:mb-20"
+            style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
+          >
+            <Link href="/" className="hover-foreground transition-colors">HOME</Link>
+            <span>/</span>
+            <span style={{ color: 'var(--color-muted)' }}>SERVICES</span>
+          </nav>
 
-                  <div className="flex items-center justify-between mb-8">
-                    <span className="font-display text-5xl font-black text-white/6 group-hover:text-violet/20 transition-colors duration-500 select-none">
-                      {num}
-                    </span>
-                    <div className="w-10 h-10 border border-border flex items-center justify-center text-muted group-hover:border-violet/40 group-hover:text-violet-light transition-all duration-300">
-                      <service.Icon className="w-5 h-5" />
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col gap-3 mt-auto">
-                    <h3 className="font-display text-xl font-bold text-white leading-tight group-hover:text-violet-light transition-colors duration-300">{service.name}</h3>
-                    <p className="text-sm text-muted leading-relaxed line-clamp-2">{service.tagline}</p>
-
-                    <div className="flex items-center justify-between mt-4 pt-4 border-t border-border">
-                      <span className="text-xs text-violet-light font-mono font-semibold">{service.priceLabel}</span>
-                      <div className="w-8 h-8 border border-border flex items-center justify-center group-hover:bg-violet group-hover:border-violet transition-all duration-300">
-                        <ArrowRight className="w-3.5 h-3.5 text-muted group-hover:text-white transition-colors" />
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              )
-            })}
+          <div className="flex-1 flex flex-col justify-center">
+            <span className="font-mono uppercase block mb-5" style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.24em' }}>
+              ✦ WHAT WE DO
+            </span>
+            <div className="flex flex-col" style={{ gap: '0.02em' }}>
+              <h1 className="font-display font-black leading-none tracking-tighter uppercase" style={{ fontSize: 'clamp(3rem, 9vw, 9rem)', color: 'var(--color-foreground)' }}>
+                SERVICES
+              </h1>
+              <h1 className="font-display font-black leading-none tracking-tighter uppercase" style={{ fontSize: 'clamp(3rem, 9vw, 9rem)', color: 'var(--color-violet)' }}>
+                THAT SCALE.
+              </h1>
+            </div>
+            <p className="mt-8" style={{ fontSize: '16px', lineHeight: 1.72, color: 'var(--color-muted)', maxWidth: '480px' }}>
+              End-to-end digital infrastructure for Indian businesses. We build, secure, and
+              automate your operations so you can focus on growth.
+            </p>
           </div>
         </div>
       </section>
 
-      <section className="py-16 bg-canvas border-t border-border">
-        <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
-          <div className="border border-border bg-surface p-6 sm:p-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+      {/* ── SERVICES GRID (client component with animations) ── */}
+      <ServicesGrid services={services} />
+
+      {/* ── GOVERNANCE CALLOUT ───────────────────────────── */}
+      <section className="border-t border-border" style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(48px, 7vw, 80px) 0' }}>
+        <div className="container-site">
+          <div className="border border-border p-8 sm:p-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6"
+            style={{ backgroundColor: 'var(--color-canvas)' }}
+          >
             <div>
-              <p className="font-mono text-[11px] text-violet-light tracking-[0.18em] uppercase mb-2">Contract-Governed Delivery</p>
-              <h2 className="font-display font-black text-white text-2xl mb-2">Every service is mapped to legal controls before execution.</h2>
-              <p className="text-sm text-muted leading-relaxed">
+              <p className="font-mono text-label tracking-[0.18em] uppercase mb-2" style={{ color: 'var(--color-violet-light)' }}>Contract-Governed Delivery</p>
+              <h2 className="font-display font-black mb-2" style={{ fontSize: 'clamp(1.1rem, 2vw, 1.6rem)', color: 'var(--color-foreground)' }}>
+                Every service is mapped to legal controls before execution.
+              </h2>
+              <p className="text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
                 Explore the agreement matrix, request workflow, and full lead-to-delivery governance model.
               </p>
             </div>
-            <div className="flex items-center gap-4 text-sm">
-              <Link href="/legal" className="text-violet-light hover:text-white transition-colors">Legal Hub →</Link>
-              <Link href="/research" className="text-violet-light hover:text-white transition-colors">Research Pipeline →</Link>
+            <div className="flex items-center gap-5 text-sm shrink-0">
+              <Link href="/legal"
+                className="font-mono transition-colors"
+                style={{ color: 'var(--color-violet-light)' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-foreground)' }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-violet-light)' }}
+              >Legal Hub →</Link>
+              <Link href="/research"
+                className="font-mono transition-colors"
+                style={{ color: 'var(--color-violet-light)' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-foreground)' }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-violet-light)' }}
+              >Research Pipeline →</Link>
             </div>
           </div>
         </div>
