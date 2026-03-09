@@ -1,6 +1,6 @@
 'use client'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { MagneticButton } from '@/components/ui/MagneticButton'
 import { AGENCY_WHATSAPP } from '@/lib/constants'
 
@@ -21,6 +21,16 @@ export function CTABanner() {
   const { scrollYProgress } = useScroll({ target:ref, offset:['start end','end start'] })
   const watermarkY = useTransform(scrollYProgress, [0,1], ['-8%','8%'])
   const contentY   = useTransform(scrollYProgress, [0,1], ['4%', '-4%'])
+
+  // Disable parallax + floating dots on mobile — major lag source on touch devices
+  const [isDesktop, setIsDesktop] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)')
+    setIsDesktop(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
 
   return (
     <section
@@ -43,9 +53,9 @@ export function CTABanner() {
         aria-hidden
       />
 
-      {/* Parallax watermark */}
+      {/* Parallax watermark — desktop only */}
       <motion.div
-        style={{ y: watermarkY }}
+        style={{ y: isDesktop ? watermarkY : '0%' }}
         className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
         aria-hidden
       >
@@ -57,8 +67,8 @@ export function CTABanner() {
         </span>
       </motion.div>
 
-      {/* Floating dots */}
-      {FLOATING_DOTS.map((dot, i) => (
+      {/* Floating dots — desktop only (7 infinite animations are expensive on mobile) */}
+      {isDesktop && FLOATING_DOTS.map((dot, i) => (
         <motion.div
           key={i}
           className="absolute pointer-events-none rounded-full"
@@ -73,9 +83,9 @@ export function CTABanner() {
         />
       ))}
 
-      {/* Content */}
+      {/* Content — parallax on desktop only */}
       <motion.div
-        style={{ y: contentY }}
+        style={{ y: isDesktop ? contentY : '0%' }}
         className="relative z-10 container-site flex flex-col items-center text-center gap-8"
       >
         <motion.span

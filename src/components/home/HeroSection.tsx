@@ -1,6 +1,6 @@
 'use client'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { TextReveal }    from '@/components/ui/TextReveal'
 import { MagneticButton } from '@/components/ui/MagneticButton'
 import Link from 'next/link'
@@ -25,9 +25,19 @@ const SERVICES = [
 export function HeroSection() {
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
-  const bgY  = useTransform(scrollYProgress, [0,1], ['0%', '22%'])
-  const txtY = useTransform(scrollYProgress, [0,1], ['0%', '10%'])
+  const bgY   = useTransform(scrollYProgress, [0,1], ['0%', '22%'])
+  const txtY  = useTransform(scrollYProgress, [0,1], ['0%', '10%'])
   const glowY = useTransform(scrollYProgress, [0,1], ['0%', '30%'])
+
+  // Disable parallax on mobile/tablet — parallax is a major lag source on touch devices
+  const [isDesktop, setIsDesktop] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)')
+    setIsDesktop(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
 
   return (
     <section
@@ -35,16 +45,16 @@ export function HeroSection() {
       className="relative w-full min-h-screen flex items-center overflow-hidden grain"
       style={{ backgroundColor:'var(--color-canvas)' }}
     >
-      {/* Line grid — parallax */}
+      {/* Line grid — parallax on desktop only */}
       <motion.div
-        style={{ y:bgY }}
+        style={{ y: isDesktop ? bgY : '0%' }}
         className="absolute inset-0 bg-line-grid pointer-events-none opacity-[0.18]"
         aria-hidden
       />
 
-      {/* Violet radial glow — right side, parallax */}
+      {/* Violet radial glow — right side, parallax on desktop only */}
       <motion.div
-        style={{ y: glowY }}
+        style={{ y: isDesktop ? glowY : '0%' }}
         className="absolute pointer-events-none"
         aria-hidden
         initial={{ opacity: 0 }}
@@ -55,11 +65,10 @@ export function HeroSection() {
           position: 'absolute',
           right: '-5%',
           top: '5%',
-          width: 'clamp(400px, 50vw, 900px)',
-          height: 'clamp(400px, 50vw, 900px)',
+          width: 'clamp(300px, 45vw, 900px)',
+          height: 'clamp(300px, 45vw, 900px)',
           borderRadius: '50%',
           background: 'radial-gradient(circle, rgba(124,58,237,0.10) 0%, rgba(124,58,237,0.04) 40%, transparent 70%)',
-          filter: 'blur(2px)',
         }} />
       </motion.div>
 
@@ -77,9 +86,9 @@ export function HeroSection() {
         }}
       />
 
-      {/* Content */}
+      {/* Content — parallax on desktop only */}
       <motion.div
-        style={{ y:txtY }}
+        style={{ y: isDesktop ? txtY : '0%' }}
         className="relative z-10 w-full container-site pt-[128px] pb-16 lg:pb-24"
       >
         <div className="grid grid-cols-1 lg:grid-cols-[55%_45%] gap-10 lg:gap-12 items-center">

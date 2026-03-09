@@ -53,7 +53,7 @@ export function FeaturedProject() {
             viewport={{ once:true, margin:'-50px' }}
             transition={{ duration:0.9, ease: EASE }}
             className="w-full overflow-hidden"
-            style={{ border:'1px solid var(--color-border)', boxShadow:'0 40px 120px rgba(0,0,0,0.7)' }}
+            style={{ border:'1px solid var(--color-border)', boxShadow:'0 20px 60px rgba(0,0,0,0.5)' }}
           >
             {/* Browser chrome */}
             <div className="flex items-center gap-3 px-4 py-3" style={{ backgroundColor:'var(--color-card)', borderBottom:'1px solid var(--color-border)' }}>
@@ -162,17 +162,16 @@ export function FeaturedProject() {
             </p>
 
             {/* Metadata grid */}
-            <div className="grid grid-cols-2" style={{ border:'1px solid var(--color-border)' }}>
-              {[['DURATION','3 Weeks'],['PROJECT VALUE','₹ 50,000'],['DELIVERED','Feb 2026'],['CLIENT TYPE','NGO']].map(([lbl,val],i) => (
+            <div className="grid grid-cols-2 sm:grid-cols-4" style={{ border:'1px solid var(--color-border)' }}>
+              {[['DURATION','3 Weeks'],['VALUE','₹50K'],['DELIVERED','Feb 2026'],['CLIENT','NGO']].map(([lbl,val],i) => (
                 <div key={lbl}
                   style={{
-                    padding:'16px',
-                    borderRight: i % 2 === 0 ? '1px solid var(--color-border)' : 'none',
-                    borderBottom: i < 2       ? '1px solid var(--color-border)' : 'none',
+                    padding:'12px 14px',
+                    borderRight: i < 3 ? '1px solid var(--color-border)' : 'none',
                   }}
                 >
-                  <p className="font-mono uppercase" style={{ fontSize:'10px', color:'var(--color-dead)', letterSpacing:'0.15em', marginBottom:'4px' }}>{lbl}</p>
-                  <p className="font-mono font-semibold" style={{ fontSize:'14px', color: 'var(--color-foreground)' }}>{val}</p>
+                  <p className="font-mono uppercase" style={{ fontSize:'9px', color:'var(--color-dead)', letterSpacing:'0.15em', marginBottom:'4px' }}>{lbl}</p>
+                  <p className="font-mono font-semibold" style={{ fontSize:'13px', color: 'var(--color-foreground)' }}>{val}</p>
                 </div>
               ))}
             </div>

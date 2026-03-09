@@ -130,13 +130,16 @@ img, video { max-width: 100%; height: auto; display: block; }
 }
 
 /* Film grain (hero overlay) */
-.grain::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.032'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 0;
+/* Grain is GPU-expensive — skip on touch/mobile devices */
+@media (pointer: fine) {
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.032'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
 }
 
 /* ── Animations ─────────────────────────────────────────────── */
@@ -148,6 +151,12 @@ img, video { max-width: 100%; height: auto; display: block; }
 .animate-marquee-right { animation: marquee-right 28s linear infinite; will-change: transform; }
 .animate-marquee-left:hover,
 .animate-marquee-right:hover { animation-play-state: paused; }
+
+/* Pause marquee on touch devices — saves battery, avoids continuous compositor work */
+@media (pointer: coarse) {
+  .animate-marquee-left,
+  .animate-marquee-right { animation-play-state: paused; }
+}
 
 /* Orbital rings */
 @keyframes spin-cw  { to { transform: rotate(360deg);  } }
@@ -214,8 +223,10 @@ html:not(.dark) .bg-dot-grid {
   background-image: radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px);
 }
 
-/* Film grain — more subtle in light mode */
-html:not(.dark) .grain::after { opacity: 0.015; }
+/* Film grain — more subtle in light mode (only applies when ::after is rendered, i.e. pointer: fine) */
+@media (pointer: fine) {
+  html:not(.dark) .grain::after { opacity: 0.015; }
+}
 
 /* ── Smooth theme transition ─────────────────────────────────── */
 body, nav, footer, section, .container-site, [class*="bg-"] {
