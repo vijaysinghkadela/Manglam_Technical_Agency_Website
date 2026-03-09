@@ -4,6 +4,7 @@ import { ContactContent } from '@/components/contact/ContactContent'
 import { ContactForm }    from '@/components/contact/ContactForm'
 import { JsonLd }         from '@/components/seo/JsonLd'
 import { breadcrumbSchema, webPageSchema } from '@/lib/seo/schemas'
+import { TextReveal } from '@/components/ui/TextReveal'
 
 export const metadata: Metadata = {
   title: 'Contact Us — Start a Project',
@@ -26,33 +27,22 @@ export default function ContactPage() {
 
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section
-        className="relative w-full min-h-screen flex flex-col overflow-hidden grain"
+        className="relative w-full min-h-[65vh] flex flex-col overflow-hidden grain"
         style={{ backgroundColor: 'var(--color-canvas)' }}
       >
         {/* Grid overlay */}
         <div className="absolute inset-0 bg-line-grid opacity-20 pointer-events-none" />
 
-        {/* Radial glows */}
+        {/* Radial glow */}
         <div
           className="absolute pointer-events-none"
           style={{
             right: '-8%',
-            top: '15%',
+            top: '10%',
             width: 'clamp(320px, 44vw, 760px)',
             height: 'clamp(320px, 44vw, 760px)',
             borderRadius: '50%',
             background: 'radial-gradient(circle, rgba(124,58,237,0.09) 0%, transparent 65%)',
-          }}
-        />
-        <div
-          className="absolute pointer-events-none"
-          style={{
-            left: '-6%',
-            bottom: '8%',
-            width: 'clamp(200px, 30vw, 500px)',
-            height: 'clamp(200px, 30vw, 500px)',
-            borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(124,58,237,0.05) 0%, transparent 65%)',
           }}
         />
 
@@ -60,7 +50,7 @@ export default function ContactPage() {
 
           {/* Breadcrumb */}
           <nav
-            className="flex items-center gap-2 font-mono mb-14 lg:mb-24"
+            className="flex items-center gap-2 font-mono mb-14 lg:mb-20 animate-fade-up"
             style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
           >
             <Link href="/" className="hover-foreground transition-colors">HOME</Link>
@@ -71,29 +61,31 @@ export default function ContactPage() {
           {/* Headline */}
           <div className="flex-1 flex flex-col justify-center">
             <span
-              className="font-mono uppercase block mb-6"
+              className="font-mono uppercase block mb-6 animate-fade-up stagger-1"
               style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.22em' }}
             >
               ✦ GET IN TOUCH
             </span>
 
             <div className="flex flex-col" style={{ gap: '0.02em' }}>
-              <h1
+              <TextReveal
+                text="START A"
+                as="h1"
+                delay={0.1}
                 className="font-display font-black leading-none tracking-tighter uppercase"
-                style={{ fontSize: 'clamp(3.5rem, 10vw, 10rem)', color: 'var(--color-foreground)' }}
-              >
-                START A
-              </h1>
-              <h1
+                style={{ fontSize: 'clamp(3rem, 8vw, 8rem)', color: 'var(--color-foreground)' }}
+              />
+              <TextReveal
+                text="CONVERSATION."
+                as="h1"
+                delay={0.22}
                 className="font-display font-black leading-none tracking-tighter uppercase"
-                style={{ fontSize: 'clamp(2.25rem, 7vw, 7rem)', color: 'var(--color-violet)' }}
-              >
-                CONVERSATION.
-              </h1>
+                style={{ fontSize: 'clamp(2rem, 5.5vw, 6rem)', color: 'var(--color-violet)' }}
+              />
             </div>
 
             <p
-              className="mt-8 lg:mt-10"
+              className="mt-8 lg:mt-10 animate-fade-up stagger-4"
               style={{ fontSize: '16px', lineHeight: 1.75, color: 'var(--color-muted)', maxWidth: '500px' }}
             >
               Ready to build? Drop us a line. We promise a technical engineer will read it,
@@ -101,55 +93,33 @@ export default function ContactPage() {
             </p>
           </div>
 
-          {/* Bottom bar */}
-          <div className="mt-12 lg:mt-16" style={{ borderTop: '1px solid var(--color-border)', paddingTop: '24px' }}>
-            <div className="flex flex-wrap items-center justify-between gap-6">
-
-              {/* Stats strip */}
-              <div className="flex flex-wrap items-center gap-8">
-                <div className="flex items-center gap-2">
-                  <span
-                    className="block w-2 h-2 rounded-full animate-pulse shrink-0"
-                    style={{ backgroundColor: 'var(--color-violet)' }}
-                  />
-                  <span
-                    className="font-mono uppercase"
-                    style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.18em' }}
-                  >
-                    Avg Response: 2–4 hrs
-                  </span>
-                </div>
+          {/* Bottom stats bar */}
+          <div className="mt-10 lg:mt-14 animate-fade-up stagger-4" style={{ borderTop: '1px solid var(--color-border)', paddingTop: '20px' }}>
+            <div className="flex flex-wrap items-center gap-6">
+              <div className="flex items-center gap-2">
                 <span
-                  className="hidden sm:block font-mono uppercase"
-                  style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.14em' }}
-                >
-                  Mon–Sat · 9AM–7PM IST
-                </span>
-                <span
-                  className="hidden md:block font-mono uppercase"
-                  style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.14em' }}
-                >
-                  Rajasthan, India
-                </span>
-              </div>
-
-              {/* Scroll indicator */}
-              <div className="hidden lg:flex flex-col items-center gap-2">
+                  className="block w-2 h-2 rounded-full animate-pulse shrink-0"
+                  style={{ backgroundColor: 'var(--color-violet)' }}
+                />
                 <span
                   className="font-mono uppercase"
-                  style={{
-                    fontSize: '10px',
-                    color: 'var(--color-dead)',
-                    letterSpacing: '0.22em',
-                    writingMode: 'vertical-rl',
-                    transform: 'rotate(180deg)',
-                  }}
+                  style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.18em' }}
                 >
-                  Scroll
+                  Avg Response: 2–4 hrs
                 </span>
-                <div style={{ width: '1px', height: '48px', backgroundColor: 'var(--color-border)' }} />
               </div>
-
+              <span
+                className="hidden sm:block font-mono uppercase"
+                style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.14em' }}
+              >
+                Mon–Sat · 9AM–7PM IST
+              </span>
+              <span
+                className="hidden md:block font-mono uppercase"
+                style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.14em' }}
+              >
+                Nagaur, Rajasthan
+              </span>
             </div>
           </div>
         </div>

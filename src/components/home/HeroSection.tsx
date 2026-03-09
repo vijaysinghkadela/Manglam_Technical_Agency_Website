@@ -118,7 +118,7 @@ export function HeroSection() {
                 as="h1"
                 delay={0.25}
                 className="font-display font-black"
-                style={{ fontSize:'clamp(2.2rem, 6vw, 6rem)', lineHeight:0.92, letterSpacing:'-0.03em', color: 'var(--color-foreground)' }}
+                style={{ fontSize:'clamp(2.2rem, 5vw, 5rem)', lineHeight:0.92, letterSpacing:'-0.03em', color: 'var(--color-foreground)' }}
               />
               <TextReveal
                 text="DIGITAL"
@@ -126,7 +126,7 @@ export function HeroSection() {
                 delay={0.35}
                 className="font-display font-black"
                 style={{
-                  fontSize:     'clamp(2.2rem, 6vw, 6rem)',
+                  fontSize:     'clamp(2.2rem, 5vw, 5rem)',
                   lineHeight:    0.92,
                   letterSpacing:'-0.03em',
                   color:         'var(--color-violet)',
@@ -138,7 +138,7 @@ export function HeroSection() {
                 as="h1"
                 delay={0.45}
                 className="font-display font-black"
-                style={{ fontSize:'clamp(1.6rem, 4.5vw, 4.5rem)', lineHeight:0.92, letterSpacing:'-0.03em', color: 'var(--color-foreground)' }}
+                style={{ fontSize:'clamp(1.6rem, 3.8vw, 3.8rem)', lineHeight:0.92, letterSpacing:'-0.03em', color: 'var(--color-foreground)' }}
               />
             </div>
 

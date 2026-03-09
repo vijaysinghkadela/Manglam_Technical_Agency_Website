@@ -48,8 +48,8 @@ export function ContactContent({ formNode }: { formNode: React.ReactNode }) {
   return (
     <section style={{ backgroundColor: 'var(--color-canvas)' }}>
       <div
-        className="grid grid-cols-1 lg:grid-cols-[44%_56%]"
-        style={{ borderTop: '1px solid var(--color-border)', minHeight: '100vh' }}
+        className="grid grid-cols-1 lg:grid-cols-[40%_60%]"
+        style={{ borderTop: '1px solid var(--color-border)' }}
       >
 
         {/* ── Left: sticky contact info panel ── */}
@@ -65,12 +65,12 @@ export function ContactContent({ formNode }: { formNode: React.ReactNode }) {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.1 }}
-            className="flex flex-col flex-1 p-10 xl:p-16 pt-16 xl:pt-20"
+            className="flex flex-col flex-1 p-8 xl:p-14 pt-14 xl:pt-16"
           >
             {/* Label */}
             <motion.span
               variants={fadeUp}
-              className="font-mono uppercase block mb-10"
+              className="font-mono uppercase block mb-8"
               style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.22em' }}
             >
               ✦ DIRECT LINE
@@ -79,8 +79,8 @@ export function ContactContent({ formNode }: { formNode: React.ReactNode }) {
             {/* Heading */}
             <motion.h2
               variants={fadeUp}
-              className="font-display font-black leading-none tracking-tighter uppercase mb-6"
-              style={{ fontSize: 'clamp(2.25rem, 4vw, 4rem)', color: 'var(--color-foreground)' }}
+              className="font-display font-black leading-none tracking-tighter uppercase mb-5"
+              style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3.5rem)', color: 'var(--color-foreground)' }}
             >
               Let&apos;s Build<br />
               <span style={{ color: 'var(--color-violet)' }}>Something Real.</span>
@@ -88,15 +88,15 @@ export function ContactContent({ formNode }: { formNode: React.ReactNode }) {
 
             <motion.p
               variants={fadeUp}
-              className="mb-12"
-              style={{ fontSize: '15px', lineHeight: 1.75, color: 'var(--color-muted)', maxWidth: '360px' }}
+              className="mb-10"
+              style={{ fontSize: '14px', lineHeight: 1.75, color: 'var(--color-muted)', maxWidth: '340px' }}
             >
               Skip the red tape — speak directly with our engineering team. We handle web, AI,
               cybersecurity, and automation for Indian businesses.
             </motion.p>
 
             {/* Contact rows */}
-            <motion.div variants={stagger} className="flex flex-col mb-10">
+            <motion.div variants={stagger} className="flex flex-col mb-8">
               {contactItems.map((item, i) => (
                 <motion.div
                   key={item.label}
@@ -113,18 +113,18 @@ export function ContactContent({ formNode }: { formNode: React.ReactNode }) {
                       target={item.external ? '_blank' : undefined}
                       rel={item.external ? 'noopener noreferrer' : undefined}
                       data-cursor="pointer"
-                      className="flex items-center justify-between py-5 transition-colors duration-200"
+                      className="flex items-center justify-between py-4 transition-colors duration-200"
                     >
                       <div className="flex flex-col gap-0.5">
                         <span
                           className="font-mono uppercase"
-                          style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
+                          style={{ fontSize: '9px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
                         >
                           {item.label}
                         </span>
                         <span
                           className="font-display font-semibold transition-colors duration-200 group-hover:text-violet"
-                          style={{ fontSize: 'clamp(0.9rem, 1.4vw, 1.1rem)', color: 'var(--color-foreground)', lineHeight: 1.3 }}
+                          style={{ fontSize: 'clamp(0.85rem, 1.2vw, 1rem)', color: 'var(--color-foreground)', lineHeight: 1.3 }}
                         >
                           {item.value}
                         </span>
@@ -133,24 +133,24 @@ export function ContactContent({ formNode }: { formNode: React.ReactNode }) {
                         </span>
                       </div>
                       <span
-                        className="font-mono text-lg transition-all duration-300 opacity-0 translate-x-[-4px] group-hover:opacity-100 group-hover:translate-x-0"
+                        className="font-mono text-base transition-all duration-300 opacity-0 translate-x-[-4px] group-hover:opacity-100 group-hover:translate-x-0"
                         style={{ color: 'var(--color-violet-light)' }}
                       >
                         →
                       </span>
                     </a>
                   ) : (
-                    <div className="flex items-center justify-between py-5">
+                    <div className="flex items-center justify-between py-4">
                       <div className="flex flex-col gap-0.5">
                         <span
                           className="font-mono uppercase"
-                          style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
+                          style={{ fontSize: '9px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
                         >
                           {item.label}
                         </span>
                         <span
                           className="font-display font-semibold"
-                          style={{ fontSize: 'clamp(0.9rem, 1.4vw, 1.1rem)', color: 'var(--color-foreground)', lineHeight: 1.3 }}
+                          style={{ fontSize: 'clamp(0.85rem, 1.2vw, 1rem)', color: 'var(--color-foreground)', lineHeight: 1.3 }}
                         >
                           {item.value}
                         </span>
@@ -165,13 +165,13 @@ export function ContactContent({ formNode }: { formNode: React.ReactNode }) {
             </motion.div>
 
             {/* WhatsApp CTA */}
-            <motion.div variants={fadeUp} className="mb-10">
+            <motion.div variants={fadeUp} className="mb-8">
               <a
                 href={AGENCY_WHATSAPP}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor="pointer"
-                className="inline-flex items-center gap-3 px-5 py-3.5 font-mono text-xs uppercase tracking-widest transition-all duration-300 hover:border-violet"
+                className="inline-flex items-center gap-3 px-5 py-3 font-mono text-xs uppercase tracking-widest transition-all duration-300 hover:border-violet"
                 style={{
                   border: '1px solid var(--color-border)',
                   color: 'var(--color-muted)',
@@ -188,10 +188,10 @@ export function ContactContent({ formNode }: { formNode: React.ReactNode }) {
             {/* Office hours + status */}
             <motion.div
               variants={fadeUp}
-              className="mt-auto pt-8"
+              className="mt-auto pt-6"
               style={{ borderTop: '1px solid var(--color-border)' }}
             >
-              <div className="flex items-center gap-2 mb-3">
+              <div className="flex items-center gap-2 mb-2">
                 <span
                   className="block w-2 h-2 rounded-full animate-pulse shrink-0"
                   style={{ backgroundColor: 'var(--color-violet)' }}
@@ -216,7 +216,7 @@ export function ContactContent({ formNode }: { formNode: React.ReactNode }) {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, ease: EASE, delay: 0.1 }}
           viewport={{ once: true, amount: 0.05 }}
-          className="p-10 xl:p-16 pt-16 xl:pt-20"
+          className="p-8 xl:p-14 pt-14 xl:pt-16"
         >
           <span
             className="font-mono uppercase block mb-3"
@@ -225,8 +225,8 @@ export function ContactContent({ formNode }: { formNode: React.ReactNode }) {
             ✦ SEND A MESSAGE
           </span>
           <h2
-            className="font-display font-black leading-tight uppercase mb-12"
-            style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)', color: 'var(--color-foreground)' }}
+            className="font-display font-black leading-tight uppercase mb-10"
+            style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2.25rem)', color: 'var(--color-foreground)' }}
           >
             Tell Us About<br />Your Project.
           </h2>

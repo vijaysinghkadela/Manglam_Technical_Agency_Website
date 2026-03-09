@@ -68,14 +68,14 @@ export default function AboutPage() {
                   as="h1"
                   delay={0.1}
                   className="font-display font-black leading-none tracking-tighter uppercase"
-                  style={{ fontSize: 'clamp(2.2rem, 7.5vw, 8rem)', color: 'var(--color-foreground)' }}
+                  style={{ fontSize: 'clamp(2.2rem, 5.5vw, 6rem)', color: 'var(--color-foreground)' }}
                 />
                 <TextReveal
                   text="IN TECHNOLOGY."
                   as="h1"
                   delay={0.22}
                   className="font-display font-black leading-none tracking-tighter uppercase"
-                  style={{ fontSize: 'clamp(2.2rem, 7.5vw, 8rem)', color: 'var(--color-violet)' }}
+                  style={{ fontSize: 'clamp(2.2rem, 5.5vw, 6rem)', color: 'var(--color-violet)' }}
                 />
                 <TextReveal
                   text="Delivered by Specialists Who Actually Do the Work."

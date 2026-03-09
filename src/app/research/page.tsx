@@ -59,28 +59,28 @@ export default function ResearchPage() {
                 as="h1"
                 delay={0.1}
                 className="font-display font-black leading-none tracking-tighter uppercase"
-                style={{ fontSize: 'clamp(2.5rem, 7.5vw, 7.5rem)', color: 'var(--color-foreground)' }}
+                style={{ fontSize: 'clamp(2rem, 4vw, 5rem)', color: 'var(--color-foreground)' }}
               />
               <TextReveal
                 text="COLLABORATION"
                 as="h1"
                 delay={0.2}
                 className="font-display font-black leading-none tracking-tighter uppercase"
-                style={{ fontSize: 'clamp(2.5rem, 7.5vw, 7.5rem)', color: 'var(--color-foreground)' }}
+                style={{ fontSize: 'clamp(2rem, 4vw, 5rem)', color: 'var(--color-foreground)' }}
               />
               <TextReveal
                 text="& DELIVERY"
                 as="h1"
                 delay={0.3}
                 className="font-display font-black leading-none tracking-tighter uppercase"
-                style={{ fontSize: 'clamp(2.5rem, 7.5vw, 7.5rem)', color: 'var(--color-violet)' }}
+                style={{ fontSize: 'clamp(2rem, 4vw, 5rem)', color: 'var(--color-violet)' }}
               />
               <TextReveal
                 text="FRAMEWORK."
                 as="h1"
                 delay={0.4}
                 className="font-display font-black leading-none tracking-tighter uppercase"
-                style={{ fontSize: 'clamp(2.5rem, 7.5vw, 7.5rem)', color: 'var(--color-violet)' }}
+                style={{ fontSize: 'clamp(2rem, 4vw, 5rem)', color: 'var(--color-violet)' }}
               />
             </div>
 
