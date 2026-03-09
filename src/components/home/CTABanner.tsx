@@ -1,6 +1,6 @@
 'use client'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useSyncExternalStore } from 'react'
 import { MagneticButton } from '@/components/ui/MagneticButton'
 import { AGENCY_WHATSAPP } from '@/lib/constants'
 
@@ -23,14 +23,11 @@ export function CTABanner() {
   const contentY   = useTransform(scrollYProgress, [0,1], ['4%', '-4%'])
 
   // Disable parallax + floating dots on mobile — major lag source on touch devices
-  const [isDesktop, setIsDesktop] = useState(false)
-  useEffect(() => {
-    const mq = window.matchMedia('(min-width: 1024px)')
-    setIsDesktop(mq.matches)
-    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches)
-    mq.addEventListener('change', handler)
-    return () => mq.removeEventListener('change', handler)
-  }, [])
+  const isDesktop = useSyncExternalStore(
+    (cb) => { const mq = window.matchMedia('(min-width: 1024px)'); mq.addEventListener('change', cb); return () => mq.removeEventListener('change', cb) },
+    ()   => window.matchMedia('(min-width: 1024px)').matches,
+    ()   => false,
+  )
 
   return (
     <section

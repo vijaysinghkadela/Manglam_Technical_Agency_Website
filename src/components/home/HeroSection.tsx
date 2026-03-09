@@ -1,6 +1,6 @@
 'use client'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useSyncExternalStore } from 'react'
 import { TextReveal }    from '@/components/ui/TextReveal'
 import { MagneticButton } from '@/components/ui/MagneticButton'
 import Link from 'next/link'
@@ -30,14 +30,11 @@ export function HeroSection() {
   const glowY = useTransform(scrollYProgress, [0,1], ['0%', '30%'])
 
   // Disable parallax on mobile/tablet — parallax is a major lag source on touch devices
-  const [isDesktop, setIsDesktop] = useState(false)
-  useEffect(() => {
-    const mq = window.matchMedia('(min-width: 1024px)')
-    setIsDesktop(mq.matches)
-    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches)
-    mq.addEventListener('change', handler)
-    return () => mq.removeEventListener('change', handler)
-  }, [])
+  const isDesktop = useSyncExternalStore(
+    (cb) => { const mq = window.matchMedia('(min-width: 1024px)'); mq.addEventListener('change', cb); return () => mq.removeEventListener('change', cb) },
+    ()   => window.matchMedia('(min-width: 1024px)').matches,
+    ()   => false,
+  )
 
   return (
     <section

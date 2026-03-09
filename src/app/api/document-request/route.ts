@@ -4,7 +4,7 @@ import { documentRequestSchema } from '@/lib/validations'
 
 export async function POST(request: NextRequest) {
   try {
-    const payload = documentRequestSchema.parse(await request.json())
+    documentRequestSchema.parse(await request.json())
 
     // TODO: forward request to fulfilment workflow (Resend / n8n)
     return NextResponse.json({
