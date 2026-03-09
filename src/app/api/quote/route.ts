@@ -11,18 +11,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log('=== New Quote Request ===');
-    console.log('Services:', body.services.join(', '));
-    console.log('Budget:', body.budget);
-    console.log('Timeline:', body.timeline);
-    console.log('Description:', body.description);
-    console.log('Name:', body.name);
-    console.log('Email:', body.email);
-    console.log('Phone:', body.phone || 'Not provided');
-    console.log('Company:', body.company || 'Not provided');
-    console.log('Timestamp:', new Date().toISOString());
-    console.log('=========================');
-
+    // TODO: forward to CRM / email provider (Resend / HubSpot)
     return NextResponse.json(
       { success: true, message: 'Quote request received. We will get back to you within 24 hours.' },
       { status: 200 }

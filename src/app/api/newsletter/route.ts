@@ -11,11 +11,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log('=== Newsletter Subscription ===');
-    console.log('Email:', body.email);
-    console.log('Timestamp:', new Date().toISOString());
-    console.log('===============================');
-
+    // TODO: forward to email provider (Resend / Mailchimp)
     return NextResponse.json(
       { success: true, message: 'Thanks for subscribing!' },
       { status: 200 }

@@ -82,16 +82,12 @@ export default function ServicesPage() {
             </div>
             <div className="flex items-center gap-5 text-sm shrink-0">
               <Link href="/legal"
-                className="font-mono transition-colors"
+                className="font-mono transition-colors hover-foreground"
                 style={{ color: 'var(--color-violet-light)' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-foreground)' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-violet-light)' }}
               >Legal Hub →</Link>
               <Link href="/research"
-                className="font-mono transition-colors"
+                className="font-mono transition-colors hover-foreground"
                 style={{ color: 'var(--color-violet-light)' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-foreground)' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-violet-light)' }}
               >Research Pipeline →</Link>
             </div>
           </div>

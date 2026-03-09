@@ -6,11 +6,7 @@ export async function POST(request: NextRequest) {
   try {
     const payload = documentRequestSchema.parse(await request.json())
 
-    console.log('[MTA Document Request]', {
-      timestamp: new Date().toISOString(),
-      ...payload,
-    })
-
+    // TODO: forward request to fulfilment workflow (Resend / n8n)
     return NextResponse.json({
       success: true,
       message: 'Request submitted. Templates are shared after review.',
