@@ -3,19 +3,11 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
+import { services } from '@/lib/data/services'
 
 const EASE: [number,number,number,number] = [0.16, 1, 0.3, 1]
 
-type Service = {
-  slug: string
-  name: string
-  tagline: string
-  priceLabel: string
-  features: string[]
-  Icon: React.ElementType
-}
-
-export function ServicesGrid({ services }: { services: Service[] }) {
+export function ServicesGrid() {
   return (
     <section className="border-t border-border" style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(56px, 10vw, 112px) 0' }}>
       <div className="container-site">

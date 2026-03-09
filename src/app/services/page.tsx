@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { services } from '@/lib/data/services'
 import { JsonLd }   from '@/components/seo/JsonLd'
 import { breadcrumbSchema } from '@/lib/seo/schemas'
 import { ServicesGrid } from '@/components/services/ServicesGrid'
@@ -64,7 +63,7 @@ export default function ServicesPage() {
       </section>
 
       {/* ── SERVICES GRID (client component with animations) ── */}
-      <ServicesGrid services={services} />
+      <ServicesGrid />
 
       {/* ── GOVERNANCE CALLOUT ───────────────────────────── */}
       <section className="border-t border-border" style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(48px, 7vw, 80px) 0' }}>

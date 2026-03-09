@@ -8,6 +8,7 @@ import { Footer }         from '@/components/layout/Footer'
 import { Toaster }        from 'react-hot-toast'
 import { ThemeProvider }  from 'next-themes'
 import { SpeedInsights }  from '@vercel/speed-insights/next'
+import { Analytics }      from '@vercel/analytics/next'
 import { JsonLd }         from '@/components/seo/JsonLd'
 import { organizationSchema, websiteSchema } from '@/lib/seo/schemas'
 import '@/styles/globals.css'
@@ -121,6 +122,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </main>
           <Footer />
+          <Analytics />
           <SpeedInsights />
           <ScrollToTop />
           <Toaster
