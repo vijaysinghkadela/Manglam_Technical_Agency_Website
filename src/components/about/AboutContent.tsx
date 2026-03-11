@@ -141,17 +141,15 @@ export function AboutContent() {
             transition={{ duration: 0.7, delay: 0.25, ease: EASE }}
           >
             <p style={{ fontSize: '17px', lineHeight: 1.78, color: 'var(--color-muted)' }}>
-              Manglam Technical Agency (MTA) is a full-service technical and creative agency
-              based in Nagaur, Rajasthan. We exist for one reason: to give businesses — from
-              ambitious startups to established institutions — access to enterprise-grade
-              technical capabilities without the overhead, bureaucracy, or impersonal service
-              of a large firm.
+              Manglam Technical Agency (MTA) is a specialized fractional technical partner
+              based in Nagaur, Rajasthan. We bridge the gap for companies scaling internationally:
+              supplying the uncompromised engineering depth of Indian technology hubs combined
+              with strict adherence to Western compliance and professional parity.
             </p>
             <p style={{ fontSize: '17px', lineHeight: 1.78, color: 'var(--color-muted)' }}>
-              We operate with a deliberately lean structure: a team of 3–4 specialists, each
-              holding deep domain expertise, who collaborate seamlessly across every engagement.
-              This is not a limitation — it is a deliberate design choice. At MTA, every client
-              speaks directly to the person doing the work.
+              We operate exclusively through rigorous documentation, signed service level agreements,
+              and clear liability caps. This eliminates time-zone risk and communication barriers.
+              At MTA, every engagement is handled by cross-functional specialists—never outsourced.
             </p>
           </motion.div>
 
@@ -435,19 +433,17 @@ export function AboutContent() {
                   paddingLeft: '1.5rem',
                 }}
               >
-                Manglam Technical Agency was built on a straightforward observation: most businesses
-                that need serious technical help are forced to choose between expensive, slow,
-                full-service agencies and unreliable freelancers with limited capability. We built
-                MTA to be the third option — a team that brings together the right expertise,
-                operates with full professional accountability, and treats every client
-                relationship as a long-term partnership rather than a transaction.
+                MTA was built on a straightforward observation: the global digital services sector
+                has shifted from simple labor-based cost arbitrage to high-value technical integration.
+                Founders and executives in high-cost jurisdictions require more than just code; they
+                need a fractional CTO acting as a true technical partner who mitigates risk and enforces compliance.
               </p>
 
               <p style={{ fontSize: '17px', lineHeight: 1.78, color: 'var(--color-muted)' }}>
-                Based out of Nagaur, Rajasthan, we have grown our portfolio to serve clients
-                across industries — including healthcare, public sector, and commercial
-                organisations — building a track record on the back of honest communication,
-                results-driven delivery, and technical depth that speaks for itself.
+                Registered under the Companies Act 1956 and compliant with both the Indian DPDP Act
+                2023 and the EU GDPR, we have grown our portfolio to serve international clients across
+                industries. Our track record is built entirely upon honest communication, transparent IP vesting,
+                and technical depth that survives rigorous vendor due diligence.
               </p>
             </motion.div>
           </div>
@@ -566,18 +562,16 @@ export function AboutContent() {
                 }}
               >
                 MTA operates as a remote-first team with a culture built on high trust and
-                high accountability. Our specialists self-manage with precision, communicate
-                early when problems arise, and document decisions so that nothing depends
-                on memory.
+                high accountability. Our specialists act as data processors under strict Data
+                Processing Agreements (DPAs) and Non-Disclosure Agreements (NDAs), ensuring
+                compliance across international borders.
               </p>
 
               <p style={{ fontSize: '17px', lineHeight: 1.78, color: 'var(--color-muted)' }}>
-                This operating discipline translates directly into more reliable outcomes for clients.
-                We bring the same rigour to our internal operations that we apply to client work.
-                Our processes are governed by comprehensive operational policies — covering
-                everything from data privacy and cybersecurity to client communication standards
-                — because the agencies that are professionally organised on the inside deliver
-                better work on the outside.
+                We communicate early when problems arise and document architecture decisions
+                so nothing depends on memory alone. This operational discipline translates
+                directly into reliable, scalable outcomes for clients—because agencies that
+                enforce rigorous internal standards produce significantly better external codebases.
               </p>
 
               {/* Highlight badges */}

@@ -19,6 +19,16 @@ const jetbrains = JetBrains_Mono({ subsets:['latin'], variable:'--font-mono', di
 
 const SITE_URL = 'https://manglamtechnicalagency.com'
 
+export const viewport: import('next').Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#f8fafc' },
+    { media: '(prefers-color-scheme: dark)', color: '#080808' },
+  ],
+  colorScheme: 'dark light',
+}
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
@@ -105,10 +115,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${inter.variable} ${syne.variable} ${jetbrains.variable}`}
       suppressHydrationWarning
     >
-      <head>
-        <meta name="theme-color" content="#7C3AED" />
-        <meta name="color-scheme" content="dark light" />
-      </head>
       <body suppressHydrationWarning>
         {/* Global structured data — Organisation + Website */}
         <JsonLd schema={organizationSchema()} />

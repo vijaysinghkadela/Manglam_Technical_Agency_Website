@@ -44,7 +44,10 @@
 html {
   scroll-behavior: auto;   /* Lenis overrides this */
   overflow-x: hidden;
+  overscroll-behavior-y: none; /* Prevents bounce on iOS/macOS */
   -webkit-text-size-adjust: 100%;
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: var(--color-border) var(--color-canvas); /* Firefox */
 }
 
 body {
@@ -52,8 +55,11 @@ body {
   color: var(--color-foreground);
   font-family: var(--font-body);
   overflow-x: hidden;
+  overscroll-behavior-y: none; /* Prevents bounce on iOS/macOS */
   width: 100%;            /* NEVER 100vw — causes scrollbar overflow */
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; /* Firefox specific */
 }
 
 /* Hide cursor everywhere (custom cursor replaces it) */
@@ -247,6 +253,7 @@ body, nav, footer, section, .container-site, [class*="bg-"] {
 
 /* ── Card hover lift ────────────────────────────────────────── */
 .card-hover {
+  will-change: transform, box-shadow, border-color;
   transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease, border-color 0.25s ease;
 }
 .card-hover:hover { transform: translateY(-3px); }
@@ -265,18 +272,18 @@ body, nav, footer, section, .container-site, [class*="bg-"] {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.animate-fade-up { animation: fade-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-fade-up { animation: fade-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) both; will-change: opacity, transform; }
 
 /* ── Fade-in ── */
 @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
-.animate-fade-in { animation: fade-in 0.5s ease both; }
+.animate-fade-in { animation: fade-in 0.5s ease both; will-change: opacity; }
 
 /* ── Slide-in from left ── */
 @keyframes slide-in-left {
   from { opacity: 0; transform: translateX(-24px); }
   to   { opacity: 1; transform: translateX(0); }
 }
-.animate-slide-left { animation: slide-in-left 0.65s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-slide-left { animation: slide-in-left 0.65s cubic-bezier(0.16, 1, 0.3, 1) both; will-change: opacity, transform; }
 
 /* ── Violet dot pulse ── */
 @keyframes dot-pulse {
@@ -305,7 +312,7 @@ body, nav, footer, section, .container-site, [class*="bg-"] {
   from { opacity: 0; transform: scale(0.95); }
   to   { opacity: 1; transform: scale(1); }
 }
-.animate-scale-in { animation: scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-scale-in { animation: scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; will-change: opacity, transform; }
 
 /* ── Stagger delay utilities ── */
 .stagger-1 { animation-delay: 0.05s; }

@@ -57,4 +57,46 @@ export const projects: Project[] = [
     duration: '2 Weeks', value: 'Confidential', deliverables: [], description: 'Case study in progress.',
     bgFrom: '#1A0A0A', bgTo: '#2A0A1A',
   },
+  {
+    id: 'gymos-ai',
+    slug: 'gymos-ai-saas',
+    featured: true,
+    status: 'live',
+    client: 'Internal SaaS Product',
+    title: 'GymOS AI',
+    tags: ['SaaS Products', 'AI Automation'],
+    stack: ['Flutter', 'Supabase', 'PostgreSQL', 'Node.js', 'Claude Opus'],
+    duration: 'Continuous Integration',
+    value: 'Proprietary',
+    description: 'Delivering customized technical and innovative engineering solutions for sustainable growth. GymOS is an AI-powered multi-tenant SaaS platform built for gym owners and trainers across India, featuring automated revenue operations and intelligent client management.',
+    bgFrom: '#0A0A1A',
+    bgTo: '#111827',
+    deliverables: [
+      'AI-generated Workout & Diet Plans',
+      'Multi-tenant Client Management System',
+      'Razorpay & Stripe Global Billing',
+      'WhatsApp Business Automation'
+    ]
+  },
+  {
+    id: 'focusguard-pro',
+    slug: 'focusguard-pro-saas',
+    featured: true,
+    status: 'live',
+    client: 'Internal SaaS Product',
+    title: 'FocusGuard Pro',
+    tags: ['SaaS Products'],
+    stack: ['Flutter', 'Firebase', 'Riverpod', 'Hive', 'OpenAI GPT-4o'],
+    duration: 'Continuous Integration',
+    value: 'Proprietary',
+    description: 'Delivering customized technical and innovative engineering solutions for sustainable growth. FocusGuard Pro is an advanced digital wellness SaaS application featuring real-time app blocking, AI coaching, and comprehensive productivity analytics.',
+    bgFrom: '#3b0716',
+    bgTo: '#1a030a',
+    deliverables: [
+      'Cross-Platform Mobile Application (iOS & Android)',
+      'Real-Time App Blocking & Screen Time Analytics',
+      'AI-Powered Productivity Coaching',
+      'Custom Gamification & Habit Tracking'
+    ]
+  }
 ]
