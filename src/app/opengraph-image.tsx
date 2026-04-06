@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
-export const alt = 'Manglam Technical Agency — Technology That Transforms'
+export const alt = 'Manglam Technical Agency — Empowering Your Digital Future'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -81,7 +81,7 @@ export default function OgImage() {
                 marginBottom: '20px',
               }}
             >
-              ✦ TECHNOLOGY THAT TRANSFORMS
+              ✦ EMPOWERING YOUR DIGITAL FUTURE
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>

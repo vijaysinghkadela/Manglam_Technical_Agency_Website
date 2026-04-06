@@ -19,15 +19,15 @@ const values = [
   },
   {
     title: 'Post-Delivery Support',
-    body: "1-year free support on web projects, guaranteed. We don\u0027t disappear after launch.",
+    body: 'Structured handover, documentation, and support planning are built into delivery. We stay accountable after launch.',
   },
   {
     title: 'Transparent Pricing',
-    body: 'Published rates, no surprise invoices. You know the full cost before you commit.',
+    body: 'Product and service pricing is documented in advance, with clear scope and no hidden line items.',
   },
   {
     title: 'Proven Delivery',
-    body: 'MNSS website: 3 weeks, exactly as scoped. We deliver on time, every time.',
+    body: 'From internal SaaS builds to NGO web delivery, MTA executes with documentation-first planning and measurable outcomes.',
   },
 ]
 
@@ -65,7 +65,7 @@ export function WhyMTA() {
 
             {/* Stats row */}
             <div className="flex gap-8 pt-4" style={{ borderTop: '1px solid var(--color-border)' }}>
-              {[['50+','Projects'],['20+','Clients'],['3+','Years']].map(([num, lbl]) => (
+              {[['3','Active Clients'],['2','SaaS Products'],['6','Practice Areas']].map(([num, lbl]) => (
                 <div key={lbl} className="flex flex-col gap-1">
                   <span className="font-display font-black" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', color: 'var(--color-foreground)' }}>
                     {num}

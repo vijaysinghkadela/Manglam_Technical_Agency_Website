@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "context": "node scripts/generate-context-summary.js"
   },
   "dependencies": {
     "@fontsource/outfit": "^5.2.8",
@@ -23,7 +24,7 @@
     "date-fns": "^4.1.0",
     "framer-motion": "^12.34.4",
     "lucide-react": "^0.575.0",
-    "next": "16.1.6",
+    "next": "^16.2.2",
     "next-themes": "^0.4.6",
     "nodemailer": "^8.0.2",
     "react": "19.2.3",
@@ -42,6 +43,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "playwright": "^1.59.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

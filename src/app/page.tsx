@@ -14,12 +14,12 @@ import { TechStackMarquee }    from '@/components/home/TechStackMarquee'
 import { CTABanner }           from '@/components/home/CTABanner'
 
 export const metadata: Metadata = {
-  title:       'Manglam Technical Agency — Technology That Transforms',
-  description: 'End-to-end technology services for Indian businesses — web development, AI automation, cybersecurity, social media & digital operations. Based in Rajasthan since 2021.',
+  title:       'Manglam Technical Agency — Empowering Your Digital Future',
+  description: 'End-to-end technology services for Indian businesses — web development, AI automation, cybersecurity, social media & digital operations. Based in Rajasthan and Udyam-registered in 2025.',
   alternates:  { canonical: 'https://manglamtechnicalagency.com' },
   openGraph: {
-    title:       'Manglam Technical Agency — Technology That Transforms',
-    description: 'Web development, AI automation, cybersecurity & digital operations for Indian businesses. Based in Rajasthan since 2021.',
+    title:       'Manglam Technical Agency — Empowering Your Digital Future',
+    description: 'Web development, AI automation, cybersecurity & digital operations for Indian businesses. Based in Rajasthan and Udyam-registered in 2025.',
     url:         'https://manglamtechnicalagency.com',
     type:        'website',
   },

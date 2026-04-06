@@ -4,8 +4,8 @@ export const AGENCY_EMAIL = 'manglamtechnicalagency@gmail.com';
 export const AGENCY_PHONE = '+91-8003903572';
 export const AGENCY_WHATSAPP = 'https://wa.me/918003903572';
 export const AGENCY_LOCATION = 'Nagaur, Rajasthan, India';
-export const AGENCY_TAGLINE = 'Technology That Transforms';
-export const AGENCY_FOUNDED = 2021;
+export const AGENCY_TAGLINE = 'Empowering Your Digital Future';
+export const AGENCY_FOUNDED = 2025;
 export const AGENCY_URL = 'https://www.manglamtechnicalagency.com';
 
 export const OFFICE_HOURS = {

@@ -8,8 +8,8 @@ export const metadata = {
 }
 
 const STATS = [
-  { value: '3–4', label: 'Specialists' },
-  { value: '2021', label: 'Founded' },
+  { value: '2', label: 'Core Team' },
+  { value: '2025', label: 'Udyam Registered' },
   { value: '6', label: 'Practice Areas' },
   { value: '∞', label: 'Accountability' },
 ]
@@ -212,7 +212,7 @@ export default function AboutPage() {
                 className="font-mono"
                 style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.14em' }}
               >
-                Est. 2021 · 6 Practice Areas · 3–4 Specialists
+                Udyam Registered 2025 · 6 Practice Areas · 2 Core Team Members
               </span>
             </div>
             <div className="hidden lg:flex flex-col items-center gap-2">

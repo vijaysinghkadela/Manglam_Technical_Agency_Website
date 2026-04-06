@@ -9,27 +9,27 @@ export interface Testimonial {
 
 export const testimonials: Testimonial[] = [
   {
+    id:      'fitnexora',
+    quote:   'FitNexora (GymOS AI) is in active v2.7 development as MTA\'s first SaaS product, focused on gym operations, member experience, and AI-assisted fitness planning.',
+    name:    'Product Update',
+    role:    'Internal SaaS',
+    company: 'FitNexora / GymOS AI',
+    initials:'FX',
+  },
+  {
+    id:      'fuxk-scroll',
+    quote:   'Fuxk_Scroll is alpha-ready with Android AccessibilityService-based blocking, hard trial enforcement, and focus-session controls for anti-doomscrolling use cases.',
+    name:    'Product Update',
+    role:    'Internal SaaS',
+    company: 'Fuxk_Scroll / FocusGuard Pro',
+    initials:'FS',
+  },
+  {
     id:      'mnss',
-    quote:   'They delivered our entire website in 3 weeks. The quality was beyond what we expected from any agency at this price. Everything was written down and delivered exactly as agreed.',
-    name:    'Programme Director',
-    role:    'Programme Director',
+    quote:   'MNSS website development is in progress with multilingual support, Razorpay donations, and an admin workflow for managing programs and progress reports.',
+    name:    'Project Update',
+    role:    'Client Project',
     company: 'Marut Narayan Sewa Sansthan',
     initials:'MD',
-  },
-  {
-    id:      't2',
-    quote:   'Our social media engagement doubled in the first month. The automation setup alone saved our team 15 hours a week. Highly recommended for any Rajasthan-based business.',
-    name:    'Business Owner',
-    role:    'Founder',
-    company: 'Jaipur Retail Business',
-    initials:'JR',
-  },
-  {
-    id:      't3',
-    quote:   'The security audit found three critical vulnerabilities we had no idea existed. The report was clear, actionable, and fully aligned with IT Act compliance. Outstanding work.',
-    name:    'Operations Head',
-    role:    'Operations Head',
-    company: 'Rajasthan Healthcare Provider',
-    initials:'RH',
   },
 ]

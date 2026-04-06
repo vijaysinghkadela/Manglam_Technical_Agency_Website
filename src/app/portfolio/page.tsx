@@ -8,7 +8,7 @@ import { breadcrumbSchema } from '@/lib/seo/schemas'
 export const metadata: Metadata = {
   title: 'Our Work',
   description:
-    "From NGO portals to e-commerce platforms and security audits. Browse MTA's recent client deliveries and case studies.",
+    "From internal SaaS products to active client implementations. Browse MTA's recent deliveries and project pipeline.",
 }
 
 const liveCount   = projects.filter(p => p.status === 'live').length
@@ -88,8 +88,8 @@ export default function PortfolioPage() {
               className="mt-8 lg:mt-10"
               style={{ fontSize: '16px', lineHeight: 1.75, color: 'var(--color-muted)', maxWidth: '500px' }}
             >
-              From e-commerce platforms to scalable NGO portals. Browse our recent client
-              deliveries and internal case studies.
+              From internal SaaS builds to active client implementations, explore what MTA is
+              currently shipping and what is in the near-term pipeline.
             </p>
           </div>
 

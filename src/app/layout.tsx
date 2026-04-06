@@ -33,11 +33,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
   title: {
-    default:  'Manglam Technical Agency — Technology That Transforms',
+    default:  'Manglam Technical Agency — Empowering Your Digital Future',
     template: '%s | Manglam Technical Agency',
   },
   description:
-    'End-to-end technology services for Indian businesses — web development, AI automation, cybersecurity, social media, and digital operations. Based in Rajasthan since 2021.',
+    'End-to-end technology services for Indian businesses — web development, AI automation, cybersecurity, social media, and digital operations. Based in Rajasthan and Udyam-registered in 2025.',
 
   keywords: [
     'web development Rajasthan',
@@ -63,14 +63,14 @@ export const metadata: Metadata = {
     locale:      'en_IN',
     url:          SITE_URL,
     siteName:    'Manglam Technical Agency',
-    title:       'Manglam Technical Agency — Technology That Transforms',
+    title:       'Manglam Technical Agency — Empowering Your Digital Future',
     description: 'End-to-end technology services for Indian businesses — web development, AI automation, cybersecurity, and more. Based in Rajasthan.',
     images: [
       {
         url:    '/opengraph-image.png',
         width:  1200,
         height: 630,
-        alt:    'Manglam Technical Agency — Technology That Transforms',
+        alt:    'Manglam Technical Agency — Empowering Your Digital Future',
         type:   'image/png',
       },
     ],
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card:        'summary_large_image',
-    title:       'Manglam Technical Agency — Technology That Transforms',
+    title:       'Manglam Technical Agency — Empowering Your Digital Future',
     description: 'End-to-end technology services for Indian businesses — web development, AI automation, cybersecurity, and more.',
     images:      ['/opengraph-image.png'],
   },

@@ -162,8 +162,8 @@ export function AboutContent() {
             transition={{ duration: 0.6, delay: 0.35, ease: EASE }}
           >
             {[
-              '3–4 Domain Specialists',
-              'Est. Nagaur 2021',
+              '2 Core Team Members',
+              'Udyam Registered 2025',
               'Enterprise-grade Quality',
               'Direct Specialist Access',
               'No Hand-offs',
@@ -413,7 +413,7 @@ export function AboutContent() {
                 style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.1em' }}
               >
                 Manglam Technical Agency<br />
-                Nagaur, Rajasthan · Est. 2021
+                Nagaur, Rajasthan · Udyam Registered 2025
               </p>
             </div>
 
@@ -440,10 +440,10 @@ export function AboutContent() {
               </p>
 
               <p style={{ fontSize: '17px', lineHeight: 1.78, color: 'var(--color-muted)' }}>
-                Registered under the Companies Act 1956 and compliant with both the Indian DPDP Act
-                2023 and the EU GDPR, we have grown our portfolio to serve international clients across
-                industries. Our track record is built entirely upon honest communication, transparent IP vesting,
-                and technical depth that survives rigorous vendor due diligence.
+                Registered as an MSME (Udyam: UDYAM-RJ-15-0094091), we align delivery with Indian legal
+                requirements including DPDP Act 2023 and relevant IT/GST obligations. Our track record is
+                built on honest communication, transparent ownership, and technical depth that holds up in
+                real client environments.
               </p>
             </motion.div>
           </div>

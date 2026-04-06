@@ -23,10 +23,10 @@ export function organizationSchema() {
     },
     image: `${BASE_URL}/og-image.png`,
     description:
-      'End-to-end technology services for Indian businesses — web development, AI automation, cybersecurity, social media, and digital operations. Based in Rajasthan since 2021.',
+      'End-to-end technology services for Indian businesses — web development, AI automation, cybersecurity, social media, and digital operations. Based in Rajasthan and registered under Udyam in 2025.',
     email: 'manglamtechnicalagency@gmail.com',
     telephone: '+91-8003903572',
-    foundingDate: '2021',
+    foundingDate: '2025',
     areaServed: [
       { '@type': 'Country', name: 'India' },
       { '@type': 'State', name: 'Rajasthan' },
@@ -61,12 +61,12 @@ export function organizationSchema() {
       '@type': 'OfferCatalog',
       name: 'Technology Services for Indian Businesses',
       itemListElement: [
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Web Development', url: `${BASE_URL}/services/web-development` } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'SaaS & Web Development', url: `${BASE_URL}/services/saas-products` } },
         { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'AI Automation', url: `${BASE_URL}/services/ai-automation` } },
         { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Cybersecurity', url: `${BASE_URL}/services/cybersecurity` } },
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Social Media & Marketing', url: `${BASE_URL}/services/social-media-marketing` } },
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'SaaS & Licensing', url: `${BASE_URL}/services/saas-licensing` } },
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Content & Editing', url: `${BASE_URL}/services/content-editing` } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Social Media Marketing', url: `${BASE_URL}/services/social-media-marketing` } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Branding', url: `${BASE_URL}/services/branding` } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Content Creation', url: `${BASE_URL}/services/content-creation` } },
       ],
     },
     knowsAbout: [
@@ -80,7 +80,7 @@ export function organizationSchema() {
       'Next.js',
       'Rajasthan Technology Services',
     ],
-    slogan: 'Technology That Transforms',
+    slogan: 'Empowering Your Digital Future',
   }
 }
 

@@ -45,23 +45,23 @@ export default function MegaMenu({ onClose }: MegaMenuProps) {
           <div className="bg-surface rounded-xl p-5 border border-border">
             <div className="text-xs text-muted uppercase tracking-wider mb-3">Featured Project</div>
             <div className="mb-3">
-              <div className="text-sm font-semibold text-white">MNSS Website</div>
-              <div className="text-xs text-muted mt-1">Rajasthan NGO • 3 weeks • ₹50,000</div>
+              <div className="text-sm font-semibold text-white">FitNexora / GymOS AI</div>
+              <div className="text-xs text-muted mt-1">Internal SaaS • Active v2.7 • B2B + B2C</div>
             </div>
             <div className="flex flex-wrap gap-2 mb-4">
-              {['Next.js', 'TypeScript', 'Tailwind'].map((t) => (
+              {['Flutter', 'Riverpod', 'Supabase'].map((t) => (
                 <span key={t} className="text-[10px] bg-canvas px-2 py-1 rounded border border-border text-muted">
                   {t}
                 </span>
               ))}
             </div>
             <a
-              href="https://www.marutnarayansewasansthan.org"
+              href="https://github.com/vijaysinghkadela/GymOS_AI"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-xs text-violet-light hover:text-violet transition-colors"
             >
-              Visit Live Site <ExternalLink className="w-3 h-3" />
+              View GitHub Repo <ExternalLink className="w-3 h-3" />
             </a>
             <div className="mt-4 pt-4 border-t border-border">
               <Link

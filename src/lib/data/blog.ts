@@ -27,8 +27,8 @@ Your potential customers search online before they call, walk in, or buy.
 A website built on modern technology — responsive, fast, and SEO-ready — is not a 
 luxury. It is the baseline for being found, trusted, and chosen.
 
-At Manglam Technical Agency, we have built websites for NGOs, hospitals, and startups 
-across Rajasthan. Every single client saw increased enquiries within 90 days of launch.
+At Manglam Technical Agency, we build digital products and web experiences for active
+client projects and internal SaaS initiatives across Rajasthan.
 
 The cost of not having a website is far higher than the cost of building one.
     `.trim(),
@@ -78,22 +78,23 @@ A security audit takes one week and costs far less than a breach.
   {
     slug: 'how-ai-automation-cut-manual-work-70-percent',
     title: 'How AI Automation Cut Our Client\'s Manual Work by 70%',
-    excerpt: 'A Rajasthan-based services firm was spending 30 hours a week on data entry and reporting. We automated it in two weeks. Here is how.',
+    excerpt: 'A typical operations workflow can consume 30+ manual hours every week. Here is how we structure automation to reduce that overhead.',
     category: 'AI',
     readTime: '5 min read',
     date: '10 Feb 2026',
     author: 'MTA Team',
     gradient: 'from-amber-900/30 to-amber-950/20',
     content: `
-The client processed 200+ enquiries a week — manually entering data into spreadsheets, 
-generating reports, and sending follow-up emails.
+Many teams process high-volume enquiries manually — entering records into spreadsheets,
+building reports by hand, and sending repetitive follow-ups.
 
-We audited the process, built an n8n workflow connected to their CRM, and automated:
-- Data entry from web forms directly into structured records
-- Automated weekly PDF reports sent to management
-- Follow-up email sequences triggered by lead status
+Our approach starts with process mapping, then workflow design in automation tools like
+n8n, followed by staged rollout and monitoring.
 
-Total implementation time: 2 weeks. Manual hours saved: 30 per week. ROI: less than 30 days.
+Common automations include structured data capture, scheduled reporting, and rule-based
+communication triggers tied to lead or customer status.
+
+The outcome is predictable: fewer manual hours, faster execution, and better operational consistency.
     `.trim(),
   },
   {
@@ -122,25 +123,25 @@ and documented security frameworks.
     `.trim(),
   },
   {
-    slug: 'from-brief-to-launch-how-mta-builds-in-3-weeks',
-    title: 'From Brief to Launch: How MTA Builds Websites in 3 Weeks',
-    excerpt: 'Most agencies take 2–3 months. We deliver in 3 weeks. Not by cutting corners — by eliminating waste from the process.',
+    slug: 'from-brief-to-launch-how-mta-structures-delivery',
+    title: 'From Brief to Launch: How MTA Structures Delivery',
+    excerpt: 'Speed matters, but process quality matters more. Here is the documentation-first delivery model we use across projects.',
     category: 'Web Development',
     readTime: '4 min read',
     date: '28 Jan 2026',
     author: 'MTA Team',
     gradient: 'from-violet-900/30 to-indigo-950/20',
     content: `
-Week 1: Discovery + design mockups. Client approves the visual direction before any code is written.
-Week 2: Full development on a live staging environment. Client reviews at any time.
-Week 3: QA, content finalisation, and production deployment.
+Our delivery approach is documentation-first: scope clarity, architecture alignment,
+and staged implementation reviews before release.
 
-The secret is eliminating the feedback loops that kill most projects — endless revisions 
-caused by vague scope and no written agreement.
+Typical project flow includes discovery, scoped design decisions, implementation,
+QA validation, and controlled deployment.
 
-Every MTA project starts with a signed scope document. That is why we deliver on time, every time.
+This reduces rework, improves communication, and keeps expectations clear for both
+the client and the engineering team.
 
-Our MNSS project (marutnarayansewasansthan.org) was delivered in exactly 3 weeks for ₹50,000.
+The goal is reliable execution that stays aligned with agreed outcomes, not arbitrary timelines.
     `.trim(),
   },
 ]

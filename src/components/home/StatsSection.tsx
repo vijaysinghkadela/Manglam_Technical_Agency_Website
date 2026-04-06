@@ -5,10 +5,10 @@ import { ScrambleCounter } from '@/components/ui/ScrambleCounter'
 const EASE: [number,number,number,number] = [0.16, 1, 0.3, 1]
 
 const STATS = [
-  { value:50, suffix:'+', label:'PROJECTS DELIVERED', sub: 'across industries' },
-  { value:20, suffix:'+', label:'HAPPY CLIENTS',      sub: 'India & beyond'   },
-  { value:3,  suffix:'+', label:'YEARS ACTIVE',       sub: 'since 2021'       },
-  { value:98, suffix:'%', label:'SATISFACTION RATE',  sub: 'client-reported'  },
+  { value: 3,    suffix: '', label: 'ACTIVE CLIENTS',         sub: 'tracked in Clients MOC' },
+  { value: 2,    suffix: '', label: 'INTERNAL SAAS PRODUCTS', sub: 'FitNexora & Fuxk_Scroll' },
+  { value: 6,    suffix: '', label: 'PRACTICE AREAS',         sub: 'integrated service model' },
+  { value: 2025, suffix: '', label: 'UDYAM REGISTERED',       sub: 'UDYAM-RJ-15-0094091' },
 ]
 
 export function StatsSection() {

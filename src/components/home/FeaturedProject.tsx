@@ -69,13 +69,13 @@ export function FeaturedProject() {
               >
                 <div className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor:'#28C840' }} />
                 <span className="font-mono truncate" style={{ fontSize:'11px', color:'var(--color-muted)' }}>
-                  marutnarayansewasansthan.org
+                  github.com/vijaysinghkadela/GymOS_AI
                 </span>
               </div>
             </div>
 
-            {/* MNSS website preview */}
-            <div className="relative overflow-hidden" style={{ backgroundColor:'#060F06', aspectRatio:'16/10' }}>
+            {/* FitNexora preview */}
+            <div className="relative overflow-hidden" style={{ backgroundColor:'#0C0C0E', aspectRatio:'16/10' }}>
               {/* Mock navbar */}
               <div className="flex items-center justify-between px-5 py-3" style={{ borderBottom:'1px solid rgba(255,255,255,0.05)' }}>
                 <div className="flex items-center gap-2">
@@ -114,7 +114,7 @@ export function FeaturedProject() {
               <div className="absolute bottom-0 left-0 right-0 flex divide-x"
                 style={{ borderTop:'1px solid rgba(255,255,255,0.05)', borderColor:'rgba(255,255,255,0.05)' }}
               >
-                {[['500+','Lives Impacted'],['15+','Years'],['5+','Districts']].map(([n,l]) => (
+                {[['v2.7','Current Build'],['3','Pricing Tiers'],['2027','Roadmap']].map(([n,l]) => (
                   <div key={l} className="flex-1 flex flex-col items-center py-3" style={{ backgroundColor:'rgba(0,0,0,0.25)' }}>
                     <span className="font-bold text-sm" style={{ color:'#FB923C' }}>{n}</span>
                     <span className="mt-1" style={{ fontSize:'9px', color:'rgba(255,255,255,0.22)' }}>{l}</span>
@@ -139,7 +139,7 @@ export function FeaturedProject() {
           >
             {/* Tags */}
             <div className="flex flex-wrap gap-2">
-              {['NGO','Web Development'].map(t => (
+              {['SaaS Product','AI & Automation'].map(t => (
                 <span key={t} className="font-mono text-label px-3 py-1" style={{ border:'1px solid var(--color-border)', color:'var(--color-muted)' }}>
                   {t}
                 </span>
@@ -151,19 +151,19 @@ export function FeaturedProject() {
 
             {/* Title */}
             <h3 className="font-display font-black leading-[0.90] tracking-tight" style={{ fontSize:'clamp(34px, 4vw, 58px)', color: 'var(--color-foreground)' }}>
-              MNSS Website
+              FitNexora / GymOS AI
             </h3>
 
             {/* Description */}
             <p style={{ fontSize:'15px', lineHeight:1.72, color:'var(--color-muted)' }}>
-              Marut Narayan Sewa Sansthan — built from scratch for a Rajasthan-based NGO
-              running rehabilitation, women&apos;s safety, and skill development across 5+ districts
-              since 2009. Delivered in exactly 3 weeks as scoped and agreed.
+              MTA&apos;s first internal SaaS platform for gym owners and members. FitNexora combines
+              operational tools, member progress workflows, and AI-assisted workout and diet planning
+              in a single product currently in active v2.7 development.
             </p>
 
             {/* Metadata grid */}
             <div className="grid grid-cols-2 sm:grid-cols-4" style={{ border:'1px solid var(--color-border)' }}>
-              {[['DURATION','3 Weeks'],['VALUE','₹50K'],['DELIVERED','Feb 2026'],['CLIENT','NGO']].map(([lbl,val],i) => (
+              {[['STATUS','Active v2.7'],['TYPE','Internal SaaS'],['PRICING','Basic/Pro/Elite'],['MARKET','Gym Owners']].map(([lbl,val],i) => (
                 <div key={lbl}
                   style={{
                     padding:'12px 14px',
@@ -180,7 +180,7 @@ export function FeaturedProject() {
             <div>
               <p className="font-mono uppercase mb-2" style={{ fontSize:'10px', color:'var(--color-dead)', letterSpacing:'0.15em' }}>TECH STACK</p>
               <div className="flex flex-wrap gap-2">
-                {['Next.js','TypeScript','Tailwind CSS','Cloudinary','Vercel'].map(t => (
+                {['Flutter 3.6+','Riverpod 2.6','Supabase','NVIDIA Kimi K2','Razorpay'].map(t => (
                   <span key={t} className="font-mono text-label px-3 py-1 transition-colors cursor-default"
                     style={{ border:'1px solid var(--color-border)', color:'var(--color-muted)' }}
                     onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-foreground)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--color-muted)' }}
@@ -197,10 +197,10 @@ export function FeaturedProject() {
               <p className="font-mono uppercase mb-3" style={{ fontSize:'10px', color:'var(--color-dead)', letterSpacing:'0.15em' }}>DELIVERABLES</p>
               <ul className="flex flex-col gap-2">
                 {[
-                  'Responsive website design & development',
-                  'Content integration & image optimisation',
-                  'QA, testing & production deployment',
-                  '1-year free domain + maintenance',
+                  'Owner dashboards for attendance and membership workflows',
+                  'Member app for workout and diet tracking',
+                  'AI pipeline for body analysis and plan generation',
+                  'Tiered INR SaaS pricing (Basic, Pro, Elite)',
                 ].map((d, i) => (
                   <motion.li
                     key={d}
@@ -219,7 +219,7 @@ export function FeaturedProject() {
             </div>
 
             {/* CTA */}
-            <a href="https://www.marutnarayansewasansthan.org"
+            <a href="https://github.com/vijaysinghkadela/GymOS_AI"
               target="_blank" rel="noopener noreferrer"
               data-cursor="link"
               className="inline-flex items-center gap-3 w-fit text-sm font-mono transition-all duration-300 group"
@@ -233,7 +233,7 @@ export function FeaturedProject() {
                 ;(e.currentTarget as HTMLElement).style.color = 'var(--color-foreground)'
               }}
             >
-              View Live Site
+              View GitHub Repo
               <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
           </motion.div>

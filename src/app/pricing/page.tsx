@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Check, ArrowRight } from 'lucide-react'
@@ -10,53 +9,46 @@ const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
 
 const plans = [
   {
-    name: 'Web & SaaS Development',
-    price: '₹50,000',
-    type: 'one-time',
-    features: ['Custom Next.js Website', 'Responsive Design', 'CMS Integration', '1-Year Free Support'],
+    name: 'SaaS & Web Development',
+    price: 'From ₹1,00,000',
+    type: 'project',
+    features: ['Web applications', 'SaaS MVP builds', 'API integrations', 'Maintenance options'],
     href: '/services/saas-products',
     recommended: true,
   },
   {
     name: 'Social Media',
-    price: '₹10,000',
+    price: 'From ₹15,000',
     type: 'per month',
-    features: ['12 Posts / Month', '2 Platforms', 'Analytics Report', 'Community Management'],
+    features: ['Strategy document', 'Content execution', 'Community management', 'Monthly reporting'],
     href: '/services/social-media-marketing',
   },
   {
     name: 'Cybersecurity',
-    price: '₹20,000',
-    type: 'per year',
-    features: ['Security Audit', 'Vulnerability Assessment', 'Threat Monitoring', 'Incident Response'],
+    price: 'From ₹50,000',
+    type: 'assessment/project',
+    features: ['Security audits', 'Penetration testing', 'Compliance consulting', 'Incident response support'],
     href: '/services/cybersecurity',
   },
   {
     name: 'AI Automation',
-    price: 'Custom',
+    price: 'From ₹15,000',
     type: 'scoped project',
-    features: ['Process Audit', 'API Integration', 'Custom Dashboards', 'Workflow Automation'],
+    features: ['Process audit', 'Workflow automation', 'LLM integrations', 'Monitoring and tuning'],
     href: '/services/ai-automation',
   },
   {
     name: 'Branding & Identity',
-    price: 'Starting at ₹10,000',
+    price: 'From ₹15,000',
     type: 'tiered offerings',
-    features: ['Discovery Workshop', 'Comprehensive Brand System', 'Asset Guidelines', 'Brand Guardian Retainer'],
+    features: ['Logo systems', 'Brand identity', 'Guideline documents', 'Brand refresh options'],
     href: '/services/branding',
   },
   {
-    name: 'SaaS Products & Subscriptions',
-    price: 'Starting at ₹5,000',
-    type: 'per month',
-    features: ['Tenant Setup & Migration', 'Custom API Integrations', 'Dedicated Database Instance', 'Enterprise SSO'],
-    href: '/services/saas-products',
-  },
-  {
-    name: 'Content Creation & Strategy',
-    price: 'Starting at ₹15,000',
+    name: 'Content Creation',
+    price: 'From ₹3,000',
     type: 'retainer or project',
-    features: ['SEO-Optimized Blog Posts', 'Social Media Copy', 'Email Newsletters', 'Whitepapers & Guides'],
+    features: ['Blog writing', 'Landing page copy', 'Email sequences', 'Monthly content packages'],
     href: '/services/content-creation',
   },
 ]
@@ -79,8 +71,6 @@ const comparisonData = {
 }
 
 export default function PricingPage() {
-  const [billing, setBilling] = useState<'monthly' | 'annual'>('monthly')
-
   return (
     <main style={{ backgroundColor: 'var(--color-canvas)', minHeight: '100vh' }}>
 
@@ -213,41 +203,14 @@ export default function PricingPage() {
                 What You&apos;ll Pay
               </h2>
             </div>
-
-            {/* Billing toggle */}
-            <div
-              className="flex items-center p-1 border border-border"
-              style={{ backgroundColor: 'var(--color-surface)' }}
-            >
-              <button
-                onClick={() => setBilling('monthly')}
-                className={`px-5 py-2.5 text-[13px] font-semibold transition-all duration-300 ${
-                  billing === 'monthly' ? 'bg-violet text-white' : 'text-muted hover-foreground'
-                }`}
-                data-cursor="pointer"
-              >
-                Monthly
-              </button>
-              <button
-                onClick={() => setBilling('annual')}
-                className={`px-5 py-2.5 text-[13px] font-semibold transition-all duration-300 ${
-                  billing === 'annual' ? 'bg-violet text-white' : 'text-muted hover-foreground'
-                }`}
-                data-cursor="pointer"
-              >
-                Annual <span className="opacity-60 text-xs">(-20%)</span>
-              </button>
-            </div>
+            <p className="font-mono text-xs" style={{ color: 'var(--color-dead)', letterSpacing: '0.1em' }}>
+              Indicative pricing aligned with MTA service catalog
+            </p>
           </motion.div>
 
           {/* Plan rows */}
           <div style={{ borderTop: '1px solid var(--color-border)' }}>
             {plans.map((plan, i) => {
-              const displayPrice =
-                billing === 'annual' && plan.type === 'per month' ? '₹96,000' : plan.price
-              const displayType =
-                billing === 'annual' && plan.type === 'per month' ? 'per year' : plan.type
-
               return (
                 <motion.div
                   key={plan.name}
@@ -296,7 +259,7 @@ export default function PricingPage() {
                             className="font-mono uppercase mt-1 block"
                             style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.16em' }}
                           >
-                            {displayType}
+                            {plan.type}
                           </span>
                         )}
                       </div>
@@ -326,10 +289,10 @@ export default function PricingPage() {
                           fontSize: 'clamp(1.4rem, 2.5vw, 2rem)',
                           color: plan.recommended ? 'var(--color-violet-light)' : 'var(--color-foreground)',
                         }}
-                      >
-                        {displayPrice}
-                      </p>
-                    </div>
+                        >
+                          {plan.price}
+                        </p>
+                      </div>
 
                     {/* Right: CTA */}
                     <div className="lg:border-l lg:border-border lg:pl-8 flex items-center">
@@ -353,7 +316,7 @@ export default function PricingPage() {
             className="font-mono mt-8"
             style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.1em' }}
           >
-            All prices in INR · GST applicable · Discovery Workshop ₹25,000 credited on project sign-off
+            All prices in INR · GST applicable · Final commercials are scoped after project discovery
           </p>
         </div>
       </section>
@@ -383,12 +346,12 @@ export default function PricingPage() {
                 className="font-display font-black mb-3"
                 style={{ fontSize: 'clamp(1.2rem, 2.2vw, 1.9rem)', color: 'var(--color-foreground)', lineHeight: 1.1 }}
               >
-                Discovery Workshop — ₹25,000
+                Discovery & Scope Planning
               </h2>
               <p
                 style={{ fontSize: '14px', lineHeight: 1.72, color: 'var(--color-muted)', maxWidth: '520px' }}
               >
-                Every engagement begins with a scoped Discovery Workshop. We map your requirements, calculate ROI, and hand you a written architecture blueprint — fully credited towards your project on sign-off.
+                Every engagement starts with requirement mapping and implementation planning before commercial and technical commitments are finalized.
               </p>
             </div>
             <Link
@@ -397,7 +360,7 @@ export default function PricingPage() {
               style={{ border: '1px solid var(--color-violet)', color: 'var(--color-violet-light)' }}
               data-cursor="pointer"
             >
-              Book Workshop →
+              Book Discovery Call →
             </Link>
           </motion.div>
         </div>

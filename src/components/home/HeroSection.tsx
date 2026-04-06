@@ -146,8 +146,8 @@ export function HeroSection() {
               animate={{ opacity:1, y:0 }}
               transition={{ duration:0.65, delay:0.7, ease:EASE_OUT }}
             >
-              Delivering the output quality of a larger enterprise firm at the responsiveness
-              and accountability of a boutique 3–4 professional team.
+              MTA is a two-person founder-led technical agency delivering integrated execution
+              across six practice areas with direct accountability on every project.
             </motion.p>
 
             {/* CTAs */}
@@ -183,7 +183,7 @@ export function HeroSection() {
               animate={{ opacity:1 }}
               transition={{ duration:0.5, delay:1.1 }}
             >
-              {['50+ Projects','20+ Clients','3 Years','Nagaur, Rajasthan'].map((t, i) => (
+              {['3 Active Clients','2 Internal SaaS Products','Udyam 2025','Nagaur, Rajasthan'].map((t, i) => (
                 <span key={t} className="flex items-center gap-2">
                   {i > 0 && <span style={{ color:'var(--color-violet)', opacity: 0.6 }}>·</span>}
                   {t}

@@ -2,45 +2,17 @@ import { TeamMember } from '@/types';
 
 export const teamMembers: TeamMember[] = [
   {
-    name: 'Vinay Kali',
-    role: 'Founder & CEO',
+    name: 'Vinay Pal Singh Kadela',
+    role: 'Founder',
     initials: 'VK',
-    bio: 'Full-stack developer and entrepreneur. Founded MTA with a vision to make enterprise-grade technology accessible to Indian businesses of all sizes.',
+    bio: 'Founder of Manglam Technical Agency (MTA), leading AI automation, SaaS and client delivery across all six practice areas.',
     linkedin: '#',
   },
   {
-    name: 'Arjun Meena',
-    role: 'Lead Developer',
-    initials: 'AM',
-    bio: 'Specialises in Next.js, React, and TypeScript. Leads all web development projects from architecture to deployment.',
-    linkedin: '#',
-  },
-  {
-    name: 'Neha Patel',
-    role: 'UI/UX Designer',
-    initials: 'NP',
-    bio: 'Creates intuitive, beautiful interfaces that convert visitors into customers. Expert in Figma and design systems.',
-    linkedin: '#',
-  },
-  {
-    name: 'Rohit Sharma',
-    role: 'Digital Marketing Lead',
-    initials: 'RS',
-    bio: 'Manages social media strategy and automation for all client accounts. Data-driven marketer with a creative edge.',
-    linkedin: '#',
-  },
-  {
-    name: 'Priya Verma',
-    role: 'Cybersecurity Specialist',
-    initials: 'PV',
-    bio: 'Conducts security audits, vulnerability assessments, and compliance reviews. Certified in IT security frameworks.',
-    linkedin: '#',
-  },
-  {
-    name: 'Sanjay Gupta',
-    role: 'Client Relations',
-    initials: 'SG',
-    bio: 'First point of contact for all client engagements. Ensures smooth communication and project delivery.',
+    name: 'Bhavy Tak',
+    role: 'Co-founder / CTO',
+    initials: 'BT',
+    bio: 'Co-founder and technical lead at MTA, driving product architecture and engineering standards for internal and client projects.',
     linkedin: '#',
   },
 ];
