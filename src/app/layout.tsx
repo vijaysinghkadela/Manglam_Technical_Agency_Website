@@ -1,15 +1,16 @@
 import type { Metadata } from 'next'
 import { Inter, Syne, JetBrains_Mono } from 'next/font/google'
-import { LenisProvider }  from '@/providers/LenisProvider'
+import { LenisProvider } from '@/providers/LenisProvider'
 import { MagneticCursor } from '@/components/ui/MagneticCursor'
-import { ScrollToTop }    from '@/components/ui/ScrollToTop'
-import { Navbar }         from '@/components/layout/Navbar'
-import { Footer }         from '@/components/layout/Footer'
-import { Toaster }        from 'react-hot-toast'
-import { ThemeProvider }  from 'next-themes'
-import { SpeedInsights }  from '@vercel/speed-insights/next'
-import { Analytics }      from '@vercel/analytics/next'
-import { JsonLd }         from '@/components/seo/JsonLd'
+import { ScrollToTop } from '@/components/ui/ScrollToTop'
+import { ConsentBanner } from '@/components/ui/ConsentBanner'
+import { Navbar } from '@/components/layout/Navbar'
+import { Footer } from '@/components/layout/Footer'
+import { Toaster } from 'react-hot-toast'
+import { ThemeProvider } from 'next-themes'
+import { SpeedInsights } from '@vercel/speed-insights/next'
+import { Analytics } from '@vercel/analytics/next'
+import { JsonLd } from '@/components/seo/JsonLd'
 import { organizationSchema, websiteSchema } from '@/lib/seo/schemas'
 import '@/styles/globals.css'
 
@@ -26,7 +27,7 @@ export const viewport: import('next').Viewport = {
     { media: '(prefers-color-scheme: light)', color: '#f8fafc' },
     { media: '(prefers-color-scheme: dark)', color: '#080808' },
   ],
-  colorScheme: 'dark light',
+  colorScheme: 'light dark',
 }
 
 export const metadata: Metadata = {
@@ -100,10 +101,17 @@ export const metadata: Metadata = {
   },
 
   icons: {
-    icon:    '/favicon.ico',
-    apple:   '/apple-icon.png',
-    shortcut:'/favicon.ico',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
   },
+  manifest: '/site.webmanifest',
 
   category: 'technology',
 }
@@ -120,7 +128,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <JsonLd schema={organizationSchema()} />
         <JsonLd schema={websiteSchema()} />
 
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange={false}>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange={false}>
         <LenisProvider>
           <MagneticCursor />
           <Navbar />
@@ -130,22 +138,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <Analytics />
           <SpeedInsights />
-          <ScrollToTop />
-          <Toaster
-            position="bottom-right"
-            toastOptions={{
-              style: {
-                background:  'var(--color-card)',
-                color:       '#FAFAFA',
-                border:      '1px solid var(--color-border)',
-                borderRadius:'2px',
-                fontFamily:  'var(--font-mono)',
-                fontSize:    '12px',
-              },
-              success: { iconTheme: { primary:'var(--color-violet)', secondary:'#FAFAFA' } },
-            }}
-          />
-        </LenisProvider>
+<ScrollToTop />
+<Toaster
+position="bottom-right"
+toastOptions={{
+style: {
+background: 'var(--color-card)',
+color: '#FAFAFA',
+border: '1px solid var(--color-border)',
+borderRadius:'2px',
+fontFamily: 'var(--font-mono)',
+fontSize: '12px',
+},
+success: { iconTheme: { primary:'var(--color-violet)', secondary:'#FAFAFA' } },
+}}
+/>
+{/* DPDP/LGPD Compliant Consent Banner */}
+<ConsentBanner />
+</LenisProvider>
         </ThemeProvider>
       </body>
     </html>

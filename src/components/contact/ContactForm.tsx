@@ -5,17 +5,24 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
-import { Loader2, CheckCircle2 } from 'lucide-react'
+import { Loader2, CheckCircle2, Shield } from 'lucide-react'
 
 const schema = z.object({
-  name:     z.string().min(2,  'Name must be at least 2 characters'),
-  email:    z.string().email(  'Enter a valid email address'),
-  phone:    z.string().optional(),
-  service:  z.string().min(1,  'Please select a service'),
-  budget:   z.string().min(1,  'Please select a budget range'),
-  timeline: z.string().min(1,  'Please select a timeline'),
-  message:  z.string().min(20, 'Message must be at least 20 characters'),
-  privacy:  z.boolean().refine(val => val === true, 'You must agree to proceed'),
+  name: z.string().min(2, 'Name must be at least 2 characters'),
+  email: z.string().email('Enter a valid email address'),
+  phone: z.string().optional(),
+  service: z.string().min(1, 'Please select a service'),
+  budget: z.string().min(1, 'Please select a budget range'),
+  timeline: z.string().min(1, 'Please select a timeline'),
+  message: z.string().min(20, 'Message must be at least 20 characters'),
+  // DPDP/LGPD compliant explicit consent - must be true
+  privacy: z.boolean().refine(val => val === true, {
+    message: 'Explicit consent required under DPDP Act 2023 and LGPD'
+  }),
+  // Consent metadata for compliance logging
+  consentTimestamp: z.string().optional(),
+  consentIP: z.string().optional(),
+  consentUserAgent: z.string().optional(),
 })
 type F = z.infer<typeof schema>
 
@@ -29,19 +36,27 @@ export function ContactForm() {
     resolver: zodResolver(schema),
   })
 
-  const onSubmit = async (data: F) => {
-    const res = await fetch('/api/contact', {
-      method:  'POST',
-      headers: { 'Content-Type':'application/json' },
-      body:    JSON.stringify(data),
-    })
-    if (!res.ok) {
-      const body = await res.json().catch(() => ({}))
-      toast.error(body?.message ?? 'Failed to send. Please try again.')
-      return
-    }
-    setDone(true); reset()
+const onSubmit = async (data: F) => {
+  // Add consent metadata for DPDP/LGPD compliance
+  const enrichedData = {
+    ...data,
+    consentTimestamp: new Date().toISOString(),
+    consentPurpose: 'contact-form-submission',
+    // These will be captured server-side for security
   }
+
+  const res = await fetch('/api/contact', {
+    method: 'POST',
+    headers: { 'Content-Type':'application/json' },
+    body: JSON.stringify(enrichedData),
+  })
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    toast.error(body?.message ?? 'Failed to send. Please try again.')
+    return
+  }
+setDone(true); reset()
+}
 
   if (done) return (
     <div className="flex flex-col items-center justify-center text-center py-24 gap-6">
@@ -120,31 +135,50 @@ export function ContactForm() {
 
       {/* ── Privacy & Submit ── */}
       <div className="flex flex-col gap-5">
-        <div className="flex items-start gap-3">
-          <input
-            {...register('privacy')}
-            type="checkbox"
-            id="privacy"
-            className="mt-0.5 w-4 h-4 shrink-0 cursor-pointer"
-            style={{ accentColor:'var(--color-violet)' }}
-          />
-          <label htmlFor="privacy" className="text-sm leading-relaxed" style={{ color:'var(--color-muted)' }}>
-            I agree to the{' '}
-            <a
-              href="/legal/privacy-policy"
-              className="transition-colors hover-foreground"
-              style={{ color:'var(--color-violet-light)' }}
-            >
-              Privacy Policy
-            </a>
-            {' '}and consent to MTA contacting me.
-          </label>
-        </div>
-        {errors.privacy && (
-          <p className="font-mono" style={{ fontSize: '11px', color: '#f87171', marginTop: '-8px' }}>
-            {errors.privacy.message}
+        {/* DPDP/LGPD Compliant Explicit Consent */}
+        <div className="flex flex-col gap-3">
+          <div className="flex items-start gap-3">
+            <input
+              {...register('privacy')}
+              type="checkbox"
+              id="privacy"
+              className="mt-0.5 w-4 h-4 shrink-0 cursor-pointer"
+              style={{ accentColor:'var(--color-violet)' }}
+              // Not pre-ticked - explicit opt-in required
+            />
+            <label htmlFor="privacy" className="text-sm leading-relaxed" style={{ color:'var(--color-muted)' }}>
+              I explicitly consent to Manglam Technical Agency processing my personal data 
+              for the purpose of responding to this inquiry under the{' '}
+              <a
+                href="/legal/privacy-policy"
+                className="transition-colors hover-foreground"
+                style={{ color:'var(--color-violet-light)' }}
+              >
+                Privacy Policy
+              </a>
+              . This consent is free, specific, informed, and unambiguous. 
+              I understand I may withdraw this consent at any time by contacting{' '}
+              <a 
+                href="mailto:contact@manglamtechnicalagency.com"
+                className="transition-colors hover-foreground"
+                style={{ color:'var(--color-violet-light)' }}
+              >
+                contact@manglamtechnicalagency.com
+              </a>.
+            </label>
+          </div>
+          {errors.privacy && (
+            <p className="font-mono" style={{ fontSize: '11px', color: '#f87171' }}>
+              {errors.privacy.message}
+            </p>
+          )}
+          
+          {/* Compliance Note */}
+          <p className="text-xs font-mono" style={{ color: 'var(--color-dead)', marginLeft: '1.75rem' }}>
+            <Shield className="w-3 h-3 inline-block mr-1" />
+            DPDP Act 2023 (India) & LGPD (Brazil) compliant • UDYAM-RJ-15-0094091
           </p>
-        )}
+        </div>
 
         <button
           type="submit"

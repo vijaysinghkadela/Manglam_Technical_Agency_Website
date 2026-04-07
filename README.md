@@ -1,40 +1,120 @@
 # Manglam Technical Agency Website
 
-This is a Next.js 16 (App Router) project bootstrapped with `create-next-app` featuring Tailwind CSS v4 and a premium Framer Motion animated UI.
+A scalable, production-ready website for Manglam Technical Agency built with modern web technologies.
 
-## Getting Started
+## System Architecture
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+mta-website/
+├── frontend/          # UI + User Experience Layer (Next.js)
+├── backend/           # Business Logic + API Layer (Express.js)
+├── docs/              # Documentation
+└── docker-compose.yml # Container Orchestration
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Quick Start
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Prerequisites
+- Node.js 20+
+- npm or yarn
+- MongoDB (optional for local dev)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Development
 
-## Learn More
+**Frontend:**
+```bash
+cd frontend
+npm install
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000)
 
-To learn more about Next.js, take a look at the following resources:
+**Backend:**
+```bash
+cd backend
+npm install
+npm run dev
+```
+API runs on [http://localhost:5000](http://localhost:5000)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Docker (Recommended)
+
+```bash
+docker-compose up -d
+```
 
 ## Project Structure
 
-- `src/app`: Next.js App Router pages and layouts.
-- `src/components`: Reusable UI components.
-- `src/lib`: Data models, types, and utility functions.
+### Frontend (`/frontend`)
+| Directory | Purpose |
+|-----------|---------|
+| `src/components/` | Reusable UI blocks |
+| `src/pages/` | Page components (App Router) |
+| `src/hooks/` | Custom React hooks |
+| `src/services/` | API communication |
+| `src/contexts/` | React contexts |
+| `src/store/` | State management (Zustand) |
+| `src/types/` | TypeScript definitions |
+| `src/utils/` | Utility functions |
+| `src/routes/` | Navigation system |
 
-## Deploy on Vercel
+### Backend (`/backend`)
+| Directory | Purpose |
+|-----------|---------|
+| `src/models/` | Database structure |
+| `src/controllers/` | Request handling |
+| `src/routes/` | API routes |
+| `src/services/` | Core business logic |
+| `src/middleware/` | Auth & security |
+| `src/utils/` | Helper functions |
+| `src/config/` | Configuration |
+| `src/jobs/` | Background tasks |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Tech Stack
+
+### Frontend
+- Next.js 16 (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- Framer Motion
+- Zustand
+
+### Backend
+- Node.js + Express.js
+- MongoDB + Mongoose
+- JWT Authentication
+- Nodemailer
+
+### DevOps
+- Docker & Docker Compose
+- Nginx (reverse proxy)
+
+## Documentation
+
+- [Architecture](docs/architecture/ARCHITECTURE.md)
+- [API Reference](docs/api/API.md)
+- [Deployment Guide](docs/deployment/DEPLOYMENT.md)
+
+## Environment Variables
+
+See [Deployment Guide](docs/deployment/DEPLOYMENT.md) for full list.
+
+## Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm run start` | Start production server |
+| `npm run lint` | Run ESLint |
+
+## License
+
+Private - Manglam Technical Agency
+
+---
+
+**Manglam Technical Agency**  
+*Empowering Your Digital Future*  
+[manglamtechnicalagency.com](https://manglamtechnicalagency.com)

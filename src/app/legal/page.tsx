@@ -97,11 +97,9 @@ export default function LegalHubPage() {
             >
               {/* Card 3 — back (MTA-FC, restricted) */}
               <div
-                className="absolute inset-0"
+                className="absolute inset-0 legal-stack-back"
                 style={{
                   transform: 'rotate(-9deg) translate(-18px, 22px)',
-                  border: '1px solid rgba(124,58,237,0.15)',
-                  backgroundColor: 'rgba(124,58,237,0.03)',
                 }}
               >
                 <div className="p-4">
@@ -133,11 +131,9 @@ export default function LegalHubPage() {
 
               {/* Card 2 — middle (MTA-DPA) */}
               <div
-                className="absolute inset-0"
+                className="absolute inset-0 legal-stack-mid"
                 style={{
                   transform: 'rotate(-3.5deg) translate(6px, 10px)',
-                  border: '1px solid rgba(124,58,237,0.25)',
-                  backgroundColor: 'rgba(124,58,237,0.05)',
                 }}
               >
                 <div className="p-4">
@@ -163,11 +159,9 @@ export default function LegalHubPage() {
 
               {/* Card 1 — front (MTA-MSA) */}
               <div
-                className="absolute inset-0"
+                className="absolute inset-0 legal-stack-front"
                 style={{
                   transform: 'rotate(2.5deg)',
-                  border: '1px solid rgba(124,58,237,0.4)',
-                  backgroundColor: 'rgba(124,58,237,0.07)',
                 }}
               >
                 <div className="p-4">
@@ -264,7 +258,7 @@ export default function LegalHubPage() {
         className="border-t border-border"
         style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(64px, 10vw, 120px) 0' }}
       >
-        <div className="container-site grid grid-cols-1 lg:grid-cols-[180px_1fr_360px] gap-10 lg:gap-12 xl:gap-16 items-start">
+        <div className="container-site grid grid-cols-1 lg:grid-cols-[220px_1fr_380px] gap-10 lg:gap-12 xl:gap-16 items-start">
 
           {/* ── TOC Sidebar (desktop only) ── */}
           <aside className="hidden lg:block lg:sticky lg:top-32 self-start">

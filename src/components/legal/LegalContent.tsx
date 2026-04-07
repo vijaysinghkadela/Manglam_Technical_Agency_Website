@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-import { FileText, Lock, Plus, ExternalLink } from 'lucide-react'
+import { FileText, Lock, Plus, ArrowRight } from 'lucide-react'
 import type { AgreementSummary, ApplicabilityRow, PolicyDocument } from '@/lib/data/legal'
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
@@ -460,8 +460,8 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
                   >
                     {policy.lastUpdated}
                   </span>
-                  <ExternalLink
-                    className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  <ArrowRight
+                    className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
                     style={{ color: 'var(--color-muted)' }}
                   />
                 </div>

@@ -8,7 +8,8 @@ const ITEMS = [
 ]
 
 // Memoized item component to prevent re-renders
-const MarqueeItem = memo(function MarqueeItem({ item, index }: { item: string; index: number }) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const MarqueeItem = memo(function MarqueeItem({ item, index: _index }: { item: string; index?: number }) {
   return (
     <span
       className="flex items-center gap-4 font-mono uppercase mr-6"

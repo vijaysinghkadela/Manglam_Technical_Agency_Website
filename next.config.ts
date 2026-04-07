@@ -19,6 +19,9 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,
+  turbopack: {
+    root: __dirname,
+  },
 
   images: {
     formats: ['image/avif', 'image/webp'],
@@ -36,16 +39,6 @@ const nextConfig: NextConfig = {
       {
         source: '/(.*)',
         headers: securityHeaders,
-      },
-      {
-        // Long-lived cache for static assets (Next.js content-hashes filenames)
-        source: '/_next/static/(.*)',
-        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
-      },
-      {
-        // Cache optimised images for 7 days
-        source: '/_next/image(.*)',
-        headers: [{ key: 'Cache-Control', value: 'public, max-age=604800, stale-while-revalidate=86400' }],
       },
     ]
   },

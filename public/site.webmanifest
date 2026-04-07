@@ -1,0 +1,29 @@
+{
+  "name": "Manglam Technical Agency",
+  "short_name": "MTA",
+  "description": "End-to-end technology services for Indian businesses — web development, AI automation, cybersecurity, and digital operations.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080808",
+  "theme_color": "#6B1A1A",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "categories": ["technology", "business", "services"],
+  "lang": "en-IN",
+  "dir": "ltr",
+  "scope": "/",
+  "id": "/"
+}

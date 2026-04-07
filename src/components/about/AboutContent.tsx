@@ -11,6 +11,7 @@ import {
   FileText,
   ArrowRight,
 } from 'lucide-react'
+import { teamMembers } from '@/lib/data/team'
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
 
@@ -184,6 +185,115 @@ export function AboutContent() {
               </span>
             ))}
           </motion.div>
+        </div>
+      </section>
+
+      {/* ── THE TEAM ─────────────────────────────────────────── */}
+      <section
+        className="w-full border-t border-border"
+        style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(64px, 10vw, 120px) 0' }}
+      >
+        <div className="container-site">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.6, ease: EASE }}
+            className="mb-12 lg:mb-16"
+          >
+            <span
+              className="font-mono uppercase block mb-3"
+              style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.22em' }}
+            >
+              ✦ THE TEAM
+            </span>
+            <h2
+              className="font-display font-black leading-none tracking-tighter uppercase"
+              style={{ fontSize: 'clamp(1.75rem, 4vw, 3.25rem)', color: 'var(--color-foreground)' }}
+            >
+              People Behind the Work
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {teamMembers.map((member, i) => (
+              <motion.div
+                key={member.name}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.6, delay: i * 0.1, ease: EASE }}
+                className="flex flex-col p-7 lg:p-8"
+                style={{
+                  border: '1px solid var(--color-border)',
+                  backgroundColor: 'var(--color-card)',
+                }}
+              >
+                {/* Header: initials + name + role */}
+                <div className="flex items-center gap-4 mb-5">
+                  <div
+                    className="w-12 h-12 flex items-center justify-center shrink-0 font-display font-black"
+                    style={{
+                      border: '1px solid rgba(124,58,237,0.45)',
+                      backgroundColor: 'rgba(124,58,237,0.08)',
+                      color: 'var(--color-violet-light)',
+                      fontSize: '1rem',
+                      letterSpacing: '-0.02em',
+                    }}
+                  >
+                    {member.initials}
+                  </div>
+                  <div className="flex flex-col gap-0.5">
+                    <span
+                      className="font-display font-bold leading-tight"
+                      style={{ fontSize: 'clamp(1rem, 1.4vw, 1.1rem)', color: 'var(--color-foreground)' }}
+                    >
+                      {member.name}
+                    </span>
+                    <span
+                      className="font-mono uppercase"
+                      style={{ fontSize: '10px', color: 'var(--color-violet-light)', letterSpacing: '0.16em' }}
+                    >
+                      {member.role}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Divider */}
+                <div style={{ height: '1px', backgroundColor: 'var(--color-border)', marginBottom: '1.25rem' }} />
+
+                {/* Bio */}
+                <p
+                  className="leading-relaxed flex-1 mb-5"
+                  style={{ fontSize: '14px', lineHeight: 1.75, color: 'var(--color-muted)' }}
+                >
+                  {member.bio}
+                </p>
+
+                {/* Expertise tags */}
+                {member.expertise && member.expertise.length > 0 && (
+                  <div className="flex flex-wrap gap-2">
+                    {member.expertise.map((tag) => (
+                      <span
+                        key={tag}
+                        className="font-mono uppercase"
+                        style={{
+                          fontSize: '9px',
+                          color: 'var(--color-muted)',
+                          letterSpacing: '0.12em',
+                          border: '1px solid var(--color-border)',
+                          padding: '3px 8px',
+                          backgroundColor: 'var(--color-surface)',
+                        }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

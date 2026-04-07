@@ -5,21 +5,46 @@ import Link from 'next/link'
 import { services } from '@/lib/data/services'
 import { SpotlightCard } from '@/components/ui/SpotlightCard'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 const EASE: [number,number,number,number] = [0.16, 1, 0.3, 1]
 const CARD_W   = 380
 const SIDE_PAD = 96
 
 export function ServicesHorizontal() {
-  const sectionRef  = useRef<HTMLDivElement>(null)
-  const isMobile    = useMediaQuery('(max-width: 1023px)')
+  const sectionRef    = useRef<HTMLDivElement>(null)
+  const isMobile      = useMediaQuery('(max-width: 1023px)')
+  const reducedMotion = useReducedMotion()
   const [vpW, setVpW] = useState(1280)
+  const isMountedRef = useRef(true) // Track mount state
 
   useEffect(() => {
-    setTimeout(() => setVpW(window.innerWidth), 0)
-    const fn = () => setVpW(window.innerWidth)
-    window.addEventListener('resize', fn, { passive:true })
-    return () => window.removeEventListener('resize', fn)
+    // Mark component as mounted
+    isMountedRef.current = true
+    
+    setTimeout(() => {
+      if (isMountedRef.current) setVpW(window.innerWidth)
+    }, 0)
+    
+    // Debounced resize handler - prevents expensive recalculations on every pixel
+    let timeoutId: ReturnType<typeof setTimeout> | null = null
+    const fn = () => {
+      if (timeoutId) clearTimeout(timeoutId)
+      timeoutId = setTimeout(() => {
+        // Only update if component is still mounted
+        if (isMountedRef.current) {
+          setVpW(window.innerWidth)
+        }
+      }, 200) // 200ms debounce
+    }
+    
+    window.addEventListener('resize', fn, { passive: true })
+    return () => {
+      // Mark component as unmounted
+      isMountedRef.current = false
+      window.removeEventListener('resize', fn)
+      if (timeoutId) clearTimeout(timeoutId)
+    }
   }, [])
 
   const trackW     = CARD_W * services.length
@@ -32,8 +57,8 @@ export function ServicesHorizontal() {
   })
   const x = useTransform(scrollYProgress, [0,1], ['0px', `-${scrollDist}px`])
 
-  // Mobile: vertical grid
-  if (isMobile) {
+  // Mobile or reduced-motion: vertical grid
+  if (isMobile || reducedMotion) {
     return (
       <section style={{ borderTop:'1px solid var(--color-border)' }}>
         <div className="container-site py-12 lg:py-20">

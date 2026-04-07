@@ -16,7 +16,7 @@ export default function CybersecurityPolicyPage() {
         breadcrumbCurrent="Cybersecurity Policy"
         label="TRUST CENTER"
         title="Cybersecurity Policies"
-        subheading="Operational guidelines, SLAs, and legal baseline for our cybersecurity services."
+        subheading="Operational guidelines, PTES methodology, DPDP Rule 6 compliance, and NIST CSF 2.0 alignment for cybersecurity services."
       />
 
       <div className="w-full max-w-[1000px] mx-auto px-6 lg:px-12 mt-16 flex flex-col gap-12">
@@ -50,9 +50,277 @@ export default function CybersecurityPolicyPage() {
           </ul>
         </section>
 
-        {/* Section 4: Data Table for SLAs */}
-        <section>
-          <h2 className="font-display font-black text-white text-2xl mb-6">4. Incident Response SLAs</h2>
+{/* Section 2: PTES Methodology */}
+      <section className="bg-surface border border-border p-8 rounded-2xl">
+        <h2 className="font-display font-black text-white text-2xl mb-4">
+          2. Penetration Testing Execution Standard (PTES)
+        </h2>
+        <p className="text-muted leading-relaxed mb-6">
+          MTA follows the 7-phase PTES methodology for all ethical hacking engagements. This framework ensures comprehensive coverage from pre-engagement through post-exploitation reporting.
+        </p>
+        <div className="w-full overflow-x-auto">
+          <table className="w-full text-left border-collapse min-w-[700px]">
+            <thead>
+              <tr className="border-b border-border bg-black/20">
+                <th className="p-4 text-xs font-mono tracking-widest text-muted uppercase">Phase</th>
+                <th className="p-4 text-xs font-mono tracking-widest text-muted uppercase">Activity</th>
+                <th className="p-4 text-xs font-mono tracking-widest text-muted uppercase">Duration</th>
+                <th className="p-4 text-xs font-mono tracking-widest text-muted uppercase">Key Deliverable</th>
+              </tr>
+            </thead>
+            <tbody className="text-sm text-white/90">
+              <tr className="border-b border-border hover:bg-white/5 transition-colors">
+                <td className="p-4 font-semibold">1. Pre-engagement</td>
+                <td className="p-4">RoE signing, scope definition, authorization</td>
+                <td className="p-4">1-2 days</td>
+                <td className="p-4">Signed RoE with Jaipur jurisdiction</td>
+              </tr>
+              <tr className="border-b border-border hover:bg-white/5 transition-colors">
+                <td className="p-4 font-semibold">2. Intelligence Gathering</td>
+                <td className="p-4">OSINT, passive/active reconnaissance</td>
+                <td className="p-4">2-3 days</td>
+                <td className="p-4">Intelligence report with asset list</td>
+              </tr>
+              <tr className="border-b border-border hover:bg-white/5 transition-colors">
+                <td className="p-4 font-semibold">3. Threat Modeling</td>
+                <td className="p-4">DFD creation, STRIDE/LINDDUN analysis</td>
+                <td className="p-4">2-3 days</td>
+                <td className="p-4">Threat model diagram</td>
+              </tr>
+              <tr className="border-b border-border hover:bg-white/5 transition-colors">
+                <td className="p-4 font-semibold">4. Vulnerability Analysis</td>
+                <td className="p-4">Scanning, manual verification, OWASP testing</td>
+                <td className="p-4">3-5 days</td>
+                <td className="p-4">CVSS-scored vulnerability list</td>
+              </tr>
+              <tr className="border-b border-border hover:bg-white/5 transition-colors">
+                <td className="p-4 font-semibold">5. Exploitation</td>
+                <td className="p-4">Controlled exploitation, proof-of-concept</td>
+                <td className="p-4">2-4 days</td>
+                <td className="p-4">Exploitation evidence</td>
+              </tr>
+              <tr className="border-b border-border hover:bg-white/5 transition-colors">
+                <td className="p-4 font-semibold">6. Post-Exploitation</td>
+                <td className="p-4">Pivot testing, lateral movement</td>
+                <td className="p-4">1-2 days</td>
+                <td className="p-4">Impact assessment</td>
+              </tr>
+              <tr className="hover:bg-white/5 transition-colors">
+                <td className="p-4 font-semibold">7. Reporting</td>
+                <td className="p-4">Executive summary, technical report, retest</td>
+                <td className="p-4">2-3 days</td>
+                <td className="p-4">Full report + DPDP certificate</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* Section 3: Testing Types */}
+      <section>
+        <h2 className="font-display font-black text-white text-2xl mb-6">3. Testing Methodology Options</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-surface border border-border p-6 rounded-2xl">
+            <h3 className="font-display font-bold text-white text-lg mb-2">Black-box</h3>
+            <p className="text-muted text-sm mb-4">Zero prior knowledge (simulates external attacker)</p>
+            <ul className="text-sm text-white/80 space-y-2">
+              <li><span className="text-violet-light">Duration:</span> +20%</li>
+              <li><span className="text-violet-light">Best for:</span> External perimeter testing</li>
+            </ul>
+          </div>
+          <div className="bg-[#111] border border-violet-500/30 p-6 rounded-2xl relative">
+            <div className="absolute top-0 right-0 bg-violet-500/20 text-violet-light text-xs font-mono px-3 py-1 rounded-bl-lg">DEFAULT</div>
+            <h3 className="font-display font-bold text-white text-lg mb-2 mt-2">Gray-box</h3>
+            <p className="text-muted text-sm mb-4">Limited credentials and documentation</p>
+            <ul className="text-sm text-white/80 space-y-2">
+              <li><span className="text-violet-light">Duration:</span> Standard</li>
+              <li><span className="text-violet-light">Best for:</span> Most cost-effective testing</li>
+            </ul>
+          </div>
+          <div className="bg-surface border border-border p-6 rounded-2xl">
+            <h3 className="font-display font-bold text-white text-lg mb-2">White-box</h3>
+            <p className="text-muted text-sm mb-4">Full source code and architecture access</p>
+            <ul className="text-sm text-white/80 space-y-2">
+              <li><span className="text-violet-light">Duration:</span> -10%</li>
+              <li><span className="text-violet-light">Best for:</span> Deep in-app security review</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 4: DPDP Rule 6 Compliance */}
+      <section className="bg-[#111] border border-violet-500/30 p-8 rounded-2xl relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-1 h-full bg-violet-500" />
+        <h2 className="font-display font-black text-white text-2xl mb-4">
+          4. DPDP Act 2023 Rule 6 Safeguards
+        </h2>
+        <p className="text-muted leading-relaxed mb-6">
+          Rule 6 mandates minimum technical and organizational measures for personal data protection. Failure = up to ₹250 Crore penalty.
+        </p>
+        <div className="w-full overflow-x-auto">
+          <table className="w-full text-left border-collapse min-w-[700px]">
+            <thead>
+              <tr className="border-b border-border bg-black/20">
+                <th className="p-4 text-xs font-mono tracking-widest text-muted uppercase">Safeguard Category</th>
+                <th className="p-4 text-xs font-mono tracking-widest text-muted uppercase">Rule 6 Requirement</th>
+                <th className="p-4 text-xs font-mono tracking-widest text-muted uppercase">MTA Implementation</th>
+              </tr>
+            </thead>
+            <tbody className="text-sm text-white/90">
+              <tr className="border-b border-border hover:bg-white/5 transition-colors">
+                <td className="p-4 font-semibold">Technical Controls</td>
+                <td className="p-4">Encryption, obfuscation, masking</td>
+                <td className="p-4">Supabase pg_crypto, tokenisation</td>
+              </tr>
+              <tr className="border-b border-border hover:bg-white/5 transition-colors">
+                <td className="p-4 font-semibold">Access Control</td>
+                <td className="p-4">Strict role-based access</td>
+                <td className="p-4">RLS policies, MFA enforcement</td>
+              </tr>
+              <tr className="border-b border-border hover:bg-white/5 transition-colors">
+                <td className="p-4 font-semibold">Logging & Monitoring</td>
+                <td className="p-4">Continuous logging, 1-year retention</td>
+                <td className="p-4">Supabase audit triggers, 180-day retention</td>
+              </tr>
+              <tr className="border-b border-border hover:bg-white/5 transition-colors">
+                <td className="p-4 font-semibold">Breach Prevention</td>
+                <td className="p-4">Vulnerability management</td>
+                <td className="p-4">OWASP 2025 scanning, RLS compliance</td>
+              </tr>
+              <tr className="border-b border-border hover:bg-white/5 transition-colors">
+                <td className="p-4 font-semibold">Data Processor Obligations</td>
+                <td className="p-4">Processor contracts mirror safeguards</td>
+                <td className="p-4">DPA clause in every RoE</td>
+              </tr>
+              <tr className="hover:bg-white/5 transition-colors">
+                <td className="p-4 font-semibold">Business Continuity</td>
+                <td className="p-4">Backups + disaster recovery</td>
+                <td className="p-4">Supabase backups, retest included</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* Section 5: NIST CSF 2.0 Alignment */}
+      <section className="bg-surface border border-border p-8 rounded-2xl">
+        <h2 className="font-display font-black text-white text-2xl mb-4">
+          5. NIST Cybersecurity Framework 2.0
+        </h2>
+        <p className="text-muted leading-relaxed mb-6">
+          Every VAPT report includes NIST CSF 2.0 heat-map showing compliance across 6 core functions.
+        </p>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="bg-black/20 border border-border p-4 rounded-xl">
+            <h3 className="font-display font-bold text-violet-light text-lg mb-1">Govern (GV)</h3>
+            <p className="text-sm text-muted">Risk strategy, policy, oversight</p>
+          </div>
+          <div className="bg-black/20 border border-border p-4 rounded-xl">
+            <h3 className="font-display font-bold text-violet-light text-lg mb-1">Identify (ID)</h3>
+            <p className="text-sm text-muted">Asset management, threat modeling</p>
+          </div>
+          <div className="bg-black/20 border border-border p-4 rounded-xl">
+            <h3 className="font-display font-bold text-violet-light text-lg mb-1">Protect (PR)</h3>
+            <p className="text-sm text-muted">Access control, data security</p>
+          </div>
+          <div className="bg-black/20 border border-border p-4 rounded-xl">
+            <h3 className="font-display font-bold text-violet-light text-lg mb-1">Detect (DE)</h3>
+            <p className="text-sm text-muted">Continuous monitoring, anomalies</p>
+          </div>
+          <div className="bg-black/20 border border-border p-4 rounded-xl">
+            <h3 className="font-display font-bold text-violet-light text-lg mb-1">Respond (RS)</h3>
+            <p className="text-sm text-muted">Incident response, breach notification</p>
+          </div>
+          <div className="bg-black/20 border border-border p-4 rounded-xl">
+            <h3 className="font-display font-bold text-violet-light text-lg mb-1">Recover (RC)</h3>
+            <p className="text-sm text-muted">Resilience, backups, retest</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 6: OWASP Top 10:2025 Testing */}
+      <section className="bg-surface border border-border p-8 rounded-2xl">
+        <h2 className="font-display font-black text-white text-2xl mb-4">
+          6. OWASP Top 10:2025 Integration
+        </h2>
+        <p className="text-muted leading-relaxed mb-6">
+          All web application testing aligns with the latest OWASP Top 10:2025 standard.
+        </p>
+        <div className="space-y-4">
+          <div className="flex items-start gap-4 p-4 bg-red-500/5 border border-red-500/20 rounded-xl">
+            <span className="w-2 h-2 rounded-full bg-red-500 mt-2 shrink-0" />
+            <div>
+              <h4 className="text-white font-semibold">A01 Broken Access Control (IDOR, privilege escalation)</h4>
+              <span className="text-red-400 text-sm font-mono">Critical</span>
+            </div>
+          </div>
+          <div className="flex items-start gap-4 p-4 bg-red-500/5 border border-red-500/20 rounded-xl">
+            <span className="w-2 h-2 rounded-full bg-red-500 mt-2 shrink-0" />
+            <div>
+              <h4 className="text-white font-semibold">A05 Injection (SQLi, XSS, command injection)</h4>
+              <span className="text-red-400 text-sm font-mono">Critical</span>
+            </div>
+          </div>
+          <div className="flex items-start gap-4 p-4 bg-orange-500/5 border border-orange-500/20 rounded-xl">
+            <span className="w-2 h-2 rounded-full bg-orange-500 mt-2 shrink-0" />
+            <div>
+              <h4 className="text-white font-semibold">A02 Security Misconfiguration</h4>
+              <span className="text-orange-400 text-sm font-mono">High</span>
+            </div>
+          </div>
+          <div className="flex items-start gap-4 p-4 bg-orange-500/5 border border-orange-500/20 rounded-xl">
+            <span className="w-2 h-2 rounded-full bg-orange-500 mt-2 shrink-0" />
+            <div>
+              <h4 className="text-white font-semibold">A04 Cryptographic Failures</h4>
+              <span className="text-orange-400 text-sm font-mono">High</span>
+            </div>
+          </div>
+          <div className="flex items-start gap-4 p-4 bg-orange-500/5 border border-orange-500/20 rounded-xl">
+            <span className="w-2 h-2 rounded-full bg-orange-500 mt-2 shrink-0" />
+            <div>
+              <h4 className="text-white font-semibold">A07 Authentication Failures</h4>
+              <span className="text-orange-400 text-sm font-mono">High</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 7: Client Case Studies */}
+      <section className="bg-card border border-border p-8 rounded-2xl">
+        <h2 className="font-display font-black text-white text-2xl mb-6">
+          7. Real Client Implementations
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-surface border border-border p-6 rounded-xl">
+            <h3 className="font-display font-bold text-white text-lg mb-3">FitNexora (SaaS)</h3>
+            <ul className="text-sm text-muted space-y-2">
+              <li>• Multi-tenant Supabase RLS vulnerabilities discovered</li>
+              <li>• IDOR threat on member data</li>
+              <li>• DPDP Section 8(5) gap remediation</li>
+            </ul>
+          </div>
+          <div className="bg-surface border border-border p-6 rounded-xl">
+            <h3 className="font-display font-bold text-white text-lg mb-3">MNSS Healthcare</h3>
+            <ul className="text-sm text-muted space-y-2">
+              <li>• Next.js path traversal vulnerability</li>
+              <li>• MongoDB patient PII exposure risk</li>
+              <li>• HIPAA-aligned DPDP compliance</li>
+            </ul>
+          </div>
+          <div className="bg-surface border border-border p-6 rounded-xl">
+            <h3 className="font-display font-bold text-white text-lg mb-3">Doctor Appointment App</h3>
+            <ul className="text-sm text-muted space-y-2">
+              <li>• Weak authentication on booking API</li>
+              <li>• WhatsApp phishing simulation</li>
+              <li>• Consent flow testing</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 8: Data Table for SLAs */}
+      <section>
+        <h2 className="font-display font-black text-white text-2xl mb-6">8. Incident Response SLAs</h2>
           <div className="w-full overflow-x-auto rounded-2xl border border-border bg-surface">
             <table className="w-full text-left border-collapse min-w-[600px]">
               <thead>
@@ -99,15 +367,25 @@ export default function CybersecurityPolicyPage() {
               </tbody>
             </table>
           </div>
-        </section>
+</section>
 
-        {/* Accordions for remaining sections */}
-        <section className="flex flex-col gap-4">
-          <h2 className="font-display font-black text-white text-2xl mb-2">Operational Guidelines</h2>
-          
-          <details className="group border border-border bg-surface rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
-            <summary className="flex items-center justify-between p-6 cursor-pointer font-display text-lg font-bold text-white transition-colors hover:bg-white/5" data-cursor="pointer">
-              2. Categorised Scope of Services
+      {/* Section 9: CERT-In Compliance */}
+      <section className="bg-surface border border-border p-8 rounded-2xl">
+        <h2 className="font-display font-black text-white text-2xl mb-4">
+          9. CERT-In Directions 2022
+        </h2>
+        <p className="text-muted leading-relaxed">
+          CERT-In compliance mandatory for all body corporates with websites/apps. Includes 6-hour incident reporting, 180-day log retention in India, accurate NTP synchronization, and mandatory cooperation with CERT-In investigations.
+        </p>
+      </section>
+
+      {/* Accordions for remaining sections */}
+      <section className="flex flex-col gap-4">
+        <h2 className="font-display font-black text-white text-2xl mb-2">Operational Guidelines</h2>
+
+        <details className="group border border-border bg-surface rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+          <summary className="flex items-center justify-between p-6 cursor-pointer font-display text-lg font-bold text-white transition-colors hover:bg-white/5" data-cursor="pointer">
+            10. Categorised Scope of Services
               <span className="text-violet-light group-open:rotate-45 transition-transform duration-300 text-2xl leading-none">+</span>
             </summary>
             <div className="p-6 pt-0 text-muted leading-relaxed border-t border-border mt-2">
@@ -121,9 +399,9 @@ export default function CybersecurityPolicyPage() {
             </div>
           </details>
 
-          <details className="group border border-border bg-surface rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
-            <summary className="flex items-center justify-between p-6 cursor-pointer font-display text-lg font-bold text-white transition-colors hover:bg-white/5" data-cursor="pointer">
-              3. Pricing and Financial Architecture
+<details className="group border border-border bg-surface rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+          <summary className="flex items-center justify-between p-6 cursor-pointer font-display text-lg font-bold text-white transition-colors hover:bg-white/5" data-cursor="pointer">
+            11. Pricing and Financial Architecture
               <span className="text-violet-light group-open:rotate-45 transition-transform duration-300 text-2xl leading-none">+</span>
             </summary>
             <div className="p-6 pt-0 text-muted leading-relaxed border-t border-border mt-2">
@@ -136,9 +414,9 @@ export default function CybersecurityPolicyPage() {
             </div>
           </details>
 
-          <details className="group border border-border bg-surface rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
-            <summary className="flex items-center justify-between p-6 cursor-pointer font-display text-lg font-bold text-white transition-colors hover:bg-white/5" data-cursor="pointer">
-              5. Rules of Engagement and Data Handling
+<details className="group border border-border bg-surface rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+          <summary className="flex items-center justify-between p-6 cursor-pointer font-display text-lg font-bold text-white transition-colors hover:bg-white/5" data-cursor="pointer">
+            12. Rules of Engagement and Data Handling
               <span className="text-violet-light group-open:rotate-45 transition-transform duration-300 text-2xl leading-none">+</span>
             </summary>
             <div className="p-6 pt-0 text-muted leading-relaxed border-t border-border mt-2">
@@ -151,9 +429,9 @@ export default function CybersecurityPolicyPage() {
             </div>
           </details>
 
-          <details className="group border border-border bg-surface rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
-            <summary className="flex items-center justify-between p-6 cursor-pointer font-display text-lg font-bold text-white transition-colors hover:bg-white/5" data-cursor="pointer">
-              6. Limitation of Liability and Termination
+<details className="group border border-border bg-surface rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+          <summary className="flex items-center justify-between p-6 cursor-pointer font-display text-lg font-bold text-white transition-colors hover:bg-white/5" data-cursor="pointer">
+            13. Limitation of Liability and Termination
               <span className="text-violet-light group-open:rotate-45 transition-transform duration-300 text-2xl leading-none">+</span>
             </summary>
             <div className="p-6 pt-0 text-muted leading-relaxed border-t border-border mt-2">
@@ -165,9 +443,9 @@ export default function CybersecurityPolicyPage() {
             </div>
           </details>
 
-          <details className="group border border-border bg-surface rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
-            <summary className="flex items-center justify-between p-6 cursor-pointer font-display text-lg font-bold text-white transition-colors hover:bg-white/5" data-cursor="pointer">
-              7. Technical Testing Methodology Annexure
+<details className="group border border-border bg-surface rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+          <summary className="flex items-center justify-between p-6 cursor-pointer font-display text-lg font-bold text-white transition-colors hover:bg-white/5" data-cursor="pointer">
+            14. Technical Testing Methodology Annexure
               <span className="text-violet-light group-open:rotate-45 transition-transform duration-300 text-2xl leading-none">+</span>
             </summary>
             <div className="p-6 pt-0 text-muted leading-relaxed border-t border-border mt-2">
@@ -180,9 +458,9 @@ export default function CybersecurityPolicyPage() {
             </div>
           </details>
 
-          <details className="group border border-border bg-surface rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
-            <summary className="flex items-center justify-between p-6 cursor-pointer font-display text-lg font-bold text-white transition-colors hover:bg-white/5" data-cursor="pointer">
-              8. Secure Transmission & Credential Transfer SOP
+<details className="group border border-border bg-surface rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+          <summary className="flex items-center justify-between p-6 cursor-pointer font-display text-lg font-bold text-white transition-colors hover:bg-white/5" data-cursor="pointer">
+            15. Secure Transmission & Credential Transfer SOP
               <span className="text-violet-light group-open:rotate-45 transition-transform duration-300 text-2xl leading-none">+</span>
             </summary>
             <div className="p-6 pt-0 text-muted leading-relaxed border-t border-border mt-2">
@@ -194,9 +472,9 @@ export default function CybersecurityPolicyPage() {
             </div>
           </details>
 
-          <details className="group border border-border bg-surface rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
-            <summary className="flex items-center justify-between p-6 cursor-pointer font-display text-lg font-bold text-white transition-colors hover:bg-white/5" data-cursor="pointer">
-              9. Post-Incident Review (PIR) Requirements
+<details className="group border border-border bg-surface rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+          <summary className="flex items-center justify-between p-6 cursor-pointer font-display text-lg font-bold text-white transition-colors hover:bg-white/5" data-cursor="pointer">
+            16. Post-Incident Review (PIR) Requirements
               <span className="text-violet-light group-open:rotate-45 transition-transform duration-300 text-2xl leading-none">+</span>
             </summary>
             <div className="p-6 pt-0 text-muted leading-relaxed border-t border-border mt-2">

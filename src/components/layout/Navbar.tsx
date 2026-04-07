@@ -9,6 +9,7 @@ import { services } from '@/lib/data/services'
 import { cn } from '@/lib/utils'
 import dynamic from 'next/dynamic'
 
+import { useTheme } from 'next-themes'
 const ThemeToggle = dynamic(() => import('@/components/ui/ThemeToggle'), { ssr: false })
 
 const NAV_LINKS = [
@@ -28,16 +29,31 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobile, setMobile] = useState(false)
   const [mega, setMega] = useState(false)
+  const { resolvedTheme } = useTheme()
 
-  // Scroll detection — only triggers setState when crossing the 40px boundary
+  // Scroll detection with RAF throttling — only triggers setState when crossing the 40px boundary
   useEffect(() => {
     let prev = window.scrollY > 40
+    let rafId: number | null = null
+    
     const fn = () => {
-      const next = window.scrollY > 40
-      if (next !== prev) { prev = next; setScrolled(next) }
+      // RAF throttling: Only schedule update if not already pending
+      if (rafId !== null) return
+      rafId = requestAnimationFrame(() => {
+        const next = window.scrollY > 40
+        if (next !== prev) {
+          prev = next
+          setScrolled(next)
+        }
+        rafId = null
+      })
     }
+    
     window.addEventListener('scroll', fn, { passive: true })
-    return () => window.removeEventListener('scroll', fn)
+    return () => {
+      window.removeEventListener('scroll', fn)
+      if (rafId !== null) cancelAnimationFrame(rafId)
+    }
   }, [])
 
   // Auto-close on navigation — deferred to avoid synchronous setState-in-effect
@@ -61,7 +77,7 @@ export function Navbar() {
       <nav
         className="fixed top-0 left-0 right-0 z-100 transition-colors duration-300"
         style={{
-          backgroundColor: scrolled ? 'rgba(8,8,8,0.75)' : 'transparent',
+          backgroundColor: scrolled ? (resolvedTheme === 'dark' ? 'rgba(8,8,8,0.75)' : 'rgba(248,250,252,0.9)') : 'transparent',
           backdropFilter: scrolled ? 'blur(24px)' : 'none',
           WebkitBackdropFilter: scrolled ? 'blur(24px)' : 'none',
           borderBottom: scrolled ? '1px solid var(--color-border)' : '1px solid transparent',
@@ -69,36 +85,38 @@ export function Navbar() {
       >
         {/* Full-width inner — 68px tall */}
         <div
-          className="relative w-full mx-auto flex items-center justify-between h-[68px]"
+          className="w-full mx-auto grid grid-cols-[auto_1fr_auto] items-center h-[68px]"
           style={{ maxWidth:'1440px', padding:'0 clamp(1.5rem, 4vw, 3rem)' }}
         >
-          {/* Logo — left */}
-          <Link 
-            href="/" 
-            data-cursor="pointer" 
-            className="flex items-center gap-3 shrink-0 z-10 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-violet p-1 rounded-sm"
+      {/* Logo — left */}
+      <Link
+        href="/"
+        data-cursor="pointer"
+        className="flex items-center gap-3 shrink-0 z-10 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-violet p-1 rounded-sm group"
+      >
+        <div className="relative transition-transform duration-300 group-hover:scale-105">
+          <Image
+            src={resolvedTheme === 'dark' ? '/images/mta-logo-dark.png' : '/images/mta-logo-light.png'}
+            alt="MTA Logo"
+            width={40}
+            height={40}
+            className="shrink-0"
+            priority
+          />
+        </div>
+        <div className="flex flex-col leading-none">
+          <span className="font-display font-black text-[15px] tracking-tight" style={{ color: 'var(--color-foreground)' }}>MTA</span>
+          <span
+            className="font-mono uppercase hidden sm:block text-muted"
+            style={{ fontSize:'9px', letterSpacing:'0.14em' }}
           >
-            <Image
-              src="/images/mta-logo.png"
-              alt="MTA Logo"
-              width={32}
-              height={32}
-              className="shrink-0"
-              priority
-            />
-            <div className="flex flex-col leading-none">
-              <span className="font-display font-black text-[15px] text-white tracking-tight">MTA</span>
-              <span
-                className="font-mono uppercase hidden sm:block text-muted"
-                style={{ fontSize:'9px', letterSpacing:'0.14em' }}
-              >
-                Manglam Technical Agency
-              </span>
-            </div>
-          </Link>
+            Manglam Technical Agency
+          </span>
+        </div>
+      </Link>
 
           {/* Nav links — ABSOLUTE CENTRE (independent of logo + CTA widths) */}
-          <div className="hidden lg:flex items-center gap-2 absolute left-1/2 -translate-x-1/2">
+          <div className="hidden lg:flex items-center justify-center gap-2">
             {NAV_LINKS.map(link => link.hasMega ? (
               <div
                 key={link.href}
@@ -199,7 +217,7 @@ export function Navbar() {
                     (link.href === '/legal' && path.startsWith('/legal')) ||
                     (link.href === '/research' && path.startsWith('/research')) ||
                     path === link.href
-                      ? '#FAFAFA'
+                      ? 'var(--color-foreground)'
                       : 'var(--color-muted)',
                 }}
               >

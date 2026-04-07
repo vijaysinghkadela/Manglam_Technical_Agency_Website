@@ -2,7 +2,13 @@
 import { useEffect } from 'react'
 
 export default function Error({ error, reset }: { error:Error; reset:()=>void }) {
-  useEffect(() => { console.error('[MTA Error]', error) }, [error])
+  useEffect(() => { 
+    // Only log in development - in production, use error tracking service (Sentry, etc.)
+    if (process.env.NODE_ENV === 'development') {
+      console.error('[MTA Error]', error)
+    }
+    // TODO: Send to error tracking service in production
+  }, [error])
   return (
     <div className="min-h-screen flex flex-col items-center justify-center text-center px-6"
       style={{ backgroundColor:'var(--color-canvas)' }}

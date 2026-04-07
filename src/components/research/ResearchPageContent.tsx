@@ -3,20 +3,26 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import {
+import { 
   leadToDeliveryPipeline,
   legalFrameworks,
   researchSections,
   riskMap,
 } from '@/lib/data/research'
+import { 
+  allMarketResearch,
+  categoryLabels,
+  categoryDescriptions,
+} from '@/lib/data/ai-market-research-index'
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
 
 const toc = [
-  { id: 'model',     label: '01 — Agency Model' },
-  { id: 'pipeline',  label: '02 — Delivery Pipeline' },
+  { id: 'ai-research', label: '00 — AI Market Research' },
+  { id: 'model', label: '01 — Agency Model' },
+  { id: 'pipeline', label: '02 — Delivery Pipeline' },
   { id: 'framework', label: '03 — Legal Framework' },
-  { id: 'risk-map',  label: '04 — Risk Map' },
+  { id: 'risk-map', label: '04 — Risk Map' },
 ]
 
 /* ── shared section header ── */
@@ -97,12 +103,121 @@ export function ResearchPageContent() {
           </div>
         </motion.aside>
 
-        {/* ── Main content ── */}
-        <div className="flex flex-col gap-24">
+      {/* ── Main content ── */}
+      <div className="flex flex-col gap-24">
 
-          {/* ── 01 AGENCY MODEL ── */}
-          <section id="model">
-            <SectionHeader label="01 — AGENCY MODEL" title="Agency Model & Client Collaboration" />
+        {/* ── 00 AI MARKET RESEARCH ── */}
+        <section id="ai-research">
+          <SectionHeader label="00 — AI MARKET RESEARCH" title="Strategic AI Automation Market Analysis" />
+          
+          <div className="mb-8">
+            <p style={{ fontSize: '15px', lineHeight: 1.75, color: 'var(--color-muted)', maxWidth: '720px' }}>
+              Comprehensive research and analysis of the global AI automation landscape. Deep-dive reports on market trends, competitive positioning, pricing benchmarks, and implementation strategies.
+            </p>
+          </div>
+
+          {/* Category Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+            {(['market-analysis', 'technical', 'case-study', 'pricing', 'compliance'] as const).map((category, index) => (
+              <motion.div
+                key={category}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.5, delay: index * 0.1, ease: EASE }}
+                className="p-6 border border-border group hover:border-violet/40 transition-all duration-300"
+                style={{ backgroundColor: 'var(--color-card)' }}
+              >
+                <span
+                  className="font-mono text-[10px] uppercase tracking-widest block mb-3"
+                  style={{ color: 'var(--color-violet-light)' }}
+                >
+                  {String(index + 1).padStart(2, '0')} — CATEGORY
+                </span>
+                <h3
+                  className="font-display font-bold mb-3 group-hover:text-violet transition-colors"
+                  style={{ fontSize: '18px', color: 'var(--color-foreground)' }}
+                >
+                  {categoryLabels[category]}
+                </h3>
+                <p style={{ fontSize: '13px', lineHeight: 1.65, color: 'var(--color-muted)' }}>
+                  {categoryDescriptions[category]}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Recent Articles */}
+          <div style={{ borderTop: '1px solid var(--color-border)' }}>
+            <h3
+              className="font-display font-bold py-6"
+              style={{ fontSize: 'clamp(1.1rem, 1.8vw, 1.35rem)', color: 'var(--color-foreground)' }}
+            >
+              Latest Research Reports
+            </h3>
+            {allMarketResearch.slice(0, 6).map((article, index) => (
+              <motion.div
+                key={article.slug}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-20px' }}
+                transition={{ duration: 0.4, delay: index * 0.05, ease: EASE }}
+              >
+                <Link
+                  href={`/research/${article.slug}`}
+                  className="group grid grid-cols-1 lg:grid-cols-[1fr_auto_auto] gap-4 items-center py-6 border-t border-border hover:bg-surface/50 transition-colors"
+                >
+                  <div className="flex flex-col gap-1">
+                    <div className="flex items-center gap-3">
+                      <span
+                        className="font-mono text-[10px] uppercase tracking-widest"
+                        style={{ color: 'var(--color-violet-light)' }}
+                      >
+                        {categoryLabels[article.category]}
+                      </span>
+                      <span className="font-mono text-xs" style={{ color: 'var(--color-dead)' }}>
+                        {article.readTime}
+                      </span>
+                    </div>
+                    <h4
+                      className="font-display font-bold group-hover:text-violet transition-colors"
+                      style={{ fontSize: '16px', color: 'var(--color-foreground)' }}
+                    >
+                      {article.title}
+                    </h4>
+                    <p style={{ fontSize: '13px', lineHeight: 1.6, color: 'var(--color-muted)' }}>
+                      {article.excerpt.slice(0, 100)}...
+                    </p>
+                  </div>
+                  <span className="font-mono text-xs lg:text-right" style={{ color: 'var(--color-muted)' }}>
+                    {article.date}
+                  </span>
+                  <span
+                    className="font-mono text-xs transition-colors group-hover:text-violet"
+                    style={{ color: 'var(--color-dead)' }}
+                  >
+                    Read →
+                  </span>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* View All Link */}
+          <div className="mt-8">
+            <Link
+              href="/research"
+              className="inline-flex items-center gap-2 px-6 py-3 font-display font-bold text-sm transition-all duration-300 hover:bg-violet hover:text-white hover:border-violet"
+              style={{ border: '1px solid var(--color-border)', color: 'var(--color-muted)' }}
+            >
+              View All Research Reports →
+            </Link>
+          </div>
+        </section>
+
+        {/* ── 01 AGENCY MODEL ── */}
+        <section id="model">
+          <SectionHeader label="01 — AGENCY MODEL" title="Agency Model & Client Collaboration" />
 
             <div style={{ borderTop: '1px solid var(--color-border)' }}>
               {researchSections.map((section, i) => (

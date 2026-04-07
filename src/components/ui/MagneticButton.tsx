@@ -1,6 +1,7 @@
 'use client'
-import { useRef } from 'react'
+import { useRef, memo } from 'react'
 import { motion, useSpring } from 'framer-motion'
+import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 interface Props {
   children:   React.ReactNode
@@ -11,13 +12,14 @@ interface Props {
   pull?:      number   // max px attraction
 }
 
-export function MagneticButton({ children, className = '', href, style, onClick, pull = 14 }: Props) {
+export const MagneticButton = memo(function MagneticButton({ children, className = '', href, style, onClick, pull = 14 }: Props) {
   const x = useSpring(0, { stiffness: 180, damping: 18 })
   const y = useSpring(0, { stiffness: 180, damping: 18 })
   const ref = useRef<HTMLDivElement>(null)
+  const reducedMotion = useReducedMotion()
 
   const onMove = (e: React.MouseEvent) => {
-    if (!ref.current) return
+    if (!ref.current || reducedMotion) return
     const r   = ref.current.getBoundingClientRect()
     const dx  = (e.clientX - r.left - r.width  / 2) * 0.3
     const dy  = (e.clientY - r.top  - r.height / 2) * 0.3
@@ -31,7 +33,7 @@ export function MagneticButton({ children, className = '', href, style, onClick,
     <Tag
       ref={ref as never}
       href={href}
-      style={{ x, y, display: 'inline-flex', ...style }}
+      style={{ x, y, display: 'inline-flex', willChange: 'transform', ...style }}
       onMouseMove={onMove}
       onMouseLeave={() => { x.set(0); y.set(0) }}
       onClick={onClick}
@@ -41,4 +43,4 @@ export function MagneticButton({ children, className = '', href, style, onClick,
       {children}
     </Tag>
   )
-}
+})

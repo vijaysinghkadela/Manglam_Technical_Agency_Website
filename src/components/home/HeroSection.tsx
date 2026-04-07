@@ -146,8 +146,8 @@ export function HeroSection() {
               animate={{ opacity:1, y:0 }}
               transition={{ duration:0.65, delay:0.7, ease:EASE_OUT }}
             >
-              MTA is a two-person founder-led technical agency delivering integrated execution
-              across six practice areas with direct accountability on every project.
+              Delivering the output quality of a larger enterprise firm at the responsiveness
+              and accountability of a boutique 3–4 professional team.
             </motion.p>
 
             {/* CTAs */}

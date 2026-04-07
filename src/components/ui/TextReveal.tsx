@@ -1,6 +1,7 @@
 'use client'
 import { motion, useInView } from 'framer-motion'
-import { useRef, useMemo } from 'react'
+import { useRef, useMemo, memo } from 'react'
+import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 interface TextRevealProps {
   text:       string
@@ -12,12 +13,13 @@ interface TextRevealProps {
 
 const EASE: [number,number,number,number] = [0.33, 1, 0.68, 1]
 
-export function TextReveal({
+export const TextReveal = memo(function TextReveal({
   text, as: Tag = 'h2', delay = 0, className = '', style,
 }: TextRevealProps) {
-  const ref    = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true, amount: 0.25 })
-  const words  = useMemo(() => text.split(' '), [text])
+  const ref          = useRef<HTMLDivElement>(null)
+  const inView       = useInView(ref, { once: true, amount: 0.25 })
+  const words        = useMemo(() => text.split(' '), [text])
+  const reducedMotion = useReducedMotion()
 
   return (
     <div ref={ref} aria-label={text}>
@@ -29,9 +31,9 @@ export function TextReveal({
           <span key={i} style={{ overflow: 'hidden', display: 'inline-block' }}>
             <motion.span
               style={{ display: 'inline-block' }}
-              initial={{ y: '115%', opacity: 0 }}
+              initial={reducedMotion ? { y: '0%', opacity: 1 } : { y: '115%', opacity: 0 }}
               animate={inView ? { y: '0%', opacity: 1 } : {}}
-              transition={{ duration: 0.7, ease: EASE, delay: delay + i * 0.042 }}
+              transition={reducedMotion ? { duration: 0 } : { duration: 0.7, ease: EASE, delay: delay + i * 0.042 }}
             >
               {word}
             </motion.span>
@@ -40,4 +42,4 @@ export function TextReveal({
       </Tag>
     </div>
   )
-}
+})

@@ -146,7 +146,10 @@ export async function POST(req: NextRequest) {
     const gmailPass = process.env.GMAIL_APP_PASSWORD
 
     if (!gmailUser || !gmailPass) {
-      console.error('[MTA Contact] GMAIL_USER / GMAIL_APP_PASSWORD not set. Restart the dev server after editing .env.local')
+      // Only log in development - avoid exposing server config in production
+      if (process.env.NODE_ENV === 'development') {
+        console.error('[MTA Contact] GMAIL_USER / GMAIL_APP_PASSWORD not set. Restart the dev server after editing .env.local')
+      }
       return NextResponse.json(
         { success: false, message: 'Email delivery is not configured on this server. Please contact us directly at manglamtechnicalagency@gmail.com' },
         { status: 503 }
@@ -175,7 +178,11 @@ export async function POST(req: NextRequest) {
     if (e instanceof z.ZodError) {
       return NextResponse.json({ success: false, errors: e.flatten().fieldErrors }, { status: 400 })
     }
-    console.error('[MTA Contact] Error:', e instanceof Error ? e.message : 'Unknown')
+    // Only log in development - in production, use error tracking service
+    if (process.env.NODE_ENV === 'development') {
+      console.error('[MTA Contact] Error:', e instanceof Error ? e.message : 'Unknown')
+    }
+    // TODO: Send to error tracking service in production (Sentry, LogRocket, etc.)
     return NextResponse.json({ success: false, message: 'Server error. Please try again.' }, { status: 500 })
   }
 }

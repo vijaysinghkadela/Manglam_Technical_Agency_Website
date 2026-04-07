@@ -1,14 +1,28 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { ArrowUp } from 'lucide-react'
 
 export function ScrollToTop() {
   const [show, setShow] = useState(false)
+  const rafIdRef = useRef<number | null>(null)
 
   useEffect(() => {
-    const fn = () => setShow(window.scrollY > 500)
+    const fn = () => {
+      // RAF throttling: Only schedule update if not already pending
+      if (rafIdRef.current !== null) return
+      rafIdRef.current = requestAnimationFrame(() => {
+        setShow(window.scrollY > 500)
+        rafIdRef.current = null
+      })
+    }
     window.addEventListener('scroll', fn, { passive: true })
-    return () => window.removeEventListener('scroll', fn)
+    return () => {
+      window.removeEventListener('scroll', fn)
+      // Cleanup pending RAF on unmount
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current)
+      }
+    }
   }, [])
 
   // Returns null until threshold. Never ever renders a text character.

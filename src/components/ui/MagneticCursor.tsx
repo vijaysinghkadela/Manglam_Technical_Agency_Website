@@ -4,36 +4,50 @@ import { motion, useMotionValue, useSpring } from 'framer-motion'
 
 type Variant = 'default' | 'pointer' | 'text' | 'link'
 
+// Static size configuration - hoisted outside component to avoid re-creation
+const SIZES: Record<Variant, { w: number; h: number }> = {
+  default: { w: 32, h: 32 },
+  pointer: { w: 18, h: 18 },
+  text: { w: 68, h: 24 },
+  link: { w: 48, h: 48 },
+}
+
+// Spring configuration
+const SPRING_CONFIG = { stiffness: 220, damping: 26, mass: 0.35 }
+
 export function MagneticCursor() {
-  const [ready,   setReady]   = useState(false)
+  const [ready, setReady] = useState(false)
   const [visible, setVisible] = useState(false)
-  const variantRef = useRef<Variant>('default')
   const [variant, setVariant] = useState<Variant>('default')
-
-  // Use a ref so `move` never needs `visible` in its deps
+  
+  // Refs for performance - avoid state updates in hot paths
+  const variantRef = useRef<Variant>('default')
   const visibleRef = useRef(false)
+  const lastVariantCheck = useRef(0)
+  const rafId = useRef<number | null>(null)
 
+  // Motion values
   const mx = useMotionValue(-300)
   const my = useMotionValue(-300)
-  const rx = useSpring(mx, { stiffness: 220, damping: 26, mass: 0.35 })
-  const ry = useSpring(my, { stiffness: 220, damping: 26, mass: 0.35 })
+  const rx = useSpring(mx, SPRING_CONFIG)
+  const ry = useSpring(my, SPRING_CONFIG)
 
-  const lastVariantCheck = useRef(0)
-
-  // Stable callback — no state deps, uses refs for visibility
+  // Stable RAF-throttled mouse handler
   const move = useCallback((e: MouseEvent) => {
     mx.set(e.clientX)
     my.set(e.clientY)
 
+    // Show cursor on first movement
     if (!visibleRef.current) {
       visibleRef.current = true
       setVisible(true)
     }
 
+    // Throttle variant detection to every 80ms
     const now = performance.now()
     if (now - lastVariantCheck.current > 80) {
       lastVariantCheck.current = now
-      const el  = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement | null
+      const el = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement | null
       const hit = el?.closest('[data-cursor]')?.getAttribute('data-cursor') as Variant | null
       const next = hit ?? 'default'
       if (next !== variantRef.current) {
@@ -41,34 +55,54 @@ export function MagneticCursor() {
         setVariant(next)
       }
     }
-  }, [mx, my]) // stable — no state deps
+  }, [mx, my])
 
-  useEffect(() => {
-    if (!window.matchMedia('(pointer: fine)').matches) return
-    setTimeout(() => setReady(true), 0)
-
-    const hide = () => { visibleRef.current = false; setVisible(false) }
-    const show = () => { visibleRef.current = true;  setVisible(true)  }
-
-    window.addEventListener('mousemove',           move, { passive: true })
-    document.documentElement.addEventListener('mouseleave', hide)
-    document.documentElement.addEventListener('mouseenter', show)
-    return () => {
-      window.removeEventListener('mousemove', move)
-      document.documentElement.removeEventListener('mouseleave', hide)
-      document.documentElement.removeEventListener('mouseenter', show)
+  // RAF-throttled handler wrapper
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    if (rafId.current === null) {
+      rafId.current = requestAnimationFrame(() => {
+        move(e)
+        rafId.current = null
+      })
     }
   }, [move])
 
+  useEffect(() => {
+    // Only enable on devices with fine pointer (mouse)
+    if (!window.matchMedia('(pointer: fine)').matches) return
+
+    // Delay ready state slightly to avoid hydration flash
+    const readyTimeout = setTimeout(() => setReady(true), 0)
+
+    const hide = () => {
+      visibleRef.current = false
+      setVisible(false)
+    }
+    
+    const show = () => {
+      visibleRef.current = true
+      setVisible(true)
+    }
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true })
+    document.documentElement.addEventListener('mouseleave', hide)
+    document.documentElement.addEventListener('mouseenter', show)
+
+    return () => {
+      clearTimeout(readyTimeout)
+      if (rafId.current !== null) {
+        cancelAnimationFrame(rafId.current)
+      }
+      window.removeEventListener('mousemove', handleMouseMove)
+      document.documentElement.removeEventListener('mouseleave', hide)
+      document.documentElement.removeEventListener('mouseenter', show)
+    }
+  }, [handleMouseMove])
+
+  // Don't render on touch devices or before ready
   if (!ready) return null
 
-  const sizes: Record<Variant, { w: number; h: number }> = {
-    default: { w: 32, h: 32 },
-    pointer: { w: 18, h: 18 },
-    text:    { w: 68, h: 24 },
-    link:    { w: 48, h: 48 },
-  }
-  const { w, h } = sizes[variant]
+  const { w, h } = SIZES[variant]
 
   return (
     <>
@@ -76,11 +110,14 @@ export function MagneticCursor() {
       <motion.div
         className="fixed top-0 left-0 rounded-full pointer-events-none z-9999"
         style={{
-          x: mx, y: my,
-          translateX: '-50%', translateY: '-50%',
-          width: 5, height: 5,
+          x: mx,
+          y: my,
+          translateX: '-50%',
+          translateY: '-50%',
+          width: 5,
+          height: 5,
           backgroundColor: 'var(--color-foreground)',
-          opacity: (visible && variant !== 'pointer') ? 1 : 0,
+          opacity: visible && variant !== 'pointer' ? 1 : 0,
           willChange: 'transform',
           transition: 'opacity 0.15s',
         }}
@@ -89,15 +126,17 @@ export function MagneticCursor() {
       <motion.div
         className="fixed top-0 left-0 rounded-full border pointer-events-none z-9998"
         style={{
-          x: rx, y: ry,
-          translateX: '-50%', translateY: '-50%',
-          width:  w,
+          x: rx,
+          y: ry,
+          translateX: '-50%',
+          translateY: '-50%',
+          width: w,
           height: h,
-          opacity:         visible ? 1 : 0,
+          opacity: visible ? 1 : 0,
           backgroundColor: variant === 'pointer' ? 'var(--color-violet)' : 'transparent',
-          borderColor:     variant === 'pointer' ? 'var(--color-violet)' : 'var(--color-cursor-ring)',
-          willChange:      'transform',
-          transition:      'width 0.18s ease, height 0.18s ease, background-color 0.18s ease, opacity 0.15s',
+          borderColor: variant === 'pointer' ? 'var(--color-violet)' : 'var(--color-cursor-ring)',
+          willChange: 'transform',
+          transition: 'width 0.18s ease, height 0.18s ease, background-color 0.18s ease, opacity 0.15s',
         }}
       />
     </>

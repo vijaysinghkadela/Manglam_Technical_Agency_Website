@@ -16,17 +16,27 @@ export default function HorizontalScroll({ children, className = '' }: Horizonta
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Debounced resize handler - prevents expensive recalculations
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+    
     const updateDimensions = () => {
-      if (trackRef.current) {
-        setTrackWidth(trackRef.current.scrollWidth);
-      }
-      setViewportWidth(window.innerWidth);
-      setIsMobile(window.innerWidth < 1024);
+      if (timeoutId) clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        if (trackRef.current) {
+          setTrackWidth(trackRef.current.scrollWidth);
+        }
+        setViewportWidth(window.innerWidth);
+        setIsMobile(window.innerWidth < 1024);
+      }, 200); // 200ms debounce
     };
 
     updateDimensions();
-    window.addEventListener('resize', updateDimensions);
-    return () => window.removeEventListener('resize', updateDimensions);
+    window.addEventListener('resize', updateDimensions, { passive: true });
+    
+    return () => {
+      window.removeEventListener('resize', updateDimensions);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, []);
 
   const { scrollYProgress } = useScroll({

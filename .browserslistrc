@@ -1,0 +1,29 @@
+# Browser Support Configuration
+# Optimized for Chrome, Safari, Firefox, Edge, Opera
+# Last 2 versions of each major browser + Safari iOS
+
+# Desktop browsers
+last 2 Chrome versions
+last 2 Firefox versions
+last 2 Safari versions
+last 2 Edge versions
+last 2 Opera versions
+
+# Mobile browsers
+last 2 iOS versions
+last 2 Android versions
+last 2 ChromeAndroid versions
+last 2 FirefoxAndroid versions
+
+# Coverage targets
+> 0.2%
+not dead
+not op_mini all
+
+# Specific version minimums for best compatibility
+Chrome >= 90
+Firefox >= 88
+Safari >= 14
+Edge >= 90
+Opera >= 76
+iOS >= 14

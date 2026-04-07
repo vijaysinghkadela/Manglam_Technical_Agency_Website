@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, ButtonHTMLAttributes } from 'react';
+import { ReactNode, ButtonHTMLAttributes, memo } from 'react';
 import { cn } from '@/lib/cn';
 import { Loader2 } from 'lucide-react';
 
@@ -34,7 +34,7 @@ const sizeStyles = {
   xl: 'px-9 py-4 text-lg gap-3',
 };
 
-export default function Button({
+const Button = memo(function Button({
   children,
   variant = 'primary',
   size = 'md',
@@ -65,4 +65,6 @@ export default function Button({
       {!loading && icon && iconPosition === 'right' && icon}
     </button>
   );
-}
+})
+
+export default Button;

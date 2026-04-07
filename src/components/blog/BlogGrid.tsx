@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
@@ -25,9 +26,64 @@ const CATEGORY_COLORS: Record<string, string> = {
 }
 
 export function BlogGrid({ posts }: { posts: BlogPost[] }) {
+  const [activeCategory, setActiveCategory] = useState<string | null>(null)
+  const categories = Array.from(new Set(posts.map(p => p.category).filter((c): c is string => c !== undefined)))
+  const filtered = activeCategory ? posts.filter(p => p.category === activeCategory) : posts
+  const [featured, ...rest] = filtered
+
   if (!posts.length) return null
 
-  const [featured, ...rest] = posts
+  const filterPills = (
+    <div className="flex flex-wrap gap-2 mb-10">
+      <button
+        onClick={() => setActiveCategory(null)}
+        className="font-mono uppercase transition-all duration-200"
+        style={{
+          fontSize: '10px',
+          letterSpacing: '0.16em',
+          padding: '5px 14px',
+          border: '1px solid ' + (activeCategory === null ? 'var(--color-violet)' : 'var(--color-border)'),
+          backgroundColor: activeCategory === null ? 'var(--color-violet)' : 'transparent',
+          color: activeCategory === null ? '#FAFAFA' : 'var(--color-muted)',
+        }}
+      >
+        All ({posts.length})
+      </button>
+      {categories.map(cat => (
+        <button
+          key={cat}
+          onClick={() => setActiveCategory(cat)}
+          className="font-mono uppercase transition-all duration-200"
+          style={{
+            fontSize: '10px',
+            letterSpacing: '0.16em',
+            padding: '5px 14px',
+            border: '1px solid ' + (activeCategory === cat ? 'var(--color-violet)' : 'var(--color-border)'),
+            backgroundColor: activeCategory === cat ? 'var(--color-violet)' : 'transparent',
+            color: activeCategory === cat ? '#FAFAFA' : 'var(--color-muted)',
+          }}
+        >
+          {cat}
+        </button>
+      ))}
+    </div>
+  )
+
+  if (filtered.length === 0) {
+    return (
+      <section
+        className="border-t border-border"
+        style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(56px, 9vw, 96px) 0' }}
+      >
+        <div className="container-site">
+          {filterPills}
+          <p className="font-mono" style={{ fontSize: '13px', color: 'var(--color-muted)' }}>
+            No articles in this category yet.
+          </p>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section
@@ -35,6 +91,47 @@ export function BlogGrid({ posts }: { posts: BlogPost[] }) {
       style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(56px, 9vw, 96px) 0' }}
     >
       <div className="container-site">
+
+        {/* ── Category filter ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: EASE }}
+          className="flex flex-wrap gap-2 mb-10"
+        >
+          <button
+            onClick={() => setActiveCategory(null)}
+            className="font-mono uppercase transition-all duration-200"
+            style={{
+              fontSize: '10px',
+              letterSpacing: '0.16em',
+              padding: '5px 14px',
+              border: '1px solid ' + (activeCategory === null ? 'var(--color-violet)' : 'var(--color-border)'),
+              backgroundColor: activeCategory === null ? 'var(--color-violet)' : 'transparent',
+              color: activeCategory === null ? '#FAFAFA' : 'var(--color-muted)',
+            }}
+          >
+            All ({posts.length})
+          </button>
+          {categories.map(cat => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className="font-mono uppercase transition-all duration-200"
+              style={{
+                fontSize: '10px',
+                letterSpacing: '0.16em',
+                padding: '5px 14px',
+                border: '1px solid ' + (activeCategory === cat ? 'var(--color-violet)' : 'var(--color-border)'),
+                backgroundColor: activeCategory === cat ? 'var(--color-violet)' : 'transparent',
+                color: activeCategory === cat ? '#FAFAFA' : 'var(--color-muted)',
+              }}
+            >
+              {cat}
+            </button>
+          ))}
+        </motion.div>
 
         {/* ── Featured post ── */}
         <motion.div
@@ -141,7 +238,7 @@ export function BlogGrid({ posts }: { posts: BlogPost[] }) {
               className="font-mono uppercase"
               style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.22em', whiteSpace: 'nowrap' }}
             >
-              MORE ARTICLES
+              MORE ARTICLES · {rest.length}
             </span>
             <div className="flex-1" style={{ height: '1px', backgroundColor: 'var(--color-border)' }} />
           </div>
@@ -159,7 +256,7 @@ export function BlogGrid({ posts }: { posts: BlogPost[] }) {
             >
               <Link
                 href={`/blog/${post.slug}`}
-                className="group border border-border flex flex-col overflow-hidden transition-all duration-300 h-full"
+                className="group border border-border flex flex-col overflow-hidden transition-all duration-300 h-full min-h-[280px]"
                 style={{ backgroundColor: 'var(--color-card)' }}
                 data-cursor="link"
                 onMouseEnter={e => {

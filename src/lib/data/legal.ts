@@ -15,7 +15,7 @@ export interface AgreementSummary {
 }
 
 export interface PolicyDocument {
-  slug: 'privacy-policy' | 'terms-of-service'
+  slug: 'privacy-policy' | 'terms-of-service' | 'ai-ethics-policy' | 'dpdp-implementation-checklist'
   title: string
   lastUpdated: string
   summary: string
@@ -226,6 +226,64 @@ export const agreementSummaries: AgreementSummary[] = [
     ],
   },
   {
+    slug: 'rules-of-engagement',
+    code: 'MTA-ROE',
+    name: 'Rules of Engagement for Penetration Testing',
+    visibility: 'public',
+    requestable: true,
+    primaryUse: 'Legal authorization framework defining scope, boundaries, and permissible actions for ethical hacking engagements.',
+    whenRequired: 'Mandatory before any penetration testing or vulnerability assessment begins.',
+    publicSummary:
+      'Defines IP ranges, applications in scope, testing windows, exclusions, emergency contacts, and explicit written authorization for lawful testing under IT Act 2000.',
+    governingLaws: ['IT Act, 2000 (Sections 43 & 66)', 'Indian Contract Act, 1872', 'DPDPA, 2023'],
+    companionAgreements: ['MTA-CS', 'MTA-NDA', 'MTA-DPA'],
+    keyClauses: [
+      'Explicit scope definition (IP ranges, applications, exclusions)',
+      'Testing windows and emergency contact protocols',
+      'No production disruption / no denial-of-service clause',
+      'Data handling and destruction obligations (7-day deletion post-test)',
+      'Breach notification without undue delay',
+    ],
+  },
+  {
+    slug: 'dpdp-breach-templates',
+    code: 'MTA-DPDP-BREACH',
+    name: 'DPDP Breach Notification Templates',
+    visibility: 'public',
+    requestable: true,
+    primaryUse: 'Standardized templates for DPDP Act 2023 personal data breach notifications to Data Principals and Data Protection Board.',
+    whenRequired: 'Triggered within 24 hours of discovering any personal data breach during testing or operations.',
+    publicSummary:
+      'Includes Data Principal notice template (plain language), DPB detailed report template (72-hour), and processor-to-fiduciary alert template.',
+    governingLaws: ['DPDPA, 2023 (Section 8(6))', 'DPDP Rules, 2025 (Rule 7)', 'IT Act, 2000'],
+    companionAgreements: ['MTA-DPA', 'MTA-CS'],
+    keyClauses: [
+      'Without undue delay notification requirement',
+      'Plain language for Data Principals',
+      'Detailed facts for DPB within 72 hours',
+      'Mitigation measures and remedial steps documentation',
+    ],
+  },
+  {
+    slug: 'cert-in-compliance',
+    code: 'MTA-CERT-IN',
+    name: 'CERT-In Compliance Addendum',
+    visibility: 'public',
+    requestable: true,
+    primaryUse: 'Ensures adherence to CERT-In Directions 2022 for incident reporting and log retention requirements.',
+    whenRequired: 'Required for all clients covered under CERT-In Directions (body corporates, service providers, intermediaries with websites/apps).',
+    publicSummary:
+      'Mandates 6-hour incident reporting, 180-day log retention, synchronized NTP timestamps, and cooperation with CERT-In investigations.',
+    governingLaws: ['IT Act, 2000 (Section 70B)', 'CERT-In Directions, 2022', 'DPDPA, 2023'],
+    companionAgreements: ['MTA-CS', 'MTA-ROE'],
+    keyClauses: [
+      '6-hour incident reporting to CERT-In',
+      '180-day log retention in India',
+      'Accurate NTP synchronization',
+      'Mandatory cooperation with CERT-In data requests',
+    ],
+  },
+  {
     slug: 'contractor-freelancer-agreement',
     code: 'MTA-FC',
     name: 'Independent Contractor & Freelancer Agreement',
@@ -242,6 +300,51 @@ export const agreementSummaries: AgreementSummary[] = [
       '12-month client non-solicitation clause',
       'Confidentiality obligations and post-termination survival',
       'TDS deduction and compliance responsibilities',
+    ],
+  },
+  {
+    slug: 'ai-ethics-policy',
+    code: 'MTA-AIE',
+    name: 'AI Ethics Policy for Social Media Marketing',
+    visibility: 'public',
+    requestable: true,
+    primaryUse: 'Defines ethical AI usage principles, transparency requirements, and human oversight obligations for all SMM operations.',
+    whenRequired: 'Mandatory for all SMM retainers and any engagement using AI tools for content generation, community management, or audience targeting.',
+    publicSummary:
+      'Establishes MTA principles for ethical AI deployment: transparency and SGI labeling per IT Amendment Rules 2026, human-in-the-loop requirements, bias mitigation, DPDP consent for AI processing, deepfake prohibition, and C2PA Content Credentials compliance.',
+    governingLaws: ['IT Amendment Rules, 2026 (SGI Labeling)', 'DPDPA, 2023', 'ASCI Guidelines, 2021', 'Indian Contract Act, 1872'],
+    companionAgreements: ['MTA-DM', 'MTA-DPA', 'MTA-NDA'],
+    keyClauses: [
+      'All AI-generated content labeled as Synthetically Generated Information (SGI) per IT Rules 2026',
+      '100% AI output receives human review and approval before posting',
+      'No client personal data fed into AI tools without explicit written consent',
+      'Deepfake/synthetic media prohibited for testimonials without consent + human editing',
+      'C2PA v2.4 Content Credentials embedded on all AI-assisted visual content',
+      'Deepfake detection (Resemble AI + Hive) required before posting',
+      'Monthly internal audit and annual policy review',
+    ],
+  },
+  {
+    slug: 'dpdp-implementation-checklist',
+    code: 'MTA-DPDP-IMPL',
+    name: 'DPDP Act 2023 Implementation Checklist',
+    visibility: 'public',
+    requestable: true,
+    primaryUse: 'Comprehensive compliance checklist for DPDP Act 2023 implementation covering all data fiduciary obligations.',
+    whenRequired: 'Reference document for all engagements involving personal data processing. Required for DPDP readiness assessments.',
+    publicSummary:
+      'Step-by-step implementation guide for DPDP Act 2023 compliance including Section 8 obligations, consent management, breach notification procedures (72-hour timeline), Data Principal rights handling, and May 2027 enforcement readiness.',
+    governingLaws: ['DPDPA, 2023', 'DPDP Rules, 2025', 'IT Act, 2000', 'Indian Contract Act, 1872'],
+    companionAgreements: ['MTA-DPA', 'MTA-DPDP-BREACH', 'MTA-CERT-IN'],
+    keyClauses: [
+      'Data Fiduciary accountability for all processing including by processors',
+      'Valid processor contracts (DPAs) with Supabase, Razorpay, AI tools, etc.',
+      'Free, specific, informed, unconditional consent with clear affirmative action',
+      'Breach notification to DPB within 72 hours with detailed report',
+      'Data Principal rights: access, correction, erasure, grievance redressal',
+      'Erasure when consent withdrawn or purpose served (unless legal retention)',
+      'Published business contact and grievance mechanism',
+      '2-year audit trail of consents required',
     ],
   },
 ]
@@ -298,6 +401,112 @@ export const policyDocuments: PolicyDocument[] = [
       {
         heading: 'Liability and Governing Law',
         body: 'Liability is contractually limited, and disputes are handled under Indian law and the agreement-specific dispute clause.',
+      },
+    ],
+  },
+  {
+    slug: 'ai-ethics-policy',
+    title: 'AI Ethics Policy for Social Media Marketing',
+    lastUpdated: 'April 2026',
+    summary:
+      'Defines MTA principles for ethical AI deployment in SMM operations: transparency, human oversight, bias mitigation, DPDP compliance, deepfake prohibition, and C2PA Content Credentials. Forms part of every SMM retainer, proposal, and client SOW.',
+    sections: [
+      {
+        heading: 'Purpose & Scope',
+        body: 'This policy ensures ethical, transparent, and trustworthy social media content for clients (gyms, healthcare providers, local businesses in Rajasthan). AI must serve the client goals while protecting audience trust, complying with law, and avoiding bias or harm. Applies to all SMM services: content creation, Reels/Shorts, carousels, captions, images, videos, ad creatives, community replies, and AI-automated workflows.',
+      },
+      {
+        heading: 'Transparency & SGI Labeling',
+        body: 'All AI-generated or AI-assisted content must be clearly labeled as Synthetically Generated Information (SGI) per IT Amendment Rules 2026. Implementation: Prominent caption line "AI-assisted content • Edited by MTA" plus platform-native labels (Instagram "AI-generated", YouTube disclosure) where available. No exceptions for "minor edits".',
+      },
+      {
+        heading: 'Human-in-the-Loop Requirements',
+        body: '100% of AI output receives human review and final approval before posting. You or designated team member reviews every post. Audit log maintained (prompt + output + editor name) for compliance verification.',
+      },
+      {
+        heading: 'Bias & Fairness Mitigation',
+        body: 'Content must not discriminate by gender, age, caste, religion, location (urban/rural Rajasthan), or language. Prompts tested on diverse audience segments. Weekly manual bias check on gym/healthcare campaigns to ensure fair representation.',
+      },
+      {
+        heading: 'Privacy & DPDP Compliance',
+        body: 'Never feed client personal data (gym member lists, patient contacts, app users) into AI tools without explicit written consent. Anonymize data before n8n/AI workflow nodes. Data minimization: only necessary information used for processing. Full DPDP Act 2023 compliance required.',
+      },
+      {
+        heading: 'Accuracy & No Misinformation',
+        body: 'All health/fitness/medical claims must be fact-checked against reliable sources. No deepfakes or misleading "before-after" transformations. Healthcare content requires doctor/client sign-off before publication. Claims limited to verified features only.',
+      },
+      {
+        heading: 'Deepfake & Synthetic Media Prohibition',
+        body: 'Deepfakes (SGI that appears real and indistinguishable) are prohibited for client testimonials or transformations unless: (1) client provides explicit verifiable consent, (2) final video is human-edited, and (3) content is clearly labeled. Deepfake detection (Resemble AI + Hive Moderation) required on all media before posting.',
+      },
+      {
+        heading: 'C2PA Content Credentials',
+        body: 'All AI-assisted visual content must embed C2PA v2.4 Content Credentials before publication. This includes cryptographic manifest with creator claim, AI assertions, edit history, and content bindings. Supported formats: JPEG, PNG, WebP, AVIF, HEIC, MP4, MOV. Tools with C2PA support: Canva Magic Studio, Adobe, Microsoft.',
+      },
+      {
+        heading: 'Tool-Specific Rules',
+        body: 'Buffer AI / Predis.ai / Canva Magic: Always add manual disclosure text; human review of performance prediction scores. Claude / Gemini: Prompts must include "Rajasthan audience, Hindi/English, transparent tone". n8n workflows: Anonymization step required before any AI node.',
+      },
+      {
+        heading: 'Accountability & Grievance',
+        body: 'MTA remains responsible for all AI-assisted output. Grievance mechanism: clients contact manglamtechnicalagency@gmail.com within 24 hours for response. Internal reviewer assigned per campaign. Audit logs kept for 2 years per DPDP requirements.',
+      },
+      {
+        heading: 'Breach & Incident Response',
+        body: 'Any suspected violation (unlabeled SGI, data leak, complaint) triggers: (1) Immediate campaign halt, (2) Client notification "without undue delay", (3) Internal audit within 24 hours, (4) Report to Data Protection Board if DPDP breach (72-hour detailed report), (5) Platform compliance (3-hour removal for flagged SGI).',
+      },
+      {
+        heading: 'Training & Review',
+        body: 'All team members trained on this policy at onboarding. Annual policy review or upon any new MeitY/IT Rules notification. Last reviewed: April 2026. Policy version: 1.0.',
+      },
+    ],
+  },
+  {
+    slug: 'dpdp-implementation-checklist',
+    title: 'DPDP Act 2023 Implementation Checklist',
+    lastUpdated: 'April 2026',
+    summary:
+      'Comprehensive compliance checklist for Digital Personal Data Protection Act 2023 implementation. Covers all Data Fiduciary obligations, consent management, breach notification procedures, and May 2027 enforcement readiness timeline.',
+    sections: [
+      {
+        heading: 'Overview & Timeline',
+        body: 'The Digital Personal Data Protection Act, 2023 with Rules 2025 (notified November 13, 2025) govern all digital personal data processing in India. Full enforcement begins May 13, 2027 (18 months from notification). Data Protection Board of India is operational. Consent Manager framework activates November 13, 2026. MTA qualifies as Data Fiduciary (determines purpose and means of processing).',
+      },
+      {
+        heading: 'Key Definitions',
+        body: 'Data Principal: Individual whose data is processed (gym members, website visitors, FitNexora users). Data Fiduciary: Entity determining purpose/means (MTA). Data Processor: Entity processing on behalf of fiduciary (Supabase, AI tools). Personal Data: Any data about identifiable individual (name, email, phone, health data, IP, behavioral data). Processing: Collection, storage, use, sharing—wholly or partly automated.',
+      },
+      {
+        heading: 'Section 8 Obligations Checklist',
+        body: 'ACCOUNTABILITY: MTA responsible for all processing including by processors (Predis.ai, Buffer leaks = MTA liability). PROCESSOR CONTRACTS: Valid DPAs required with Supabase, Razorpay, Canva, AI tools. ACCURACY: Ensure data accurate/complete for decisions (FitNexora records, appointments). TECHNICAL MEASURES: Policies, access controls, staff training. SECURITY SAFEGUARDS: Encryption, RLS, access logs. BREACH NOTIFICATION: Notify Board + principals "without undue delay" (72 hours). ERASURE: Delete when consent withdrawn or purpose served. CONTACT PERSON: Publish business contact. GRIEVANCE MECHANISM: Effective redressal system on website and contracts.',
+      },
+      {
+        heading: 'Consent Requirements (Sections 5-6)',
+        body: 'Consent must be: FREE, SPECIFIC, INFORMED, UNCONDITIONAL, UNAMBIGUOUS + clear affirmative action (checkbox, NOT pre-ticked). Notice required before/with consent: Plain language explaining (1) data collected, (2) purpose, (3) how to exercise rights, (4) how to complain to Board. Available in English or 22 scheduled languages. Withdrawal must be as easy as giving consent. No bundling unrelated consents. Children (<18): Verifiable parental consent + no tracking/targeted ads.',
+      },
+      {
+        heading: 'Data Principal Rights (Sections 11-14)',
+        body: 'RIGHT TO ACCESS: Summary of data processed + sharing details (respond within prescribed period, likely 30 days). RIGHT TO CORRECTION: Update, complete, or correct data (without undue delay). RIGHT TO ERASURE: Delete data unless legal retention required. RIGHT TO GRIEVANCE: Effective redressal within prescribed timeline. RIGHT TO NOMINATION: Post-death/incapacity data management. Agencies must provide mechanisms and respond timely with documentation.',
+      },
+      {
+        heading: 'Breach Notification Procedures',
+        body: 'DETECTION (T+0): Identify breach, contain if possible, document facts. INTERNAL ASSESSMENT (T+24h): Determine scope, affected data, impact assessment. DATA PRINCIPAL NOTICE ("without undue delay"): Plain language explaining breach, impact, and rights. DPB DETAILED REPORT (T+72h): Comprehensive report with facts, extent, impact, mitigation, remediation steps. ONGOING UPDATES: Update Board and principals as investigation progresses.',
+      },
+      {
+        heading: 'Penalty Framework',
+        body: 'Failure to prevent breach (security safeguards): ₹250 crore maximum. Failure to notify breach: ₹200 crore maximum. Children data violations: ₹200 crore maximum. Other obligation failures: ₹50 crore maximum. General non-compliance: ₹10,000 per instance. Average breach cost in India (2026): ₹22 crore including legal, remediation, lost business.',
+      },
+      {
+        heading: 'MTA Implementation Checklist',
+        body: '1. Update Privacy Policy: Add DPDP notice template, grievance process, processor list. 2. Client Contracts/SOWs: Insert consent clause + data processing addendum. 3. FitNexora App: Supabase RLS + explicit consent flows on signup. 4. SMM Workflows: Document consent for audience data; add AI-assisted labels; never use client personal data in prompts without permission. 5. Processor Agreements: Review Supabase, Razorpay, AI tools for DPDP-compliant DPAs. 6. Internal: Appoint grievance handler; keep 2-year audit trail of consents. 7. Website: Clear privacy notice + consent banner. 8. Breach Response Plan: 1-page playbook (notify → contain → report in 72h).',
+      },
+      {
+        heading: 'Contract Language Templates',
+        body: 'DPDP CONSENT CLAUSE: "Client confirms explicit consent has been obtained from all data subjects whose personal data is provided to MTA for processing. Client remains the Data Fiduciary and MTA acts as Data Processor." BREACH NOTIFICATION CLAUSE: "MTA will notify Client within 24 hours of detecting any personal data breach. Client is responsible for notifying the Data Protection Board within 72 hours per DPDP Act 2023." AI PROCESSING CLAUSE: "MTA uses AI tools for service delivery. No client personal data will be used for AI model training without separate written consent."',
+      },
+      {
+        heading: 'Enforcement Readiness Timeline',
+        body: 'NOW (April 2026): Audit current practices, update Privacy Policy, review processor agreements, implement consent mechanisms. BY NOVEMBER 2026: Consent Manager framework activation—ensure all consent flows compliant. BY MAY 2027: Full enforcement begins—all obligations must be operational, breach response tested, audit trails in place, grievance mechanism functional.',
       },
     ],
   },
@@ -440,6 +649,30 @@ export const documentRegistry: DocumentRegistryItem[] = [
     visibility: 'internal',
     requestable: false,
     notes: 'Executed client-specific contract; confidential.',
+  },
+  {
+    id: 'MTA_ROE_Template.docx',
+    name: 'Rules of Engagement Template',
+    sourceDoc: 'MTA_ROE_Template.docx',
+    visibility: 'public',
+    requestable: true,
+    notes: 'Penetration testing authorization template with scope definitions.',
+  },
+  {
+    id: 'MTA_DPDP_Breach_Templates.docx',
+    name: 'DPDP Breach Notification Templates',
+    sourceDoc: 'MTA_DPDP_Breach_Templates.docx',
+    visibility: 'public',
+    requestable: true,
+    notes: 'Breach notification templates for Data Principals and DPB.',
+  },
+  {
+    id: 'MTA_CERT_In_Addendum.docx',
+    name: 'CERT-In Compliance Addendum',
+    sourceDoc: 'MTA_CERT_In_Addendum.docx',
+    visibility: 'public',
+    requestable: true,
+    notes: 'CERT-In Directions 2022 compliance addendum for incident reporting.',
   },
 ]
 

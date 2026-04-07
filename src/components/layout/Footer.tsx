@@ -103,17 +103,17 @@ export function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0, ease: EASE }}
           >
-            <div>
-              <div className="flex items-center gap-3 mb-3">
-                <Image
-                  src="/images/mta-logo.png"
-                  alt="MTA Logo"
-                  width={32}
-                  height={32}
-                  className="shrink-0"
-                />
-                <span className="font-display font-black text-[15px] tracking-tight" style={{ color:'var(--color-foreground)' }}>MTA</span>
-              </div>
+          <div>
+            <div className="flex items-center gap-3 mb-3">
+              <Image
+                src="/images/mta-logo.png"
+                alt="MTA Logo"
+                width={40}
+                height={40}
+                className="shrink-0"
+              />
+              <span className="font-display font-black text-[15px] tracking-tight" style={{ color:'var(--color-foreground)' }}>MTA</span>
+            </div>
               <p className="text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
                 Technology services for Indian businesses ready to scale. Based in Nagaur, Rajasthan.
               </p>

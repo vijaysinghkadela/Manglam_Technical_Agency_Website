@@ -88,6 +88,7 @@ export interface TeamMember {
   role: string;
   initials: string;
   bio: string;
+  expertise?: string[];
   linkedin?: string;
 }
 
