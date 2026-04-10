@@ -44,7 +44,7 @@ export function BlogGrid({ posts }: { posts: BlogPost[] }) {
           padding: '5px 14px',
           border: '1px solid ' + (activeCategory === null ? 'var(--color-violet)' : 'var(--color-border)'),
           backgroundColor: activeCategory === null ? 'var(--color-violet)' : 'transparent',
-          color: activeCategory === null ? '#FAFAFA' : 'var(--color-muted)',
+          color: activeCategory === null ? '#fff' : 'var(--color-muted)',
         }}
       >
         All ({posts.length})
@@ -60,7 +60,7 @@ export function BlogGrid({ posts }: { posts: BlogPost[] }) {
             padding: '5px 14px',
             border: '1px solid ' + (activeCategory === cat ? 'var(--color-violet)' : 'var(--color-border)'),
             backgroundColor: activeCategory === cat ? 'var(--color-violet)' : 'transparent',
-            color: activeCategory === cat ? '#FAFAFA' : 'var(--color-muted)',
+            color: activeCategory === cat ? '#fff' : 'var(--color-muted)',
           }}
         >
           {cat}
@@ -109,7 +109,7 @@ export function BlogGrid({ posts }: { posts: BlogPost[] }) {
               padding: '5px 14px',
               border: '1px solid ' + (activeCategory === null ? 'var(--color-violet)' : 'var(--color-border)'),
               backgroundColor: activeCategory === null ? 'var(--color-violet)' : 'transparent',
-              color: activeCategory === null ? '#FAFAFA' : 'var(--color-muted)',
+              color: activeCategory === null ? '#fff' : 'var(--color-muted)',
             }}
           >
             All ({posts.length})
@@ -125,7 +125,7 @@ export function BlogGrid({ posts }: { posts: BlogPost[] }) {
                 padding: '5px 14px',
                 border: '1px solid ' + (activeCategory === cat ? 'var(--color-violet)' : 'var(--color-border)'),
                 backgroundColor: activeCategory === cat ? 'var(--color-violet)' : 'transparent',
-                color: activeCategory === cat ? '#FAFAFA' : 'var(--color-muted)',
+                color: activeCategory === cat ? '#fff' : 'var(--color-muted)',
               }}
             >
               {cat}

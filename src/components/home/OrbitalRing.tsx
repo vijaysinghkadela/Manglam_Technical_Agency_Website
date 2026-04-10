@@ -48,9 +48,9 @@ const ServiceBadge = memo(function ServiceBadge({
         transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
         className="px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-semibold whitespace-nowrap backdrop-blur-sm transition-colors duration-300 cursor-default"
         style={{
-          backgroundColor: 'rgba(17,17,17,0.85)',
+          backgroundColor: 'var(--color-card)',
           border: '1px solid var(--color-border)',
-          color: '#FAFAFA',
+          color: 'var(--color-foreground)',
           boxShadow: '0 0 12px rgba(124,58,237,0.3)',
           // GPU optimization: only use will-change when animating
           willChange: prefersReduced ? 'auto' : 'transform',

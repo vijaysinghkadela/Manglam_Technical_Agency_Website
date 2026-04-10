@@ -93,7 +93,7 @@ export function ProcessSection() {
                 </motion.span>
               </button>
 
-              <AnimatePresence initial={false}>
+              <AnimatePresence initial={false} mode="wait">
                 {active === stage.stage && (
                   <motion.div
                     key="detail"

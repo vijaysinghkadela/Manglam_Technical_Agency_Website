@@ -138,7 +138,7 @@ export function Navbar() {
                   style={{
                     fontSize: '13px',
                     fontWeight: 500,
-                    color: path.startsWith('/services') ? '#FAFAFA' : 'var(--color-muted)',
+                    color: path.startsWith('/services') ? 'var(--color-foreground)' : 'var(--color-muted)',
                   }}
                 >
                   {link.label}
@@ -147,7 +147,7 @@ export function Navbar() {
                   />
                 </button>
 
-                <AnimatePresence>
+                <AnimatePresence mode="wait">
                   {mega && (
                     <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4"> {/* Hover bridge */}
                       <motion.div
@@ -247,7 +247,7 @@ export function Navbar() {
               }}
               onMouseEnter={e => {
                 (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-violet)'
-                ;(e.currentTarget as HTMLElement).style.color = '#FAFAFA'
+                ;(e.currentTarget as HTMLElement).style.color = '#fff'
               }}
               onMouseLeave={e => {
                 (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent'
@@ -274,7 +274,7 @@ export function Navbar() {
         {mobile && (
           <motion.div
             initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }}
-            className="fixed inset-0 z-99 flex flex-col pt-[68px] overflow-hidden bg-canvas"
+            className="fixed inset-0 z-[101] flex flex-col pt-[68px] overflow-hidden bg-canvas"
           >
             {/* Watermark */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
@@ -300,7 +300,7 @@ export function Navbar() {
                     className="block py-4 font-display font-black transition-colors duration-200 border-b border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet rounded-sm"
                     style={{
                       fontSize:    '30px',
-                      color:       path === link.href ? '#FAFAFA' : 'var(--color-dead)',
+                      color:       path === link.href ? 'var(--color-foreground)' : 'var(--color-dead)',
                     }}
                   >
                     {link.label}

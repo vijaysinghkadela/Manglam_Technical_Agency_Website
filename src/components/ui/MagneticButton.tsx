@@ -39,6 +39,7 @@ export const MagneticButton = memo(function MagneticButton({ children, className
       onClick={onClick}
       data-cursor="pointer"
       className={className}
+      whileTap={reducedMotion ? {} : { scale: 0.95 }}
     >
       {children}
     </Tag>

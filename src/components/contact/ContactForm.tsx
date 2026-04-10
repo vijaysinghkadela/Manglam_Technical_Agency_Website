@@ -168,7 +168,7 @@ setDone(true); reset()
             </label>
           </div>
           {errors.privacy && (
-            <p className="font-mono" style={{ fontSize: '11px', color: '#f87171' }}>
+            <p className="font-mono" style={{ fontSize: '11px', color: 'var(--color-error)' }}>
               {errors.privacy.message}
             </p>
           )}
@@ -247,7 +247,7 @@ const Field = ({ label, error, children }: { label: string; error?: string; chil
         ...(error ? { 'aria-describedby': errId, 'aria-invalid': 'true' } : {}),
       })}
       {error && (
-        <p id={errId} role="alert" className="font-mono" style={{ fontSize: '11px', color: '#f87171' }}>
+        <p id={errId} role="alert" className="font-mono" style={{ fontSize: '11px', color: 'var(--color-error)' }}>
           {error}
         </p>
       )}
