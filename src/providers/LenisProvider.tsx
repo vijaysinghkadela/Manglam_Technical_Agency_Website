@@ -53,15 +53,13 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
     }
     rafId = requestAnimationFrame(raf)
 
-    // Expose lenis instance globally for external control
-    // @ts-expect-error - Global Lenis instance for external access
+    // Expose lenis instance globally for external control (typed in src/types/window.d.ts)
     window.__lenis = lenis
 
     return () => {
       cancelAnimationFrame(rafId)
       lenis.destroy()
       lenisRef.current = null
-      // @ts-expect-error - Cleanup global reference
       delete window.__lenis
     }
   }, [shouldUseLenis])

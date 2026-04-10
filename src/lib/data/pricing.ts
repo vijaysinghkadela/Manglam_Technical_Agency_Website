@@ -95,7 +95,7 @@ export const globalMarketBenchmarks: GlobalMarketBenchmark[] = [
 export interface SMMToolPricing {
   tool: string;
   category: string;
-  freeTeir: string;
+  freeTier: string;
   paidRange: string;
   enterpriseRange: string;
   mtaNotes: string;
@@ -105,7 +105,7 @@ export const smmToolPricing: SMMToolPricing[] = [
   {
     tool: 'Sprout Social',
     category: 'Scheduling & Analytics',
-    freeTeir: 'None',
+    freeTier: 'None',
     paidRange: '$199–$399/user/month',
     enterpriseRange: '$Custom',
     mtaNotes: 'Included in Growth/Scale tiers; MTA manages on your behalf',
@@ -113,7 +113,7 @@ export const smmToolPricing: SMMToolPricing[] = [
   {
     tool: 'Hootsuite',
     category: 'Scheduling & Analytics',
-    freeTeir: 'None (trial only)',
+    freeTier: 'None (trial only)',
     paidRange: '$99–$249/month',
     enterpriseRange: '$739+/month',
     mtaNotes: 'MTA provides equivalent functionality via n8n pipelines',
@@ -121,7 +121,7 @@ export const smmToolPricing: SMMToolPricing[] = [
   {
     tool: 'Buffer',
     category: 'Scheduling',
-    freeTeir: '3 channels',
+    freeTier: '3 channels',
     paidRange: '$5–$100/month',
     enterpriseRange: 'N/A',
     mtaNotes: 'Starter tier includes Buffer-equivalent scheduling',
@@ -129,7 +129,7 @@ export const smmToolPricing: SMMToolPricing[] = [
   {
     tool: 'Canva Pro',
     category: 'Design',
-    freeTeir: 'Limited',
+    freeTier: 'Limited',
     paidRange: '$12.99/user/month',
     enterpriseRange: '$30/user/month',
     mtaNotes: 'All MTA SMM tiers include professional design—no client Canva needed',
@@ -137,7 +137,7 @@ export const smmToolPricing: SMMToolPricing[] = [
   {
     tool: 'CapCut / Premiere Pro',
     category: 'Video Editing',
-    freeTeir: 'Limited (CapCut)',
+    freeTier: 'Limited (CapCut)',
     paidRange: '$22.99/month (PP)',
     enterpriseRange: '$Corporate licensing',
     mtaNotes: 'Growth/Scale tiers include short-form video production',
@@ -145,7 +145,7 @@ export const smmToolPricing: SMMToolPricing[] = [
   {
     tool: 'Brandwatch / Sprinklr',
     category: 'Social Listening',
-    freeTeir: 'None',
+    freeTier: 'None',
     paidRange: '$800–$3,000/month',
     enterpriseRange: '$10,000+/month',
     mtaNotes: 'Scale tier includes AI-powered sentiment analysis',
@@ -153,7 +153,7 @@ export const smmToolPricing: SMMToolPricing[] = [
   {
     tool: 'Jasper / Copy.ai',
     category: 'AI Copywriting',
-    freeTeir: 'Limited',
+    freeTier: 'Limited',
     paidRange: '$49–$125/month',
     enterpriseRange: '$Custom',
     mtaNotes: 'MTA uses fine-tuned LLMs with brand voice calibration',
@@ -161,7 +161,7 @@ export const smmToolPricing: SMMToolPricing[] = [
   {
     tool: 'Meta Ads Manager',
     category: 'Paid Ads',
-    freeTeir: 'Platform (ads extra)',
+    freeTier: 'Platform (ads extra)',
     paidRange: 'Ad spend variable',
     enterpriseRange: 'Ad spend variable',
     mtaNotes: 'Growth/Scale tiers include ad coordination and optimization',

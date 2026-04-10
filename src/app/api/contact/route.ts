@@ -1,19 +1,38 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import nodemailer from 'nodemailer'
+import { rateLimit, getClientIp } from '@/lib/rate-limit'
 
 const schema = z.object({
-  name:     z.string().min(2),
+  name:     z.string().min(2).max(100),
   email:    z.string().email(),
-  phone:    z.string().optional(),
-  service:  z.string().min(1),
-  budget:   z.string().min(1),
-  timeline: z.string().min(1),
-  message:  z.string().min(20),
+  phone:    z.string().max(30).optional(),
+  service:  z.string().min(1).max(100),
+  budget:   z.string().min(1).max(100),
+  timeline: z.string().min(1).max(100),
+  message:  z.string().min(20).max(5000),
   privacy:  z.literal(true),
 })
 
-function buildHtml(data: z.infer<typeof schema>): string {
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;')
+}
+
+function buildHtml(raw: z.infer<typeof schema>): string {
+  const d = {
+    name:     escapeHtml(raw.name),
+    email:    escapeHtml(raw.email),
+    phone:    raw.phone ? escapeHtml(raw.phone) : undefined,
+    service:  escapeHtml(raw.service),
+    budget:   escapeHtml(raw.budget),
+    timeline: escapeHtml(raw.timeline),
+    message:  escapeHtml(raw.message),
+  }
   const ts = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
   return `
 <!DOCTYPE html>
@@ -47,20 +66,20 @@ function buildHtml(data: z.infer<typeof schema>): string {
             <tr>
               <td style="padding-bottom:10px;">
                 <span style="font-size:11px;color:#71717a;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;">Name</span><br/>
-                <span style="font-size:16px;font-weight:700;color:#fafafa;">${data.name}</span>
+                <span style="font-size:16px;font-weight:700;color:#fafafa;">${d.name}</span>
               </td>
             </tr>
             <tr>
               <td style="padding-bottom:10px;">
                 <span style="font-size:11px;color:#71717a;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;">Email</span><br/>
-                <a href="mailto:${data.email}" style="font-size:15px;color:#7c3aed;text-decoration:none;">${data.email}</a>
+                <a href="mailto:${d.email}" style="font-size:15px;color:#7c3aed;text-decoration:none;">${d.email}</a>
               </td>
             </tr>
-            ${data.phone ? `
+            ${d.phone ? `
             <tr>
               <td style="padding-bottom:10px;">
                 <span style="font-size:11px;color:#71717a;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;">Phone</span><br/>
-                <a href="tel:${data.phone}" style="font-size:15px;color:#7c3aed;text-decoration:none;">${data.phone}</a>
+                <a href="tel:${d.phone}" style="font-size:15px;color:#7c3aed;text-decoration:none;">${d.phone}</a>
               </td>
             </tr>` : ''}
           </table>
@@ -75,15 +94,15 @@ function buildHtml(data: z.infer<typeof schema>): string {
             <tr>
               <td width="33%" style="padding-bottom:14px;vertical-align:top;">
                 <span style="font-size:10px;color:#71717a;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;display:block;">Service</span>
-                <span style="font-size:14px;font-weight:700;color:#fafafa;display:block;margin-top:4px;">${data.service}</span>
+                <span style="font-size:14px;font-weight:700;color:#fafafa;display:block;margin-top:4px;">${d.service}</span>
               </td>
               <td width="33%" style="padding-bottom:14px;vertical-align:top;">
                 <span style="font-size:10px;color:#71717a;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;display:block;">Budget</span>
-                <span style="font-size:14px;font-weight:700;color:#fafafa;display:block;margin-top:4px;">${data.budget}</span>
+                <span style="font-size:14px;font-weight:700;color:#fafafa;display:block;margin-top:4px;">${d.budget}</span>
               </td>
               <td width="33%" style="padding-bottom:14px;vertical-align:top;">
                 <span style="font-size:10px;color:#71717a;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;display:block;">Timeline</span>
-                <span style="font-size:14px;font-weight:700;color:#fafafa;display:block;margin-top:4px;">${data.timeline}</span>
+                <span style="font-size:14px;font-weight:700;color:#fafafa;display:block;margin-top:4px;">${d.timeline}</span>
               </td>
             </tr>
           </table>
@@ -94,7 +113,7 @@ function buildHtml(data: z.infer<typeof schema>): string {
       <tr>
         <td style="padding:28px 40px;border-bottom:1px solid #27272a;">
           <p style="margin:0 0 12px;font-size:10px;color:#71717a;letter-spacing:0.16em;text-transform:uppercase;font-family:monospace;">MESSAGE</p>
-          <p style="margin:0;font-size:14px;color:#a1a1aa;line-height:1.75;white-space:pre-wrap;">${data.message}</p>
+          <p style="margin:0;font-size:14px;color:#a1a1aa;line-height:1.75;white-space:pre-wrap;">${d.message}</p>
         </td>
       </tr>
 
@@ -102,10 +121,10 @@ function buildHtml(data: z.infer<typeof schema>): string {
       <tr>
         <td style="padding:24px 40px;text-align:center;">
           <a
-            href="mailto:${data.email}?subject=Re:%20Your%20enquiry%20at%20Manglam%20Technical%20Agency"
+            href="mailto:${d.email}?subject=Re:%20Your%20enquiry%20at%20Manglam%20Technical%20Agency"
             style="display:inline-block;padding:12px 28px;background:#7c3aed;color:#fff;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:0.05em;"
           >
-            Reply to ${data.name} →
+            Reply to ${d.name} →
           </a>
         </td>
       </tr>
@@ -139,14 +158,23 @@ function buildTextFallback(data: z.infer<typeof schema>): string {
 }
 
 export async function POST(req: NextRequest) {
+  // Rate limit: 5 requests per minute per IP
+  const { ok } = rateLimit(getClientIp(req), 5, 60_000)
+  if (!ok) {
+    return NextResponse.json(
+      { success: false, message: 'Too many requests. Please wait a minute and try again.' },
+      { status: 429 }
+    )
+  }
+
   try {
     const data = schema.parse(await req.json())
 
     const gmailUser = process.env.GMAIL_USER
     const gmailPass = process.env.GMAIL_APP_PASSWORD
+    const recipient = process.env.CONTACT_RECIPIENT_EMAIL ?? 'manglamtechnicalagency@gmail.com'
 
     if (!gmailUser || !gmailPass) {
-      // Only log in development - avoid exposing server config in production
       if (process.env.NODE_ENV === 'development') {
         console.error('[MTA Contact] GMAIL_USER / GMAIL_APP_PASSWORD not set. Restart the dev server after editing .env.local')
       }
@@ -156,7 +184,6 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    // Strip spaces — Google displays App Passwords in 4-char groups but SMTP needs them removed
     const transporter = nodemailer.createTransport({
       host:   'smtp.gmail.com',
       port:   465,
@@ -166,7 +193,7 @@ export async function POST(req: NextRequest) {
 
     await transporter.sendMail({
       from:    `"MTA Website" <${gmailUser}>`,
-      to:      'manglamtechnicalagency@gmail.com',
+      to:      recipient,
       replyTo: data.email,
       subject: `[MTA Enquiry] ${data.service} — ${data.name}`,
       text:    buildTextFallback(data),
@@ -178,11 +205,9 @@ export async function POST(req: NextRequest) {
     if (e instanceof z.ZodError) {
       return NextResponse.json({ success: false, errors: e.flatten().fieldErrors }, { status: 400 })
     }
-    // Only log in development - in production, use error tracking service
     if (process.env.NODE_ENV === 'development') {
       console.error('[MTA Contact] Error:', e instanceof Error ? e.message : 'Unknown')
     }
-    // TODO: Send to error tracking service in production (Sentry, LogRocket, etc.)
     return NextResponse.json({ success: false, message: 'Server error. Please try again.' }, { status: 500 })
   }
 }

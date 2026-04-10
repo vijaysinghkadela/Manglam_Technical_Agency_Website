@@ -57,6 +57,7 @@ const Button = memo(function Button({
         className,
       )}
       disabled={disabled || loading}
+      aria-busy={loading || undefined}
       {...props}
     >
       {loading && <Loader2 className="w-4 h-4 animate-spin" />}

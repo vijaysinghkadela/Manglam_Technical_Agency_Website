@@ -15,15 +15,18 @@ export function TestimonialsSection() {
   const prev = useCallback(() => setIndex((i) => (i === 0 ? testimonials.length - 1 : i - 1)), [])
   const next = useCallback(() => setIndex((i) => (i === testimonials.length - 1 ? 0 : i + 1)), [])
 
-  // Keyboard navigation
+  // Keyboard navigation — only fires while section is hovered to avoid hijacking global arrow keys
   useEffect(() => {
     const fn = (e: KeyboardEvent) => {
+      if (!isHovered.current) return
       if (e.key === 'ArrowLeft') prev()
       if (e.key === 'ArrowRight') next()
     }
     window.addEventListener('keydown', fn)
     return () => window.removeEventListener('keydown', fn)
   }, [prev, next])
+
+  if (!current) return null
 
   // Auto-advance (pauses on hover)
   useEffect(() => {
@@ -80,6 +83,9 @@ export function TestimonialsSection() {
           </motion.span>
 
           {/* Animated testimonial */}
+          <div aria-live="polite" aria-atomic="true" className="sr-only">
+            {current.name} — {current.company}
+          </div>
           <AnimatePresence mode="wait">
             <motion.div
               key={index}

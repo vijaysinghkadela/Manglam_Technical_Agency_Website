@@ -348,8 +348,9 @@ body, nav, footer, section, .container-site, [class*="bg-"] {
 /* ── Violet text glow ───────────────────────────────────────── */
 .text-glow-violet { text-shadow: 0 0 32px rgba(124,58,237,0.45); }
 
-/* ── Theme-aware hover foreground ───────────────────────────── */
+/* ── Theme-aware hover utilities ────────────────────────────── */
 .hover-foreground:hover { color: var(--color-foreground) !important; }
+.hover-muted:hover      { color: var(--color-muted)      !important; }
 
 /* ── Card hover lift - GPU optimized ────────────────────────── */
 .card-hover {

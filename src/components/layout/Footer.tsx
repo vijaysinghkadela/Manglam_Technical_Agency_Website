@@ -74,11 +74,8 @@ export function Footer() {
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 font-display font-black text-[15px] transition-all duration-300 group"
-            style={{ backgroundColor:'var(--color-foreground)', color:'var(--color-canvas)' }}
+            className="inline-flex items-center gap-2 px-8 py-4 font-display font-black text-[15px] transition-all duration-300 group bg-foreground text-canvas hover:bg-violet hover:text-white"
             data-cursor="pointer"
-            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-violet)'; (e.currentTarget as HTMLElement).style.color = '#fff' }}
-            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-foreground)'; (e.currentTarget as HTMLElement).style.color = 'var(--color-canvas)' }}
           >
             Get a Quote
             <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
@@ -136,12 +133,12 @@ export function Footer() {
               ))}
               <a
                 href={AGENCY_WHATSAPP}
-                className="text-sm font-mono transition-colors"
+                className="text-sm font-mono transition-colors hover:text-[#25D366]"
                 style={{ color: 'var(--color-muted)' }}
                 aria-label="WhatsApp"
+                target="_blank"
+                rel="noopener noreferrer"
                 data-cursor="pointer"
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#25D366' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-muted)' }}
               >
                 WhatsApp
               </a>
@@ -215,10 +212,7 @@ export function Footer() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-xs font-mono transition-colors"
-                style={{ color: 'var(--color-dead)' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-muted)' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-dead)' }}
+                className="text-xs font-mono transition-colors text-dead hover-muted"
                 data-cursor="pointer"
               >
                 {link.label}

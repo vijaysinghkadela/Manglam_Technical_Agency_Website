@@ -11,14 +11,14 @@ const getServerSnapshot = () => false
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme()
   const mounted = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
-  if (!mounted) return <div className="w-[72px] h-[32px]" />
+  if (!mounted) return <div className="w-[72px] h-[32px] border border-transparent" aria-hidden />
 
   const isDark = theme === 'dark'
 
   return (
     <button
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
-      className="flex items-center gap-1.5 px-3 py-1.5 font-mono transition-all duration-200 hover:border-violet"
+      className="flex items-center gap-1.5 px-3 py-1.5 h-[32px] font-mono transition-all duration-200 hover:border-violet"
       style={{
         border: '1px solid var(--color-border)',
         backgroundColor: 'var(--color-surface)',
