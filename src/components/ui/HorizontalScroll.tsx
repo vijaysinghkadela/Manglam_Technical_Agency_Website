@@ -50,7 +50,7 @@ export default function HorizontalScroll({ children, className = '' }: Horizonta
   // On mobile, render as vertical stack
   if (isMobile) {
     return (
-      <div className={className}>
+      <div ref={sectionRef} className={className} style={{ position: 'relative' }}>
         <div className="flex flex-col gap-6 px-4">
           {children}
         </div>

@@ -1,10 +1,12 @@
 'use client'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef, useSyncExternalStore } from 'react'
+import { useRef } from 'react'
 import { MagneticButton } from '@/components/ui/MagneticButton'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { AGENCY_WHATSAPP } from '@/lib/constants'
+import { BRAND, ANIMATION, SPACING, TYPOGRAPHY, RADIUS } from '@/lib/design-system'
 
-const EASE: [number,number,number,number] = [0.16, 1, 0.3, 1]
+const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
 
 const FLOATING_DOTS = [
   { x: '12%', y: '18%', size: 3, delay: 0    },
@@ -21,19 +23,13 @@ export function CTABanner() {
   const { scrollYProgress } = useScroll({ target:ref, offset:['start end','end start'] })
   const watermarkY = useTransform(scrollYProgress, [0,1], ['-8%','8%'])
   const contentY   = useTransform(scrollYProgress, [0,1], ['4%', '-4%'])
-
-  // Disable parallax + floating dots on mobile — major lag source on touch devices
-  const isDesktop = useSyncExternalStore(
-    (cb) => { const mq = window.matchMedia('(min-width: 1024px)'); mq.addEventListener('change', cb); return () => mq.removeEventListener('change', cb) },
-    ()   => window.matchMedia('(min-width: 1024px)').matches,
-    ()   => false,
-  )
+  const isDesktop = useMediaQuery('(min-width: 1024px)')
 
   return (
     <section
       ref={ref}
       className="relative overflow-hidden"
-      style={{ backgroundColor:'var(--color-violet)', padding:'clamp(64px, 11vw, 112px) 0' }}
+      style={{ backgroundColor: BRAND.primary, padding: `${SPACING.section.lg} 0` }}
     >
       {/* Diagonal grid overlay */}
       <div
@@ -58,7 +54,7 @@ export function CTABanner() {
       >
         <span
           className="font-display font-black text-white leading-none"
-          style={{ fontSize:'clamp(180px, 28vw, 480px)', opacity:0.045, letterSpacing: '-0.05em' }}
+          style={{ fontSize:'clamp(180px, 28vw, 480px)', opacity:0.045, letterSpacing: 0 }}
         >
           MTA
         </span>
@@ -83,7 +79,7 @@ export function CTABanner() {
       {/* Content — parallax on desktop only */}
       <motion.div
         style={{ y: isDesktop ? contentY : '0%' }}
-        className="relative z-10 container-site flex flex-col items-center text-center gap-8"
+        className="relative z-10 container-site flex flex-col items-center text-center gap-7 sm:gap-8"
       >
         <motion.span
           className="font-mono uppercase"
@@ -96,9 +92,9 @@ export function CTABanner() {
           ✦ READY TO SCALE?
         </motion.span>
 
-        <motion.h2
-          className="font-display font-black text-white leading-[0.90] tracking-tight"
-          style={{ fontSize:'clamp(40px, 8vw, 108px)' }}
+      <motion.h2
+        className="font-display font-black leading-[0.90] tracking-normal"
+        style={{ fontSize:'clamp(42px, 8vw, 108px)', color:'#FFFFFF' }}
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
@@ -108,7 +104,7 @@ export function CTABanner() {
         </motion.h2>
 
         <motion.p
-          style={{ fontSize:'17px', lineHeight:1.68, color:'rgba(255,255,255,0.62)', maxWidth:'440px' }}
+          style={{ fontSize:'17px', lineHeight:1.68, color:'rgba(255,255,255,0.62)', maxWidth:'28rem' }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
@@ -118,46 +114,47 @@ export function CTABanner() {
           Book our ₹25,000 Discovery Workshop today.
         </motion.p>
 
-        <motion.div
-          className="flex items-center gap-5 flex-wrap justify-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.6, delay: 0.24, ease: EASE }}
+      <motion.div
+        className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-5 w-full sm:w-auto px-0 sm:px-0 max-w-[40rem]"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.6, delay: 0.24, ease: EASE }}
+      >
+        <MagneticButton
+          href="/contact"
+          className="inline-flex w-full sm:w-auto items-center justify-center gap-2 font-display font-black text-[16px] sm:text-[17px] px-6 sm:px-8 py-4 transition-all duration-300 min-h-[56px] sm:min-h-0 touch-manipulation"
+          style={{ backgroundColor:'#FAFAFA', color:BRAND.primary, touchAction: 'manipulation' }}
         >
-          <MagneticButton
-            href="/contact"
-            className="inline-flex items-center gap-2 font-display font-black text-[17px] px-8 py-4 transition-all duration-300"
-            style={{ backgroundColor:'#FAFAFA', color:'var(--color-violet)' }}
-          >
-            Book Discovery Workshop →
-          </MagneticButton>
+          Book Discovery Workshop →
+        </MagneticButton>
 
-          <a
-            href={AGENCY_WHATSAPP}
-            target="_blank"
-            rel="noopener noreferrer"
-            data-cursor="pointer"
-            className="inline-flex items-center gap-2 font-mono text-sm transition-all duration-200"
-            style={{
-              color: 'rgba(255,255,255,0.72)',
-              border: '1px solid rgba(255,255,255,0.22)',
-              padding: '14px 24px',
-            }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLElement).style.color = '#fff'
-              ;(e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.55)'
-              ;(e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(255,255,255,0.08)'
-            }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.72)'
-              ;(e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.22)'
-              ;(e.currentTarget as HTMLElement).style.backgroundColor = 'transparent'
-            }}
-          >
-            WhatsApp Us
-          </a>
-        </motion.div>
+        <a
+          href={AGENCY_WHATSAPP}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-cursor="pointer"
+          className="inline-flex w-full sm:w-auto items-center justify-center gap-2 font-mono text-sm transition-all duration-200 min-h-[52px] sm:min-h-0 touch-manipulation rounded-full"
+          style={{
+            color: 'rgba(255,255,255,0.72)',
+            border: '1px solid rgba(255,255,255,0.22)',
+            padding: '14px 24px',
+            touchAction: 'manipulation',
+          }}
+          onMouseEnter={e => {
+            (e.currentTarget as HTMLElement).style.color = '#fff'
+            ;(e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.55)'
+            ;(e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(255,255,255,0.08)'
+          }}
+          onMouseLeave={e => {
+            (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.72)'
+            ;(e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.22)'
+            ;(e.currentTarget as HTMLElement).style.backgroundColor = 'transparent'
+          }}
+        >
+          WhatsApp Us
+        </a>
+      </motion.div>
 
         <motion.p
           className="font-mono"
@@ -173,3 +170,4 @@ export function CTABanner() {
     </section>
   )
 }
+

@@ -4,7 +4,7 @@ import { AboutContent } from '@/components/about/AboutContent'
 
 export const metadata = {
   title: 'About — Manglam Technical Agency',
-  description: 'Manglam Technical Agency is a full-service technical agency based in Nagaur, Rajasthan. A lean team of specialists delivering AI automation, cybersecurity, web development, and digital operations for Indian businesses.',
+  description: 'Manglam Technical Agency is a full-service technical agency based in Bikaner, Rajasthan. A lean team of specialists delivering AI automation, cybersecurity, web development, and digital operations for Indian businesses.',
 }
 
 const STATS = [
@@ -22,7 +22,7 @@ export default function AboutPage() {
 
       {/* ── HERO — Full viewport ─────────────────────────── */}
       <section
-        className="relative w-full min-h-screen flex flex-col overflow-hidden grain"
+        className="relative w-full min-h-[92svh] flex flex-col overflow-hidden grain"
         style={{ backgroundColor: 'var(--color-canvas)' }}
       >
         {/* Backgrounds */}
@@ -35,15 +35,15 @@ export default function AboutPage() {
             width: 'clamp(300px, 40vw, 700px)',
             height: 'clamp(300px, 40vw, 700px)',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(124,58,237,0.07) 0%, transparent 68%)',
+            background: 'radial-gradient(circle, rgba(107,26,26,0.07) 0%, transparent 68%)',
           }}
         />
 
-        <div className="relative z-10 container-site flex flex-col flex-1 pt-28 lg:pt-36 pb-12 lg:pb-16">
+        <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-10 sm:pb-12 lg:pb-16">
 
           {/* Breadcrumb */}
           <nav
-            className="flex items-center gap-2 font-mono mb-14 lg:mb-20 animate-fade-up"
+            className="flex items-center gap-2 font-mono mb-10 lg:mb-16 animate-fade-up"
             style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
           >
             <Link href="/" className="hover-foreground transition-colors">HOME</Link>
@@ -67,21 +67,21 @@ export default function AboutPage() {
                   text="EXCELLENCE"
                   as="h1"
                   delay={0.1}
-                  className="font-display font-black leading-none tracking-tighter uppercase"
+                  className="font-display font-black leading-none tracking-normal uppercase"
                   style={{ fontSize: 'clamp(2.2rem, 5.5vw, 6rem)', color: 'var(--color-foreground)' }}
                 />
                 <TextReveal
                   text="IN TECHNOLOGY."
                   as="h1"
                   delay={0.22}
-                  className="font-display font-black leading-none tracking-tighter uppercase"
+                  className="font-display font-black leading-none tracking-normal uppercase"
                   style={{ fontSize: 'clamp(2.2rem, 5.5vw, 6rem)', color: 'var(--color-violet)' }}
                 />
                 <TextReveal
                   text="Delivered by Specialists Who Actually Do the Work."
                   as="h1"
                   delay={0.38}
-                  className="font-display font-black leading-none tracking-tighter"
+                  className="font-display font-black leading-none tracking-normal"
                   style={{
                     fontSize: 'clamp(0.9rem, 2.5vw, 2.5rem)',
                     color: 'var(--color-muted)',
@@ -101,7 +101,7 @@ export default function AboutPage() {
                 }}
               >
                 Manglam Technical Agency (MTA) is a full-service technical and creative agency
-                based in Nagaur, Rajasthan. We exist for one reason: to give businesses access
+                based in Bikaner, Rajasthan. We exist for one reason: to give businesses access
                 to enterprise-grade technical capabilities without the overhead, bureaucracy, or
                 impersonal service of a large firm.
               </p>
@@ -109,88 +109,169 @@ export default function AboutPage() {
 
             {/* Right: Floating Agency Card (desktop only) */}
             <div
-              className="hidden lg:flex flex-col shrink-0 animate-fade-up stagger-3"
+              className="hidden lg:flex flex-col shrink-0 animate-fade-up stagger-3 relative"
               style={{
-                width: '220px',
-                border: '1px solid rgba(124,58,237,0.35)',
-                backgroundColor: 'rgba(124,58,237,0.04)',
+                width: '300px',
+                border: '2px solid rgba(107,26,26,0.35)',
+                backgroundColor: 'rgba(107,26,26,0.06)',
+                backdropFilter: 'blur(16px)',
+                borderRadius: '20px',
+                overflow: 'hidden',
+                boxShadow: `
+                  0 25px 50px -12px rgba(107,26,26,0.25),
+                  0 0 0 1px rgba(107,26,26,0.1),
+                  inset 0 1px 0 rgba(255,255,255,0.1)
+                `,
               }}
             >
+              {/* Animated glow border effect */}
+              <div
+                className="absolute inset-0 rounded-[20px] pointer-events-none"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(107,26,26,0.1) 0%, transparent 50%, rgba(107,26,26,0.05) 100%)',
+                }}
+              />
+
+              {/* Top glow line */}
+              <div
+                className="absolute top-0 left-4 right-4 h-[2px]"
+                style={{
+                  background: 'linear-gradient(90deg, transparent, rgba(107,26,26,0.6), transparent)',
+                  boxShadow: '0 0 20px rgba(107,26,26,0.4)',
+                }}
+              />
+
               {/* Card header */}
               <div
-                className="px-5 py-4 flex items-center justify-between"
-                style={{ borderBottom: '1px solid rgba(124,58,237,0.18)' }}
+                className="px-6 py-5 flex items-center justify-between relative"
+                style={{
+                  borderBottom: '2px solid rgba(107,26,26,0.15)',
+                  background: 'linear-gradient(180deg, rgba(107,26,26,0.1) 0%, rgba(107,26,26,0.02) 100%)',
+                }}
               >
+                <div className="flex items-center gap-3">
+                  <div
+                    className="w-3 h-3 rounded-full animate-pulse"
+                    style={{
+                      backgroundColor: 'var(--color-violet)',
+                      boxShadow: '0 0 12px rgba(107,26,26,0.8), 0 0 24px rgba(107,26,26,0.4)',
+                    }}
+                  />
+                  <span
+                    className="font-display font-bold uppercase tracking-wider"
+                    style={{ fontSize: '14px', color: 'var(--color-violet)', letterSpacing: '0.12em' }}
+                  >
+                    MTA
+                  </span>
+                </div>
                 <span
-                  className="font-mono uppercase"
-                  style={{ fontSize: '9px', color: 'var(--color-violet-light)', letterSpacing: '0.22em' }}
-                >
-                  ✦ MTA
-                </span>
-                <span
-                  className="font-mono"
-                  style={{ fontSize: '8px', color: 'rgba(124,58,237,0.4)', letterSpacing: '0.1em' }}
+                  className="font-mono px-3 py-1 rounded-full font-semibold"
+                  style={{
+                    fontSize: '9px',
+                    color: 'var(--color-violet)',
+                    letterSpacing: '0.12em',
+                    backgroundColor: 'rgba(107,26,26,0.12)',
+                    border: '1px solid rgba(107,26,26,0.25)',
+                  }}
                 >
                   PUBLIC
                 </span>
               </div>
 
               {/* Stats */}
-              {STATS.map((stat, i) => (
-                <div
-                  key={stat.label}
-                  className="px-5 py-4 flex items-baseline justify-between"
-                  style={{ borderBottom: i < STATS.length - 1 ? '1px solid rgba(124,58,237,0.12)' : 'none' }}
-                >
-                  <span
-                    className="font-mono uppercase"
-                    style={{ fontSize: '9px', color: 'rgba(124,58,237,0.4)', letterSpacing: '0.14em' }}
-                  >
-                    {stat.label}
-                  </span>
-                  <span
-                    className="font-display font-black"
-                    style={{ fontSize: '1.15rem', color: 'var(--color-violet-light)' }}
-                  >
-                    {stat.value}
-                  </span>
-                </div>
-              ))}
-
-              {/* Service tags */}
-              <div
-                className="px-5 py-4 flex flex-wrap gap-1.5"
-                style={{ borderTop: '1px solid rgba(124,58,237,0.18)' }}
-              >
-                {SERVICE_TAGS.map((tag) => (
-                  <span
-                    key={tag}
-                    className="font-mono uppercase"
+              <div className="px-3 py-4 relative">
+                {STATS.map((stat, i) => (
+                  <div
+                    key={stat.label}
+                    className="px-4 py-3 flex items-center justify-between rounded-xl transition-all duration-200 hover:bg-white/10"
                     style={{
-                      fontSize: '8px',
-                      color: 'rgba(124,58,237,0.5)',
-                      letterSpacing: '0.14em',
-                      border: '1px solid rgba(124,58,237,0.2)',
-                      padding: '2px 6px',
+                      borderBottom: i < STATS.length - 1 ? '1px solid rgba(107,26,26,0.08)' : 'none',
                     }}
                   >
-                    {tag}
-                  </span>
+                    <div className="flex items-center gap-3">
+                      <span
+                        className="font-mono text-[11px] w-7 h-7 flex items-center justify-center rounded-lg font-bold"
+                        style={{
+                          backgroundColor: 'rgba(107,26,26,0.12)',
+                          color: 'var(--color-violet)',
+                          border: '1px solid rgba(107,26,26,0.2)',
+                        }}
+                      >
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <span
+                        className="font-mono uppercase font-medium"
+                        style={{ fontSize: '11px', color: 'var(--color-muted)', letterSpacing: '0.06em' }}
+                      >
+                        {stat.label}
+                      </span>
+                    </div>
+                    <span
+                      className="font-display font-black"
+                      style={{
+                        fontSize: '1.35rem',
+                        color: 'var(--color-violet)',
+                        textShadow: '0 0 30px rgba(107,26,26,0.4)',
+                      }}
+                    >
+                      {stat.value}
+                    </span>
+                  </div>
                 ))}
               </div>
 
-              {/* Footer */}
+              {/* Service tags */}
               <div
-                className="px-5 py-3 flex items-center gap-2"
-                style={{ borderTop: '1px solid rgba(124,58,237,0.18)' }}
+                className="px-5 py-4"
+                style={{
+                  borderTop: '2px solid rgba(107,26,26,0.12)',
+                  backgroundColor: 'rgba(107,26,26,0.04)',
+                }}
               >
+                <div className="flex flex-wrap gap-2.5">
+                  {SERVICE_TAGS.map((tag, i) => (
+                    <span
+                      key={tag}
+                      className="font-mono uppercase transition-all duration-200 hover:scale-110 cursor-default"
+                      style={{
+                        fontSize: '10px',
+                        color: 'var(--color-violet)',
+                        letterSpacing: '0.06em',
+                        backgroundColor: 'rgba(107,26,26,0.1)',
+                        border: '1px solid rgba(107,26,26,0.25)',
+                        padding: '4px 10px',
+                        borderRadius: '6px',
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Footer - Activity bars */}
+              <div
+                className="px-5 py-4 flex items-center gap-2"
+                style={{
+                  borderTop: '2px solid rgba(107,26,26,0.12)',
+                  backgroundColor: 'rgba(107,26,26,0.06)',
+                }}
+              >
+                <span
+                  className="font-mono mr-3 font-semibold"
+                  style={{ fontSize: '9px', color: 'var(--color-violet)', letterSpacing: '0.1em' }}
+                >
+                  ACTIVITY
+                </span>
                 {[...Array(5)].map((_, i) => (
                   <div
                     key={i}
-                    className="flex-1 rounded-sm"
+                    className="flex-1 rounded transition-all duration-300 hover:opacity-100"
                     style={{
-                      height: `${10 + (i % 3) * 6}px`,
-                      backgroundColor: `rgba(124,58,237,${0.12 + i * 0.04})`,
+                      height: `${16 + (i % 3) * 10}px`,
+                      backgroundColor: `rgba(107,26,26,${0.2 + i * 0.08})`,
+                      borderRadius: '3px',
+                      opacity: 0.8 + (i * 0.05),
                     }}
                   />
                 ))}
@@ -239,3 +320,6 @@ export default function AboutPage() {
     </main>
   )
 }
+
+
+

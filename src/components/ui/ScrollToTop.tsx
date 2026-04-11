@@ -34,14 +34,22 @@ export function ScrollToTop() {
       aria-label="Back to top"
       data-cursor="pointer"
       className="
-        fixed bottom-6 right-6 z-50
-        w-10 h-10 flex items-center justify-center
-        border border-border bg-canvas
-        hover:border-violet hover:bg-[rgba(124,58,237,0.08)]
+        fixed z-50
+        flex h-12 w-12 items-center justify-center
+        rounded-full border border-border
+        bg-card/90 backdrop-blur-md
+        shadow-[0_16px_40px_rgba(0,0,0,0.24)]
         transition-all duration-300 group
+        hover:-translate-y-0.5 hover:border-[color:var(--color-accent-border)] hover:bg-[color:var(--color-accent-soft)]
+        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-accent)] focus-visible:ring-offset-2
+        focus-visible:ring-offset-canvas
       "
+      style={{
+        bottom: 'calc(1.5rem + env(safe-area-inset-bottom))',
+        right: 'calc(1.5rem + env(safe-area-inset-right))',
+      }}
     >
-      <ArrowUp className="w-4 h-4 text-muted group-hover:text-violet transition-colors" />
+      <ArrowUp className="w-4 h-4 text-muted transition-colors group-hover:text-violet" />
     </button>
   )
 }

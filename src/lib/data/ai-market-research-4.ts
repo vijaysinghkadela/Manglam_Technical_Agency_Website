@@ -270,7 +270,7 @@ export const marketResearchPart4: MarketResearchArticle[] = [
             rows: [
               ['Legal/Regulatory', 'Unlabeled SGI violates IT Rules 2026 + DPDP Act', '₹250cr + safe harbor loss', 'Fake gym transformation video without consent'],
               ['Platform Penalties', 'Instagram/Meta auto-flag and remove deepfakes', '2-3 hour compliance window', 'Entire campaign paused, account restrictions'],
-              ['Reputational', 'Audience detects deepfake → permanent distrust', '49% report lower social media trust', 'Local Nagaur gyms cancel retainers'],
+              ['Reputational', 'Audience detects deepfake → permanent distrust', '49% report lower social media trust', 'Local Bikaner gyms cancel retainers'],
               ['Privacy/DPDP Breach', 'Using client photos/videos without explicit consent', 'Mandatory breach notification', 'Feeding gym member photos into Predis.ai'],
             ],
           },
@@ -576,7 +576,7 @@ export const marketResearchPart4: MarketResearchArticle[] = [
           },
         ],
         highlight:
-          'Average breach cost in India (2026): ₹22 crore including legal, remediation, lost business. One gym client data leak could kill local reputation in Nagaur/Bikaner.',
+          'Average breach cost in India (2026): ₹22 crore including legal, remediation, lost business. One gym client data leak could kill local reputation in Bikaner/Nagaur.',
       },
       {
         id: 'recent-breaches',

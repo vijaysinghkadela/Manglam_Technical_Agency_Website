@@ -16,8 +16,9 @@ export function useToast() {
       }),
     info: (message: string) =>
       toast(message, {
-        style: { background: '#161625', color: '#F4F4F8', border: '1px solid rgba(108,43,217,0.3)' },
+        style: { background: '#161625', color: '#F4F4F8', border: '1px solid rgba(107,26,26,0.3)' },
         icon: '💡',
       }),
   };
 }
+

@@ -21,7 +21,7 @@ export default function PortfolioPage() {
 
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section
-        className="relative w-full min-h-screen flex flex-col overflow-hidden grain"
+        className="relative w-full min-h-[92svh] flex flex-col overflow-hidden grain"
         style={{ backgroundColor: 'var(--color-canvas)' }}
       >
         <div className="absolute inset-0 bg-line-grid opacity-20 pointer-events-none" />
@@ -33,7 +33,7 @@ export default function PortfolioPage() {
             width: 'clamp(320px, 44vw, 760px)',
             height: 'clamp(320px, 44vw, 760px)',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(124,58,237,0.09) 0%, transparent 65%)',
+            background: 'radial-gradient(circle, rgba(107,26,26,0.09) 0%, transparent 65%)',
           }}
         />
         <div
@@ -44,15 +44,15 @@ export default function PortfolioPage() {
             width: 'clamp(200px, 28vw, 480px)',
             height: 'clamp(200px, 28vw, 480px)',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(124,58,237,0.04) 0%, transparent 65%)',
+            background: 'radial-gradient(circle, rgba(107,26,26,0.04) 0%, transparent 65%)',
           }}
         />
 
-        <div className="relative z-10 container-site flex flex-col flex-1 pt-28 lg:pt-36 pb-12 lg:pb-16">
+        <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-10 sm:pb-12 lg:pb-16">
 
           {/* Breadcrumb */}
           <nav
-            className="flex items-center gap-2 font-mono mb-14 lg:mb-24"
+            className="flex items-center gap-2 font-mono mb-10 lg:mb-20"
             style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
           >
             <Link href="/" className="hover-foreground transition-colors">HOME</Link>
@@ -71,13 +71,13 @@ export default function PortfolioPage() {
 
             <div className="flex flex-col" style={{ gap: '0.02em' }}>
               <h1
-                className="font-display font-black leading-none tracking-tighter uppercase"
+                className="font-display font-black leading-none tracking-normal uppercase"
                 style={{ fontSize: 'clamp(3.5rem, 10vw, 10rem)', color: 'var(--color-foreground)' }}
               >
                 DIGITAL
               </h1>
               <h1
-                className="font-display font-black leading-none tracking-tighter uppercase"
+                className="font-display font-black leading-none tracking-normal uppercase"
                 style={{ fontSize: 'clamp(3.5rem, 10vw, 10rem)', color: 'var(--color-violet)' }}
               >
                 PRODUCTS.
@@ -167,3 +167,6 @@ export default function PortfolioPage() {
     </main>
   )
 }
+
+
+

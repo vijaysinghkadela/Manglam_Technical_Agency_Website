@@ -25,7 +25,7 @@ export default function LegalHubPage() {
 
       {/* ── HERO — Full viewport ─────────────────────────── */}
       <section
-        className="relative w-full min-h-screen flex flex-col overflow-hidden grain"
+        className="relative w-full min-h-[92svh] flex flex-col overflow-hidden grain"
         style={{ backgroundColor: 'var(--color-canvas)' }}
       >
         <div className="absolute inset-0 bg-line-grid opacity-20 pointer-events-none" />
@@ -37,15 +37,15 @@ export default function LegalHubPage() {
             width: 'clamp(300px, 40vw, 700px)',
             height: 'clamp(300px, 40vw, 700px)',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(124,58,237,0.07) 0%, transparent 68%)',
+            background: 'radial-gradient(circle, rgba(107,26,26,0.07) 0%, transparent 68%)',
           }}
         />
 
-        <div className="relative z-10 container-site flex flex-col flex-1 pt-28 lg:pt-36 pb-12 lg:pb-16">
+        <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-10 sm:pb-12 lg:pb-16">
 
           {/* Breadcrumb */}
           <nav
-            className="flex items-center gap-2 font-mono mb-14 lg:mb-20 animate-fade-up"
+            className="flex items-center gap-2 font-mono mb-10 lg:mb-16 animate-fade-up"
             style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
           >
             <Link href="/" className="hover-foreground transition-colors">HOME</Link>
@@ -70,14 +70,14 @@ export default function LegalHubPage() {
                   text="LEGAL"
                   as="h1"
                   delay={0.1}
-                  className="font-display font-black leading-none tracking-tighter uppercase"
+                  className="font-display font-black leading-none tracking-normal uppercase"
                   style={{ fontSize: 'clamp(3rem, 9vw, 9rem)', color: 'var(--color-foreground)' }}
                 />
                 <TextReveal
                   text="HUB."
                   as="h1"
                   delay={0.2}
-                  className="font-display font-black leading-none tracking-tighter uppercase"
+                  className="font-display font-black leading-none tracking-normal uppercase"
                   style={{ fontSize: 'clamp(3rem, 9vw, 9rem)', color: 'var(--color-violet)' }}
                 />
               </div>
@@ -105,13 +105,13 @@ export default function LegalHubPage() {
                 <div className="p-4">
                   <span
                     className="font-mono uppercase"
-                    style={{ fontSize: '9px', color: 'rgba(124,58,237,0.25)', letterSpacing: '0.18em' }}
+                    style={{ fontSize: '9px', color: 'rgba(107,26,26,0.25)', letterSpacing: '0.18em' }}
                   >
                     MTA-FC
                   </span>
                   <div
                     className="mt-2 font-mono uppercase"
-                    style={{ fontSize: '7px', color: 'rgba(124,58,237,0.18)', letterSpacing: '0.14em' }}
+                    style={{ fontSize: '7px', color: 'rgba(107,26,26,0.18)', letterSpacing: '0.14em' }}
                   >
                     RESTRICTED
                   </div>
@@ -123,7 +123,7 @@ export default function LegalHubPage() {
                     style={{
                       left: '16px', top: `${76 + idx * 18}px`,
                       width: `${w}%`, height: '2px',
-                      backgroundColor: 'rgba(124,58,237,0.08)',
+                      backgroundColor: 'rgba(107,26,26,0.08)',
                     }}
                   />
                 ))}
@@ -139,7 +139,7 @@ export default function LegalHubPage() {
                 <div className="p-4">
                   <span
                     className="font-mono uppercase"
-                    style={{ fontSize: '9px', color: 'rgba(124,58,237,0.45)', letterSpacing: '0.18em' }}
+                    style={{ fontSize: '9px', color: 'rgba(107,26,26,0.45)', letterSpacing: '0.18em' }}
                   >
                     MTA-DPA
                   </span>
@@ -151,7 +151,7 @@ export default function LegalHubPage() {
                     style={{
                       left: '16px', top: `${60 + idx * 16}px`,
                       width: `${w}%`, height: '2px',
-                      backgroundColor: 'rgba(124,58,237,0.13)',
+                      backgroundColor: 'rgba(107,26,26,0.13)',
                     }}
                   />
                 ))}
@@ -173,7 +173,7 @@ export default function LegalHubPage() {
                   </span>
                   <div
                     className="mt-2 w-full"
-                    style={{ height: '1px', backgroundColor: 'rgba(124,58,237,0.2)' }}
+                    style={{ height: '1px', backgroundColor: 'rgba(107,26,26,0.2)' }}
                   />
                 </div>
                 {[62, 78, 52, 84, 66, 58, 74].map((w, idx) => (
@@ -183,24 +183,24 @@ export default function LegalHubPage() {
                     style={{
                       left: '16px', top: `${60 + idx * 22}px`,
                       width: `${w}%`, height: '2px',
-                      backgroundColor: 'rgba(124,58,237,0.18)',
+                      backgroundColor: 'rgba(107,26,26,0.18)',
                     }}
                   />
                 ))}
                 {/* Footer */}
                 <div
                   className="absolute bottom-4 left-4 right-4 flex items-center justify-between"
-                  style={{ borderTop: '1px solid rgba(124,58,237,0.18)', paddingTop: '8px' }}
+                  style={{ borderTop: '1px solid rgba(107,26,26,0.18)', paddingTop: '8px' }}
                 >
                   <span
                     className="font-mono"
-                    style={{ fontSize: '8px', color: 'rgba(124,58,237,0.4)', letterSpacing: '0.12em' }}
+                    style={{ fontSize: '8px', color: 'rgba(107,26,26,0.4)', letterSpacing: '0.12em' }}
                   >
                     PUBLIC
                   </span>
                   <span
                     className="font-mono"
-                    style={{ fontSize: '8px', color: 'rgba(124,58,237,0.4)' }}
+                    style={{ fontSize: '8px', color: 'rgba(107,26,26,0.4)' }}
                   >
                     ✦ MTA
                   </span>
@@ -320,3 +320,6 @@ export default function LegalHubPage() {
     </main>
   )
 }
+
+
+

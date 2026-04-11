@@ -20,7 +20,7 @@ export default function NotFound() {
           style={{
             width: '500px',
             height: '500px',
-            backgroundColor: 'rgba(124,58,237,0.07)',
+            backgroundColor: 'rgba(107,26,26,0.07)',
             borderRadius: '50%',
             filter: 'blur(100px)',
           }}
@@ -132,3 +132,4 @@ export default function NotFound() {
     </div>
   )
 }
+

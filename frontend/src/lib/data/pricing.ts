@@ -1,0 +1,151 @@
+import { PricingPlan, ComparisonRow } from '@/types';
+
+export const pricingPlans: PricingPlan[] = [
+  {
+    service: 'SaaS & Web Development',
+    slug: 'web-development',
+    badge: 'Build',
+    plans: [
+      {
+        name: 'Micro MVP',
+        price: '$15,000–$25,000',
+        period: 'one-time',
+        features: ['Basic auth setup', '1 CRUD core workflow', 'Simple dashboard', 'Launch-ready codebase', 'Responsive design', 'Deployment included'],
+        popular: true,
+        cta: 'Build Micro MVP',
+        ctaLink: '/contact',
+      },
+      {
+        name: 'Standard MVP',
+        price: '$40,000–$99,000',
+        period: 'one-time',
+        features: ['Advanced Auth & SSO', 'Stripe Billing Integration', '3-5 major custom features', 'Advanced Reporting CMS', 'Scalable Architecture', 'Priority Support'],
+        cta: 'Build Standard MVP',
+        ctaLink: '/contact',
+      },
+      {
+        name: 'SaaS Success Plan',
+        price: '$450',
+        period: '/month',
+        features: ['Uptime monitoring', 'Security patches', 'Core Web Vitals optimization', 'Hosting & Database management', '5 hrs developer support'],
+        cta: 'Secure Retainer',
+        ctaLink: '/contact',
+      },
+    ],
+  },
+  {
+    service: 'Social Media Marketing',
+    slug: 'social-media-marketing',
+    badge: 'Retainer',
+    plans: [
+      {
+        name: 'Starter',
+        price: '$1,250',
+        period: '/month',
+        features: ['2 platforms (e.g. FB/IG)', '3 posts per week', 'Static graphics', 'Community management', 'Basic analytics reporting'],
+        cta: 'Start Starter Plan',
+        ctaLink: '/contact',
+      },
+      {
+        name: 'Growth',
+        price: '$2,750',
+        period: '/month',
+        features: ['3-4 platforms', 'Daily posting', 'Short-form video production (Reels/TikToks)', 'Active audience engagement', 'Ad coordination'],
+        popular: true,
+        cta: 'Start Growth Plan',
+        ctaLink: '/contact',
+      },
+      {
+        name: 'Scale',
+        price: '$5,000+',
+        period: '/month',
+        features: ['5+ platforms', 'Multiple daily posts', 'Influencer strategy integration', 'Deep performance analytics', 'Generative Search Optimization (GSO)'],
+        cta: 'Start Scale Plan',
+        ctaLink: '/contact',
+      },
+    ],
+  },
+  {
+    service: 'Cybersecurity & Compliance',
+    slug: 'cybersecurity',
+    badge: 'Security',
+    plans: [
+      {
+        name: 'Vulnerability & Privacy Audit',
+        price: '$1,500',
+        period: 'one-time',
+        features: ['Surface Threat Audit', 'Compliance Gap Check (GDPR/DPDP)', 'Immediate Risk Report', 'Actionable remediation plan'],
+        popular: true,
+        cta: 'Request Full Audit',
+        ctaLink: '/contact',
+      },
+      {
+        name: 'Managed Security Retainer',
+        price: '$250',
+        period: '/month',
+        features: ['24/7 Threat monitoring', 'Monthly vulnerability scanning', 'Managed Antivirus/Firewall checks', 'Security Awareness training access'],
+        cta: 'Secure Your Stack',
+        ctaLink: '/contact',
+      },
+    ],
+  },
+  {
+    service: 'AI & Workflow Automation',
+    slug: 'ai-automation',
+    badge: 'Efficiency',
+    plans: [
+      {
+        name: 'Implementation (n8n/Make)',
+        price: '$3,000–$8,000',
+        period: 'setup',
+        features: ['Process audit & mapping', 'CRM / Data system sync', 'Zapier to n8n migration (save 80% on fees)', 'Custom Chatbot workflows'],
+        popular: true,
+        cta: 'Request Automation',
+        ctaLink: '/contact',
+      },
+      {
+        name: 'AI Support Retainer',
+        price: '$300–$700',
+        period: '/month',
+        features: ['Endpoint error resolution', 'API credit usage monitoring', 'Prompt tuning & drift prevention', 'Ongoing workflow adjustments'],
+        cta: 'Request Retainer',
+        ctaLink: '/contact',
+      },
+    ],
+  },
+  {
+    service: 'Fractional CTO',
+    slug: 'fractional-cto',
+    badge: 'Advisory',
+    plans: [
+      {
+        name: 'Advisory Retainer',
+        price: '$2,500',
+        period: '/month',
+        features: ['10-15 hours/month', 'Weekly strategy calls', 'Architecture reviews', 'High-level vendor evaluation', 'Code auditing'],
+        cta: 'Request Advisory',
+        ctaLink: '/contact',
+      },
+      {
+        name: 'Standard Partnership',
+        price: '$5,000',
+        period: '/month',
+        features: ['20-30 hours/month', 'Hands-on developer mentorship', 'Hiring and interview support', 'Detailed code reviews', 'Emergency response'],
+        popular: true,
+        cta: 'Hire Fractional CTO',
+        ctaLink: '/contact',
+      },
+    ],
+  },
+];
+
+export const comparisonTable: ComparisonRow[] = [
+  { feature: 'Target Architecture', starter: 'Micro Validation', growth: 'Robust Mid-Level', custom: 'Enterprise Operations' },
+  { feature: 'Basic User Auth', starter: true, growth: true, custom: true },
+  { feature: 'Stripe Billing Logic', starter: false, growth: true, custom: true },
+  { feature: 'Custom Data Dashboard', starter: false, growth: true, custom: true },
+  { feature: 'AI/LLM Integrations', starter: false, growth: 'Supported', custom: 'Complex/RAG' },
+  { feature: 'Dedicated Project Manager', starter: false, growth: true, custom: true },
+  { feature: 'Estimated Build Time', starter: '2–4 weeks', growth: '3–5 months', custom: '6+ months' },
+  { feature: 'Development Cost (USD)', starter: '$15K–$25K', growth: '$40K–$99K', custom: '$100K+' },
+];

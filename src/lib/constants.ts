@@ -1,12 +1,15 @@
 export const AGENCY_NAME = 'Manglam Technical Agency';
 export const AGENCY_SHORT = 'MTA';
 export const AGENCY_EMAIL = 'manglamtechnicalagency@gmail.com';
-export const AGENCY_PHONE = '+91-8003903572';
-export const AGENCY_WHATSAPP = 'https://wa.me/918003903572';
-export const AGENCY_LOCATION = 'Nagaur, Rajasthan, India';
+export const AGENCY_PHONE = '+91-9694322131';
+export const AGENCY_WHATSAPP = 'https://wa.me/919694322131';
+export const AGENCY_LOCATION = 'F-18 Vallabh Garden, Bikaner 334001';
 export const AGENCY_TAGLINE = 'Empowering Your Digital Future';
 export const AGENCY_FOUNDED = 2025;
 export const AGENCY_URL = 'https://www.manglamtechnicalagency.com';
+export const AGENCY_X_URL = 'https://x.com/MAgency67224';
+export const AGENCY_LINKEDIN_URL = null; // Add when available
+export const AGENCY_INSTAGRAM_URL = null; // Add when available
 
 export const OFFICE_HOURS = {
   weekdays: 'Mon–Sat: 9:00 AM – 7:00 PM IST',
@@ -16,7 +19,7 @@ export const OFFICE_HOURS = {
 export const CONTACT_INFO = {
   address: {
     street: 'Rampole Choraha',
-    city: 'Nagaur',
+    city: 'Bikaner',
     state: 'Rajasthan',
     pincode: '341001',
     country: 'India',

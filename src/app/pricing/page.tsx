@@ -76,7 +76,7 @@ export default function PricingPage() {
 
       {/* ── HERO ─────────────────────────────────────────── */}
       <section
-        className="relative w-full min-h-screen flex flex-col overflow-hidden grain"
+        className="relative w-full min-h-[92svh] flex flex-col overflow-hidden grain"
         style={{ backgroundColor: 'var(--color-canvas)' }}
       >
         <div className="absolute inset-0 bg-line-grid opacity-20 pointer-events-none" />
@@ -88,18 +88,18 @@ export default function PricingPage() {
             width: 'clamp(300px, 40vw, 700px)',
             height: 'clamp(300px, 40vw, 700px)',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(124,58,237,0.07) 0%, transparent 68%)',
+            background: 'radial-gradient(circle, rgba(107,26,26,0.07) 0%, transparent 68%)',
           }}
         />
 
-        <div className="relative z-10 container-site flex flex-col flex-1 pt-28 lg:pt-36 pb-12 lg:pb-16">
+        <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-10 sm:pb-12 lg:pb-16">
 
           {/* Breadcrumb */}
           <motion.nav
             initial={{ opacity: 0, x: -12 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, ease: EASE }}
-            className="flex items-center gap-2 font-mono mb-14 lg:mb-24"
+            className="flex items-center gap-2 font-mono mb-10 lg:mb-20"
             style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
           >
             <Link href="/" className="hover-foreground transition-colors">HOME</Link>
@@ -124,14 +124,14 @@ export default function PricingPage() {
                 text="HONEST"
                 as="h1"
                 delay={0.1}
-                className="font-display font-black leading-none tracking-tighter uppercase"
+                className="font-display font-black leading-none tracking-normal uppercase"
                 style={{ fontSize: 'clamp(3rem, 9vw, 9rem)', color: 'var(--color-foreground)' }}
               />
               <TextReveal
                 text="RATES."
                 as="h1"
                 delay={0.22}
-                className="font-display font-black leading-none tracking-tighter uppercase"
+                className="font-display font-black leading-none tracking-normal uppercase"
                 style={{ fontSize: 'clamp(3rem, 9vw, 9rem)', color: 'var(--color-violet)' }}
               />
             </div>
@@ -233,9 +233,9 @@ export default function PricingPage() {
                       <span
                         className="font-mono text-[10px] uppercase tracking-widest px-2 py-0.5"
                         style={{
-                          border: '1px solid rgba(124,58,237,0.4)',
+                          border: '1px solid rgba(107,26,26,0.4)',
                           color: 'var(--color-violet-light)',
-                          backgroundColor: 'rgba(124,58,237,0.06)',
+                          backgroundColor: 'rgba(107,26,26,0.06)',
                         }}
                       >
                         ✦ Popular
@@ -333,7 +333,7 @@ export default function PricingPage() {
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.6, ease: EASE }}
             className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 items-center"
-            style={{ border: '1px solid rgba(124,58,237,0.3)', padding: 'clamp(24px, 4vw, 48px)', backgroundColor: 'rgba(124,58,237,0.03)' }}
+            style={{ border: '1px solid rgba(107,26,26,0.3)', padding: 'clamp(24px, 4vw, 48px)', backgroundColor: 'rgba(107,26,26,0.03)' }}
           >
             <div>
               <span
@@ -451,7 +451,7 @@ export default function PricingPage() {
                             {has ? (
                               <span
                                 className="inline-flex items-center justify-center w-6 h-6 text-xs font-bold"
-                                style={{ backgroundColor: 'rgba(124,58,237,0.12)', color: 'var(--color-violet)' }}
+                                style={{ backgroundColor: 'rgba(107,26,26,0.12)', color: 'var(--color-violet)' }}
                               >
                                 ✓
                               </span>
@@ -531,3 +531,6 @@ export default function PricingPage() {
     </main>
   )
 }
+
+
+

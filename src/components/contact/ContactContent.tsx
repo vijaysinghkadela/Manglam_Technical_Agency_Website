@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import type { ReactNode } from 'react'
 import {
   AGENCY_EMAIL,
   AGENCY_LOCATION,
@@ -15,122 +16,138 @@ const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
 }
+
 const stagger = {
   hidden: {},
-  show:   { transition: { staggerChildren: 0.09, delayChildren: 0.1 } },
+  show: { transition: { staggerChildren: 0.09, delayChildren: 0.1 } },
 }
 
 const contactItems = [
-  { label: 'Email',    value: AGENCY_EMAIL,    href: `mailto:${AGENCY_EMAIL}`,  note: 'Fastest response',  external: false },
-  { label: 'WhatsApp', value: AGENCY_PHONE,    href: AGENCY_WHATSAPP,           note: 'Tap to open chat',  external: true  },
-  { label: 'Office',   value: AGENCY_LOCATION, href: null,                      note: 'Rajasthan, India',  external: false },
+  { label: 'Email', value: AGENCY_EMAIL, href: `mailto:${AGENCY_EMAIL}`, note: 'Fastest response', external: false },
+  { label: 'WhatsApp', value: AGENCY_PHONE, href: AGENCY_WHATSAPP, note: 'Tap to open chat', external: true },
+  { label: 'Office', value: AGENCY_LOCATION, href: null, note: 'Rajasthan, India', external: false },
 ]
 
-export function ContactContent({ formNode }: { formNode: React.ReactNode }) {
+export function ContactContent({ formNode }: { formNode: ReactNode }) {
   return (
     <section
-      className="relative w-full min-h-screen flex flex-col overflow-hidden grain"
+      className="relative w-full overflow-hidden grain"
       style={{ backgroundColor: 'var(--color-canvas)' }}
     >
-      {/* Backgrounds */}
       <div className="absolute inset-0 bg-line-grid opacity-[0.16] pointer-events-none" />
       <div
         className="absolute pointer-events-none"
         style={{
-          right: '-8%', top: '15%',
-          width: 'clamp(300px, 40vw, 640px)', height: 'clamp(300px, 40vw, 640px)',
+          right: '-8%',
+          top: '15%',
+          width: 'clamp(300px, 40vw, 640px)',
+          height: 'clamp(300px, 40vw, 640px)',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 65%)',
+          background: 'radial-gradient(circle, rgba(107,26,26,0.08) 0%, transparent 65%)',
         }}
       />
 
       <div
-        className="relative z-10 flex flex-col flex-1 mx-auto w-full pt-28 lg:pt-32 pb-16 lg:pb-24"
-        style={{
-          maxWidth: '1200px',
-          paddingLeft:  'clamp(1.5rem, 4vw, 3rem)',
-          paddingRight: 'clamp(1.5rem, 4vw, 3rem)',
-        }}
+        className="relative z-10 mx-auto flex w-full max-w-[1280px] flex-col px-[clamp(1rem,3.2vw,3rem)] pb-16 pt-24 sm:pt-28 lg:pt-32 lg:pb-24"
       >
-        {/* Breadcrumb */}
         <nav
-          className="flex items-center gap-2 font-mono mb-12 lg:mb-16 animate-fade-up"
-          style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
+          className="mb-10 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] sm:mb-14 lg:mb-16"
+          style={{ color: 'var(--color-dead)' }}
         >
-          <Link href="/" className="hover-foreground transition-colors">HOME</Link>
+          <Link href="/" className="hover-foreground transition-colors">
+            Home
+          </Link>
           <span>/</span>
-          <span style={{ color: 'var(--color-muted)' }}>CONTACT</span>
+          <span style={{ color: 'var(--color-muted)' }}>Contact</span>
         </nav>
 
-        {/* ── 2-col grid: headline+info | form ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-12 lg:gap-8 xl:gap-16 flex-1">
+        <div className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
+          {[
+            { label: 'Response window', value: '2–4 hours' },
+            { label: 'Consultation', value: 'Engineer-led' },
+            { label: 'Time zone', value: 'IST, Mon–Sat' },
+          ].map((item) => (
+            <div
+              key={item.label}
+              className="rounded-[20px] border border-border bg-[rgba(255,255,255,0.02)] px-4 py-4"
+            >
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em]" style={{ color: 'var(--color-dead)' }}>
+                {item.label}
+              </p>
+              <p className="mt-2 font-display text-[15px] font-semibold leading-tight" style={{ color: 'var(--color-foreground)' }}>
+                {item.value}
+              </p>
+            </div>
+          ))}
+        </div>
 
-          {/* ── LEFT: headline + contact details ── */}
-          <div className="flex flex-col">
-
-            {/* Sticky wrapper on desktop */}
+        <div className="grid flex-1 grid-cols-1 gap-10 lg:grid-cols-[0.95fr_1.05fr] xl:gap-14">
+          <div className="order-1 flex flex-col lg:pr-6">
             <div className="lg:sticky lg:top-32 lg:self-start">
-
               <span
-                className="font-mono uppercase block mb-5 animate-fade-up stagger-1"
-                style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.22em' }}
+                className="mb-5 block font-mono uppercase tracking-[0.22em] text-violet-light"
+                style={{ fontSize: '11px' }}
               >
-                ✦ GET IN TOUCH
+                Get in touch
               </span>
 
-              {/* Big headline */}
-              <div className="flex flex-col mb-7" style={{ gap: '0.02em' }}>
+              <div className="mb-7 flex flex-col" style={{ gap: '0.02em' }}>
                 <TextReveal
                   text="START A"
                   as="h1"
                   delay={0.1}
-                  className="font-display font-black leading-none tracking-tighter uppercase"
-                  style={{ fontSize: 'clamp(2.5rem, 5vw, 5.5rem)', color: 'var(--color-foreground)' }}
+                  className="font-display font-black leading-none tracking-normal uppercase"
+                  style={{ fontSize: 'clamp(2.2rem, 4.8vw, 5.2rem)', color: 'var(--color-foreground)' }}
                 />
                 <TextReveal
                   text="CONVERSATION."
                   as="h1"
                   delay={0.22}
-                  className="font-display font-black leading-none tracking-tighter uppercase"
-                  style={{ fontSize: 'clamp(1.6rem, 3.2vw, 3.6rem)', color: 'var(--color-violet)' }}
+                  className="font-display font-black leading-none tracking-normal uppercase"
+                  style={{ fontSize: 'clamp(1.75rem, 3.5vw, 3.9rem)', color: '#6B1A1A' }}
                 />
               </div>
 
               <p
-                className="mb-10 animate-fade-up stagger-3"
-                style={{ fontSize: '15px', lineHeight: 1.75, color: 'var(--color-muted)', maxWidth: '400px' }}
+                className="mb-10 max-w-[420px]"
+                style={{ fontSize: '15px', lineHeight: 1.75, color: 'var(--color-muted)' }}
               >
                 Ready to build? We promise a technical engineer will read it, not a salesperson.
                 Response within 2–4 hours.
               </p>
 
-              {/* Contact rows */}
+              <div className="mb-10 flex flex-wrap gap-2">
+                {['Engineer-led replies', 'DPDP compliant', 'Rajasthan / IST'].map((chip) => (
+                  <span
+                    key={chip}
+                    className="rounded-full border border-border bg-card px-3 py-2 font-mono text-[10px] uppercase tracking-[0.16em]"
+                    style={{ color: 'var(--color-dead)' }}
+                  >
+                    {chip}
+                  </span>
+                ))}
+              </div>
+
               <motion.div
                 variants={stagger}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, amount: 0.1 }}
-                className="flex flex-col mb-8"
-                style={{ borderTop: '1px solid var(--color-border)' }}
+                className="grid gap-3"
               >
                 {contactItems.map((item) => (
-                  <motion.div
-                    key={item.label}
-                    variants={fadeUp}
-                    className="group"
-                    style={{ borderBottom: '1px solid var(--color-border)' }}
-                  >
+                  <motion.div key={item.label} variants={fadeUp}>
                     {item.href ? (
                       <a
                         href={item.href}
                         target={item.external ? '_blank' : undefined}
                         rel={item.external ? 'noopener noreferrer' : undefined}
                         data-cursor="pointer"
-                        className="flex items-center justify-between py-4 gap-3"
+                        className="group flex min-h-[76px] items-start justify-between gap-4 rounded-[22px] border border-border bg-card px-4 py-4 sm:px-5 sm:py-5"
                       >
-                        <div className="flex flex-col gap-0.5 min-w-0">
+                        <div className="flex min-w-0 flex-col gap-1">
                           <span
                             className="font-mono uppercase"
                             style={{ fontSize: '9px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
@@ -138,8 +155,8 @@ export function ContactContent({ formNode }: { formNode: React.ReactNode }) {
                             {item.label}
                           </span>
                           <span
-                            className="font-display font-semibold transition-colors duration-200 group-hover:text-violet truncate"
-                            style={{ fontSize: '0.95rem', color: 'var(--color-foreground)', lineHeight: 1.3 }}
+                            className="min-w-0 break-all font-display font-semibold transition-colors duration-200 group-hover:text-violet-light sm:break-normal"
+                            style={{ fontSize: '0.98rem', color: 'var(--color-foreground)', lineHeight: 1.35 }}
                           >
                             {item.value}
                           </span>
@@ -148,14 +165,14 @@ export function ContactContent({ formNode }: { formNode: React.ReactNode }) {
                           </span>
                         </div>
                         <span
-                          className="font-mono transition-all duration-300 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 shrink-0"
-                          style={{ color: 'var(--color-violet-light)' }}
+                          className="shrink-0 font-mono transition-all duration-300 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0"
+                          style={{ color: '#6B1A1A' }}
                         >
                           →
                         </span>
                       </a>
                     ) : (
-                      <div className="flex flex-col gap-0.5 py-4">
+                      <div className="flex min-h-[76px] flex-col gap-1 rounded-[22px] border border-border bg-card px-4 py-4 sm:px-5 sm:py-5">
                         <span
                           className="font-mono uppercase"
                           style={{ fontSize: '9px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
@@ -164,7 +181,7 @@ export function ContactContent({ formNode }: { formNode: React.ReactNode }) {
                         </span>
                         <span
                           className="font-display font-semibold"
-                          style={{ fontSize: '0.95rem', color: 'var(--color-foreground)', lineHeight: 1.3 }}
+                          style={{ fontSize: '0.98rem', color: 'var(--color-foreground)', lineHeight: 1.35 }}
                         >
                           {item.value}
                         </span>
@@ -177,79 +194,75 @@ export function ContactContent({ formNode }: { formNode: React.ReactNode }) {
                 ))}
               </motion.div>
 
-              {/* WhatsApp */}
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, ease: EASE, delay: 0.3 }}
-                className="mb-10"
+                className="mt-10 rounded-[22px] border border-[rgba(107,26,26,0.18)] bg-[rgba(107,26,26,0.06)] p-4 sm:p-5"
               >
                 <a
                   href={AGENCY_WHATSAPP}
                   target="_blank"
                   rel="noopener noreferrer"
                   data-cursor="pointer"
-                  className="inline-flex items-center gap-3 px-5 py-3 font-mono text-xs uppercase tracking-widest transition-all duration-300 hover:border-violet"
-                  style={{ border: '1px solid var(--color-border)', color: 'var(--color-muted)' }}
+                  className="inline-flex min-h-[48px] items-center gap-3 rounded-full border border-border px-5 py-3 font-mono text-xs uppercase tracking-widest transition-all duration-300 hover:border-violet"
+                  style={{ color: 'var(--color-muted)' }}
                 >
-                  <span className="w-2 h-2 rounded-full animate-pulse shrink-0" style={{ backgroundColor: '#25D366' }} />
+                  <span className="h-2 w-2 shrink-0 rounded-full animate-pulse bg-[#25D366]" />
                   Message on WhatsApp
                 </a>
               </motion.div>
 
-              {/* Status */}
               <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.4 }}
-                className="flex items-center gap-5 flex-wrap"
+                className="mt-6 flex flex-wrap items-center gap-4"
               >
-                <div className="flex items-center gap-2">
-                  <span className="block w-2 h-2 rounded-full animate-pulse shrink-0" style={{ backgroundColor: 'var(--color-violet)' }} />
-                  <span className="font-mono uppercase" style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.18em' }}>
+                <div className="flex items-center gap-2 rounded-full border border-border px-4 py-2">
+                  <span className="block h-2 w-2 shrink-0 rounded-full animate-pulse" style={{ backgroundColor: '#6B1A1A' }} />
+                  <span className="font-mono uppercase" style={{ fontSize: '10px', color: '#6B1A1A', letterSpacing: '0.18em' }}>
                     Active · Accepting Projects
                   </span>
                 </div>
-                <span className="hidden sm:block font-mono" style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.12em' }}>
+                <span className="hidden font-mono sm:block" style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.12em' }}>
                   {OFFICE_HOURS.weekdays}
                 </span>
               </motion.div>
-
             </div>
           </div>
 
-          {/* ── RIGHT: form ── */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.05 }}
             transition={{ duration: 0.65, ease: EASE, delay: 0.15 }}
-            className="flex flex-col"
-            style={{
-              borderTop: '1px solid var(--color-border)',
-              paddingTop: '32px',
-            }}
+            className="order-2 flex flex-col"
           >
-            <span
-              className="font-mono uppercase block mb-3"
-              style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.22em' }}
-            >
-              ✦ SEND A MESSAGE
-            </span>
-            <h2
-              className="font-display font-black leading-tight uppercase mb-8"
-              style={{ fontSize: 'clamp(1.3rem, 2vw, 1.8rem)', color: 'var(--color-foreground)' }}
-            >
-              Tell Us About<br />Your Project.
-            </h2>
+            <div className="rounded-[28px] border border-border bg-card p-5 shadow-[0_24px_70px_rgba(0,0,0,0.08)] sm:p-6 lg:p-8">
+              <span
+                className="mb-3 block font-mono uppercase tracking-[0.22em] text-violet-light"
+                style={{ fontSize: '11px' }}
+              >
+                Send a message
+              </span>
+              <h2
+                className="mb-6 font-display font-black uppercase leading-tight"
+                style={{ fontSize: 'clamp(1.3rem, 2vw, 1.9rem)', color: 'var(--color-foreground)' }}
+              >
+                Tell Us About
+                <br />
+                Your Project.
+              </h2>
 
-            {formNode}
+              {formNode}
+            </div>
           </motion.div>
-
         </div>
       </div>
     </section>
   )
 }
+

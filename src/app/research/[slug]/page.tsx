@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { allMarketResearch, getMarketResearchBySlug, categoryLabels, MarketResearchArticle } from '@/lib/data/ai-market-research-index'
+import { allMarketResearch, getMarketResearchBySlug, categoryLabels } from '@/lib/data/ai-market-research-index'
 import { MarketResearchArticleContent } from '@/components/research/MarketResearchArticleContent'
 
 export const dynamicParams = false
@@ -52,7 +52,7 @@ export default async function MarketResearchArticlePage({ params }: { params: Pr
             width: 'clamp(300px, 38vw, 660px)',
             height: 'clamp(300px, 38vw, 660px)',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(124,58,237,0.07) 0%, transparent 68%)',
+            background: 'radial-gradient(circle, rgba(107,26,26,0.07) 0%, transparent 68%)',
           }}
         />
 
@@ -77,7 +77,7 @@ export default async function MarketResearchArticlePage({ params }: { params: Pr
                 fontSize: '10px',
                 color: 'var(--color-violet-light)',
                 letterSpacing: '0.22em',
-                border: '1px solid rgba(124,58,237,0.35)',
+                border: '1px solid rgba(107,26,26,0.35)',
               }}
             >
               {categoryLabels[article.category]}
@@ -86,7 +86,7 @@ export default async function MarketResearchArticlePage({ params }: { params: Pr
 
           {/* Title */}
           <h1
-            className="font-display font-black leading-tight tracking-tight mb-6"
+            className="font-display font-black leading-tight tracking-normal mb-6"
             style={{ fontSize: 'clamp(1.75rem, 4vw, 3.5rem)', color: 'var(--color-foreground)' }}
           >
             {article.title}
@@ -165,7 +165,7 @@ export default async function MarketResearchArticlePage({ params }: { params: Pr
               NEXT STEPS
             </span>
             <h2
-              className="font-display font-black tracking-tight leading-tight"
+              className="font-display font-black tracking-normal leading-tight"
               style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', color: 'var(--color-foreground)' }}
             >
               Ready to Implement AI Automation?
@@ -313,3 +313,6 @@ function RelatedArticles({ currentSlug, category }: { currentSlug: string; categ
     </section>
   )
 }
+
+
+

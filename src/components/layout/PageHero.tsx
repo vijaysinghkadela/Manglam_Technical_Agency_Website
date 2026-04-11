@@ -27,7 +27,7 @@ export function PageHero({ label, title, subtitle, breadcrumb }: Props) {
           {label}
         </span>
         <TextReveal text={title} as="h1"
-          className="font-display font-black text-white tracking-tight leading-[0.92]"
+          className="font-display font-black text-white tracking-normal leading-[0.92]"
           style={{ fontSize:'clamp(40px, 6vw, 88px)' } as CSSProperties}
         />
         {subtitle && (
@@ -38,3 +38,4 @@ export function PageHero({ label, title, subtitle, breadcrumb }: Props) {
     </section>
   )
 }
+

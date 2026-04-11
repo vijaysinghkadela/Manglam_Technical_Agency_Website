@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { MarketResearchArticle } from '@/lib/data/ai-market-research-index'
 
@@ -11,8 +10,6 @@ interface Props {
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
 
 export function MarketResearchArticleContent({ article }: Props) {
-  const [activeTable, setActiveTable] = useState<number | null>(null)
-
   return (
     <section
       className="border-t border-border"
@@ -80,7 +77,7 @@ export function MarketResearchArticleContent({ article }: Props) {
               <div className="flex items-center gap-4 mb-6">
                 <span
                   className="font-display font-black text-2xl"
-                  style={{ color: 'rgba(124,58,237,0.25)' }}
+                  style={{ color: 'rgba(107,26,26,0.25)' }}
                 >
                   {String(index + 1).padStart(2, '0')}
                 </span>
@@ -110,8 +107,8 @@ export function MarketResearchArticleContent({ article }: Props) {
                   transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
                   className="my-8 p-5"
                   style={{
-                    border: '1px solid rgba(124,58,237,0.35)',
-                    backgroundColor: 'rgba(124,58,237,0.04)',
+                    border: '1px solid rgba(107,26,26,0.35)',
+                    backgroundColor: 'rgba(107,26,26,0.04)',
                     borderLeft: '3px solid var(--color-violet)',
                   }}
                 >
@@ -238,3 +235,4 @@ export function MarketResearchArticleContent({ article }: Props) {
     </section>
   )
 }
+

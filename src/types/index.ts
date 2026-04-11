@@ -89,7 +89,10 @@ export interface TeamMember {
   initials: string;
   bio: string;
   expertise?: string[];
-  linkedin?: string;
+  linkedin?: string | null;
+  x?: string | null;
+  image?: string;
+  imagePosition?: string;
 }
 
 export interface BlogPost {

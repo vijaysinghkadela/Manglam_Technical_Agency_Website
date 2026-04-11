@@ -1,0 +1,673 @@
+@import "tailwindcss";
+
+/* ── Design Tokens ──────────────────────────────────────────── */
+@theme {
+  /* Colours */
+  --color-canvas:        #080808;
+  --color-surface:       #0E0E0E;
+  --color-card:          #111111;
+  --color-border:        #1F1F1F;
+  --color-muted:         #525252;
+  --color-dead:          #2A2A2A;
+  --color-violet:        #7C3AED;
+  --color-violet-light:  #A78BFA;
+  --color-violet-dark:   #5B21B6;
+  --color-cyan:          #06B6D4;
+  --color-amber:         #F59E0B;
+
+  /* Semantic foreground — always the readable text colour */
+  --color-foreground:    #FAFAFA;
+  /* Cursor ring colour — rgba form for opacity */
+  --color-cursor-ring:   rgba(255,255,255,0.18);
+
+  /* Fonts */
+  --font-display: "Syne", sans-serif;
+  --font-body:    "Inter", sans-serif;
+  --font-mono:    "JetBrains Mono", monospace;
+
+  /* Type scale — used as text-display-xl etc. */
+  --text-display-xl: clamp(60px, 9vw, 130px);
+  --text-display-lg: clamp(44px, 6vw, 90px);
+  --text-display-md: clamp(30px, 4vw, 58px);
+  --text-display-sm: clamp(22px, 2.5vw, 38px);
+  --text-label:      11px;
+}
+
+/* ── Base Reset ─────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  cursor: none !important;
+}
+
+html {
+  scroll-behavior: auto;   /* Lenis overrides this */
+  overflow-x: hidden;
+  overscroll-behavior-y: none; /* Prevents bounce on iOS/macOS */
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  /* Firefox scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) var(--color-canvas);
+  /* Touch optimization */
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-foreground);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  overscroll-behavior-y: none; /* Prevents bounce on iOS/macOS */
+  width: 100%;            /* NEVER 100vw — causes scrollbar overflow */
+  /* Text rendering optimization */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Font feature settings for better typography */
+  font-feature-settings: "kern" 1, "liga" 1;
+  -webkit-font-feature-settings: "kern" 1, "liga" 1;
+  /* Touch optimization */
+  touch-action: manipulation;
+}
+
+/* Hide cursor everywhere (custom cursor replaces it) */
+*, *::before, *::after { cursor: none !important; }
+
+/* Selection */
+::selection { background: var(--color-violet); color: #fff; }
+::-moz-selection { background: var(--color-violet); color: #fff; }
+
+/* Webkit Scrollbar */
+::-webkit-scrollbar       { width: 2px; }
+::-webkit-scrollbar-track { background: var(--color-canvas); }
+::-webkit-scrollbar-thumb { background: var(--color-border); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-violet); }
+
+/* Firefox scrollbar fallback (already in html, this is extra specificity) */
+@supports (-moz-appearance: none) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) var(--color-canvas);
+  }
+}
+
+a { color: inherit; text-decoration: none; }
+img, video { 
+  max-width: 100%; 
+  height: auto; 
+  display: block;
+  /* Prevent image dragging on mobile */
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+/* ── Utility Classes ────────────────────────────────────────── */
+
+/* Standard section container — apply to every section's inner div */
+.container-site {
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1.5rem, 4vw, 3rem);
+  padding-right: clamp(1.5rem, 4vw, 3rem);
+}
+
+/* Section top divider — apply to every <section> element */
+.section-divide { border-top: 1px solid var(--color-border); }
+
+/* Responsive section vertical padding */
+.section-py {
+  padding-top: clamp(64px, 10vw, 112px);
+  padding-bottom: clamp(64px, 10vw, 112px);
+}
+
+/* ── Accessibility ── */
+
+/* Focus-visible ring for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid var(--color-violet);
+  outline-offset: 2px;
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    -webkit-animation-duration: 0.01ms !important;
+    -moz-animation-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    -webkit-animation-iteration-count: 1 !important;
+    -moz-animation-iteration-count: 1 !important;
+    animation-iteration-count: 1 !important;
+    -webkit-transition-duration: 0.01ms !important;
+    -moz-transition-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Dot grid background */
+.bg-dot-grid {
+  background-image: radial-gradient(
+    circle,
+    rgba(255,255,255,0.055) 1px,
+    transparent 1px
+  );
+  background-size: 28px 28px;
+}
+
+/* Line grid background (hero) */
+.bg-line-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 80px 80px;
+  -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+}
+
+/* Film grain (hero overlay) */
+/* Grain is GPU-expensive — skip on touch/mobile devices */
+@media (pointer: fine) {
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.032'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+/* ── Animations ─────────────────────────────────────────────── */
+
+/* Marquee — with vendor prefixes */
+@-webkit-keyframes marquee-left {
+  to { -webkit-transform: translateX(-50%); transform: translateX(-50%); }
+}
+@-moz-keyframes marquee-left {
+  to { -moz-transform: translateX(-50%); transform: translateX(-50%); }
+}
+@keyframes marquee-left {
+  to { -webkit-transform: translateX(-50%); -moz-transform: translateX(-50%); -ms-transform: translateX(-50%); transform: translateX(-50%); }
+}
+
+@-webkit-keyframes marquee-right {
+  from { -webkit-transform: translateX(-50%); transform: translateX(-50%); }
+  to { -webkit-transform: translateX(0); transform: translateX(0); }
+}
+@-moz-keyframes marquee-right {
+  from { -moz-transform: translateX(-50%); transform: translateX(-50%); }
+  to { -moz-transform: translateX(0); transform: translateX(0); }
+}
+@keyframes marquee-right {
+  from { -webkit-transform: translateX(-50%); -moz-transform: translateX(-50%); -ms-transform: translateX(-50%); transform: translateX(-50%); }
+  to { -webkit-transform: translateX(0); -moz-transform: translateX(0); -ms-transform: translateX(0); transform: translateX(0); }
+}
+
+.animate-marquee-left {
+  -webkit-animation: marquee-left 32s linear infinite;
+  -moz-animation: marquee-left 32s linear infinite;
+  animation: marquee-left 32s linear infinite;
+  will-change: transform;
+  contain: layout paint;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.animate-marquee-right {
+  -webkit-animation: marquee-right 28s linear infinite;
+  -moz-animation: marquee-right 28s linear infinite;
+  animation: marquee-right 28s linear infinite;
+  will-change: transform;
+  contain: layout paint;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.animate-marquee-left:hover,
+.animate-marquee-right:hover {
+  -webkit-animation-play-state: paused;
+  -moz-animation-play-state: paused;
+  animation-play-state: paused;
+}
+
+/* Pause marquee on touch devices — saves battery, avoids continuous compositor work */
+@media (pointer: coarse) {
+  .animate-marquee-left,
+  .animate-marquee-right {
+    -webkit-animation-play-state: paused;
+    -moz-animation-play-state: paused;
+    animation-play-state: paused;
+  }
+}
+
+/* Orbital rings — with vendor prefixes */
+@-webkit-keyframes spin-cw {
+  to { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@-moz-keyframes spin-cw {
+  to { -moz-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@keyframes spin-cw {
+  to { -webkit-transform: rotate(360deg); -moz-transform: rotate(360deg); -ms-transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+@-webkit-keyframes spin-ccw {
+  to { -webkit-transform: rotate(-360deg); transform: rotate(-360deg); }
+}
+@-moz-keyframes spin-ccw {
+  to { -moz-transform: rotate(-360deg); transform: rotate(-360deg); }
+}
+@keyframes spin-ccw {
+  to { -webkit-transform: rotate(-360deg); -moz-transform: rotate(-360deg); -ms-transform: rotate(-360deg); transform: rotate(-360deg); }
+}
+
+/* Float (hero pills — compositor-driven) */
+@-webkit-keyframes float {
+  0%, 100% { -webkit-transform: translateY(0px); transform: translateY(0px); }
+  50% { -webkit-transform: translateY(-12px); transform: translateY(-12px); }
+}
+@-moz-keyframes float {
+  0%, 100% { -moz-transform: translateY(0px); transform: translateY(0px); }
+  50% { -moz-transform: translateY(-12px); transform: translateY(-12px); }
+}
+@keyframes float {
+  0%, 100% { -webkit-transform: translateY(0px); -moz-transform: translateY(0px); -ms-transform: translateY(0px); transform: translateY(0px); }
+  50% { -webkit-transform: translateY(-12px); -moz-transform: translateY(-12px); -ms-transform: translateY(-12px); transform: translateY(-12px); }
+}
+
+@-webkit-keyframes pill-float {
+  0%, 100% { -webkit-transform: translateY(0px); transform: translateY(0px); opacity: 1; }
+  50% { -webkit-transform: translateY(-10px); transform: translateY(-10px); opacity: 0.85; }
+}
+@-moz-keyframes pill-float {
+  0%, 100% { -moz-transform: translateY(0px); transform: translateY(0px); opacity: 1; }
+  50% { -moz-transform: translateY(-10px); transform: translateY(-10px); opacity: 0.85; }
+}
+@keyframes pill-float {
+  0%, 100% { -webkit-transform: translateY(0px); -moz-transform: translateY(0px); -ms-transform: translateY(0px); transform: translateY(0px); opacity: 1; }
+  50% { -webkit-transform: translateY(-10px); -moz-transform: translateY(-10px); -ms-transform: translateY(-10px); transform: translateY(-10px); opacity: 0.85; }
+}
+
+/* Pulse violet — GPU optimized (uses opacity + box-shadow) */
+@-webkit-keyframes pulse-violet {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 8px rgba(124, 58, 237, 0); }
+}
+@-moz-keyframes pulse-violet {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 8px rgba(124, 58, 237, 0); }
+}
+@keyframes pulse-violet {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 8px rgba(124, 58, 237, 0); }
+}
+
+.animate-pulse-violet {
+  -webkit-animation: pulse-violet 1.8s ease-in-out infinite;
+  -moz-animation: pulse-violet 1.8s ease-in-out infinite;
+  animation: pulse-violet 1.8s ease-in-out infinite;
+  will-change: opacity;
+  contain: layout paint;
+}
+
+/* Loading bar (page transitions) */
+@-webkit-keyframes progress-in {
+  from { -webkit-transform: scaleX(0); transform: scaleX(0); }
+  to { -webkit-transform: scaleX(1); transform: scaleX(1); }
+}
+@-moz-keyframes progress-in {
+  from { -moz-transform: scaleX(0); transform: scaleX(0); }
+  to { -moz-transform: scaleX(1); transform: scaleX(1); }
+}
+@keyframes progress-in {
+  from { -webkit-transform: scaleX(0); -moz-transform: scaleX(0); -ms-transform: scaleX(0); transform: scaleX(0); }
+  to { -webkit-transform: scaleX(1); -moz-transform: scaleX(1); -ms-transform: scaleX(1); transform: scaleX(1); }
+}
+
+section[id] { scroll-margin-top: 120px; }
+
+/* ── Light Mode ─────────────────────────────────────────────── */
+html:not(.dark) {
+  --color-canvas:        #f8fafc;
+  --color-surface:       #f1f5f9;
+  --color-card:          #ffffff;
+  --color-border:        #e2e8f0;
+  --color-muted:         #64748b;
+  --color-dead:          #94a3b8;
+  --color-violet:        #7C3AED;
+  --color-violet-light:  #6D28D9;
+  --color-violet-dark:   #5B21B6;
+  --color-cyan:          #0891B2;
+  --color-amber:         #D97706;
+
+  /* Flip semantic tokens */
+  --color-foreground:  #0f172a;
+  --color-cursor-ring: rgba(0,0,0,0.18);
+}
+
+/* ── Light mode: flip Tailwind dark utility classes ── */
+
+/* Section / page backgrounds — bg-black only (no bracket selectors: Turbopack rejects them) */
+html:not(.dark) .bg-black {
+  background-color: var(--color-canvas) !important;
+}
+
+/* Foreground text — white → dark */
+html:not(.dark) .text-white { color: #0f172a !important; }
+
+/* Grid backgrounds */
+html:not(.dark) .bg-line-grid {
+  background-image:
+    linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+}
+html:not(.dark) .bg-dot-grid {
+  background-image: radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px);
+}
+
+/* Film grain — more subtle in light mode (only applies when ::after is rendered, i.e. pointer: fine) */
+@media (pointer: fine) {
+  html:not(.dark) .grain::after { opacity: 0.015; }
+}
+
+/* ── Smooth theme transition ─────────────────────────────────── */
+body, nav, footer, section, .container-site, [class*="bg-"] {
+  -webkit-transition: background-color 0.25s ease, border-color 0.25s ease, color 0.15s ease;
+  -moz-transition: background-color 0.25s ease, border-color 0.25s ease, color 0.15s ease;
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.15s ease;
+}
+
+/* ── Marquee edge fade mask ─────────────────────────────────── */
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+/* ── Violet text glow ───────────────────────────────────────── */
+.text-glow-violet { text-shadow: 0 0 32px rgba(124,58,237,0.45); }
+
+/* ── Theme-aware hover foreground ───────────────────────────── */
+.hover-foreground:hover { color: var(--color-foreground) !important; }
+
+/* ── Card hover lift ────────────────────────────────────────── */
+.card-hover {
+  will-change: transform, box-shadow, border-color;
+  contain: layout paint;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transition: -webkit-transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease, border-color 0.25s ease;
+  -moz-transition: -moz-transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease, border-color 0.25s ease;
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease, border-color 0.25s ease;
+}
+.card-hover:hover {
+  -webkit-transform: translateY(-3px);
+  -moz-transform: translateY(-3px);
+  -ms-transform: translateY(-3px);
+  transform: translateY(-3px);
+}
+
+/* ── Violet box-shadow ──────────────────────────────────────── */
+.shadow-violet-glow { box-shadow: 0 0 40px rgba(124,58,237,0.18), 0 0 80px rgba(124,58,237,0.06); }
+
+/* ── Gradient divider ───────────────────────────────────────── */
+.divider-gradient {
+  height: 1px;
+  background: linear-gradient(to right, var(--color-violet), var(--color-border) 50%, transparent 100%);
+}
+
+/* ── Fade-up entrance ─────────────────────────────────────────── */
+@-webkit-keyframes fade-up {
+  from { opacity: 0; -webkit-transform: translateY(24px); transform: translateY(24px); }
+  to { opacity: 1; -webkit-transform: translateY(0); transform: translateY(0); }
+}
+@-moz-keyframes fade-up {
+  from { opacity: 0; -moz-transform: translateY(24px); transform: translateY(24px); }
+  to { opacity: 1; -moz-transform: translateY(0); transform: translateY(0); }
+}
+@keyframes fade-up {
+  from { opacity: 0; -webkit-transform: translateY(24px); -moz-transform: translateY(24px); -ms-transform: translateY(24px); transform: translateY(24px); }
+  to { opacity: 1; -webkit-transform: translateY(0); -moz-transform: translateY(0); -ms-transform: translateY(0); transform: translateY(0); }
+}
+.animate-fade-up {
+  -webkit-animation: fade-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+  -moz-animation: fade-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: fade-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: opacity, transform;
+  contain: layout paint;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* ── Fade-in ── */
+@-webkit-keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@-moz-keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-fade-in {
+  -webkit-animation: fade-in 0.5s ease both;
+  -moz-animation: fade-in 0.5s ease both;
+  animation: fade-in 0.5s ease both;
+  will-change: opacity;
+  contain: layout paint;
+}
+
+/* ── Slide-in from left ── */
+@-webkit-keyframes slide-in-left {
+  from { opacity: 0; -webkit-transform: translateX(-24px); transform: translateX(-24px); }
+  to { opacity: 1; -webkit-transform: translateX(0); transform: translateX(0); }
+}
+@-moz-keyframes slide-in-left {
+  from { opacity: 0; -moz-transform: translateX(-24px); transform: translateX(-24px); }
+  to { opacity: 1; -moz-transform: translateX(0); transform: translateX(0); }
+}
+@keyframes slide-in-left {
+  from { opacity: 0; -webkit-transform: translateX(-24px); -moz-transform: translateX(-24px); -ms-transform: translateX(-24px); transform: translateX(-24px); }
+  to { opacity: 1; -webkit-transform: translateX(0); -moz-transform: translateX(0); -ms-transform: translateX(0); transform: translateX(0); }
+}
+.animate-slide-left {
+  -webkit-animation: slide-in-left 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+  -moz-animation: slide-in-left 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: slide-in-left 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: opacity, transform;
+  contain: layout paint;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* ── Violet dot pulse ── */
+@-webkit-keyframes dot-pulse {
+  0%, 100% { -webkit-transform: scale(1); transform: scale(1); opacity: 1; }
+  50% { -webkit-transform: scale(1.5); transform: scale(1.5); opacity: 0.6; }
+}
+@-moz-keyframes dot-pulse {
+  0%, 100% { -moz-transform: scale(1); transform: scale(1); opacity: 1; }
+  50% { -moz-transform: scale(1.5); transform: scale(1.5); opacity: 0.6; }
+}
+@keyframes dot-pulse {
+  0%, 100% { -webkit-transform: scale(1); -moz-transform: scale(1); -ms-transform: scale(1); transform: scale(1); opacity: 1; }
+  50% { -webkit-transform: scale(1.5); -moz-transform: scale(1.5); -ms-transform: scale(1.5); transform: scale(1.5); opacity: 0.6; }
+}
+.animate-dot-pulse {
+  -webkit-animation: dot-pulse 1.6s ease-in-out infinite;
+  -moz-animation: dot-pulse 1.6s ease-in-out infinite;
+  animation: dot-pulse 1.6s ease-in-out infinite;
+  will-change: transform, opacity;
+  contain: layout paint;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* ── Text shimmer ── */
+@-webkit-keyframes text-shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@-moz-keyframes text-shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes text-shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.text-shimmer {
+  background: linear-gradient(90deg, var(--color-foreground) 0%, var(--color-violet-light) 50%, var(--color-foreground) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  background-clip: text;
+  -webkit-animation: text-shimmer 4s linear infinite;
+  -moz-animation: text-shimmer 4s linear infinite;
+  animation: text-shimmer 4s linear infinite;
+}
+
+/* ── Scale-in ── */
+@-webkit-keyframes scale-in {
+  from { opacity: 0; -webkit-transform: scale(0.95); transform: scale(0.95); }
+  to { opacity: 1; -webkit-transform: scale(1); transform: scale(1); }
+}
+@-moz-keyframes scale-in {
+  from { opacity: 0; -moz-transform: scale(0.95); transform: scale(0.95); }
+  to { opacity: 1; -moz-transform: scale(1); transform: scale(1); }
+}
+@keyframes scale-in {
+  from { opacity: 0; -webkit-transform: scale(0.95); -moz-transform: scale(0.95); -ms-transform: scale(0.95); transform: scale(0.95); }
+  to { opacity: 1; -webkit-transform: scale(1); -moz-transform: scale(1); -ms-transform: scale(1); transform: scale(1); }
+}
+.animate-scale-in {
+  -webkit-animation: scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  -moz-animation: scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: opacity, transform;
+  contain: layout paint;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* ── Stagger delay utilities ── */
+.stagger-1 { -webkit-animation-delay: 0.05s; -moz-animation-delay: 0.05s; animation-delay: 0.05s; }
+.stagger-2 { -webkit-animation-delay: 0.10s; -moz-animation-delay: 0.10s; animation-delay: 0.10s; }
+.stagger-3 { -webkit-animation-delay: 0.15s; -moz-animation-delay: 0.15s; animation-delay: 0.15s; }
+.stagger-4 { -webkit-animation-delay: 0.20s; -moz-animation-delay: 0.20s; animation-delay: 0.20s; }
+.stagger-5 { -webkit-animation-delay: 0.25s; -moz-animation-delay: 0.25s; animation-delay: 0.25s; }
+.stagger-6 { -webkit-animation-delay: 0.30s; -moz-animation-delay: 0.30s; animation-delay: 0.30s; }
+
+/* ── Gradient border utility ── */
+.border-violet-glow { border-color: rgba(124, 58, 237, 0.35) !important; }
+
+/* ── Safari backdrop-filter fix ─────────────────────────────── */
+@supports (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px)) {
+  .backdrop-blur-safari {
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+}
+
+/* Safari fallback when backdrop-filter not supported */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .backdrop-blur-safari {
+    background-color: rgba(8, 8, 8, 0.95);
+  }
+}
+
+/* ── GPU acceleration hints for 3D transforms ───────────────── */
+.gpu-accelerated {
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000px;
+  -moz-perspective: 1000px;
+  perspective: 1000px;
+}
+
+/* ── Touch action optimization for interactive elements ─────── */
+.touch-optimized {
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* ── Feature detection for transforms ───────────────────────── */
+@supports (transform: translateX(0)) {
+  .transform-supported {
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+/* ── Feature detection for CSS Grid ─────────────────────────── */
+@supports (display: grid) {
+  .grid-supported {
+    display: grid;
+  }
+}
+
+/* ── Feature detection for CSS custom properties ────────────── */
+@supports (--custom: property) {
+  :root {
+    --css-vars-supported: true;
+  }
+}
+
+/* ── iOS Safari momentum scrolling ──────────────────────────── */
+.scroll-container {
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+}
+
+/* ── High contrast mode support ─────────────────────────────── */
+@media (prefers-contrast: high) {
+  :root {
+    --color-border: #444444;
+    --color-muted: #888888;
+  }
+}
+
+/* ── Print styles ───────────────────────────────────────────── */
+@media print {
+  *, *::before, *::after {
+    -webkit-animation: none !important;
+    -moz-animation: none !important;
+    animation: none !important;
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    transition: none !important;
+  }
+  
+  body {
+    background: white;
+    color: black;
+  }
+}

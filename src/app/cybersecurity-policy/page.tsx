@@ -128,8 +128,8 @@ export default function CybersecurityPolicyPage() {
               <li><span className="text-violet-light">Best for:</span> External perimeter testing</li>
             </ul>
           </div>
-          <div className="bg-[#111] border border-violet-500/30 p-6 rounded-2xl relative">
-            <div className="absolute top-0 right-0 bg-violet-500/20 text-violet-light text-xs font-mono px-3 py-1 rounded-bl-lg">DEFAULT</div>
+          <div className="bg-[#111] border border-[#6B1A1A]/30 p-6 rounded-lg relative">
+            <div className="absolute top-0 right-0 bg-[#6B1A1A]/20 text-violet-light text-xs font-mono px-3 py-1 rounded-bl-lg">DEFAULT</div>
             <h3 className="font-display font-bold text-white text-lg mb-2 mt-2">Gray-box</h3>
             <p className="text-muted text-sm mb-4">Limited credentials and documentation</p>
             <ul className="text-sm text-white/80 space-y-2">
@@ -149,8 +149,8 @@ export default function CybersecurityPolicyPage() {
       </section>
 
       {/* Section 4: DPDP Rule 6 Compliance */}
-      <section className="bg-[#111] border border-violet-500/30 p-8 rounded-2xl relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-1 h-full bg-violet-500" />
+      <section className="bg-[#111] border border-[#6B1A1A]/30 p-8 rounded-lg relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-1 h-full bg-[#6B1A1A]" />
         <h2 className="font-display font-black text-white text-2xl mb-4">
           4. DPDP Act 2023 Rule 6 Safeguards
         </h2>

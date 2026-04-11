@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useMemo } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Clock, Calendar } from 'lucide-react'
 
 const EASE: [number,number,number,number] = [0.16, 1, 0.3, 1]
 
@@ -17,315 +17,427 @@ type BlogPost = {
   category?: string
 }
 
-const CATEGORY_COLORS: Record<string, string> = {
-  'Web Development': 'rgba(124,58,237,0.15)',
-  'Marketing':       'rgba(6,182,212,0.15)',
-  'Cybersecurity':   'rgba(239,68,68,0.15)',
-  'AI':              'rgba(245,158,11,0.15)',
-  'Business':        'rgba(34,197,94,0.15)',
+export const CATEGORY_COLORS: Record<string, { bg: string; border: string; text: string }> = {
+  'Web Development': { bg: 'rgba(107,26,26,0.12)', border: 'rgba(107,26,26,0.25)', text: 'var(--color-violet)' },
+  'Marketing': { bg: 'rgba(6,182,212,0.12)', border: 'rgba(6,182,212,0.25)', text: 'rgb(6,182,212)' },
+  'Cybersecurity': { bg: 'rgba(239,68,68,0.12)', border: 'rgba(239,68,68,0.25)', text: 'rgb(239,68,68)' },
+  'AI': { bg: 'rgba(245,158,11,0.12)', border: 'rgba(245,158,11,0.25)', text: 'rgb(245,158,11)' },
+  'Business': { bg: 'rgba(34,197,94,0.12)', border: 'rgba(34,197,94,0.25)', text: 'rgb(34,197,94)' },
+}
+
+function FilterButton({
+  label,
+  isActive,
+  onClick,
+  colors,
+}: {
+  label: string
+  isActive: boolean
+  onClick: () => void
+  colors?: { bg: string; border: string; text: string }
+}) {
+  const isAllButton = label === 'All'
+  const style = isAllButton
+    ? {
+        backgroundColor: isActive ? 'var(--color-violet)' : 'transparent',
+        border: `1px solid ${isActive ? 'var(--color-violet)' : 'var(--color-border)'}`,
+        color: isActive ? '#FFFFFF' : 'var(--color-muted)',
+      }
+    : {
+        backgroundColor: isActive ? colors?.bg : 'transparent',
+        border: `1px solid ${isActive ? colors?.border : 'var(--color-border)'}`,
+        color: isActive ? colors?.text : 'var(--color-muted)',
+      }
+
+  return (
+    <button
+      onClick={onClick}
+      className="relative font-mono uppercase transition-all duration-300 rounded-full overflow-hidden"
+      style={{
+        fontSize: '11px',
+        letterSpacing: '0.12em',
+        padding: '8px 18px',
+        ...style,
+      }}
+    >
+      {label}
+    </button>
+  )
 }
 
 export function BlogGrid({ posts }: { posts: BlogPost[] }) {
   const [activeCategory, setActiveCategory] = useState<string | null>(null)
-  const categories = Array.from(new Set(posts.map(p => p.category).filter((c): c is string => c !== undefined)))
-  const filtered = activeCategory ? posts.filter(p => p.category === activeCategory) : posts
+  const [hoveredPost, setHoveredPost] = useState<string | null>(null)
+
+  const categories = useMemo(
+    () => Array.from(new Set(posts.map(p => p.category).filter((c): c is string => c !== undefined))),
+    [posts]
+  )
+
+  const filtered = useMemo(
+    () => (activeCategory ? posts.filter(p => p.category === activeCategory) : posts),
+    [posts, activeCategory]
+  )
+
   const [featured, ...rest] = filtered
 
   if (!posts.length) return null
 
-  const filterPills = (
-    <div className="flex flex-wrap gap-2 mb-10">
-      <button
-        onClick={() => setActiveCategory(null)}
-        className="font-mono uppercase transition-all duration-200"
-        style={{
-          fontSize: '10px',
-          letterSpacing: '0.16em',
-          padding: '5px 14px',
-          border: '1px solid ' + (activeCategory === null ? 'var(--color-violet)' : 'var(--color-border)'),
-          backgroundColor: activeCategory === null ? 'var(--color-violet)' : 'transparent',
-          color: activeCategory === null ? '#FAFAFA' : 'var(--color-muted)',
-        }}
-      >
-        All ({posts.length})
-      </button>
-      {categories.map(cat => (
-        <button
-          key={cat}
-          onClick={() => setActiveCategory(cat)}
-          className="font-mono uppercase transition-all duration-200"
-          style={{
-            fontSize: '10px',
-            letterSpacing: '0.16em',
-            padding: '5px 14px',
-            border: '1px solid ' + (activeCategory === cat ? 'var(--color-violet)' : 'var(--color-border)'),
-            backgroundColor: activeCategory === cat ? 'var(--color-violet)' : 'transparent',
-            color: activeCategory === cat ? '#FAFAFA' : 'var(--color-muted)',
-          }}
-        >
-          {cat}
-        </button>
-      ))}
-    </div>
-  )
-
   if (filtered.length === 0) {
     return (
-      <section
-        className="border-t border-border"
-        style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(56px, 9vw, 96px) 0' }}
-      >
+      <section className="w-full border-t border-border" style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(64px, 10vw, 120px) 0' }}>
         <div className="container-site">
-          {filterPills}
-          <p className="font-mono" style={{ fontSize: '13px', color: 'var(--color-muted)' }}>
-            No articles in this category yet.
-          </p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center py-20"
+          >
+            <p className="font-mono text-[14px]" style={{ color: 'var(--color-muted)' }}>
+              No articles in this category yet.
+            </p>
+          </motion.div>
         </div>
       </section>
     )
   }
 
   return (
-    <section
-      className="border-t border-border"
-      style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(56px, 9vw, 96px) 0' }}
-    >
+    <section className="w-full border-t border-border" style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(64px, 10vw, 120px) 0' }}>
       <div className="container-site">
 
-        {/* ── Category filter ── */}
+        {/* ── Category Filter Pills ── */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, ease: EASE }}
-          className="flex flex-wrap gap-2 mb-10"
+          transition={{ duration: 0.6, ease: EASE }}
+          className="flex flex-wrap items-center gap-3 mb-12"
         >
-          <button
+          <span className="font-mono text-[10px] uppercase mr-2" style={{ color: 'var(--color-dead)', letterSpacing: '0.14em' }}>
+            Filter:
+          </span>
+          <FilterButton
+            label="All"
+            isActive={activeCategory === null}
             onClick={() => setActiveCategory(null)}
-            className="font-mono uppercase transition-all duration-200"
-            style={{
-              fontSize: '10px',
-              letterSpacing: '0.16em',
-              padding: '5px 14px',
-              border: '1px solid ' + (activeCategory === null ? 'var(--color-violet)' : 'var(--color-border)'),
-              backgroundColor: activeCategory === null ? 'var(--color-violet)' : 'transparent',
-              color: activeCategory === null ? '#FAFAFA' : 'var(--color-muted)',
-            }}
-          >
-            All ({posts.length})
-          </button>
+          />
           {categories.map(cat => (
-            <button
+            <FilterButton
               key={cat}
+              label={cat}
+              isActive={activeCategory === cat}
               onClick={() => setActiveCategory(cat)}
-              className="font-mono uppercase transition-all duration-200"
-              style={{
-                fontSize: '10px',
-                letterSpacing: '0.16em',
-                padding: '5px 14px',
-                border: '1px solid ' + (activeCategory === cat ? 'var(--color-violet)' : 'var(--color-border)'),
-                backgroundColor: activeCategory === cat ? 'var(--color-violet)' : 'transparent',
-                color: activeCategory === cat ? '#FAFAFA' : 'var(--color-muted)',
-              }}
-            >
-              {cat}
-            </button>
+              colors={CATEGORY_COLORS[cat] || CATEGORY_COLORS['Web Development']}
+            />
           ))}
         </motion.div>
 
-        {/* ── Featured post ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 32 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.65, ease: EASE }}
-          className="mb-10 lg:mb-14"
-        >
-          <Link
-            href={`/blog/${featured.slug}`}
-            className="group relative flex flex-col lg:flex-row overflow-hidden border border-border transition-all duration-300"
-            style={{ backgroundColor: 'var(--color-card)' }}
-            data-cursor="link"
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLElement).style.borderColor = 'rgba(124,58,237,0.4)'
-              ;(e.currentTarget as HTMLElement).style.boxShadow = '0 12px 60px rgba(124,58,237,0.10)'
-            }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLElement).style.borderColor = 'var(--color-border)'
-              ;(e.currentTarget as HTMLElement).style.boxShadow = 'none'
-            }}
-          >
-            {/* Left accent strip (desktop) */}
-            <div
-              className={`hidden lg:block w-[4px] shrink-0 bg-linear-to-b ${featured.gradient} opacity-70 group-hover:opacity-100 transition-opacity duration-300`}
-            />
-
-            {/* Top accent bar (mobile) */}
-            <div className={`lg:hidden h-[3px] w-full bg-linear-to-r ${featured.gradient}`} />
-
-            <div className="flex flex-col lg:flex-row flex-1 p-8 lg:p-12 gap-8 lg:gap-12 items-start lg:items-center">
-
-              {/* Left: meta + title */}
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-3 mb-5">
-                  {featured.category && (
-                    <span
-                      className="font-mono uppercase text-[10px] tracking-[0.18em] px-2.5 py-1"
-                      style={{
-                        color: 'var(--color-violet-light)',
-                        backgroundColor: CATEGORY_COLORS[featured.category] ?? 'rgba(124,58,237,0.12)',
-                        border: '1px solid rgba(124,58,237,0.2)',
-                      }}
-                    >
-                      {featured.category}
-                    </span>
-                  )}
-                  <span
-                    className="font-mono uppercase text-[10px] tracking-[0.14em]"
-                    style={{ color: 'var(--color-dead)' }}
-                  >
-                    FEATURED
-                  </span>
-                </div>
-
-                <h2
-                  className="font-display font-black leading-tight mb-4 transition-colors duration-200 group-hover:text-violet"
-                  style={{ fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', color: 'var(--color-foreground)' }}
-                >
-                  {featured.title}
-                </h2>
-
-                <p
-                  className="leading-relaxed"
-                  style={{ fontSize: '15px', color: 'var(--color-muted)', lineHeight: 1.72, maxWidth: '520px' }}
-                >
-                  {featured.excerpt}
-                </p>
-              </div>
-
-              {/* Right: date + CTA */}
-              <div className="flex lg:flex-col items-center lg:items-end justify-between lg:justify-start w-full lg:w-auto gap-4 shrink-0">
-                <div className="lg:text-right">
-                  <time
-                    className="font-mono block"
-                    style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.14em' }}
-                  >
-                    {featured.date}
-                  </time>
-                  <span
-                    className="font-mono block"
-                    style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.14em' }}
-                  >
-                    {featured.readTime}
-                  </span>
-                </div>
-                <span
-                  className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest transition-all duration-300 group-hover:gap-3"
-                  style={{ color: 'var(--color-violet-light)' }}
-                >
-                  Read article
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </span>
-              </div>
-            </div>
-          </Link>
-        </motion.div>
-
-        {/* ── Section divider ── */}
-        {rest.length > 0 && (
-          <div className="flex items-center gap-4 mb-8">
-            <span
-              className="font-mono uppercase"
-              style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.22em', whiteSpace: 'nowrap' }}
-            >
-              MORE ARTICLES · {rest.length}
-            </span>
-            <div className="flex-1" style={{ height: '1px', backgroundColor: 'var(--color-border)' }} />
-          </div>
-        )}
-
-        {/* ── Rest of posts grid ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {rest.map((post, i) => (
+        {/* ── Featured Post (Editorial Style) ── */}
+        <AnimatePresence mode="wait">
+          {featured && (
             <motion.div
-              key={post.slug}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.5, delay: (i % 3) * 0.07, ease: EASE }}
+              key={`featured-${activeCategory || 'all'}`}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.7, ease: EASE }}
+              className="mb-16"
             >
               <Link
-                href={`/blog/${post.slug}`}
-                className="group border border-border flex flex-col overflow-hidden transition-all duration-300 h-full min-h-[280px]"
-                style={{ backgroundColor: 'var(--color-card)' }}
-                data-cursor="link"
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.borderColor = 'rgba(124,58,237,0.35)'
-                  ;(e.currentTarget as HTMLElement).style.boxShadow = '0 8px 40px rgba(124,58,237,0.08)'
+                href={`/blog/${featured.slug}`}
+                className="group relative block overflow-hidden rounded-2xl border transition-all duration-500"
+                style={{
+                  backgroundColor: 'var(--color-card)',
+                  borderColor: 'var(--color-border)',
                 }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.borderColor = 'var(--color-border)'
-                  ;(e.currentTarget as HTMLElement).style.boxShadow = 'none'
+                data-cursor="link"
+                onMouseEnter={(e) => {
+                  setHoveredPost(featured.slug)
+                  e.currentTarget.style.borderColor = 'rgba(107,26,26,0.4)'
+                  e.currentTarget.style.boxShadow = '0 20px 80px rgba(107,26,26,0.12)'
+                }}
+                onMouseLeave={(e) => {
+                  setHoveredPost(null)
+                  e.currentTarget.style.borderColor = 'var(--color-border)'
+                  e.currentTarget.style.boxShadow = 'none'
                 }}
               >
-                {/* Gradient accent bar */}
-                <div className={`h-[2px] w-full bg-linear-to-r ${post.gradient} group-hover:h-[3px] transition-all duration-300`} />
+                {/* Top gradient bar */}
+                <div className={`h-1 w-full bg-linear-to-r ${featured.gradient}`} />
 
-                <div className="flex flex-col flex-1 p-6 pt-5">
-                  <div className="flex items-center gap-2 mb-4">
-                    {post.category && (
+                <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-0">
+                  {/* Left: Content */}
+                  <div className="p-8 lg:p-12 flex flex-col justify-center">
+                    {/* Meta row */}
+                    <div className="flex items-center gap-4 mb-6">
+                      {featured.category && (
+                        <span
+                          className="font-mono uppercase text-[10px] tracking-[0.14em] px-3 py-1.5 rounded-full"
+                          style={{
+                            color: CATEGORY_COLORS[featured.category]?.text || 'var(--color-violet)',
+                            backgroundColor: CATEGORY_COLORS[featured.category]?.bg || 'rgba(107,26,26,0.1)',
+                            border: `1px solid ${CATEGORY_COLORS[featured.category]?.border || 'rgba(107,26,26,0.2)'}`,
+                          }}
+                        >
+                          {featured.category}
+                        </span>
+                      )}
                       <span
-                        className="font-mono uppercase text-[9px] tracking-[0.16em] px-2 py-0.5"
+                        className="font-mono uppercase text-[10px] tracking-[0.14em] px-3 py-1.5 rounded-full flex items-center gap-1.5"
                         style={{
                           color: 'var(--color-violet-light)',
-                          backgroundColor: CATEGORY_COLORS[post.category] ?? 'rgba(124,58,237,0.1)',
-                          border: '1px solid rgba(124,58,237,0.18)',
+                          backgroundColor: 'rgba(107,26,26,0.08)',
+                          border: '1px solid rgba(107,26,26,0.15)',
                         }}
                       >
-                        {post.category}
+                        <span className="w-1.5 h-1.5 rounded-full bg-violet animate-pulse" />
+                        Featured
                       </span>
-                    )}
-                    <span
-                      className="font-mono"
-                      style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.12em' }}
+                    </div>
+
+                    {/* Title */}
+                    <h2
+                      className="font-display font-black leading-[1.05] mb-5 transition-colors duration-300 group-hover:text-violet"
+                      style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', color: 'var(--color-foreground)' }}
                     >
-                      {post.readTime}
-                    </span>
+                      {featured.title}
+                    </h2>
+
+                    {/* Excerpt */}
+                    <p
+                      className="leading-relaxed mb-8"
+                      style={{ fontSize: '16px', color: 'var(--color-muted)', lineHeight: 1.75, maxWidth: '540px' }}
+                    >
+                      {featured.excerpt}
+                    </p>
+
+                    {/* Bottom row: date + CTA */}
+                    <div className="flex items-center justify-between mt-auto">
+                      <div className="flex items-center gap-6">
+                        <span className="flex items-center gap-2 font-mono text-[11px]" style={{ color: 'var(--color-dead)', letterSpacing: '0.08em' }}>
+                          <Calendar className="w-3.5 h-3.5" />
+                          {featured.date}
+                        </span>
+                        <span className="flex items-center gap-2 font-mono text-[11px]" style={{ color: 'var(--color-dead)', letterSpacing: '0.08em' }}>
+                          <Clock className="w-3.5 h-3.5" />
+                          {featured.readTime}
+                        </span>
+                      </div>
+                      <span
+                        className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest transition-all duration-300 group-hover:gap-3"
+                        style={{ color: 'var(--color-violet)' }}
+                      >
+                        Read article
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                      </span>
+                    </div>
                   </div>
 
-                  <h2
-                    className="font-display font-bold mb-3 leading-tight transition-colors duration-200 group-hover:text-violet"
-                    style={{ fontSize: 'clamp(1rem, 1.4vw, 1.2rem)', color: 'var(--color-foreground)', lineHeight: 1.25 }}
+                  {/* Right: Visual accent */}
+                  <div
+                    className="relative hidden lg:flex items-center justify-center p-12 overflow-hidden"
+                    style={{
+                      background: `linear-gradient(135deg, rgba(107,26,26,0.05) 0%, transparent 50%)`,
+                    }}
                   >
-                    {post.title}
-                  </h2>
-                  <p
-                    className="leading-relaxed mb-6 flex-1"
-                    style={{ color: 'var(--color-muted)', lineHeight: 1.72, fontSize: '13px' }}
-                  >
-                    {post.excerpt}
-                  </p>
-
-                  <div className="mt-auto flex items-center justify-between">
-                    <time
-                      className="font-mono"
-                      style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.12em' }}
+                    <motion.div
+                      className="relative"
+                      animate={{ rotate: hoveredPost === featured.slug ? 5 : 0 }}
+                      transition={{ duration: 0.5, ease: EASE }}
                     >
-                      {post.date}
-                    </time>
-                    <span
-                      className="inline-flex items-center gap-1.5 text-xs font-mono transition-all duration-200 group-hover:gap-2.5"
-                      style={{ color: 'var(--color-violet-light)' }}
-                    >
-                      Read
-                      <ArrowRight className="w-3 h-3" />
-                    </span>
+                      <span
+                        className="font-display font-black select-none"
+                        style={{
+                          fontSize: 'clamp(8rem, 15vw, 14rem)',
+                          color: 'rgba(107,26,26,0.08)',
+                          lineHeight: 1,
+                        }}
+                      >
+                        01
+                      </span>
+                    </motion.div>
+                    {/* Decorative circle */}
+                    <div
+                      className="absolute w-32 h-32 rounded-full blur-3xl opacity-40"
+                      style={{ background: 'radial-gradient(circle, rgba(107,26,26,0.3) 0%, transparent 70%)' }}
+                    />
                   </div>
                 </div>
               </Link>
             </motion.div>
-          ))}
-        </div>
+          )}
+        </AnimatePresence>
+
+        {/* ── Section Header ── */}
+        {rest.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: EASE }}
+            className="flex items-center gap-6 mb-10"
+          >
+            <h3 className="font-display font-bold text-xl" style={{ color: 'var(--color-foreground)' }}>
+              More Articles
+            </h3>
+            <div className="flex-1 h-px" style={{ backgroundColor: 'var(--color-border)' }} />
+            <span className="font-mono text-[11px]" style={{ color: 'var(--color-dead)', letterSpacing: '0.1em' }}>
+              {rest.length} items
+            </span>
+          </motion.div>
+        )}
+
+        {/* ── Articles Grid (Bento Style) ── */}
+        <motion.div
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 gap-5"
+        >
+          <AnimatePresence mode="popLayout">
+            {rest.map((post, i) => (
+              <motion.div
+                key={post.slug}
+                layout
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.5, delay: i * 0.08, ease: EASE }}
+              >
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className="group relative flex flex-col h-full rounded-xl border overflow-hidden transition-all duration-400"
+                  style={{
+                    backgroundColor: 'var(--color-card)',
+                    borderColor: 'var(--color-border)',
+                    minHeight: '240px',
+                  }}
+                  data-cursor="link"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = 'rgba(107,26,26,0.35)'
+                    e.currentTarget.style.transform = 'translateY(-4px)'
+                    e.currentTarget.style.boxShadow = '0 12px 40px rgba(107,26,26,0.1)'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--color-border)'
+                    e.currentTarget.style.transform = 'translateY(0)'
+                    e.currentTarget.style.boxShadow = 'none'
+                  }}
+                >
+                  {/* Gradient bar */}
+                  <div className={`h-[3px] w-full bg-linear-to-r ${post.gradient}`} />
+
+                  <div className="flex flex-col flex-1 p-6">
+                    {/* Top: Category & Read time */}
+                    <div className="flex items-center justify-between mb-4">
+                      {post.category && (
+                        <span
+                          className="font-mono uppercase text-[9px] tracking-[0.14em] px-2.5 py-1 rounded-full"
+                          style={{
+                            color: CATEGORY_COLORS[post.category]?.text || 'var(--color-violet)',
+                            backgroundColor: CATEGORY_COLORS[post.category]?.bg || 'rgba(107,26,26,0.08)',
+                            border: `1px solid ${CATEGORY_COLORS[post.category]?.border || 'rgba(107,26,26,0.15)'}`,
+                          }}
+                        >
+                          {post.category}
+                        </span>
+                      )}
+                      <span className="flex items-center gap-1.5 font-mono text-[10px]" style={{ color: 'var(--color-dead)' }}>
+                        <Clock className="w-3 h-3" />
+                        {post.readTime}
+                      </span>
+                    </div>
+
+                    {/* Title */}
+                    <h3
+                      className="font-display font-bold mb-3 leading-tight transition-colors duration-200 group-hover:text-violet flex-1"
+                      style={{ fontSize: 'clamp(1.1rem, 1.6vw, 1.35rem)', color: 'var(--color-foreground)', lineHeight: 1.3 }}
+                    >
+                      {post.title}
+                    </h3>
+
+                    {/* Excerpt */}
+                    <p
+                      className="leading-relaxed mb-5 line-clamp-2"
+                      style={{ color: 'var(--color-muted)', fontSize: '14px', lineHeight: 1.65 }}
+                    >
+                      {post.excerpt}
+                    </p>
+
+                    {/* Bottom: Date & Arrow */}
+                    <div className="flex items-center justify-between mt-auto pt-4" style={{ borderTop: '1px solid var(--color-border)' }}>
+                      <span className="font-mono text-[10px]" style={{ color: 'var(--color-dead)', letterSpacing: '0.08em' }}>
+                        {post.date}
+                      </span>
+                      <span
+                        className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wider transition-all duration-200 group-hover:gap-2.5"
+                        style={{ color: 'var(--color-violet-light)' }}
+                      >
+                        Read
+                        <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+
+        {/* ── Newsletter CTA ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2, ease: EASE }}
+          className="mt-16"
+        >
+          <div
+            className="relative overflow-hidden rounded-2xl p-8 lg:p-12"
+            style={{
+              backgroundColor: 'var(--color-card)',
+              border: '1px solid var(--color-border)',
+            }}
+          >
+            {/* Background accent */}
+            <div
+              className="absolute top-0 right-0 w-64 h-64 opacity-30 pointer-events-none"
+              style={{
+                background: 'radial-gradient(circle at 70% 30%, rgba(107,26,26,0.15) 0%, transparent 70%)',
+              }}
+            />
+
+            <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+              <div>
+                <span
+                  className="font-mono uppercase text-[10px] tracking-[0.18em] mb-3 block"
+                  style={{ color: 'var(--color-violet-light)' }}
+                >
+                  ✦ STAY UPDATED
+                </span>
+                <h4
+                  className="font-display font-bold text-xl lg:text-2xl"
+                  style={{ color: 'var(--color-foreground)' }}
+                >
+                  Get engineering insights delivered to your inbox.
+                </h4>
+                <p className="mt-2 text-[14px]" style={{ color: 'var(--color-muted)' }}>
+                  No spam. Unsubscribe anytime.
+                </p>
+              </div>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-mono text-[12px] uppercase tracking-wider transition-all duration-300 hover:gap-3"
+                style={{
+                  backgroundColor: 'var(--color-violet)',
+                  color: '#FFFFFF',
+                }}
+                data-cursor="pointer"
+              >
+                Subscribe
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </motion.div>
 
       </div>
     </section>

@@ -1,10 +1,11 @@
 'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronDown, Menu, X } from 'lucide-react'
+import { ChevronDown, Menu, X, ArrowUpRight } from 'lucide-react'
 import { services } from '@/lib/data/services'
 import { cn } from '@/lib/utils'
 import dynamic from 'next/dynamic'
@@ -13,16 +14,105 @@ import { useTheme } from 'next-themes'
 const ThemeToggle = dynamic(() => import('@/components/ui/ThemeToggle'), { ssr: false })
 
 const NAV_LINKS = [
-  { href:'/',          label:'Home'                     },
-  { href:'/about',     label:'About'                    },
-  { href:'/services',  label:'Services', hasMega: true  },
-  { href:'/portfolio', label:'Portfolio'                },
-  { href:'/pricing',   label:'Pricing'                  },
-  { href:'/research',  label:'Research'                 },
-  { href:'/legal',     label:'Legal'                    },
-  { href:'/blog',      label:'Blog'                     },
-  { href:'/contact',   label:'Contact'                  },
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/services', label: 'Services', hasMega: true },
+  { href: '/portfolio', label: 'Portfolio' },
+  { href: '/pricing', label: 'Pricing' },
+  { href: '/research', label: 'Research' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/contact', label: 'Contact' },
 ]
+
+// Style constants matching ThemeToggle
+const getNavStyles = (isLight: boolean, scrolled: boolean) => ({
+  container: {
+    backgroundColor: scrolled
+      ? isLight
+        ? 'rgba(250, 247, 244, 0.95)'
+        : 'rgba(13, 13, 14, 0.95)'
+      : 'transparent',
+    backdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
+    WebkitBackdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
+    borderBottom: scrolled ? `1px solid ${isLight ? 'rgba(107, 26, 26, 0.08)' : 'rgba(255, 255, 255, 0.06)'}` : '1px solid transparent',
+    boxShadow: scrolled
+      ? isLight
+        ? '0 4px 30px rgba(0, 0, 0, 0.04)'
+        : '0 4px 30px rgba(0, 0, 0, 0.2)'
+      : 'none',
+  },
+  navPill: {
+    backgroundColor: isLight
+      ? 'rgba(107, 26, 26, 0.04)'
+      : 'rgba(255, 255, 255, 0.04)',
+    border: `1px solid ${isLight ? 'rgba(107, 26, 26, 0.08)' : 'rgba(255, 255, 255, 0.08)'}`,
+    boxShadow: isLight
+      ? '0 2px 8px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8)'
+      : '0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+  },
+  link: {
+    default: {
+      backgroundColor: 'transparent',
+      border: '1px solid transparent',
+    },
+    hover: {
+      backgroundColor: isLight ? 'rgba(107, 26, 26, 0.08)' : 'rgba(255, 255, 255, 0.08)',
+      borderColor: isLight ? 'rgba(107, 26, 26, 0.15)' : 'rgba(255, 255, 255, 0.15)',
+    },
+    active: {
+      backgroundColor: isLight ? 'rgba(107, 26, 26, 0.12)' : 'rgba(255, 255, 255, 0.1)',
+      borderColor: isLight ? 'rgba(107, 26, 26, 0.2)' : 'rgba(255, 255, 255, 0.2)',
+    },
+  },
+  megaMenu: {
+    backgroundColor: isLight ? 'rgba(250, 247, 244, 0.98)' : 'rgba(13, 13, 14, 0.98)',
+    borderColor: isLight ? 'rgba(107, 26, 26, 0.12)' : 'rgba(255, 255, 255, 0.08)',
+    boxShadow: isLight
+      ? '0 25px 50px -12px rgba(107, 26, 26, 0.15), 0 0 0 1px rgba(107, 26, 26, 0.05)'
+      : '0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05)',
+  },
+  megaItem: {
+    default: {
+      backgroundColor: 'transparent',
+      border: '1px solid transparent',
+    },
+    hover: {
+      backgroundColor: isLight ? 'rgba(107, 26, 26, 0.06)' : 'rgba(255, 255, 255, 0.06)',
+      borderColor: isLight ? 'rgba(107, 26, 26, 0.1)' : 'rgba(255, 255, 255, 0.1)',
+    },
+  },
+  iconBox: {
+    backgroundColor: isLight ? 'rgba(107, 26, 26, 0.08)' : 'rgba(255, 255, 255, 0.06)',
+    border: `1px solid ${isLight ? 'rgba(107, 26, 26, 0.12)' : 'rgba(255, 255, 255, 0.1)'}`,
+  },
+  ctaButton: {
+    default: {
+      backgroundColor: isLight ? 'rgba(107, 26, 26, 0.08)' : 'rgba(255, 255, 255, 0.06)',
+      border: `1px solid ${isLight ? 'rgba(107, 26, 26, 0.12)' : 'rgba(255, 255, 255, 0.1)'}`,
+      color: isLight ? 'var(--color-violet)' : '#FFFFFF',
+      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
+    },
+    hover: {
+      backgroundColor: isLight ? 'rgba(107, 26, 26, 0.12)' : 'rgba(255, 255, 255, 0.1)',
+      borderColor: isLight ? 'rgba(107, 26, 26, 0.2)' : 'rgba(255, 255, 255, 0.2)',
+      boxShadow: isLight ? '0 4px 20px rgba(107, 26, 26, 0.15)' : '0 4px 20px rgba(255, 255, 255, 0.1)',
+    },
+    pressed: {
+      backgroundColor: isLight ? 'rgba(107, 26, 26, 0.15)' : 'rgba(255, 255, 255, 0.12)',
+      boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.1)',
+    },
+  },
+  mobileButton: {
+    default: {
+      backgroundColor: isLight ? 'rgba(107, 26, 26, 0.06)' : 'rgba(255, 255, 255, 0.06)',
+      border: `1px solid ${isLight ? 'rgba(107, 26, 26, 0.1)' : 'rgba(255, 255, 255, 0.1)'}`,
+    },
+    active: {
+      backgroundColor: 'var(--color-violet)',
+      border: '1px solid var(--color-violet)',
+    },
+  },
+})
 
 export function Navbar() {
   const path = usePathname()
@@ -30,17 +120,29 @@ export function Navbar() {
   const [mobile, setMobile] = useState(false)
   const [mega, setMega] = useState(false)
   const { resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null)
+  const [pressedLink, setPressedLink] = useState<string | null>(null)
+  const [ctaHovered, setCtaHovered] = useState(false)
+  const [ctaPressed, setCtaPressed] = useState(false)
 
-  // Scroll detection with RAF throttling — only triggers setState when crossing the 40px boundary
+  useEffect(() => setMounted(true), [])
+
+  const isLight = useMemo(() => {
+    if (mounted) return resolvedTheme !== 'dark'
+    return true // default to light during SSR
+  }, [mounted, resolvedTheme])
+  const styles = useMemo(() => getNavStyles(isLight, scrolled), [isLight, scrolled])
+
+  // Scroll detection with RAF throttling
   useEffect(() => {
-    let prev = window.scrollY > 40
+    let prev = window.scrollY > 20
     let rafId: number | null = null
-    
+
     const fn = () => {
-      // RAF throttling: Only schedule update if not already pending
       if (rafId !== null) return
       rafId = requestAnimationFrame(() => {
-        const next = window.scrollY > 40
+        const next = window.scrollY > 20
         if (next !== prev) {
           prev = next
           setScrolled(next)
@@ -48,7 +150,7 @@ export function Navbar() {
         rafId = null
       })
     }
-    
+
     window.addEventListener('scroll', fn, { passive: true })
     return () => {
       window.removeEventListener('scroll', fn)
@@ -56,9 +158,12 @@ export function Navbar() {
     }
   }, [])
 
-  // Auto-close on navigation — deferred to avoid synchronous setState-in-effect
+  // Auto-close on navigation
   useEffect(() => {
-    const id = setTimeout(() => { setMobile(false); setMega(false) }, 0)
+    const id = setTimeout(() => {
+      setMobile(false)
+      setMega(false)
+    }, 0)
     return () => clearTimeout(id)
   }, [path])
 
@@ -69,254 +174,429 @@ export function Navbar() {
     } else {
       document.body.style.overflow = 'unset'
     }
-    return () => { document.body.style.overflow = 'unset' }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
   }, [mobile])
+
+  const isActive = useCallback((link: (typeof NAV_LINKS)[0]) => {
+    if (link.href === '/') return path === '/'
+    if (link.href === '/blog') return path.startsWith('/blog')
+    if (link.href === '/legal') return path.startsWith('/legal')
+    if (link.href === '/research') return path.startsWith('/research')
+    if (link.href === '/services') return path.startsWith('/services')
+    return path === link.href
+  }, [path])
+
+  const getLinkStyle = (link: (typeof NAV_LINKS)[0]) => {
+    const active = isActive(link)
+    const hovered = hoveredLink === link.href
+    const pressed = pressedLink === link.href
+
+    return {
+      backgroundColor: active
+        ? styles.link.active.backgroundColor
+        : pressed
+          ? styles.link.hover.backgroundColor
+          : hovered
+            ? styles.link.hover.backgroundColor
+            : styles.link.default.backgroundColor,
+      borderColor: active
+        ? styles.link.active.borderColor
+        : pressed
+          ? styles.link.hover.borderColor
+          : hovered
+            ? styles.link.hover.borderColor
+            : styles.link.default.backgroundColor,
+      boxShadow: pressed
+        ? 'inset 0 2px 4px rgba(0,0,0,0.1)'
+        : hovered
+          ? '0 4px 12px rgba(107, 26, 26, 0.1)'
+          : 'none',
+      transform: pressed ? 'scale(0.98)' : 'scale(1)',
+    }
+  }
 
   return (
     <>
-      <nav
-        className="fixed top-0 left-0 right-0 z-100 transition-colors duration-300"
-        style={{
-          backgroundColor: scrolled ? (resolvedTheme === 'dark' ? 'rgba(8,8,8,0.75)' : 'rgba(248,250,252,0.9)') : 'transparent',
-          backdropFilter: scrolled ? 'blur(24px)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(24px)' : 'none',
-          borderBottom: scrolled ? '1px solid var(--color-border)' : '1px solid transparent',
-        }}
+      <motion.nav
+        className="fixed top-0 left-0 right-0 z-[100]"
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       >
-        {/* Full-width inner — 68px tall */}
+        {/* Main navbar container */}
         <div
-          className="w-full mx-auto grid grid-cols-[auto_1fr_auto] items-center h-[68px]"
-          style={{ maxWidth:'1440px', padding:'0 clamp(1.5rem, 4vw, 3rem)' }}
+          className="transition-all duration-500 ease-out"
+          style={styles.container}
         >
-      {/* Logo — left */}
-      <Link
-        href="/"
-        data-cursor="pointer"
-        className="flex items-center gap-3 shrink-0 z-10 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-violet p-1 rounded-sm group"
-      >
-        <div className="relative transition-transform duration-300 group-hover:scale-105">
-          <Image
-            src={resolvedTheme === 'dark' ? '/images/mta-logo-dark.png' : '/images/mta-logo-light.png'}
-            alt="MTA Logo"
-            width={40}
-            height={40}
-            className="shrink-0"
-            priority
-          />
-        </div>
-        <div className="flex flex-col leading-none">
-          <span className="font-display font-black text-[15px] tracking-tight" style={{ color: 'var(--color-foreground)' }}>MTA</span>
-          <span
-            className="font-mono uppercase hidden sm:block text-muted"
-            style={{ fontSize:'9px', letterSpacing:'0.14em' }}
+          {/* Inner container */}
+          <div
+            className="w-full mx-auto flex items-center justify-between h-[64px] sm:h-[72px] lg:h-[80px] xl:h-[88px]"
+            style={{ maxWidth: '1600px', padding: '0 clamp(1rem, 5vw, 4rem)' }}
           >
-            Manglam Technical Agency
-          </span>
-        </div>
-      </Link>
-
-          {/* Nav links — ABSOLUTE CENTRE (independent of logo + CTA widths) */}
-          <div className="hidden lg:flex items-center justify-center gap-2">
-            {NAV_LINKS.map(link => link.hasMega ? (
-              <div
-                key={link.href}
+            {/* Logo */}
+            <Link
+              href="/"
+              data-cursor="pointer"
+              className="flex items-center gap-3 sm:gap-4 shrink-0 group"
+            >
+              <motion.div
                 className="relative"
-                onMouseEnter={() => setMega(true)}
-                onMouseLeave={() => setMega(false)}
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
               >
-                <button
+                <Image
+                  src="/images/mta-logo-light.png"
+                  alt="MTA"
+                  width={40}
+                  height={40}
+                  className="shrink-0 transition-opacity duration-300"
+                  style={{ opacity: mounted ? 1 : 0 }}
+                  priority
+                />
+              </motion.div>
+              <div className="hidden sm:flex flex-col leading-none">
+                <span className="font-display font-black text-[14px] tracking-tight text-foreground">
+                  MTA
+                </span>
+                <span className="font-mono uppercase text-muted text-[8px] tracking-wider">
+                  Agency
+                </span>
+              </div>
+            </Link>
+
+            {/* Desktop Navigation - Pill Container */}
+            <div className="hidden lg:block absolute left-1/2 -translate-x-1/2">
+              <div
+                className="flex items-center gap-1 xl:gap-1.5 px-2 py-1.5 rounded-full transition-all duration-300"
+                style={styles.navPill}
+              >
+                {NAV_LINKS.map((link) =>
+                  link.hasMega ? (
+                    <div
+                      key={link.href}
+                      className="relative"
+                      onMouseEnter={() => setMega(true)}
+                      onMouseLeave={() => setMega(false)}
+                    >
+                      <motion.button
+                        data-cursor="pointer"
+                        onFocus={() => setMega(true)}
+                        onBlur={() => setTimeout(() => setMega(false), 200)}
+                        aria-label={mega ? 'Close services menu' : 'Open services menu'}
+                        aria-expanded={mega}
+                        aria-haspopup="true"
+                        className={cn(
+                          'flex items-center gap-1.5 px-4 py-2 rounded-full text-[13px] font-medium transition-all duration-200',
+                          isActive(link) ? 'text-foreground' : 'text-muted'
+                        )}
+                        style={getLinkStyle(link)}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        {link.label}
+                        <motion.div
+                          animate={{ rotate: mega ? 180 : 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <ChevronDown className="w-3.5 h-3.5 opacity-60" />
+                        </motion.div>
+                      </motion.button>
+
+                      {/* Mega Menu */}
+                      <AnimatePresence>
+                        {mega && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: 10, scale: 0.98 }}
+                            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                            className="absolute top-full left-1/2 -translate-x-1/2 pt-4"
+                          >
+                            <div
+                              className="p-5 rounded-2xl border backdrop-blur-xl"
+                              style={{
+                                width: '560px',
+                                ...styles.megaMenu,
+                              }}
+                            >
+                              <div className="grid grid-cols-2 gap-3">
+                                {services.map((s, idx) => (
+                                  <motion.div
+                                    key={s.slug}
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: idx * 0.03 }}
+                                  >
+                                    <Link
+                                      href={`/services/${s.slug}`}
+                                      data-cursor="pointer"
+                                      className="flex items-start gap-3 p-3 rounded-xl transition-all duration-200 group"
+                                      style={styles.megaItem.default}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = styles.megaItem.hover.backgroundColor
+                e.currentTarget.style.border = `1px solid ${styles.megaItem.hover.borderColor}`
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = styles.megaItem.default.backgroundColor
+                e.currentTarget.style.border = styles.megaItem.default.border
+              }}
+                                    >
+                                      <div
+                                        className="w-10 h-10 flex items-center justify-center shrink-0 rounded-xl transition-colors duration-200"
+                                        style={styles.iconBox}
+                                      >
+                                        <s.Icon className="w-4 h-4 text-violet" />
+                                      </div>
+                                      <div className="min-w-0">
+                                        <p className="text-[13px] font-semibold text-foreground leading-tight">
+                                          {s.name}
+                                        </p>
+                                        <p className="text-[11px] text-muted mt-1 leading-snug truncate">
+                                          {s.tagline}
+                                        </p>
+                                      </div>
+                                    </Link>
+                                  </motion.div>
+                                ))}
+                              </div>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  ) : (
+                    <motion.div
+                      key={link.href}
+                      className="relative"
+                      onMouseEnter={() => setHoveredLink(link.href)}
+                      onMouseLeave={() => setHoveredLink(null)}
+                      onMouseDown={() => setPressedLink(link.href)}
+                      onMouseUp={() => setPressedLink(null)}
+                    >
+                      <Link
+                        href={link.href}
+                        data-cursor="pointer"
+                        className={cn(
+                          'block px-4 py-2 text-[13px] font-medium rounded-full transition-all duration-200',
+                          isActive(link) ? 'text-foreground' : 'text-muted'
+                        )}
+                        style={getLinkStyle(link)}
+                      >
+                        {link.label}
+                      </Link>
+                    </motion.div>
+                  )
+                )}
+              </div>
+            </div>
+
+            {/* Right side actions */}
+            <div className="flex items-center gap-2 sm:gap-3 xl:gap-4">
+              {/* Get Quote Button - Styled like ThemeToggle but darker */}
+              <motion.div
+                onMouseEnter={() => setCtaHovered(true)}
+                onMouseLeave={() => { setCtaHovered(false); setCtaPressed(false) }}
+                onMouseDown={() => setCtaPressed(true)}
+                onMouseUp={() => setCtaPressed(false)}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Link
+                  href="/contact"
                   data-cursor="pointer"
-                  onFocus={() => setMega(true)}
-                  onBlur={() => setTimeout(() => setMega(false), 200)}
-                  aria-label={mega ? 'Close services menu' : 'Open services menu'}
-                  aria-expanded={mega}
-                  aria-haspopup="true"
-                  className={cn(
-                    'flex items-center gap-2 px-3 py-2 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-violet rounded-sm',
-                    path.startsWith('/services') ? 'text-white' : 'hover:text-white',
-                  )}
+                  className="hidden sm:inline-flex items-center justify-center gap-2 h-9 px-4 rounded-full text-[13px] font-semibold transition-all duration-300 group relative overflow-hidden"
                   style={{
-                    fontSize: '13px',
-                    fontWeight: 500,
-                    color: path.startsWith('/services') ? '#FAFAFA' : 'var(--color-muted)',
+                    backgroundColor: ctaPressed
+                      ? isLight ? 'rgba(107, 26, 26, 0.2)' : 'rgba(124, 58, 237, 0.25)'
+                      : ctaHovered
+                        ? isLight ? 'rgba(107, 26, 26, 0.14)' : 'rgba(124, 58, 237, 0.18)'
+                        : isLight ? 'rgba(107, 26, 26, 0.1)' : 'rgba(124, 58, 237, 0.12)',
+                    border: `1px solid ${ctaPressed
+                      ? isLight ? 'rgba(107, 26, 26, 0.3)' : 'rgba(124, 58, 237, 0.4)'
+                      : ctaHovered
+                        ? isLight ? 'rgba(107, 26, 26, 0.25)' : 'rgba(124, 58, 237, 0.35)'
+                        : isLight ? 'rgba(107, 26, 26, 0.2)' : 'rgba(124, 58, 237, 0.25)'}`,
+                    color: isLight ? 'var(--color-violet)' : '#FFFFFF',
+                    boxShadow: ctaPressed
+                      ? 'inset 0 2px 4px rgba(0,0,0,0.1)'
+                      : ctaHovered
+                        ? isLight ? '0 4px 20px rgba(107, 26, 26, 0.2)' : '0 4px 20px rgba(124, 58, 237, 0.25)'
+                        : '0 2px 8px rgba(0,0,0,0.08)',
                   }}
                 >
-                  {link.label}
-                  <ChevronDown
-                    className={cn('w-3 h-3 transition-transform duration-200', mega && 'rotate-180')}
+                  {/* Subtle gradient background like ThemeToggle */}
+                  <motion.div
+                    className="absolute inset-0 rounded-full pointer-events-none"
+                    initial={false}
+                    animate={{
+                      background: ctaHovered
+                        ? isLight
+                          ? 'radial-gradient(circle at 30% 30%, rgba(107, 26, 26, 0.12), transparent 70%)'
+                          : 'radial-gradient(circle at 70% 30%, rgba(124, 58, 237, 0.15), transparent 70%)'
+                        : 'transparent',
+                    }}
+                    transition={{ duration: 0.4 }}
                   />
-                </button>
+                  <span className="relative z-10">Get Quote</span>
+                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 relative z-10" />
+                </Link>
+              </motion.div>
 
-                <AnimatePresence>
-                  {mega && (
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4"> {/* Hover bridge */}
-                      <motion.div
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 8 }}
-                        transition={{ duration: 0.2 }}
-                        className="grid grid-cols-2 gap-2 p-5 bg-surface border border-border shadow-2xl relative"
-                        style={{
-                          width: '560px',
-                        }}
-                      >
-                        {services.map((s, idx) => (
-                          <motion.div
-                            key={s.slug}
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: idx * 0.05 }}
-                          >
-                            <Link 
-                              href={`/services/${s.slug}`}
-                              data-cursor="pointer"
-                              className="flex items-start gap-3 p-3 border border-transparent
-                                         hover:border-border hover:bg-canvas focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-violet focus-visible:bg-canvas focus-visible:border-border
-                                         transition-all group rounded-sm"
-                            >
-                              <div
-                                className="w-8 h-8 flex items-center justify-center shrink-0 border border-border transition-colors group-hover:border-violet group-focus-visible:border-violet"
-                              >
-                                <s.Icon
-                                  className="w-4 h-4 text-muted transition-colors group-hover:text-violet-light group-focus-visible:text-violet-light"
-                                />
-                              </div>
-                              <div className="min-w-0">
-                                <p className="text-[13px] font-semibold text-white leading-tight">{s.name}</p>
-                                <p
-                                  className="text-label mt-1 leading-snug truncate text-muted"
-                                >
-                                  {s.tagline}
-                                </p>
-                              </div>
-                            </Link>
-                          </motion.div>
-                        ))}
-                      </motion.div>
-                    </div>
+              <ThemeToggle />
+
+              {/* Mobile menu button */}
+              <motion.button
+                onClick={() => setMobile((v) => !v)}
+                aria-label={mobile ? 'Close menu' : 'Open menu'}
+                aria-expanded={mobile}
+                data-cursor="pointer"
+                className="lg:hidden h-10 w-10 flex items-center justify-center rounded-full transition-all duration-200"
+                style={mobile ? styles.mobileButton.active : styles.mobileButton.default}
+                whileTap={{ scale: 0.95 }}
+              >
+                <AnimatePresence mode="wait">
+                  {mobile ? (
+                    <motion.div
+                      key="close"
+                      initial={{ rotate: -90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: 90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <X className="w-5 h-5 text-white" />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="menu"
+                      initial={{ rotate: 90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: -90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Menu className="w-5 h-5 text-muted" />
+                    </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
-            ) : (
-              <Link
-                key={link.href}
-                href={link.href}
-                data-cursor="pointer"
-                aria-current={
-                  (link.href === '/blog' && path.startsWith('/blog')) ||
-                  (link.href === '/legal' && path.startsWith('/legal')) ||
-                  (link.href === '/research' && path.startsWith('/research')) ||
-                  path === link.href
-                    ? 'page'
-                    : undefined
-                }
-                className="relative px-3.5 py-2 text-[13px] font-medium transition-colors duration-200 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-violet rounded-sm"
-                style={{
-                  color:
-                    (link.href === '/blog' && path.startsWith('/blog')) ||
-                    (link.href === '/legal' && path.startsWith('/legal')) ||
-                    (link.href === '/research' && path.startsWith('/research')) ||
-                    path === link.href
-                      ? 'var(--color-foreground)'
-                      : 'var(--color-muted)',
-                }}
-              >
-                {link.label}
-                {((link.href === '/blog' && path.startsWith('/blog')) ||
-                  (link.href === '/legal' && path.startsWith('/legal')) ||
-                  (link.href === '/research' && path.startsWith('/research')) ||
-                  path === link.href) && (
-                  <motion.div
-                    layoutId="activeNavIndicator"
-                    className="absolute bottom-2 left-3 right-3 h-[1.5px] bg-violet origin-left"
-                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                  />
-                )}
-              </Link>
-            ))}
-          </div>
-
-          {/* CTA — right */}
-          <div className="flex items-center gap-3 z-10">
-            <ThemeToggle />
-            <Link href="/contact" data-cursor="pointer"
-              className="hidden sm:inline-flex items-center px-4 py-2 text-[13px] font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet rounded-sm"
-              style={{
-                color:        'var(--color-violet-light)',
-                border:       '1px solid rgba(124,58,237,0.45)',
-              }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-violet)'
-                ;(e.currentTarget as HTMLElement).style.color = '#FAFAFA'
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent'
-                ;(e.currentTarget as HTMLElement).style.color = 'var(--color-violet-light)'
-              }}
-            >
-              Get a Quote
-            </Link>
-            <button
-              onClick={() => setMobile(v => !v)}
-              aria-label={mobile ? 'Close menu' : 'Open menu'}
-              aria-expanded={mobile}
-              data-cursor="pointer"
-              className="lg:hidden min-w-[44px] min-h-[44px] flex items-center justify-center border border-border text-muted transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet rounded-sm"
-            >
-              {mobile ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
+              </motion.button>
+            </div>
           </div>
         </div>
-      </nav>
+      </motion.nav>
 
-      {/* Mobile fullscreen menu */}
+      {/* Mobile menu overlay */}
       <AnimatePresence>
         {mobile && (
           <motion.div
-            initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }}
-            className="fixed inset-0 z-99 flex flex-col pt-[68px] overflow-hidden bg-canvas"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-50 lg:hidden"
+            style={{
+              backgroundColor: isLight
+                ? 'rgba(250, 247, 244, 0.98)'
+                : 'rgba(13, 13, 14, 0.98)',
+              backdropFilter: 'blur(20px)',
+            }}
           >
-            {/* Watermark */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
+            {/* Background watermark */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
               <span
-                className="font-display font-black leading-none text-white"
-                style={{ fontSize:'44vw', opacity:0.022 }}
+                className="font-display font-black text-[30vw] select-none"
+                style={{
+                  color: isLight ? 'rgba(107, 26, 26, 0.03)' : 'rgba(255, 255, 255, 0.02)',
+                }}
               >
                 MTA
               </span>
             </div>
 
-            <div className="relative flex flex-col px-6 pt-8 overflow-y-auto pb-24">
-              {NAV_LINKS.map((link, i) => (
-                <motion.div key={link.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.08, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            {/* Content */}
+            <div className="relative h-full flex flex-col pt-[80px] px-6">
+              <div className="flex-1 overflow-y-auto">
+                <nav className="space-y-1">
+                  {NAV_LINKS.map((link, i) => (
+                    <motion.div
+                      key={link.href}
+                      initial={{ opacity: 0, x: -30 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -30 }}
+                      transition={{
+                        delay: i * 0.05,
+                        duration: 0.4,
+                        ease: [0.16, 1, 0.3, 1],
+                      }}
+                    >
+                      <Link
+                        href={link.href}
+                        onClick={() => setMobile(false)}
+                        className={cn(
+                          'flex items-center justify-between py-4 border-b transition-colors duration-200',
+                          isActive(link)
+                            ? 'text-foreground border-violet/30'
+                            : 'text-muted border-border hover:text-foreground'
+                        )}
+                        style={{
+                          borderColor: isActive(link)
+                            ? 'rgba(124, 58, 237, 0.2)'
+                            : isLight
+                              ? 'rgba(107, 26, 26, 0.08)'
+                              : 'rgba(255, 255, 255, 0.06)',
+                        }}
+                      >
+                        <span
+                          className="font-display font-black text-2xl"
+                          style={{
+                            color: isActive(link) ? 'var(--color-violet)' : 'var(--color-foreground)',
+                          }}
+                        >
+                          {link.label}
+                        </span>
+                        {isActive(link) && (
+                          <motion.div
+                            layoutId="mobileActiveIndicator"
+                            className="w-2 h-2 rounded-full bg-violet"
+                          />
+                        )}
+                      </Link>
+                    </motion.div>
+                  ))}
+                </nav>
+
+                {/* Mobile CTA */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: NAV_LINKS.length * 0.05 + 0.1 }}
+                  className="mt-8"
                 >
-                  <Link 
-                    href={link.href} 
+                  <Link
+                    href="/contact"
                     onClick={() => setMobile(false)}
-                    aria-current={path === link.href ? 'page' : undefined}
-                    className="block py-4 font-display font-black transition-colors duration-200 border-b border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet rounded-sm"
+                    className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl text-white font-display font-black text-lg transition-all duration-300"
                     style={{
-                      fontSize:    '30px',
-                      color:       path === link.href ? '#FAFAFA' : 'var(--color-dead)',
+                      backgroundColor: 'var(--color-violet)',
+                      boxShadow: isLight
+                        ? '0 8px 30px rgba(107, 26, 26, 0.3)'
+                        : '0 8px 30px rgba(124, 58, 237, 0.3)',
                     }}
                   >
-                    {link.label}
+                    Get a Quote
+                    <ArrowUpRight className="w-5 h-5" />
                   </Link>
                 </motion.div>
-              ))}
+              </div>
+
+              {/* Bottom info */}
               <motion.div
-                initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: NAV_LINKS.length * 0.08 + 0.1 }}
-                className="mt-8"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="py-6 text-center"
               >
-                <Link href="/contact" onClick={() => setMobile(false)}
-                  className="block w-full text-center py-4 text-white font-display font-black text-xl bg-violet transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-sm"
-                >
-                  Get a Quote →
-                </Link>
+                <p className="font-mono text-[10px] text-muted tracking-wider uppercase">
+                  Manglam Technical Agency • UDYAM-RJ-15-0094091
+                </p>
               </motion.div>
             </div>
           </motion.div>

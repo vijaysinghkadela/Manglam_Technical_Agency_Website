@@ -7,7 +7,10 @@ export const teamMembers: TeamMember[] = [
     initials: 'VK',
     bio: 'Founder of Manglam Technical Agency, leading AI automation, SaaS, and client delivery across all six practice areas. Driven by the belief that enterprise-grade technical capability should be accessible to any business, regardless of size.',
     expertise: ['AI & Automation', 'SaaS Development', 'Client Delivery', 'Strategy'],
-    linkedin: '#',
+    linkedin: null,
+    x: 'https://x.com/MAgency67224',
+    image: '/images/team/vinay-pal-singh-kadela.jpeg',
+    imagePosition: '50% 30%',
   },
   {
     name: 'Bhavy Tak',
@@ -15,6 +18,8 @@ export const teamMembers: TeamMember[] = [
     initials: 'BT',
     bio: 'Co-founder and technical lead at MTA, driving product architecture and engineering standards for internal and client projects. Every system we build is designed to hold up in production, not just in demos.',
     expertise: ['Product Architecture', 'Engineering', 'Technical Standards', 'Systems Design'],
-    linkedin: '#',
+    linkedin: null,
+    x: null,
+    image: '/images/team/bhavy-tak.jpeg',
   },
 ];

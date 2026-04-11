@@ -36,7 +36,7 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
             01 — AGREEMENT CATALOG
           </span>
           <h2
-            className="font-display font-black leading-none tracking-tighter uppercase"
+            className="font-display font-black leading-none tracking-normal uppercase"
             style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', color: 'var(--color-foreground)' }}
           >
             Agreements
@@ -74,9 +74,9 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
                   <span
                     className="font-mono text-[10px] uppercase tracking-widest px-2 py-1 shrink-0"
                     style={{
-                      border: '1px solid rgba(124,58,237,0.35)',
+                      border: '1px solid rgba(107,26,26,0.35)',
                       color: 'var(--color-violet-light)',
-                      backgroundColor: 'rgba(124,58,237,0.06)',
+                      backgroundColor: 'rgba(107,26,26,0.06)',
                     }}
                   >
                     {a.code}
@@ -204,9 +204,9 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
                                     key={code}
                                     className="font-mono text-[10px] uppercase tracking-wider px-2 py-0.5"
                                     style={{
-                                      border: '1px solid rgba(124,58,237,0.35)',
+                                      border: '1px solid rgba(107,26,26,0.35)',
                                       color: 'var(--color-violet-light)',
-                                      backgroundColor: 'rgba(124,58,237,0.06)',
+                                      backgroundColor: 'rgba(107,26,26,0.06)',
                                     }}
                                   >
                                     {code}
@@ -257,7 +257,7 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
             02 — APPLICABILITY MATRIX
           </span>
           <h2
-            className="font-display font-black leading-none tracking-tighter uppercase"
+            className="font-display font-black leading-none tracking-normal uppercase"
             style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', color: 'var(--color-foreground)' }}
           >
             Service Matrix
@@ -296,9 +296,9 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
                         key={code}
                         className="font-mono text-[10px] px-2 py-0.5 uppercase"
                         style={{
-                          border: '1px solid rgba(124,58,237,0.35)',
+                          border: '1px solid rgba(107,26,26,0.35)',
                           color: 'var(--color-violet-light)',
-                          backgroundColor: 'rgba(124,58,237,0.06)',
+                          backgroundColor: 'rgba(107,26,26,0.06)',
                         }}
                       >
                         {code}
@@ -366,9 +366,9 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
                           key={code}
                           className="font-mono text-[10px] px-2 py-0.5 uppercase"
                           style={{
-                            border: '1px solid rgba(124,58,237,0.35)',
+                            border: '1px solid rgba(107,26,26,0.35)',
                             color: 'var(--color-violet-light)',
-                            backgroundColor: 'rgba(124,58,237,0.06)',
+                            backgroundColor: 'rgba(107,26,26,0.06)',
                           }}
                         >
                           {code}
@@ -402,7 +402,7 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
             03 — POLICY DOCUMENTS
           </span>
           <h2
-            className="font-display font-black leading-none tracking-tighter uppercase"
+            className="font-display font-black leading-none tracking-normal uppercase"
             style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', color: 'var(--color-foreground)' }}
           >
             Policies
@@ -474,3 +474,5 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
     </div>
   )
 }
+
+

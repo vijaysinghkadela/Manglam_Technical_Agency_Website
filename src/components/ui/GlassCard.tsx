@@ -17,8 +17,8 @@ export default function GlassCard({ children, className, hover = true, glow = fa
         'relative rounded-2xl border border-white/8 bg-white/3 backdrop-blur-xl p-6',
         'before:absolute before:inset-0 before:rounded-2xl before:bg-linear-to-br before:from-white/5 before:to-transparent before:pointer-events-none',
         hover &&
-          'transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:border-violet-500/30 hover:bg-white/5 hover:shadow-[0_20px_60px_rgba(108,43,217,0.15)]',
-        glow && 'shadow-[0_0_40px_rgba(108,43,217,0.2)]',
+          'transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:border-[rgba(var(--color-accent-rgb),0.30)] hover:bg-white/5 hover:shadow-[0_20px_60px_rgba(107,26,26,0.15)]',
+        glow && 'shadow-[0_0_40px_rgba(107,26,26,0.2)]',
         className,
       )}
     >
@@ -26,3 +26,4 @@ export default function GlassCard({ children, className, hover = true, glow = fa
     </div>
   );
 }
+

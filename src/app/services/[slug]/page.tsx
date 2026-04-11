@@ -28,7 +28,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
 
       {/* ── HERO — Full viewport ─────────────────────────── */}
       <section
-        className="relative w-full min-h-screen flex flex-col overflow-hidden grain"
+        className="relative w-full min-h-[92svh] flex flex-col overflow-hidden grain"
         style={{ backgroundColor: 'var(--color-canvas)' }}
       >
         <div className="absolute inset-0 bg-line-grid opacity-20 pointer-events-none" />
@@ -40,14 +40,14 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
             width: 'clamp(300px, 38vw, 660px)',
             height: 'clamp(300px, 38vw, 660px)',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(124,58,237,0.07) 0%, transparent 68%)',
+            background: 'radial-gradient(circle, rgba(107,26,26,0.07) 0%, transparent 68%)',
           }}
         />
 
-        <div className="relative z-10 container-site flex flex-col flex-1 pt-28 lg:pt-36 pb-12 lg:pb-16">
+        <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-10 sm:pb-12 lg:pb-16">
 
           {/* Breadcrumb + label */}
-          <div className="flex items-start justify-between gap-4 mb-14 lg:mb-24">
+          <div className="flex items-start justify-between gap-4 mb-10 lg:mb-20">
             <nav
               className="flex items-center gap-2 font-mono"
               style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
@@ -73,8 +73,8 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
               <div
                 className="w-10 h-10 flex items-center justify-center"
                 style={{
-                  border: '1px solid rgba(124,58,237,0.35)',
-                  backgroundColor: 'rgba(124,58,237,0.08)',
+                  border: '1px solid rgba(107,26,26,0.35)',
+                  backgroundColor: 'rgba(107,26,26,0.08)',
                 }}
               >
                 <service.Icon className="w-5 h-5" style={{ color: 'var(--color-violet-light)' }} />
@@ -89,7 +89,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
 
             {/* Service name — massive */}
             <h1
-              className="font-display font-black leading-none tracking-tighter"
+              className="font-display font-black leading-none tracking-normal"
               style={{
                 fontSize: 'clamp(3rem, 8vw, 8rem)',
                 color: 'var(--color-foreground)',
@@ -272,7 +272,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
                         key={code}
                         href={`/legal/agreements/${agreement.slug}`}
                         className="font-mono text-xs px-2 py-1 transition-colors hover:text-white"
-                        style={{ border: '1px solid rgba(124,58,237,0.35)', color: 'var(--color-violet-light)' }}
+                        style={{ border: '1px solid rgba(107,26,26,0.35)', color: 'var(--color-violet-light)' }}
                       >
                         {code}
                       </Link>
@@ -360,7 +360,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
                         className="font-display font-black leading-none transition-colors duration-500 group-hover:text-violet"
                         style={{
                           fontSize: 'clamp(3rem, 5vw, 4.5rem)',
-                          color: 'rgba(124,58,237,0.15)',
+                          color: 'rgba(107,26,26,0.15)',
                         }}
                       >
                         {String(step.step).padStart(2, '0')}
@@ -418,7 +418,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
           style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(64px, 10vw, 120px) 0' }}
         >
           <div className="container-site">
-            <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 mb-14 lg:mb-20">
+            <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 mb-10 lg:mb-16">
               <div>
                 <span
                   className="font-mono uppercase block mb-3"
@@ -448,7 +448,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
                   className="flex flex-col overflow-hidden"
                   style={{
                     border: plan.highlight ? '1px solid var(--color-violet)' : '1px solid var(--color-border)',
-                    backgroundColor: plan.highlight ? 'rgba(124,58,237,0.04)' : 'var(--color-card)',
+                    backgroundColor: plan.highlight ? 'rgba(107,26,26,0.04)' : 'var(--color-card)',
                   }}
                 >
                   {plan.highlight && (
@@ -730,3 +730,6 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
     </main>
   )
 }
+
+
+

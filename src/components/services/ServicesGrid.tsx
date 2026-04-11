@@ -27,9 +27,8 @@ export function ServicesGrid() {
               >
                 <Link
                   href={`/services/${service.slug}`}
-                  className="group relative flex flex-col h-full p-8 lg:p-10 overflow-hidden transition-colors duration-300"
+                  className="group relative flex h-full min-h-[240px] flex-col overflow-hidden p-6 transition-colors duration-300 sm:p-8 md:min-h-[320px] lg:p-10"
                   data-cursor="link"
-                  style={{ minHeight: '320px' }}
                 >
                   {/* Left violet accent */}
                   <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-violet scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-bottom" />

@@ -12,58 +12,74 @@ interface AnimatedCounterProps {
 }
 
 export default function AnimatedCounter({ end, suffix = '', prefix = '', duration = 2000, className }: AnimatedCounterProps) {
-  const [count, setCount] = useState(0);
+  const reducedMotion = useReducedMotion();
+  // Initialize to end value if reduced motion is preferred
+  const [count, setCount] = useState(() => reducedMotion ? end : 0);
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
-  const rafIdRef = useRef<number | null>(null);
-  const reducedMotion = useReducedMotion();
+  const startTimeRef = useRef<number | null>(null);
+  const hasAnimatedRef = useRef(false);
 
+  // Intersection observer for animation trigger - runs once
   useEffect(() => {
-    if (reducedMotion) {
-      setCount(end);
-      return;
-    }
+    const element = ref.current;
+    if (!element) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && !hasAnimatedRef.current) {
+          hasAnimatedRef.current = true;
           setIsVisible(true);
         }
       },
       { threshold: 0.3 }
     );
 
-    if (ref.current) observer.observe(ref.current);
+    observer.observe(element);
     return () => observer.disconnect();
-  }, [reducedMotion, end]);
+  }, []);
 
+  // Trigger animation when visible (only if not reduced motion)
   useEffect(() => {
     if (!isVisible || reducedMotion) return;
 
-    let startTime: number | null = null;
-    const animate = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
+    let rafId: number;
+
+    const step = (timestamp: number) => {
+      if (startTimeRef.current === null) {
+        startTimeRef.current = timestamp;
+      }
+
+      const elapsed = timestamp - startTimeRef.current;
+      const progress = Math.min(elapsed / duration, 1);
       const easeOut = 1 - Math.pow(1 - progress, 3);
+
       setCount(Math.floor(easeOut * end));
-      
+
       if (progress < 1) {
-        rafIdRef.current = requestAnimationFrame(animate);
-      } else {
-        rafIdRef.current = null;
+        rafId = requestAnimationFrame(step);
       }
     };
 
-    rafIdRef.current = requestAnimationFrame(animate);
+    rafId = requestAnimationFrame(step);
 
-    // Cleanup: cancel RAF on unmount to prevent memory leak
     return () => {
-      if (rafIdRef.current !== null) {
-        cancelAnimationFrame(rafIdRef.current);
-        rafIdRef.current = null;
-      }
+      cancelAnimationFrame(rafId);
+      startTimeRef.current = null;
     };
   }, [isVisible, end, duration, reducedMotion]);
+
+  // Update count when end changes in reduced motion mode
+  // Using flushSync pattern to avoid cascading renders
+  useEffect(() => {
+    if (reducedMotion) {
+      // Schedule update in next tick to avoid sync setState in effect
+      const timeoutId = setTimeout(() => {
+        setCount(end);
+      }, 0);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [reducedMotion, end]);
 
   return (
     <span ref={ref} className={className}>

@@ -45,6 +45,10 @@ export const documentRequestSchema = z.object({
   requestedDocuments: z.array(z.string()).min(1, 'Select at least one document'),
   useCase: z.string().min(20, 'Use case must be at least 20 characters'),
   privacy: z.literal(true),
+  retentionConsent: z.literal(true),
+  consentTimestamp: z.string().optional(),
+  consentPurpose: z.string().optional(),
+  consentUserAgent: z.string().optional(),
 });
 
 export type DocumentRequestValues = z.infer<typeof documentRequestSchema>;

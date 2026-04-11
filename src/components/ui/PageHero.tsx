@@ -87,7 +87,7 @@ export function PageHero({
           text={title}
           as="h1"
           delay={0.1}
-          className="font-display font-black tracking-tight leading-[0.92]"
+          className="font-display font-black tracking-normal leading-[0.92]"
           style={{ fontSize: 'clamp(40px, 6vw, 88px)', color: 'var(--color-foreground)' } as CSSProperties}
         />
 
@@ -118,3 +118,4 @@ export function PageHero({
 }
 
 export default PageHero
+

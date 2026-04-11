@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 import {
   Bot,
   Share2,
@@ -10,6 +11,8 @@ import {
   Palette,
   FileText,
   ArrowRight,
+  Linkedin,
+  Twitter,
 } from 'lucide-react'
 import { teamMembers } from '@/lib/data/team'
 
@@ -96,7 +99,7 @@ export function AboutContent() {
       {/* ── WHO WE ARE — STATEMENT ──────────────────────────── */}
       <section
         className="w-full border-t border-border overflow-hidden relative"
-        style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(80px, 14vw, 160px) 0' }}
+        style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(40px, 5vw, 64px) 0' }}
       >
         <div className="absolute inset-0 grain opacity-25 pointer-events-none" />
 
@@ -112,26 +115,22 @@ export function AboutContent() {
             ✦ WHO WE ARE
           </motion.span>
 
-          <div className="flex flex-col items-start" style={{ gap: '0.02em' }}>
-            {[
-              { word: 'FULL-SERVICE', color: 'var(--color-foreground)' },
-              { word: 'TECHNICAL', color: 'var(--color-violet)' },
-              { word: 'AGENCY.', color: 'var(--color-muted)' },
-            ].map(({ word, color }, i) => (
-              <div key={word} style={{ overflow: 'hidden' }}>
-                <motion.span
-                  className="font-display font-black leading-none tracking-tighter block"
-                  style={{ fontSize: 'clamp(3rem, 11vw, 13rem)', color }}
-                  initial={{ y: '110%' }}
-                  whileInView={{ y: '0%' }}
-                  viewport={{ once: true, amount: 0.05 }}
-                  transition={{ duration: 0.75, delay: i * 0.07, ease: EASE }}
-                >
-                  {word}
-                </motion.span>
-              </div>
-            ))}
-          </div>
+            <div className="flex flex-col items-start" style={{ gap: '0.02em' }}>
+              {[
+                { word: 'FULL-SERVICE', color: 'var(--color-foreground)' },
+                { word: 'TECHNICAL', color: 'var(--color-violet)' },
+                { word: 'AGENCY.', color: 'var(--color-muted)' },
+              ].map(({ word, color }, i) => (
+                <div key={word}>
+                  <span
+                    className="font-display font-black leading-none tracking-normal block"
+                    style={{ fontSize: 'clamp(3rem, 11vw, 13rem)', color }}
+                  >
+                    {word}
+                  </span>
+                </div>
+              ))}
+            </div>
 
           {/* Paragraphs */}
           <motion.div
@@ -143,7 +142,7 @@ export function AboutContent() {
           >
             <p style={{ fontSize: '17px', lineHeight: 1.78, color: 'var(--color-muted)' }}>
               Manglam Technical Agency (MTA) is a specialized fractional technical partner
-              based in Nagaur, Rajasthan. We bridge the gap for companies scaling internationally:
+              based in Bikaner, Rajasthan. We bridge the gap for companies scaling internationally:
               supplying the uncompromised engineering depth of Indian technology hubs combined
               with strict adherence to Western compliance and professional parity.
             </p>
@@ -208,7 +207,7 @@ export function AboutContent() {
               ✦ THE TEAM
             </span>
             <h2
-              className="font-display font-black leading-none tracking-tighter uppercase"
+              className="font-display font-black leading-none tracking-normal uppercase"
               style={{ fontSize: 'clamp(1.75rem, 4vw, 3.25rem)', color: 'var(--color-foreground)' }}
             >
               People Behind the Work
@@ -223,30 +222,44 @@ export function AboutContent() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.6, delay: i * 0.1, ease: EASE }}
-                className="flex flex-col p-7 lg:p-8"
+                className="flex flex-col sm:flex-row overflow-hidden"
                 style={{
                   border: '1px solid var(--color-border)',
                   backgroundColor: 'var(--color-card)',
                 }}
               >
-                {/* Header: initials + name + role */}
-                <div className="flex items-center gap-4 mb-5">
-                  <div
-                    className="w-12 h-12 flex items-center justify-center shrink-0 font-display font-black"
-                    style={{
-                      border: '1px solid rgba(124,58,237,0.45)',
-                      backgroundColor: 'rgba(124,58,237,0.08)',
-                      color: 'var(--color-violet-light)',
-                      fontSize: '1rem',
-                      letterSpacing: '-0.02em',
-                    }}
-                  >
-                    {member.initials}
-                  </div>
-                  <div className="flex flex-col gap-0.5">
+                {/* Portrait image — full width on mobile, fixed-width sidebar on sm+ */}
+                <div className="relative shrink-0 h-72 w-full sm:h-auto sm:w-44 md:w-52 xl:w-60 sm:self-stretch overflow-hidden">
+                  {member.image ? (
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      className="object-cover"
+                      style={{ objectPosition: member.imagePosition ?? '50% 15%' }}
+                      unoptimized
+                    />
+                  ) : (
+                    <div
+                      className="absolute inset-0 flex items-center justify-center font-display font-black"
+                      style={{
+                        backgroundColor: 'rgba(107,26,26,0.08)',
+                        color: 'var(--color-violet-light)',
+                        fontSize: '2.5rem',
+                      }}
+                    >
+                      {member.initials}
+                    </div>
+                  )}
+                </div>
+
+                {/* Content */}
+                <div className="flex flex-col flex-1 p-6 lg:p-7">
+                  {/* Name + role */}
+                  <div className="mb-4">
                     <span
-                      className="font-display font-bold leading-tight"
-                      style={{ fontSize: 'clamp(1rem, 1.4vw, 1.1rem)', color: 'var(--color-foreground)' }}
+                      className="font-display font-bold leading-tight block mb-1"
+                      style={{ fontSize: 'clamp(1rem, 1.4vw, 1.15rem)', color: 'var(--color-foreground)' }}
                     >
                       {member.name}
                     </span>
@@ -257,40 +270,75 @@ export function AboutContent() {
                       {member.role}
                     </span>
                   </div>
-                </div>
 
-                {/* Divider */}
-                <div style={{ height: '1px', backgroundColor: 'var(--color-border)', marginBottom: '1.25rem' }} />
+                  {/* Divider */}
+                  <div style={{ height: '1px', backgroundColor: 'var(--color-border)', marginBottom: '1.25rem' }} />
 
-                {/* Bio */}
-                <p
-                  className="leading-relaxed flex-1 mb-5"
-                  style={{ fontSize: '14px', lineHeight: 1.75, color: 'var(--color-muted)' }}
-                >
-                  {member.bio}
-                </p>
+                  {/* Bio */}
+                  <p
+                    className="leading-relaxed flex-1 mb-5"
+                    style={{ fontSize: '14px', lineHeight: 1.75, color: 'var(--color-muted)' }}
+                  >
+                    {member.bio}
+                  </p>
 
-                {/* Expertise tags */}
-                {member.expertise && member.expertise.length > 0 && (
-                  <div className="flex flex-wrap gap-2">
-                    {member.expertise.map((tag) => (
-                      <span
-                        key={tag}
-                        className="font-mono uppercase"
-                        style={{
-                          fontSize: '9px',
-                          color: 'var(--color-muted)',
-                          letterSpacing: '0.12em',
-                          border: '1px solid var(--color-border)',
-                          padding: '3px 8px',
-                          backgroundColor: 'var(--color-surface)',
-                        }}
+                  {/* Expertise tags */}
+                  {member.expertise && member.expertise.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {member.expertise.map((tag) => (
+                        <span
+                          key={tag}
+                          className="font-mono uppercase"
+                          style={{
+                            fontSize: '9px',
+                            color: 'var(--color-muted)',
+                            letterSpacing: '0.12em',
+                            border: '1px solid var(--color-border)',
+                            padding: '3px 8px',
+                            backgroundColor: 'var(--color-surface)',
+                          }}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Social links */}
+                  <div className="flex items-center gap-2">
+                    {member.x && (
+                      <a
+                        href={member.x}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center w-8 h-8 transition-colors hover:text-violet-light"
+                        style={{ color: 'var(--color-muted)' }}
+                        aria-label={`${member.name}'s X profile`}
+                        data-cursor="pointer"
                       >
-                        {tag}
+                        <Twitter className="w-4 h-4" />
+                      </a>
+                    )}
+                    {member.linkedin && (
+                      <a
+                        href={member.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center w-8 h-8 transition-colors hover:text-violet-light"
+                        style={{ color: 'var(--color-muted)' }}
+                        aria-label={`${member.name}'s LinkedIn profile`}
+                        data-cursor="pointer"
+                      >
+                        <Linkedin className="w-4 h-4" />
+                      </a>
+                    )}
+                    {!member.x && !member.linkedin && (
+                      <span className="font-mono text-xs" style={{ color: 'var(--color-dead)' }}>
+                        MTA Team
                       </span>
-                    ))}
+                    )}
                   </div>
-                )}
+                </div>
               </motion.div>
             ))}
           </div>
@@ -317,7 +365,7 @@ export function AboutContent() {
                 style={{
                   fontSize: 'clamp(4rem, 9vw, 8rem)',
                   color: 'var(--color-dead)',
-                  letterSpacing: '-0.04em',
+                  letterSpacing: 0,
                 }}
                 aria-hidden
               >
@@ -374,7 +422,7 @@ export function AboutContent() {
                 SIX PRACTICE AREAS
               </span>
               <h2
-                className="font-display font-black leading-none tracking-tighter uppercase"
+                className="font-display font-black leading-none tracking-normal uppercase"
                 style={{ fontSize: 'clamp(1.75rem, 4vw, 3.25rem)', color: 'var(--color-foreground)' }}
               >
                 What We Do
@@ -413,7 +461,7 @@ export function AboutContent() {
                     className="font-display font-black leading-none select-none transition-colors duration-400 group-hover:text-violet"
                     style={{
                       fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
-                      color: 'rgba(124,58,237,0.12)',
+                      color: 'rgba(107,26,26,0.12)',
                       transitionDuration: '400ms',
                       lineHeight: 1,
                     }}
@@ -509,7 +557,7 @@ export function AboutContent() {
                 style={{
                   fontSize: 'clamp(5rem, 10vw, 9rem)',
                   color: 'var(--color-dead)',
-                  letterSpacing: '-0.04em',
+                  letterSpacing: 0,
                 }}
                 aria-hidden
               >
@@ -523,7 +571,7 @@ export function AboutContent() {
                 style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.1em' }}
               >
                 Manglam Technical Agency<br />
-                Nagaur, Rajasthan · Udyam Registered 2025
+                Bikaner, Rajasthan · Udyam Registered 2025
               </p>
             </div>
 
@@ -597,7 +645,7 @@ export function AboutContent() {
                 className="font-display font-black block leading-none transition-colors duration-400 group-hover:text-violet"
                 style={{
                   fontSize: 'clamp(3rem, 5vw, 5rem)',
-                  color: 'rgba(124,58,237,0.15)',
+                  color: 'rgba(107,26,26,0.15)',
                   transitionDuration: '400ms',
                 }}
               >
@@ -646,7 +694,7 @@ export function AboutContent() {
                 style={{
                   fontSize: 'clamp(4rem, 9vw, 8rem)',
                   color: 'var(--color-dead)',
-                  letterSpacing: '-0.04em',
+                  letterSpacing: 0,
                 }}
                 aria-hidden
               >
@@ -728,9 +776,9 @@ export function AboutContent() {
             transition={{ duration: 0.65, ease: EASE }}
             className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8"
             style={{
-              border: '1px solid rgba(124,58,237,0.3)',
+              border: '1px solid rgba(107,26,26,0.3)',
               padding: 'clamp(20px, 3vw, 36px)',
-              backgroundColor: 'rgba(124,58,237,0.03)',
+              backgroundColor: 'rgba(107,26,26,0.03)',
             }}
           >
             <div>
@@ -768,3 +816,5 @@ export function AboutContent() {
     </>
   )
 }
+
+

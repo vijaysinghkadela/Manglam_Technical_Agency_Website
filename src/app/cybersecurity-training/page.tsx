@@ -15,7 +15,7 @@ const workshopOfferings = [
     duration: '4 hours',
     price: '₹25,000',
     priceDetail: 'per session (up to 15 participants)',
-    location: 'On-site (Nagaur, Bikaner, Jaipur) or Virtual',
+    location: 'On-site (Bikaner, Nagaur, Jaipur) or Virtual',
     content: [
       'Live demo of real gym website exploitation',
       'OWASP Top 3 threats for fitness businesses',
@@ -57,7 +57,7 @@ const workshopOfferings = [
 const whyMTA = [
   {
     title: 'Rajasthan-Focused',
-    description: 'Local examples from Nagaur, Bikaner, Jaipur businesses',
+    description: 'Local examples from Bikaner, Nagaur, Jaipur businesses',
   },
   {
     title: 'Hands-On',

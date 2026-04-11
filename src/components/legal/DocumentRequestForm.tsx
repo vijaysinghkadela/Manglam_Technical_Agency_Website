@@ -14,6 +14,10 @@ const schema = z.object({
   requestedDocuments: z.array(z.string()).min(1, 'Select at least one document'),
   useCase: z.string().min(20, 'Use case must be at least 20 characters'),
   privacy: z.boolean().refine((value) => value === true, 'You must agree to continue'),
+  retentionConsent: z.boolean().refine((value) => value === true, 'Retention acknowledgement is required'),
+  consentTimestamp: z.string().optional(),
+  consentPurpose: z.string().optional(),
+  consentUserAgent: z.string().optional(),
 })
 
 type FormData = z.infer<typeof schema>
@@ -43,6 +47,7 @@ export function DocumentRequestForm({ docs }: DocumentRequestFormProps) {
     defaultValues: {
       requestedDocuments: [],
       privacy: false,
+      retentionConsent: false,
     },
   })
 
@@ -54,10 +59,17 @@ export function DocumentRequestForm({ docs }: DocumentRequestFormProps) {
   }
 
   const onSubmit = async (data: FormData) => {
+    const payload = {
+      ...data,
+      consentTimestamp: new Date().toISOString(),
+      consentPurpose: 'legal-document-request',
+      consentUserAgent: typeof navigator !== 'undefined' ? navigator.userAgent : undefined,
+    }
+
     const response = await fetch('/api/document-request', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
+      body: JSON.stringify(payload),
     })
 
     if (!response.ok) {
@@ -79,7 +91,7 @@ export function DocumentRequestForm({ docs }: DocumentRequestFormProps) {
         <div className="flex items-center gap-4">
           <div
             className="w-12 h-12 flex items-center justify-center shrink-0"
-            style={{ border: '1px solid rgba(124,58,237,0.4)', backgroundColor: 'rgba(124,58,237,0.08)' }}
+            style={{ border: '1px solid rgba(107,26,26,0.4)', backgroundColor: 'rgba(107,26,26,0.08)' }}
           >
             <CheckCircle2 className="w-6 h-6" style={{ color: 'var(--color-violet-light)' }} />
           </div>
@@ -223,9 +235,9 @@ export function DocumentRequestForm({ docs }: DocumentRequestFormProps) {
                 className="text-left px-4 py-3 transition-all duration-200"
                 style={{
                   border: selected
-                    ? '1px solid rgba(124,58,237,0.6)'
+                    ? '1px solid rgba(107,26,26,0.6)'
                     : '1px solid var(--color-border)',
-                  backgroundColor: selected ? 'rgba(124,58,237,0.08)' : 'var(--color-canvas)',
+                  backgroundColor: selected ? 'rgba(107,26,26,0.08)' : 'var(--color-canvas)',
                 }}
               >
                 <p className="text-sm font-semibold" style={{ color: 'var(--color-foreground)' }}>
@@ -269,17 +281,30 @@ export function DocumentRequestForm({ docs }: DocumentRequestFormProps) {
         )}
       </label>
 
-      {/* Privacy checkbox */}
-      <label className="flex items-start gap-3 text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
-        <input
-          type="checkbox"
-          {...register('privacy')}
-          className="mt-0.5 w-4 h-4 accent-violet shrink-0"
-        />
-        I confirm this request is for legitimate evaluation or onboarding and I agree to MTA processing this submission.
-      </label>
+      {/* Consent checkboxes */}
+      <div className="grid gap-3">
+        <label className="flex items-start gap-3 text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
+          <input
+            type="checkbox"
+            {...register('privacy')}
+            className="mt-0.5 w-5 h-5 accent-violet shrink-0"
+          />
+          I confirm this request is for legitimate evaluation or onboarding and I agree to MTA processing this submission for document access review.
+        </label>
+        <label className="flex items-start gap-3 text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
+          <input
+            type="checkbox"
+            {...register('retentionConsent')}
+            className="mt-0.5 w-5 h-5 accent-violet shrink-0"
+          />
+          I acknowledge MTA may retain this request as an access-control and compliance record.
+        </label>
+      </div>
       {errors.privacy && (
         <span className="text-label text-red-400 -mt-4">{errors.privacy.message}</span>
+      )}
+      {errors.retentionConsent && (
+        <span className="text-label text-red-400 -mt-4">{errors.retentionConsent.message}</span>
       )}
 
       {/* Submit */}
@@ -301,3 +326,4 @@ export function DocumentRequestForm({ docs }: DocumentRequestFormProps) {
     </form>
   )
 }
+

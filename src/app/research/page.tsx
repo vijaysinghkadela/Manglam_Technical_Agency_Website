@@ -16,7 +16,7 @@ export default function ResearchPage() {
 
       {/* ── HERO — Full viewport ─────────────────────────── */}
       <section
-        className="relative w-full min-h-screen flex flex-col overflow-hidden grain"
+        className="relative w-full min-h-[92svh] flex flex-col overflow-hidden grain"
         style={{ backgroundColor: 'var(--color-canvas)' }}
       >
         <div className="absolute inset-0 bg-line-grid opacity-20 pointer-events-none" />
@@ -28,15 +28,15 @@ export default function ResearchPage() {
             width: 'clamp(300px, 40vw, 700px)',
             height: 'clamp(300px, 40vw, 700px)',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(124,58,237,0.07) 0%, transparent 68%)',
+            background: 'radial-gradient(circle, rgba(107,26,26,0.07) 0%, transparent 68%)',
           }}
         />
 
-        <div className="relative z-10 container-site flex flex-col flex-1 pt-28 lg:pt-36 pb-12 lg:pb-16">
+        <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-10 sm:pb-12 lg:pb-16">
 
           {/* Breadcrumb */}
           <nav
-            className="flex items-center gap-2 font-mono mb-14 lg:mb-24 animate-fade-up stagger-1"
+            className="flex items-center gap-2 font-mono mb-10 lg:mb-20 animate-fade-up stagger-1"
             style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
           >
             <Link href="/" className="hover-foreground transition-colors">HOME</Link>
@@ -58,28 +58,28 @@ export default function ResearchPage() {
                 text="CLIENT"
                 as="h1"
                 delay={0.1}
-                className="font-display font-black leading-none tracking-tighter uppercase"
+                className="font-display font-black leading-none tracking-normal uppercase"
                 style={{ fontSize: 'clamp(2rem, 4vw, 5rem)', color: 'var(--color-foreground)' }}
               />
               <TextReveal
                 text="COLLABORATION"
                 as="h1"
                 delay={0.2}
-                className="font-display font-black leading-none tracking-tighter uppercase"
+                className="font-display font-black leading-none tracking-normal uppercase"
                 style={{ fontSize: 'clamp(2rem, 4vw, 5rem)', color: 'var(--color-foreground)' }}
               />
               <TextReveal
                 text="& DELIVERY"
                 as="h1"
                 delay={0.3}
-                className="font-display font-black leading-none tracking-tighter uppercase"
+                className="font-display font-black leading-none tracking-normal uppercase"
                 style={{ fontSize: 'clamp(2rem, 4vw, 5rem)', color: 'var(--color-violet)' }}
               />
               <TextReveal
                 text="FRAMEWORK."
                 as="h1"
                 delay={0.4}
-                className="font-display font-black leading-none tracking-tighter uppercase"
+                className="font-display font-black leading-none tracking-normal uppercase"
                 style={{ fontSize: 'clamp(2rem, 4vw, 5rem)', color: 'var(--color-violet)' }}
               />
             </div>
@@ -122,3 +122,6 @@ export default function ResearchPage() {
     </main>
   )
 }
+
+
+

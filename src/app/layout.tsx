@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { Inter, Syne, JetBrains_Mono } from 'next/font/google'
 import { LenisProvider } from '@/providers/LenisProvider'
 import { MagneticCursor } from '@/components/ui/MagneticCursor'
 import { ScrollToTop } from '@/components/ui/ScrollToTop'
@@ -12,11 +11,12 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Analytics } from '@vercel/analytics/next'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { organizationSchema, websiteSchema } from '@/lib/seo/schemas'
+import '@fontsource/outfit/400.css'
+import '@fontsource/outfit/500.css'
+import '@fontsource/outfit/600.css'
+import '@fontsource/outfit/700.css'
+import '@fontsource/outfit/800.css'
 import '@/styles/globals.css'
-
-const inter     = Inter({ subsets:['latin'], variable:'--font-body',    display:'swap' })
-const syne      = Syne({ subsets:['latin'], variable:'--font-display',  display:'swap', weight:['600','700','800'] })
-const jetbrains = JetBrains_Mono({ subsets:['latin'], variable:'--font-mono', display:'swap' })
 
 const SITE_URL = 'https://manglamtechnicalagency.com'
 
@@ -24,8 +24,8 @@ export const viewport: import('next').Viewport = {
   width: 'device-width',
   initialScale: 1,
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f8fafc' },
-    { media: '(prefers-color-scheme: dark)', color: '#080808' },
+    { media: '(prefers-color-scheme: light)', color: '#faf7f4' },
+    { media: '(prefers-color-scheme: dark)', color: '#090706' },
   ],
   colorScheme: 'light dark',
 }
@@ -118,12 +118,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${syne.variable} ${jetbrains.variable}`}
-      suppressHydrationWarning
-    >
-      <body suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
+      <body className="bg-canvas text-foreground" suppressHydrationWarning>
         {/* Global structured data — Organisation + Website */}
         <JsonLd schema={organizationSchema()} />
         <JsonLd schema={websiteSchema()} />
@@ -132,30 +128,38 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <LenisProvider>
           <MagneticCursor />
           <Navbar />
-          <main className="w-full relative" style={{ overflowX:'hidden' }}>
+          <main className="relative w-full overflow-x-clip">
             {children}
           </main>
           <Footer />
           <Analytics />
           <SpeedInsights />
-<ScrollToTop />
-<Toaster
-position="bottom-right"
-toastOptions={{
-style: {
-background: 'var(--color-card)',
-color: '#FAFAFA',
-border: '1px solid var(--color-border)',
-borderRadius:'2px',
-fontFamily: 'var(--font-mono)',
-fontSize: '12px',
-},
-success: { iconTheme: { primary:'var(--color-violet)', secondary:'#FAFAFA' } },
-}}
-/>
-{/* DPDP/LGPD Compliant Consent Banner */}
-<ConsentBanner />
-</LenisProvider>
+          <ScrollToTop />
+          <Toaster
+            position="bottom-right"
+            toastOptions={{
+              style: {
+                background: 'var(--color-card)',
+                color: 'var(--color-foreground)',
+                border: '1px solid var(--color-border)',
+                borderRadius: '14px',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '12px',
+                boxShadow: '0 18px 48px rgba(0,0,0,0.26)',
+                backdropFilter: 'blur(18px)',
+                WebkitBackdropFilter: 'blur(18px)',
+              },
+              success: {
+                iconTheme: { primary: 'var(--color-accent)', secondary: 'var(--color-card)' },
+              },
+              error: {
+                iconTheme: { primary: 'var(--color-violet-dark)', secondary: 'var(--color-card)' },
+              },
+            }}
+          />
+          {/* DPDP/LGPD Compliant Consent Banner */}
+          <ConsentBanner />
+        </LenisProvider>
         </ThemeProvider>
       </body>
     </html>

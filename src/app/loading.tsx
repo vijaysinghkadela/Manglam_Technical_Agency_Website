@@ -6,8 +6,8 @@ export default function Loading() {
     >
       {/* MTA wordmark */}
       <span
-        className="font-display font-black tracking-tight select-none animate-pulse"
-        style={{ fontSize: '22px', color: 'var(--color-foreground)', opacity: 0.6, letterSpacing: '-0.03em' }}
+        className="font-display font-black tracking-normal select-none animate-pulse"
+        style={{ fontSize: '22px', color: 'var(--color-foreground)', opacity: 0.6, letterSpacing: 0 }}
       >
         MTA
       </span>
@@ -44,3 +44,4 @@ export default function Loading() {
     </div>
   )
 }
+

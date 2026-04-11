@@ -235,7 +235,7 @@ export function ResearchPageContent() {
                     className="font-display font-black leading-none select-none transition-colors duration-500 group-hover:text-violet"
                     style={{
                       fontSize: 'clamp(2rem, 3.5vw, 3.5rem)',
-                      color: 'rgba(124,58,237,0.15)',
+                      color: 'rgba(107,26,26,0.15)',
                     }}
                   >
                     {String(i + 1).padStart(2, '0')}
@@ -302,7 +302,7 @@ export function ResearchPageContent() {
                         className="font-display font-black leading-none shrink-0 transition-colors duration-500"
                         style={{
                           fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-                          color: isOpen ? 'var(--color-violet)' : 'rgba(124,58,237,0.18)',
+                          color: isOpen ? 'var(--color-violet)' : 'rgba(107,26,26,0.18)',
                           minWidth: '64px',
                         }}
                       >
@@ -348,7 +348,7 @@ export function ResearchPageContent() {
                             style={{
                               borderTop: '1px solid var(--color-border)',
                               paddingTop: '24px',
-                              borderLeft: '2px solid rgba(124,58,237,0.2)',
+                              borderLeft: '2px solid rgba(107,26,26,0.2)',
                               marginLeft: '4px',
                               paddingLeft: 'calc(64px + 2.5rem)',
                             }}
@@ -407,7 +407,7 @@ export function ResearchPageContent() {
                                   fontSize: '13px',
                                   color: 'var(--color-muted)',
                                   lineHeight: 1.65,
-                                  borderLeft: '2px solid rgba(124,58,237,0.3)',
+                                  borderLeft: '2px solid rgba(107,26,26,0.3)',
                                   paddingLeft: '12px',
                                   marginBottom: '12px',
                                 }}
@@ -421,7 +421,7 @@ export function ResearchPageContent() {
                                       key={instrument}
                                       className="font-mono text-[10px] px-2 py-1 uppercase tracking-widest"
                                       style={{
-                                        border: '1px solid rgba(124,58,237,0.35)',
+                                        border: '1px solid rgba(107,26,26,0.35)',
                                         color: 'var(--color-violet-light)',
                                       }}
                                     >
@@ -553,9 +553,9 @@ export function ResearchPageContent() {
               transition={{ duration: 0.55, delay: 0.1, ease: EASE }}
               className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6"
               style={{
-                border: '1px solid rgba(124,58,237,0.3)',
+                border: '1px solid rgba(107,26,26,0.3)',
                 padding: 'clamp(20px, 3vw, 36px)',
-                backgroundColor: 'rgba(124,58,237,0.03)',
+                backgroundColor: 'rgba(107,26,26,0.03)',
               }}
             >
               <div>
@@ -585,3 +585,4 @@ export function ResearchPageContent() {
     </div>
   )
 }
+

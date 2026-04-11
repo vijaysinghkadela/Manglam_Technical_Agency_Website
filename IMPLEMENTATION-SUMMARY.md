@@ -387,7 +387,7 @@ cd backend && npm install     # ✗ IGNORED by ESLint
 **Manglam Technical Agency**
 - **Website**: https://manglamtechnicalagency.com
 - **UDYAM**: RJ-15-0094091
-- **Locations**: Nagaur/Bikaner/Jodhpur, Rajasthan, India
+- **Locations**: Bikaner/Nagaur/Jodhpur, Rajasthan, India
 - **Email**: contact@manglamtechnicalagency.com
 
 **Ecosystem**

@@ -109,9 +109,9 @@ export function PortfolioContent() {
                         style={{
                           fontSize: '10px',
                           letterSpacing: '0.22em',
-                          border: '1px solid rgba(124,58,237,0.5)',
+                          border: '1px solid rgba(107,26,26,0.5)',
                           padding: '4px 14px',
-                          backgroundColor: 'rgba(124,58,237,0.22)',
+                          backgroundColor: 'rgba(107,26,26,0.22)',
                         }}
                       >
                         ✦ Signature Project
@@ -147,7 +147,7 @@ export function PortfolioContent() {
 
                   {/* Title */}
                   <h2
-                    className="font-display font-black leading-none tracking-tighter uppercase mb-6"
+                    className="font-display font-black leading-none tracking-normal uppercase mb-6"
                     style={{ fontSize: 'clamp(2rem, 3.5vw, 3.25rem)', color: 'var(--color-foreground)' }}
                   >
                     {p.title}
@@ -292,7 +292,7 @@ export function PortfolioContent() {
                 ✦ PIPELINE
               </span>
               <h2
-                className="font-display font-black leading-none tracking-tighter uppercase"
+                className="font-display font-black leading-none tracking-normal uppercase"
                 style={{ fontSize: 'clamp(1.75rem, 3.5vw, 3rem)', color: 'var(--color-foreground)' }}
               >
                 Coming Soon
@@ -327,7 +327,7 @@ export function PortfolioContent() {
                   className="font-display font-black leading-none select-none transition-colors duration-500 group-hover:text-violet"
                   style={{
                     fontSize: 'clamp(1.75rem, 3vw, 2.75rem)',
-                    color: 'rgba(124,58,237,0.15)',
+                    color: 'rgba(107,26,26,0.15)',
                     lineHeight: 1,
                   }}
                 >
@@ -399,9 +399,9 @@ export function PortfolioContent() {
             viewport={{ once: true, margin: "-50px" }}
             className="mt-20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
             style={{
-              border: '1px solid rgba(124,58,237,0.3)',
+              border: '1px solid rgba(107,26,26,0.3)',
               padding: 'clamp(20px, 3vw, 36px)',
-              backgroundColor: 'rgba(124,58,237,0.03)',
+              backgroundColor: 'rgba(107,26,26,0.03)',
             }}
           >
             <div>
@@ -430,3 +430,5 @@ export function PortfolioContent() {
     </div>
   )
 }
+
+

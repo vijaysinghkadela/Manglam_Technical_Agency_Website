@@ -1,30 +1,69 @@
-import { ReactNode, memo } from 'react';
-import { cn } from '@/lib/utils';
+'use client'
+
+import { ReactNode, memo } from 'react'
+import { motion } from 'framer-motion'
+import { cn } from '@/lib/utils'
+import { BRAND } from '@/lib/design-system'
 
 interface BadgeProps {
-  children: ReactNode;
-  className?: string;
-  variant?: 'default' | 'brand' | 'accent';
+  children: ReactNode
+  className?: string
+  variant?: 'default' | 'brand' | 'accent' | 'subtle' | 'outline'
+  size?: 'sm' | 'md' | 'lg'
+  interactive?: boolean
 }
 
-const Badge = memo(function Badge({ children, className, variant = 'default' }: BadgeProps) {
-  const variants = {
-    default: 'bg-white/4 border-white/8 text-white/60',
-    brand: 'bg-violet-500/15 border-violet-500/25 text-violet-400',
+const Badge = memo(function Badge({
+  children,
+  className,
+  variant = 'default',
+  size = 'md',
+  interactive = false,
+}: BadgeProps) {
+  const sizeClasses = {
+    sm: 'px-3 py-1.5 text-[10px]',
+    md: 'px-4 py-2 text-[11px]',
+    lg: 'px-5 py-2.5 text-[11px]',
+  }
+
+  const variantClasses = {
+    default: 'bg-white/5 border-white/10 text-white/70 hover:border-white/20',
+    brand: `bg-[${BRAND.primarySoft}] border-[${BRAND.primaryMedium}] text-[${BRAND.primaryText}]`,
     accent: 'bg-cyan-400/10 border-cyan-400/25 text-cyan-400',
-  };
+    subtle: 'bg-card border-border text-muted',
+    outline: 'bg-transparent border-border text-muted hover:border-white/20',
+  }
+
+  const MotionComponent = interactive ? motion.span : 'span'
+  const motionProps = interactive
+    ? {
+        whileHover: { scale: 1.02 },
+        whileTap: { scale: 0.98 },
+      }
+    : {}
 
   return (
-    <span
+    <MotionComponent
       className={cn(
-        'inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-medium',
-        variants[variant],
+        'inline-flex items-center gap-2 rounded-full border font-mono uppercase tracking-widest whitespace-nowrap transition-all duration-300',
+        sizeClasses[size],
+        variantClasses[variant],
         className,
       )}
+      style={{
+        letterSpacing: size === 'sm' ? '0.16em' : '0.18em',
+      }}
+      {...motionProps}
     >
+      {variant === 'brand' && (
+        <span
+          className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+          style={{ backgroundColor: BRAND.primary }}
+        />
+      )}
       {children}
-    </span>
-  );
+    </MotionComponent>
+  )
 })
 
-export default Badge;
+export default Badge

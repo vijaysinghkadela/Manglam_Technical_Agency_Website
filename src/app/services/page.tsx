@@ -27,7 +27,7 @@ export default function ServicesPage() {
             right: '-8%', top: '10%',
             width: 'clamp(300px, 40vw, 700px)', height: 'clamp(300px, 40vw, 700px)',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(124,58,237,0.09) 0%, transparent 68%)',
+            background: 'radial-gradient(circle, rgba(107,26,26,0.09) 0%, transparent 68%)',
           }}
         />
 
@@ -46,10 +46,10 @@ export default function ServicesPage() {
               ✦ WHAT WE DO
             </span>
             <div className="flex flex-col" style={{ gap: '0.02em' }}>
-              <h1 className="font-display font-black leading-none tracking-tighter uppercase" style={{ fontSize: 'clamp(3rem, 9vw, 9rem)', color: 'var(--color-foreground)' }}>
+              <h1 className="font-display font-black leading-none tracking-normal uppercase" style={{ fontSize: 'clamp(3rem, 9vw, 9rem)', color: 'var(--color-foreground)' }}>
                 SERVICES
               </h1>
-              <h1 className="font-display font-black leading-none tracking-tighter uppercase" style={{ fontSize: 'clamp(3rem, 9vw, 9rem)', color: 'var(--color-violet)' }}>
+              <h1 className="font-display font-black leading-none tracking-normal uppercase" style={{ fontSize: 'clamp(3rem, 9vw, 9rem)', color: 'var(--color-violet)' }}>
                 THAT SCALE.
               </h1>
             </div>
@@ -95,3 +95,5 @@ export default function ServicesPage() {
     </main>
   )
 }
+
+

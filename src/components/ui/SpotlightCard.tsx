@@ -5,7 +5,7 @@ interface Props {
   children:   ReactNode
   className?: string
   style?:     CSSProperties
-  intensity?: number  // 0.04–0.12 — opacity of violet spotlight
+  intensity?: number  // 0.04–0.12 — opacity of brand spotlight
 }
 
 /**
@@ -13,7 +13,7 @@ interface Props {
  * Uses CSS variables + RAF throttling for smooth 60fps performance
  * Compatible with all browsers: Chrome, Safari, Firefox, Edge, Opera
  */
-export function SpotlightCard({ children, className = '', style, intensity = 0.065 }: Props) {
+export function SpotlightCard({ children, className = '', style, intensity = 0.055 }: Props) {
   const [isHovered, setIsHovered] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   const rafIdRef = useRef<number | null>(null)
@@ -30,12 +30,17 @@ export function SpotlightCard({ children, className = '', style, intensity = 0.0
   return (
     <div
       ref={ref}
-      className={`transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 ${className}`}
+      className={`overflow-hidden rounded-[28px] border border-border bg-card transition-[transform,box-shadow,border-color,background-color] duration-300 hover:-translate-y-1 hover:scale-[1.01] ${className}`}
       style={{
         ...style,
-        background: isHovered 
-          ? `radial-gradient(300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(124,58,237,${intensity}), transparent 70%)`
-          : 'transparent'
+        backgroundColor: 'var(--color-card)',
+        borderColor: isHovered ? 'var(--color-accent-border)' : 'var(--color-border)',
+        boxShadow: isHovered
+          ? '0 24px 72px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.03)'
+          : '0 14px 40px rgba(0,0,0,0.10)',
+        backgroundImage: isHovered
+          ? `radial-gradient(320px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(var(--color-accent-rgb), ${intensity}), transparent 68%)`
+          : 'none',
       }}
       onMouseMove={(e) => {
         if (!ref.current) return
@@ -45,7 +50,7 @@ export function SpotlightCard({ children, className = '', style, intensity = 0.0
 
         rafIdRef.current = requestAnimationFrame(() => {
           if (!ref.current) return
-          
+
           const r = ref.current.getBoundingClientRect()
           const x = e.clientX - r.left
           const y = e.clientY - r.top

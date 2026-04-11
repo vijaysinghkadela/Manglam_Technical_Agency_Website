@@ -160,7 +160,7 @@ export const aiMarketResearchPart2: MarketResearchArticle[] = [
       {
         id: 'executive-summary',
         heading: 'Executive Summary: The Tier-2 Boutique Model',
-        content: `Manglam Technical Agency (MTA) serves as a prime example of a lean, tier-2 city enterprise leveraging global digital tools to deliver sophisticated engineering and automation solutions. Operating from Rajasthan with dual presence in Jaipur (tech zone) and Nagaur (tier-2), MTA demonstrates how micro-agencies can achieve competitive positioning against larger, more expensive competitors through strategic cost management, modern infrastructure, and specialized service delivery.`,
+        content: `Manglam Technical Agency (MTA) serves as a prime example of a lean, tier-2 city enterprise leveraging global digital tools to deliver sophisticated engineering and automation solutions. Operating from Rajasthan with dual presence in Jaipur (tech zone) and Bikaner (tier-2), MTA demonstrates how micro-agencies can achieve competitive positioning against larger, more expensive competitors through strategic cost management, modern infrastructure, and specialized service delivery.`,
         bullets: [
           'UDYAM-RJ-25-0043551 — MSME-registered micro-enterprise since April 2022',
           'NIC Code 62099 — Other information technology and computer service activities',
@@ -185,7 +185,7 @@ export const aiMarketResearchPart2: MarketResearchArticle[] = [
       {
         id: 'geographic-strategy',
         heading: 'Geographic Strategy: Dual-Hub Operational Model',
-        content: `MTA's contact information reveals a dual-hub strategy. Business cards and collateral display addresses in both a major technological center (Plot No. A-21, Tech Zone, Malviya Nagar, Jaipur) and a tier-2 municipality (Rampole Choraha, Nagaur, Rajasthan). This footprint indicates strategic capitalization on lower operational overhead of tier-2 cities while maintaining presence in recognized tech zone for enterprise client interface.`,
+        content: `MTA's contact information reveals a dual-hub strategy. Business cards and collateral display addresses in both a major technological center (Plot No. A-21, Tech Zone, Malviya Nagar, Jaipur) and a tier-2 municipality (Rampole Choraha, Bikaner, Rajasthan). This footprint indicates strategic capitalization on lower operational overhead of tier-2 cities while maintaining presence in recognized tech zone for enterprise client interface.`,
         tables: [
           {
             title: 'MTA Geographic Cost Advantage Analysis',
@@ -193,7 +193,7 @@ export const aiMarketResearchPart2: MarketResearchArticle[] = [
             rows: [
               ['Tier-1 (Delhi/Mumbai)', '₹80,000–₹150,000/month', '+30-50%', 'High', 'Brand prestige'],
               ['Jaipur (Tier-2 Tech)', '₹35,000–₹60,000/month', 'Baseline', 'Medium', 'Tech ecosystem access'],
-              ['Nagaur (Tier-3)', '₹15,000–₹25,000/month', '-20-30%', 'Low', 'Cost optimization'],
+              ['Bikaner (Tier-3)', '₹15,000–₹25,000/month', '-20-30%', 'Low', 'Cost optimization'],
               ['MTA Dual Model', '₹50,000–₹85,000/month', 'Tier-2 rates', 'Medium+', 'Balanced optimization'],
             ],
           },

@@ -33,7 +33,7 @@ npm run context  # Generates CONTEXT-SUMMARY.md
 | Fact | Detail |
 |------|--------|
 | **Entity** | Manglam Technical Agency, UDYAM-RJ-15-0094091 |
-| **Locations** | Nagaur/Bikaner/Jodhpur, Rajasthan, India |
+| **Locations** | Bikaner/Nagaur/Jodhpur, Rajasthan, India |
 | **Brand** | Deep Red `#6B1A1A` |
 | **Product** | FitNexora (fitness SaaS) — handles health/biometric data |
 | **Ecosystem** | iStart Rajasthan registered; QRate eligible |

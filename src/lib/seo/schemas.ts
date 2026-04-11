@@ -34,7 +34,7 @@ export function organizationSchema() {
     address: {
       '@type': 'PostalAddress',
       streetAddress: 'Rampole Choraha',
-      addressLocality: 'Nagaur',
+      addressLocality: 'Bikaner',
       addressRegion: 'Rajasthan',
       postalCode: '341001',
       addressCountry: 'IN',

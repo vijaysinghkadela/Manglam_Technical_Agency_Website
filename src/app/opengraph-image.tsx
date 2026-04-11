@@ -40,7 +40,7 @@ export default function OgImage() {
             width: '600px',
             height: '600px',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(124,58,237,0.18) 0%, transparent 65%)',
+            background: 'radial-gradient(circle, rgba(107,26,26,0.18) 0%, transparent 65%)',
           }}
         />
 
@@ -53,8 +53,8 @@ export default function OgImage() {
               style={{
                 width: '44px',
                 height: '44px',
-                backgroundColor: 'rgba(124,58,237,0.15)',
-                border: '1px solid rgba(124,58,237,0.4)',
+                backgroundColor: 'rgba(107,26,26,0.15)',
+                border: '1px solid rgba(107,26,26,0.4)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -91,7 +91,7 @@ export default function OgImage() {
                   fontWeight: 900,
                   color: '#FAFAFA',
                   lineHeight: 0.9,
-                  letterSpacing: '-0.04em',
+                  letterSpacing: 0,
                   textTransform: 'uppercase',
                 }}
               >
@@ -101,9 +101,9 @@ export default function OgImage() {
                 style={{
                   fontSize: '88px',
                   fontWeight: 900,
-                  color: '#7C3AED',
+                  color: '#6B1A1A',
                   lineHeight: 0.9,
-                  letterSpacing: '-0.04em',
+                  letterSpacing: 0,
                   textTransform: 'uppercase',
                 }}
               >
@@ -151,3 +151,5 @@ export default function OgImage() {
     { ...size },
   )
 }
+
+

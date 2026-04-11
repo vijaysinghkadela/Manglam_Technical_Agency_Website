@@ -12,19 +12,20 @@ const SIZES: Record<Variant, { w: number; h: number }> = {
   link: { w: 48, h: 48 },
 }
 
-// Spring configuration
-const SPRING_CONFIG = { stiffness: 220, damping: 26, mass: 0.35 }
+// Spring configuration - less aggressive
+const SPRING_CONFIG = { stiffness: 180, damping: 22, mass: 0.4 }
 
 export function MagneticCursor() {
   const [ready, setReady] = useState(false)
   const [visible, setVisible] = useState(false)
   const [variant, setVariant] = useState<Variant>('default')
-  
+
   // Refs for performance - avoid state updates in hot paths
   const variantRef = useRef<Variant>('default')
   const visibleRef = useRef(false)
   const lastVariantCheck = useRef(0)
   const rafId = useRef<number | null>(null)
+  const mousePos = useRef({ x: -300, y: -300 })
 
   // Motion values
   const mx = useMotionValue(-300)
@@ -34,6 +35,7 @@ export function MagneticCursor() {
 
   // Stable RAF-throttled mouse handler
   const move = useCallback((e: MouseEvent) => {
+    mousePos.current = { x: e.clientX, y: e.clientY }
     mx.set(e.clientX)
     my.set(e.clientY)
 
@@ -43,16 +45,20 @@ export function MagneticCursor() {
       setVisible(true)
     }
 
-    // Throttle variant detection to every 80ms
+    // Throttle variant detection to every 100ms (less aggressive)
     const now = performance.now()
-    if (now - lastVariantCheck.current > 80) {
+    if (now - lastVariantCheck.current > 100) {
       lastVariantCheck.current = now
-      const el = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement | null
-      const hit = el?.closest('[data-cursor]')?.getAttribute('data-cursor') as Variant | null
-      const next = hit ?? 'default'
-      if (next !== variantRef.current) {
-        variantRef.current = next
-        setVariant(next)
+      try {
+        const el = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement | null
+        const hit = el?.closest('[data-cursor]')?.getAttribute('data-cursor') as Variant | null
+        const next = hit ?? 'default'
+        if (next !== variantRef.current) {
+          variantRef.current = next
+          setVariant(next)
+        }
+      } catch {
+        // Silent fail - elementFromPoint can throw in some edge cases
       }
     }
   }, [mx, my])
@@ -71,19 +77,20 @@ export function MagneticCursor() {
     // Only enable on devices with fine pointer (mouse)
     if (!window.matchMedia('(pointer: fine)').matches) return
 
-    // Delay ready state slightly to avoid hydration flash
-    const readyTimeout = setTimeout(() => setReady(true), 0)
+    // Delay ready state to avoid hydration flash and initial layout shifts
+    const readyTimeout = setTimeout(() => setReady(true), 100)
 
     const hide = () => {
       visibleRef.current = false
       setVisible(false)
     }
-    
+
     const show = () => {
       visibleRef.current = true
       setVisible(true)
     }
 
+    // Passive event listener for better performance
     window.addEventListener('mousemove', handleMouseMove, { passive: true })
     document.documentElement.addEventListener('mouseleave', hide)
     document.documentElement.addEventListener('mouseenter', show)
@@ -99,46 +106,47 @@ export function MagneticCursor() {
     }
   }, [handleMouseMove])
 
-  // Don't render on touch devices or before ready
+  // Don't render until ready to prevent hydration mismatch
   if (!ready) return null
 
-  const { w, h } = SIZES[variant]
+  // Don't render on touch devices
+  if (typeof window !== 'undefined' && !window.matchMedia('(pointer: fine)').matches) {
+    return null
+  }
+
+  const size = SIZES[variant]
+  const halfW = size.w / 2
+  const halfH = size.h / 2
 
   return (
-    <>
-      {/* Dot: instant follow — theme-aware color */}
-      <motion.div
-        className="fixed top-0 left-0 rounded-full pointer-events-none z-9999"
+    <motion.div
+      className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference hidden md:block"
+      style={{
+        x: rx,
+        y: ry,
+        translateX: '-50%',
+        translateY: '-50%',
+        width: size.w,
+        height: size.h,
+        opacity: visible ? 1 : 0,
+        willChange: 'transform',
+      }}
+      animate={{
+        width: size.w,
+        height: size.h,
+      }}
+      transition={{
+        width: { duration: 0.15, ease: 'easeOut' },
+        height: { duration: 0.15, ease: 'easeOut' },
+      }}
+    >
+      <div
+        className="w-full h-full rounded-full"
         style={{
-          x: mx,
-          y: my,
-          translateX: '-50%',
-          translateY: '-50%',
-          width: 5,
-          height: 5,
-          backgroundColor: 'var(--color-foreground)',
-          opacity: visible && variant !== 'pointer' ? 1 : 0,
-          willChange: 'transform',
-          transition: 'opacity 0.15s',
+          backgroundColor: 'white',
+          opacity: 0.9,
         }}
       />
-      {/* Ring: spring follow — theme-aware border */}
-      <motion.div
-        className="fixed top-0 left-0 rounded-full border pointer-events-none z-9998"
-        style={{
-          x: rx,
-          y: ry,
-          translateX: '-50%',
-          translateY: '-50%',
-          width: w,
-          height: h,
-          opacity: visible ? 1 : 0,
-          backgroundColor: variant === 'pointer' ? 'var(--color-violet)' : 'transparent',
-          borderColor: variant === 'pointer' ? 'var(--color-violet)' : 'var(--color-cursor-ring)',
-          willChange: 'transform',
-          transition: 'width 0.18s ease, height 0.18s ease, background-color 0.18s ease, opacity 0.15s',
-        }}
-      />
-    </>
+    </motion.div>
   )
 }
