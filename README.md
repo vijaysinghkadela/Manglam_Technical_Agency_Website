@@ -1,113 +1,150 @@
 # Manglam Technical Agency Website
 
-A scalable, production-ready website for Manglam Technical Agency built with modern web technologies.
+A scalable, production-ready website for Manglam Technical Agency built with Next.js 16 and React 19.
 
-## System Architecture
+> **Entity:** Manglam Technical Agency, UDYAM-RJ-15-0094091  
+> **Locations:** Bikaner/Nagaur/Jodhpur, Rajasthan, India  
+> **Brand:** Deep Red `#6B1A1A`  
+> **Product:** FitNexora (fitness SaaS) — handles health/biometric data  
+> **Ecosystem:** iStart Rajasthan registered; QRate eligible
 
-```
-mta-website/
-├── frontend/          # UI + User Experience Layer (Next.js)
-├── backend/           # Business Logic + API Layer (Express.js)
-├── docs/              # Documentation
-└── docker-compose.yml # Container Orchestration
-```
+---
 
 ## Quick Start
 
 ### Prerequisites
 - Node.js 20+
-- npm or yarn
-- MongoDB (optional for local dev)
+- npm
 
 ### Development
 
-**Frontend:**
 ```bash
-cd frontend
 npm install
 npm run dev
 ```
+
 Open [http://localhost:3000](http://localhost:3000)
 
-**Backend:**
-```bash
-cd backend
-npm install
-npm run dev
-```
-API runs on [http://localhost:5000](http://localhost:5000)
-
-### Docker (Recommended)
+### Production Build
 
 ```bash
-docker-compose up -d
+npm run build
+npm run start
 ```
+
+---
 
 ## Project Structure
 
-### Frontend (`/frontend`)
-| Directory | Purpose |
-|-----------|---------|
-| `src/components/` | Reusable UI blocks |
-| `src/pages/` | Page components (App Router) |
-| `src/hooks/` | Custom React hooks |
-| `src/services/` | API communication |
-| `src/contexts/` | React contexts |
-| `src/store/` | State management (Zustand) |
-| `src/types/` | TypeScript definitions |
-| `src/utils/` | Utility functions |
-| `src/routes/` | Navigation system |
+**Note:** This is a single Next.js 16 app in the root directory, NOT a monorepo.
 
-### Backend (`/backend`)
-| Directory | Purpose |
-|-----------|---------|
-| `src/models/` | Database structure |
-| `src/controllers/` | Request handling |
-| `src/routes/` | API routes |
-| `src/services/` | Core business logic |
-| `src/middleware/` | Auth & security |
-| `src/utils/` | Helper functions |
-| `src/config/` | Configuration |
-| `src/jobs/` | Background tasks |
+```
+src/
+├── app/                 # Next.js App Router pages
+│   ├── page.tsx        # Home
+│   ├── about/
+│   ├── blog/
+│   ├── contact/
+│   ├── services/
+│   ├── portfolio/
+│   ├── pricing/
+│   ├── research/
+│   ├── legal/
+│   └── api/            # API routes (contact, newsletter, quote)
+├── components/
+│   ├── home/           # Home page sections
+│   ├── layout/         # Navbar, Footer
+│   ├── ui/             # Reusable UI components
+│   ├── blog/
+│   ├── contact/
+│   ├── services/
+│   └── ...
+├── lib/
+│   ├── data/           # Static content (TypeScript files)
+│   ├── constants.ts
+│   ├── design-system.ts
+│   └── security.ts
+├── providers/          # React context providers (Lenis)
+├── stores/             # Zustand stores
+└── hooks/              # Custom React hooks
+```
+
+---
 
 ## Tech Stack
 
-### Frontend
-- Next.js 16 (App Router)
-- React 19
-- TypeScript
-- Tailwind CSS 4
-- Framer Motion
-- Zustand
+| Layer | Technology |
+|-------|------------|
+| Framework | Next.js 16.2.2 (App Router) |
+| React | 19.2.3 |
+| Styling | Tailwind CSS v4 |
+| Animation | Framer Motion + Lenis smooth scroll |
+| State | Zustand |
+| Forms | React Hook Form + Zod |
+| Email | Nodemailer (API routes) |
 
-### Backend
-- Node.js + Express.js
-- MongoDB + Mongoose
-- JWT Authentication
-- Nodemailer
-
-### DevOps
-- Docker & Docker Compose
-- Nginx (reverse proxy)
-
-## Documentation
-
-- [Architecture](docs/architecture/ARCHITECTURE.md)
-- [API Reference](docs/api/API.md)
-- [Deployment Guide](docs/deployment/DEPLOYMENT.md)
-
-## Environment Variables
-
-See [Deployment Guide](docs/deployment/DEPLOYMENT.md) for full list.
+---
 
 ## Scripts
 
 | Command | Description |
 |---------|-------------|
-| `npm run dev` | Start development server |
+| `npm run dev` | Start development server (Turbopack) |
 | `npm run build` | Build for production |
 | `npm run start` | Start production server |
-| `npm run lint` | Run ESLint |
+| `npm run lint` | Run ESLint (zero warnings policy) |
+
+---
+
+## Key Features
+
+### Security & Compliance
+- **Proxy Handler:** `src/proxy.ts` - Security middleware (XSS/SQL detection, rate limiting, CORS)
+- **Compliance:** DPDP Act 2023, LGPD (Brazil), GDPR (EU) - Privacy-first design
+- **Security Headers:** CSP, HSTS, X-Frame-Options, Referrer-Policy
+- **Rate Limiting:** 5 requests/minute per IP for API routes
+
+### Content Management
+All content in static TypeScript files at `src/lib/data/`:
+- `services.ts` - Service offerings
+- `projects.ts` - Portfolio items
+- `blog.ts` - Blog posts
+- `research.ts` - Research articles
+- `testimonials.ts` - Client testimonials
+- `legal.ts` - Privacy policy, terms, agreements
+
+**No CMS, no database.** Edit files directly.
+
+### Animations
+- Smooth scroll via Lenis
+- Framer Motion for component animations
+- Reduced motion support via `useReducedMotion()`
+
+---
+
+## Configuration
+
+### Path Aliases
+```typescript
+@/* → ./src/*
+```
+
+### Fonts
+Configured in `src/app/layout.tsx`:
+- **Body:** Inter (`--font-body`)
+- **Display:** Syne (`--font-display`)
+- **Mono:** JetBrains Mono (`--font-mono`)
+
+---
+
+## Documentation
+
+- `/docs/AGENTS.md` - Comprehensive agent guidance
+- `/docs/COMPLIANCE.md` - DPDP/LGPD/GDPR implementation
+- `/docs/PIPELINE.md` - 10-stage client workflow
+- `/docs/ECOSYSTEM.md` - Rajasthan/iStart context
+
+---
 
 ## License
 
