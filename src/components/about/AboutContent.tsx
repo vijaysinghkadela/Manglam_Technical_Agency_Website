@@ -120,7 +120,7 @@ export function AboutContent() {
                 { word: 'FULL-SERVICE', color: 'var(--color-foreground)' },
                 { word: 'TECHNICAL', color: 'var(--color-violet)' },
                 { word: 'AGENCY.', color: 'var(--color-muted)' },
-              ].map(({ word, color }, i) => (
+              ].map(({ word, color }) => (
                 <div key={word}>
                   <span
                     className="font-display font-black leading-none tracking-normal block"

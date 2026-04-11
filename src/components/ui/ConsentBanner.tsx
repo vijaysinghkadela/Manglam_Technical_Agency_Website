@@ -139,7 +139,7 @@ export function ConsentBanner() {
                     { icon: Eye, label: 'Analytics', desc: 'Usage data' },
                     { icon: Lock, label: 'Secure', desc: 'Encrypted' },
                     { icon: CheckCircle2, label: 'DPDP', desc: 'Compliant' },
-                  ].map((item, i) => (
+                  ].map((item) => (
                     <div
                       key={item.label}
                       className="flex flex-col items-center p-3 rounded-xl transition-all duration-200 hover:bg-white/5"

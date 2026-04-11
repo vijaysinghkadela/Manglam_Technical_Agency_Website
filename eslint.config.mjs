@@ -13,6 +13,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    ".claude/**",
+    ".agents/**",
+    ".opencode/**",
     "backend/**",
     "frontend/**",
     // Node.js scripts use CommonJS

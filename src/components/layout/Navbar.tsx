@@ -8,10 +8,10 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown, Menu, X, ArrowUpRight } from 'lucide-react'
 import { services } from '@/lib/data/services'
 import { cn } from '@/lib/utils'
-import dynamic from 'next/dynamic'
+import ThemeToggle from '@/components/ui/ThemeToggle'
+import { useIsClient } from '@/hooks/useIsClient'
 
 import { useTheme } from 'next-themes'
-const ThemeToggle = dynamic(() => import('@/components/ui/ThemeToggle'), { ssr: false })
 
 const NAV_LINKS = [
   { href: '/', label: 'Home' },
@@ -116,22 +116,20 @@ const getNavStyles = (isLight: boolean, scrolled: boolean) => ({
 
 export function Navbar() {
   const path = usePathname()
+  const isClient = useIsClient()
   const [scrolled, setScrolled] = useState(false)
   const [mobile, setMobile] = useState(false)
   const [mega, setMega] = useState(false)
   const { resolvedTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
   const [hoveredLink, setHoveredLink] = useState<string | null>(null)
   const [pressedLink, setPressedLink] = useState<string | null>(null)
   const [ctaHovered, setCtaHovered] = useState(false)
   const [ctaPressed, setCtaPressed] = useState(false)
 
-  useEffect(() => setMounted(true), [])
-
   const isLight = useMemo(() => {
-    if (mounted) return resolvedTheme !== 'dark'
+    if (isClient) return resolvedTheme !== 'dark'
     return true // default to light during SSR
-  }, [mounted, resolvedTheme])
+  }, [isClient, resolvedTheme])
   const styles = useMemo(() => getNavStyles(isLight, scrolled), [isLight, scrolled])
 
   // Scroll detection with RAF throttling
@@ -252,7 +250,7 @@ export function Navbar() {
                   width={40}
                   height={40}
                   className="shrink-0 transition-opacity duration-300"
-                  style={{ opacity: mounted ? 1 : 0 }}
+                  style={{ opacity: isClient ? 1 : 0 }}
                   priority
                 />
               </motion.div>

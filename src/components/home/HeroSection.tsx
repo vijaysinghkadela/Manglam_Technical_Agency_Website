@@ -3,11 +3,11 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
 
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { TextReveal } from '@/components/ui/TextReveal'
 import { MagneticButton } from '@/components/ui/MagneticButton'
+import OrbitalRing from '@/components/home/OrbitalRing'
 import {
   BRAND,
   ANIMATION,
@@ -17,8 +17,6 @@ import {
   SHADOW,
   GRADIENT,
 } from '@/lib/design-system'
-
-const OrbitalRing = dynamic(() => import('@/components/home/OrbitalRing'), { ssr: false })
 
 const SERVICES = [
   'Cybersecurity',

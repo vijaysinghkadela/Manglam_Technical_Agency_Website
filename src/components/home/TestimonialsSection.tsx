@@ -4,7 +4,7 @@ import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-mo
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { testimonials } from '@/lib/data/testimonials'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
-import { BRAND, ANIMATION, SPACING, TYPOGRAPHY, RADIUS } from '@/lib/design-system'
+import { BRAND, ANIMATION } from '@/lib/design-system'
 
 const AUTO_ADVANCE_MS = 5000
 const SWIPE_THRESHOLD = 50

@@ -1,6 +1,6 @@
 'use client'
 import { memo, useMemo } from 'react'
-import { BRAND, ANIMATION, TYPOGRAPHY, RADIUS, SHADOW } from '@/lib/design-system'
+import { BRAND, ANIMATION, TYPOGRAPHY, RADIUS } from '@/lib/design-system'
 
 const ITEMS = [
   'WEB DEVELOPMENT', 'SOCIAL MEDIA MARKETING', 'CYBERSECURITY',

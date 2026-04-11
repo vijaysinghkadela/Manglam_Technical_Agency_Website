@@ -1,7 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import { ScrambleCounter } from '@/components/ui/ScrambleCounter'
-import { BRAND, ANIMATION, SPACING, TYPOGRAPHY, RADIUS, SHADOW } from '@/lib/design-system'
+import { BRAND, ANIMATION, SPACING, TYPOGRAPHY, RADIUS } from '@/lib/design-system'
 
 const STATS = [
   { value: 3, suffix: '', label: 'ACTIVE CLIENTS', sub: 'tracked in Clients MOC' },

@@ -1,8 +1,9 @@
 'use client'
 
 import { useTheme } from 'next-themes'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useIsClient } from '@/hooks/useIsClient'
 
 const SunIcon = ({ className }: { className?: string }) => (
   <svg
@@ -41,18 +42,13 @@ const MoonIcon = ({ className }: { className?: string }) => (
 )
 
 export default function ThemeToggle() {
-  const { theme, setTheme, resolvedTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
+  const { setTheme, resolvedTheme } = useTheme()
+  const isClient = useIsClient()
   const [isHovered, setIsHovered] = useState(false)
   const [isPressed, setIsPressed] = useState(false)
 
-  // Prevent hydration mismatch
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
   // Prevent flash during hydration
-  if (!mounted) {
+  if (!isClient) {
     return (
       <div 
         className="h-9 w-9 sm:w-[88px] rounded-full flex items-center justify-center"

@@ -173,7 +173,7 @@ export function sanitizeUrl(url: string): string | null {
     }
 
     return parsed.toString();
-  } catch (e) {
+  } catch {
     return null;
   }
 }

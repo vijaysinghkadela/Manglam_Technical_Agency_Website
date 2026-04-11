@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { leadToDeliveryPipeline } from '@/lib/data/research'
-import { BRAND, ANIMATION, SPACING, TYPOGRAPHY, RADIUS } from '@/lib/design-system'
+import { BRAND, ANIMATION } from '@/lib/design-system'
 
 export function ProcessSection() {
   const [active, setActive] = useState<number | null>(0)

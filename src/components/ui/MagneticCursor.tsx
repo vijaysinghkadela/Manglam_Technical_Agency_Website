@@ -115,8 +115,6 @@ export function MagneticCursor() {
   }
 
   const size = SIZES[variant]
-  const halfW = size.w / 2
-  const halfH = size.h / 2
 
   return (
     <motion.div

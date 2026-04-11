@@ -1,7 +1,20 @@
 import type { NextConfig } from "next";
 
-// Generate nonce for CSP on each request
-// Note: For production, implement proper nonce generation in middleware
+const isDevelopment = process.env.NODE_ENV === 'development'
+
+const contentSecurityPolicy = [
+  "default-src 'self'",
+  `script-src 'self' 'unsafe-inline'${isDevelopment ? " 'unsafe-eval'" : ''} https://va.vercel-scripts.com https://vercel.live *.vercel.app`,
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: https: blob:",
+  "font-src 'self' data:",
+  "connect-src 'self' https://api.resend.dev https://*.vercel.app https://vitals.vercel-insights.com https://va.vercel-scripts.com",
+  "frame-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  'upgrade-insecure-requests',
+].join('; ')
+
 const securityHeaders = [
   { key: 'X-DNS-Prefetch-Control', value: 'on' },
   { key: 'X-Content-Type-Options', value: 'nosniff' },
@@ -18,9 +31,7 @@ const securityHeaders = [
   },
   {
     key: 'Content-Security-Policy',
-    // Removed 'unsafe-inline' and 'unsafe-eval' for scripts
-    // Added strict-dynamic for scripts that need it
-    value: "default-src 'self'; script-src 'self' 'nonce-{nonce}' 'strict-dynamic' *.vercel.app; style-src 'self' 'nonce-{nonce}'; img-src 'self' data: https: blob:; font-src 'self'; connect-src 'self' https://api.resend.dev https://*.vercel.app; frame-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;",
+    value: contentSecurityPolicy,
   },
   {
     key: 'Cross-Origin-Opener-Policy',

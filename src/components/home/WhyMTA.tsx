@@ -1,7 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import { Check } from 'lucide-react'
-import { BRAND, ANIMATION, SPACING, TYPOGRAPHY, RADIUS } from '@/lib/design-system'
+import { BRAND, ANIMATION } from '@/lib/design-system'
 
 const values = [
   {

@@ -30,13 +30,13 @@ const ACCENT_LIGHT = 'rgba(107,26,26,0.6)'
 const ACCENT_FADE = 'rgba(107,26,26,0.2)'
 const ACCENT_GLOW = 'rgba(107,26,26,0.35)'
 
-// Calculate orbital positions
+// Calculate orbital positions - round to 2 decimal places to avoid hydration mismatches
 const calculatePosition = (index: number, total: number, radius: number = 48) => {
   const angle = (360 / total) * index - 90
   const rad = (angle * Math.PI) / 180
   return {
-    x: 50 + radius * Math.cos(rad),
-    y: 50 + radius * Math.sin(rad),
+    x: parseFloat((50 + radius * Math.cos(rad)).toFixed(2)),
+    y: parseFloat((50 + radius * Math.sin(rad)).toFixed(2)),
     angle,
   }
 }
@@ -58,7 +58,7 @@ const ServiceBadge = memo(function ServiceBadge({
   return (
     <div
       className="absolute"
-      style={{ left: `${x}%`, top: `${y}%`, transform: 'translate(-50%, -50%)' }}
+      style={{ left: `${x.toFixed(2)}%`, top: `${y.toFixed(2)}%`, transform: 'translate(-50%, -50%)' }}
     >
       <motion.div
         animate={prefersReduced ? {} : { rotate: -360 }}
@@ -148,8 +148,8 @@ const FloatingParticle = memo(function FloatingParticle({
   duration?: number
 }) {
   const rad = (angle * Math.PI) / 180
-  const x = 50 + radius * Math.cos(rad)
-  const y = 50 + radius * Math.sin(rad)
+  const x = parseFloat((50 + radius * Math.cos(rad)).toFixed(2))
+  const y = parseFloat((50 + radius * Math.sin(rad)).toFixed(2))
 
   return (
     <motion.div
@@ -510,19 +510,19 @@ function OrbitalRingComponent() {
         animate={prefersReduced ? {} : { rotate: -360 }}
         transition={innerOrbitTransition}
       >
-        {/* Decorative dots */}
-        {[0, 60, 120, 180, 240, 300].map((angle) => {
-          const rad = (angle * Math.PI) / 180
-          const r = 50
-          const x = 50 + r * Math.cos(rad)
-          const y = 50 + r * Math.sin(rad)
-          return (
-            <motion.div
-              key={angle}
-              className="absolute w-2.5 h-2.5 rounded-full"
-              style={{
-                left: `${x}%`,
-                top: `${y}%`,
+{/* Decorative dots */}
+          {[0, 60, 120, 180, 240, 300].map((angle) => {
+            const rad = (angle * Math.PI) / 180
+            const r = 50
+            const x = parseFloat((50 + r * Math.cos(rad)).toFixed(2))
+            const y = parseFloat((50 + r * Math.sin(rad)).toFixed(2))
+            return (
+              <motion.div
+                key={angle}
+                className="absolute w-2.5 h-2.5 rounded-full"
+                style={{
+                  left: `${x}%`,
+                  top: `${y}%`,
                 transform: 'translate(-50%, -50%)',
                 backgroundColor: ACCENT,
                 boxShadow: `0 0 10px ${ACCENT}, 0 0 20px ${ACCENT_LIGHT}`,

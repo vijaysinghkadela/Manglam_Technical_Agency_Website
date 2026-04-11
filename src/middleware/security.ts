@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
-import { escapeHtml, sanitizeInput } from '@/lib/security';
+// Security utilities imported from '@/lib/security' if needed in future
 
 // Security middleware to enhance protection
 export async function securityMiddleware(request: NextRequest) {

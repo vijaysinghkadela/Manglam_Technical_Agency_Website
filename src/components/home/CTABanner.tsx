@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import { MagneticButton } from '@/components/ui/MagneticButton'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { AGENCY_WHATSAPP } from '@/lib/constants'
-import { BRAND, ANIMATION, SPACING, TYPOGRAPHY, RADIUS } from '@/lib/design-system'
+import { BRAND, ANIMATION, SPACING } from '@/lib/design-system'
 
 const FLOATING_DOTS = [
   { x: '12%', y: '18%', size: 3, delay: 0    },

@@ -229,7 +229,7 @@ export default function AboutPage() {
                 }}
               >
                 <div className="flex flex-wrap gap-2.5">
-                  {SERVICE_TAGS.map((tag, i) => (
+                  {SERVICE_TAGS.map((tag) => (
                     <span
                       key={tag}
                       className="font-mono uppercase transition-all duration-200 hover:scale-110 cursor-default"

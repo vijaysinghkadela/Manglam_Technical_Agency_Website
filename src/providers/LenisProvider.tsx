@@ -1,6 +1,6 @@
 'use client'
 import Lenis from '@studio-freight/lenis'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { isSafari, isIOS, isTouchDevice } from '@/lib/browser-detect'
 
 /**
@@ -14,15 +14,8 @@ import { isSafari, isIOS, isTouchDevice } from '@/lib/browser-detect'
  */
 export function LenisProvider({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null)
-  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  useEffect(() => {
-    if (!mounted) return
-
     // Determine if we should use Lenis
     const shouldUseLenis = (() => {
       if (typeof window === 'undefined') return false
@@ -96,7 +89,7 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
       // @ts-expect-error - Cleanup global reference
       delete window.__lenis
     }
-  }, [mounted])
+  }, [])
 
   return <>{children}</>
 }

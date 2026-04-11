@@ -67,7 +67,7 @@ function hasMaliciousPatterns(url: string, headers: Headers): boolean {
     'alert(',
     '<img onerror',
     'document.cookie',
-  ];
+  ]
 
   const urlStr = url.toLowerCase();
   const hasXSS = suspiciousPatterns.some(pattern => urlStr.includes(pattern));
@@ -78,7 +78,7 @@ function hasMaliciousPatterns(url: string, headers: Headers): boolean {
     'drop table',
     'insert into',
     'delete from',
-  ];
+  ]
 
   let hasSQL = false;
   headers.forEach((value) => {
@@ -140,17 +140,21 @@ setInterval(cleanupRateLimit, 5 * 60 * 1000)
  */
 function getCorsOrigin(request: NextRequest): string {
   const origin = request.headers.get('origin')
-  
+
   // Check if origin is in allowed list
   if (origin && ALLOWED_ORIGINS.includes(origin)) {
     return origin
   }
-  
+
   // Default to the main domain
   return 'https://manglamtechnicalagency.com'
 }
 
-export function middleware(request: NextRequest) {
+/**
+ * Proxy handler - replaces deprecated middleware.ts
+ * See: https://nextjs.org/docs/app/api-reference/file-conventions/proxy
+ */
+export async function proxy(request: NextRequest) {
   // Enhanced security checks for all requests
   const url = request.url;
 
