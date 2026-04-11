@@ -2,9 +2,7 @@
 import { motion } from 'framer-motion'
 import { Lock, FileText, CreditCard, Package } from 'lucide-react'
 import Link from 'next/link'
-
-const EASE: [number,number,number,number] = [0.16, 1, 0.3, 1]
-const ACCENT = '#6B1A1A'
+import { BRAND, ANIMATION } from '@/lib/design-system'
 
 const highlights = [
   {
@@ -38,10 +36,10 @@ export function ComplianceByDesign() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.7, ease: EASE }}
+          transition={{ duration: 0.7, ease: ANIMATION.ease }}
         >
           <div>
-            <p className="font-mono text-label tracking-[0.22em] uppercase mb-3" style={{ color: ACCENT }}>
+            <p className="font-mono text-label tracking-[0.22em] uppercase mb-3" style={{ color: BRAND.primary }}>
               LEGAL & COMPLIANCE BY DESIGN
             </p>
             <h2
@@ -55,18 +53,18 @@ export function ComplianceByDesign() {
             <Link
               href="/research"
               className="font-mono text-sm transition-colors rounded-full border border-border px-4 py-2"
-              style={{ color: ACCENT }}
+              style={{ color: BRAND.primary }}
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-foreground)' }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = ACCENT }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = BRAND.primary }}
             >
               Read Research →
             </Link>
             <Link
               href="/legal"
               className="font-mono text-sm transition-colors rounded-full border border-border px-4 py-2"
-              style={{ color: ACCENT }}
+              style={{ color: BRAND.primary }}
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-foreground)' }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = ACCENT }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = BRAND.primary }}
             >
               Open Legal Hub →
             </Link>
@@ -81,17 +79,17 @@ export function ComplianceByDesign() {
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.55, delay: (i % 2) * 0.08, ease: EASE }}
+              transition={{ duration: 0.55, delay: (i % 2) * 0.08, ease: ANIMATION.ease }}
             >
               <div
                 className="absolute inset-x-0 top-0 h-px"
-                style={{ background: `linear-gradient(90deg, ${ACCENT}, transparent 75%)` }}
+                style={{ background: `linear-gradient(90deg, ${BRAND.primary}, transparent 75%)` }}
                 aria-hidden
               />
 
               <span
                 className="absolute top-4 right-5 font-display font-black select-none pointer-events-none"
-                style={{ fontSize: '64px', lineHeight: 1, color: ACCENT, opacity: 0.05 }}
+                style={{ fontSize: '64px', lineHeight: 1, color: BRAND.primary, opacity: 0.05 }}
                 aria-hidden
               >
                 {String(i + 1).padStart(2, '0')}
@@ -104,7 +102,7 @@ export function ComplianceByDesign() {
                   backgroundColor: 'rgba(107,26,26,0.05)',
                 }}
               >
-                <item.Icon className="w-4 h-4 transition-colors duration-300" style={{ color: ACCENT }} />
+                <item.Icon className="w-4 h-4 transition-colors duration-300" style={{ color: BRAND.primary }} />
               </div>
 
               <h3

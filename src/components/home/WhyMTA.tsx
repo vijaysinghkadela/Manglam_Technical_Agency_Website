@@ -3,9 +3,6 @@ import { motion } from 'framer-motion'
 import { Check } from 'lucide-react'
 import { BRAND, ANIMATION, SPACING, TYPOGRAPHY, RADIUS } from '@/lib/design-system'
 
-const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
-const ACCENT = BRAND.primary
-
 const values = [
   {
     title: 'India-Based, Globally-Minded',
@@ -43,11 +40,11 @@ export function WhyMTA() {
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.75, ease: EASE }}
+            transition={{ duration: 0.75, ease: ANIMATION.ease }}
             className="lg:sticky lg:top-[120px] lg:self-start flex flex-col gap-6 rounded-[28px] border border-border bg-card p-6 sm:p-8"
           >
             <div>
-              <span className="font-mono uppercase block mb-3" style={{ fontSize: '11px', color: ACCENT, letterSpacing: '0.22em' }}>
+              <span className="font-mono uppercase block mb-3" style={{ fontSize: '11px', color: BRAND.primary, letterSpacing: '0.22em' }}>
                 WHY CHOOSE US
               </span>
               <h2
@@ -89,7 +86,7 @@ export function WhyMTA() {
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
-                transition={{ delay: i * 0.08, duration: 0.6, ease: EASE }}
+                transition={{ delay: i * 0.08, duration: 0.6, ease: ANIMATION.ease }}
                 className="group rounded-[24px] border border-border bg-card p-5 sm:p-6"
               >
                 <div className="flex items-start gap-4">
@@ -97,7 +94,7 @@ export function WhyMTA() {
                     className="w-9 h-9 flex items-center justify-center shrink-0 rounded-xl transition-colors duration-300"
                     style={{ backgroundColor: 'rgba(107,26,26,0.08)', border: '1px solid rgba(107,26,26,0.18)' }}
                   >
-                    <Check className="w-4 h-4" style={{ color: ACCENT }} />
+                    <Check className="w-4 h-4" style={{ color: BRAND.primary }} />
                   </div>
                   <div className="min-w-0">
                     <h3

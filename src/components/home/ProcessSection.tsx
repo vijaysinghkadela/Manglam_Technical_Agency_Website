@@ -5,9 +5,6 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { leadToDeliveryPipeline } from '@/lib/data/research'
 import { BRAND, ANIMATION, SPACING, TYPOGRAPHY, RADIUS } from '@/lib/design-system'
 
-const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
-const ACCENT = BRAND.primary
-
 export function ProcessSection() {
   const [active, setActive] = useState<number | null>(0)
 
@@ -18,13 +15,13 @@ export function ProcessSection() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.7, ease: EASE }}
+          transition={{ duration: 0.7, ease: ANIMATION.ease }}
           className="grid grid-cols-1 lg:grid-cols-[0.92fr_1.08fr] gap-4 sm:gap-6 lg:gap-12 mb-10 lg:mb-14"
         >
           <div className="rounded-[28px] border border-border bg-card p-6 sm:p-8">
             <span
               className="font-mono uppercase block mb-3"
-              style={{ fontSize: '11px', color: ACCENT, letterSpacing: '0.22em' }}
+              style={{ fontSize: '11px', color: BRAND.primary, letterSpacing: '0.22em' }}
             >
               LEAD TO DELIVERY
             </span>
@@ -41,7 +38,7 @@ export function ProcessSection() {
           </div>
 
           <div className="rounded-[28px] border border-border bg-surface p-6 sm:p-8">
-            <p className="font-mono uppercase mb-3" style={{ fontSize: '11px', color: ACCENT, letterSpacing: '0.22em' }}>
+            <p className="font-mono uppercase mb-3" style={{ fontSize: '11px', color: BRAND.primary, letterSpacing: '0.22em' }}>
               HOW IT WORKS
             </p>
             <p style={{ fontSize: '15px', lineHeight: 1.72, color: 'var(--color-muted)', maxWidth: '520px' }}>
@@ -61,7 +58,7 @@ export function ProcessSection() {
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-30px' }}
-                  transition={{ duration: 0.5, delay: index * 0.03, ease: EASE }}
+                  transition={{ duration: 0.5, delay: index * 0.03, ease: ANIMATION.ease }}
                   className="overflow-hidden rounded-[24px] border border-border bg-card"
                 >
                   <button
@@ -75,7 +72,7 @@ export function ProcessSection() {
                     className="font-black leading-none font-mono shrink-0 transition-colors duration-400"
                     style={{
                       fontSize: 'clamp(28px, 4.5vw, 52px)',
-                      color: isOpen ? ACCENT : 'var(--color-border)',
+                      color: isOpen ? BRAND.primary : 'var(--color-border)',
                       minWidth: '76px',
                     }}
                   >
@@ -95,7 +92,7 @@ export function ProcessSection() {
                       </h3>
                       <span
                         className="font-mono uppercase"
-                        style={{ fontSize: '10px', color: ACCENT, letterSpacing: '0.16em' }}
+                        style={{ fontSize: '10px', color: BRAND.primary, letterSpacing: '0.16em' }}
                       >
                         {isOpen ? 'Open' : 'Tap to expand'}
                       </span>
@@ -107,9 +104,9 @@ export function ProcessSection() {
 
                     <motion.span
                       className="font-mono text-2xl shrink-0"
-                      style={{ color: isOpen ? ACCENT : 'var(--color-dead)', paddingTop: '2px' }}
+                      style={{ color: isOpen ? BRAND.primary : 'var(--color-dead)', paddingTop: '2px' }}
                       animate={{ rotate: isOpen ? 45 : 0 }}
-                      transition={{ duration: 0.25, ease: EASE }}
+                      transition={{ duration: 0.25, ease: ANIMATION.ease }}
                   >
                     +
                   </motion.span>
@@ -130,13 +127,13 @@ export function ProcessSection() {
                         style={{ backgroundColor: 'var(--color-surface)' }}
                       >
                         <div className="rounded-[20px] border border-border bg-canvas p-4 sm:p-5">
-                          <p className="font-mono uppercase mb-3" style={{ fontSize: '10px', letterSpacing: '0.18em', color: ACCENT }}>
+                          <p className="font-mono uppercase mb-3" style={{ fontSize: '10px', letterSpacing: '0.18em', color: BRAND.primary }}>
                             Actions
                           </p>
                           <ul className="space-y-2">
                             {stage.actions.map((item) => (
                               <li key={item} className="text-sm flex items-start gap-2" style={{ color: 'var(--color-muted)' }}>
-                                <span style={{ color: ACCENT, opacity: 0.7, marginTop: '2px', fontSize: '10px' }}>▸</span>
+                                <span style={{ color: BRAND.primary, opacity: 0.7, marginTop: '2px', fontSize: '10px' }}>▸</span>
                                 {item}
                               </li>
                             ))}
@@ -144,13 +141,13 @@ export function ProcessSection() {
                         </div>
 
                         <div className="rounded-[20px] border border-border bg-canvas p-4 sm:p-5">
-                          <p className="font-mono uppercase mb-3" style={{ fontSize: '10px', letterSpacing: '0.18em', color: ACCENT }}>
+                          <p className="font-mono uppercase mb-3" style={{ fontSize: '10px', letterSpacing: '0.18em', color: BRAND.primary }}>
                             Outputs
                           </p>
                           <ul className="space-y-2">
                             {stage.outputs.map((item) => (
                               <li key={item} className="text-sm flex items-start gap-2" style={{ color: 'var(--color-muted)' }}>
-                                <span style={{ color: ACCENT, opacity: 0.7, marginTop: '2px', fontSize: '10px' }}>▸</span>
+                                <span style={{ color: BRAND.primary, opacity: 0.7, marginTop: '2px', fontSize: '10px' }}>▸</span>
                                 {item}
                               </li>
                             ))}
@@ -158,14 +155,14 @@ export function ProcessSection() {
                         </div>
 
                         <div className="rounded-[20px] border border-border bg-canvas p-4 sm:p-5">
-                          <p className="font-mono uppercase mb-3" style={{ fontSize: '10px', letterSpacing: '0.18em', color: ACCENT }}>
+                          <p className="font-mono uppercase mb-3" style={{ fontSize: '10px', letterSpacing: '0.18em', color: BRAND.primary }}>
                             Control
                           </p>
                           <p
                             className="text-[13px] leading-relaxed mb-4"
                             style={{
                               color: 'var(--color-muted)',
-                              borderLeft: `2px solid ${ACCENT}`,
+                              borderLeft: `2px solid ${BRAND.primary}`,
                               paddingLeft: '12px',
                             }}
                           >
@@ -179,7 +176,7 @@ export function ProcessSection() {
                                   className="font-mono text-[10px] px-2 py-1 rounded-full"
                                   style={{
                                     border: '1px solid rgba(107,26,26,0.20)',
-                                    color: ACCENT,
+                                    color: BRAND.primary,
                                     backgroundColor: 'rgba(107,26,26,0.04)',
                                   }}
                                 >

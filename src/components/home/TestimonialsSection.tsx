@@ -6,10 +6,8 @@ import { testimonials } from '@/lib/data/testimonials'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { BRAND, ANIMATION, SPACING, TYPOGRAPHY, RADIUS } from '@/lib/design-system'
 
-const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
 const AUTO_ADVANCE_MS = 5000
 const SWIPE_THRESHOLD = 50
-const ACCENT = BRAND.primary
 
 export function TestimonialsSection() {
   const [index, setIndex] = useState(0)
@@ -66,12 +64,12 @@ export function TestimonialsSection() {
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-40px' }}
-        transition={{ duration: 0.55, ease: EASE }}
+        transition={{ duration: 0.55, ease: ANIMATION.ease }}
         className="text-center mb-10 sm:mb-12 lg:mb-20 px-4"
       >
         <span
           className="font-mono uppercase block mb-2 sm:mb-3"
-          style={{ fontSize: 'clamp(10px, 2.5vw, 11px)', color: ACCENT, letterSpacing: '0.22em' }}
+          style={{ fontSize: 'clamp(10px, 2.5vw, 11px)', color: BRAND.primary, letterSpacing: '0.22em' }}
         >
           TESTIMONIALS
         </span>
@@ -140,7 +138,7 @@ export function TestimonialsSection() {
                 style={{
                   backgroundColor: 'rgba(107,26,26,0.08)',
                   border: '1px solid rgba(107,26,26,0.24)',
-                  color: ACCENT,
+                  color: BRAND.primary,
                 }}
               >
                 {current.initials}
@@ -180,7 +178,7 @@ export function TestimonialsSection() {
                   className="h-1.5 rounded-full transition-all duration-300"
                   style={{
                     width: i === index ? '24px' : '6px',
-                    backgroundColor: i === index ? ACCENT : 'var(--color-border)',
+                    backgroundColor: i === index ? BRAND.primary : 'var(--color-border)',
                   }}
                   data-cursor="pointer"
                 />

@@ -8,8 +8,8 @@ const rateLimit = new Map<string, { count: number; timestamp: number }>()
 const RATE_LIMIT_WINDOW = 60 * 1000 // 1 minute
 const MAX_REQUESTS = 5 // Max 5 requests per minute per IP
 
-// Allowed origins for CORS
-const ALLOWED_ORIGINS = [
+// Allowed origins for CORS - configured via environment variable or fallback to defaults
+const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS?.split(',') ?? [
   'https://manglamtechnicalagency.com',
   'https://www.manglamtechnicalagency.com',
   'http://localhost:3000',

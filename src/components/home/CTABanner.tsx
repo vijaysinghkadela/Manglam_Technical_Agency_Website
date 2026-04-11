@@ -6,8 +6,6 @@ import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { AGENCY_WHATSAPP } from '@/lib/constants'
 import { BRAND, ANIMATION, SPACING, TYPOGRAPHY, RADIUS } from '@/lib/design-system'
 
-const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
-
 const FLOATING_DOTS = [
   { x: '12%', y: '18%', size: 3, delay: 0    },
   { x: '88%', y: '12%', size: 2, delay: 0.6  },
@@ -87,7 +85,7 @@ export function CTABanner() {
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.6, ease: EASE }}
+          transition={{ duration: 0.6, ease: ANIMATION.ease }}
         >
           ✦ READY TO SCALE?
         </motion.span>
@@ -98,7 +96,7 @@ export function CTABanner() {
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.75, delay: 0.08, ease: EASE }}
+          transition={{ duration: 0.75, delay: 0.08, ease: ANIMATION.ease }}
         >
           Scale With<br />Certainty
         </motion.h2>
@@ -108,7 +106,7 @@ export function CTABanner() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.65, delay: 0.16, ease: EASE }}
+          transition={{ duration: 0.65, delay: 0.16, ease: ANIMATION.ease }}
         >
           Free consultation. Honest scope. Real timelines.<br />
           Book our ₹25,000 Discovery Workshop today.
@@ -119,7 +117,7 @@ export function CTABanner() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.6, delay: 0.24, ease: EASE }}
+        transition={{ duration: 0.6, delay: 0.24, ease: ANIMATION.ease }}
       >
         <MagneticButton
           href="/contact"
