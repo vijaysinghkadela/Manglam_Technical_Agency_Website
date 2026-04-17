@@ -21,13 +21,11 @@ import {
 const SERVICES = [
   'Cybersecurity',
   'AI Automation',
-  'SaaS Products',
   'Social Media Marketing',
-  'Content Creation',
-  'Branding',
   'Web Development',
   'Application Development',
   'AI Agents',
+  'DPDP Compliance',
 ]
 
 // Trust badges with status colors - module level to prevent re-creation

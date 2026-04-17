@@ -32,7 +32,7 @@ const values = [
   {
     num: '03',
     title: 'Integrated Delivery',
-    desc: 'One team, one strategy. Your AI, security, branding, and content needs are handled as a single coherent programme, not isolated silos.',
+    desc: 'One team, one strategy. Your AI, security, and social media needs are handled as a single coherent programme, not isolated silos.',
   },
   {
     num: '04',

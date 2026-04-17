@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Linkedin, Instagram, Twitter, ArrowUpRight } from 'lucide-react'
+import { Linkedin, Instagram, Twitter, Facebook, ArrowUpRight } from 'lucide-react'
 import {
   AGENCY_NAME,
   AGENCY_EMAIL,
@@ -11,6 +11,7 @@ import {
   AGENCY_LOCATION,
   AGENCY_WHATSAPP,
   AGENCY_X_URL,
+  AGENCY_FACEBOOK_URL,
 } from '@/lib/constants'
 import { services } from '@/lib/data/services'
 
@@ -132,9 +133,10 @@ export function Footer() {
 
             <div className="flex flex-wrap items-center gap-2 sm:gap-3">
               {[
+                { Icon: Facebook, href: AGENCY_FACEBOOK_URL, label: 'Facebook' },
+                { Icon: Twitter, href: AGENCY_X_URL, label: 'X (Twitter)' },
                 { Icon: Linkedin, href: null, label: 'LinkedIn' },
                 { Icon: Instagram, href: null, label: 'Instagram' },
-                { Icon: Twitter, href: AGENCY_X_URL, label: 'X (Twitter)' },
               ].map(({ Icon, href, label }) =>
                 href ? (
                   <a

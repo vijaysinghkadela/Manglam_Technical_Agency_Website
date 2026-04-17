@@ -9,15 +9,15 @@ const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
 
 const plans = [
   {
-    name: 'SaaS & Web Development',
-    price: 'From ₹1,00,000',
-    type: 'project',
-    features: ['Web applications', 'SaaS MVP builds', 'API integrations', 'Maintenance options'],
-    href: '/services/saas-products',
+    name: 'AI Automation',
+    price: 'From ₹15,000',
+    type: 'scoped project',
+    features: ['Process audit', 'Workflow automation', 'LLM integrations', 'Monitoring and tuning'],
+    href: '/services/ai-automation',
     recommended: true,
   },
   {
-    name: 'Social Media',
+    name: 'Social Media Marketing',
     price: 'From ₹15,000',
     type: 'per month',
     features: ['Strategy document', 'Content execution', 'Community management', 'Monthly reporting'],
@@ -25,31 +25,10 @@ const plans = [
   },
   {
     name: 'Cybersecurity',
-    price: 'From ₹50,000',
+    price: 'From ₹59,000',
     type: 'assessment/project',
-    features: ['Security audits', 'Penetration testing', 'Compliance consulting', 'Incident response support'],
+    features: ['Security audits', 'Penetration testing', 'DPDP compliance', 'Incident response support'],
     href: '/services/cybersecurity',
-  },
-  {
-    name: 'AI Automation',
-    price: 'From ₹15,000',
-    type: 'scoped project',
-    features: ['Process audit', 'Workflow automation', 'LLM integrations', 'Monitoring and tuning'],
-    href: '/services/ai-automation',
-  },
-  {
-    name: 'Branding & Identity',
-    price: 'From ₹15,000',
-    type: 'tiered offerings',
-    features: ['Logo systems', 'Brand identity', 'Guideline documents', 'Brand refresh options'],
-    href: '/services/branding',
-  },
-  {
-    name: 'Content Creation',
-    price: 'From ₹3,000',
-    type: 'retainer or project',
-    features: ['Blog writing', 'Landing page copy', 'Email sequences', 'Monthly content packages'],
-    href: '/services/content-creation',
   },
 ]
 

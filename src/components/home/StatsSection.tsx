@@ -6,7 +6,7 @@ import { BRAND, ANIMATION, SPACING, TYPOGRAPHY, RADIUS } from '@/lib/design-syst
 const STATS = [
   { value: 3, suffix: '', label: 'ACTIVE CLIENTS', sub: 'tracked in Clients MOC' },
   { value: 2, suffix: '', label: 'INTERNAL SAAS PRODUCTS', sub: 'FitNexora & Fuxk_Scroll' },
-  { value: 6, suffix: '', label: 'PRACTICE AREAS', sub: 'integrated service model' },
+  { value: 3, suffix: '', label: 'CORE SERVICES', sub: 'AI · Cybersecurity · Social Media' },
   { value: 2025, suffix: '', label: 'UDYAM REGISTERED', sub: 'UDYAM-RJ-15-0094091' },
 ]
 

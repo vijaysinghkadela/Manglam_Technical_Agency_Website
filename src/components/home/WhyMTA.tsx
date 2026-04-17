@@ -63,7 +63,7 @@ export function WhyMTA() {
             </div>
 
             <div className="grid grid-cols-3 gap-3 pt-4" style={{ borderTop: '1px solid var(--color-border)' }}>
-              {[['3', 'Active Clients'], ['2', 'SaaS Products'], ['6', 'Practice Areas']].map(([num, lbl]) => (
+              {[['3', 'Active Clients'], ['3', 'Core Services'], ['2025', 'Udyam Reg.']].map(([num, lbl]) => (
                 <div
                   key={lbl}
                   className="rounded-2xl border border-border bg-surface px-3 py-4 text-center"

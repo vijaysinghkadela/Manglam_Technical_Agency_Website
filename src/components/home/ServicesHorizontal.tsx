@@ -8,7 +8,7 @@ import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 import { BRAND, ANIMATION, SPACING, TYPOGRAPHY, RADIUS, SHADOW } from '@/lib/design-system'
 
-const CARD_W = 372
+const CARD_W = 480
 const SIDE_PAD = 96
 
 export function ServicesHorizontal() {
@@ -254,7 +254,7 @@ export function ServicesHorizontal() {
               <SpotlightCard
                 key={s.slug}
                 style={{
-                  width: `clamp(340px, 28vw, ${CARD_W}px)`,
+                  width: `clamp(380px, 33vw, ${CARD_W}px)`,
                   flexShrink: 0,
                   borderRight: '1px solid var(--color-border)',
                   backgroundColor: 'var(--color-card)',

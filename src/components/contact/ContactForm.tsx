@@ -28,7 +28,7 @@ const schema = z.object({
 
 type F = z.infer<typeof schema>
 
-const SERVICES = ['Web Development', 'Social Media & Automation', 'Cybersecurity', 'AI Automation', 'SaaS Licensing', 'Data Processing', 'Contractor Management', 'Other']
+const SERVICES = ['AI Automation', 'Social Media Marketing', 'Cybersecurity', 'Web Development', 'Data Processing', 'Contractor Management', 'Other']
 const BUDGETS = ['Under ₹25,000', '₹25,000–₹50,000', '₹50,000–₹1,00,000', '₹1,00,000–₹5,00,000', '₹5,00,000+', 'Not Sure']
 const TIMELINES = ['ASAP', 'Within 1 month', 'Within 3 months', 'Flexible']
 

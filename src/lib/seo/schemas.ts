@@ -56,17 +56,16 @@ export function organizationSchema() {
     ],
     sameAs: [
       'https://wa.me/918003903572',
+      'https://x.com/MAgency67224',
+      'https://www.facebook.com/profile.php?id=61573272405278',
     ],
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: 'Technology Services for Indian Businesses',
       itemListElement: [
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'SaaS & Web Development', url: `${BASE_URL}/services/saas-products` } },
         { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'AI Automation', url: `${BASE_URL}/services/ai-automation` } },
         { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Cybersecurity', url: `${BASE_URL}/services/cybersecurity` } },
         { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Social Media Marketing', url: `${BASE_URL}/services/social-media-marketing` } },
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Branding', url: `${BASE_URL}/services/branding` } },
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Content Creation', url: `${BASE_URL}/services/content-creation` } },
       ],
     },
     knowsAbout: [

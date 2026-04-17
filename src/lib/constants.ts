@@ -8,6 +8,7 @@ export const AGENCY_TAGLINE = 'Empowering Your Digital Future';
 export const AGENCY_FOUNDED = 2025;
 export const AGENCY_URL = 'https://www.manglamtechnicalagency.com';
 export const AGENCY_X_URL = 'https://x.com/MAgency67224';
+export const AGENCY_FACEBOOK_URL = 'https://www.facebook.com/profile.php?id=61573272405278';
 export const AGENCY_LINKEDIN_URL = null; // Add when available
 export const AGENCY_INSTAGRAM_URL = null; // Add when available
 
