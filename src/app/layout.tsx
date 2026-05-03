@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { LenisProvider } from '@/providers/LenisProvider'
 import { MagneticCursor } from '@/components/ui/MagneticCursor'
 import { ScrollToTop } from '@/components/ui/ScrollToTop'
-import { ConsentBanner } from '@/components/ui/ConsentBanner'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { Toaster } from 'react-hot-toast'
@@ -158,8 +157,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               },
             }}
           />
-          {/* DPDP/LGPD Compliant Consent Banner */}
-          <ConsentBanner />
         </LenisProvider>
         </ThemeProvider>
       </body>
