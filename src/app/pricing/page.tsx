@@ -1,56 +1,22 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Check, ArrowRight } from 'lucide-react'
 import { TextReveal } from '@/components/ui/TextReveal'
+import { servicePricingData, type ServicePricing, type PricingPlan } from '@/lib/data/pricing'
+import { cn } from '@/lib/utils'
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
 
-const plans = [
-  {
-    name: 'SaaS & Web Development',
-    price: 'From ₹1,00,000',
-    type: 'project',
-    features: ['Web applications', 'SaaS MVP builds', 'API integrations', 'Maintenance options'],
-    href: '/services/saas-products',
-    recommended: true,
-  },
-  {
-    name: 'Social Media',
-    price: 'From ₹15,000',
-    type: 'per month',
-    features: ['Strategy document', 'Content execution', 'Community management', 'Monthly reporting'],
-    href: '/services/social-media-marketing',
-  },
-  {
-    name: 'Cybersecurity',
-    price: 'From ₹50,000',
-    type: 'assessment/project',
-    features: ['Security audits', 'Penetration testing', 'Compliance consulting', 'Incident response support'],
-    href: '/services/cybersecurity',
-  },
-  {
-    name: 'AI Automation',
-    price: 'From ₹15,000',
-    type: 'scoped project',
-    features: ['Process audit', 'Workflow automation', 'LLM integrations', 'Monitoring and tuning'],
-    href: '/services/ai-automation',
-  },
-  {
-    name: 'Branding & Identity',
-    price: 'From ₹15,000',
-    type: 'tiered offerings',
-    features: ['Logo systems', 'Brand identity', 'Guideline documents', 'Brand refresh options'],
-    href: '/services/branding',
-  },
-  {
-    name: 'Content Creation',
-    price: 'From ₹3,000',
-    type: 'retainer or project',
-    features: ['Blog writing', 'Landing page copy', 'Email sequences', 'Monthly content packages'],
-    href: '/services/content-creation',
-  },
+const TABS: { label: string; slug: string }[] = [
+  { label: 'Meta Ads', slug: 'social-media-marketing' },
+  { label: 'Web & App Dev', slug: 'saas-products' },
+  { label: 'Cybersecurity', slug: 'cybersecurity' },
+  { label: 'AI & Automation', slug: 'ai-automation' },
+  { label: 'Branding', slug: 'branding' },
+  { label: 'Content', slug: 'content-creation' },
 ]
 
 const comparisonData = {
@@ -70,11 +36,159 @@ const comparisonData = {
   ],
 }
 
+function PlanCard({ plan }: { plan: PricingPlan; serviceSlug?: string }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.45, ease: EASE }}
+      className={cn(
+        'relative flex flex-col border p-6 lg:p-8',
+        plan.highlight
+          ? 'border-[var(--color-violet)]'
+          : 'border-[var(--color-border)]',
+      )}
+      style={{ backgroundColor: plan.highlight ? 'rgba(107,26,26,0.04)' : 'var(--color-card)' }}
+    >
+      {plan.highlight && (
+        <span
+          className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 font-mono text-[10px] uppercase tracking-widest px-3 py-1"
+          style={{
+            backgroundColor: 'var(--color-violet)',
+            color: '#fff',
+          }}
+        >
+          ✦ Popular
+        </span>
+      )}
+
+      <div className="mb-6">
+        <h3
+          className="font-display font-black mb-1"
+          style={{ fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', color: 'var(--color-foreground)' }}
+        >
+          {plan.name}
+        </h3>
+        <p
+          style={{ fontSize: '13px', color: 'var(--color-muted)', lineHeight: 1.5 }}
+        >
+          {plan.tagline}
+        </p>
+      </div>
+
+      <div className="mb-6">
+        <div className="flex items-baseline gap-1">
+          <span
+            className="font-display font-black"
+            style={{
+              fontSize: 'clamp(1.6rem, 3vw, 2.2rem)',
+              color: plan.highlight ? 'var(--color-violet-light)' : 'var(--color-foreground)',
+            }}
+          >
+            {plan.price}
+          </span>
+          <span
+            className="font-mono text-xs"
+            style={{ color: 'var(--color-dead)' }}
+          >
+            {plan.period}
+          </span>
+        </div>
+        {plan.annualLabel && (
+          <p
+            className="font-mono mt-1"
+            style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.08em' }}
+          >
+            {plan.annualLabel}
+          </p>
+        )}
+        {plan.adSpend && (
+          <p
+            className="font-mono mt-1"
+            style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.08em' }}
+          >
+            Ad spend: {plan.adSpend}
+          </p>
+        )}
+      </div>
+
+      <ul className="flex flex-col gap-2.5 flex-1 mb-8">
+        {plan.features.map((f) => (
+          <li
+            key={f}
+            className="flex items-start gap-2.5"
+            style={{ fontSize: '13px', color: 'var(--color-muted)' }}
+          >
+            <Check
+              className="w-3.5 h-3.5 shrink-0 mt-0.5"
+              style={{ color: 'var(--color-violet)' }}
+            />
+            {f}
+          </li>
+        ))}
+      </ul>
+
+      <Link
+        href="/contact"
+        data-cursor="pointer"
+        className={cn(
+          'inline-flex items-center justify-center gap-2 px-6 py-3.5 font-display font-bold text-sm transition-all duration-300',
+          plan.highlight
+            ? 'hover:bg-opacity-80'
+            : 'hover:border-[var(--color-violet)] hover:text-[var(--color-violet-light)]',
+        )}
+        style={
+          plan.highlight
+            ? { backgroundColor: 'var(--color-violet)', color: '#fff' }
+            : { border: '1px solid var(--color-border)', color: 'var(--color-muted)' }
+        }
+      >
+        Get Started
+        <ArrowRight className="w-3.5 h-3.5" />
+      </Link>
+    </motion.div>
+  )
+}
+
+function ServiceTab({ service }: { service: ServicePricing }) {
+  return (
+    <div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+        {service.plans.map((plan) => (
+          <PlanCard key={plan.name} plan={plan} serviceSlug={service.slug} />
+        ))}
+      </div>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        {service.note && (
+          <p
+            className="font-mono"
+            style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.08em', maxWidth: '600px' }}
+          >
+            {service.note}
+          </p>
+        )}
+        <Link
+          href={`/services/${service.slug}`}
+          className="inline-flex items-center gap-1.5 font-mono text-xs transition-colors duration-200 whitespace-nowrap"
+          style={{ color: 'var(--color-violet-light)', letterSpacing: '0.1em' }}
+          data-cursor="link"
+        >
+          View full service details
+          <ArrowRight className="w-3 h-3" />
+        </Link>
+      </div>
+    </div>
+  )
+}
+
 export default function PricingPage() {
+  const [activeSlug, setActiveSlug] = useState<string>('social-media-marketing')
+  const activeService = servicePricingData[activeSlug]
+
   return (
     <main style={{ backgroundColor: 'var(--color-canvas)', minHeight: '100vh' }}>
 
-      {/* ── HERO ─────────────────────────────────────────── */}
+      {/* HERO */}
       <section
         className="relative w-full min-h-[92svh] flex flex-col overflow-hidden grain"
         style={{ backgroundColor: 'var(--color-canvas)' }}
@@ -94,7 +208,6 @@ export default function PricingPage() {
 
         <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-10 sm:pb-12 lg:pb-16">
 
-          {/* Breadcrumb */}
           <motion.nav
             initial={{ opacity: 0, x: -12 }}
             animate={{ opacity: 1, x: 0 }}
@@ -107,7 +220,6 @@ export default function PricingPage() {
             <span style={{ color: 'var(--color-muted)' }}>PRICING</span>
           </motion.nav>
 
-          {/* Headline */}
           <div className="flex-1 flex flex-col justify-center">
             <motion.span
               initial={{ opacity: 0, y: -8 }}
@@ -143,17 +255,16 @@ export default function PricingPage() {
               className="mt-8 lg:mt-10"
               style={{ fontSize: '16px', lineHeight: 1.72, color: 'var(--color-muted)', maxWidth: '480px' }}
             >
-              No games, no tiers nobody needs. We publish our rates so you know exactly what to expect before we even speak.
+              Six services. Three plans each. INR pricing, no games. Pick your service below and see exactly what you get.
             </motion.p>
           </div>
 
-          {/* Bottom bar */}
           <div className="flex items-end justify-between mt-10 lg:mt-14">
             <span
               className="font-mono uppercase"
               style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.22em' }}
             >
-              ✦ ALL PRICES IN INR · GST APPLICABLE
+              ✦ ALL PRICES IN INR · GST @18% APPLICABLE
             </span>
             <div className="hidden lg:flex flex-col items-center gap-2">
               <span
@@ -174,154 +285,63 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* ── PLANS — Editorial rows ────────────────────────── */}
+      {/* PLANS */}
       <section
         className="border-t border-border"
         style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(64px, 10vw, 120px) 0' }}
       >
         <div className="container-site">
 
-          {/* Section header */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.55, ease: EASE }}
-            className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-8 mb-12 lg:mb-16"
+            className="mb-10 lg:mb-12"
           >
-            <div>
-              <span
-                className="font-mono uppercase block mb-3"
-                style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.22em' }}
-              >
-                STARTING RATES
-              </span>
-              <h2
-                className="font-display font-black leading-tight"
-                style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', color: 'var(--color-foreground)' }}
-              >
-                What You&apos;ll Pay
-              </h2>
-            </div>
-            <p className="font-mono text-xs" style={{ color: 'var(--color-dead)', letterSpacing: '0.1em' }}>
-              Indicative pricing aligned with MTA service catalog
-            </p>
+            <span
+              className="font-mono uppercase block mb-3"
+              style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.22em' }}
+            >
+              SERVICE PRICING
+            </span>
+            <h2
+              className="font-display font-black leading-tight"
+              style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', color: 'var(--color-foreground)' }}
+            >
+              Pick a Service
+            </h2>
           </motion.div>
 
-          {/* Plan rows */}
-          <div style={{ borderTop: '1px solid var(--color-border)' }}>
-            {plans.map((plan, i) => {
-              return (
-                <motion.div
-                  key={plan.name}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.06, duration: 0.45, ease: EASE }}
-                  className="group relative"
-                  style={{ borderBottom: '1px solid var(--color-border)' }}
-                >
-                  {/* Violet left accent on hover */}
-                  <div
-                    className="absolute left-0 top-0 bottom-0 w-[3px] transition-all duration-300 opacity-0 group-hover:opacity-100"
-                    style={{ backgroundColor: 'var(--color-violet)' }}
-                  />
-
-                  {/* Recommended banner */}
-                  {plan.recommended && (
-                    <div className="flex items-center gap-2 px-6 lg:px-8 pt-5">
-                      <span
-                        className="font-mono text-[10px] uppercase tracking-widest px-2 py-0.5"
-                        style={{
-                          border: '1px solid rgba(107,26,26,0.4)',
-                          color: 'var(--color-violet-light)',
-                          backgroundColor: 'rgba(107,26,26,0.06)',
-                        }}
-                      >
-                        ✦ Popular
-                      </span>
-                    </div>
-                  )}
-
-                  <div className="grid grid-cols-1 lg:grid-cols-[1fr_220px_160px] gap-6 lg:gap-0 px-6 lg:px-8 py-8 lg:py-10 items-center">
-
-                    {/* Left: name + features */}
-                    <div className="flex flex-col gap-4 lg:pr-12">
-                      <div>
-                        <h3
-                          className="font-display font-bold"
-                          style={{ fontSize: 'clamp(1.1rem, 1.8vw, 1.5rem)', color: 'var(--color-foreground)', lineHeight: 1.2 }}
-                        >
-                          {plan.name}
-                        </h3>
-                        {plan.type !== 'scoped project' && (
-                          <span
-                            className="font-mono uppercase mt-1 block"
-                            style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.16em' }}
-                          >
-                            {plan.type}
-                          </span>
-                        )}
-                      </div>
-
-                      <div className="flex flex-wrap gap-x-5 gap-y-2">
-                        {plan.features.map((f) => (
-                          <span
-                            key={f}
-                            className="flex items-center gap-1.5"
-                            style={{ fontSize: '13px', color: 'var(--color-muted)' }}
-                          >
-                            <Check
-                              className="w-3 h-3 shrink-0"
-                              style={{ color: 'var(--color-violet)' }}
-                            />
-                            {f}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Middle: price */}
-                    <div className="lg:border-l lg:border-border lg:pl-8">
-                      <p
-                        className="font-display font-black leading-none"
-                        style={{
-                          fontSize: 'clamp(1.4rem, 2.5vw, 2rem)',
-                          color: plan.recommended ? 'var(--color-violet-light)' : 'var(--color-foreground)',
-                        }}
-                        >
-                          {plan.price}
-                        </p>
-                      </div>
-
-                    {/* Right: CTA */}
-                    <div className="lg:border-l lg:border-border lg:pl-8 flex items-center">
-                      <Link
-                        href={plan.href}
-                        data-cursor="link"
-                        className="inline-flex items-center gap-2 font-display font-bold text-sm transition-colors duration-200 group-hover:text-violet"
-                        style={{ color: 'var(--color-muted)' }}
-                      >
-                        View Details
-                        <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
-                      </Link>
-                    </div>
-                  </div>
-                </motion.div>
-              )
-            })}
+          {/* Tabs */}
+          <div
+            className="flex flex-wrap gap-2 mb-10 lg:mb-12"
+            style={{ borderBottom: '1px solid var(--color-border)', paddingBottom: '0' }}
+          >
+            {TABS.map((tab) => (
+              <button
+                key={tab.slug}
+                onClick={() => setActiveSlug(tab.slug)}
+                className="font-mono uppercase text-xs px-4 py-3 transition-all duration-200 relative"
+                style={{
+                  letterSpacing: '0.14em',
+                  color: activeSlug === tab.slug ? 'var(--color-violet-light)' : 'var(--color-dead)',
+                  borderBottom: activeSlug === tab.slug ? '2px solid var(--color-violet)' : '2px solid transparent',
+                  marginBottom: '-1px',
+                  backgroundColor: 'transparent',
+                }}
+              >
+                {tab.label}
+              </button>
+            ))}
           </div>
 
-          <p
-            className="font-mono mt-8"
-            style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.1em' }}
-          >
-            All prices in INR · GST applicable · Final commercials are scoped after project discovery
-          </p>
+          {/* Active service plans */}
+          {activeService && <ServiceTab service={activeService} />}
         </div>
       </section>
 
-      {/* ── DISCOVERY WORKSHOP CALLOUT ───────────────────── */}
+      {/* DISCOVERY WORKSHOP CALLOUT */}
       <section
         className="border-t border-border"
         style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(40px, 6vw, 72px) 0' }}
@@ -346,7 +366,7 @@ export default function PricingPage() {
                 className="font-display font-black mb-3"
                 style={{ fontSize: 'clamp(1.2rem, 2.2vw, 1.9rem)', color: 'var(--color-foreground)', lineHeight: 1.1 }}
               >
-                Discovery & Scope Planning
+                Discovery &amp; Scope Planning
               </h2>
               <p
                 style={{ fontSize: '14px', lineHeight: 1.72, color: 'var(--color-muted)', maxWidth: '520px' }}
@@ -366,7 +386,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* ── COMPARISON TABLE ─────────────────────────────── */}
+      {/* COMPARISON TABLE */}
       <section
         className="border-t border-border"
         style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(64px, 10vw, 120px) 0' }}
@@ -404,7 +424,6 @@ export default function PricingPage() {
             style={{ backgroundColor: 'var(--color-card)' }}
           >
             <div className="w-full overflow-x-auto relative">
-              {/* Mobile fade */}
               <div
                 className="absolute right-0 top-0 bottom-0 w-8 pointer-events-none z-10 lg:hidden"
                 style={{ background: 'linear-gradient(to left, var(--color-card), transparent)' }}
@@ -470,7 +489,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* ── CTA ─────────────────────────────────────────── */}
+      {/* CTA */}
       <section
         className="border-t border-border"
         style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(64px, 10vw, 120px) 0' }}
@@ -531,6 +550,3 @@ export default function PricingPage() {
     </main>
   )
 }
-
-
-
