@@ -94,14 +94,6 @@ function PlanCard({ plan }: { plan: PricingPlan; serviceSlug?: string }) {
             {plan.period}
           </span>
         </div>
-        {plan.annualLabel && (
-          <p
-            className="font-mono mt-1"
-            style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.08em' }}
-          >
-            {plan.annualLabel}
-          </p>
-        )}
         {plan.adSpend && (
           <p
             className="font-mono mt-1"
@@ -109,6 +101,25 @@ function PlanCard({ plan }: { plan: PricingPlan; serviceSlug?: string }) {
           >
             Ad spend: {plan.adSpend}
           </p>
+        )}
+        {(plan.note6mo || plan.note12mo) && (
+          <div
+            className="mt-3 flex flex-col gap-1 pt-3"
+            style={{ borderTop: '1px solid var(--color-border)' }}
+          >
+            {plan.note6mo && (
+              <p className="font-mono flex items-start gap-1.5" style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.06em' }}>
+                <span style={{ color: 'var(--color-violet-light)', flexShrink: 0 }}>6mo</span>
+                {plan.note6mo}
+              </p>
+            )}
+            {plan.note12mo && (
+              <p className="font-mono flex items-start gap-1.5" style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.06em' }}>
+                <span style={{ color: 'var(--color-violet-light)', flexShrink: 0 }}>12mo</span>
+                {plan.note12mo}
+              </p>
+            )}
+          </div>
         )}
       </div>
 
