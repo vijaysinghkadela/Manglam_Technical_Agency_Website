@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { ExternalLink, Check } from 'lucide-react'
 import Link from 'next/link'
 import { BRAND, ANIMATION, SPACING, TYPOGRAPHY, RADIUS, SHADOW } from '@/lib/design-system'
+import { cn } from '@/lib/utils'
 
 export function FeaturedProject() {
   return (
@@ -174,11 +175,16 @@ export function FeaturedProject() {
               {[['STATUS','Work in Progress'],['TYPE','NGO Website'],['DONATIONS','Razorpay'],['LOCATION','Bikaner, RJ']].map(([lbl,val],i) => (
                 <div
                   key={lbl}
-                  style={{
-                    padding: '12px 14px',
-                    borderRight: i < 3 ? '1px solid var(--color-border)' : 'none',
-                    borderBottom: i < 2 ? '1px solid var(--color-border)' : 'none',
-                  }}
+                  className={cn(
+                    'p-[12px_14px]',
+                    // Mobile 2-col: only left-column items (even index) get right border
+                    i % 2 === 0 && 'border-r border-border',
+                    // Mobile 2-col: first row items get bottom border, removed at sm+
+                    i < 2 && 'border-b border-border sm:border-b-0',
+                    // sm+ 4-col: item 1 needs right border (not present on mobile)
+                    i === 1 && 'sm:border-r',
+                    // sm+ 4-col: item 3 has no right border (already has none on mobile)
+                  )}
                 >
                   <p 
                     className="font-mono uppercase" 

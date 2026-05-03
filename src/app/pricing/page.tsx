@@ -125,14 +125,14 @@ export default function PricingPage() {
                 as="h1"
                 delay={0.1}
                 className="font-display font-black leading-none tracking-normal uppercase"
-                style={{ fontSize: 'clamp(3rem, 9vw, 9rem)', color: 'var(--color-foreground)' }}
+                style={{ fontSize: 'clamp(2rem, 9vw, 9rem)', color: 'var(--color-foreground)' }}
               />
               <TextReveal
                 text="RATES."
                 as="h1"
                 delay={0.22}
                 className="font-display font-black leading-none tracking-normal uppercase"
-                style={{ fontSize: 'clamp(3rem, 9vw, 9rem)', color: 'var(--color-violet)' }}
+                style={{ fontSize: 'clamp(2rem, 9vw, 9rem)', color: 'var(--color-violet)' }}
               />
             </div>
 

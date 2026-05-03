@@ -17,7 +17,7 @@ export function BlogPageContent({ posts }: BlogPageContentProps) {
   return (
     <main className="min-h-screen bg-canvas">
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <section className="w-full bg-canvas pt-[120px] pb-8 relative overflow-hidden">
+      <section className="w-full bg-canvas pt-[80px] sm:pt-[100px] lg:pt-[120px] pb-8 relative overflow-hidden">
         {/* Background elements */}
         <div className="absolute inset-0 bg-line-grid pointer-events-none opacity-40" aria-hidden />
         <div

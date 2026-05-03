@@ -4,6 +4,7 @@ import { getAgreementByCode } from '@/lib/data/legal'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ChevronDown, ArrowRight } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 type Params = { slug: string }
 
@@ -91,7 +92,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
             <h1
               className="font-display font-black leading-none tracking-normal"
               style={{
-                fontSize: 'clamp(3rem, 8vw, 8rem)',
+                fontSize: 'clamp(2rem, 8vw, 8rem)',
                 color: 'var(--color-foreground)',
               }}
             >
@@ -178,11 +179,12 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
             ] as const).map(([label, val], i) => (
               <div
                 key={label}
-                className="px-6 py-5"
-                style={{
-                  borderRight: i < 3 ? '1px solid var(--color-border)' : 'none',
-                  borderBottom: i < 2 ? '1px solid var(--color-border)' : 'none',
-                }}
+                className={cn(
+                  'px-6 py-5 border-border',
+                  i % 2 === 0 && 'border-r',
+                  i < 2 && 'border-b lg:border-b-0',
+                  i < 3 ? 'lg:border-r' : 'lg:border-r-0',
+                )}
               >
                 <p
                   className="font-mono uppercase mb-1"

@@ -510,7 +510,7 @@ export function Navbar() {
             </div>
 
             {/* Content */}
-            <div className="relative h-full flex flex-col pt-[80px] px-6">
+            <div className="relative h-full flex flex-col pt-[64px] sm:pt-[72px] lg:pt-[80px] px-6">
               <div className="flex-1 overflow-y-auto">
                 <nav className="space-y-1">
                   {NAV_LINKS.map((link, i) => (

@@ -72,13 +72,13 @@ export default function PortfolioPage() {
             <div className="flex flex-col" style={{ gap: '0.02em' }}>
               <h1
                 className="font-display font-black leading-none tracking-normal uppercase"
-                style={{ fontSize: 'clamp(3.5rem, 10vw, 10rem)', color: 'var(--color-foreground)' }}
+                style={{ fontSize: 'clamp(2.5rem, 10vw, 10rem)', color: 'var(--color-foreground)' }}
               >
                 DIGITAL
               </h1>
               <h1
                 className="font-display font-black leading-none tracking-normal uppercase"
-                style={{ fontSize: 'clamp(3.5rem, 10vw, 10rem)', color: 'var(--color-violet)' }}
+                style={{ fontSize: 'clamp(2.5rem, 10vw, 10rem)', color: 'var(--color-violet)' }}
               >
                 PRODUCTS.
               </h1>

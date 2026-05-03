@@ -31,7 +31,7 @@ export default function ServicesPage() {
           }}
         />
 
-        <div className="relative z-10 container-site flex flex-col flex-1 pt-28 lg:pt-36 pb-16">
+        <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-16">
           <nav
             className="flex items-center gap-2 font-mono mb-14 lg:mb-20"
             style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
@@ -46,10 +46,10 @@ export default function ServicesPage() {
               ✦ WHAT WE DO
             </span>
             <div className="flex flex-col" style={{ gap: '0.02em' }}>
-              <h1 className="font-display font-black leading-none tracking-normal uppercase" style={{ fontSize: 'clamp(3rem, 9vw, 9rem)', color: 'var(--color-foreground)' }}>
+              <h1 className="font-display font-black leading-none tracking-normal uppercase" style={{ fontSize: 'clamp(2rem, 9vw, 9rem)', color: 'var(--color-foreground)' }}>
                 SERVICES
               </h1>
-              <h1 className="font-display font-black leading-none tracking-normal uppercase" style={{ fontSize: 'clamp(3rem, 9vw, 9rem)', color: 'var(--color-violet)' }}>
+              <h1 className="font-display font-black leading-none tracking-normal uppercase" style={{ fontSize: 'clamp(2rem, 9vw, 9rem)', color: 'var(--color-violet)' }}>
                 THAT SCALE.
               </h1>
             </div>
@@ -81,11 +81,11 @@ export default function ServicesPage() {
             </div>
             <div className="flex items-center gap-5 text-sm shrink-0">
               <Link href="/legal"
-                className="font-mono transition-colors hover-foreground"
+                className="font-mono transition-colors hover-foreground inline-flex items-center min-h-[44px] px-1"
                 style={{ color: 'var(--color-violet-light)' }}
               >Legal Hub →</Link>
               <Link href="/research"
-                className="font-mono transition-colors hover-foreground"
+                className="font-mono transition-colors hover-foreground inline-flex items-center min-h-[44px] px-1"
                 style={{ color: 'var(--color-violet-light)' }}
               >Research Pipeline →</Link>
             </div>
