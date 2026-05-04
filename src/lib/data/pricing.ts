@@ -1,47 +1,59 @@
 export interface PricingPlan {
   name: string
   tagline: string
+  // base (1-month / one-time) price
   price: string
   period: string
+  // retainer duration pricing
+  price6mo?: string
+  price12mo?: string
+  savings6mo?: string   // e.g. "~14% off"
+  savings12mo?: string  // e.g. "25% off"
+  totalBilled6mo?: string
+  totalBilled12mo?: string
+  // extras
   adSpend?: string
-  annualLabel?: string
   highlight: boolean
-  features: string[]
+  deliverables: string[]
   margin: string
-  note6mo?: string
-  note12mo?: string
+  retainerNote?: string  // post-build retainer option for project services
 }
 
 export interface ServicePricing {
   slug: string
   service: string
-  category: string
+  category: 'Monthly Retainer' | 'Project' | 'Project / Retainer'
+  isRetainer: boolean   // true → show duration toggle
   plans: PricingPlan[]
   note?: string
 }
 
 export const servicePricingData: Record<string, ServicePricing> = {
 
-  /* ─────────────────────────────────────────────────────────
-     META ADS (Social Media Marketing)
-  ───────────────────────────────────────────────────────── */
+  /* ─── META ADS ─────────────────────────────────────────── */
   'social-media-marketing': {
     slug: 'social-media-marketing',
     service: 'Meta Ads',
     category: 'Monthly Retainer',
+    isRetainer: true,
     plans: [
       {
         name: 'Starter',
-        tagline: 'Local shops, service providers, startups & clinics beginning with paid ads.',
+        tagline: 'Local shops, startups & clinics beginning with paid ads.',
         price: '₹18,000',
-        period: '/month',
+        period: '/mo',
+        price6mo: '₹15,500',
+        price12mo: '₹13,500',
+        savings6mo: '~14% off',
+        savings12mo: '25% off',
+        totalBilled6mo: '₹93,000 total',
+        totalBilled12mo: '₹1,62,000 total',
         adSpend: '₹10K–30K/mo (client pays Meta)',
-        annualLabel: '₹13,500/mo on 12-month · ₹15,500/mo on 6-month',
         highlight: false,
-        features: [
-          'Campaign strategy & objective setting',
+        deliverables: [
+          'Campaign strategy & objective setting (traffic, leads, or awareness)',
           'Facebook Pixel / CAPI setup',
-          '2 ad creatives/month (static, copy included)',
+          '2 ad creatives/month (static; copy included)',
           '1 active campaign, up to 2 ad sets',
           'Audience research + targeting setup',
           'Monthly performance report',
@@ -49,21 +61,24 @@ export const servicePricingData: Record<string, ServicePricing> = {
           'WhatsApp/email support (24-hr response)',
         ],
         margin: '44%',
-        note6mo: '₹15,500/mo · ₹93,000 total (~14% off)',
-        note12mo: '₹13,500/mo · ₹1,62,000 total (25% off)',
       },
       {
         name: 'Growth',
         tagline: 'SMBs, coaching, real estate & e-commerce scaling ad spend.',
         price: '₹35,000',
-        period: '/month',
+        period: '/mo',
+        price6mo: '₹30,000',
+        price12mo: '₹26,000',
+        savings6mo: '~14% off',
+        savings12mo: '26% off',
+        totalBilled6mo: '₹1,80,000 total',
+        totalBilled12mo: '₹3,12,000 total',
         adSpend: '₹30K–80K/mo (client pays Meta)',
-        annualLabel: '₹26,000/mo on 12-month · ₹30,000/mo on 6-month',
         highlight: true,
-        features: [
-          'Full-funnel strategy (awareness → conversion)',
+        deliverables: [
+          'Full-funnel campaign strategy (awareness → conversion)',
           'Pixel + CAPI setup + custom events',
-          '4–6 creatives/month (static + carousel, copy included)',
+          '4–6 ad creatives/month (static + carousel; copy included)',
           'Up to 3 campaigns, 6 ad sets',
           'A/B testing (creatives + audiences)',
           'Lookalike + retargeting audience setup',
@@ -74,25 +89,28 @@ export const servicePricingData: Record<string, ServicePricing> = {
           'WhatsApp/email support (12-hr response)',
         ],
         margin: '43%',
-        note6mo: '₹30,000/mo · ₹1,80,000 total (~14% off)',
-        note12mo: '₹26,000/mo · ₹3,12,000 total (26% off)',
       },
       {
         name: 'Scale',
         tagline: 'E-commerce stores, established brands & high-growth businesses.',
         price: '₹65,000',
-        period: '/month',
+        period: '/mo',
+        price6mo: '₹55,000',
+        price12mo: '₹48,000',
+        savings6mo: '~15% off',
+        savings12mo: '26% off',
+        totalBilled6mo: '₹3,30,000 total',
+        totalBilled12mo: '₹5,76,000 total',
         adSpend: '₹80K–2L/mo (client pays Meta)',
-        annualLabel: '₹48,000/mo on 12-month · ₹55,000/mo on 6-month',
         highlight: false,
-        features: [
+        deliverables: [
           'Comprehensive media strategy (FB + IG + Reels + Stories)',
           'Full Pixel, CAPI & GA4 integration',
           '8–10 creatives/month (static + video + UGC-style reels)',
           'Unlimited campaigns & ad sets (within scope)',
           'Full-funnel A/B testing (creative, audience, placement, objective)',
           'Dynamic product ads (e-commerce + catalog setup)',
-          'Retargeting + lookalike + broad + interest stacking',
+          'Retargeting + lookalike + broad + interest audience stacking',
           'Weekly calls (45 min) + weekly detailed report',
           'Monthly strategy review + quarterly account audit',
           'Dedicated account manager (named contact)',
@@ -100,29 +118,25 @@ export const servicePricingData: Record<string, ServicePricing> = {
           'Priority support — 4-hr WhatsApp response',
         ],
         margin: '49%',
-        note6mo: '₹55,000/mo · ₹3,30,000 total (~15% off)',
-        note12mo: '₹48,000/mo · ₹5,76,000 total (26% off)',
       },
     ],
-    note: 'All prices excl. GST (18%). SAC 998361. Ad spend NOT included — client pays Meta directly. Onboarding fee ₹5,000 (waived on 6/12-month commitments). Minimum 1-month notice for cancellation on rolling monthly contracts.',
+    note: 'All prices excl. GST (18%). SAC 998361. Ad spend NOT included — client pays Meta directly. Onboarding fee ₹5,000 for new accounts (waived on 6/12-month commitments). Minimum 1-month notice for cancellation on rolling monthly.',
   },
 
-  /* ─────────────────────────────────────────────────────────
-     WEB & APP DEVELOPMENT
-  ───────────────────────────────────────────────────────── */
+  /* ─── WEB & APP DEVELOPMENT ─────────────────────────────── */
   'saas-products': {
     slug: 'saas-products',
     service: 'Web & App Dev',
     category: 'Project',
+    isRetainer: false,
     plans: [
       {
         name: 'Sprint',
-        tagline: 'Landing pages, portfolio sites, brochure websites, clinic info sites. Delivered in 1 month.',
+        tagline: 'Landing pages, portfolio, brochure & clinic sites. Delivered in 1 month.',
         price: '₹65,000',
         period: 'one-time',
-        annualLabel: '₹55,000/sprint on 6-mo · ₹50,000/sprint on 12-mo retainer',
         highlight: false,
-        features: [
+        deliverables: [
           'Up to 6 pages / sections',
           'Mobile-first responsive design (Next.js + Tailwind)',
           'Contact form + WhatsApp integration',
@@ -133,17 +147,15 @@ export const servicePricingData: Record<string, ServicePricing> = {
           'Deployment on Vercel / custom hosting',
         ],
         margin: '51%',
-        note6mo: '₹55,000/sprint on quarterly refresh retainer',
-        note12mo: '₹50,000/sprint on 12-month retainer',
+        retainerNote: '₹55,000/sprint on 6-mo refresh retainer · ₹50,000/sprint on 12-mo',
       },
       {
         name: 'Build',
-        tagline: 'Web apps, client portals, booking systems, Flutter apps & dashboards. 3–6 months.',
+        tagline: 'Web apps, client portals, booking systems & Flutter apps. 3–6 months.',
         price: '₹2,80,000',
         period: 'one-time',
-        annualLabel: '₹50K/mo phased (6-mo) · ₹28K/mo on 12-month bundle',
         highlight: true,
-        features: [
+        deliverables: [
           'Full requirements + wireframe session',
           'Custom UI design (Figma → code)',
           'Auth (email / phone / Google SSO via Supabase)',
@@ -156,22 +168,20 @@ export const servicePricingData: Record<string, ServicePricing> = {
           '60-day post-launch support + handover docs',
         ],
         margin: '50%',
-        note6mo: '₹50,000/mo phased · ₹3,00,000 total',
-        note12mo: '₹28,000/mo bundle · ₹3,36,000 total (includes AMC)',
+        retainerNote: 'Phased: ₹50K/mo over 6 months · Bundle: ₹28K/mo on 12-mo (includes AMC)',
       },
       {
         name: 'Platform',
-        tagline: 'SaaS products, multi-tenant platforms, marketplaces & enterprise tools. 6–12 months.',
+        tagline: 'SaaS products, multi-tenant platforms & enterprise tools. 6–12 months.',
         price: '₹8,00,000',
         period: 'one-time',
-        annualLabel: '₹90K/mo on 12-month build + iterate contract',
         highlight: false,
-        features: [
+        deliverables: [
           'Discovery + scoping workshop',
           'Full architecture design (DB schema, API design, component tree)',
           'Figma design system',
           'Multi-role auth + tenant isolation',
-          'Custom billing / subscriptions (Razorpay/Stripe)',
+          'Custom billing / subscriptions (Razorpay / Stripe)',
           'Notification system (push + email + WhatsApp)',
           'Admin super-panel + Flutter app (iOS + Android)',
           'CI/CD pipeline (GitHub Actions) + automated testing',
@@ -180,30 +190,27 @@ export const servicePricingData: Record<string, ServicePricing> = {
           'Full source code + docs handover',
         ],
         margin: '55%',
-        note6mo: '₹8,00,000 fixed-scope (6-month)',
-        note12mo: '₹90,000/mo · ₹10,80,000 total (build + iterate + maintain)',
+        retainerNote: '12-mo build + iterate: ₹90K/mo · ₹10,80,000 total',
       },
     ],
-    note: 'All prices excl. GST (18%). SAC 998314. Payment: 40% on signing, 30% mid-delivery / staging, 30% on launch. AMC available: Basic ₹8K/mo · Standard ₹18K/mo · Premium ₹35K/mo.',
+    note: 'All prices excl. GST (18%). SAC 998314. Payment: 40% on signing · 30% mid-delivery / staging · 30% on launch. AMC available post-launch: Basic ₹8K/mo · Standard ₹18K/mo · Premium ₹35K/mo.',
   },
 
-  /* ─────────────────────────────────────────────────────────
-     CYBERSECURITY
-  ───────────────────────────────────────────────────────── */
+  /* ─── CYBERSECURITY ─────────────────────────────────────── */
   cybersecurity: {
     slug: 'cybersecurity',
     service: 'Cybersecurity',
     category: 'Project / Retainer',
+    isRetainer: false,
     plans: [
       {
         name: 'Shield',
-        tagline: 'CA firms, coaching institutes, schools, local businesses. DPDP compliance + cyber hygiene.',
+        tagline: 'CA firms, coaching institutes, schools & local businesses.',
         price: '₹50,000',
         period: 'one-time',
-        annualLabel: '₹8,500/mo on 6-month · ₹6,500/mo on 12-month AMC',
         highlight: false,
-        features: [
-          'Email security audit (SPF/DKIM/DMARC + dark web credential check)',
+        deliverables: [
+          'Email security audit (SPF / DKIM / DMARC + dark web credential check)',
           'Basic VAPT — web (up to 5 pages / endpoints)',
           'DPDP Act compliance gap checklist (10-point)',
           'Phishing simulation (25 users, 1 campaign)',
@@ -211,17 +218,15 @@ export const servicePricingData: Record<string, ServicePricing> = {
           '15-day post-delivery email support',
         ],
         margin: '50%',
-        note6mo: '₹8,500/mo · ₹51,000 total (includes monitoring + phishing sims)',
-        note12mo: '₹6,500/mo · ₹78,000 total AMC (includes annual VAPT refresh + training)',
+        retainerNote: '6-mo AMC: ₹8,500/mo · ₹51,000 total · 12-mo AMC: ₹6,500/mo · ₹78,000 total',
       },
       {
         name: 'Guard',
         tagline: 'Private hospitals, NBFCs, textile exporters & diagnostic centres.',
         price: '₹1,30,000',
         period: 'one-time',
-        annualLabel: '₹20,000/mo on 6-month · ₹16,500/mo on 12-month AMC',
         highlight: true,
-        features: [
+        deliverables: [
           'Full VAPT — web app + API (30+ endpoints, CVSS-scored)',
           'Network VAPT (up to 10 IPs)',
           'Phishing + vishing simulation',
@@ -232,17 +237,15 @@ export const servicePricingData: Record<string, ServicePricing> = {
           '30-day post-delivery support',
         ],
         margin: '53%',
-        note6mo: '₹20,000/mo · ₹1,20,000 total (continuous monitoring + bi-monthly mini-VAPT)',
-        note12mo: '₹16,500/mo · ₹1,98,000 total (2× full VAPT + 2× training + RBI audit prep)',
+        retainerNote: '6-mo: ₹20,000/mo · ₹1,20,000 total · 12-mo AMC: ₹16,500/mo · ₹1,98,000 total',
       },
       {
         name: 'Fortress',
         tagline: 'Cooperative banks, pharma, mid-size enterprises & EV/manufacturing.',
         price: '₹2,50,000',
         period: 'one-time',
-        annualLabel: '₹45,000/mo on 6-month · ₹38,000/mo on 12-month contract',
         highlight: false,
-        features: [
+        deliverables: [
           'Full-scope VAPT (web + API + network 20 IPs + WiFi)',
           'ISO 27001 Annex A gap report (114 controls assessed)',
           'DPDP + RBI / SEBI compliance gap document',
@@ -253,72 +256,65 @@ export const servicePricingData: Record<string, ServicePricing> = {
           '45-day post-audit support',
         ],
         margin: '60%',
-        note6mo: '₹45,000/mo · ₹2,70,000 total (monthly VAPT cycle + ISO 27001 tracking)',
-        note12mo: '₹38,000/mo · ₹4,56,000 total (4× VAPT cycles + ISO implementation + RBI readiness)',
+        retainerNote: '6-mo managed: ₹45,000/mo · ₹2,70,000 total · 12-mo: ₹38,000/mo · ₹4,56,000 total',
       },
     ],
-    note: 'All prices excl. GST (18%). SAC 998315. Payment: 50% on signing, 30% mid-engagement, 20% on final report delivery. Retainers: 100% quarterly in advance. Never start VAPT without 50% advance.',
+    note: 'All prices excl. GST (18%). SAC 998315. Payment: 50% on signing · 30% mid-engagement · 20% on final report delivery. Never start VAPT without 50% advance.',
   },
 
-  /* ─────────────────────────────────────────────────────────
-     AI & AUTOMATION
-  ───────────────────────────────────────────────────────── */
+  /* ─── AI & AUTOMATION ───────────────────────────────────── */
   'ai-automation': {
     slug: 'ai-automation',
     service: 'AI & Automation',
     category: 'Project',
+    isRetainer: false,
     plans: [
       {
         name: 'Spark',
-        tagline: 'Solopreneurs, gyms, clinics & coaching institutes. Eliminate manual lead capture & admin.',
+        tagline: 'Solopreneurs, gyms, clinics & coaching institutes. Eliminate manual admin.',
         price: '₹85,000',
         period: 'one-time',
-        annualLabel: '₹14,000/mo on 6-month · ₹11,000/mo on 12-month retainer',
         highlight: false,
-        features: [
+        deliverables: [
           '3 production-ready n8n workflows (lead form → CRM, booking → calendar, invoice auto-send)',
           'WhatsApp AI bot (24/7 FAQ + lead capture + appointment booking)',
           'Admin dashboard view in n8n (live logs)',
-          'Integration with 1 external tool (CRM, Sheets, or calendar)',
+          'Integration with 1 external tool (CRM, Google Sheets, or calendar)',
           'Prompt + system config documentation',
           '1-hr live training session',
-          '30-day post-launch support (bug fixes, prompt tweaks)',
-          'LLM API allowance: ₹2,500/mo included',
+          '30-day post-launch support (bug fixes + prompt tweaks)',
+          'LLM API allowance: ₹2,500/month included',
         ],
         margin: '51%',
-        note6mo: '₹14,000/mo · ₹84,000 total (monitoring + 1 workflow/quarter + prompt tuning)',
-        note12mo: '₹11,000/mo · ₹1,32,000 total (4 new workflows + annual audit + model upgrades)',
+        retainerNote: '6-mo retainer: ₹14,000/mo · ₹84,000 total · 12-mo AMC: ₹11,000/mo · ₹1,32,000 total',
       },
       {
         name: 'Neural',
-        tagline: 'SMBs, e-commerce, HR teams & sales companies. Automate lead qualification & support.',
+        tagline: 'SMBs, e-commerce, HR & sales companies. Automate lead qualification & support.',
         price: '₹2,00,000',
         period: 'one-time',
-        annualLabel: '₹28,000/mo on 6-month · ₹22,000/mo on 12-month retainer',
         highlight: true,
-        features: [
+        deliverables: [
           'Custom AI agent (Claude-powered, persistent memory, tool-use enabled)',
-          'RAG pipeline (ingest docs/catalog/policies → agent answers from own data)',
+          'RAG pipeline (ingest docs / catalog / policies → agent answers from own data)',
           '5 production n8n workflows (lead, support, invoice, payment reminder, etc.)',
           'WhatsApp + email + CRM integration (1 each)',
           'Admin panel (view conversations, override responses, add docs)',
           'Agent performance dashboard (response time, escalations, resolution rate)',
-          '2 training sessions (1 technical, 1 staff usage)',
+          '2 training sessions (1 technical + 1 staff usage)',
           '45-day post-launch support',
-          'LLM API allowance: ₹4,000/mo included',
+          'LLM API allowance: ₹4,000/month included',
         ],
         margin: '50%',
-        note6mo: '₹28,000/mo · ₹1,68,000 total (prompt tuning + RAG updates + 1 workflow/2mo)',
-        note12mo: '₹22,000/mo · ₹2,64,000 total (6 new workflows + annual audit + model upgrades)',
+        retainerNote: '6-mo retainer: ₹28,000/mo · ₹1,68,000 total · 12-mo: ₹22,000/mo · ₹2,64,000 total',
       },
       {
         name: 'Cortex',
         tagline: 'Mid-size companies, SaaS products & ops-heavy businesses. AI-first operations.',
         price: '₹4,00,000',
         period: 'one-time',
-        annualLabel: '₹48,000/mo on 6-month · ₹38,000/mo on 12-month contract',
         highlight: false,
-        features: [
+        deliverables: [
           'Multi-agent crew (3+ agents: sales / support / ops — shared memory)',
           'Voice AI agent (inbound calls, lead qualification, appointment booking)',
           '10+ n8n workflows (full ops suite)',
@@ -327,34 +323,31 @@ export const servicePricingData: Record<string, ServicePricing> = {
           'Admin super-panel + custom analytics dashboard (ROI tracking)',
           '2 dept training sessions + video walkthrough recording',
           '60-day post-launch support',
-          'LLM API allowance: ₹8,000/mo included',
+          'LLM API allowance: ₹8,000/month included',
         ],
         margin: '55%',
-        note6mo: '₹48,000/mo · ₹2,88,000 total (full monitoring + 2 workflows/mo + voice tuning)',
-        note12mo: '₹38,000/mo · ₹4,56,000 total (unlimited workflows up to 20 hrs/mo + 1 new agent/quarter)',
+        retainerNote: '6-mo managed: ₹48,000/mo · ₹2,88,000 total · 12-mo partnership: ₹38,000/mo · ₹4,56,000 total',
       },
     ],
-    note: 'All prices excl. GST (18%). SAC 998314 + 998313. LLM API (Claude Sonnet): pass-through + 15% markup on overage. Payment: 40% on signing, 30% staging demo, 30% production launch.',
+    note: 'All prices excl. GST (18%). SAC 998314 + 998313. LLM API (Claude Sonnet): pass-through + 15% markup on overage. Payment: 40% on signing · 30% staging demo · 30% production launch.',
   },
 
-  /* ─────────────────────────────────────────────────────────
-     BRANDING & IDENTITY
-  ───────────────────────────────────────────────────────── */
+  /* ─── BRANDING & IDENTITY ───────────────────────────────── */
   branding: {
     slug: 'branding',
     service: 'Branding & Identity',
     category: 'Project',
+    isRetainer: false,
     plans: [
       {
         name: 'Stamp',
         tagline: 'Solopreneurs, coaches, local shops & new startups. Look professional fast.',
         price: '₹35,000',
         period: 'one-time',
-        annualLabel: '₹8,500/mo on 6-month · ₹6,500/mo on 12-month retainer',
         highlight: false,
-        features: [
+        deliverables: [
           'Logo (3 formats: horizontal, stacked, icon-only)',
-          'Color palette (primary, secondary, accent — hex + CMYK)',
+          'Color palette (primary, secondary, accent — hex + CMYK codes)',
           'Typography pair (2 fonts + usage rules)',
           'Business card (Canva/Figma source + print-ready PDF)',
           'Letterhead (A4, print-ready)',
@@ -364,43 +357,39 @@ export const servicePricingData: Record<string, ServicePricing> = {
           '2 revision rounds',
         ],
         margin: '52%',
-        note6mo: '₹8,500/mo · ₹51,000 total (monthly branded templates + seasonal creatives)',
-        note12mo: '₹6,500/mo · ₹78,000 total (includes quarterly brand refresh + growing template library)',
+        retainerNote: '6-mo creative retainer: ₹8,500/mo · 12-mo: ₹6,500/mo',
       },
       {
         name: 'Mark',
         tagline: 'Growing SMBs, D2C brands, clinics & law firms. Full identity system + strategy.',
         price: '₹1,20,000',
         period: 'one-time',
-        annualLabel: '₹14,000/mo on 6-month · ₹11,000/mo on 12-month retainer',
         highlight: true,
-        features: [
+        deliverables: [
           'Brand discovery report + competitor positioning analysis',
           'Brand strategy document (positioning, audience, personality)',
-          'Logo system (all variants — primary, secondary, icon mark)',
-          'Visual identity system (color, typography, iconography, brand pattern)',
-          'Brand guidelines (8–12 page PDF: usage rules, do\'s/don\'ts, color codes)',
+          'Logo system (primary + secondary + icon mark, all variants)',
+          'Visual identity system (color system, typography, iconography, brand pattern)',
+          'Brand guidelines (8–12 page PDF: do\'s/don\'ts, usage rules, color codes)',
           'Tagline + brand voice guide + 3 key messaging pillars',
           'Full collateral (card, letterhead, envelope, email sig, social kit 5 templates, brochure cover)',
           'Editable source files (Figma + Canva) + print-ready PDFs',
           '3 revision rounds + 1-hr brand walkthrough call',
         ],
         margin: '51%',
-        note6mo: '₹14,000/mo · ₹84,000 total (12 templates/mo + campaign creatives + brand compliance)',
-        note12mo: '₹11,000/mo · ₹1,32,000 total (annual health check + 3 brand extensions/yr)',
+        retainerNote: '6-mo brand management: ₹14,000/mo · 12-mo: ₹11,000/mo',
       },
       {
         name: 'Signature',
-        tagline: 'Established businesses, scaling brands & companies going through a rebrand.',
+        tagline: 'Established businesses & companies going through a rebrand.',
         price: '₹2,50,000',
         period: 'one-time',
-        annualLabel: '₹22,000/mo on 6-month · ₹17,000/mo on 12-month contract',
         highlight: false,
-        features: [
+        deliverables: [
           'Brand audit + competitor + market deep research',
           'Brand strategy + architecture framework',
           'Brand story + narrative (500-word manifesto)',
-          'Logo system (6 concepts → all variants: horizontal, stacked, icon, monochrome, reversed)',
+          'Logo system (6 concepts → all variants incl. monochrome + reversed)',
           'Complete visual identity (color system, type scale, iconography, illustration style, photography direction)',
           'Brand book (20–30 pages, print + digital PDF)',
           'Messaging framework + brand voice guide + tone variations',
@@ -409,30 +398,33 @@ export const servicePricingData: Record<string, ServicePricing> = {
           '4 revision rounds + 2 presentations + 1-hr final walkthrough',
         ],
         margin: '57%',
-        note6mo: '₹22,000/mo · ₹1,32,000 total (16 templates/mo + 3 campaign creatives + brand compliance)',
-        note12mo: '₹17,000/mo · ₹2,04,000 total (annual audit + 5 brand extension projects/yr + dedicated brand manager)',
+        retainerNote: '6-mo brand partnership: ₹22,000/mo · 12-mo flagship: ₹17,000/mo',
       },
     ],
-    note: 'All prices excl. GST (18%). SAC 998392. IP transfers only on full payment receipt. Source files withheld until 100% cleared. Payment: 50% on signing, 25% at concept presentation, 25% on final delivery.',
+    note: 'All prices excl. GST (18%). SAC 998392. IP transfers only on full payment. Payment: 50% on signing · 25% at concept presentation · 25% on final delivery.',
   },
 
-  /* ─────────────────────────────────────────────────────────
-     CONTENT CREATION
-  ───────────────────────────────────────────────────────── */
+  /* ─── CONTENT CREATION ──────────────────────────────────── */
   'content-creation': {
     slug: 'content-creation',
     service: 'Content Creation',
     category: 'Monthly Retainer',
+    isRetainer: true,
     plans: [
       {
         name: 'Seed',
-        tagline: 'Solopreneurs, local businesses & single-platform presence. Build consistency.',
+        tagline: 'Solopreneurs, local businesses & single-platform presence.',
         price: '₹28,000',
-        period: '/month',
-        annualLabel: '₹20,000/mo on 12-month · ₹25,000/mo on 6-month',
+        period: '/mo',
+        price6mo: '₹25,000',
+        price12mo: '₹20,000',
+        savings6mo: '~11% off',
+        savings12mo: '29% off',
+        totalBilled6mo: '₹1,50,000 total',
+        totalBilled12mo: '₹2,40,000 total',
         highlight: false,
-        features: [
-          'Monthly content calendar (12 posts planned, topics + format breakdown)',
+        deliverables: [
+          'Monthly content calendar (12 posts — topics + format breakdown)',
           '12 branded social media graphics (static + carousel mix)',
           '12 captions (copy + hashtag research + CTA)',
           '2 blog posts (800–1,000 words, SEO-aware)',
@@ -441,17 +433,20 @@ export const servicePricingData: Record<string, ServicePricing> = {
           '1 revision round per piece',
         ],
         margin: '50%',
-        note6mo: '₹25,000/mo · ₹1,50,000 total (+ seasonal creatives + content library build)',
-        note12mo: '₹20,000/mo · ₹2,40,000 total (+ quarterly content audit + annual brand voice refresh)',
       },
       {
         name: 'Grow',
         tagline: 'Growing SMBs, clinics, coaches, D2C & real estate. Volume + variety.',
         price: '₹80,000',
-        period: '/month',
-        annualLabel: '₹55,000/mo on 12-month · ₹70,000/mo on 6-month',
+        period: '/mo',
+        price6mo: '₹70,000',
+        price12mo: '₹55,000',
+        savings6mo: '~13% off',
+        savings12mo: '31% off',
+        totalBilled6mo: '₹4,20,000 total',
+        totalBilled12mo: '₹6,60,000 total',
         highlight: true,
-        features: [
+        deliverables: [
           'Content strategy + competitor audit + monthly calendar',
           '20 social media graphics (branded — carousels, single posts, quote cards)',
           '20 captions (platform-optimized copy + CTAs + hashtags)',
@@ -459,21 +454,24 @@ export const servicePricingData: Record<string, ServicePricing> = {
           '4 SEO blog posts (1,000–1,200 words, keyword-targeted)',
           '1 email newsletter (design + copy, Mailchimp/Brevo-ready)',
           'Content scheduling + publishing across platforms',
-          'Monthly analytics report (engagement, reach, best performers, recommendations)',
+          'Monthly analytics report (engagement, reach, best performers + recommendations)',
           '2 revision rounds per content piece',
         ],
         margin: '51%',
-        note6mo: '₹70,000/mo · ₹4,20,000 total (+ trending reel research + 2 seasonal campaign creatives/mo)',
-        note12mo: '₹55,000/mo · ₹6,60,000 total (+ annual content audit + SEO blog cluster + 2 new platform onboardings/yr)',
       },
       {
         name: 'Lead',
-        tagline: 'Established brands & founders building personal brand. Full multi-platform ownership.',
+        tagline: 'Established brands & founders building personal brand. Full multi-platform.',
         price: '₹1,50,000',
-        period: '/month',
-        annualLabel: '₹1,10,000/mo on 12-month · ₹1,30,000/mo on 6-month',
+        period: '/mo',
+        price6mo: '₹1,30,000',
+        price12mo: '₹1,10,000',
+        savings6mo: '~13% off',
+        savings12mo: '27% off',
+        totalBilled6mo: '₹7,80,000 total',
+        totalBilled12mo: '₹13,20,000 total',
         highlight: false,
-        features: [
+        deliverables: [
           'Full content strategy (brand voice, content pillars, platform roadmap, content mix %)',
           '30 graphics (static, carousel, story — Canva source files included)',
           '30 captions (Instagram casual, LinkedIn professional, Facebook community — tone-split)',
@@ -482,13 +480,11 @@ export const servicePricingData: Record<string, ServicePricing> = {
           '4 LinkedIn thought leadership articles (900–1,200 words)',
           '2 email newsletters (branded HTML template, written + designed)',
           '1 YouTube script (10–15 min, shot-by-shot breakdown)',
-          'Monthly analytics report (per-platform: reach, engagement, click-through, lead attribution)',
+          'Monthly analytics report (per-platform: reach, engagement, click-through)',
           'Content scheduled + published across all platforms',
           '2 revision rounds + 1 monthly strategy call (45 min)',
         ],
         margin: '51%',
-        note6mo: '₹1,30,000/mo · ₹7,80,000 total (+ trend research + paid content cascade + campaign series)',
-        note12mo: '₹1,10,000/mo · ₹13,20,000 total (+ full content library handover + 50+ SEO blog cluster + 1 whitepaper/year)',
       },
     ],
     note: 'All prices excl. GST (18%). SAC 998363. Monthly retainer: 100% advance on 1st of month. 6/12-month contract: 50% advance + monthly thereafter. No content published until payment cleared.',
