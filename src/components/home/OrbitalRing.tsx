@@ -347,11 +347,11 @@ const CenterLogo = memo(function CenterLogo({
         {/* Logo - No background container */}
         <div className="relative w-20 h-20 flex items-center justify-center">
           <Image
-            src="/images/mta-logo-light.png"
+            src="/images/mta-logo-transparent-white.png"
             alt="MTA"
             fill
+            sizes="80px"
             className="object-contain drop-shadow-2xl"
-            priority
           />
         </div>
       </motion.div>

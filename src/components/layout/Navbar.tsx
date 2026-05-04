@@ -10,6 +10,8 @@ import { services } from '@/lib/data/services'
 import { cn } from '@/lib/utils'
 import ThemeToggle from '@/components/ui/ThemeToggle'
 import { useIsClient } from '@/hooks/useIsClient'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 import { useTheme } from 'next-themes'
 
@@ -126,11 +128,18 @@ export function Navbar() {
   const [ctaHovered, setCtaHovered] = useState(false)
   const [ctaPressed, setCtaPressed] = useState(false)
 
+  const prefersReducedMotion = useReducedMotion()
+  const isTouchDevice = useMediaQuery('(hover: none) and (pointer: coarse)')
+
   const isLight = useMemo(() => {
     if (isClient) return resolvedTheme !== 'dark'
     return true // default to light during SSR
   }, [isClient, resolvedTheme])
   const styles = useMemo(() => getNavStyles(isLight, scrolled), [isLight, scrolled])
+  const logoSrc = isLight
+    ? '/images/mta-logo-transparent.png'
+    : '/images/mta-logo-transparent-white.png'
+  const animateLogo = !prefersReducedMotion && !isTouchDevice
 
   // Scroll detection with RAF throttling
   useEffect(() => {
@@ -241,17 +250,17 @@ export function Navbar() {
             >
               <motion.div
                 className="relative"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.2 }}
+                whileHover={animateLogo ? { scale: 1.05 } : undefined}
+                transition={animateLogo ? { duration: 0.2 } : { duration: 0 }}
               >
                 <Image
-                  src="/images/mta-logo-light.png"
-                  alt="MTA"
+                  src={logoSrc}
+                  alt="Manglam Technical Agency"
                   width={40}
                   height={40}
-                  className="shrink-0 transition-opacity duration-300"
-                  style={{ opacity: isClient ? 1 : 0 }}
-                  priority
+                  sizes="(max-width: 640px) 36px, 40px"
+                  className="h-9 w-9 shrink-0 object-contain sm:h-10 sm:w-10"
+                  loading="eager"
                 />
               </motion.div>
               <div className="hidden sm:flex flex-col leading-none">
