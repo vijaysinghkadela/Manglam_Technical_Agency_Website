@@ -38,8 +38,8 @@ function inferBudgetRange(priceLabel: string): string {
   return "₹5,00,000+";
 }
 
-function inferTimeline(period?: string, note?: string): string {
-  const text = `${period ?? ""} ${note ?? ""}`.toLowerCase();
+function inferTimeline(period?: string, subtext?: string): string {
+  const text = `${period ?? ""} ${subtext ?? ""}`.toLowerCase();
   if (!text.trim()) return "Flexible";
   if (
     text.includes("ongoing") ||
@@ -79,15 +79,12 @@ function buildPrefilledMessage(service: ServiceData, plan?: ServicePlan) {
   ];
 
   if (plan) {
-    lines.push(
-      "",
-      "Selected pricing plan:",
-      `Plan: ${plan.label}`,
-      `Plan price: ${plan.amount}`,
-      plan.period ? `Plan period: ${plan.period}` : null,
-      plan.note ? `Plan notes: ${plan.note}` : null,
-      `Plan features: ${plan.features.join(" • ")}`,
-    );
+    lines.push("", "Selected pricing plan:");
+    lines.push(`Plan: ${plan.label}`);
+    lines.push(`Plan price: ${plan.amount}`);
+    if (plan.period) lines.push(`Plan period: ${plan.period}`);
+    if (plan.subtext) lines.push(`Plan notes: ${plan.subtext}`);
+    lines.push(`Plan features: ${plan.features.join(" • ")}`);
   }
 
   lines.push(
@@ -102,7 +99,7 @@ function buildContactHref(service: ServiceData, plan?: ServicePlan) {
   const params = new URLSearchParams();
   params.set("service", service.name);
   params.set("budget", inferBudgetRange(plan?.amount ?? service.priceLabel));
-  params.set("timeline", inferTimeline(plan?.period, plan?.note));
+  params.set("timeline", inferTimeline(plan?.period, plan?.subtext));
   params.set("message", buildPrefilledMessage(service, plan));
 
   return `/contact?${params.toString()}`;
