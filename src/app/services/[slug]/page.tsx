@@ -6,6 +6,8 @@ import Link from "next/link";
 import { ChevronDown, ArrowRight } from "lucide-react";
 
 type Params = { slug: string };
+type ServiceData = NonNullable<ReturnType<typeof getService>>;
+type ServicePlan = ServiceData["pricing"][number];
 
 export async function generateMetadata({
   params,
@@ -20,6 +22,73 @@ export async function generateMetadata({
 
 export function generateStaticParams() {
   return services.map((service) => ({ slug: service.slug }));
+}
+
+function inferBudgetRange(priceLabel: string): string {
+  const matches = priceLabel.match(/\d[\d,]*/g);
+  if (!matches || matches.length === 0) return "Not Sure";
+
+  const maxAmount = Math.max(...matches.map((value) => Number(value.replace(/,/g, ""))));
+  if (maxAmount <= 25000) return "Under ₹25,000";
+  if (maxAmount <= 50000) return "₹25,000–₹50,000";
+  if (maxAmount <= 100000) return "₹50,000–₹1,00,000";
+  if (maxAmount <= 500000) return "₹1,00,000–₹5,00,000";
+  return "₹5,00,000+";
+}
+
+function inferTimeline(period?: string, note?: string): string {
+  const text = `${period ?? ""} ${note ?? ""}`.toLowerCase();
+  if (!text.trim()) return "Flexible";
+  if (text.includes("ongoing") || text.includes("retainer") || text.includes("monthly") || text.includes("partnership")) {
+    return "Flexible";
+  }
+  if (text.includes("1-month") || text.includes("1 month") || text.includes("setup") || text.includes("build")) {
+    return "Within 1 month";
+  }
+  if (text.includes("3-4") || text.includes("4-6") || text.includes("6-month") || text.includes("12-month")) {
+    return "Within 3 months";
+  }
+  return "Within 3 months";
+}
+
+function buildPrefilledMessage(service: ServiceData, plan?: ServicePlan) {
+  const lines = [
+    "I selected this service from the MTA services page:",
+    `Service: ${service.name}`,
+    `Tagline: ${service.tagline}`,
+    `Starting price: ${service.priceLabel}`,
+    `Core features: ${service.features.join(" • ")}`,
+    `Overview: ${service.description}`,
+  ];
+
+  if (plan) {
+    lines.push(
+      "",
+      "Selected pricing plan:",
+      `Plan: ${plan.label}`,
+      `Plan price: ${plan.amount}`,
+      plan.period ? `Plan period: ${plan.period}` : null,
+      plan.note ? `Plan notes: ${plan.note}` : null,
+      `Plan features: ${plan.features.join(" • ")}`
+    );
+  }
+
+  lines.push(
+    "",
+    "Please review the above requirements and reply on WhatsApp with next steps."
+  );
+
+  return lines.filter(Boolean).join("\n");
+}
+
+function buildContactHref(service: ServiceData, plan?: ServicePlan) {
+  const params = new URLSearchParams();
+  params.set("service", service.name);
+  params.set("budget", inferBudgetRange(plan?.amount ?? service.priceLabel));
+  params.set("timeline", inferTimeline(plan?.period, plan?.note));
+  params.set("message", buildPrefilledMessage(service, plan));
+
+  return `/contact?${params.toString()}`;
 }
 
 export default async function ServicePage({
@@ -185,7 +254,7 @@ export default async function ServicePage({
           {/* Bottom row */}
           <div className="flex items-end justify-between mt-10 lg:mt-14">
             <Link
-              href="/contact"
+              href={buildContactHref(service)}
               className="inline-flex items-center gap-2 px-7 py-4 font-display font-black text-[15px] hover:bg-violet hover:text-white transition-all duration-300"
               style={{
                 backgroundColor: "var(--color-foreground)",
@@ -451,7 +520,7 @@ export default async function ServicePage({
 
               {/* CTA */}
               <Link
-                href="/contact"
+                href={buildContactHref(service)}
                 className="inline-flex items-center gap-2 w-fit px-7 py-4 font-display font-black text-[15px] hover:bg-violet hover:text-white transition-all duration-300"
                 style={{
                   backgroundColor: "var(--color-foreground)",
@@ -701,7 +770,7 @@ export default async function ServicePage({
                     </ul>
 
                     <Link
-                      href="/contact"
+                      href={buildContactHref(service, plan)}
                       data-cursor="pointer"
                       className="mt-auto inline-flex items-center justify-center gap-2 py-3 font-display font-bold text-sm transition-all duration-300 hover:bg-violet hover:text-white hover:border-violet"
                       style={{

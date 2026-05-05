@@ -9,6 +9,7 @@ import { ThemeProvider } from "next-themes";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { SiteChatbot } from "@/components/chat/SiteChatbot";
 import { organizationSchema, websiteSchema } from "@/lib/seo/schemas";
 import "@fontsource/outfit/400.css";
 import "@fontsource/outfit/500.css";
@@ -141,11 +142,12 @@ export default function RootLayout({
             <Navbar />
             <main className="relative w-full overflow-x-clip">{children}</main>
             <Footer />
+              <SiteChatbot />
             <Analytics />
             <SpeedInsights />
             <ScrollToTop />
             <Toaster
-              position="bottom-right"
+              position="bottom-left"
               toastOptions={{
                 style: {
                   background: "var(--color-card)",

@@ -23,6 +23,23 @@ const governanceChips = [
   'Low-motion defaults',
 ]
 
+function buildContactHref() {
+  const params = new URLSearchParams()
+  params.set('service', 'Other')
+  params.set('budget', 'Not Sure')
+  params.set('timeline', 'Flexible')
+  params.set(
+    'message',
+    [
+      'I found MTA through the Services page and would like help choosing the right service.',
+      '',
+      'Please review my needs and recommend the best starting point for my project.',
+    ].join('\n')
+  )
+
+  return `/contact?${params.toString()}`
+}
+
 export default function ServicesPage() {
   return (
     <main className="min-h-screen bg-canvas">
@@ -72,7 +89,7 @@ export default function ServicesPage() {
 
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                href="/contact"
+                href={buildContactHref()}
                 className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 font-display text-[14px] font-black transition-all duration-300"
                 style={{ backgroundColor: '#6B1A1A', color: '#FFFFFF' }}
                 data-cursor="pointer"

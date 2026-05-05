@@ -1,11 +1,13 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
+import { useSearchParams } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import toast from 'react-hot-toast'
-import { Loader2, CheckCircle2, Shield } from 'lucide-react'
+import { Loader2, Shield } from 'lucide-react'
+import { services as serviceCatalog } from '@/lib/data/services'
 import { hasMaliciousInput } from '@/lib/security'
 
 const schema = z.object({
@@ -20,85 +22,126 @@ const schema = z.object({
     message: 'Explicit consent required under DPDP Act 2023 and LGPD',
   }),
   followUpConsent: z.boolean().optional(),
-  sensitiveDataConsent: z.boolean().optional(),
-  consentTimestamp: z.string().optional(),
-  consentPurpose: z.string().optional(),
-  consentUserAgent: z.string().optional(),
 })
 
 type F = z.infer<typeof schema>
 
-const SERVICES = ['Web Development', 'Social Media & Automation', 'Cybersecurity', 'AI Automation', 'SaaS Licensing', 'Data Processing', 'Contractor Management', 'Other']
+const SERVICES = [...serviceCatalog.map((service) => service.name), 'Other']
 const BUDGETS = ['Under ₹25,000', '₹25,000–₹50,000', '₹50,000–₹1,00,000', '₹1,00,000–₹5,00,000', '₹5,00,000+', 'Not Sure']
 const TIMELINES = ['ASAP', 'Within 1 month', 'Within 3 months', 'Flexible']
+const WHATSAPP_NUMBER = '919694322131'
+
+const normalizeOption = (value: string | null, options: string[]) => {
+  if (!value) return ''
+  return options.includes(value) ? value : ''
+}
+
+const extractMaxAmount = (text: string) => {
+  const matches = text.match(/\d[\d,]*/g)
+  if (!matches) return null
+
+  const amounts = matches
+    .map((value) => Number(value.replace(/,/g, '')))
+    .filter((value) => Number.isFinite(value))
+
+  if (amounts.length === 0) return null
+  return Math.max(...amounts)
+}
+
+const inferBudgetRange = (price: string) => {
+  const amount = extractMaxAmount(price)
+  if (amount === null) return 'Not Sure'
+  if (amount <= 25000) return 'Under ₹25,000'
+  if (amount <= 50000) return '₹25,000–₹50,000'
+  if (amount <= 100000) return '₹50,000–₹1,00,000'
+  if (amount <= 500000) return '₹1,00,000–₹5,00,000'
+  return '₹5,00,000+'
+}
+
+const inferTimeline = (hint: string) => {
+  const text = hint.toLowerCase()
+  if (!text.trim()) return 'Flexible'
+  if (text.includes('ongoing') || text.includes('retainer') || text.includes('monthly') || text.includes('partnership')) {
+    return 'Flexible'
+  }
+  if (text.includes('1-month') || text.includes('1 month') || text.includes('setup') || text.includes('build')) {
+    return 'Within 1 month'
+  }
+  if (text.includes('3-4') || text.includes('4-6') || text.includes('6-month') || text.includes('12-month')) {
+    return 'Within 3 months'
+  }
+  return 'Within 3 months'
+}
+
+const buildWhatsAppMessage = (data: F) => {
+  const lines = [
+    'New enquiry from the MTA website',
+    '',
+    `Name: ${data.name}`,
+    `Email: ${data.email}`,
+    data.phone ? `Phone: ${data.phone}` : null,
+    `Service: ${data.service}`,
+    `Budget: ${data.budget}`,
+    `Timeline: ${data.timeline}`,
+    '',
+    'Project details:',
+    data.message,
+    '',
+    `Privacy consent: Yes`,
+    `Follow-up consent: ${data.followUpConsent ? 'Yes' : 'No'}`,
+  ]
+
+  return lines.filter(Boolean).join('\n')
+}
 
 export default function ContactForm() {
-  const [done, setDone] = useState(false)
+  const searchParams = useSearchParams()
+  const initialService = normalizeOption(searchParams.get('service'), SERVICES)
+  const planAmount = searchParams.get('planAmount')
+  const planPeriod = searchParams.get('planPeriod')
+  const planNote = searchParams.get('planNote')
+  const initialBudget = normalizeOption(searchParams.get('budget') ?? (planAmount ? inferBudgetRange(planAmount) : ''), BUDGETS)
+  const initialTimeline = normalizeOption(
+    searchParams.get('timeline') ?? (planPeriod || planNote ? inferTimeline(`${planPeriod ?? ''} ${planNote ?? ''}`) : ''),
+    TIMELINES
+  )
+  const initialMessage = searchParams.get('message') ?? ''
+
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    reset,
   } = useForm<F>({
     resolver: zodResolver(schema),
     defaultValues: {
       privacy: false,
       followUpConsent: false,
-      sensitiveDataConsent: false,
+      service: initialService,
+      budget: initialBudget,
+      timeline: initialTimeline,
+      message: initialMessage,
     },
   })
 
-const onSubmit = async (data: F) => {
-    // Enhanced security validation
-    if (hasMaliciousInput(data.name) || hasMaliciousInput(data.email) || hasMaliciousInput(data.message)) {
+  const onSubmit = async (data: F) => {
+    if (
+      hasMaliciousInput(data.name) ||
+      hasMaliciousInput(data.email) ||
+      hasMaliciousInput(data.service) ||
+      hasMaliciousInput(data.budget) ||
+      hasMaliciousInput(data.timeline) ||
+      hasMaliciousInput(data.message)
+    ) {
       toast.error('Invalid characters detected in form input')
       return
     }
 
-    const enrichedData = {
-      ...data,
-      consentTimestamp: new Date().toISOString(),
-      consentPurpose: 'contact-form-submission',
-      consentUserAgent: typeof navigator !== 'undefined' ? navigator.userAgent : undefined,
-    }
-
-    const res = await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(enrichedData),
-    })
-
-    if (!res.ok) {
-      const body = await res.json().catch(() => ({}))
-      toast.error(body?.message ?? 'Failed to send. Please try again.')
+    if (typeof window === 'undefined') {
       return
     }
 
-    setDone(true)
-    reset()
-  }
-
-  if (done) {
-    return (
-      <div className="flex flex-col items-center justify-center gap-6 rounded-[24px] border border-[rgba(107,26,26,0.2)] bg-[rgba(107,26,26,0.05)] px-6 py-20 text-center sm:px-10">
-        <div className="flex h-16 w-16 items-center justify-center rounded-full border border-[rgba(107,26,26,0.3)] bg-[rgba(107,26,26,0.08)]">
-          <CheckCircle2 className="h-8 w-8" style={{ color: '#6B1A1A' }} />
-        </div>
-        <div>
-          <h3 className="mb-2 font-display text-2xl font-black" style={{ color: 'var(--color-foreground)' }}>
-            Message Sent
-          </h3>
-          <p style={{ color: 'var(--color-muted)' }}>We&apos;ll respond within 2–4 hours.</p>
-        </div>
-        <button
-          onClick={() => setDone(false)}
-          className="font-mono text-xs uppercase tracking-widest transition-colors hover-foreground"
-          style={{ color: 'var(--color-muted)', letterSpacing: '0.15em' }}
-        >
-          Send another message →
-        </button>
-      </div>
-    )
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildWhatsAppMessage(data))}`
+    window.location.assign(whatsappUrl)
   }
 
   return (
@@ -114,7 +157,7 @@ const onSubmit = async (data: F) => {
           </Field>
         </Row>
         <Field label="Phone Number">
-          <Input {...register('phone')} autoComplete="tel" inputMode="tel" placeholder="+91 98765 43210" />
+          <Input {...register('phone')} autoComplete="tel" type="tel" inputMode="tel" placeholder="+91 98765 43210" />
         </Field>
       </div>
 
@@ -209,18 +252,6 @@ const onSubmit = async (data: F) => {
               />
               <span className="text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
                 I agree to receive project follow-up emails related to this inquiry. This does not add me to a newsletter.
-              </span>
-            </label>
-
-            <label className="grid gap-3 sm:grid-cols-[24px_1fr]">
-              <input
-                {...register('sensitiveDataConsent')}
-                type="checkbox"
-                className="mt-1 h-5 w-5 shrink-0 cursor-pointer rounded"
-                style={{ accentColor: '#6B1A1A' }}
-              />
-              <span className="text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
-                If I include FitNexora health, biometric, diet, or fitness data, I explicitly consent to MTA reviewing that sensitive data only for this inquiry.
               </span>
             </label>
           </div>
