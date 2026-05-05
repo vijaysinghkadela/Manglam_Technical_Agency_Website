@@ -1,192 +1,208 @@
-'use client'
+"use client";
 
-import * as Dialog from '@radix-ui/react-dialog'
-import { AnimatePresence, motion } from 'framer-motion'
-import { Bot, MessageSquareMore, RefreshCcw, Send, X } from 'lucide-react'
-import { usePathname } from 'next/navigation'
-import { useEffect, useMemo, useRef, useState } from 'react'
-import toast from 'react-hot-toast'
-import { cn } from '@/lib/cn'
+import * as Dialog from "@radix-ui/react-dialog";
+import { AnimatePresence, motion } from "framer-motion";
+import { Bot, MessageSquareMore, RefreshCcw, Send, X } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { useEffect, useMemo, useRef, useState } from "react";
+import toast from "react-hot-toast";
+import { cn } from "@/lib/cn";
 
-type ChatRole = 'user' | 'assistant'
+type ChatRole = "user" | "assistant";
 
 interface ChatMessage {
-  role: ChatRole
-  content: string
+  role: ChatRole;
+  content: string;
 }
 
-const STORAGE_KEY = 'mta-chatbot-state-v1'
-const MAX_MESSAGES = 20
+const STORAGE_KEY = "mta-chatbot-state-v1";
+const MAX_MESSAGES = 20;
 
 const WELCOME_MESSAGE: ChatMessage = {
-  role: 'assistant',
+  role: "assistant",
   content:
-    'Hi, I am the MTA website assistant. Tell me what you need, and I will help you choose the right service, compare options, or answer questions about the live site.',
-}
+    "Hi, I am the MTA website assistant. Tell me what you need, and I will help you choose the right service, compare options, or answer questions about the live site.",
+};
 
 const QUICK_PROMPTS = [
-  'Recommend the best service for my business.',
-  'Compare your pricing plans for me.',
-  'I need a website and AI automation.',
-  'Explain your compliance and delivery process.',
-]
+  "Recommend the best service for my business.",
+  "Compare your pricing plans for me.",
+  "I need a website and AI automation.",
+  "Explain your compliance and delivery process.",
+];
 
 function trimMessages(messages: ChatMessage[]) {
-  return messages.slice(-MAX_MESSAGES)
+  return messages.slice(-MAX_MESSAGES);
 }
 
 function getPageLabel(pathname: string) {
-  if (pathname === '/') return 'Home'
-  if (pathname === '/services') return 'Services'
-  if (pathname === '/pricing') return 'Pricing'
-  if (pathname === '/contact') return 'Contact'
-  if (pathname === '/blog') return 'Blog'
-  if (pathname === '/portfolio') return 'Portfolio'
-  if (pathname === '/research') return 'Research'
-  if (pathname === '/legal') return 'Legal'
-  if (pathname === '/trust-center') return 'Trust Center'
-  if (pathname.startsWith('/services/')) {
-    const slug = pathname.split('/')[2] ?? ''
-    return `Service: ${slug.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())}`
+  if (pathname === "/") return "Home";
+  if (pathname === "/services") return "Services";
+  if (pathname === "/pricing") return "Pricing";
+  if (pathname === "/contact") return "Contact";
+  if (pathname === "/blog") return "Blog";
+  if (pathname === "/portfolio") return "Portfolio";
+  if (pathname === "/research") return "Research";
+  if (pathname === "/legal") return "Legal";
+  if (pathname === "/trust-center") return "Trust Center";
+  if (pathname.startsWith("/services/")) {
+    const slug = pathname.split("/")[2] ?? "";
+    return `Service: ${slug.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase())}`;
   }
-  if (pathname.startsWith('/blog/')) return 'Blog article'
-  if (pathname.startsWith('/portfolio/')) return 'Portfolio item'
-  return pathname.replace(/\//g, ' • ').replace(/^ • /, '') || 'Website'
+  if (pathname.startsWith("/blog/")) return "Blog article";
+  if (pathname.startsWith("/portfolio/")) return "Portfolio item";
+  return pathname.replace(/\//g, " • ").replace(/^ • /, "") || "Website";
 }
 
 export function SiteChatbot() {
-  const pathname = usePathname() || '/'
-  const pageLabel = useMemo(() => getPageLabel(pathname), [pathname])
+  const pathname = usePathname() || "/";
+  const pageLabel = useMemo(() => getPageLabel(pathname), [pathname]);
   const panelStyle = {
-    backgroundColor: 'var(--color-card)',
+    backgroundColor: "var(--color-card)",
     backgroundImage:
-      'radial-gradient(circle at top right, rgba(var(--color-accent-rgb), 0.08), transparent 42%), linear-gradient(180deg, var(--color-card), var(--color-surface))',
-  }
-  const [open, setOpen] = useState(false)
-  const [messages, setMessages] = useState<ChatMessage[]>([WELCOME_MESSAGE])
-  const [input, setInput] = useState('')
-  const [isSending, setIsSending] = useState(false)
-  const [ready, setReady] = useState(false)
+      "radial-gradient(circle at top right, rgba(var(--color-accent-rgb), 0.08), transparent 42%), linear-gradient(180deg, var(--color-card), var(--color-surface))",
+  };
+  const [open, setOpen] = useState(false);
+  const [messages, setMessages] = useState<ChatMessage[]>([WELCOME_MESSAGE]);
+  const [input, setInput] = useState("");
+  const [isSending, setIsSending] = useState(false);
+  const [ready, setReady] = useState(false);
 
-  const scrollAnchorRef = useRef<HTMLDivElement | null>(null)
-  const inputRef = useRef<HTMLTextAreaElement | null>(null)
+  const scrollAnchorRef = useRef<HTMLDivElement | null>(null);
+  const inputRef = useRef<HTMLTextAreaElement | null>(null);
 
   useEffect(() => {
     try {
-      const raw = window.localStorage.getItem(STORAGE_KEY)
+      const raw = window.localStorage.getItem(STORAGE_KEY);
       if (!raw) {
-        setReady(true)
-        return
+        setReady(true);
+        return;
       }
 
-      const parsed = JSON.parse(raw) as { messages?: ChatMessage[] }
+      const parsed = JSON.parse(raw) as { messages?: ChatMessage[] };
       if (Array.isArray(parsed.messages) && parsed.messages.length > 0) {
-        setMessages(trimMessages(parsed.messages))
+        setMessages(trimMessages(parsed.messages));
       }
     } catch {
       // Ignore storage corruption and fall back to the welcome message.
     } finally {
-      setReady(true)
+      setReady(true);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
-    if (!ready) return
+    if (!ready) return;
 
     window.localStorage.setItem(
       STORAGE_KEY,
       JSON.stringify({
         messages,
-      })
-    )
-  }, [messages, ready])
+      }),
+    );
+  }, [messages, ready]);
 
   useEffect(() => {
-    scrollAnchorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
-  }, [messages, open, isSending])
+    scrollAnchorRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+    });
+  }, [messages, open, isSending]);
 
   useEffect(() => {
     if (open) {
       window.requestAnimationFrame(() => {
-        inputRef.current?.focus()
-      })
+        inputRef.current?.focus();
+      });
     }
-  }, [open])
+  }, [open]);
 
   async function sendMessage(messageText: string) {
-    const trimmed = messageText.trim()
-    if (!trimmed || isSending) return
+    const trimmed = messageText.trim();
+    if (!trimmed || isSending) return;
 
-    setOpen(true)
-    const nextMessages = trimMessages([...messages, { role: 'user', content: trimmed }])
-    setMessages(nextMessages)
-    setInput('')
-    setIsSending(true)
+    setOpen(true);
+    const nextMessages = trimMessages([
+      ...messages,
+      { role: "user", content: trimmed },
+    ]);
+    setMessages(nextMessages);
+    setInput("");
+    setIsSending(true);
 
     try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           messages: nextMessages,
           pathname,
           pageTitle: document.title,
         }),
-      })
+      });
 
-      const data = (await response.json().catch(() => null)) as { success?: boolean; message?: string } | null
+      const data = (await response.json().catch(() => null)) as {
+        success?: boolean;
+        message?: string;
+      } | null;
 
       if (!response.ok || !data?.success || !data.message) {
-        throw new Error(data?.message || 'The chatbot could not answer that request right now.')
+        throw new Error(
+          data?.message ||
+            "The chatbot could not answer that request right now.",
+        );
       }
 
       setMessages((current) =>
         trimMessages([
           ...current,
           {
-            role: 'assistant',
-            content: data.message || 'I can help with that. Could you share one more detail?',
+            role: "assistant",
+            content:
+              data.message ||
+              "I can help with that. Could you share one more detail?",
           },
-        ])
-      )
+        ]),
+      );
     } catch (error) {
       const fallback =
-        error instanceof Error ? error.message : 'The assistant is temporarily unavailable.'
-      toast.error(fallback)
+        error instanceof Error
+          ? error.message
+          : "The assistant is temporarily unavailable.";
+      toast.error(fallback);
       setMessages((current) =>
         trimMessages([
           ...current,
           {
-            role: 'assistant',
+            role: "assistant",
             content:
-              'I am having trouble reaching the assistant service at the moment. Please try again in a moment, or continue through the contact form if you want a direct quote.',
+              "I am having trouble reaching the assistant service at the moment. Please try again in a moment, or continue through the contact form if you want a direct quote.",
           },
-        ])
-      )
+        ]),
+      );
     } finally {
-      setIsSending(false)
+      setIsSending(false);
       window.requestAnimationFrame(() => {
-        inputRef.current?.focus()
-      })
+        inputRef.current?.focus();
+      });
     }
   }
 
   function resetConversation() {
-    setMessages([WELCOME_MESSAGE])
-    setInput('')
+    setMessages([WELCOME_MESSAGE]);
+    setInput("");
     try {
-      window.localStorage.removeItem(STORAGE_KEY)
+      window.localStorage.removeItem(STORAGE_KEY);
     } catch {
       // Ignore storage failures and keep the visible reset state.
     }
     window.requestAnimationFrame(() => {
-      inputRef.current?.focus()
-    })
-    toast.success('Chat reset')
+      inputRef.current?.focus();
+    });
+    toast.success("Chat reset");
   }
 
   function handleQuickPrompt(prompt: string) {
-    void sendMessage(prompt)
+    void sendMessage(prompt);
   }
 
   return (
@@ -195,9 +211,9 @@ export function SiteChatbot() {
         <button
           type="button"
           className={cn(
-            'fixed bottom-5 right-5 z-[70] flex items-center gap-3 rounded-full border border-border bg-card/95 px-4 py-3 text-left text-foreground shadow-[0_20px_60px_rgba(0,0,0,0.18)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[color:var(--color-accent-border)] hover:bg-[color:var(--color-accent-soft)] hover:shadow-[0_24px_70px_rgba(107,26,26,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-canvas'
+            "fixed bottom-5 right-5 z-[70] flex items-center gap-3 rounded-full border border-border bg-card/95 px-4 py-3 text-left text-foreground shadow-[0_20px_60px_rgba(0,0,0,0.18)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[color:var(--color-accent-border)] hover:bg-[color:var(--color-accent-soft)] hover:shadow-[0_24px_70px_rgba(107,26,26,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-canvas",
           )}
-          aria-label={open ? 'Close AI assistant' : 'Open AI assistant'}
+          aria-label={open ? "Close AI assistant" : "Open AI assistant"}
           aria-haspopup="dialog"
           aria-expanded={open}
         >
@@ -206,8 +222,12 @@ export function SiteChatbot() {
             <span className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full border border-canvas bg-emerald-400" />
           </span>
           <span className="hidden min-w-0 flex-col sm:flex">
-            <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-muted">Chat</span>
-            <span className="font-display text-[14px] font-black leading-tight">MTA Assistant</span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-muted">
+              Chat
+            </span>
+            <span className="font-display text-[14px] font-black leading-tight">
+              MTA Assistant
+            </span>
           </span>
         </button>
       </Dialog.Trigger>
@@ -229,7 +249,7 @@ export function SiteChatbot() {
                 initial={{ opacity: 0, y: 20, scale: 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 16, scale: 0.98 }}
-                transition={{ duration: 0.22, ease: 'easeOut' }}
+                transition={{ duration: 0.22, ease: "easeOut" }}
                 style={panelStyle}
                 className="fixed bottom-4 left-4 right-4 z-[80] flex h-[min(82vh,760px)] max-h-[calc(100vh-2rem)] flex-col overflow-hidden rounded-[28px] border border-border bg-card/95 text-foreground shadow-[0_30px_100px_rgba(0,0,0,0.24)] backdrop-blur-xl outline-none sm:left-auto sm:right-6 sm:bottom-6 sm:w-[440px]"
               >
@@ -270,11 +290,11 @@ export function SiteChatbot() {
                     </Dialog.Close>
                   </div>
                 </div>
-
                 <div className="border-b border-border px-5 py-4">
                   <p className="text-sm leading-relaxed text-muted">
-                    Ask about services, pricing, compliance, project fit, or what changed on the current page. I will
-                    use the live site context to answer.
+                    Ask about services, pricing, compliance, project fit, or
+                    what changed on the current page. I will use the live site
+                    context to answer.
                   </p>
 
                   <div className="mt-4 grid gap-2 sm:grid-cols-2">
@@ -290,20 +310,29 @@ export function SiteChatbot() {
                     ))}
                   </div>
                 </div>
-
                 <div className="flex-1 overflow-y-auto px-5 py-4">
-                  <div className="flex flex-col gap-3" role="log" aria-live="polite" aria-relevant="additions text">
+                  <div
+                    className="flex flex-col gap-3"
+                    role="log"
+                    aria-live="polite"
+                    aria-relevant="additions text"
+                  >
                     {messages.map((message, index) => (
                       <div
                         key={`${message.role}-${index}`}
-                        className={cn('flex', message.role === 'user' ? 'justify-end' : 'justify-start')}
+                        className={cn(
+                          "flex",
+                          message.role === "user"
+                            ? "justify-end"
+                            : "justify-start",
+                        )}
                       >
                         <div
                           className={cn(
-                            'max-w-[88%] rounded-[22px] px-4 py-3 text-sm leading-7 whitespace-pre-wrap break-words',
-                            message.role === 'user'
-                              ? 'bg-[linear-gradient(135deg,rgba(var(--color-accent-rgb),0.98),rgba(var(--color-accent-rgb),0.88))] text-white shadow-[0_14px_30px_rgba(107,26,26,0.22)]'
-                              : 'border border-border bg-card/90 text-foreground shadow-[0_10px_24px_rgba(0,0,0,0.08)]'
+                            "max-w-[88%] rounded-[22px] px-4 py-3 text-sm leading-7 whitespace-pre-wrap break-words",
+                            message.role === "user"
+                              ? "bg-[linear-gradient(135deg,rgba(var(--color-accent-rgb),0.98),rgba(var(--color-accent-rgb),0.88))] text-white shadow-[0_14px_30px_rgba(107,26,26,0.22)]"
+                              : "border border-border bg-card/90 text-foreground shadow-[0_10px_24px_rgba(0,0,0,0.08)]",
                           )}
                         >
                           {message.content}
@@ -324,13 +353,12 @@ export function SiteChatbot() {
                     <div ref={scrollAnchorRef} />
                   </div>
                 </div>
-
                 <div className="border-t border-border p-4">
                   <form
                     aria-busy={isSending}
                     onSubmit={(event) => {
-                      event.preventDefault()
-                      void sendMessage(input)
+                      event.preventDefault();
+                      void sendMessage(input);
                     }}
                     className="flex flex-col gap-3"
                   >
@@ -339,9 +367,13 @@ export function SiteChatbot() {
                       value={input}
                       onChange={(event) => setInput(event.target.value)}
                       onKeyDown={(event) => {
-                        if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) {
-                          event.preventDefault()
-                          void sendMessage(input)
+                        if (
+                          event.key === "Enter" &&
+                          !event.shiftKey &&
+                          !event.nativeEvent.isComposing
+                        ) {
+                          event.preventDefault();
+                          void sendMessage(input);
                         }
                       }}
                       rows={3}
@@ -365,12 +397,12 @@ export function SiteChatbot() {
                     </div>
                   </form>
                 </div>
-                        disabled={isSending}
+                disabled={isSending}
               </motion.div>
             </Dialog.Content>
           </Dialog.Portal>
         )}
       </AnimatePresence>
     </Dialog.Root>
-  )
+  );
 }

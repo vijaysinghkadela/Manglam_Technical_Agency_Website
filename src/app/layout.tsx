@@ -142,7 +142,7 @@ export default function RootLayout({
             <Navbar />
             <main className="relative w-full overflow-x-clip">{children}</main>
             <Footer />
-              <SiteChatbot />
+            <SiteChatbot />
             <Analytics />
             <SpeedInsights />
             <ScrollToTop />

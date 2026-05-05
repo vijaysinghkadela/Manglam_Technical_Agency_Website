@@ -28,7 +28,9 @@ function inferBudgetRange(priceLabel: string): string {
   const matches = priceLabel.match(/\d[\d,]*/g);
   if (!matches || matches.length === 0) return "Not Sure";
 
-  const maxAmount = Math.max(...matches.map((value) => Number(value.replace(/,/g, ""))));
+  const maxAmount = Math.max(
+    ...matches.map((value) => Number(value.replace(/,/g, ""))),
+  );
   if (maxAmount <= 25000) return "Under ₹25,000";
   if (maxAmount <= 50000) return "₹25,000–₹50,000";
   if (maxAmount <= 100000) return "₹50,000–₹1,00,000";
@@ -39,13 +41,28 @@ function inferBudgetRange(priceLabel: string): string {
 function inferTimeline(period?: string, note?: string): string {
   const text = `${period ?? ""} ${note ?? ""}`.toLowerCase();
   if (!text.trim()) return "Flexible";
-  if (text.includes("ongoing") || text.includes("retainer") || text.includes("monthly") || text.includes("partnership")) {
+  if (
+    text.includes("ongoing") ||
+    text.includes("retainer") ||
+    text.includes("monthly") ||
+    text.includes("partnership")
+  ) {
     return "Flexible";
   }
-  if (text.includes("1-month") || text.includes("1 month") || text.includes("setup") || text.includes("build")) {
+  if (
+    text.includes("1-month") ||
+    text.includes("1 month") ||
+    text.includes("setup") ||
+    text.includes("build")
+  ) {
     return "Within 1 month";
   }
-  if (text.includes("3-4") || text.includes("4-6") || text.includes("6-month") || text.includes("12-month")) {
+  if (
+    text.includes("3-4") ||
+    text.includes("4-6") ||
+    text.includes("6-month") ||
+    text.includes("12-month")
+  ) {
     return "Within 3 months";
   }
   return "Within 3 months";
@@ -69,13 +86,13 @@ function buildPrefilledMessage(service: ServiceData, plan?: ServicePlan) {
       `Plan price: ${plan.amount}`,
       plan.period ? `Plan period: ${plan.period}` : null,
       plan.note ? `Plan notes: ${plan.note}` : null,
-      `Plan features: ${plan.features.join(" • ")}`
+      `Plan features: ${plan.features.join(" • ")}`,
     );
   }
 
   lines.push(
     "",
-    "Please review the above requirements and reply on WhatsApp with next steps."
+    "Please review the above requirements and reply on WhatsApp with next steps.",
   );
 
   return lines.filter(Boolean).join("\n");
