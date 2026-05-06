@@ -35,7 +35,7 @@ export default function CybersecurityLegalPage() {
               <div className="flex-1">
                 <h2 className="font-display font-black text-2xl text-white mb-3">Explicit Authorization Required</h2>
                 <p className="text-[15px] text-muted leading-[1.75] mb-6">
-                  No penetration testing begins without signed Rules of Engagement (RoE) and NDA. MTA operates strictly under IT Act 2000 with Jaipur jurisdiction and GST 18%.
+                  No penetration testing begins without signed Rules of Engagement (RoE) and NDA. MTA operates strictly under IT Act 2000 with Jaipur jurisdiction.
                 </p>
                 <ul className="space-y-3">
                   {[

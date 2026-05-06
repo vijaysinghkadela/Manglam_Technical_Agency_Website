@@ -599,7 +599,7 @@ export function AboutContent() {
 
               <p style={{ fontSize: '17px', lineHeight: 1.78, color: 'var(--color-muted)' }}>
                 Registered as an MSME (Udyam: UDYAM-RJ-15-0094091), we align delivery with Indian legal
-                requirements including DPDP Act 2023 and relevant IT/GST obligations. Our track record is
+                requirements including DPDP Act 2023 and relevant IT Act obligations. Our track record is
                 built on honest communication, transparent ownership, and technical depth that holds up in
                 real client environments.
               </p>

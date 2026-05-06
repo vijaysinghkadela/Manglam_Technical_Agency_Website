@@ -229,30 +229,6 @@ const contractTerms = [
   "Creative rights remain with MTA until full payment is received.",
 ];
 
-const gstRows = [
-  {
-    service: "Social Media Marketing",
-    sac: "998361",
-    note: "18% GST on all invoices",
-  },
-  {
-    service: "Web Development / AI Automation",
-    sac: "998314",
-    note: "18% GST on all invoices",
-  },
-  { service: "Cybersecurity", sac: "998315", note: "18% GST on all invoices" },
-  {
-    service: "Branding & Identity",
-    sac: "998392",
-    note: "18% GST on all invoices",
-  },
-  {
-    service: "Content Creation",
-    sac: "998363",
-    note: "18% GST on all invoices",
-  },
-];
-
 const servicePositioning =
   "MTA sits in the boutique-agency tier at Tier-2 pricing - competitive against Jaipur/Delhi rates while delivering comparable quality.";
 
@@ -352,8 +328,7 @@ export default function PricingPage() {
               }}
             >
               The site now shows the real commercial stack: tiered retainers,
-              benchmark pricing, GST treatment, and the contract terms that
-              govern delivery.
+              benchmark pricing, and the contract terms that govern delivery.
             </motion.p>
           </div>
 
@@ -367,7 +342,7 @@ export default function PricingPage() {
                 letterSpacing: "0.22em",
               }}
             >
-              ✦ ALL PRICES IN INR · GST APPLICABLE
+              ✦ ALL PRICES IN INR
             </span>
             <div className="hidden lg:flex flex-col items-center gap-2">
               <span
@@ -609,8 +584,8 @@ export default function PricingPage() {
               letterSpacing: "0.1em",
             }}
           >
-            All prices in INR · GST applicable · Final commercials are scoped
-            after project discovery
+            All prices in INR · Final commercials are scoped after project
+            discovery
           </p>
         </div>
       </section>
@@ -667,13 +642,6 @@ export default function PricingPage() {
               >
                 These are the contract rules that govern all live retainers and
                 project work.
-              </p>
-              <p
-                className="mt-4 font-mono text-xs"
-                style={{ color: "var(--color-dead)", letterSpacing: "0.1em" }}
-              >
-                All prices exclude GST (18%). SAC codes are listed in the
-                benchmark section below.
               </p>
             </div>
             <div className="flex flex-col gap-5">
@@ -842,47 +810,6 @@ export default function PricingPage() {
               >
                 {servicePositioning}
               </p>
-            </div>
-            <div className="rounded-[24px] border border-border bg-card p-6">
-              <span
-                className="font-mono uppercase block mb-3"
-                style={{
-                  fontSize: "11px",
-                  color: "var(--color-violet-light)",
-                  letterSpacing: "0.22em",
-                }}
-              >
-                GST & SAC
-              </span>
-              <div className="grid gap-3">
-                {gstRows.map((row) => (
-                  <div
-                    key={row.service}
-                    className="flex items-center justify-between gap-4 border-b border-border pb-3 last:border-b-0 last:pb-0"
-                  >
-                    <div>
-                      <p
-                        className="text-sm font-medium"
-                        style={{ color: "var(--color-foreground)" }}
-                      >
-                        {row.service}
-                      </p>
-                      <p
-                        className="text-xs"
-                        style={{ color: "var(--color-dead)" }}
-                      >
-                        {row.note}
-                      </p>
-                    </div>
-                    <span
-                      className="font-mono text-xs uppercase tracking-widest"
-                      style={{ color: "var(--color-violet-light)" }}
-                    >
-                      SAC {row.sac}
-                    </span>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </div>

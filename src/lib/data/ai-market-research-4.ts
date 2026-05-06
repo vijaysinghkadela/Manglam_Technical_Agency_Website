@@ -485,7 +485,7 @@ export const marketResearchPart4: MarketResearchArticle[] = [
               ['Technical Measures', 'Implement safeguards for compliance', 'Policies, access controls, staff training'],
               ['Security Safeguards', 'Reasonable security to prevent breach', 'Encryption, RLS in Supabase, access logs'],
               ['Breach Notification', 'Notify Board + affected principals "as prescribed"', '"Without undue delay" — 72 hours to Board'],
-              ['Erasure/Retention', 'Erase when consent withdrawn or purpose served', 'Auto-delete inactive leads; retain for GST/Contract Act'],
+              ['Erasure/Retention', 'Erase when consent withdrawn or purpose served', 'Auto-delete inactive leads; retain for Contract Act'],
               ['Contact Person', 'Publish business contact for queries', 'Update Privacy Policy with email/phone'],
               ['Grievance Mechanism', 'Effective redressal system', 'Grievance form on website + in SMM contracts'],
             ],

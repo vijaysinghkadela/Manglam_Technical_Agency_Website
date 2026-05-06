@@ -678,7 +678,6 @@ export const services: Service[] = [
       "Consumer Protection Act, 2019",
       "DPDPA, 2023",
       "IT Act, 2000",
-      "GST Act, 2017",
     ],
     deliveryStages: [2, 3, 5, 6, 7, 8, 9, 10],
     pricing: [
