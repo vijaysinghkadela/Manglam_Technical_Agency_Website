@@ -307,10 +307,10 @@ export function SiteChatbot() {
 
             {/* Text label — visible on all screen sizes */}
             <span className="flex min-w-0 flex-col">
-              <span className="font-mono text-[9px] uppercase tracking-[0.22em] text-muted sm:text-[10px]">
+              <span className="font-mono text-[9px] uppercase tracking-[0.22em] text-muted sm:text-[10px] lg:text-[11px]">
                 MTA Chat
               </span>
-              <span className="font-display text-[13px] font-black leading-tight sm:text-[15px]">
+              <span className="font-display text-[13px] font-black leading-tight sm:text-[15px] lg:text-[17px]">
                 AI Assistant
               </span>
             </span>
@@ -355,10 +355,10 @@ export function SiteChatbot() {
                       <MessageSquareMore className="h-4 w-4" />
                     </span>
                     <div className="min-w-0">
-                      <Dialog.Title className="font-display text-[17px] font-black leading-tight sm:text-[20px]">
+                      <Dialog.Title className="font-display text-[17px] font-black leading-tight sm:text-[20px] lg:text-[22px]">
                         MTA AI Assistant
                       </Dialog.Title>
-                      <Dialog.Description className="mt-1 truncate font-mono text-[9px] uppercase tracking-[0.2em] text-muted sm:text-[10px]">
+                      <Dialog.Description className="mt-1 truncate font-mono text-[9px] uppercase tracking-[0.2em] text-muted sm:text-[10px] lg:text-[11px]">
                         Live context · {pageLabel}
                       </Dialog.Description>
                     </div>
@@ -368,7 +368,7 @@ export function SiteChatbot() {
                     <button
                       type="button"
                       onClick={resetConversation}
-                      className="inline-flex items-center gap-1.5 rounded-full border border-border bg-canvas/75 px-3 py-2 font-mono text-[9px] uppercase tracking-[0.16em] text-muted transition-colors hover:bg-[color:var(--color-accent-soft)] hover:text-foreground sm:text-[10px]"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-border bg-canvas/75 px-3 py-2 font-mono text-[9px] uppercase tracking-[0.16em] text-muted transition-colors hover:bg-[color:var(--color-accent-soft)] hover:text-foreground sm:text-[10px] lg:text-[11px]"
                     >
                       <RefreshCcw className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                       Reset
@@ -387,7 +387,7 @@ export function SiteChatbot() {
 
                 {/* ── Sub-header: description + quick prompts ──────── */}
                 <div className="border-b border-border px-5 py-4">
-                  <p className="text-[13px] leading-relaxed text-muted sm:text-[14px]">
+                  <p className="text-[13px] leading-relaxed text-muted sm:text-[14px] lg:text-[16px]">
                     Ask about services, pricing, compliance, project fit, or the
                     current page. I use live site context to answer.
                   </p>
@@ -399,7 +399,7 @@ export function SiteChatbot() {
                         type="button"
                         disabled={isSending || isLimitReached}
                         onClick={() => handleQuickPrompt(prompt)}
-                        className="rounded-[16px] border border-border bg-canvas/75 px-3 py-2.5 text-left text-[12px] leading-relaxed text-foreground transition-colors hover:border-[color:var(--color-accent-border)] hover:bg-[color:var(--color-accent-soft)] disabled:cursor-not-allowed disabled:opacity-50 sm:text-[13px]"
+                        className="rounded-[16px] border border-border bg-canvas/75 px-3 py-2.5 text-left text-[12px] leading-relaxed text-foreground transition-colors hover:border-[color:var(--color-accent-border)] hover:bg-[color:var(--color-accent-soft)] disabled:cursor-not-allowed disabled:opacity-50 sm:text-[13px] lg:text-[15px]"
                       >
                         {prompt}
                       </button>
@@ -429,7 +429,7 @@ export function SiteChatbot() {
                           className={cn(
                             "max-w-[90%] rounded-[18px] px-4 py-3 whitespace-pre-wrap break-words",
                             // Responsive text sizes
-                            "text-[13px] leading-[1.65] sm:text-[15px] sm:leading-[1.7]",
+                            "text-[13px] leading-[1.65] sm:text-[15px] sm:leading-[1.7] lg:text-[17px]",
                             message.role === "user"
                               ? "bg-[linear-gradient(135deg,rgba(var(--color-accent-rgb),0.95),rgba(var(--color-accent-rgb),0.80))] text-white shadow-[0_10px_24px_rgba(107,26,26,0.22)]"
                               : "border border-border bg-card/90 text-foreground shadow-[0_4px_14px_rgba(0,0,0,0.08)]",
@@ -492,18 +492,18 @@ export function SiteChatbot() {
                         rows={3}
                         disabled={isSending}
                         placeholder="Describe your goal, service need, budget, and timeline..."
-                        className="min-h-[88px] w-full resize-none rounded-[16px] border border-border bg-canvas/85 px-4 py-3 text-[14px] leading-6 text-foreground outline-none placeholder:text-muted focus:border-[color:var(--color-accent)] focus:ring-2 focus:ring-[color:var(--color-accent-soft)] disabled:opacity-60 sm:text-[15px]"
+                        className="min-h-[88px] w-full resize-none rounded-[16px] border border-border bg-canvas/85 px-4 py-3 text-[14px] leading-6 text-foreground outline-none placeholder:text-muted focus:border-[color:var(--color-accent)] focus:ring-2 focus:ring-[color:var(--color-accent-soft)] disabled:opacity-60 sm:text-[15px] lg:text-[16px]"
                       />
 
                       <div className="flex items-center justify-between gap-3">
-                        <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted sm:text-[10px]">
+                        <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted sm:text-[10px] lg:text-[11px]">
                           {dailyRemaining} of {DAILY_MESSAGES_LIMIT} left today
                         </p>
 
                         <button
                           type="submit"
                           disabled={isSending || !input.trim()}
-                          className="inline-flex items-center gap-2 rounded-full bg-[linear-gradient(135deg,rgba(var(--color-accent-rgb),0.98),rgba(90,23,21,0.95))] px-4 py-2.5 font-display text-[13px] font-black text-white shadow-[0_8px_20px_rgba(107,26,26,0.22)] transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 sm:text-[14px]"
+                          className="inline-flex items-center gap-2 rounded-full bg-[linear-gradient(135deg,rgba(var(--color-accent-rgb),0.98),rgba(90,23,21,0.95))] px-4 py-2.5 font-display text-[13px] font-black text-white shadow-[0_8px_20px_rgba(107,26,26,0.22)] transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 sm:text-[14px] lg:text-[16px]"
                         >
                           <Send className="h-3.5 w-3.5" />
                           Send
