@@ -30,7 +30,6 @@ const BRAND_FACTS = [
   "Location: Bikaner, Nagaur, and Jodhpur, Rajasthan, India",
   "Brand color: deep red #6B1A1A",
   "Core services: web development, AI automation, cybersecurity, social media marketing, SaaS/licensing, and legal-compliance aware delivery",
-  "Primary public product: FitNexora / GymOS AI for gym operations and AI-assisted fitness planning",
   "Primary response path: service pages prefill the contact form, and the contact flow sends the final enquiry to WhatsApp at +91 96943 22131",
   "Typical response expectation: 2-4 hours, Mon-Sat 9AM-7PM IST",
 ];
