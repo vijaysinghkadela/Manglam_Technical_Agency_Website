@@ -12,6 +12,7 @@ import {
   AGENCY_WHATSAPP,
   AGENCY_X_URL,
   AGENCY_INSTAGRAM_URL,
+  AGENCY_LINKEDIN_URL,
 } from "@/lib/constants";
 import { services } from "@/lib/data/services";
 
@@ -164,7 +165,7 @@ export function Footer() {
 
             <div className="flex flex-wrap items-center gap-2 sm:gap-3">
               {[
-                { Icon: Linkedin, href: null, label: "LinkedIn" },
+                { Icon: Linkedin, href: AGENCY_LINKEDIN_URL, label: "LinkedIn" },
                 {
                   Icon: Instagram,
                   href: AGENCY_INSTAGRAM_URL,

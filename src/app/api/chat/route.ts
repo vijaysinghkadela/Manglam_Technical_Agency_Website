@@ -20,27 +20,18 @@ const requestSchema = z.object({
   pageDescription: z.string().max(300).optional(),
 });
 
-interface GeminiContentPart {
-  text?: string;
+const API_CONTEXT_WINDOW = 15;
+const OPENROUTER_ENDPOINT =
+  "https://openrouter.ai/api/v1/chat/completions";
+
+interface OpenRouterChoice {
+  message?: { role?: string; content?: string };
+  finish_reason?: string;
 }
 
-interface GeminiCandidate {
-  content?: {
-    parts?: GeminiContentPart[];
-  };
-}
-
-interface GeminiResponse {
-  candidates?: GeminiCandidate[];
-}
-
-function extractGeminiText(payload: GeminiResponse): string {
-  const candidate = payload?.candidates?.[0];
-  const parts = candidate?.content?.parts ?? [];
-  return parts
-    .map((part) => (typeof part?.text === "string" ? part.text : ""))
-    .join("")
-    .trim();
+interface OpenRouterResponse {
+  choices?: OpenRouterChoice[];
+  error?: { message?: string; code?: number | string };
 }
 
 function getLastUserMessage(
@@ -52,10 +43,11 @@ function getLastUserMessage(
   );
 }
 
-async function generateFallbackResponse(parsed: z.infer<typeof requestSchema>) {
+function generateFallbackResponse(parsed: z.infer<typeof requestSchema>) {
   const lastUserMessage = getLastUserMessage(parsed.messages);
   return NextResponse.json({
     success: true,
+    source: "local-fallback",
     message: buildLocalAssistantReply(
       {
         pathname: parsed.pathname,
@@ -64,16 +56,16 @@ async function generateFallbackResponse(parsed: z.infer<typeof requestSchema>) {
       },
       lastUserMessage,
     ),
-    source: "local-fallback",
   });
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const apiKey = process.env.GEMINI_API_KEY;
-
+    const apiKey = process.env.OPENROUTER_API_KEY;
     const parsed = requestSchema.parse(await request.json());
-    const model = process.env.GEMINI_MODEL ?? "gemini-2.5-flash";
+    const model =
+      process.env.OPENROUTER_MODEL ?? "openai/gpt-oss-20b:free";
+
     const systemPrompt = buildChatSystemPrompt({
       pathname: parsed.pathname,
       pageTitle: parsed.pageTitle,
@@ -84,41 +76,60 @@ export async function POST(request: NextRequest) {
       return generateFallbackResponse(parsed);
     }
 
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${apiKey}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          systemInstruction: {
-            parts: [{ text: systemPrompt }],
-          },
-          contents: parsed.messages.slice(-12).map((message) => ({
-            role: message.role === "assistant" ? "model" : "user",
-            parts: [{ text: message.content }],
-          })),
-          generationConfig: {
-            temperature: 0.35,
-            topP: 0.9,
-            topK: 40,
-            maxOutputTokens: 800,
-          },
-        }),
+    const referer =
+      process.env.NEXT_PUBLIC_SITE_URL ??
+      "https://manglamtechnicalagency.com";
+
+    const response = await fetch(OPENROUTER_ENDPOINT, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+        // OpenRouter uses these for analytics & rate-limiting policy.
+        "HTTP-Referer": referer,
+        "X-Title": "MTA Website Assistant",
       },
-    );
+      body: JSON.stringify({
+        model,
+        // System prompt rides as the first message in OpenAI-compatible API.
+        messages: [
+          { role: "system", content: systemPrompt },
+          ...parsed.messages.slice(-API_CONTEXT_WINDOW).map((m) => ({
+            role: m.role,
+            content: m.content,
+          })),
+        ],
+        temperature: 0.3,
+        top_p: 0.9,
+        max_tokens: 1200,
+        stream: false,
+      }),
+    });
 
     if (!response.ok) {
+      // Rate-limited (429), bad key (401), upstream error (5xx) — fall back.
       return generateFallbackResponse(parsed);
     }
 
-    const data: GeminiResponse = await response.json();
-    const message = extractGeminiText(data);
+    const data = (await response.json().catch(() => null)) as
+      | OpenRouterResponse
+      | null;
+
+    if (!data || data.error) {
+      return generateFallbackResponse(parsed);
+    }
+
+    const message = data.choices?.[0]?.message?.content?.trim();
 
     if (!message) {
       return generateFallbackResponse(parsed);
     }
 
-    return NextResponse.json({ success: true, message });
+    return NextResponse.json({
+      success: true,
+      source: "openrouter",
+      message,
+    });
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
