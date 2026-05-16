@@ -165,7 +165,7 @@ export function FeaturedProject() {
             </p>
 
             <div 
-              className="grid grid-cols-2 sm:grid-cols-4 overflow-hidden border border-border" 
+              className="grid grid-cols-2 sm:grid-cols-4 overflow-hidden" 
               style={{ 
                 border: '1px solid var(--color-border)',
                 borderRadius: RADIUS.lg,
@@ -174,14 +174,15 @@ export function FeaturedProject() {
               {[['STATUS','Work in Progress'],['TYPE','NGO Website'],['DONATIONS','Razorpay'],['LOCATION','Bikaner, RJ']].map(([lbl,val],i) => (
                 <div
                   key={lbl}
+                  className="min-w-0"
                   style={{
                     padding: '12px 14px',
-                    borderRight: i < 3 ? '1px solid var(--color-border)' : 'none',
                     borderBottom: i < 2 ? '1px solid var(--color-border)' : 'none',
+                    borderRight: i % 2 === 0 ? '1px solid var(--color-border)' : 'none',
                   }}
                 >
                   <p 
-                    className="font-mono uppercase" 
+                    className="font-mono uppercase truncate" 
                     style={{ 
                       fontSize: TYPOGRAPHY.micro, 
                       color: 'var(--color-dead)', 
@@ -190,7 +191,7 @@ export function FeaturedProject() {
                     }}
                   >{lbl}</p>
                   <p 
-                    className="font-mono font-semibold" 
+                    className="font-mono font-semibold truncate" 
                     style={{ 
                       fontSize: TYPOGRAPHY.bodySm, 
                       color: 'var(--color-foreground)',

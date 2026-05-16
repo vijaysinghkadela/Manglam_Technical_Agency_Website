@@ -457,7 +457,7 @@ export function Navbar() {
                 aria-label={mobile ? 'Close menu' : 'Open menu'}
                 aria-expanded={mobile}
                 data-cursor="pointer"
-                className="lg:hidden h-10 w-10 flex items-center justify-center rounded-full transition-all duration-200"
+                className="lg:hidden h-11 w-11 min-w-[44px] flex items-center justify-center rounded-full transition-all duration-200"
                 style={mobile ? styles.mobileButton.active : styles.mobileButton.default}
                 whileTap={{ scale: 0.95 }}
               >

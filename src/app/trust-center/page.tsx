@@ -42,11 +42,11 @@ export default function TrustCenterPage() {
       <section className="py-12 lg:py-20 bg-surface border-t border-border">
         <div className="container-site grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8">
           <article className="border border-border bg-card p-6 sm:p-8">
-            <h2 className="font-display font-black text-3xl text-white mb-6">Operational Pillars</h2>
+            <h2 className="font-display font-black text-3xl text-foreground mb-6">Operational Pillars</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {operationalPillars.map((pillar) => (
                 <div key={pillar.title} className="border border-border bg-canvas p-5">
-                  <h3 className="font-display font-bold text-white text-xl mb-2">{pillar.title}</h3>
+                  <h3 className="font-display font-bold text-xl text-foreground mb-2">{pillar.title}</h3>
                   <p className="text-sm text-muted leading-relaxed">{pillar.body}</p>
                 </div>
               ))}
@@ -55,18 +55,18 @@ export default function TrustCenterPage() {
 
           <aside className="border border-border bg-card p-6 sm:p-8">
             <p className="font-mono text-label tracking-[0.18em] uppercase text-violet-light mb-3">Explore Depth</p>
-            <h3 className="font-display font-black text-2xl text-white mb-4">Documentation Layers</h3>
+            <h3 className="font-display font-black text-2xl text-foreground mb-4">Documentation Layers</h3>
             <div className="flex flex-col gap-3 text-sm">
-              <Link href="/research" className="text-violet-light hover:text-white transition-colors py-2 min-h-[44px] flex items-center">
+              <Link href="/research" className="text-violet-light hover:text-foreground transition-colors py-2 min-h-[44px] flex items-center">
                 Research: lead-to-delivery pipeline & risk map →
               </Link>
-              <Link href="/legal" className="text-violet-light hover:text-white transition-colors py-2 min-h-[44px] flex items-center">
+              <Link href="/legal" className="text-violet-light hover:text-foreground transition-colors py-2 min-h-[44px] flex items-center">
                 Legal Hub: agreements, applicability matrix, request workflow →
               </Link>
-              <Link href="/legal/privacy-policy" className="text-violet-light hover:text-white transition-colors py-2 min-h-[44px] flex items-center">
+              <Link href="/legal/privacy-policy" className="text-violet-light hover:text-foreground transition-colors py-2 min-h-[44px] flex items-center">
                 Privacy Policy →
               </Link>
-              <Link href="/legal/terms-of-service" className="text-violet-light hover:text-white transition-colors py-2 min-h-[44px] flex items-center">
+              <Link href="/legal/terms-of-service" className="text-violet-light hover:text-foreground transition-colors py-2 min-h-[44px] flex items-center">
                 Terms of Service →
               </Link>
             </div>
@@ -76,7 +76,7 @@ export default function TrustCenterPage() {
 
       <section className="py-20 bg-canvas border-t border-border">
         <div className="container-site">
-          <h2 className="font-display font-black text-3xl text-white mb-6">Regulatory Alignment Snapshot</h2>
+          <h2 className="font-display font-black text-3xl text-foreground mb-6">Regulatory Alignment Snapshot</h2>
           <div className="overflow-x-auto border border-border bg-card">
             <table className="w-full min-w-[680px] border-collapse">
               <thead>

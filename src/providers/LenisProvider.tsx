@@ -3,6 +3,12 @@ import Lenis from '@studio-freight/lenis'
 import { useEffect, useRef } from 'react'
 import { isSafari, isIOS, isTouchDevice } from '@/lib/browser-detect'
 
+declare global {
+  interface Window {
+    __lenis?: Lenis
+  }
+}
+
 /**
  * LenisProvider - Cross-browser optimized smooth scrolling
  *
@@ -34,10 +40,7 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
 
     if (!shouldUseLenis) return
 
-    // Check for existing Lenis instance to prevent duplicates
-    // @ts-expect-error - Global Lenis check
     if (window.__lenis) {
-      // @ts-expect-error - Global Lenis check
       window.__lenis.destroy()
     }
 
@@ -64,8 +67,6 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
 
     rafId = requestAnimationFrame(raf)
 
-    // Expose lenis instance globally for external control
-    // @ts-expect-error - Global Lenis instance for external access
     window.__lenis = lenis
 
     // Handle visibility change - pause when tab is hidden
@@ -86,7 +87,6 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
       cancelAnimationFrame(rafId)
       lenis.destroy()
       lenisRef.current = null
-      // @ts-expect-error - Cleanup global reference
       delete window.__lenis
     }
   }, [])

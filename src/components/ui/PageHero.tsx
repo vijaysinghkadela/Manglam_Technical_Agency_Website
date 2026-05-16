@@ -43,11 +43,11 @@ export function PageHero({
         : []
 
   return (
-    <section className="w-full bg-canvas pt-[140px] pb-16 relative overflow-hidden grain">
+    <section className="w-full bg-canvas pt-[calc(var(--nav-offset)+40px)] pb-16 relative overflow-hidden grain">
       {/* Line grid background */}
       <div className="absolute inset-0 bg-line-grid pointer-events-none opacity-60" aria-hidden />
 
-      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 lg:px-12">
+      <div className="relative z-10 container-site">
         {/* Breadcrumb */}
         {crumbs.length > 0 && (
           <motion.nav

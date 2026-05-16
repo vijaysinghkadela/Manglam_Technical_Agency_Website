@@ -1,5 +1,3 @@
-// Security audit logging
-
 type AuditEvent = {
   action: string
   timestamp: string
@@ -9,49 +7,47 @@ type AuditEvent = {
   severity: 'low' | 'medium' | 'high' | 'critical'
 }
 
-/**
- * Log security events
- * In production, send to logging service (Sentry, LogRocket, etc.)
- */
+const eventQueue: AuditEvent[] = []
+
+function flushQueue(): void {
+  if (eventQueue.length === 0) return
+  const batch = eventQueue.splice(0)
+  const webhookUrl = process.env.AUDIT_WEBHOOK_URL
+  if (webhookUrl) {
+    fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ events: batch, source: 'mta-website' }),
+    }).catch(() => { /* fire-and-forget */ })
+  }
+}
+
 export function logSecurityEvent(event: Omit<AuditEvent, 'timestamp'>): void {
   const auditEvent: AuditEvent = {
     ...event,
     timestamp: new Date().toISOString(),
   }
 
-  // Development: log to console
   if (process.env.NODE_ENV === 'development') {
-    console.log('[Security Audit]', auditEvent)
+    eventQueue.push(auditEvent)
     return
   }
 
-  // Production: Send to logging service
-  // TODO: Implement webhook to logging service
-  // Example: await fetch('https://api.loggingservice.com/security', { ... })
-
-  // Critical events should be alerted immediately
+  eventQueue.push(auditEvent)
   if (event.severity === 'critical') {
-    // TODO: Send alert to ops team
-    console.error('[CRITICAL Security Event]', auditEvent)
+    flushQueue()
   }
 }
 
-/**
- * Log failed authentication attempts
- */
 export function logFailedAuth(ip: string, reason: string, userAgent?: string): void {
   logSecurityEvent({
     action: 'auth_failed',
-    ip,
-    userAgent,
+    ip, userAgent,
     details: { reason },
     severity: 'medium',
   })
 }
 
-/**
- * Log rate limit violations
- */
 export function logRateLimit(ip: string, path: string): void {
   logSecurityEvent({
     action: 'rate_limit_exceeded',
@@ -61,14 +57,10 @@ export function logRateLimit(ip: string, path: string): void {
   })
 }
 
-/**
- * Log suspicious activity
- */
 export function logSuspiciousActivity(ip: string, action: string, details?: Record<string, unknown>): void {
   logSecurityEvent({
     action: 'suspicious_activity',
-    ip,
-    details,
+    ip, details,
     severity: 'high',
   })
 }

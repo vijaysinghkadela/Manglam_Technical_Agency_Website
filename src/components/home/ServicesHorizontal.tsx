@@ -231,7 +231,7 @@ export function ServicesHorizontal() {
         }}
       >
         <div 
-          className="flex items-end justify-between shrink-0 pt-24 lg:pt-28 xl:pt-32 pb-10 lg:pb-12 max-w-[1440px] mx-auto px-6 lg:px-12 xl:px-16 w-full"
+          className="flex items-end justify-between shrink-0 pt-24 lg:pt-28 xl:pt-32 pb-10 lg:pb-12 container-site w-full"
         >
           <SectionLabel />
           <span 
@@ -245,7 +245,7 @@ export function ServicesHorizontal() {
           </span>
         </div>
 
-        <div className="flex-1 overflow-hidden min-h-0 flex items-stretch max-w-[1440px] mx-auto px-6 lg:px-12 xl:px-16 w-full">
+        <div className="flex-1 overflow-hidden min-h-0 flex items-stretch container-site w-full">
           <motion.div
             style={{ x, width: `${trackW}px`, flexShrink: 0 }}
             className="flex items-stretch"

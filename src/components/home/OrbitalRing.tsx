@@ -64,9 +64,6 @@ const ServiceBadge = memo(function ServiceBadge({
         animate={prefersReduced ? {} : { rotate: -360 }}
         transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
         className="flex flex-col items-center gap-2"
-        style={{
-          willChange: prefersReduced ? 'auto' : 'transform',
-        }}
       >
         {/* Circular Icon Container */}
         <motion.div
@@ -482,9 +479,6 @@ function OrbitalRingComponent() {
         className="absolute inset-0"
         animate={prefersReduced ? {} : { rotate: 360 }}
         transition={orbitTransition}
-        style={{
-          willChange: prefersReduced ? 'auto' : 'transform',
-        }}
       >
         {SERVICES.map((service, i) => (
           <ServiceBadge

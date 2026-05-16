@@ -354,12 +354,12 @@ section[id] { scroll-margin-top: var(--nav-offset); }
 
 /* ── Light Mode ─────────────────────────────────────────────── */
 html:not(.dark) {
-  --color-canvas: #faf7f4;
-  --color-surface: #f4ede8;
-  --color-card: #fffdfb;
-  --color-border: #e7dad4;
-  --color-muted: #6e6058;
-  --color-dead: #9b8d85;
+  --color-canvas: #fcf8f5;
+  --color-surface: #f7f0ea;
+  --color-card: #ffffff;
+  --color-border: #e6d9d0;
+  --color-muted: #6b5b53;
+  --color-dead: #a49289;
   --color-violet: #8b2320;
   --color-violet-light: #bd615c;
   --color-violet-dark: #5a1715;
@@ -368,9 +368,15 @@ html:not(.dark) {
   --color-accent: var(--color-violet);
   --color-accent-rgb: 139, 35, 32;
 
-  /* Flip semantic tokens */
-  --color-foreground: #0f172a;
-  --color-cursor-ring: rgba(0,0,0,0.18);
+  --color-foreground: #1a1a2e;
+  --color-cursor-ring: rgba(0,0,0,0.12);
+}
+
+html:not(.dark) body {
+  background-image:
+    radial-gradient(ellipse at 50% 0%, rgba(139, 35, 32, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(107, 26, 26, 0.03) 0%, transparent 40%),
+    radial-gradient(ellipse at 20% 90%, rgba(255, 255, 255, 0.5) 0%, transparent 30%);
 }
 
 /* ── Light mode: flip Tailwind dark utility classes ── */
@@ -378,6 +384,30 @@ html:not(.dark) {
 /* Section / page backgrounds — bg-black only (no bracket selectors: Turbopack rejects them) */
 html:not(.dark) .bg-black {
   background-color: var(--color-canvas) !important;
+}
+
+html:not(.dark) .card-elevated {
+  box-shadow:
+    0 1px 3px rgba(0,0,0,0.04),
+    0 4px 12px rgba(0,0,0,0.04),
+    0 8px 24px rgba(0,0,0,0.03);
+}
+
+html:not(.dark) .card-elevated:hover {
+  box-shadow:
+    0 2px 4px rgba(0,0,0,0.04),
+    0 8px 20px rgba(0,0,0,0.06),
+    0 16px 40px rgba(107, 26, 26, 0.06);
+}
+
+html:not(.dark) .glass {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+html:not(.dark) .glass-light {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(0,0,0,0.04);
 }
 
 /* Foreground text — white → dark */
@@ -398,6 +428,35 @@ html:not(.dark) .bg-dot-grid {
   html:not(.dark) .grain::after { opacity: 0.015; }
 }
 
+html:not(.dark) .shadow-violet-glow {
+  box-shadow: 0 0 36px rgba(139, 35, 32, 0.08), 0 0 72px rgba(139, 35, 32, 0.03);
+}
+
+html:not(.dark) .btn-primary:hover {
+  box-shadow:
+    0 4px 12px rgba(139, 35, 32, 0.15),
+    0 2px 4px rgba(0,0,0,0.05);
+}
+
+html:not(.dark) .badge {
+  background-color: rgba(139, 35, 32, 0.06);
+  border-color: rgba(139, 35, 32, 0.12);
+  color: var(--color-violet);
+}
+
+html:not(.dark) .badge:hover {
+  background-color: rgba(139, 35, 32, 0.10);
+  border-color: rgba(139, 35, 32, 0.20);
+}
+
+html:not(.dark) .text-glow-violet {
+  text-shadow: 0 0 30px rgba(139, 35, 32, 0.20);
+}
+
+html:not(.dark) .text-gradient {
+  background: linear-gradient(135deg, var(--color-foreground) 0%, var(--color-violet) 100%);
+}
+
 /* ── Smooth theme transition ─────────────────────────────────── */
 body, nav, footer, section, .container-site {
   -webkit-transition: background-color 0.25s ease, border-color 0.25s ease, color 0.15s ease;
@@ -416,6 +475,37 @@ body, nav, footer, section, .container-site {
 
 /* ── Theme-aware hover foreground ───────────────────────────── */
 .hover-foreground:hover { color: var(--color-foreground) !important; }
+
+/* ── Responsive touch target sizing ──────────────────────────── */
+.touch-target { min-height: 44px; min-width: 44px; }
+.touch-target-sm { min-height: 36px; min-width: 36px; }
+
+/* ── Image overlay text readability ─────────────────────────── */
+.text-overlay-light { text-shadow: 0 2px 16px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.35); }
+.text-overlay-dark { text-shadow: 0 2px 16px rgba(255,255,255,0.3), 0 1px 4px rgba(0,0,0,0.15); }
+
+/* ── Safe area responsive padding for phones with notches ───── */
+.px-safe { padding-left: max(1rem, env(safe-area-inset-left)); padding-right: max(1rem, env(safe-area-inset-right)); }
+
+/* ── Max width constraint for very long words ───────────────── */
+.break-word { overflow-wrap: break-word; word-break: break-word; }
+
+/* ── Improved responsive container for services section ─────── */
+@media (max-width: 360px) {
+  .container-site {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
+
+/* ── Text readability on images ──────────────────────────────── */
+.text-shadow-hero { text-shadow: 0 2px 12px rgba(0,0,0,0.4), 0 1px 4px rgba(0,0,0,0.3); }
+.text-shadow-sm { text-shadow: 0 1px 3px rgba(0,0,0,0.25); }
+
+/* ── Prevent text overflow on small screens ──────────────────── */
+@media (max-width: 480px) {
+  .text-prewrap-mobile { white-space: normal !important; word-break: break-word; }
+}
 
 /* Touch optimization - prevent double-tap zoom */
 .touch-manipulation { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }

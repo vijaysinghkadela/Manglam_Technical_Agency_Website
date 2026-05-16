@@ -134,7 +134,7 @@ export default function ServicesPage() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href={buildContactHref()}
-                className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 font-display text-[14px] font-black transition-all duration-300"
+                className="inline-flex items-center gap-2 rounded-full px-6 py-4 min-h-[48px] font-display text-[14px] font-black transition-all duration-300"
                 style={{ backgroundColor: "#6B1A1A", color: "#FFFFFF" }}
                 data-cursor="pointer"
               >
@@ -142,7 +142,7 @@ export default function ServicesPage() {
               </Link>
               <Link
                 href="/pricing"
-                className="inline-flex items-center gap-2 rounded-full border px-6 py-3.5 font-display text-[14px] font-black transition-all duration-300"
+                className="inline-flex items-center gap-2 rounded-full border px-6 py-4 min-h-[48px] font-display text-[14px] font-black transition-all duration-300"
                 style={{
                   borderColor: "var(--color-border)",
                   color: "var(--color-violet-light)",

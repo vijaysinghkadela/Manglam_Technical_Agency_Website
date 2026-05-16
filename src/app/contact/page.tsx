@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="relative min-h-screen overflow-x-hidden" style={{ backgroundColor: 'var(--color-canvas)' }}>
+    <main className="relative min-h-screen overflow-x-clip" style={{ backgroundColor: 'var(--color-canvas)' }}>
       <JsonLd schema={breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Contact', url: '/contact' }])} />
       <JsonLd schema={webPageSchema({ url: '/contact', title: 'Contact Manglam Technical Agency', description: 'Get in touch with MTA engineers. Web development, AI automation, cybersecurity projects — Rajasthan.' })} />
       <ContactContent formNode={<ContactForm />} />

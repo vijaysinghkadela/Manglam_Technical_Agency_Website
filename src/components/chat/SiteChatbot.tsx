@@ -206,14 +206,25 @@ export function SiteChatbot() {
   const pageLabel = useMemo(() => getPageLabel(pathname), [pathname]);
 
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState<ChatMessage[]>([WELCOME_MESSAGE]);
+  const [messages, setMessages] = useState<ChatMessage[]>(() => {
+    try {
+      const raw = window.localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw) as { messages?: ChatMessage[] };
+        if (Array.isArray(parsed.messages) && parsed.messages.length > 0) {
+          const loaded = parsed.messages.map((m, i) => ({
+            ...m,
+            id: m.id ?? `loaded-${i}`,
+          }));
+          return trimMessages(loaded);
+        }
+      }
+    } catch { /* fall back */ }
+    return [WELCOME_MESSAGE];
+  });
   const [input, setInput] = useState("");
   const [isSending, setIsSending] = useState(false);
-  const [ready, setReady] = useState(false);
-  const [dailyUsage, setDailyUsage] = useState<DailyUsage>({
-    date: getTodayString(),
-    count: 0,
-  });
+  const [dailyUsage, setDailyUsage] = useState<DailyUsage>(() => loadDailyUsage());
 
   const scrollAnchorRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
@@ -228,32 +239,10 @@ export function SiteChatbot() {
     [messages],
   );
 
-  // Hydrate from localStorage once on mount.
-  useEffect(() => {
-    try {
-      const raw = window.localStorage.getItem(STORAGE_KEY);
-      if (raw) {
-        const parsed = JSON.parse(raw) as { messages?: ChatMessage[] };
-        if (Array.isArray(parsed.messages) && parsed.messages.length > 0) {
-          const loaded = parsed.messages.map((m, i) => ({
-            ...m,
-            id: m.id ?? `loaded-${i}`,
-          }));
-          setMessages(trimMessages(loaded));
-        }
-      }
-    } catch {
-      // Fall back to the welcome message.
-    }
-    setDailyUsage(loadDailyUsage());
-    setReady(true);
-  }, []);
-
   // Persist message history.
   useEffect(() => {
-    if (!ready) return;
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ messages }));
-  }, [messages, ready]);
+  }, [messages]);
 
   // Scroll to bottom on new messages.
   useEffect(() => {

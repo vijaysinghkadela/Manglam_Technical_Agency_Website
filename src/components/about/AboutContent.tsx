@@ -124,7 +124,7 @@ export function AboutContent() {
                 <div key={word}>
                   <span
                     className="font-display font-black leading-none tracking-normal block"
-                    style={{ fontSize: 'clamp(3rem, 11vw, 13rem)', color }}
+                    style={{ fontSize: 'clamp(2.4rem, 11vw, 13rem)', color, overflowWrap: 'break-word' }}
                   >
                     {word}
                   </span>
@@ -796,7 +796,7 @@ export function AboutContent() {
               <Link
                 href="/contact"
                 data-cursor="pointer"
-                className="inline-flex items-center gap-2 px-6 py-3 font-display font-bold text-sm hover:bg-violet hover:text-white transition-all duration-300 whitespace-nowrap"
+                className="inline-flex items-center gap-2 px-6 py-3.5 min-h-[48px] font-display font-bold text-sm hover:bg-violet hover:text-white transition-all duration-300 whitespace-nowrap"
                 style={{ border: '1px solid var(--color-violet)', color: 'var(--color-violet-light)' }}
               >
                 Get in Touch →
@@ -804,7 +804,7 @@ export function AboutContent() {
               <Link
                 href="/portfolio"
                 data-cursor="pointer"
-                className="inline-flex items-center gap-2 px-6 py-3 font-display font-bold text-sm transition-all duration-300 whitespace-nowrap hover:text-violet"
+                className="inline-flex items-center gap-2 px-6 py-3.5 min-h-[48px] font-display font-bold text-sm transition-all duration-300 whitespace-nowrap hover:text-violet"
                 style={{ color: 'var(--color-muted)' }}
               >
                 View Work

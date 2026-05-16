@@ -11,8 +11,8 @@ interface Props {
 
 export function PageHero({ label, title, subtitle, breadcrumb }: Props) {
   return (
-    <section className="w-full bg-canvas pt-[140px] pb-16 section-divide">
-      <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
+    <section className="w-full bg-canvas pt-[calc(var(--nav-offset)+40px)] pb-16 section-divide">
+      <div className="container-site">
         {breadcrumb && (
           <div className="flex items-center gap-2 font-mono text-[11px] text-dead mb-8">
             {breadcrumb.map((b, i) => (

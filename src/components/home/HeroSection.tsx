@@ -196,8 +196,9 @@ export function HeroSection() {
                 text="WE BUILD"
                 as="h1"
                 delay={0.25}
-                className="font-display text-[2.55rem] font-black sm:text-[4.1rem] lg:text-[5.1rem]"
+                className="font-display font-black"
                 style={{
+                  fontSize: 'clamp(2rem, 7.5vw, 5.1rem)',
                   lineHeight: TYPOGRAPHY.leading.tight,
                   letterSpacing: TYPOGRAPHY.tracking.normal,
                   color: 'var(--color-foreground)',
@@ -208,20 +209,23 @@ export function HeroSection() {
                 text="DIGITAL"
                 as="h1"
                 delay={0.35}
-                className="font-display text-[2.55rem] font-black sm:text-[4.1rem] lg:text-[5.1rem] pl-[clamp(0px,2vw,20px)]"
+                className="font-display font-black"
                 style={{
+                  fontSize: 'clamp(2rem, 7.5vw, 5.1rem)',
                   lineHeight: TYPOGRAPHY.leading.tight,
                   letterSpacing: TYPOGRAPHY.tracking.normal,
                   color: BRAND.primary,
                   overflowWrap: 'anywhere',
+                  paddingLeft: 'clamp(0px, 2vw, 20px)',
                 }}
               />
               <TextReveal
                 text="INFRASTRUCTURE"
                 as="h1"
                 delay={0.45}
-                className="font-display text-[1.85rem] font-black sm:text-[3rem] lg:text-[3.8rem]"
+                className="font-display font-black"
                 style={{
+                  fontSize: 'clamp(1.4rem, 5.5vw, 3.8rem)',
                   lineHeight: 0.96,
                   letterSpacing: TYPOGRAPHY.tracking.normal,
                   color: 'var(--color-foreground)',

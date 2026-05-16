@@ -450,7 +450,7 @@ export default function PricingPage() {
                     </div>
                   )}
 
-                  <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_220px_160px] gap-6 lg:gap-0 px-6 lg:px-8 py-8 lg:py-10 items-center">
+                  <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_220px_160px] gap-6 lg:gap-0 py-8 lg:py-10 items-center">
                     {/* Left: name + features */}
                     <div className="flex flex-col gap-4 lg:pr-12">
                       <div>

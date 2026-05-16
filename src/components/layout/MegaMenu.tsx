@@ -19,8 +19,8 @@ export default function MegaMenu({ onClose }: MegaMenuProps) {
       className="absolute top-full left-0 right-0 z-50 mt-2"
       onMouseLeave={onClose}
     >
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="bg-card border border-border p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="container-site">
+        <div className="bg-card border border-border p-6 grid grid-cols-1 lg:grid-cols-3 gap-6" style={{ borderRadius: '20px' }}>
           {/* Services list */}
           <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
             {services.map((service) => (
@@ -34,7 +34,7 @@ export default function MegaMenu({ onClose }: MegaMenuProps) {
                   <service.Icon className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-white group-hover:text-violet-light transition-colors">{service.name}</div>
+                  <div className="text-sm font-medium text-foreground group-hover:text-violet-light transition-colors">{service.name}</div>
                   <div className="text-xs text-muted mt-1 line-clamp-1">{service.tagline}</div>
                 </div>
               </Link>
@@ -45,7 +45,7 @@ export default function MegaMenu({ onClose }: MegaMenuProps) {
           <div className="bg-surface rounded-xl p-5 border border-border">
             <div className="text-xs text-muted uppercase tracking-wider mb-3">Featured Project</div>
             <div className="mb-3">
-              <div className="text-sm font-semibold text-white">FitNexora / GymOS AI</div>
+              <div className="text-sm font-semibold text-foreground">FitNexora / GymOS AI</div>
               <div className="text-xs text-muted mt-1">Internal SaaS • Active v2.7 • B2B + B2C</div>
             </div>
             <div className="flex flex-wrap gap-2 mb-4">

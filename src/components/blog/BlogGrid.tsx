@@ -425,7 +425,7 @@ export function BlogGrid({ posts }: { posts: BlogPost[] }) {
               </div>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-mono text-[12px] uppercase tracking-wider transition-all duration-300 hover:gap-3"
+                className="inline-flex items-center gap-2 px-6 py-3.5 min-h-[48px] rounded-full font-mono text-[12px] uppercase tracking-wider transition-all duration-300 hover:gap-3"
                 style={{
                   backgroundColor: 'var(--color-violet)',
                   color: '#FFFFFF',

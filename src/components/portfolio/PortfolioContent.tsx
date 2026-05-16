@@ -123,7 +123,7 @@ export function PortfolioContent() {
                 {/* Right — Project details */}
                 <motion.div
                   variants={fadeUp}
-                  className="flex flex-col p-8 lg:p-12 xl:p-16"
+                  className="flex flex-col p-6 sm:p-8 lg:p-12 xl:p-16"
                   style={{ borderLeft: '1px solid var(--color-border)' }}
                 >
                   {/* Tags */}
@@ -418,7 +418,7 @@ export function PortfolioContent() {
             <Link
               href="/contact"
               data-cursor="pointer"
-              className="inline-flex items-center gap-2 px-6 py-3 font-display font-bold text-sm hover:bg-violet hover:text-white transition-all duration-300 whitespace-nowrap"
+              className="inline-flex items-center gap-2 px-6 py-3.5 min-h-[48px] font-display font-bold text-sm hover:bg-violet hover:text-white transition-all duration-300 whitespace-nowrap"
               style={{ border: '1px solid var(--color-violet)', color: 'var(--color-violet-light)' }}
             >
               Start a Project →

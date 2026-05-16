@@ -117,7 +117,7 @@ export default function CybersecurityTrainingPage() {
                 <span className="font-mono text-label tracking-[0.18em] uppercase text-violet-light block mb-4">
                   LEAD MAGNET
                 </span>
-                <h2 className="font-display font-black text-2xl lg:text-3xl text-white mb-4">
+                <h2 className="font-display font-black text-2xl lg:text-3xl text-foreground mb-4">
                   Free DPDP Compliance Gap Assessment
                 </h2>
                 <p className="text-muted text-base lg:text-lg leading-relaxed max-w-2xl mb-6">
@@ -156,7 +156,7 @@ export default function CybersecurityTrainingPage() {
             <span className="font-mono text-label tracking-[0.22em] uppercase text-violet-light block mb-4">
               WORKSHOPS
             </span>
-            <h2 className="font-display font-black text-3xl lg:text-4xl text-white">
+            <h2 className="font-display font-black text-3xl lg:text-4xl text-foreground">
               Training Programs
             </h2>
           </div>
@@ -176,7 +176,7 @@ export default function CybersecurityTrainingPage() {
                       {workshop.duration}
                     </span>
                   </div>
-                  <h3 className="font-display font-bold text-xl text-white mb-2">
+                  <h3 className="font-display font-bold text-xl text-foreground mb-2">
                     {workshop.title}
                   </h3>
                   <div className="flex items-baseline gap-2 mb-2">
@@ -220,7 +220,7 @@ export default function CybersecurityTrainingPage() {
                 <span className="font-mono text-label tracking-[0.22em] uppercase text-violet-light block mb-4">
                   LIVE DEMO
                 </span>
-                <h2 className="font-display font-black text-2xl lg:text-3xl text-white mb-4">
+                <h2 className="font-display font-black text-2xl lg:text-3xl text-foreground mb-4">
                   Watch a Real Exploitation Demo
                 </h2>
                 <p className="text-muted text-base leading-relaxed mb-6">
@@ -232,7 +232,7 @@ export default function CybersecurityTrainingPage() {
                 </div>
               </div>
               <div>
-                <h3 className="font-display font-bold text-white mb-4">Demo Highlights</h3>
+                <h3 className="font-display font-bold text-foreground mb-4">Demo Highlights</h3>
                 <ul className="flex flex-col gap-3">
                   {[
                     'Cross-gym data access via IDOR vulnerability',
@@ -259,7 +259,7 @@ export default function CybersecurityTrainingPage() {
             <span className="font-mono text-label tracking-[0.22em] uppercase text-violet-light block mb-4">
               WHY MTA
             </span>
-            <h2 className="font-display font-black text-3xl lg:text-4xl text-white">
+            <h2 className="font-display font-black text-3xl lg:text-4xl text-foreground">
               Why Choose MTA Training?
             </h2>
           </div>
@@ -267,7 +267,7 @@ export default function CybersecurityTrainingPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {whyMTA.map((item) => (
               <div key={item.title} className="bg-surface border border-border p-6">
-                <h3 className="font-display font-bold text-white text-lg mb-2">{item.title}</h3>
+                <h3 className="font-display font-bold text-foreground text-lg mb-2">{item.title}</h3>
                 <p className="text-sm text-muted leading-relaxed">{item.description}</p>
               </div>
             ))}
@@ -282,7 +282,7 @@ export default function CybersecurityTrainingPage() {
             <span className="font-mono text-label tracking-[0.22em] uppercase text-violet-light block mb-4">
               PROCESS
             </span>
-            <h2 className="font-display font-black text-3xl lg:text-4xl text-white">
+            <h2 className="font-display font-black text-3xl lg:text-4xl text-foreground">
               How Training Works
             </h2>
           </div>
@@ -294,7 +294,7 @@ export default function CybersecurityTrainingPage() {
                   <span className="font-display font-black text-5xl text-violet/20 block mb-4">
                     {step.step}
                   </span>
-                  <h3 className="font-display font-bold text-white text-lg mb-2">{step.title}</h3>
+                  <h3 className="font-display font-bold text-foreground text-lg mb-2">{step.title}</h3>
                   <p className="text-sm text-muted">{step.description}</p>
                 </div>
               </div>
@@ -307,7 +307,7 @@ export default function CybersecurityTrainingPage() {
       <section className="border-t border-border bg-canvas">
         <div className="container-site py-16 lg:py-24">
           <div className="bg-card border border-border text-center p-10 lg:p-16">
-            <h2 className="font-display font-black text-2xl lg:text-3xl text-white mb-4">
+            <h2 className="font-display font-black text-2xl lg:text-3xl text-foreground mb-4">
               Ready to Train Your Team?
             </h2>
             <p className="text-muted text-base lg:text-lg max-w-2xl mx-auto mb-8">
@@ -323,7 +323,7 @@ export default function CybersecurityTrainingPage() {
               </Link>
               <Link
                 href="/services/cybersecurity"
-                className="inline-flex items-center gap-2 px-6 py-4 border border-border text-muted font-mono text-sm hover:text-white hover:border-violet/35 transition-colors duration-300"
+                className="inline-flex items-center gap-2 px-6 py-4 border border-border text-muted font-mono text-sm hover:text-foreground hover:border-violet/35 transition-colors duration-300"
               >
                 View VAPT Services
               </Link>
