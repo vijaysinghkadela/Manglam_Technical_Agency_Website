@@ -436,7 +436,7 @@ export default function PricingPage() {
 
                   {/* Recommended banner */}
                   {plan.recommended && (
-                    <div className="flex items-center gap-2 px-6 lg:px-8 pt-5">
+                    <div className="flex items-center gap-2 pt-5">
                       <span
                         className="font-mono text-[10px] uppercase tracking-widest px-2 py-0.5"
                         style={{
@@ -511,7 +511,7 @@ export default function PricingPage() {
                         {plan.tiers.map((tier) => (
                           <div
                             key={tier.label}
-                            className="rounded-2xl border border-border bg-surface p-3"
+                            className="rounded-2xl border border-border bg-surface p-4 sm:p-3"
                             style={{ backgroundColor: "var(--color-surface)" }}
                           >
                             <div className="flex items-baseline justify-between gap-3">
@@ -789,7 +789,7 @@ export default function PricingPage() {
             </div>
           </div>
 
-          <div className="mt-8 grid gap-4 lg:grid-cols-2">
+          <div className="mt-8 grid gap-4">
             <div className="rounded-[24px] border border-border bg-surface p-6">
               <span
                 className="font-mono uppercase block mb-3"
