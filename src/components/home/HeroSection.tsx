@@ -136,11 +136,11 @@ export function HeroSection() {
       {/* Content - parallax on desktop only */}
       <motion.div
         style={{ y: isDesktop ? txtY : '0%' }}
-        className="relative z-10 w-full container-site pt-[88px] sm:pt-[108px] lg:pt-[112px] pb-10 sm:pb-12 lg:pb-16"
+        className="relative z-10 w-full container-site pt-[88px] sm:pt-[108px] lg:pt-[112px] pb-14 sm:pb-16 lg:pb-20"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-center">
           {/* Left Content */}
-          <div className="flex flex-col gap-5 sm:gap-6 max-w-[760px]">
+          <div className="flex flex-col gap-6 sm:gap-8 max-w-[760px]">
             {/* Micro label */}
             <motion.div
               className="flex min-w-0 items-center gap-3"
@@ -277,7 +277,7 @@ export function HeroSection() {
 
             {/* Stats - Enhanced with colored indicators */}
             <motion.div
-              className="flex flex-wrap items-center justify-start gap-2 sm:gap-3 pt-4"
+              className="flex flex-wrap items-center justify-start gap-2 sm:gap-3 pt-6"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: ANIMATION.duration.normal, delay: 1.1 }}

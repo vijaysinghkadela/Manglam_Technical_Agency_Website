@@ -15,9 +15,9 @@ export function ServicesGrid() {
   const animateCards = !prefersReducedMotion && !isTouchDevice
 
   return (
-    <section className="border-t border-border" style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(56px, 10vw, 112px) 0' }}>
+    <section className="border-t border-border" style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(72px, 10vw, 128px) 0' }}>
       <div className="container-site">
-        <div className="mb-10 flex flex-col gap-5 lg:mb-14 lg:flex-row lg:items-end lg:justify-between">
+        <div className="mb-12 flex flex-col gap-5 lg:mb-16 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <span
               className="font-mono uppercase block mb-3"
@@ -32,7 +32,7 @@ export function ServicesGrid() {
               Built to move from strategy to delivery without bloat.
             </h2>
             <p
-              className="mt-4 max-w-[58ch] text-[15px] leading-relaxed"
+              className="mt-5 max-w-[58ch] text-[15px] leading-relaxed"
               style={{ color: 'var(--color-muted)' }}
             >
               Transparent pricing, contract-bound delivery, and service cards that stay readable on phones,
@@ -53,7 +53,7 @@ export function ServicesGrid() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
           {services.map((service, idx) => {
             const num = String(idx + 1).padStart(2, '0')
             return (
@@ -68,7 +68,7 @@ export function ServicesGrid() {
               >
                 <Link
                   href={`/services/${service.slug}`}
-                  className="group relative flex h-full min-h-[300px] flex-col overflow-hidden rounded-[30px] border border-border bg-card p-6 shadow-[0_18px_60px_rgba(0,0,0,0.04)] transition-all duration-300 sm:p-7"
+                  className="group relative flex h-full min-h-[300px] flex-col overflow-hidden rounded-[30px] border border-border bg-card p-8 shadow-[0_18px_60px_rgba(0,0,0,0.04)] transition-all duration-300 sm:p-10"
                   data-cursor="link"
                 >
                   <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top_right,rgba(107,26,26,0.08),transparent_50%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -106,11 +106,11 @@ export function ServicesGrid() {
                     </div>
                   </div>
 
-                  <p className="relative mt-4 text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
+                  <p className="relative mt-5 text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
                     {service.tagline}
                   </p>
 
-                  <div className="relative mt-5 flex flex-wrap gap-2.5">
+                  <div className="relative mt-6 flex flex-wrap gap-2.5">
                     {service.features.slice(0, 3).map((feature) => (
                       <span
                         key={feature}
@@ -122,7 +122,7 @@ export function ServicesGrid() {
                     ))}
                   </div>
 
-                  <div className="relative mt-auto flex items-center justify-between gap-4 border-t border-border pt-5">
+                  <div className="relative mt-auto flex items-center justify-between gap-4 border-t border-border pt-6">
                     <span className="font-mono text-[11px] uppercase tracking-[0.18em]" style={{ color: 'var(--color-violet-light)' }}>
                       View details
                     </span>

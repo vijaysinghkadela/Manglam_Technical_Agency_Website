@@ -20,7 +20,7 @@ export function StatsSection() {
     <section
       style={{
         backgroundColor: 'var(--color-canvas)',
-        padding: `${SPACING.section.md} 0`,
+        padding: `${SPACING.section.lg} 0`,
         position: 'relative',
       }}
     >
@@ -46,7 +46,7 @@ export function StatsSection() {
 
       <div className="container-site">
         <motion.div
-          className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between mb-10 lg:mb-14"
+          className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between mb-12 lg:mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-40px' }}
@@ -90,7 +90,7 @@ export function StatsSection() {
           </p>
         </motion.div>
 
-        <div className="relative grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+        <div className="relative grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
           {STATS.map((s, i) => (
             <motion.article
               key={s.label}
@@ -133,7 +133,7 @@ export function StatsSection() {
                 {String(i + 1).padStart(2, '0')}
               </span>
 
-              <div className="flex h-full flex-col p-7 sm:p-8">
+              <div className="flex h-full flex-col p-8 sm:p-10">
                 <div className="flex items-start justify-between gap-4">
                   <span
                     className="font-mono text-[10px] uppercase tracking-[0.2em] rounded-full px-3 py-1"

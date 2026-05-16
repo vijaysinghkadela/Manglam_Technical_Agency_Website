@@ -24,7 +24,7 @@ export function PortfolioContent() {
     <div style={{ backgroundColor: 'var(--color-canvas)' }}>
 
       {/* ── Case Studies (Live) ───────────────────────────────── */}
-      <section style={{ borderTop: '1px solid var(--color-border)', padding: 'clamp(64px, 10vw, 120px) 0' }}>
+      <section style={{ borderTop: '1px solid var(--color-border)', padding: 'clamp(72px, 10vw, 128px) 0' }}>
         <div className="container-site">
 
           <motion.span
@@ -32,7 +32,7 @@ export function PortfolioContent() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true }}
-            className="font-mono uppercase block mb-16"
+            className="font-mono uppercase block mb-20"
             style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.22em' }}
           >
             ✦ CASE STUDIES
@@ -123,7 +123,7 @@ export function PortfolioContent() {
                 {/* Right — Project details */}
                 <motion.div
                   variants={fadeUp}
-                  className="flex flex-col p-6 sm:p-8 lg:p-12 xl:p-16"
+                  className="flex flex-col p-8 sm:p-10 lg:p-14 xl:p-20"
                   style={{ borderLeft: '1px solid var(--color-border)' }}
                 >
                   {/* Tags */}
@@ -155,7 +155,7 @@ export function PortfolioContent() {
 
                   {/* Description */}
                   <p
-                    className="mb-10"
+                    className="mb-12"
                     style={{ fontSize: '15px', lineHeight: 1.75, color: 'var(--color-muted)', maxWidth: '480px' }}
                   >
                     {p.description}
@@ -163,7 +163,7 @@ export function PortfolioContent() {
 
                   {/* Duration + Client */}
                   <div
-                    className="grid grid-cols-2 gap-6 mb-8 pb-8"
+                    className="grid grid-cols-2 gap-6 mb-10 pb-10"
                     style={{ borderBottom: '1px solid var(--color-border)' }}
                   >
                     <div>
@@ -198,9 +198,9 @@ export function PortfolioContent() {
 
                   {/* Tech Stack */}
                   {p.stack.length > 0 && (
-                    <div className="mb-8">
+                    <div className="mb-10">
                       <span
-                        className="font-mono uppercase block mb-3"
+                        className="font-mono uppercase block mb-4"
                         style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
                       >
                         Tech Stack
@@ -226,9 +226,9 @@ export function PortfolioContent() {
 
                   {/* Deliverables */}
                   {p.deliverables.length > 0 && (
-                    <div className="mb-10">
+                    <div className="mb-12">
                       <span
-                        className="font-mono uppercase block mb-4"
+                        className="font-mono uppercase block mb-5"
                         style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
                       >
                         Deliverables
@@ -259,7 +259,7 @@ export function PortfolioContent() {
                       target="_blank"
                       rel="noopener noreferrer"
                       data-cursor="pointer"
-                      className="mt-auto inline-flex items-center gap-2 px-6 py-4 font-display font-black text-sm uppercase tracking-wide transition-all duration-300 hover:bg-violet hover:text-white hover:border-violet w-fit"
+                      className="mt-auto inline-flex items-center gap-2 px-8 py-5 font-display font-black text-sm uppercase tracking-wide transition-all duration-300 hover:bg-violet hover:text-white hover:border-violet w-fit"
                       style={{ border: '1px solid var(--color-foreground)', color: 'var(--color-foreground)' }}
                     >
                       View Live Site
@@ -277,13 +277,13 @@ export function PortfolioContent() {
       <section
         style={{
           borderTop: '1px solid var(--color-border)',
-          padding: 'clamp(64px, 10vw, 120px) 0',
+          padding: 'clamp(72px, 10vw, 128px) 0',
           backgroundColor: 'var(--color-surface)',
         }}
       >
         <div className="container-site">
 
-          <div className="flex items-end justify-between mb-16 gap-4">
+          <div className="flex items-end justify-between mb-20 gap-4">
             <div>
               <span
                 className="font-mono uppercase block mb-3"
@@ -314,7 +314,7 @@ export function PortfolioContent() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: i * 0.08 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="relative grid grid-cols-1 lg:grid-cols-[72px_1fr_auto] gap-4 lg:gap-8 items-center py-8 group overflow-hidden"
+                className="relative grid grid-cols-1 lg:grid-cols-[72px_1fr_auto] gap-4 lg:gap-8 items-center py-10 group overflow-hidden"
                 style={{ borderBottom: '1px solid var(--color-border)' }}
               >
                 {/* Violet left accent */}
@@ -397,7 +397,7 @@ export function PortfolioContent() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
             viewport={{ once: true, margin: "-50px" }}
-            className="mt-20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
+            className="mt-24 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8"
             style={{
               border: '1px solid rgba(107,26,26,0.3)',
               padding: 'clamp(20px, 3vw, 36px)',
@@ -418,7 +418,7 @@ export function PortfolioContent() {
             <Link
               href="/contact"
               data-cursor="pointer"
-              className="inline-flex items-center gap-2 px-6 py-3.5 min-h-[48px] font-display font-bold text-sm hover:bg-violet hover:text-white transition-all duration-300 whitespace-nowrap"
+              className="inline-flex items-center gap-2 px-7 py-4 min-h-[52px] font-display font-bold text-sm hover:bg-violet hover:text-white transition-all duration-300 whitespace-nowrap"
               style={{ border: '1px solid var(--color-violet)', color: 'var(--color-violet-light)' }}
             >
               Start a Project →

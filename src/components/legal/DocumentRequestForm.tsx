@@ -85,7 +85,7 @@ export function DocumentRequestForm({ docs }: DocumentRequestFormProps) {
   if (submitted) {
     return (
       <div
-        className="flex flex-col gap-6 p-8"
+        className="flex flex-col gap-8 p-10"
         style={{ border: '1px solid var(--color-border)', backgroundColor: 'var(--color-card)' }}
       >
         <div className="flex items-center gap-4">
@@ -118,7 +118,7 @@ export function DocumentRequestForm({ docs }: DocumentRequestFormProps) {
 
   return (
     <form
-      className="flex flex-col gap-6 p-6 sm:p-8"
+      className="flex flex-col gap-8 p-8 sm:p-10"
       style={{ border: '1px solid var(--color-border)', backgroundColor: 'var(--color-card)' }}
       onSubmit={handleSubmit(onSubmit)}
       noValidate
@@ -143,7 +143,7 @@ export function DocumentRequestForm({ docs }: DocumentRequestFormProps) {
       </div>
 
       {/* Name + Email */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <label className="flex flex-col gap-2">
           <span
             className="font-mono uppercase"
@@ -217,14 +217,14 @@ export function DocumentRequestForm({ docs }: DocumentRequestFormProps) {
       </label>
 
       {/* Document selection */}
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-4">
         <span
           className="font-mono uppercase"
           style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.15em' }}
         >
           Requested Documents *
         </span>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-3">
           {docs.map((doc) => {
             const selected = selectedDocs.includes(doc.id)
             return (
@@ -282,7 +282,7 @@ export function DocumentRequestForm({ docs }: DocumentRequestFormProps) {
       </label>
 
       {/* Consent checkboxes */}
-      <div className="grid gap-3">
+      <div className="grid gap-4">
         <label className="flex items-start gap-3 text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
           <input
             type="checkbox"
@@ -311,7 +311,7 @@ export function DocumentRequestForm({ docs }: DocumentRequestFormProps) {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="inline-flex items-center justify-center gap-2 px-6 py-4 font-display font-black text-[15px] transition-all duration-300 hover:bg-violet hover:text-white disabled:opacity-60"
+        className="inline-flex items-center justify-center gap-2 px-7 py-5 font-display font-black text-[15px] transition-all duration-300 hover:bg-violet hover:text-white disabled:opacity-60"
         style={{ backgroundColor: 'var(--color-foreground)', color: 'var(--color-canvas)' }}
       >
         {isSubmitting ? (

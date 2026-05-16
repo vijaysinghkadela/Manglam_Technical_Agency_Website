@@ -39,11 +39,11 @@ export default function AboutPage() {
           }}
         />
 
-        <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-10 sm:pb-12 lg:pb-16">
+        <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-12 sm:pb-16 lg:pb-20">
 
           {/* Breadcrumb */}
           <nav
-            className="flex items-center gap-2 font-mono mb-10 lg:mb-16 animate-fade-up"
+            className="flex items-center gap-2 font-mono mb-12 lg:mb-20 animate-fade-up"
             style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
           >
             <Link href="/" className="hover-foreground transition-colors">HOME</Link>
@@ -57,12 +57,12 @@ export default function AboutPage() {
             {/* Left: headline + description */}
             <div>
               <span
-                className="font-mono uppercase block mb-6 animate-fade-up stagger-1"
+                className="font-mono uppercase block mb-8 animate-fade-up stagger-1"
                 style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.22em' }}
               >
                 ✦ MANGLAM TECHNICAL AGENCY
               </span>
-              <div className="flex flex-col" style={{ gap: '0.02em' }}>
+              <div className="flex flex-col" style={{ gap: '0.25rem' }}>
                 <TextReveal
                   text="EXCELLENCE"
                   as="h1"
@@ -92,7 +92,7 @@ export default function AboutPage() {
               </div>
 
               <p
-                className="mt-8 lg:mt-10 animate-fade-up stagger-4"
+                className="mt-10 lg:mt-14 animate-fade-up stagger-4"
                 style={{
                   fontSize: '16px',
                   lineHeight: 1.72,
@@ -281,7 +281,7 @@ export default function AboutPage() {
           </div>
 
           {/* Bottom bar */}
-          <div className="flex items-end justify-between mt-10 lg:mt-14">
+          <div className="flex items-end justify-between mt-12 lg:mt-16">
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 animate-fade-up stagger-4">
               <span
                 className="font-mono uppercase"

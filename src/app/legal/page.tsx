@@ -41,11 +41,11 @@ export default function LegalHubPage() {
           }}
         />
 
-        <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-10 sm:pb-12 lg:pb-16">
+        <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-12 sm:pb-16 lg:pb-20">
 
           {/* Breadcrumb */}
           <nav
-            className="flex items-center gap-2 font-mono mb-10 lg:mb-16 animate-fade-up"
+            className="flex items-center gap-2 font-mono mb-12 lg:mb-20 animate-fade-up"
             style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
           >
             <Link href="/" className="hover-foreground transition-colors">HOME</Link>
@@ -59,13 +59,13 @@ export default function LegalHubPage() {
             {/* Left: headline */}
             <div>
               <span
-                className="font-mono uppercase block mb-6 animate-fade-up stagger-1"
+                className="font-mono uppercase block mb-8 animate-fade-up stagger-1"
                 style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.22em' }}
               >
                 ✦ LEGAL &amp; COMPLIANCE
               </span>
 
-              <div className="flex flex-col" style={{ gap: '0.02em' }}>
+              <div className="flex flex-col" style={{ gap: '0.25rem' }}>
                 <TextReveal
                   text="LEGAL"
                   as="h1"
@@ -211,7 +211,7 @@ export default function LegalHubPage() {
           </div>
 
           {/* Bottom stats + scroll indicator */}
-          <div className="flex items-end justify-between mt-10 lg:mt-14">
+          <div className="flex items-end justify-between mt-12 lg:mt-16">
             <div className="flex items-center gap-8 flex-wrap">
               {[
                 { value: `${visibleAgreements.length}`, label: 'Agreements' },
@@ -256,9 +256,9 @@ export default function LegalHubPage() {
       {/* ── MAIN CONTENT ─────────────────────────────────── */}
       <section
         className="border-t border-border"
-        style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(64px, 10vw, 120px) 0' }}
+        style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(72px, 10vw, 128px) 0' }}
       >
-        <div className="container-site grid grid-cols-1 lg:grid-cols-[220px_1fr_380px] gap-10 lg:gap-12 xl:gap-16 items-start">
+        <div className="container-site grid grid-cols-1 lg:grid-cols-[220px_1fr_380px] gap-10 lg:gap-14 xl:gap-20 items-start">
 
           {/* ── TOC Sidebar (desktop only) ── */}
           <aside className="hidden lg:block lg:sticky lg:top-32 self-start">

@@ -18,7 +18,7 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <div className="flex flex-col gap-24">
+    <div className="flex flex-col gap-28">
 
       {/* ── Agreement Catalog ── */}
       <div id="agreements">
@@ -59,7 +59,7 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
                 {/* Row header */}
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="w-full flex items-center gap-3 sm:gap-5 py-5 text-left group"
+                  className="w-full flex items-center gap-3 sm:gap-5 py-6 text-left group"
                   aria-expanded={isOpen}
                 >
                   {/* Index */}
@@ -132,7 +132,7 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
                       style={{ overflow: 'hidden' }}
                     >
                       <div
-                        className="pb-8 sm:pl-12 pt-6 grid grid-cols-1 md:grid-cols-2 gap-8"
+                        className="pb-10 sm:pl-12 pt-8 grid grid-cols-1 md:grid-cols-2 gap-10"
                         style={{ borderTop: '1px solid var(--color-border)' }}
                       >
                         {/* Key Clauses */}
@@ -248,24 +248,24 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.55, ease: EASE }}
-          className="mb-10"
+          className="mb-12"
         >
           <span
             className="font-mono uppercase block mb-3"
             style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.22em' }}
           >
             02 — APPLICABILITY MATRIX
-          </span>
-          <h2
-            className="font-display font-black leading-none tracking-normal uppercase"
-            style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', color: 'var(--color-foreground)' }}
-          >
-            Service Matrix
-          </h2>
-        </motion.div>
+              </span>
+              <h2
+                className="font-display font-black leading-none tracking-normal uppercase"
+                style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', color: 'var(--color-foreground)' }}
+              >
+                Service Matrix
+              </h2>
+            </motion.div>
 
-        {/* Mobile: card view */}
-        <div className="lg:hidden flex flex-col gap-3">
+            {/* Mobile: card view */}
+            <div className="lg:hidden flex flex-col gap-4">
           {matrix.map((row, i) => (
             <motion.div
               key={row.service}
@@ -273,7 +273,7 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-20px' }}
               transition={{ duration: 0.5, delay: i * 0.06, ease: EASE }}
-              className="p-5"
+              className="p-6"
               style={{ border: '1px solid var(--color-border)', backgroundColor: 'var(--color-card)' }}
             >
               <p
@@ -282,7 +282,7 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
               >
                 {row.service}
               </p>
-              <div className="flex flex-col gap-3">
+                  <div className="flex flex-col gap-4">
                 <div>
                   <span
                     className="font-mono uppercase block mb-2"
@@ -339,7 +339,7 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
                 {['Service', 'Required', 'Conditional'].map((h) => (
                   <th
                     key={h}
-                    className="font-mono text-xs uppercase tracking-widest py-4 px-5"
+                    className="font-mono text-xs uppercase tracking-widest py-5 px-6"
                     style={{ color: 'var(--color-muted)' }}
                   >
                     {h}
@@ -356,10 +356,10 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
                   onMouseEnter={e => (e.currentTarget.style.backgroundColor = 'var(--color-surface)')}
                   onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'transparent')}
                 >
-                  <td className="py-4 px-5 text-sm font-semibold" style={{ color: 'var(--color-foreground)' }}>
+                    <td className="py-5 px-6 text-sm font-semibold" style={{ color: 'var(--color-foreground)' }}>
                     {row.service}
                   </td>
-                  <td className="py-4 px-5">
+                    <td className="py-5 px-6">
                     <div className="flex flex-wrap gap-1.5">
                       {row.required.map((code) => (
                         <span
@@ -376,7 +376,7 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
                       ))}
                     </div>
                   </td>
-                  <td className="py-4 px-5 text-sm" style={{ color: 'var(--color-muted)' }}>
+                    <td className="py-5 px-6 text-sm" style={{ color: 'var(--color-muted)' }}>
                     {row.conditional.join(' · ')}
                   </td>
                 </tr>
@@ -393,24 +393,24 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.55, ease: EASE }}
-          className="mb-10"
-        >
-          <span
-            className="font-mono uppercase block mb-3"
-            style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.22em' }}
-          >
-            03 — POLICY DOCUMENTS
-          </span>
-          <h2
-            className="font-display font-black leading-none tracking-normal uppercase"
-            style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', color: 'var(--color-foreground)' }}
-          >
-            Policies
-          </h2>
-        </motion.div>
+              className="mb-12"
+            >
+              <span
+                className="font-mono uppercase block mb-3"
+                style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.22em' }}
+              >
+                03 — POLICY DOCUMENTS
+              </span>
+              <h2
+                className="font-display font-black leading-none tracking-normal uppercase"
+                style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', color: 'var(--color-foreground)' }}
+              >
+                Policies
+              </h2>
+            </motion.div>
 
-        {/* Horizontal banner cards */}
-        <div className="flex flex-col gap-4">
+            {/* Horizontal banner cards */}
+            <div className="flex flex-col gap-5">
           {policies.map((policy, i) => (
             <motion.div
               key={policy.slug}
@@ -422,7 +422,7 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
               <Link
                 href={`/legal/${policy.slug}`}
                 data-cursor="link"
-                className="group flex items-center gap-5 sm:gap-6 p-5 sm:p-6 border border-border transition-all duration-300 hover:border-violet/40"
+                className="group flex items-center gap-5 sm:gap-6 p-6 sm:p-8 border border-border transition-all duration-300 hover:border-violet/40"
                 style={{ backgroundColor: 'var(--color-card)' }}
               >
                 {/* Icon */}

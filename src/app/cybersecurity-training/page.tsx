@@ -110,9 +110,9 @@ export default function CybersecurityTrainingPage() {
 
       {/* Section 1: Free DPDP Gap Assessment Lead Magnet */}
       <section className="border-t border-border bg-surface">
-        <div className="container-site py-16 lg:py-24">
-          <div className="bg-card border border-border p-8 lg:p-12 rounded-2xl">
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+        <div className="container-site py-20 lg:py-28">
+          <div className="bg-card border border-border p-10 lg:p-14 rounded-2xl">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-10">
               <div className="flex-1">
                 <span className="font-mono text-label tracking-[0.18em] uppercase text-violet-light block mb-4">
                   LEAD MAGNET
@@ -138,7 +138,7 @@ export default function CybersecurityTrainingPage() {
               <div className="shrink-0">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-foreground text-canvas font-display font-black text-base hover:bg-violet transition-colors duration-300"
+                  className="inline-flex items-center gap-2 px-10 py-5 bg-foreground text-canvas font-display font-black text-base hover:bg-violet transition-colors duration-300"
                 >
                   Request Free Assessment
                   <ArrowRight className="w-4 h-4" />
@@ -151,8 +151,8 @@ export default function CybersecurityTrainingPage() {
 
       {/* Section 2: Workshop Offerings */}
       <section className="border-t border-border bg-canvas">
-        <div className="container-site py-16 lg:py-24">
-          <div className="mb-12 lg:mb-16">
+        <div className="container-site py-20 lg:py-28">
+          <div className="mb-14 lg:mb-20">
             <span className="font-mono text-label tracking-[0.22em] uppercase text-violet-light block mb-4">
               WORKSHOPS
             </span>
@@ -161,13 +161,13 @@ export default function CybersecurityTrainingPage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {workshopOfferings.map((workshop) => (
               <div
                 key={workshop.title}
                 className="bg-surface border border-border rounded-xl overflow-hidden flex flex-col hover:border-violet/30 transition-colors duration-300"
               >
-                <div className="p-6 border-b border-border">
+                <div className="p-8 border-b border-border">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 flex items-center justify-center border border-violet/35 bg-violet/8">
                       <workshop.icon className="w-5 h-5 text-violet-light" />
@@ -189,7 +189,7 @@ export default function CybersecurityTrainingPage() {
                     <p className="text-sm text-muted">{workshop.location}</p>
                   )}
                 </div>
-                <div className="p-6 flex-1 flex flex-col">
+                <div className="p-8 flex-1 flex flex-col">
                   <ul className="flex flex-col gap-2.5 mb-6 flex-1">
                     {workshop.content.map((item) => (
                       <li key={item} className="flex items-start gap-2.5 text-sm text-muted">
@@ -213,48 +213,7 @@ export default function CybersecurityTrainingPage() {
 
       {/* Section 3: Live Demo Preview */}
       <section className="border-t border-border bg-surface">
-        <div className="container-site py-16 lg:py-24">
-          <div className="bg-surface border border-border p-8 lg:p-12">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-              <div>
-                <span className="font-mono text-label tracking-[0.22em] uppercase text-violet-light block mb-4">
-                  LIVE DEMO
-                </span>
-                <h2 className="font-display font-black text-2xl lg:text-3xl text-foreground mb-4">
-                  Watch a Real Exploitation Demo
-                </h2>
-                <p className="text-muted text-base leading-relaxed mb-6">
-                  See how we gained unauthorized access to a multi-tenant gym management system (FitNexora simulation) in under 3 minutes.
-                </p>
-                <div className="flex items-center gap-2 text-sm text-dead">
-                  <Shield className="w-4 h-4 text-violet-light" />
-                  <span>All demos use synthetic data in isolated environments. No production systems affected.</span>
-                </div>
-              </div>
-              <div>
-                <h3 className="font-display font-bold text-foreground mb-4">Demo Highlights</h3>
-                <ul className="flex flex-col gap-3">
-                  {[
-                    'Cross-gym data access via IDOR vulnerability',
-                    'Real-time session hijacking',
-                    'DPDP breach implications',
-                    'Immediate remediation steps',
-                  ].map((highlight) => (
-                    <li key={highlight} className="flex items-start gap-3 text-muted">
-                      <span className="w-1.5 h-1.5 rounded-full bg-violet mt-2 shrink-0" />
-                      <span>{highlight}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 4: Why MTA Training? */}
-      <section className="border-t border-border bg-canvas">
-        <div className="container-site py-16 lg:py-24">
+        <div className="container-site py-20 lg:py-28">
           <div className="mb-12 lg:mb-16">
             <span className="font-mono text-label tracking-[0.22em] uppercase text-violet-light block mb-4">
               WHY MTA
@@ -264,9 +223,9 @@ export default function CybersecurityTrainingPage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {whyMTA.map((item) => (
-              <div key={item.title} className="bg-surface border border-border p-6">
+              <div key={item.title} className="bg-surface border border-border p-8">
                 <h3 className="font-display font-bold text-foreground text-lg mb-2">{item.title}</h3>
                 <p className="text-sm text-muted leading-relaxed">{item.description}</p>
               </div>
@@ -277,8 +236,8 @@ export default function CybersecurityTrainingPage() {
 
       {/* Section 5: Training Process */}
       <section className="border-t border-border bg-surface">
-        <div className="container-site py-16 lg:py-24">
-          <div className="mb-12 lg:mb-16">
+        <div className="container-site py-20 lg:py-28">
+          <div className="mb-14 lg:mb-20">
             <span className="font-mono text-label tracking-[0.22em] uppercase text-violet-light block mb-4">
               PROCESS
             </span>
@@ -287,10 +246,10 @@ export default function CybersecurityTrainingPage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {trainingProcess.map((step) => (
               <div key={step.step} className="relative">
-                <div className="bg-canvas border border-border p-6 h-full">
+                <div className="bg-canvas border border-border p-8 h-full">
                   <span className="font-display font-black text-5xl text-violet/20 block mb-4">
                     {step.step}
                   </span>
@@ -305,8 +264,8 @@ export default function CybersecurityTrainingPage() {
 
       {/* Section 6: CTA Section */}
       <section className="border-t border-border bg-canvas">
-        <div className="container-site py-16 lg:py-24">
-          <div className="bg-card border border-border text-center p-10 lg:p-16">
+        <div className="container-site py-20 lg:py-28">
+          <div className="bg-card border border-border text-center p-12 lg:p-20">
             <h2 className="font-display font-black text-2xl lg:text-3xl text-foreground mb-4">
               Ready to Train Your Team?
             </h2>
@@ -316,14 +275,14 @@ export default function CybersecurityTrainingPage() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-foreground text-canvas font-display font-black text-base hover:bg-violet transition-colors duration-300"
+                className="inline-flex items-center gap-2 px-10 py-5 bg-foreground text-canvas font-display font-black text-base hover:bg-violet transition-colors duration-300"
               >
                 Schedule Training
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 href="/services/cybersecurity"
-                className="inline-flex items-center gap-2 px-6 py-4 border border-border text-muted font-mono text-sm hover:text-foreground hover:border-violet/35 transition-colors duration-300"
+                className="inline-flex items-center gap-2 px-8 py-5 border border-border text-muted font-mono text-sm hover:text-foreground hover:border-violet/35 transition-colors duration-300"
               >
                 View VAPT Services
               </Link>

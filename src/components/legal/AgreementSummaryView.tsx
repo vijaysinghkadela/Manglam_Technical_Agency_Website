@@ -21,25 +21,25 @@ export function AgreementSummaryView({ agreement }: AgreementSummaryViewProps) {
         subheading={agreement.publicSummary}
       />
 
-      <section className="py-20 bg-surface border-t border-border">
-        <div className="container-site grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-8">
-          <article className="border border-border bg-card p-6 sm:p-8">
+      <section className="py-24 bg-surface border-t border-border">
+        <div className="container-site grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-10">
+          <article className="border border-border bg-card p-8 sm:p-10">
             <div className="flex items-center gap-3 mb-6 flex-wrap">
               <span className="font-mono text-[11px] text-violet-light tracking-[0.18em] uppercase">{agreement.code}</span>
               <span className="font-mono text-[11px] text-muted tracking-[0.12em] uppercase">Visibility: {agreement.visibility}</span>
             </div>
 
-            <section className="mb-8">
+            <section className="mb-10">
               <h2 className="font-display font-black text-2xl text-white mb-3">When to Use</h2>
               <p className="text-[15px] text-muted leading-[1.7]">{agreement.whenRequired}</p>
             </section>
 
-            <section className="mb-8">
+            <section className="mb-10">
               <h2 className="font-display font-black text-2xl text-white mb-3">Primary Use</h2>
               <p className="text-[15px] text-muted leading-[1.7]">{agreement.primaryUse}</p>
             </section>
 
-            <section className="mb-8">
+            <section className="mb-10">
               <h2 className="font-display font-black text-2xl text-white mb-4">Key Clauses</h2>
               <ul className="flex flex-col gap-3">
                 {agreement.keyClauses.map((clause) => (
@@ -51,7 +51,7 @@ export function AgreementSummaryView({ agreement }: AgreementSummaryViewProps) {
               </ul>
             </section>
 
-            <section className="mb-8">
+            <section className="mb-10">
               <h2 className="font-display font-black text-2xl text-white mb-4">Governing Laws</h2>
               <div className="flex flex-wrap gap-2">
                 {agreement.governingLaws.map((law) => (
@@ -76,8 +76,8 @@ export function AgreementSummaryView({ agreement }: AgreementSummaryViewProps) {
             )}
           </article>
 
-          <aside className="flex flex-col gap-6">
-            <div className="border border-border bg-card p-6">
+            <aside className="flex flex-col gap-8">
+            <div className="border border-border bg-card p-8">
               <p className="font-mono text-[11px] tracking-[0.18em] uppercase text-violet-light mb-3">Access Model</p>
               <h3 className="font-display font-black text-xl text-white mb-3">Template Distribution</h3>
               <p className="text-sm text-muted leading-relaxed mb-4">

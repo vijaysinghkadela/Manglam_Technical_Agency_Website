@@ -13,7 +13,7 @@ export function MarketResearchArticleContent({ article }: Props) {
   return (
     <section
       className="border-t border-border"
-      style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(48px, 6vw, 80px) 0' }}
+      style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(64px, 10vw, 120px) 0' }}
     >
       <div className="container-site max-w-4xl">
         {/* Excerpt Block */}
@@ -22,7 +22,7 @@ export function MarketResearchArticleContent({ article }: Props) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: EASE }}
-          className="mb-12 p-6"
+          className="mb-16 p-8"
           style={{ border: '1px solid var(--color-border)', backgroundColor: 'var(--color-surface)' }}
         >
           <p style={{ fontSize: '16px', lineHeight: 1.75, color: 'var(--color-muted)', fontStyle: 'italic' }}>
@@ -36,10 +36,10 @@ export function MarketResearchArticleContent({ article }: Props) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
-          className="mb-12"
+          className="mb-16"
         >
           <h2
-            className="font-display font-bold mb-6"
+            className="font-display font-bold mb-8"
             style={{ fontSize: 'clamp(1.1rem, 1.8vw, 1.35rem)', color: 'var(--color-foreground)' }}
           >
             Contents
@@ -49,7 +49,7 @@ export function MarketResearchArticleContent({ article }: Props) {
               <a
                 key={section.id}
                 href={`#${section.id}`}
-                className="flex items-center gap-3 py-2 text-sm transition-colors hover-foreground"
+                className="flex items-center gap-3 py-3 text-sm transition-colors hover-foreground"
                 style={{ color: 'var(--color-muted)' }}
               >
                 <span className="font-mono text-xs" style={{ color: 'var(--color-violet-light)', minWidth: '24px' }}>
@@ -62,7 +62,7 @@ export function MarketResearchArticleContent({ article }: Props) {
         </motion.div>
 
         {/* Sections */}
-        <div className="flex flex-col gap-12">
+        <div className="flex flex-col gap-16">
           {article.sections.map((section, index) => (
             <motion.article
               key={section.id}
@@ -74,7 +74,7 @@ export function MarketResearchArticleContent({ article }: Props) {
               className="scroll-mt-28"
             >
               {/* Section Header */}
-              <div className="flex items-center gap-4 mb-6">
+              <div className="flex items-center gap-4 mb-8">
                 <span
                   className="font-display font-black text-2xl"
                   style={{ color: 'rgba(107,26,26,0.25)' }}
@@ -91,7 +91,7 @@ export function MarketResearchArticleContent({ article }: Props) {
 
               {/* Content */}
               {section.content && (
-                <div className="mb-6">
+                <div className="mb-8">
                   <p style={{ fontSize: '15px', lineHeight: 1.8, color: 'var(--color-muted)' }}>
                     {section.content}
                   </p>
@@ -105,7 +105,7 @@ export function MarketResearchArticleContent({ article }: Props) {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
-                  className="my-8 p-5"
+                  className="my-10 p-6"
                   style={{
                     border: '1px solid rgba(107,26,26,0.35)',
                     backgroundColor: 'rgba(107,26,26,0.04)',
@@ -120,7 +120,7 @@ export function MarketResearchArticleContent({ article }: Props) {
 
               {/* Bullets */}
               {section.bullets && section.bullets.length > 0 && (
-                <ul className="flex flex-col gap-3 mb-6">
+                <ul className="flex flex-col gap-4 mb-6">
                   {section.bullets.map((bullet, bulletIndex) => (
                     <li
                       key={bulletIndex}
@@ -138,11 +138,11 @@ export function MarketResearchArticleContent({ article }: Props) {
 
               {/* Tables */}
               {section.tables && section.tables.length > 0 && (
-                <div className="my-8 flex flex-col gap-8">
+                <div className="my-10 flex flex-col gap-8">
                   {section.tables.map((table, tableIndex) => (
                     <div key={tableIndex} className="overflow-x-auto border border-border" style={{ backgroundColor: 'var(--color-card)' }}>
                       {table.title && (
-                        <div className="px-4 py-3 border-b border-border" style={{ backgroundColor: 'var(--color-surface)' }}>
+                        <div className="px-5 py-4 border-b border-border" style={{ backgroundColor: 'var(--color-surface)' }}>
                           <p className="font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--color-muted)' }}>
                             {table.title}
                           </p>
@@ -154,7 +154,7 @@ export function MarketResearchArticleContent({ article }: Props) {
                             {table.headers.map((header, headerIndex) => (
                               <th
                                 key={headerIndex}
-                                className="font-mono text-xs uppercase tracking-widest py-4 px-4"
+                                className="font-mono text-xs uppercase tracking-widest py-5 px-5"
                                 style={{ color: 'var(--color-muted)' }}
                               >
                                 {header}
@@ -178,7 +178,7 @@ export function MarketResearchArticleContent({ article }: Props) {
                               {row.map((cell, cellIndex) => (
                                 <td
                                   key={cellIndex}
-                                  className={`py-4 px-4 text-sm ${cellIndex === 0 ? 'font-semibold' : ''}`}
+                                  className={`py-5 px-5 text-sm ${cellIndex === 0 ? 'font-semibold' : ''}`}
                                   style={{
                                     color: cellIndex === 0 ? 'var(--color-foreground)' : 'var(--color-muted)',
                                   }}
@@ -204,7 +204,7 @@ export function MarketResearchArticleContent({ article }: Props) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, ease: EASE }}
-          className="mt-16 pt-8 border-t border-border"
+          className="mt-20 pt-10 border-t border-border"
         >
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex flex-col gap-1">

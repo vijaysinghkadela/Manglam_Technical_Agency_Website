@@ -43,7 +43,7 @@ export function PageHero({
         : []
 
   return (
-    <section className="w-full bg-canvas pt-[calc(var(--nav-offset)+40px)] pb-16 relative overflow-hidden grain">
+    <section className="w-full bg-canvas pt-[calc(var(--nav-offset)+40px)] pb-20 relative overflow-hidden grain">
       {/* Line grid background */}
       <div className="absolute inset-0 bg-line-grid pointer-events-none opacity-60" aria-hidden />
 
@@ -55,7 +55,7 @@ export function PageHero({
             initial={{ opacity: 0, x: -12 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, ease: EASE }}
-            className="flex items-center gap-2 font-mono text-label mb-8"
+            className="flex items-center gap-2 font-mono text-label mb-10"
             style={{ color: 'var(--color-dead)' }}
           >
             {crumbs.map((b, i) => (
@@ -76,7 +76,7 @@ export function PageHero({
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.05, ease: EASE }}
-          className="font-mono text-label tracking-[0.22em] uppercase block mb-4"
+          className="font-mono text-label tracking-[0.22em] uppercase block mb-5"
           style={{ color: 'var(--color-violet-light)' }}
         >
           {label}
@@ -97,7 +97,7 @@ export function PageHero({
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4, ease: EASE }}
-            className="text-[17px] leading-[1.65] mt-6 max-w-2xl"
+            className="text-[17px] leading-[1.65] mt-8 max-w-2xl"
             style={{ color: 'var(--color-muted)' }}
           >
             {description}
@@ -110,7 +110,7 @@ export function PageHero({
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.7, delay: 0.5, ease: EASE }}
           style={{ transformOrigin: 'left' }}
-          className="divider-gradient mt-16"
+          className="divider-gradient mt-20"
         />
       </div>
     </section>

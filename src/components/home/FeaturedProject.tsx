@@ -9,7 +9,7 @@ export function FeaturedProject() {
     <section 
       style={{ 
         backgroundColor: 'var(--color-surface)', 
-        padding: `${SPACING.section.md} 0`,
+        padding: `${SPACING.section.lg} 0`,
       }}
     >
       <div className="container-site">
@@ -22,7 +22,7 @@ export function FeaturedProject() {
             duration: ANIMATION.duration.slow, 
             ease: ANIMATION.ease 
           }}
-          className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-5 lg:gap-4 mb-10 lg:mb-14"
+          className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 lg:gap-4 mb-12 lg:mb-16"
         >
           <div className="max-w-2xl">
             <span 
@@ -96,7 +96,7 @@ export function FeaturedProject() {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-start">
 
           {/* RIGHT — Project Details Card (MNSS) */}
           <motion.div
@@ -108,7 +108,7 @@ export function FeaturedProject() {
               delay: 0.15, 
               ease: ANIMATION.ease 
             }}
-            className="order-1 lg:order-2 flex flex-col gap-6 lg:pt-2 rounded-3xl border border-border bg-card p-6 sm:p-8 transition-all duration-300 hover:shadow-lg"
+            className="order-1 lg:order-2 flex flex-col gap-6 lg:pt-2 rounded-3xl border border-border bg-card p-8 sm:p-10 transition-all duration-300 hover:shadow-lg"
             style={{ 
               borderRadius: RADIUS['2xl'],
               boxShadow: SHADOW.sm,

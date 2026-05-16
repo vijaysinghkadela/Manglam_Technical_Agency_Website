@@ -11,16 +11,16 @@ export function ProcessSection() {
   const [active, setActive] = useState<number | null>(0)
 
   return (
-    <section style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(56px, 9vw, 112px) 0' }}>
+    <section style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(72px, 10vw, 128px) 0' }}>
       <div className="container-site">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-50px' }}
           transition={{ duration: 0.7, ease: ANIMATION.ease }}
-          className="grid grid-cols-1 lg:grid-cols-[0.92fr_1.08fr] gap-4 sm:gap-6 lg:gap-12 mb-10 lg:mb-14"
+          className="grid grid-cols-1 lg:grid-cols-[0.92fr_1.08fr] gap-6 sm:gap-8 lg:gap-14 mb-12 lg:mb-16"
         >
-          <div className="rounded-[28px] border border-border bg-card p-6 sm:p-8 relative overflow-hidden">
+          <div className="rounded-[28px] border border-border bg-card p-8 sm:p-10 relative overflow-hidden">
             <div
               className="absolute top-0 left-0 w-[3px] h-full"
               style={{ background: `linear-gradient(180deg, ${BRAND.primary}, transparent)` }}
@@ -43,7 +43,7 @@ export function ProcessSection() {
             </p>
           </div>
 
-          <div className="rounded-[28px] border border-border bg-card p-6 sm:p-8 relative">
+          <div className="rounded-[28px] border border-border bg-card p-8 sm:p-10 relative">
             <div
               className="absolute top-0 right-0 w-[3px] h-full"
               style={{ background: `linear-gradient(180deg, transparent, ${BRAND.primary})` }}
@@ -87,7 +87,7 @@ export function ProcessSection() {
                 >
                   <button
                     onClick={() => setActive(isOpen ? null : stage.stage)}
-                    className="w-full flex items-start gap-4 sm:gap-6 text-left transition-colors duration-200 px-5 sm:px-6 py-5 sm:py-6 touch-manipulation relative"
+                    className="w-full flex items-start gap-4 sm:gap-6 text-left transition-colors duration-200 px-6 sm:px-8 py-6 sm:py-8 touch-manipulation relative"
                     style={{ touchAction: 'manipulation' }}
                     aria-expanded={isOpen}
                     aria-controls={`process-stage-${stage.stage}`}
@@ -157,41 +157,41 @@ export function ProcessSection() {
                         style={{ overflow: 'hidden' }}
                       >
                         <div
-                          className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 border-t px-5 sm:px-6 py-5 sm:py-6"
+                            className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 border-t px-6 sm:px-8 py-6 sm:py-8"
                           style={{
                             borderColor: 'var(--color-border)',
                             backgroundColor: 'var(--color-surface)',
                           }}
                         >
-                          <div className="rounded-[20px] border border-border bg-card p-4 sm:p-5">
-                            <p className="font-mono uppercase mb-3" style={{ fontSize: '10px', letterSpacing: '0.18em', color: BRAND.primary }}>
-                              Actions
-                            </p>
-                            <ul className="space-y-2">
-                              {stage.actions.map((item) => (
-                                <li key={item} className="text-sm flex items-start gap-2" style={{ color: 'var(--color-muted)' }}>
-                                  <span style={{ color: BRAND.primary, opacity: 0.7, marginTop: '2px', fontSize: '10px' }}>▸</span>
-                                  {item}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
+                            <div className="rounded-[20px] border border-border bg-card p-5 sm:p-6">
+                              <p className="font-mono uppercase mb-3" style={{ fontSize: '10px', letterSpacing: '0.18em', color: BRAND.primary }}>
+                                Actions
+                              </p>
+                              <ul className="space-y-2">
+                                {stage.actions.map((item) => (
+                                  <li key={item} className="text-sm flex items-start gap-2" style={{ color: 'var(--color-muted)' }}>
+                                    <span style={{ color: BRAND.primary, opacity: 0.7, marginTop: '2px', fontSize: '10px' }}>▸</span>
+                                    {item}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
 
-                          <div className="rounded-[20px] border border-border bg-card p-4 sm:p-5">
-                            <p className="font-mono uppercase mb-3" style={{ fontSize: '10px', letterSpacing: '0.18em', color: BRAND.primary }}>
-                              Outputs
-                            </p>
-                            <ul className="space-y-2">
-                              {stage.outputs.map((item) => (
-                                <li key={item} className="text-sm flex items-start gap-2" style={{ color: 'var(--color-muted)' }}>
-                                  <span style={{ color: BRAND.primary, opacity: 0.7, marginTop: '2px', fontSize: '10px' }}>▸</span>
-                                  {item}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
+                            <div className="rounded-[20px] border border-border bg-card p-5 sm:p-6">
+                              <p className="font-mono uppercase mb-3" style={{ fontSize: '10px', letterSpacing: '0.18em', color: BRAND.primary }}>
+                                Outputs
+                              </p>
+                              <ul className="space-y-2">
+                                {stage.outputs.map((item) => (
+                                  <li key={item} className="text-sm flex items-start gap-2" style={{ color: 'var(--color-muted)' }}>
+                                    <span style={{ color: BRAND.primary, opacity: 0.7, marginTop: '2px', fontSize: '10px' }}>▸</span>
+                                    {item}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
 
-                          <div className="rounded-[20px] border border-border bg-card p-4 sm:p-5">
+                            <div className="rounded-[20px] border border-border bg-card p-5 sm:p-6">
                             <p className="font-mono uppercase mb-3" style={{ fontSize: '10px', letterSpacing: '0.18em', color: BRAND.primary }}>
                               Control
                             </p>

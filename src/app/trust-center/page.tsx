@@ -39,9 +39,9 @@ export default function TrustCenterPage() {
         subheading="This page is the executive layer. Detailed pipeline, legal matrices, and template-access workflow live in Research and Legal hub pages."
       />
 
-      <section className="py-12 lg:py-20 bg-surface border-t border-border">
-        <div className="container-site grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8">
-          <article className="border border-border bg-card p-6 sm:p-8">
+      <section className="py-16 lg:py-24 bg-surface border-t border-border">
+        <div className="container-site grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-10">
+          <article className="border border-border bg-card p-8 sm:p-10">
             <h2 className="font-display font-black text-3xl text-foreground mb-6">Operational Pillars</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {operationalPillars.map((pillar) => (
@@ -53,7 +53,7 @@ export default function TrustCenterPage() {
             </div>
           </article>
 
-          <aside className="border border-border bg-card p-6 sm:p-8">
+          <aside className="border border-border bg-card p-8 sm:p-10">
             <p className="font-mono text-label tracking-[0.18em] uppercase text-violet-light mb-3">Explore Depth</p>
             <h3 className="font-display font-black text-2xl text-foreground mb-4">Documentation Layers</h3>
             <div className="flex flex-col gap-3 text-sm">
@@ -74,24 +74,24 @@ export default function TrustCenterPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-canvas border-t border-border">
+      <section className="py-24 bg-canvas border-t border-border">
         <div className="container-site">
-          <h2 className="font-display font-black text-3xl text-foreground mb-6">Regulatory Alignment Snapshot</h2>
+          <h2 className="font-display font-black text-3xl text-foreground mb-8">Regulatory Alignment Snapshot</h2>
           <div className="overflow-x-auto border border-border bg-card">
             <table className="w-full min-w-[680px] border-collapse">
               <thead>
                 <tr className="border-b border-border bg-surface">
-                  <th className="text-left p-3 text-xs font-mono uppercase tracking-[0.14em] text-muted">Framework</th>
-                  <th className="text-left p-3 text-xs font-mono uppercase tracking-[0.14em] text-muted">Scope</th>
-                  <th className="text-left p-3 text-xs font-mono uppercase tracking-[0.14em] text-muted">Usage</th>
+                    <th className="text-left p-4 text-xs font-mono uppercase tracking-[0.14em] text-muted">Framework</th>
+                  <th className="text-left p-4 text-xs font-mono uppercase tracking-[0.14em] text-muted">Scope</th>
+                  <th className="text-left p-4 text-xs font-mono uppercase tracking-[0.14em] text-muted">Usage</th>
                 </tr>
               </thead>
               <tbody>
                 {legalFrameworks.map((framework) => (
                   <tr key={framework.framework} className="border-b border-border/70">
-                    <td className="p-3 text-sm text-white font-medium">{framework.framework}</td>
-                    <td className="p-3 text-sm text-muted">{framework.applicability}</td>
-                    <td className="p-3 text-sm text-muted">{framework.usage}</td>
+                    <td className="p-4 text-sm text-white font-medium">{framework.framework}</td>
+                    <td className="p-4 text-sm text-muted">{framework.applicability}</td>
+                    <td className="p-4 text-sm text-muted">{framework.usage}</td>
                   </tr>
                 ))}
               </tbody>

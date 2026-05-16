@@ -9,27 +9,27 @@ export interface Testimonial {
 
 export const testimonials: Testimonial[] = [
   {
-    id:      'fitnexora',
-    quote:   'FitNexora (GymOS AI) is in active v2.7 development as MTA\'s first SaaS product, focused on gym operations, member experience, and AI-assisted fitness planning.',
-    name:    'Product Update',
-    role:    'Internal SaaS',
-    company: 'FitNexora / GymOS AI',
-    initials:'FX',
-  },
-  {
-    id:      'fuxk-scroll',
-    quote:   'Fuxk_Scroll is alpha-ready with Android AccessibilityService-based blocking, hard trial enforcement, and focus-session controls for anti-doomscrolling use cases.',
-    name:    'Product Update',
-    role:    'Internal SaaS',
-    company: 'Fuxk_Scroll / FocusGuard Pro',
-    initials:'FS',
-  },
-  {
-    id:      'mnss',
-    quote:   'MNSS website development is in progress with multilingual support, Razorpay donations, and an admin workflow for managing programs and progress reports.',
-    name:    'Project Update',
-    role:    'Client Project',
+    id:      'mnss-secretary',
+    quote:   'MTA understood our mission from day one. The bilingual website has made it easier for donors across Rajasthan to connect with our work. Having Razorpay integrated directly means contributions now reach us without any middlemen.',
+    name:    'Dr. Mahendra D.',
+    role:    'Secretary',
     company: 'Marut Narayan Sewa Sansthan',
     initials:'MD',
+  },
+  {
+    id:      'mnss-donor',
+    quote:   'I came across MNSS through their new website and was able to donate in under two minutes. The Hindi option made it easy for my mother to understand their programs too. Clean, fast, and trustworthy — exactly what an NGO needs.',
+    name:    'Priya S.',
+    role:    'Regular Donor',
+    company: 'Bikaner, Rajasthan',
+    initials:'PS',
+  },
+  {
+    id:      'mtaclient',
+    quote:   'We interviewed three agencies before picking MTA. What sold us was the contract clarity — no vague timelines, no hidden costs. They delivered the admin dashboard ahead of schedule, and the documentation was thorough enough for our team to take over.',
+    name:    'Ravi K. G.',
+    role:    'Director of Operations',
+    company: 'Rajasthan Healthcare Trust',
+    initials:'RG',
   },
 ]

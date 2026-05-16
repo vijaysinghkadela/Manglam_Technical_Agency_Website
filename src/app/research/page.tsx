@@ -32,11 +32,11 @@ export default function ResearchPage() {
           }}
         />
 
-        <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-10 sm:pb-12 lg:pb-16">
+        <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-14 sm:pb-16 lg:pb-20">
 
           {/* Breadcrumb */}
           <nav
-            className="flex items-center gap-2 font-mono mb-10 lg:mb-20 animate-fade-up stagger-1"
+            className="flex items-center gap-2 font-mono mb-12 lg:mb-24 animate-fade-up stagger-1"
             style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
           >
             <Link href="/" className="hover-foreground transition-colors">HOME</Link>
@@ -53,7 +53,7 @@ export default function ResearchPage() {
               ✦ INTERNAL RESEARCH (PUBLIC EXCERPT)
             </span>
 
-            <div className="flex flex-col" style={{ gap: '0.02em' }}>
+            <div className="flex flex-col" style={{ gap: '0.25rem' }}>
               <TextReveal
                 text="CLIENT"
                 as="h1"
@@ -85,7 +85,7 @@ export default function ResearchPage() {
             </div>
 
             <p
-              className="mt-8 lg:mt-10 animate-fade-up stagger-4"
+              className="mt-10 lg:mt-14 animate-fade-up stagger-4"
               style={{ fontSize: '16px', lineHeight: 1.72, color: 'var(--color-muted)', maxWidth: '520px' }}
             >
               A structured view of how MTA qualifies leads, executes delivery, enforces legal controls, and protects confidentiality in every engagement.
@@ -93,7 +93,7 @@ export default function ResearchPage() {
           </div>
 
           {/* Bottom bar */}
-          <div className="flex items-end justify-between mt-10 lg:mt-14">
+          <div className="flex items-end justify-between mt-14 lg:mt-18">
             <div className="flex flex-col gap-1 font-mono" style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.14em' }}>
               <span>{researchMeta.classification}</span>
               <span>{researchMeta.version} · {researchMeta.basis}</span>

@@ -48,11 +48,11 @@ export default function PortfolioPage() {
           }}
         />
 
-        <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-10 sm:pb-12 lg:pb-16">
+        <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-12 sm:pb-16 lg:pb-20">
 
           {/* Breadcrumb */}
           <nav
-            className="flex items-center gap-2 font-mono mb-10 lg:mb-20"
+            className="flex items-center gap-2 font-mono mb-12 lg:mb-24"
             style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
           >
             <Link href="/" className="hover-foreground transition-colors">HOME</Link>
@@ -63,13 +63,13 @@ export default function PortfolioPage() {
           {/* Headline */}
           <div className="flex-1 flex flex-col justify-center">
             <span
-              className="font-mono uppercase block mb-6"
+                className="font-mono uppercase block mb-8"
               style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.22em' }}
             >
               ✦ OUR WORK
             </span>
 
-            <div className="flex flex-col" style={{ gap: '0.02em' }}>
+          <div className="flex flex-col" style={{ gap: '0.25rem' }}>
               <h1
                 className="font-display font-black leading-none tracking-normal uppercase"
                 style={{ fontSize: 'clamp(3.5rem, 10vw, 10rem)', color: 'var(--color-foreground)' }}
@@ -85,7 +85,7 @@ export default function PortfolioPage() {
             </div>
 
             <p
-              className="mt-8 lg:mt-10"
+              className="mt-10 lg:mt-14"
               style={{ fontSize: '16px', lineHeight: 1.75, color: 'var(--color-muted)', maxWidth: '500px' }}
             >
               From internal SaaS builds to active client implementations, explore what MTA is
@@ -95,8 +95,8 @@ export default function PortfolioPage() {
 
           {/* Bottom stats strip */}
           <div
-            className="mt-12 lg:mt-16 flex flex-wrap items-center justify-between gap-6"
-            style={{ borderTop: '1px solid var(--color-border)', paddingTop: '24px' }}
+            className="mt-14 lg:mt-20 flex flex-wrap items-center justify-between gap-6"
+            style={{ borderTop: '1px solid var(--color-border)', paddingTop: '28px' }}
           >
             <div className="flex flex-wrap items-center gap-10">
               <div className="flex items-baseline gap-2">

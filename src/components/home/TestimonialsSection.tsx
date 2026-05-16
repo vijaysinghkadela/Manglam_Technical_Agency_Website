@@ -53,7 +53,7 @@ export function TestimonialsSection() {
 
   return (
     <section
-      style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(64px, 10vw, 112px) 0' }}
+      style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(72px, 10vw, 128px) 0' }}
       onMouseEnter={() => { isHovered.current = true }}
       onMouseLeave={() => { isHovered.current = false }}
     >
@@ -65,7 +65,7 @@ export function TestimonialsSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-40px' }}
         transition={{ duration: 0.55, ease: ANIMATION.ease }}
-        className="text-center mb-10 sm:mb-12 lg:mb-20 px-4"
+        className="text-center mb-12 sm:mb-14 lg:mb-24 px-4"
       >
         <span
           className="font-mono uppercase block mb-2 sm:mb-3"
@@ -117,7 +117,7 @@ export function TestimonialsSection() {
             dragElastic={0.2}
             onDragEnd={handleDragEnd}
             style={{ x, opacity, rotate, touchAction: 'pan-y' }}
-            className="flex flex-col items-center text-center cursor-grab active:cursor-grabbing touch-manipulation rounded-[28px] border border-border bg-card px-5 sm:px-8 py-9 sm:py-12 shadow-[0_18px_70px_rgba(0,0,0,0.12)] w-full"
+            className="flex flex-col items-center text-center cursor-grab active:cursor-grabbing touch-manipulation rounded-[28px] border border-border bg-card px-6 sm:px-10 py-10 sm:py-14 shadow-[0_18px_70px_rgba(0,0,0,0.12)] w-full"
           >
             <blockquote
               className="font-display font-bold leading-snug italic mb-8 sm:mb-10 select-text"

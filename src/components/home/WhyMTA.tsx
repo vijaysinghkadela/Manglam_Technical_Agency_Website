@@ -32,16 +32,16 @@ const values = [
 
 export function WhyMTA() {
   return (
-    <section style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(56px, 9vw, 104px) 0' }}>
+    <section style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(72px, 10vw, 128px) 0' }}>
       <div className="container-site">
-        <div className="grid grid-cols-1 lg:grid-cols-[0.92fr_1.08fr] gap-6 lg:gap-14">
+        <div className="grid grid-cols-1 lg:grid-cols-[0.92fr_1.08fr] gap-8 lg:gap-16">
 
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.75, ease: ANIMATION.ease }}
-            className="lg:sticky lg:top-[120px] lg:self-start flex flex-col gap-6 rounded-[28px] border border-border bg-card p-6 sm:p-8"
+            className="lg:sticky lg:top-[120px] lg:self-start flex flex-col gap-6 rounded-[28px] border border-border bg-card p-8 sm:p-10"
           >
             <div>
               <span className="font-mono uppercase block mb-3" style={{ fontSize: '11px', color: BRAND.primary, letterSpacing: '0.22em' }}>
@@ -79,7 +79,7 @@ export function WhyMTA() {
             </div>
           </motion.div>
 
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-5">
             {values.map((val, i) => (
               <motion.article
                 key={val.title}
@@ -87,7 +87,7 @@ export function WhyMTA() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ delay: i * 0.08, duration: 0.6, ease: ANIMATION.ease }}
-                className="group rounded-[24px] border border-border bg-card p-5 sm:p-6"
+                className="group rounded-[24px] border border-border bg-card p-6 sm:p-8"
               >
                 <div className="flex items-start gap-4">
                   <div

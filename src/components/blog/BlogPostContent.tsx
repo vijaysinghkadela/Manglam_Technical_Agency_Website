@@ -102,7 +102,7 @@ export function BlogPostContent({
   return (
     <>
       {/* ── HERO SECTION ─────────────────────────────────────── */}
-      <section className="relative w-full pt-[100px] pb-16 lg:pb-20 overflow-hidden">
+      <section className="relative w-full pt-[100px] pb-20 lg:pb-24 overflow-hidden">
         {/* Background elements */}
         <div className="absolute inset-0 bg-line-grid pointer-events-none opacity-30" aria-hidden />
         <div
@@ -123,7 +123,7 @@ export function BlogPostContent({
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease }}
-            className="flex items-center gap-2 font-mono text-[11px] mb-10"
+            className="flex items-center gap-2 font-mono text-[11px] mb-12"
             style={{ color: 'var(--color-dead)', letterSpacing: '0.18em' }}
           >
             <Link href="/" className="hover:text-foreground transition-colors">
@@ -144,7 +144,7 @@ export function BlogPostContent({
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1, ease }}
-            className="mb-6"
+            className="mb-10"
           >
             <span
               className="font-mono uppercase text-[11px] tracking-[0.14em] px-4 py-2 rounded-full inline-flex items-center gap-2"
@@ -163,7 +163,7 @@ export function BlogPostContent({
           </motion.div>
 
           {/* Title */}
-          <div className="mb-8">
+          <div className="mb-10">
             <TextReveal
               text={post.title}
               as="h1"
@@ -178,7 +178,7 @@ export function BlogPostContent({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5, ease }}
-            className="text-[17px] leading-[1.7] max-w-2xl mb-10"
+            className="text-[17px] leading-[1.7] max-w-2xl mb-12"
             style={{ color: 'var(--color-muted)' }}
           >
             {post.excerpt}
@@ -189,7 +189,7 @@ export function BlogPostContent({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6, ease }}
-            className="flex flex-wrap items-center gap-6 py-6"
+            className="flex flex-wrap items-center gap-6 py-8"
             style={{ borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)' }}
           >
             <div className="flex items-center gap-2.5">
@@ -257,7 +257,7 @@ export function BlogPostContent({
       </section>
 
       {/* ── ARTICLE CONTENT ──────────────────────────────────── */}
-      <section className="w-full pb-16 lg:pb-24">
+      <section className="w-full pb-20 lg:pb-28">
         <div className="container-site max-w-3xl">
           {/* Article card */}
           <motion.article
@@ -275,9 +275,9 @@ export function BlogPostContent({
             {/* Top gradient accent */}
             <div className={`h-1 w-full bg-linear-to-r ${post.gradient}`} />
 
-            <div className="p-8 sm:p-10 lg:p-12">
+            <div className="p-10 sm:p-12 lg:p-14">
               {/* Paragraphs */}
-              <div className="space-y-5">{paragraphNodes}</div>
+              <div className="space-y-6">{paragraphNodes}</div>
 
               {/* Lists */}
               {listNodes.length > 0 && (
@@ -286,7 +286,7 @@ export function BlogPostContent({
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.2 }}
-                  className="mt-8 space-y-4 p-6 rounded-xl"
+                  className="mt-10 space-y-5 p-8 rounded-xl"
                   style={{
                     backgroundColor: 'rgba(107,26,26,0.03)',
                     border: '1px solid rgba(107,26,26,0.08)',
@@ -297,7 +297,7 @@ export function BlogPostContent({
               )}
 
               {/* Article footer */}
-              <div className="mt-12 pt-8" style={{ borderTop: '1px solid var(--color-border)' }}>
+              <div className="mt-16 pt-10" style={{ borderTop: '1px solid var(--color-border)' }}>
                 <div className="flex items-center justify-between">
                   <span
                     className="font-mono text-[11px]"
@@ -324,11 +324,11 @@ export function BlogPostContent({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3, ease }}
-            className="mt-10"
+            className="mt-12"
           >
             <Link
               href="/blog"
-              className="group inline-flex items-center gap-3 px-6 py-3 rounded-full transition-all duration-300 hover:gap-4"
+              className="group inline-flex items-center gap-3 px-8 py-4 rounded-full transition-all duration-300 hover:gap-4"
               style={{
                 backgroundColor: 'var(--color-card)',
                 border: '1px solid var(--color-border)',
@@ -345,7 +345,7 @@ export function BlogPostContent({
       {/* ── RELATED POSTS ───────────────────────────────────── */}
       {relatedPosts.length > 0 && (
         <section
-          className="w-full py-16 lg:py-20 border-t border-border"
+          className="w-full py-20 lg:py-24 border-t border-border"
           style={{ backgroundColor: 'var(--color-surface)' }}
         >
           <div className="container-site max-w-4xl">
@@ -354,7 +354,7 @@ export function BlogPostContent({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, ease }}
-              className="mb-10"
+              className="mb-12"
             >
               <span
                 className="font-mono uppercase text-[11px] tracking-[0.22em] mb-3 block"
@@ -367,7 +367,7 @@ export function BlogPostContent({
               </h2>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {relatedPosts.map((relatedPost, i) => (
                 <motion.div
                   key={relatedPost.slug}
@@ -395,9 +395,9 @@ export function BlogPostContent({
                     }}
                   >
                     <div className={`h-[3px] w-full bg-linear-to-r ${relatedPost.gradient}`} />
-                    <div className="p-6 flex flex-col flex-1">
+                    <div className="p-8 flex flex-col flex-1">
                       <span
-                        className="font-mono uppercase text-[9px] tracking-[0.14em] px-2.5 py-1 rounded-full w-fit mb-4"
+                        className="font-mono uppercase text-[9px] tracking-[0.14em] px-2.5 py-1 rounded-full w-fit mb-5"
                         style={{
                           color:
                             CATEGORY_COLORS[relatedPost.category]?.text || 'var(--color-violet)',
@@ -409,7 +409,7 @@ export function BlogPostContent({
                         {relatedPost.category}
                       </span>
                       <h3
-                        className="font-display font-bold mb-3 leading-tight transition-colors duration-200 group-hover:text-violet flex-1"
+                        className="font-display font-bold mb-4 leading-tight transition-colors duration-200 group-hover:text-violet flex-1"
                         style={{
                           fontSize: '1.15rem',
                           color: 'var(--color-foreground)',
@@ -419,7 +419,7 @@ export function BlogPostContent({
                         {relatedPost.title}
                       </h3>
                       <div
-                        className="flex items-center justify-between mt-auto pt-4"
+                        className="flex items-center justify-between mt-auto pt-5"
                         style={{ borderTop: '1px solid var(--color-border)' }}
                       >
                         <span className="font-mono text-[10px]" style={{ color: 'var(--color-dead)' }}>

@@ -56,10 +56,10 @@ export default async function MarketResearchArticlePage({ params }: { params: Pr
           }}
         />
 
-        <div className="relative z-10 container-site flex flex-col flex-1 pt-28 lg:pt-36 pb-12 lg:pb-16">
+        <div className="relative z-10 container-site flex flex-col flex-1 pt-28 lg:pt-36 pb-16 lg:pb-20">
           {/* Breadcrumb */}
           <nav
-            className="flex items-center gap-2 font-mono mb-8 lg:mb-12"
+            className="flex items-center gap-2 font-mono mb-10 lg:mb-14"
             style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
           >
             <Link href="/" className="hover-foreground transition-colors">HOME</Link>
@@ -70,7 +70,7 @@ export default async function MarketResearchArticlePage({ params }: { params: Pr
           </nav>
 
           {/* Category Badge */}
-          <div className="mb-6">
+          <div className="mb-8">
             <span
               className="font-mono uppercase px-3 py-1.5"
               style={{
@@ -86,7 +86,7 @@ export default async function MarketResearchArticlePage({ params }: { params: Pr
 
           {/* Title */}
           <h1
-            className="font-display font-black leading-tight tracking-normal mb-6"
+            className="font-display font-black leading-tight tracking-normal mb-8"
             style={{ fontSize: 'clamp(1.75rem, 4vw, 3.5rem)', color: 'var(--color-foreground)' }}
           >
             {article.title}
@@ -94,7 +94,7 @@ export default async function MarketResearchArticlePage({ params }: { params: Pr
 
           {/* Subtitle */}
           <p
-            className="mb-8 max-w-3xl"
+            className="mb-10 max-w-3xl"
             style={{ fontSize: '17px', lineHeight: 1.7, color: 'var(--color-muted)', fontStyle: 'italic' }}
           >
             {article.subtitle}
@@ -125,11 +125,11 @@ export default async function MarketResearchArticlePage({ params }: { params: Pr
 
           {/* Stats Grid (if available) */}
           {article.stats && article.stats.length > 0 && (
-            <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-5">
               {article.stats.slice(0, 4).map((stat, index) => (
                 <div
                   key={index}
-                  className="p-4"
+                  className="p-5"
                   style={{ border: '1px solid var(--color-border)', backgroundColor: 'var(--color-card)' }}
                 >
                   <p className="font-mono text-[10px] uppercase tracking-widest mb-1" style={{ color: 'var(--color-muted)' }}>
@@ -154,10 +154,10 @@ export default async function MarketResearchArticlePage({ params }: { params: Pr
       {/* CTA Section */}
       <section
         className="border-t border-border"
-        style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(48px, 8vw, 96px) 0' }}
+        style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(64px, 10vw, 120px) 0' }}
       >
         <div className="container-site">
-          <div className="flex flex-col items-center text-center gap-6">
+          <div className="flex flex-col items-center text-center gap-8">
             <span
               className="font-mono uppercase"
               style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.24em' }}
@@ -173,17 +173,17 @@ export default async function MarketResearchArticlePage({ params }: { params: Pr
             <p style={{ fontSize: '15px', color: 'var(--color-muted)', maxWidth: '480px', lineHeight: 1.72 }}>
               Book a free 30-minute AI readiness audit. We will assess your current workflows, identify automation opportunities, and provide a clear ROI calculation.
             </p>
-            <div className="flex flex-wrap items-center gap-4 mt-2">
+            <div className="flex flex-wrap items-center gap-4 mt-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 px-8 py-4 font-display font-black text-[15px] transition-all duration-300 hover:bg-violet hover:text-white"
+                className="inline-flex items-center gap-2 px-10 py-5 font-display font-black text-[15px] transition-all duration-300 hover:bg-violet hover:text-white"
                 style={{ backgroundColor: 'var(--color-foreground)', color: 'var(--color-canvas)' }}
               >
                 Book Free Audit →
               </Link>
               <Link
                 href="/services/ai-automation"
-                className="inline-flex items-center gap-2 px-6 py-4 font-display font-bold text-[15px] transition-all duration-300"
+                className="inline-flex items-center gap-2 px-8 py-5 font-display font-bold text-[15px] transition-all duration-300"
                 style={{ border: '1px solid var(--color-border)', color: 'var(--color-muted)' }}
               >
                 View AI Services →
@@ -212,26 +212,26 @@ function RelatedArticles({ currentSlug, category }: { currentSlug: string; categ
     if (anyRelated.length === 0) return null
     
     return (
-      <section className="border-t border-border" style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(48px, 8vw, 80px) 0' }}>
+      <section className="border-t border-border" style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(64px, 10vw, 96px) 0' }}>
         <div className="container-site">
           <span
-            className="font-mono uppercase block mb-4"
+            className="font-mono uppercase block mb-6"
             style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.22em' }}
           >
             RELATED RESEARCH
           </span>
           <h2
-            className="font-display font-black mb-10"
+            className="font-display font-black mb-12"
             style={{ fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)', color: 'var(--color-foreground)' }}
           >
             Continue Reading
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {anyRelated.map((article) => (
               <Link
                 key={article.slug}
                 href={`/research/${article.slug}`}
-                className="group flex flex-col gap-4 p-6 transition-all duration-300 border border-border hover:border-violet/35"
+                className="group flex flex-col gap-4 p-8 transition-all duration-300 border border-border hover:border-violet/35"
                 style={{ backgroundColor: 'var(--color-card)' }}
               >
                 <span
@@ -264,26 +264,26 @@ function RelatedArticles({ currentSlug, category }: { currentSlug: string; categ
   }
 
   return (
-    <section className="border-t border-border" style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(48px, 8vw, 80px) 0' }}>
+    <section className="border-t border-border" style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(64px, 10vw, 96px) 0' }}>
       <div className="container-site">
         <span
-          className="font-mono uppercase block mb-4"
+          className="font-mono uppercase block mb-6"
           style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.22em' }}
         >
           MORE IN {categoryLabels[category].toUpperCase()}
         </span>
         <h2
-          className="font-display font-black mb-10"
+          className="font-display font-black mb-12"
           style={{ fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)', color: 'var(--color-foreground)' }}
         >
           Continue Reading
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {related.map((article) => (
             <Link
               key={article.slug}
               href={`/research/${article.slug}`}
-              className="group flex flex-col gap-4 p-6 transition-all duration-300 border border-border hover:border-violet/35"
+              className="group flex flex-col gap-4 p-8 transition-all duration-300 border border-border hover:border-violet/35"
               style={{ backgroundColor: 'var(--color-card)' }}
             >
               <h3

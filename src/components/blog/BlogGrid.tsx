@@ -56,7 +56,7 @@ function FilterButton({
       style={{
         fontSize: '11px',
         letterSpacing: '0.12em',
-        padding: '8px 18px',
+        padding: '10px 22px',
         ...style,
       }}
     >
@@ -111,7 +111,7 @@ export function BlogGrid({ posts }: { posts: BlogPost[] }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: EASE }}
-          className="flex flex-wrap items-center gap-3 mb-12"
+          className="flex flex-wrap items-center gap-4 mb-16"
         >
           <span className="font-mono text-[10px] uppercase mr-2" style={{ color: 'var(--color-dead)', letterSpacing: '0.14em' }}>
             Filter:
@@ -141,7 +141,7 @@ export function BlogGrid({ posts }: { posts: BlogPost[] }) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.7, ease: EASE }}
-              className="mb-16"
+              className="mb-20"
             >
               <Link
                 href={`/blog/${featured.slug}`}
@@ -167,9 +167,9 @@ export function BlogGrid({ posts }: { posts: BlogPost[] }) {
 
                 <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-0">
                   {/* Left: Content */}
-                  <div className="p-8 lg:p-12 flex flex-col justify-center">
+                  <div className="p-10 lg:p-14 flex flex-col justify-center">
                     {/* Meta row */}
-                    <div className="flex items-center gap-4 mb-6">
+                    <div className="flex items-center gap-4 mb-8">
                       {featured.category && (
                         <span
                           className="font-mono uppercase text-[10px] tracking-[0.14em] px-3 py-1.5 rounded-full"
@@ -197,7 +197,7 @@ export function BlogGrid({ posts }: { posts: BlogPost[] }) {
 
                     {/* Title */}
                     <h2
-                      className="font-display font-black leading-[1.05] mb-5 transition-colors duration-300 group-hover:text-violet"
+                      className="font-display font-black leading-[1.05] mb-6 transition-colors duration-300 group-hover:text-violet"
                       style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', color: 'var(--color-foreground)' }}
                     >
                       {featured.title}
@@ -205,7 +205,7 @@ export function BlogGrid({ posts }: { posts: BlogPost[] }) {
 
                     {/* Excerpt */}
                     <p
-                      className="leading-relaxed mb-8"
+                      className="leading-relaxed mb-10"
                       style={{ fontSize: '16px', color: 'var(--color-muted)', lineHeight: 1.75, maxWidth: '540px' }}
                     >
                       {featured.excerpt}
@@ -275,7 +275,7 @@ export function BlogGrid({ posts }: { posts: BlogPost[] }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: EASE }}
-            className="flex items-center gap-6 mb-10"
+            className="flex items-center gap-6 mb-12"
           >
             <h3 className="font-display font-bold text-xl" style={{ color: 'var(--color-foreground)' }}>
               More Articles
@@ -290,7 +290,7 @@ export function BlogGrid({ posts }: { posts: BlogPost[] }) {
         {/* ── Articles Grid (Bento Style) ── */}
         <motion.div
           layout
-          className="grid grid-cols-1 md:grid-cols-2 gap-5"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
         >
           <AnimatePresence mode="popLayout">
             {rest.map((post, i) => (
@@ -325,9 +325,9 @@ export function BlogGrid({ posts }: { posts: BlogPost[] }) {
                   {/* Gradient bar */}
                   <div className={`h-[3px] w-full bg-linear-to-r ${post.gradient}`} />
 
-                  <div className="flex flex-col flex-1 p-6">
+                  <div className="flex flex-col flex-1 p-8">
                     {/* Top: Category & Read time */}
-                    <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center justify-between mb-5">
                       {post.category && (
                         <span
                           className="font-mono uppercase text-[9px] tracking-[0.14em] px-2.5 py-1 rounded-full"
@@ -348,7 +348,7 @@ export function BlogGrid({ posts }: { posts: BlogPost[] }) {
 
                     {/* Title */}
                     <h3
-                      className="font-display font-bold mb-3 leading-tight transition-colors duration-200 group-hover:text-violet flex-1"
+                      className="font-display font-bold mb-4 leading-tight transition-colors duration-200 group-hover:text-violet flex-1"
                       style={{ fontSize: 'clamp(1.1rem, 1.6vw, 1.35rem)', color: 'var(--color-foreground)', lineHeight: 1.3 }}
                     >
                       {post.title}
@@ -356,7 +356,7 @@ export function BlogGrid({ posts }: { posts: BlogPost[] }) {
 
                     {/* Excerpt */}
                     <p
-                      className="leading-relaxed mb-5 line-clamp-2"
+                      className="leading-relaxed mb-6 line-clamp-2"
                       style={{ color: 'var(--color-muted)', fontSize: '14px', lineHeight: 1.65 }}
                     >
                       {post.excerpt}
@@ -388,10 +388,10 @@ export function BlogGrid({ posts }: { posts: BlogPost[] }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.2, ease: EASE }}
-          className="mt-16"
+          className="mt-20"
         >
           <div
-            className="relative overflow-hidden rounded-2xl p-8 lg:p-12"
+            className="relative overflow-hidden rounded-2xl p-10 lg:p-14"
             style={{
               backgroundColor: 'var(--color-card)',
               border: '1px solid var(--color-border)',
@@ -405,7 +405,7 @@ export function BlogGrid({ posts }: { posts: BlogPost[] }) {
               }}
             />
 
-            <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+            <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
               <div>
                 <span
                   className="font-mono uppercase text-[10px] tracking-[0.18em] mb-3 block"

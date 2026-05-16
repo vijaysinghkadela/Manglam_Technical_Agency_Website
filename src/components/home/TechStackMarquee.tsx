@@ -44,7 +44,7 @@ export function TechStackMarquee() {
         backgroundColor: 'var(--color-surface)',
         borderTop: '1px solid var(--color-border)',
         borderBottom: '1px solid var(--color-border)',
-        padding: 'clamp(40px, 6vw, 64px) 0',
+        padding: 'clamp(56px, 8vw, 80px) 0',
       }}
     >
       <motion.div
@@ -61,7 +61,7 @@ export function TechStackMarquee() {
           The stack is opinionated, modern, and intentionally compact.
         </p>
       </motion.div>
-      <div className="flex flex-col gap-4 sm:gap-5">
+      <div className="flex flex-col gap-5 sm:gap-6">
         <MarqueeRow items={techRow1} />
         <MarqueeRow items={techRow2} reverse />
       </div>

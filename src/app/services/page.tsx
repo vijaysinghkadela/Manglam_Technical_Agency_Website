@@ -69,10 +69,10 @@ export default function ServicesPage() {
           }}
         />
 
-        <div className="relative z-10 container-site grid min-h-[68svh] gap-10 py-24 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:py-32">
+        <div className="relative z-10 container-site grid min-h-[68svh] gap-12 py-28 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:py-36">
           <div className="flex flex-col">
             <nav
-              className="flex items-center gap-2 font-mono mb-10 lg:mb-14"
+              className="flex items-center gap-2 font-mono mb-12 lg:mb-16"
               style={{
                 fontSize: "11px",
                 color: "var(--color-dead)",
@@ -87,7 +87,7 @@ export default function ServicesPage() {
             </nav>
 
             <span
-              className="font-mono uppercase block mb-5"
+              className="font-mono uppercase block mb-6"
               style={{
                 fontSize: "11px",
                 color: "var(--color-violet-light)",
@@ -97,7 +97,7 @@ export default function ServicesPage() {
               ✦ WHAT WE DO
             </span>
 
-            <div className="flex flex-col" style={{ gap: "0.02em" }}>
+            <div className="flex flex-col" style={{ gap: "0.25rem" }}>
               <h1
                 className="font-display font-black leading-none tracking-normal uppercase"
                 style={{
@@ -119,7 +119,7 @@ export default function ServicesPage() {
             </div>
 
             <p
-              className="mt-7 max-w-[56ch]"
+              className="mt-9 max-w-[56ch]"
               style={{
                 fontSize: "16px",
                 lineHeight: 1.72,
@@ -131,10 +131,10 @@ export default function ServicesPage() {
               without hidden scope or bloated handoffs.
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-10 flex flex-wrap gap-4">
               <Link
                 href={buildContactHref()}
-                className="inline-flex items-center gap-2 rounded-full px-6 py-4 min-h-[48px] font-display text-[14px] font-black transition-all duration-300"
+                className="inline-flex items-center gap-2 rounded-full px-7 py-4 min-h-[52px] font-display text-[14px] font-black transition-all duration-300"
                 style={{ backgroundColor: "#6B1A1A", color: "#FFFFFF" }}
                 data-cursor="pointer"
               >
@@ -142,7 +142,7 @@ export default function ServicesPage() {
               </Link>
               <Link
                 href="/pricing"
-                className="inline-flex items-center gap-2 rounded-full border px-6 py-4 min-h-[48px] font-display text-[14px] font-black transition-all duration-300"
+                className="inline-flex items-center gap-2 rounded-full border px-7 py-4 min-h-[52px] font-display text-[14px] font-black transition-all duration-300"
                 style={{
                   borderColor: "var(--color-border)",
                   color: "var(--color-violet-light)",
@@ -153,11 +153,11 @@ export default function ServicesPage() {
               </Link>
             </div>
 
-            <div className="mt-10 grid gap-3 sm:grid-cols-3">
+            <div className="mt-12 grid gap-4 sm:grid-cols-3">
               {heroStats.map((item) => (
                 <div
                   key={item.label}
-                  className="rounded-[20px] border border-border bg-[rgba(255,255,255,0.02)] px-4 py-4"
+                  className="rounded-[20px] border border-border bg-[rgba(255,255,255,0.02)] px-5 py-5"
                 >
                   <p
                     className="font-display text-[15px] font-semibold leading-tight"
@@ -176,8 +176,8 @@ export default function ServicesPage() {
             </div>
           </div>
 
-          <div className="rounded-[32px] border border-border bg-card p-5 shadow-[0_24px_80px_rgba(0,0,0,0.08)] sm:p-6">
-            <div className="flex items-start justify-between gap-4 border-b border-border pb-4">
+          <div className="rounded-[32px] border border-border bg-card p-6 shadow-[0_24px_80px_rgba(0,0,0,0.08)] sm:p-8">
+            <div className="flex items-start justify-between gap-4 border-b border-border pb-5">
               <div>
                 <p
                   className="font-mono uppercase text-[11px] tracking-[0.18em]"
@@ -200,11 +200,11 @@ export default function ServicesPage() {
               </span>
             </div>
 
-            <div className="mt-5 grid gap-3">
+            <div className="mt-6 grid gap-3">
               {services.slice(0, 4).map((service) => (
                 <div
                   key={service.slug}
-                  className="rounded-2xl border border-border bg-surface px-4 py-4"
+                  className="rounded-2xl border border-border bg-surface px-5 py-5"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div>
@@ -232,8 +232,8 @@ export default function ServicesPage() {
               ))}
             </div>
 
-            <div className="mt-5 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-2xl border border-border bg-[rgba(107,26,26,0.04)] px-4 py-4">
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              <div className="rounded-2xl border border-border bg-[rgba(107,26,26,0.04)] px-5 py-5">
                 <p
                   className="font-mono text-[10px] uppercase tracking-[0.18em]"
                   style={{ color: "var(--color-violet-light)" }}
@@ -248,7 +248,7 @@ export default function ServicesPage() {
                   preferences.
                 </p>
               </div>
-              <div className="rounded-2xl border border-border bg-[rgba(107,26,26,0.04)] px-4 py-4">
+              <div className="rounded-2xl border border-border bg-[rgba(107,26,26,0.04)] px-5 py-5">
                 <p
                   className="font-mono text-[10px] uppercase tracking-[0.18em]"
                   style={{ color: "var(--color-violet-light)" }}
@@ -276,12 +276,12 @@ export default function ServicesPage() {
         className="border-t border-border"
         style={{
           backgroundColor: "var(--color-surface)",
-          padding: "clamp(48px, 7vw, 80px) 0",
+          padding: "clamp(56px, 8vw, 96px) 0",
         }}
       >
         <div className="container-site">
-          <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="rounded-[30px] border border-[rgba(107,26,26,0.18)] bg-[rgba(107,26,26,0.04)] p-6 sm:p-8">
+          <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="rounded-[30px] border border-[rgba(107,26,26,0.18)] bg-[rgba(107,26,26,0.04)] p-8 sm:p-10">
               <p
                 className="font-mono text-[11px] tracking-[0.18em] uppercase mb-2"
                 style={{ color: "var(--color-violet-light)" }}
@@ -306,7 +306,7 @@ export default function ServicesPage() {
                 separately, and how delivery will be measured.
               </p>
 
-              <div className="mt-5 flex flex-wrap gap-2.5">
+              <div className="mt-6 flex flex-wrap gap-2.5">
                 {governanceChips.map((chip) => (
                   <span
                     key={chip}
@@ -342,7 +342,7 @@ export default function ServicesPage() {
 
               <Link
                 href="/research"
-                className="rounded-[28px] border border-border bg-card p-6 transition-colors hover:border-violet/40 hover:bg-[rgba(107,26,26,0.04)]"
+                className="rounded-[28px] border border-border bg-card p-8 transition-colors hover:border-violet/40 hover:bg-[rgba(107,26,26,0.04)]"
                 data-cursor="pointer"
               >
                 <p

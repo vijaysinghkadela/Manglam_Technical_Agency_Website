@@ -137,9 +137,9 @@ export default async function ServicePage({
           }}
         />
 
-        <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-10 sm:pb-12 lg:pb-16">
+        <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-12 sm:pb-16 lg:pb-20">
           {/* Breadcrumb + label */}
-          <div className="flex items-start justify-between gap-4 mb-10 lg:mb-20">
+          <div className="flex items-start justify-between gap-4 mb-12 lg:mb-24">
             <nav
               className="flex items-center gap-2 font-mono"
               style={{
@@ -178,7 +178,7 @@ export default async function ServicePage({
           {/* Main statement */}
           <div className="flex-1 flex flex-col justify-center">
             {/* Service icon + category */}
-            <div className="flex items-center gap-3 mb-8">
+            <div className="flex items-center gap-3 mb-10">
               <div
                 className="w-10 h-10 flex items-center justify-center"
                 style={{
@@ -228,7 +228,7 @@ export default async function ServicePage({
             </h1>
 
             {/* Tagline + price row */}
-            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mt-8 lg:mt-10">
+            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mt-10 lg:mt-14">
               <p
                 style={{
                   fontSize: "17px",
@@ -266,10 +266,10 @@ export default async function ServicePage({
           </div>
 
           {/* Bottom row */}
-          <div className="flex items-end justify-between mt-10 lg:mt-14">
+          <div className="flex items-end justify-between mt-12 lg:mt-16">
             <Link
               href={buildContactHref(service)}
-              className="inline-flex items-center gap-2 px-7 py-4 font-display font-black text-[15px] hover:bg-violet hover:text-white transition-all duration-300"
+              className="inline-flex items-center gap-2 px-8 py-5 font-display font-black text-[15px] hover:bg-violet hover:text-white transition-all duration-300"
               style={{
                 backgroundColor: "var(--color-foreground)",
                 color: "var(--color-canvas)",
@@ -321,7 +321,7 @@ export default async function ServicePage({
             ).map(([label, val], i) => (
               <div
                 key={label}
-                className="px-6 py-5"
+                className="px-8 py-6"
                 style={{
                   borderRight: i < 3 ? "1px solid var(--color-border)" : "none",
                   borderBottom:
@@ -355,13 +355,13 @@ export default async function ServicePage({
         className="border-t border-border"
         style={{
           backgroundColor: "var(--color-canvas)",
-          padding: "clamp(64px, 10vw, 120px) 0",
+          padding: "clamp(72px, 10vw, 128px) 0",
         }}
       >
         <div className="container-site">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.65fr] gap-16 lg:gap-24 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.65fr] gap-20 lg:gap-28 items-start">
             {/* LEFT — sticky overview */}
-            <div className="lg:sticky top-32 flex flex-col gap-10">
+            <div className="lg:sticky top-32 flex flex-col gap-12">
               {/* Description */}
               <div>
                 <span
@@ -423,7 +423,7 @@ export default async function ServicePage({
               <div
                 style={{
                   border: "1px solid var(--color-border)",
-                  padding: "24px",
+                  padding: "28px",
                   backgroundColor: "var(--color-surface)",
                 }}
               >
@@ -535,7 +535,7 @@ export default async function ServicePage({
               {/* CTA */}
               <Link
                 href={buildContactHref(service)}
-                className="inline-flex items-center gap-2 w-fit px-7 py-4 font-display font-black text-[15px] hover:bg-violet hover:text-white transition-all duration-300"
+                className="inline-flex items-center gap-2 w-fit px-8 py-5 font-display font-black text-[15px] hover:bg-violet hover:text-white transition-all duration-300"
                 style={{
                   backgroundColor: "var(--color-foreground)",
                   color: "var(--color-canvas)",
@@ -549,7 +549,7 @@ export default async function ServicePage({
             {/* RIGHT — process steps */}
             <div>
               <span
-                className="font-mono uppercase block mb-10"
+                className="font-mono uppercase block mb-12"
                 style={{
                   fontSize: "11px",
                   color: "var(--color-violet-light)",
@@ -566,7 +566,7 @@ export default async function ServicePage({
                     className="group"
                     style={{
                       borderBottom: "1px solid var(--color-border)",
-                      padding: "32px 0",
+                      padding: "40px 0",
                     }}
                   >
                     <div className="grid grid-cols-[80px_1fr] lg:grid-cols-[100px_1fr] gap-6 lg:gap-8">
@@ -638,11 +638,11 @@ export default async function ServicePage({
           className="border-t border-border"
           style={{
             backgroundColor: "var(--color-surface)",
-            padding: "clamp(64px, 10vw, 120px) 0",
+            padding: "clamp(72px, 10vw, 128px) 0",
           }}
         >
           <div className="container-site">
-            <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 mb-10 lg:mb-16">
+            <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 mb-12 lg:mb-20">
               <div>
                 <span
                   className="font-mono uppercase block mb-3"
@@ -678,7 +678,7 @@ export default async function ServicePage({
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {service.pricing.map((plan) => (
                 <div
                   key={plan.label}
@@ -705,7 +705,7 @@ export default async function ServicePage({
                     </div>
                   )}
 
-                  <div className="flex flex-col flex-1 p-8 gap-6">
+                  <div className="flex flex-col flex-1 p-10 gap-8">
                     <div>
                       <p
                         className="font-display font-bold mb-3"
@@ -828,15 +828,15 @@ export default async function ServicePage({
         className="border-t border-border"
         style={{
           backgroundColor: "var(--color-canvas)",
-          padding: "clamp(48px, 7vw, 80px) 0",
+          padding: "clamp(56px, 8vw, 96px) 0",
         }}
       >
         <div className="container-site">
           <div
-            className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8"
+            className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10"
             style={{
               border: "1px solid var(--color-border)",
-              padding: "clamp(24px, 4vw, 48px)",
+              padding: "clamp(28px, 4vw, 56px)",
               backgroundColor: "var(--color-surface)",
             }}
           >
@@ -901,12 +901,12 @@ export default async function ServicePage({
         className="border-t border-border"
         style={{
           backgroundColor: "var(--color-canvas)",
-          padding: "clamp(64px, 10vw, 120px) 0",
+          padding: "clamp(72px, 10vw, 128px) 0",
         }}
       >
         <div className="container-site" style={{ maxWidth: "860px" }}>
           <span
-            className="font-mono uppercase block mb-4"
+            className="font-mono uppercase block mb-5"
             style={{
               fontSize: "11px",
               color: "var(--color-violet-light)",
@@ -916,7 +916,7 @@ export default async function ServicePage({
             FAQ
           </span>
           <h2
-            className="font-display font-black mb-12 lg:mb-16"
+            className="font-display font-black mb-14 lg:mb-20"
             style={{
               fontSize: "clamp(1.5rem, 3.5vw, 2.75rem)",
               color: "var(--color-foreground)",
@@ -933,7 +933,7 @@ export default async function ServicePage({
                 style={{ borderBottom: "1px solid var(--color-border)" }}
               >
                 <summary
-                  className="flex items-center justify-between py-6 list-none"
+                  className="flex items-center justify-between py-7 list-none"
                   data-cursor="pointer"
                   style={{ cursor: "none" }}
                 >
@@ -951,7 +951,7 @@ export default async function ServicePage({
                     style={{ color: "var(--color-muted)" }}
                   />
                 </summary>
-                <div className="pb-6 pr-10">
+                <div className="pb-8 pr-10">
                   <p
                     style={{
                       fontSize: "15px",
@@ -973,7 +973,7 @@ export default async function ServicePage({
         className="border-t border-border"
         style={{
           backgroundColor: "var(--color-surface)",
-          padding: "clamp(48px, 8vw, 96px) 0",
+          padding: "clamp(56px, 8vw, 112px) 0",
         }}
       >
         <div className="container-site">
@@ -988,7 +988,7 @@ export default async function ServicePage({
             OTHER SERVICES
           </span>
           <h2
-            className="font-display font-black mb-10"
+            className="font-display font-black mb-12"
             style={{
               fontSize: "clamp(1.5rem, 2.5vw, 2.25rem)",
               color: "var(--color-foreground)",
@@ -997,7 +997,7 @@ export default async function ServicePage({
             Keep Exploring
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {services
               .filter((s) => s.slug !== slug)
               .slice(0, 2)
@@ -1006,7 +1006,7 @@ export default async function ServicePage({
                   key={s.slug}
                   href={`/services/${s.slug}`}
                   data-cursor="link"
-                  className="group flex items-start gap-6 p-8 transition-all duration-300 border border-border hover:border-violet/35"
+                  className="group flex items-start gap-6 p-10 transition-all duration-300 border border-border hover:border-violet/35"
                   style={{ backgroundColor: "var(--color-card)" }}
                 >
                   <div

@@ -99,13 +99,13 @@ export function AboutContent() {
       {/* ── WHO WE ARE — STATEMENT ──────────────────────────── */}
       <section
         className="w-full border-t border-border overflow-hidden relative"
-        style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(40px, 5vw, 64px) 0' }}
+        style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(48px, 6vw, 80px) 0' }}
       >
         <div className="absolute inset-0 grain opacity-25 pointer-events-none" />
 
         <div className="container-site relative z-10">
           <motion.span
-            className="font-mono uppercase block mb-10 lg:mb-14"
+            className="font-mono uppercase block mb-12 lg:mb-16"
             style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.28em' }}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -115,7 +115,7 @@ export function AboutContent() {
             ✦ WHO WE ARE
           </motion.span>
 
-            <div className="flex flex-col items-start" style={{ gap: '0.02em' }}>
+            <div className="flex flex-col items-start" style={{ gap: '0.25rem' }}>
               {[
                 { word: 'FULL-SERVICE', color: 'var(--color-foreground)' },
                 { word: 'TECHNICAL', color: 'var(--color-violet)' },
@@ -134,7 +134,7 @@ export function AboutContent() {
 
           {/* Paragraphs */}
           <motion.div
-            className="mt-12 lg:mt-16 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16"
+            className="mt-14 lg:mt-20 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
@@ -155,7 +155,7 @@ export function AboutContent() {
 
           {/* Mini stat badges */}
           <motion.div
-            className="mt-12 lg:mt-16 flex flex-wrap gap-3"
+            className="mt-14 lg:mt-20 flex flex-wrap gap-3"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
@@ -190,7 +190,7 @@ export function AboutContent() {
       {/* ── THE TEAM ─────────────────────────────────────────── */}
       <section
         className="w-full border-t border-border"
-        style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(64px, 10vw, 120px) 0' }}
+        style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(72px, 10vw, 128px) 0' }}
       >
         <div className="container-site">
           <motion.div
@@ -198,7 +198,7 @@ export function AboutContent() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.6, ease: EASE }}
-            className="mb-12 lg:mb-16"
+            className="mb-14 lg:mb-20"
           >
             <span
               className="font-mono uppercase block mb-3"
@@ -214,7 +214,7 @@ export function AboutContent() {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {teamMembers.map((member, i) => (
               <motion.div
                 key={member.name}
@@ -254,7 +254,7 @@ export function AboutContent() {
                 </div>
 
                 {/* Content */}
-                <div className="flex flex-col flex-1 p-6 lg:p-7">
+                <div className="flex flex-col flex-1 p-8 lg:p-10">
                   {/* Name + role */}
                   <div className="mb-4">
                     <span
@@ -284,7 +284,7 @@ export function AboutContent() {
 
                   {/* Expertise tags */}
                   {member.expertise && member.expertise.length > 0 && (
-                    <div className="flex flex-wrap gap-2 mb-4">
+                    <div className="flex flex-wrap gap-2 mb-5">
                       {member.expertise.map((tag) => (
                         <span
                           key={tag}
@@ -348,10 +348,10 @@ export function AboutContent() {
       {/* ── MISSION ─────────────────────────────────────────── */}
       <section
         className="w-full border-t border-border"
-        style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(64px, 10vw, 120px) 0' }}
+        style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(72px, 10vw, 128px) 0' }}
       >
         <div className="container-site">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 lg:gap-24 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-14 lg:gap-28 items-start">
 
             <div className="lg:sticky top-32 flex flex-col gap-4">
               <span
@@ -403,12 +403,12 @@ export function AboutContent() {
       {/* ── WHAT WE DO — Editorial numbered list ─────────── */}
       <section
         className="w-full border-t border-border"
-        style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(64px, 10vw, 120px) 0' }}
+        style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(72px, 10vw, 128px) 0' }}
       >
         <div className="container-site">
           {/* Header */}
           <motion.div
-            className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 mb-12 lg:mb-16"
+            className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 mb-14 lg:mb-20"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
@@ -454,7 +454,7 @@ export function AboutContent() {
                   style={{ transitionTimingFunction: 'cubic-bezier(0.16,1,0.3,1)' }}
                 />
 
-                <div className="grid grid-cols-1 sm:grid-cols-[80px_1fr] lg:grid-cols-[80px_1fr_1.6fr] gap-4 lg:gap-8 items-center py-7 sm:py-8">
+                <div className="grid grid-cols-1 sm:grid-cols-[80px_1fr] lg:grid-cols-[80px_1fr_1.6fr] gap-4 lg:gap-8 items-center py-8 sm:py-10">
 
                   {/* Number */}
                   <span
@@ -521,12 +521,12 @@ export function AboutContent() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-20px' }}
             transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
-            className="mt-12"
+            className="mt-14"
           >
             <Link
               href="/services"
               data-cursor="pointer"
-              className="inline-flex items-center gap-2 font-display font-bold text-sm uppercase tracking-wide transition-all duration-300 hover:bg-violet hover:text-white hover:border-violet px-6 py-4"
+              className="inline-flex items-center gap-2 font-display font-bold text-sm uppercase tracking-wide transition-all duration-300 hover:bg-violet hover:text-white hover:border-violet px-8 py-5"
               style={{ border: '1px solid var(--color-foreground)', color: 'var(--color-foreground)' }}
             >
               Explore Our Services
@@ -640,7 +640,7 @@ export function AboutContent() {
               style={{ transitionTimingFunction: 'cubic-bezier(0.16,1,0.3,1)' }}
             />
 
-            <div className="container-site grid grid-cols-1 sm:grid-cols-[80px_1fr] lg:grid-cols-[140px_1fr_1.4fr] gap-6 lg:gap-12 py-10 lg:py-14">
+            <div className="container-site grid grid-cols-1 sm:grid-cols-[80px_1fr] lg:grid-cols-[140px_1fr_1.4fr] gap-6 lg:gap-12 py-12 lg:py-16">
               <span
                 className="font-display font-black block leading-none transition-colors duration-400 group-hover:text-violet"
                 style={{
@@ -677,12 +677,12 @@ export function AboutContent() {
       {/* ── HOW WE WORK ─────────────────────────────────────── */}
       <section
         className="w-full border-t border-border"
-        style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(64px, 10vw, 120px) 0' }}
+        style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(72px, 10vw, 128px) 0' }}
       >
         <div className="container-site">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.8fr] gap-16 lg:gap-24 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.8fr] gap-20 lg:gap-28 items-start">
 
-            <div className="lg:sticky top-32 flex flex-col gap-4">
+            <div className="lg:sticky top-32 flex flex-col gap-5">
               <span
                 className="font-mono uppercase"
                 style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.22em' }}
@@ -733,11 +733,11 @@ export function AboutContent() {
               </p>
 
               {/* Highlight badges */}
-              <div className="grid grid-cols-2 gap-3 pt-4">
+              <div className="grid grid-cols-2 gap-3 pt-6">
                 {highlights.map((h) => (
                   <div
                     key={h.label}
-                    className="p-4"
+                    className="p-5"
                     style={{
                       border: '1px solid var(--color-border)',
                       backgroundColor: 'var(--color-card)',
@@ -766,7 +766,7 @@ export function AboutContent() {
       {/* ── CTA BAND ─────────────────────────────────────────── */}
       <section
         className="w-full border-t border-border"
-        style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(48px, 8vw, 80px) 0' }}
+        style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(56px, 8vw, 96px) 0' }}
       >
         <div className="container-site">
           <motion.div
@@ -774,7 +774,7 @@ export function AboutContent() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.65, ease: EASE }}
-            className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8"
+            className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-10"
             style={{
               border: '1px solid rgba(107,26,26,0.3)',
               padding: 'clamp(20px, 3vw, 36px)',
@@ -796,7 +796,7 @@ export function AboutContent() {
               <Link
                 href="/contact"
                 data-cursor="pointer"
-                className="inline-flex items-center gap-2 px-6 py-3.5 min-h-[48px] font-display font-bold text-sm hover:bg-violet hover:text-white transition-all duration-300 whitespace-nowrap"
+                className="inline-flex items-center gap-2 px-7 py-4 min-h-[52px] font-display font-bold text-sm hover:bg-violet hover:text-white transition-all duration-300 whitespace-nowrap"
                 style={{ border: '1px solid var(--color-violet)', color: 'var(--color-violet-light)' }}
               >
                 Get in Touch →
@@ -804,7 +804,7 @@ export function AboutContent() {
               <Link
                 href="/portfolio"
                 data-cursor="pointer"
-                className="inline-flex items-center gap-2 px-6 py-3.5 min-h-[48px] font-display font-bold text-sm transition-all duration-300 whitespace-nowrap hover:text-violet"
+                className="inline-flex items-center gap-2 px-7 py-4 min-h-[52px] font-display font-bold text-sm transition-all duration-300 whitespace-nowrap hover:text-violet"
                 style={{ color: 'var(--color-muted)' }}
               >
                 View Work

@@ -29,10 +29,10 @@ const highlights = [
 
 export function ComplianceByDesign() {
   return (
-    <section className="border-t border-border" style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(64px, 9vw, 112px) 0' }}>
+    <section className="border-t border-border" style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(72px, 10vw, 128px) 0' }}>
       <div className="container-site">
         <motion.div
-          className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 sm:gap-8 lg:gap-16 mb-12 lg:mb-16"
+          className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 sm:gap-8 lg:gap-16 mb-14 lg:mb-20"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
@@ -71,11 +71,11 @@ export function ComplianceByDesign() {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {highlights.map((item, i) => (
             <motion.article
               key={item.title}
-              className="group relative overflow-hidden rounded-[24px] border border-border bg-card p-7 sm:p-8"
+              className="group relative overflow-hidden rounded-[24px] border border-border bg-card p-8 sm:p-10"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}

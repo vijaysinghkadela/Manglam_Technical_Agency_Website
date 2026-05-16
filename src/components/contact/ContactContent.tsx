@@ -50,10 +50,10 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
       />
 
       <div
-        className="relative z-10 mx-auto flex w-full max-w-[1280px] flex-col px-[clamp(1rem,3.2vw,3rem)] pb-16 pt-24 sm:pt-28 lg:pt-32 lg:pb-24"
+        className="relative z-10 mx-auto flex w-full max-w-[1280px] flex-col px-[clamp(1rem,3.2vw,3rem)] pb-20 pt-28 sm:pt-32 lg:pt-36 lg:pb-28"
       >
         <nav
-          className="mb-10 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] sm:mb-14 lg:mb-16"
+          className="mb-12 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] sm:mb-16 lg:mb-20"
           style={{ color: 'var(--color-dead)' }}
         >
           <Link href="/" className="hover-foreground transition-colors">
@@ -63,7 +63,7 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
           <span style={{ color: 'var(--color-muted)' }}>Contact</span>
         </nav>
 
-        <div className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <div className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
           {[
             { label: 'Response window', value: '2–4 hours' },
             { label: 'Consultation', value: 'Engineer-led' },
@@ -71,7 +71,7 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
           ].map((item) => (
             <div
               key={item.label}
-              className="rounded-[20px] border border-border bg-[rgba(255,255,255,0.02)] px-4 py-4"
+              className="rounded-[20px] border border-border bg-[rgba(255,255,255,0.02)] px-5 py-5"
             >
               <p className="font-mono text-[10px] uppercase tracking-[0.2em]" style={{ color: 'var(--color-dead)' }}>
                 {item.label}
@@ -83,7 +83,7 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
           ))}
         </div>
 
-        <div className="grid flex-1 grid-cols-1 gap-10 lg:grid-cols-[0.95fr_1.05fr] xl:gap-14">
+        <div className="grid flex-1 grid-cols-1 gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-14 xl:gap-16">
           <div className="order-1 flex flex-col lg:pr-6">
             <div className="lg:sticky lg:top-32 lg:self-start">
               <span
@@ -93,7 +93,7 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
                 Get in touch
               </span>
 
-              <div className="mb-7 flex flex-col" style={{ gap: '0.02em' }}>
+              <div className="mb-10 flex flex-col" style={{ gap: '0.25rem' }}>
                 <TextReveal
                   text="START A"
                   as="h1"
@@ -111,14 +111,14 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
               </div>
 
               <p
-                className="mb-10 max-w-[420px]"
+                className="mb-12 max-w-[420px]"
                 style={{ fontSize: '15px', lineHeight: 1.75, color: 'var(--color-muted)' }}
               >
                 Ready to build? We promise a technical engineer will read it, not a salesperson.
                 Response within 2–4 hours.
               </p>
 
-              <div className="mb-10 flex flex-wrap gap-2">
+              <div className="mb-12 flex flex-wrap gap-3">
                 {['Engineer-led replies', 'DPDP compliant', 'Rajasthan / IST'].map((chip) => (
                   <span
                     key={chip}
@@ -135,7 +135,7 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, amount: 0.1 }}
-                className="grid gap-3"
+                className="grid gap-4"
               >
                 {contactItems.map((item) => (
                   <motion.div key={item.label} variants={fadeUp}>
@@ -145,7 +145,7 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
                         target={item.external ? '_blank' : undefined}
                         rel={item.external ? 'noopener noreferrer' : undefined}
                         data-cursor="pointer"
-                        className="group flex min-h-[76px] items-start justify-between gap-4 rounded-[22px] border border-border bg-card px-4 py-4 sm:px-5 sm:py-5"
+                        className="group flex min-h-[80px] items-start justify-between gap-4 rounded-[22px] border border-border bg-card px-5 py-5 sm:px-6 sm:py-6"
                       >
                         <div className="flex min-w-0 flex-col gap-1">
                           <span
@@ -172,7 +172,7 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
                         </span>
                       </a>
                     ) : (
-                      <div className="flex min-h-[76px] flex-col gap-1 rounded-[22px] border border-border bg-card px-4 py-4 sm:px-5 sm:py-5">
+                      <div className="flex min-h-[80px] flex-col gap-1 rounded-[22px] border border-border bg-card px-5 py-5 sm:px-6 sm:py-6">
                         <span
                           className="font-mono uppercase"
                           style={{ fontSize: '9px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
@@ -199,7 +199,7 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, ease: EASE, delay: 0.3 }}
-                className="mt-10 rounded-[22px] border border-[rgba(107,26,26,0.18)] bg-[rgba(107,26,26,0.06)] p-4 sm:p-5"
+                className="mt-12 rounded-[22px] border border-[rgba(107,26,26,0.18)] bg-[rgba(107,26,26,0.06)] p-5 sm:p-6"
               >
                 <a
                   href={AGENCY_WHATSAPP}
@@ -219,7 +219,7 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.4 }}
-                className="mt-6 flex flex-wrap items-center gap-4"
+                className="mt-8 flex flex-wrap items-center gap-4"
               >
                 <div className="flex items-center gap-2 rounded-full border border-border px-4 py-2">
                   <span className="block h-2 w-2 shrink-0 rounded-full animate-pulse" style={{ backgroundColor: '#6B1A1A' }} />
@@ -241,15 +241,15 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
             transition={{ duration: 0.65, ease: EASE, delay: 0.15 }}
             className="order-2 flex flex-col"
           >
-            <div className="rounded-[28px] border border-border bg-card p-5 shadow-[0_24px_70px_rgba(0,0,0,0.08)] sm:p-6 lg:p-8">
+            <div className="rounded-[28px] border border-border bg-card p-6 shadow-[0_24px_70px_rgba(0,0,0,0.08)] sm:p-8 lg:p-10">
               <span
-                className="mb-3 block font-mono uppercase tracking-[0.22em] text-violet-light"
+                className="mb-4 block font-mono uppercase tracking-[0.22em] text-violet-light"
                 style={{ fontSize: '11px' }}
               >
                 Send a message
               </span>
               <h2
-                className="mb-6 font-display font-black uppercase leading-tight"
+                className="mb-8 font-display font-black uppercase leading-tight"
                 style={{ fontSize: 'clamp(1.3rem, 2vw, 1.9rem)', color: 'var(--color-foreground)' }}
               >
                 Tell Us About

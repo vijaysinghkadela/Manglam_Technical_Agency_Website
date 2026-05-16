@@ -256,13 +256,13 @@ export default function PricingPage() {
           }}
         />
 
-        <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-10 sm:pb-12 lg:pb-16">
+        <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-14 sm:pb-16 lg:pb-20">
           {/* Breadcrumb */}
           <motion.nav
             initial={{ opacity: 0, x: -12 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, ease: EASE }}
-            className="flex items-center gap-2 font-mono mb-10 lg:mb-20"
+            className="flex items-center gap-2 font-mono mb-12 lg:mb-24"
             style={{
               fontSize: "11px",
               color: "var(--color-dead)",
@@ -292,7 +292,7 @@ export default function PricingPage() {
               ✦ TIER-2 BOUTIQUE PRICING
             </motion.span>
 
-            <div className="flex flex-col" style={{ gap: "0.02em" }}>
+            <div className="flex flex-col" style={{ gap: "0.25rem" }}>
               <TextReveal
                 text="COMPLETE"
                 as="h1"
@@ -319,7 +319,7 @@ export default function PricingPage() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.35, ease: EASE }}
-              className="mt-8 lg:mt-10"
+              className="mt-10 lg:mt-14"
               style={{
                 fontSize: "16px",
                 lineHeight: 1.72,
@@ -333,7 +333,7 @@ export default function PricingPage() {
           </div>
 
           {/* Bottom bar */}
-          <div className="flex items-end justify-between mt-10 lg:mt-14">
+          <div className="flex items-end justify-between mt-14 lg:mt-18">
             <span
               className="font-mono uppercase"
               style={{
@@ -374,7 +374,7 @@ export default function PricingPage() {
         className="border-t border-border"
         style={{
           backgroundColor: "var(--color-canvas)",
-          padding: "clamp(64px, 10vw, 120px) 0",
+          padding: "clamp(72px, 10vw, 128px) 0",
         }}
       >
         <div className="container-site">
@@ -384,7 +384,7 @@ export default function PricingPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.55, ease: EASE }}
-            className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-8 mb-12 lg:mb-16"
+            className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-10 mb-14 lg:mb-20"
           >
             <div>
               <span
@@ -436,7 +436,7 @@ export default function PricingPage() {
 
                   {/* Recommended banner */}
                   {plan.recommended && (
-                    <div className="flex items-center gap-2 pt-5">
+                    <div className="flex items-center gap-2 pt-6">
                       <span
                         className="font-mono text-[10px] uppercase tracking-widest px-2 py-0.5"
                         style={{
@@ -450,9 +450,9 @@ export default function PricingPage() {
                     </div>
                   )}
 
-                  <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_220px_160px] gap-6 lg:gap-0 py-8 lg:py-10 items-center">
+                  <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_220px_160px] gap-8 lg:gap-0 py-10 lg:py-12 items-center">
                     {/* Left: name + features */}
-                    <div className="flex flex-col gap-4 lg:pr-12">
+                    <div className="flex flex-col gap-5 lg:pr-12">
                       <div>
                         <h3
                           className="font-display font-bold"
@@ -488,7 +488,7 @@ export default function PricingPage() {
                         {plan.summary}
                       </p>
 
-                      <div className="flex flex-wrap gap-x-5 gap-y-2">
+                      <div className="flex flex-wrap gap-x-6 gap-y-3">
                         {plan.features.map((f) => (
                           <span
                             key={f}
@@ -507,11 +507,11 @@ export default function PricingPage() {
                         ))}
                       </div>
 
-                      <div className="grid gap-3 sm:grid-cols-3">
+                      <div className="grid gap-4 sm:grid-cols-3">
                         {plan.tiers.map((tier) => (
                           <div
                             key={tier.label}
-                            className="rounded-2xl border border-border bg-surface p-4 sm:p-3"
+                            className="rounded-2xl border border-border bg-surface p-5 sm:p-4"
                             style={{ backgroundColor: "var(--color-surface)" }}
                           >
                             <div className="flex items-baseline justify-between gap-3">
@@ -577,7 +577,7 @@ export default function PricingPage() {
           </div>
 
           <p
-            className="font-mono mt-8"
+            className="font-mono mt-10"
             style={{
               fontSize: "11px",
               color: "var(--color-dead)",
@@ -595,7 +595,7 @@ export default function PricingPage() {
         className="border-t border-border"
         style={{
           backgroundColor: "var(--color-surface)",
-          padding: "clamp(40px, 6vw, 72px) 0",
+          padding: "clamp(64px, 10vw, 120px) 0",
         }}
       >
         <div className="container-site">
@@ -604,10 +604,10 @@ export default function PricingPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.6, ease: EASE }}
-            className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 items-start"
+            className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 items-start"
             style={{
               border: "1px solid rgba(107,26,26,0.3)",
-              padding: "clamp(24px, 4vw, 48px)",
+              padding: "clamp(32px, 5vw, 56px)",
               backgroundColor: "rgba(107,26,26,0.03)",
             }}
           >
@@ -644,8 +644,8 @@ export default function PricingPage() {
                 project work.
               </p>
             </div>
-            <div className="flex flex-col gap-5">
-              <ul className="grid gap-3">
+            <div className="flex flex-col gap-6">
+              <ul className="grid gap-4">
                 {contractTerms.map((term) => (
                   <li
                     key={term}
@@ -681,7 +681,7 @@ export default function PricingPage() {
         className="border-t border-border"
         style={{
           backgroundColor: "var(--color-canvas)",
-          padding: "clamp(64px, 10vw, 120px) 0",
+          padding: "clamp(72px, 10vw, 128px) 0",
         }}
       >
         <div className="container-site">
@@ -690,7 +690,7 @@ export default function PricingPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.55, ease: EASE }}
-            className="mb-12 lg:mb-16"
+            className="mb-14 lg:mb-20"
           >
             <span
               className="font-mono uppercase block mb-3"
@@ -743,13 +743,13 @@ export default function PricingPage() {
                 <thead>
                   <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
                     <th
-                      className="font-mono text-xs uppercase tracking-widest py-5 px-6 w-[55%]"
+                      className="font-mono text-xs uppercase tracking-widest py-6 px-8 w-[55%]"
                       style={{ color: "var(--color-muted)" }}
                     >
                       Segment
                     </th>
                     <th
-                      className="font-mono text-xs uppercase tracking-widest py-5 px-6 w-[45%]"
+                      className="font-mono text-xs uppercase tracking-widest py-6 px-8 w-[45%]"
                       style={{ color: "var(--color-muted)" }}
                     >
                       Monthly Range
@@ -771,13 +771,13 @@ export default function PricingPage() {
                       }
                     >
                       <td
-                        className="py-5 px-6 text-sm font-medium"
+                        className="py-6 px-8 text-sm font-medium"
                         style={{ color: "var(--color-foreground)" }}
                       >
                         {row.segment}
                       </td>
                       <td
-                        className="py-5 px-6 text-sm"
+                        className="py-6 px-8 text-sm"
                         style={{ color: "var(--color-muted)" }}
                       >
                         {row.monthlyRange}
@@ -789,8 +789,8 @@ export default function PricingPage() {
             </div>
           </div>
 
-          <div className="mt-8 grid gap-4">
-            <div className="rounded-[24px] border border-border bg-surface p-6">
+          <div className="mt-10 grid gap-6">
+            <div className="rounded-[24px] border border-border bg-surface p-8">
               <span
                 className="font-mono uppercase block mb-3"
                 style={{
@@ -820,11 +820,11 @@ export default function PricingPage() {
         className="border-t border-border"
         style={{
           backgroundColor: "var(--color-surface)",
-          padding: "clamp(64px, 10vw, 120px) 0",
+          padding: "clamp(72px, 10vw, 128px) 0",
         }}
       >
         <div className="container-site">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-28 items-center">
             <motion.div
               initial={{ opacity: 0, x: -16 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -868,11 +868,11 @@ export default function PricingPage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
-              className="flex flex-col gap-4"
+              className="flex flex-col gap-5"
             >
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 px-8 py-5 font-display font-black text-[15px] hover:bg-violet hover:text-white transition-all duration-300"
+                className="inline-flex items-center justify-center gap-2 px-10 py-6 font-display font-black text-[15px] hover:bg-violet hover:text-white transition-all duration-300 rounded-xl"
                 style={{
                   backgroundColor: "var(--color-foreground)",
                   color: "var(--color-canvas)",
@@ -883,7 +883,7 @@ export default function PricingPage() {
               </Link>
               <Link
                 href="/services"
-                className="inline-flex items-center justify-center gap-2 px-8 py-5 font-display font-bold text-[14px] hover:border-violet transition-all duration-300"
+                className="inline-flex items-center justify-center gap-2 px-10 py-6 font-display font-bold text-[14px] hover:border-violet transition-all duration-300 rounded-xl"
                 style={{
                   border: "1px solid var(--color-border)",
                   color: "var(--color-muted)",

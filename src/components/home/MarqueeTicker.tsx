@@ -44,7 +44,7 @@ export const MarqueeTicker = memo(function MarqueeTicker() {
     backgroundColor: 'var(--color-card)',
     borderTop: '1px solid var(--color-border)',
     borderBottom: '1px solid var(--color-border)',
-    padding: `${TYPOGRAPHY.bodySm} 0`,
+    padding: '0.75rem 0',
   }), [])
 
   return (

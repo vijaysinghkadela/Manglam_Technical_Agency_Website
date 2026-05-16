@@ -35,13 +35,13 @@ function SectionHeader({ label, title }: { label: string; title: string }) {
       transition={{ duration: 0.55, ease: EASE }}
     >
       <span
-        className="font-mono uppercase block mb-4"
+        className="font-mono uppercase block mb-6"
         style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.22em' }}
       >
         {label}
       </span>
       <h2
-        className="font-display font-black mb-12 leading-tight"
+        className="font-display font-black mb-16 leading-tight"
         style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', color: 'var(--color-foreground)' }}
       >
         {title}
@@ -56,9 +56,9 @@ export function ResearchPageContent() {
   return (
     <div
       className="border-t border-border"
-      style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(64px, 10vw, 120px) 0' }}
+      style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(72px, 10vw, 128px) 0' }}
     >
-      <div className="container-site grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-16 lg:gap-20 items-start">
+      <div className="container-site grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-16 lg:gap-24 items-start">
 
         {/* ── TOC Sidebar ── */}
         <motion.aside
@@ -79,7 +79,7 @@ export function ResearchPageContent() {
               <a
                 key={entry.id}
                 href={`#${entry.id}`}
-                className="flex items-center py-4 text-sm font-mono transition-colors hover-foreground"
+                className="flex items-center py-5 text-sm font-mono transition-colors hover-foreground"
                 style={{
                   borderBottom: '1px solid var(--color-border)',
                   color: 'var(--color-muted)',
@@ -92,7 +92,7 @@ export function ResearchPageContent() {
           </nav>
 
           {/* Legal hub link */}
-          <div className="mt-8">
+          <div className="mt-10">
             <Link
               href="/legal"
               className="inline-flex items-center gap-2 text-xs font-mono transition-colors hover-foreground"
@@ -110,14 +110,14 @@ export function ResearchPageContent() {
         <section id="ai-research">
           <SectionHeader label="00 — AI MARKET RESEARCH" title="Strategic AI Automation Market Analysis" />
           
-          <div className="mb-8">
+          <div className="mb-10">
             <p style={{ fontSize: '15px', lineHeight: 1.75, color: 'var(--color-muted)', maxWidth: '720px' }}>
               Comprehensive research and analysis of the global AI automation landscape. Deep-dive reports on market trends, competitive positioning, pricing benchmarks, and implementation strategies.
             </p>
           </div>
 
           {/* Category Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
             {(['market-analysis', 'technical', 'case-study', 'pricing', 'compliance'] as const).map((category, index) => (
               <motion.div
                 key={category}
@@ -125,7 +125,7 @@ export function ResearchPageContent() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.5, delay: index * 0.1, ease: EASE }}
-                className="p-6 border border-border group hover:border-violet/40 transition-all duration-300"
+                className="p-8 border border-border group hover:border-violet/40 transition-all duration-300"
                 style={{ backgroundColor: 'var(--color-card)' }}
               >
                 <span
@@ -150,7 +150,7 @@ export function ResearchPageContent() {
           {/* Recent Articles */}
           <div style={{ borderTop: '1px solid var(--color-border)' }}>
             <h3
-              className="font-display font-bold py-6"
+              className="font-display font-bold py-8"
               style={{ fontSize: 'clamp(1.1rem, 1.8vw, 1.35rem)', color: 'var(--color-foreground)' }}
             >
               Latest Research Reports
@@ -165,7 +165,7 @@ export function ResearchPageContent() {
               >
                 <Link
                   href={`/research/${article.slug}`}
-                  className="group grid grid-cols-1 lg:grid-cols-[1fr_auto_auto] gap-4 items-center py-6 border-t border-border hover:bg-surface/50 transition-colors"
+                  className="group grid grid-cols-1 lg:grid-cols-[1fr_auto_auto] gap-4 items-center py-8 border-t border-border hover:bg-surface/50 transition-colors"
                 >
                   <div className="flex flex-col gap-1">
                     <div className="flex items-center gap-3">
@@ -204,10 +204,10 @@ export function ResearchPageContent() {
           </div>
 
           {/* View All Link */}
-          <div className="mt-8">
+          <div className="mt-10">
             <Link
               href="/research"
-              className="inline-flex items-center gap-2 px-6 py-3 font-display font-bold text-sm transition-all duration-300 hover:bg-violet hover:text-white hover:border-violet"
+              className="inline-flex items-center gap-2 px-8 py-4 font-display font-bold text-sm transition-all duration-300 hover:bg-violet hover:text-white hover:border-violet"
               style={{ border: '1px solid var(--color-border)', color: 'var(--color-muted)' }}
             >
               View All Research Reports →
@@ -227,7 +227,7 @@ export function ResearchPageContent() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-20px' }}
                   transition={{ duration: 0.5, delay: i * 0.05, ease: EASE }}
-                  className="grid grid-cols-1 lg:grid-cols-[80px_1fr_1.4fr] gap-6 lg:gap-8 py-10 group"
+                  className="grid grid-cols-1 lg:grid-cols-[80px_1fr_1.4fr] gap-8 lg:gap-10 py-12 group"
                   style={{ borderBottom: '1px solid var(--color-border)' }}
                 >
                   {/* Number watermark */}
@@ -255,7 +255,7 @@ export function ResearchPageContent() {
                   </div>
 
                   {/* Bullets */}
-                  <ul className="flex flex-col gap-2.5">
+                  <ul className="flex flex-col gap-3">
                     {section.bullets.map((item) => (
                       <li
                         key={item}
@@ -291,7 +291,7 @@ export function ResearchPageContent() {
                   >
                     {/* Summary row */}
                     <button
-                      className="w-full flex items-center gap-6 lg:gap-10 py-8 text-left"
+                      className="w-full flex items-center gap-6 lg:gap-10 py-10 text-left"
                       style={{ cursor: 'none' }}
                       data-cursor="pointer"
                       onClick={() => setOpenStage(isOpen ? null : i)}
@@ -344,7 +344,7 @@ export function ResearchPageContent() {
                           style={{ overflow: 'hidden' }}
                         >
                           <div
-                            className="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-10 pl-0 lg:pl-[calc(64px+2.5rem)]"
+                            className="grid grid-cols-1 lg:grid-cols-3 gap-10 pb-12 pl-0 lg:pl-[calc(64px+2.5rem)]"
                             style={{
                               borderTop: '1px solid var(--color-border)',
                               paddingTop: '24px',
@@ -360,7 +360,7 @@ export function ResearchPageContent() {
                               >
                                 ACTIONS
                               </p>
-                              <ul className="flex flex-col gap-2.5">
+                              <ul className="flex flex-col gap-3">
                                 {stage.actions.map((item) => (
                                   <li
                                     key={item}
@@ -381,7 +381,7 @@ export function ResearchPageContent() {
                               >
                                 OUTPUTS
                               </p>
-                              <ul className="flex flex-col gap-2.5">
+                              <ul className="flex flex-col gap-3">
                                 {stage.outputs.map((item) => (
                                   <li
                                     key={item}
@@ -459,7 +459,7 @@ export function ResearchPageContent() {
                     {['Framework', 'Applies To', 'MTA Usage'].map((h) => (
                       <th
                         key={h}
-                        className="font-mono text-xs uppercase tracking-widest py-5 px-6"
+                        className="font-mono text-xs uppercase tracking-widest py-6 px-8"
                         style={{ color: 'var(--color-muted)' }}
                       >
                         {h}
@@ -476,13 +476,13 @@ export function ResearchPageContent() {
                       onMouseEnter={e => (e.currentTarget.style.backgroundColor = 'var(--color-surface)')}
                       onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'transparent')}
                     >
-                      <td className="py-5 px-6 text-sm font-semibold" style={{ color: 'var(--color-foreground)' }}>
+                      <td className="py-6 px-8 text-sm font-semibold" style={{ color: 'var(--color-foreground)' }}>
                         {fw.framework}
                       </td>
-                      <td className="py-5 px-6 text-sm" style={{ color: 'var(--color-muted)' }}>
+                      <td className="py-6 px-8 text-sm" style={{ color: 'var(--color-muted)' }}>
                         {fw.applicability}
                       </td>
-                      <td className="py-5 px-6 text-sm" style={{ color: 'var(--color-muted)' }}>
+                      <td className="py-6 px-8 text-sm" style={{ color: 'var(--color-muted)' }}>
                         {fw.usage}
                       </td>
                     </tr>
@@ -510,7 +510,7 @@ export function ResearchPageContent() {
                     {['Stage', 'Risk', 'Legal Exposure', 'Control'].map((h) => (
                       <th
                         key={h}
-                        className="font-mono text-xs uppercase tracking-widest py-5 px-6"
+                        className="font-mono text-xs uppercase tracking-widest py-6 px-8"
                         style={{ color: 'var(--color-muted)' }}
                       >
                         {h}
@@ -527,16 +527,16 @@ export function ResearchPageContent() {
                       onMouseEnter={e => (e.currentTarget.style.backgroundColor = 'var(--color-surface)')}
                       onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'transparent')}
                     >
-                      <td className="py-5 px-6 text-sm font-mono font-semibold whitespace-nowrap" style={{ color: 'var(--color-foreground)' }}>
+                      <td className="py-6 px-8 text-sm font-mono font-semibold whitespace-nowrap" style={{ color: 'var(--color-foreground)' }}>
                         {item.stage}
                       </td>
-                      <td className="py-5 px-6 text-sm" style={{ color: 'var(--color-muted)' }}>
+                      <td className="py-6 px-8 text-sm" style={{ color: 'var(--color-muted)' }}>
                         {item.risk}
                       </td>
-                      <td className="py-5 px-6 text-sm" style={{ color: 'var(--color-muted)' }}>
+                      <td className="py-6 px-8 text-sm" style={{ color: 'var(--color-muted)' }}>
                         {item.legalExposure}
                       </td>
-                      <td className="py-5 px-6 text-sm" style={{ color: 'var(--color-muted)' }}>
+                      <td className="py-6 px-8 text-sm" style={{ color: 'var(--color-muted)' }}>
                         {item.control}
                       </td>
                     </tr>
@@ -551,10 +551,10 @@ export function ResearchPageContent() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-20px' }}
               transition={{ duration: 0.55, delay: 0.1, ease: EASE }}
-              className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6"
+              className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8"
               style={{
                 border: '1px solid rgba(107,26,26,0.3)',
-                padding: 'clamp(20px, 3vw, 36px)',
+                padding: 'clamp(28px, 4vw, 48px)',
                 backgroundColor: 'rgba(107,26,26,0.03)',
               }}
             >

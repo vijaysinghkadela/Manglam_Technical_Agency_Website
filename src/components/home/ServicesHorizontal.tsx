@@ -60,14 +60,14 @@ export function ServicesHorizontal() {
         style={{ 
           borderTop: '1px solid var(--color-border)', 
           position: 'relative',
-          padding: `${SPACING.section.md} 0`,
+          padding: `${SPACING.section.lg} 0`,
         }}
       >
         <div className="container-site">
-          <div className="grid gap-4 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+          <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
             <SectionLabel />
             <div 
-              className="rounded-[28px] border border-border bg-card p-5 sm:p-6 transition-all duration-300 hover:shadow-lg"
+              className="rounded-[28px] border border-border bg-card p-6 sm:p-8 transition-all duration-300 hover:shadow-lg"
               style={{ 
                 borderRadius: RADIUS['2xl'],
                 boxShadow: SHADOW.sm,
@@ -103,7 +103,7 @@ export function ServicesHorizontal() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 mt-8 sm:mt-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 mt-10 sm:mt-14">
             {services.map((s, i) => (
               <motion.div
                 key={s.slug}
@@ -119,7 +119,7 @@ export function ServicesHorizontal() {
                 <Link
                   href={`/services/${s.slug}`}
                   data-cursor="link"
-                  className="group flex flex-col rounded-[24px] border border-border bg-card p-5 sm:p-6 transition-all duration-300 active:scale-[0.98] touch-manipulation hover:shadow-md"
+                  className="group flex flex-col rounded-[24px] border border-border bg-card p-6 sm:p-8 transition-all duration-300 active:scale-[0.98] touch-manipulation hover:shadow-md"
                   style={{ 
                     touchAction: 'manipulation',
                     borderRadius: RADIUS.xl,
@@ -231,7 +231,7 @@ export function ServicesHorizontal() {
         }}
       >
         <div 
-          className="flex items-end justify-between shrink-0 pt-24 lg:pt-28 xl:pt-32 pb-10 lg:pb-12 container-site w-full"
+          className="flex items-end justify-between shrink-0 pt-28 lg:pt-32 xl:pt-36 pb-12 lg:pb-14 container-site w-full"
         >
           <SectionLabel />
           <span 
@@ -269,7 +269,7 @@ export function ServicesHorizontal() {
                 <Link
                   href={`/services/${s.slug}`}
                   data-cursor="link"
-                  className="flex flex-col h-full p-8 xl:p-10"
+                  className="flex flex-col h-full p-10 xl:p-12"
                 >
                   <span
                     className="font-display font-black leading-none select-none transition-colors duration-500 group-hover:text-[#6B1A1A]"
@@ -355,7 +355,7 @@ export function ServicesHorizontal() {
             style={{ scaleX: scrollYProgress, backgroundColor: BRAND.primary }} 
           />
         </div>
-        <div className="shrink-0 max-w-[1440px] mx-auto px-6 lg:px-12 w-full py-3 flex items-center justify-between">
+        <div className="shrink-0 max-w-[1440px] mx-auto px-6 lg:px-12 w-full py-4 flex items-center justify-between">
           <span 
             className="font-mono uppercase" 
             style={{ 
