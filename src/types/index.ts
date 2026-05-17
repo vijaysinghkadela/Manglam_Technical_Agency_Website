@@ -197,6 +197,48 @@ export interface RiskControl {
   control: string;
 }
 
+export interface DurationPrice {
+  label: string;
+  price: string;
+  totalPrice?: string;
+  type: 'one-time' | 'per-month' | 'per-sprint';
+  note?: string;
+}
+
+export interface PricingPlanData {
+  name: string;
+  tagline: string;
+  target: string;
+  popular: boolean;
+  highlight: boolean;
+  icon: string;
+  durations: DurationPrice[];
+  deliverables: string[];
+  features: string[];
+}
+
+export interface DepartmentData {
+  department: string;
+  slug: string;
+  description: string;
+  plans: PricingPlanData[];
+  note?: string;
+}
+
+export interface BundlePlan {
+  department: string;
+  plan: string;
+  price: string;
+  period: string;
+}
+
+export interface PricingBundleData {
+  name: string;
+  target: string;
+  plans: BundlePlan[];
+  total: string;
+}
+
 export interface DocumentRequestPayload {
   name: string;
   email: string;

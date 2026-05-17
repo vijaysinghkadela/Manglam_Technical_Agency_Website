@@ -33,7 +33,9 @@ const getNavStyles = (isLight: boolean, scrolled: boolean) => ({
       ? isLight
         ? 'rgba(250, 247, 244, 0.95)'
         : 'rgba(13, 13, 14, 0.95)'
-      : 'transparent',
+      : isLight
+        ? 'rgb(250, 247, 244)'
+        : 'rgb(13, 13, 14)',
     backdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
     WebkitBackdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
     borderBottom: scrolled ? `1px solid ${isLight ? 'rgba(107, 26, 26, 0.08)' : 'rgba(255, 255, 255, 0.06)'}` : '1px solid transparent',

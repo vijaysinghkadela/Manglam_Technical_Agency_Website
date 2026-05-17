@@ -4,6 +4,8 @@ import { getAgreementByCode } from "@/lib/data/legal";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronDown, ArrowRight } from "lucide-react";
+import { ServicePricingSection } from "@/components/pricing/ServicePricingSection";
+import { departments as pricingDepartments } from "@/lib/data/pricing-2026";
 
 type Params = { slug: string };
 type ServiceData = NonNullable<ReturnType<typeof getService>>;
@@ -633,195 +635,12 @@ export default async function ServicePage({
       </section>
 
       {/* ── PRICING ─────────────────────────────────────── */}
-      {service.pricing.length > 0 && (
-        <section
-          className="border-t border-border"
-          style={{
-            backgroundColor: "var(--color-surface)",
-            padding: "clamp(72px, 10vw, 128px) 0",
-          }}
-        >
-          <div className="container-site">
-            <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 mb-12 lg:mb-20">
-              <div>
-                <span
-                  className="font-mono uppercase block mb-3"
-                  style={{
-                    fontSize: "11px",
-                    color: "var(--color-violet-light)",
-                    letterSpacing: "0.22em",
-                  }}
-                >
-                  PRICING
-                </span>
-                <h2
-                  className="font-display font-black leading-tight"
-                  style={{
-                    fontSize: "clamp(1.5rem, 3vw, 2.75rem)",
-                    color: "var(--color-foreground)",
-                  }}
-                >
-                  Plans &<br />
-                  Investment
-                </h2>
-              </div>
-              <p
-                className="lg:max-w-sm"
-                style={{
-                  fontSize: "14px",
-                  lineHeight: 1.72,
-                  color: "var(--color-muted)",
-                }}
-              >
-                All plans start with a Discovery Workshop, which is fully
-                credited towards your build.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {service.pricing.map((plan) => (
-                <div
-                  key={plan.label}
-                  className="flex flex-col overflow-hidden"
-                  style={{
-                    border: plan.highlight
-                      ? "1px solid var(--color-violet)"
-                      : "1px solid var(--color-border)",
-                    backgroundColor: plan.highlight
-                      ? "rgba(107,26,26,0.04)"
-                      : "var(--color-card)",
-                  }}
-                >
-                  {plan.highlight && (
-                    <div
-                      style={{
-                        backgroundColor: "var(--color-violet)",
-                        padding: "6px 20px",
-                      }}
-                    >
-                      <span className="font-mono text-xs text-white uppercase tracking-widest">
-                        ✦ Recommended
-                      </span>
-                    </div>
-                  )}
-
-                  <div className="flex flex-col flex-1 p-10 gap-8">
-                    <div>
-                      <p
-                        className="font-display font-bold mb-3"
-                        style={{
-                          fontSize: "17px",
-                          color: "var(--color-foreground)",
-                        }}
-                      >
-                        {plan.label}
-                      </p>
-                      <p
-                        className="font-display font-black leading-none"
-                        style={{
-                          fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
-                          color: plan.highlight
-                            ? "var(--color-violet-light)"
-                            : "var(--color-foreground)",
-                        }}
-                      >
-                        {plan.amount}
-                      </p>
-                      {plan.period && (
-                        <p
-                          className="font-mono text-xs mt-1.5 uppercase tracking-wider"
-                          style={{ color: "var(--color-muted)" }}
-                        >
-                          {plan.period}
-                        </p>
-                      )}
-                    </div>
-
-                    {plan.subtext && (
-                      <p
-                        style={{
-                          fontSize: "12px",
-                          color: "var(--color-dead)",
-                          borderLeft: "2px solid var(--color-violet)",
-                          paddingLeft: "10px",
-                          lineHeight: 1.65,
-                        }}
-                      >
-                        {plan.subtext}
-                      </p>
-                    )}
-
-                    <div
-                      style={{
-                        height: "1px",
-                        backgroundColor: "var(--color-border)",
-                      }}
-                    />
-
-                    <ul className="flex flex-col gap-2.5 flex-1">
-                      {plan.features.map((f) => (
-                        <li
-                          key={f}
-                          className="flex items-start gap-2.5"
-                          style={{
-                            fontSize: "13px",
-                            color: "var(--color-muted)",
-                          }}
-                        >
-                          <span
-                            className="shrink-0 rounded-full"
-                            style={{
-                              marginTop: "6px",
-                              width: "5px",
-                              height: "5px",
-                              backgroundColor: "var(--color-violet)",
-                              opacity: 0.6,
-                            }}
-                          />
-                          {f}
-                        </li>
-                      ))}
-                    </ul>
-
-                    <Link
-                      href={buildContactHref(service, plan)}
-                      data-cursor="pointer"
-                      className="mt-auto inline-flex items-center justify-center gap-2 py-3 font-display font-bold text-sm transition-all duration-300 hover:bg-violet hover:text-white hover:border-violet"
-                      style={{
-                        border: plan.highlight
-                          ? "1px solid var(--color-violet)"
-                          : "1px solid var(--color-border)",
-                        color: plan.highlight
-                          ? "var(--color-violet-light)"
-                          : "var(--color-muted)",
-                      }}
-                    >
-                      {plan.amount === "Custom"
-                        ? "Request Quote"
-                        : "Get Started"}
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {service.slug === "social-media-marketing" && (
-              <p
-                className="font-mono text-center mt-8"
-                style={{
-                  fontSize: "11px",
-                  color: "var(--color-dead)",
-                  letterSpacing: "0.1em",
-                }}
-              >
-                * Ad spend is billed separately. 6-month and 12-month
-                commitments unlock discounted monthly pricing.
-              </p>
-            )}
-          </div>
-        </section>
-      )}
+      {service.pricing.length > 0 &&
+        (pricingDepartments.some((d) => d.slug === service.slug) ? (
+          <ServicePricingSection departmentSlug={service.slug} />
+        ) : (
+          <OldPricingSectionInline service={service} />
+        ))}
 
       {/* ── COMPLIANCE BANNER ───────────────────────────── */}
       <section
@@ -1050,5 +869,186 @@ export default async function ServicePage({
         </div>
       </section>
     </main>
+  );
+}
+
+function OldPricingSectionInline({ service }: { service: ServiceData }) {
+  const slug = service.slug;
+  return (
+    <section
+      className="border-t border-border"
+      style={{
+        backgroundColor: "var(--color-surface)",
+        padding: "clamp(72px, 10vw, 128px) 0",
+      }}
+    >
+      <div className="container-site">
+        <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 mb-12 lg:mb-20">
+          <div>
+            <span
+              className="font-mono uppercase block mb-3"
+              style={{
+                fontSize: "11px",
+                color: "var(--color-violet-light)",
+                letterSpacing: "0.22em",
+              }}
+            >
+              PRICING
+            </span>
+            <h2
+              className="font-display font-black leading-tight"
+              style={{
+                fontSize: "clamp(1.5rem, 3vw, 2.75rem)",
+                color: "var(--color-foreground)",
+              }}
+            >
+              Plans &<br />
+              Investment
+            </h2>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {service.pricing.map((plan) => (
+            <div
+              key={plan.label}
+              className="flex flex-col overflow-hidden"
+              style={{
+                border: plan.highlight
+                  ? "1px solid var(--color-violet)"
+                  : "1px solid var(--color-border)",
+                backgroundColor: plan.highlight
+                  ? "rgba(107,26,26,0.04)"
+                  : "var(--color-card)",
+              }}
+            >
+              {plan.highlight && (
+                <div
+                  style={{
+                    backgroundColor: "var(--color-violet)",
+                    padding: "6px 20px",
+                  }}
+                >
+                  <span className="font-mono text-xs text-white uppercase tracking-widest">
+                    ✦ Recommended
+                  </span>
+                </div>
+              )}
+
+              <div className="flex flex-col flex-1 p-10 gap-8">
+                <div>
+                  <p
+                    className="font-display font-bold mb-3"
+                    style={{
+                      fontSize: "17px",
+                      color: "var(--color-foreground)",
+                    }}
+                  >
+                    {plan.label}
+                  </p>
+                  <p
+                    className="font-display font-black leading-none"
+                    style={{
+                      fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
+                      color: plan.highlight
+                        ? "var(--color-violet-light)"
+                        : "var(--color-foreground)",
+                    }}
+                  >
+                    {plan.amount}
+                  </p>
+                  {plan.period && (
+                    <p
+                      className="font-mono text-xs mt-1.5 uppercase tracking-wider"
+                      style={{ color: "var(--color-muted)" }}
+                    >
+                      {plan.period}
+                    </p>
+                  )}
+                </div>
+
+                {plan.subtext && (
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "var(--color-dead)",
+                      borderLeft: "2px solid var(--color-violet)",
+                      paddingLeft: "10px",
+                      lineHeight: 1.65,
+                    }}
+                  >
+                    {plan.subtext}
+                  </p>
+                )}
+
+                <div
+                  style={{
+                    height: "1px",
+                    backgroundColor: "var(--color-border)",
+                  }}
+                />
+
+                <ul className="flex flex-col gap-2.5 flex-1">
+                  {plan.features.map((f) => (
+                    <li
+                      key={f}
+                      className="flex items-start gap-2.5"
+                      style={{
+                        fontSize: "13px",
+                        color: "var(--color-muted)",
+                      }}
+                    >
+                      <span
+                        className="shrink-0 rounded-full"
+                        style={{
+                          marginTop: "6px",
+                          width: "5px",
+                          height: "5px",
+                          backgroundColor: "var(--color-violet)",
+                          opacity: 0.6,
+                        }}
+                      />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+
+                <Link
+                  href={buildContactHref(service, plan)}
+                  className="mt-auto inline-flex items-center justify-center gap-2 py-3 font-display font-bold text-sm transition-all duration-300 hover:bg-violet hover:text-white hover:border-violet rounded-xl"
+                  style={{
+                    border: plan.highlight
+                      ? "1px solid var(--color-violet)"
+                      : "1px solid var(--color-border)",
+                    color: plan.highlight
+                      ? "var(--color-violet-light)"
+                      : "var(--color-muted)",
+                  }}
+                >
+                  {plan.amount === "Custom"
+                    ? "Request Quote"
+                    : "Get Started"}
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {slug === "social-media-marketing" && (
+          <p
+            className="font-mono text-center mt-8"
+            style={{
+              fontSize: "11px",
+              color: "var(--color-dead)",
+              letterSpacing: "0.1em",
+            }}
+          >
+            * Ad spend is billed separately. 6-month and 12-month
+            commitments unlock discounted monthly pricing.
+          </p>
+        )}
+      </div>
+    </section>
   );
 }

@@ -24,16 +24,6 @@ const API_CONTEXT_WINDOW = 15;
 const OPENROUTER_ENDPOINT =
   "https://openrouter.ai/api/v1/chat/completions";
 
-interface OpenRouterChoice {
-  message?: { role?: string; content?: string };
-  finish_reason?: string;
-}
-
-interface OpenRouterResponse {
-  choices?: OpenRouterChoice[];
-  error?: { message?: string; code?: number | string };
-}
-
 function getLastUserMessage(
   messages: Array<{ role: "user" | "assistant"; content: string }>,
 ) {
@@ -43,7 +33,7 @@ function getLastUserMessage(
   );
 }
 
-function generateFallbackResponse(parsed: z.infer<typeof requestSchema>) {
+function localFallback(parsed: z.infer<typeof requestSchema>) {
   const lastUserMessage = getLastUserMessage(parsed.messages);
   return NextResponse.json({
     success: true,
@@ -56,6 +46,55 @@ function generateFallbackResponse(parsed: z.infer<typeof requestSchema>) {
       },
       lastUserMessage,
     ),
+  });
+}
+
+async function openRouterStream(orResponse: Response): Promise<Response> {
+  const encoder = new TextEncoder();
+  const reader = orResponse.body!.getReader();
+  const decoder = new TextDecoder();
+
+  const stream = new ReadableStream({
+    async pull(controller) {
+      let buffer = "";
+      try {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split("\n");
+          buffer = lines.pop() || "";
+
+          for (const line of lines) {
+            const trimmed = line.trim();
+            if (!trimmed || !trimmed.startsWith("data: ")) continue;
+            const data = trimmed.slice(6);
+            if (data === "[DONE]") continue;
+            try {
+              const parsed = JSON.parse(data);
+              const content = parsed.choices?.[0]?.delta?.content || "";
+              if (content) controller.enqueue(encoder.encode(content));
+            } catch {
+              // skip malformed JSON
+            }
+          }
+        }
+      } catch {
+        // stream interrupted — partial content is still valid
+      }
+      controller.close();
+    },
+    cancel() {
+      reader.cancel();
+    },
+  });
+
+  return new Response(stream, {
+    headers: {
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache",
+    },
   });
 }
 
@@ -73,20 +112,16 @@ export async function POST(request: NextRequest) {
     });
 
     if (!apiKey) {
-      console.error(
-        "[chat] OPENROUTER_API_KEY is not set in this environment — falling back to local templated reply. Set the env var in your hosting dashboard (e.g. Vercel → Settings → Environment Variables).",
-      );
-      return generateFallbackResponse(parsed);
+      console.error("[chat] OPENROUTER_API_KEY not set — using local fallback");
+      return localFallback(parsed);
     }
 
     const referer =
       process.env.NEXT_PUBLIC_SITE_URL ??
       "https://manglamtechnicalagency.com";
 
-    // OpenRouter free models can be slow; cap at 25s to leave headroom under
-    // the Vercel Hobby 30s function timeout.
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 25_000);
+    const timeoutId = setTimeout(() => controller.abort(), 30_000);
 
     let response: Response;
     try {
@@ -96,13 +131,11 @@ export async function POST(request: NextRequest) {
         headers: {
           Authorization: `Bearer ${apiKey}`,
           "Content-Type": "application/json",
-          // OpenRouter uses these for analytics & rate-limiting policy.
           "HTTP-Referer": referer,
           "X-Title": "MTA Website Assistant",
         },
         body: JSON.stringify({
           model,
-          // System prompt rides as the first message in OpenAI-compatible API.
           messages: [
             { role: "system", content: systemPrompt },
             ...parsed.messages.slice(-API_CONTEXT_WINDOW).map((m) => ({
@@ -113,74 +146,44 @@ export async function POST(request: NextRequest) {
           temperature: 0.3,
           top_p: 0.9,
           max_tokens: 1200,
-          stream: false,
+          stream: true,
         }),
       });
     } catch (fetchErr) {
       clearTimeout(timeoutId);
       const reason =
         fetchErr instanceof Error && fetchErr.name === "AbortError"
-          ? "timeout (>25s)"
+          ? "timeout (>30s)"
           : fetchErr instanceof Error
             ? fetchErr.message
             : String(fetchErr);
-      console.error(`[chat] OpenRouter fetch failed (${reason}) — model=${model}`);
-      return generateFallbackResponse(parsed);
+      console.error(`[chat] OpenRouter fetch failed (${reason})`);
+      return localFallback(parsed);
     }
     clearTimeout(timeoutId);
 
     if (!response.ok) {
-      // Rate-limited (429), bad key (401), upstream error (5xx) — fall back.
       const errBody = await response.text().catch(() => "<no body>");
       console.error(
-        `[chat] OpenRouter HTTP ${response.status} ${response.statusText} — model=${model} — ${errBody.slice(0, 400)}`,
+        `[chat] OpenRouter HTTP ${response.status} — ${errBody.slice(0, 400)}`,
       );
-      return generateFallbackResponse(parsed);
+      return localFallback(parsed);
     }
 
-    const data = (await response.json().catch(() => null)) as
-      | OpenRouterResponse
-      | null;
-
-    if (!data || data.error) {
-      console.error(
-        `[chat] OpenRouter returned error payload — model=${model} — ${JSON.stringify(data?.error ?? data).slice(0, 400)}`,
-      );
-      return generateFallbackResponse(parsed);
-    }
-
-    const message = data.choices?.[0]?.message?.content?.trim();
-
-    if (!message) {
-      console.error(
-        `[chat] OpenRouter returned empty/missing content — model=${model} — finish_reason=${data.choices?.[0]?.finish_reason ?? "unknown"}`,
-      );
-      return generateFallbackResponse(parsed);
-    }
-
-    return NextResponse.json({
-      success: true,
-      source: "openrouter",
-      message,
-    });
+    return openRouterStream(response);
   } catch (error) {
     if (error instanceof z.ZodError) {
-      console.error("[chat] Request validation failed:", error.issues);
       return NextResponse.json(
-        { success: false, message: "Please send a valid chat message." },
+        { success: false, message: "Invalid request." },
         { status: 400 },
       );
     }
-
     console.error(
-      "[chat] Unexpected error in POST handler:",
-      error instanceof Error ? `${error.name}: ${error.message}` : error,
+      "[chat] Unexpected error:",
+      error instanceof Error ? error.message : error,
     );
     return NextResponse.json(
-      {
-        success: false,
-        message: "The chatbot could not process your request.",
-      },
+      { success: false, message: "Chatbot error." },
       { status: 500 },
     );
   }

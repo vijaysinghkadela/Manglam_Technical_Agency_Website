@@ -5,6 +5,10 @@ import {
   costComparisonModels,
 } from "@/lib/data/pricing";
 import {
+  departments as pricingDepartments,
+  bundles as pricingBundles,
+} from "@/lib/data/pricing-2026";
+import {
   agreementSummaries,
   policyDocuments,
   agreementApplicabilityMatrix,
@@ -214,6 +218,23 @@ function summarizeMarketBenchmark(
     .join("\n");
 }
 
+function summarizeDepartment(dept: (typeof pricingDepartments)[number]) {
+  return [
+    `${dept.department} [${dept.slug}]`,
+    `Plans: ${dept.plans
+      .slice(0, 3)
+      .map(
+        (plan) =>
+          `${plan.name} from ${plan.durations[0].price}, ` +
+          `6-mo: ${plan.durations[1]?.price ?? "N/A"}, ` +
+          `12-mo: ${plan.durations[2]?.price ?? "N/A"}`,
+      )
+      .join(" | ")}`,
+  ]
+    .filter(Boolean)
+    .join("\n");
+}
+
 function summarizeCostModel(model: (typeof costComparisonModels)[number]) {
   return [
     `${model.model}`,
@@ -257,8 +278,14 @@ function summarizeContactPage() {
 function summarizePricingPage() {
   return [
     "Page: /pricing",
-    "Purpose: compare service packages, market benchmarks, and cost models before starting a project.",
-    `Pricing groups: ${pricingPlans
+    "Purpose: compare 6 departments with expandable accordion, full deliverables, duration toggle (1/6/12 months), cross-department bundles, and payment terms.",
+    `Departments: ${pricingDepartments
+      .map((dept) => `${dept.department} (${dept.plans.length} plans)`)
+      .join(" | ")}`,
+    `Bundles: ${pricingBundles
+      .map((b) => `${b.name} (${b.total})`)
+      .join(" | ")}`,
+    `Old pricing groups: ${pricingPlans
       .slice(0, 5)
       .map((group) => `${group.service} (${group.badge})`)
       .join(" | ")}`,
@@ -436,6 +463,7 @@ export function buildSiteKnowledge(input: ChatContextInput = {}) {
     "## ROUTING DECISION GUIDE",
     "Use this table to pick which service to recommend based on visitor intent:",
     "- Visitor wants a website / landing page / corporate site → **Web Development**",
+    "- Visitor wants an online store / e-commerce / shopping cart / product catalog → **E-Commerce Solutions** (standalone service, distinct from SaaS Build plan which is for custom web apps)",
     "- Visitor wants AI agents / chatbots / RAG / workflow automation / n8n → **AI Automation**",
     "- Visitor wants pen-test / VAPT / security audit / SOC / compliance hardening → **Cybersecurity**",
     "- Visitor wants social media / paid ads / content / brand growth → **Social Media Marketing**",
@@ -459,7 +487,20 @@ export function buildSiteKnowledge(input: ChatContextInput = {}) {
     "## SERVICES (FULL DETAIL)",
     services.map((service) => `- ${summarizeService(service)}`).join("\n\n"),
     "",
-    "## PRICING PLANS",
+    "## PRICING DEPARTMENTS (2026)",
+    pricingDepartments
+      .map((dept) => `- ${summarizeDepartment(dept)}`)
+      .join("\n\n"),
+    "",
+    "## CROSS-DEPARTMENT BUNDLES",
+    pricingBundles
+      .map(
+        (b) =>
+          `- ${b.name}: ${b.total} — ${b.target} (plans: ${b.plans.map((p) => `${p.department} ${p.plan}`).join(", ")})`,
+      )
+      .join("\n"),
+    "",
+    "## PRICING PLANS (LEGACY)",
     pricingPlans
       .map((group) => `- ${summarizePricingGroup(group)}`)
       .join("\n\n"),

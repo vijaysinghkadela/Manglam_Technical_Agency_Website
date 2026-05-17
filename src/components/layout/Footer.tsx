@@ -58,68 +58,107 @@ export function Footer() {
     <footer className="safe-area-bottom w-full border-t border-border bg-canvas">
       <div className="container-site py-12 sm:py-16 lg:py-24">
         <motion.div
-          className="mx-auto w-full max-w-[960px] xl:max-w-[1100px] overflow-hidden rounded-[28px] border border-[rgba(107,26,26,0.25)] bg-[rgba(107,26,26,0.04)] px-5 py-10 text-center shadow-[0_24px_80px_rgba(0,0,0,0.08)] sm:px-8 sm:py-14 lg:py-16 flex flex-col items-center justify-center"
+          className="relative mx-auto w-full max-w-[960px] xl:max-w-[1100px] overflow-hidden rounded-[32px] border border-[rgba(107,26,26,0.2)]"
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.75, ease: EASE }}
         >
-          <span
-            className="font-mono uppercase"
-            style={{
-              fontSize: "11px",
-              color: "var(--color-violet-light)",
-              letterSpacing: "0.24em",
-            }}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            aria-hidden="true"
           >
-            ✦ START A PROJECT
-          </span>
-          <h2
-            className="mt-6 font-display font-black tracking-normal leading-[0.92]"
-            style={{
-              fontSize: "clamp(2.1rem, 6vw, 5.5rem)",
-              color: "var(--color-foreground)",
-            }}
+            <div
+              className="absolute top-[-40%] left-1/2 -translate-x-1/2 w-[65%] aspect-square rounded-full blur-[140px]"
+              style={{ backgroundColor: "rgba(107,26,26,0.08)" }}
+            />
+          </div>
+
+          <div
+            className="relative flex flex-col items-center justify-center px-6 py-12 text-center sm:px-10 sm:py-16 lg:py-20"
+            style={{ backgroundColor: "rgba(107,26,26,0.03)" }}
           >
-            Let&apos;s Build
-            <br />
-            <span style={{ color: "#6B1A1A" }}>Something Better</span>
-          </h2>
-          <p
-            className="mx-auto mt-5 max-w-[420px]"
-            style={{
-              fontSize: "15px",
-              lineHeight: 1.72,
-              color: "var(--color-muted)",
-            }}
-          >
-            One conversation is all it takes to know whether we&apos;re the
-            right fit.
-          </p>
-          <div className="mt-8 w-full flex items-center justify-center">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-display text-[15px] font-black transition-all duration-300 group"
+            <span
+              className="font-mono text-[11px] uppercase tracking-[0.24em]"
+              style={{ color: "var(--color-violet-light)" }}
+            >
+              ✦ START A PROJECT
+            </span>
+
+            <h2
+              className="mt-6 font-display font-black leading-[0.92] tracking-tight"
               style={{
-                backgroundColor: "#6B1A1A",
-                boxShadow: "0 16px 40px rgba(107,26,26,0.24)",
-                color: "#FFFFFF",
-              }}
-              data-cursor="pointer"
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.backgroundColor =
-                  "#4f1111";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.backgroundColor =
-                  "#6B1A1A";
+                fontSize: "clamp(2rem, 7vw, 5.5rem)",
+                color: "var(--color-foreground)",
               }}
             >
-              Get a Quote
-              <span className="inline-block transition-transform group-hover:translate-x-1">
-                →
+              Let&apos;s Build
+              <br />
+              <span
+                className="inline-block"
+                style={{
+                  background:
+                    "linear-gradient(135deg, #6B1A1A 0%, #8B2020 50%, #6B1A1A 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                Something Better
               </span>
-            </Link>
+            </h2>
+
+            <p
+              className="mx-auto mt-5 max-w-[440px] text-[15px] leading-[1.72] sm:text-[16px]"
+              style={{ color: "var(--color-muted)" }}
+            >
+              One conversation is all it takes to know whether we&apos;re the
+              right fit.
+            </p>
+
+            <div className="mt-8 sm:mt-10">
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <Link
+                  href="/contact"
+                  className="relative inline-flex items-center gap-2.5 rounded-full px-8 py-3.5 font-display text-[15px] font-black text-white transition-shadow duration-300 sm:px-10 sm:py-4 sm:text-[16px]"
+                  style={{
+                    backgroundColor: "#6B1A1A",
+                    boxShadow:
+                      "0 8px 32px rgba(107,26,26,0.35), 0 0 0 1px rgba(107,26,26,0.5)",
+                  }}
+                  data-cursor="pointer"
+                  onMouseEnter={(e) => {
+                    const el = e.currentTarget as HTMLElement;
+                    el.style.boxShadow =
+                      "0 12px 48px rgba(107,26,26,0.45), 0 0 0 1px rgba(107,26,26,0.6)";
+                    el.style.backgroundColor = "#4f1111";
+                  }}
+                  onMouseLeave={(e) => {
+                    const el = e.currentTarget as HTMLElement;
+                    el.style.boxShadow =
+                      "0 8px 32px rgba(107,26,26,0.35), 0 0 0 1px rgba(107,26,26,0.5)";
+                    el.style.backgroundColor = "#6B1A1A";
+                  }}
+                >
+                  <span>Get a Quote</span>
+                  <motion.span
+                    className="inline-flex"
+                    animate={{ x: [0, 3, 0] }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    →
+                  </motion.span>
+                </Link>
+              </motion.div>
+            </div>
           </div>
         </motion.div>
       </div>
