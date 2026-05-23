@@ -171,8 +171,7 @@ export default function RootLayout({
                     primary: "var(--color-violet-dark)",
                     secondary: "var(--color-card)",
                   },
-                },
-              }}
+                } }}
             />
           </LenisProvider>
         </ThemeProvider>

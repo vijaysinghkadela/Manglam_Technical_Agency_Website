@@ -1,6 +1,8 @@
 import PageHero from '@/components/ui/PageHero'
 import { ShieldAlert, ShieldCheck } from 'lucide-react'
 import type { Metadata } from 'next'
+import { JsonLd } from '@/components/seo/JsonLd'
+import { breadcrumbSchema, webPageSchema } from '@/lib/seo/schemas'
 
 export const metadata: Metadata = {
   title: 'Cybersecurity Trust Center & Policies',
@@ -10,6 +12,8 @@ export const metadata: Metadata = {
 export default function CybersecurityPolicyPage() {
   return (
     <main className="bg-canvas min-h-screen pb-36">
+      <JsonLd schema={breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Cybersecurity Policy', url: '/cybersecurity-policy' }])} />
+      <JsonLd schema={webPageSchema({ url: '/cybersecurity-policy', title: 'Cybersecurity Trust Center & Policies', description: 'MTA legal baseline, explicit authorization, incident response SLAs, and operational policies for cybersecurity services.' })} />
       <PageHero
         breadcrumbBase="Compliance"
         breadcrumbBaseHref="#"
@@ -22,7 +26,7 @@ export default function CybersecurityPolicyPage() {
       <div className="w-full max-w-[1000px] mx-auto px-6 lg:px-12 mt-20 flex flex-col gap-16">
 
         {/* Section 1: Prominent Legal Baseline */}
-        <section className="bg-[#111] border border-red-900/50 p-10 lg:p-14 rounded-3xl relative overflow-hidden shadow-[0_0_40px_rgba(220,38,38,0.05)]">
+        <section className="bg-card border border-red-900/50 p-10 lg:p-14 rounded-3xl relative overflow-hidden shadow-[0_0_40px_rgba(220,38,38,0.05)]">
           <div className="absolute top-0 left-0 w-1 h-full bg-red-600" />
           <div className="flex items-center gap-4 mb-6">
             <div className="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center border border-red-500/20">
@@ -128,8 +132,8 @@ export default function CybersecurityPolicyPage() {
               <li><span className="text-violet-light">Best for:</span> External perimeter testing</li>
             </ul>
           </div>
-          <div className="bg-[#111] border border-[#6B1A1A]/30 p-8 rounded-lg relative">
-            <div className="absolute top-0 right-0 bg-[#6B1A1A]/20 text-violet-light text-xs font-mono px-3 py-1 rounded-bl-lg">DEFAULT</div>
+          <div className="bg-card border border-violet/30 p-8 rounded-lg relative">
+            <div className="absolute top-0 right-0 bg-violet/20 text-violet-light text-xs font-mono px-3 py-1 rounded-bl-lg">DEFAULT</div>
             <h3 className="font-display font-bold text-white text-lg mb-2 mt-2">Gray-box</h3>
             <p className="text-muted text-sm mb-4">Limited credentials and documentation</p>
             <ul className="text-sm text-white/80 space-y-2">
@@ -149,8 +153,8 @@ export default function CybersecurityPolicyPage() {
       </section>
 
       {/* Section 4: DPDP Rule 6 Compliance */}
-      <section className="bg-[#111] border border-[#6B1A1A]/30 p-10 rounded-lg relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-1 h-full bg-[#6B1A1A]" />
+      <section className="bg-card border border-violet/30 p-10 rounded-lg relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-1 h-full bg-violet" />
         <h2 className="font-display font-black text-white text-2xl mb-5">
           4. DPDP Act 2023 Rule 6 Safeguards
         </h2>

@@ -1,3 +1,5 @@
+'use client'
+
 /**
  * useReducedMotion Hook
  * Respects user's motion preferences for accessibility.

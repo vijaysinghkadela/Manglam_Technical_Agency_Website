@@ -8,16 +8,6 @@ import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { TextReveal } from '@/components/ui/TextReveal'
 import { MagneticButton } from '@/components/ui/MagneticButton'
 import OrbitalRing from '@/components/home/OrbitalRing'
-import {
-  BRAND,
-  ANIMATION,
-  SPACING,
-  TYPOGRAPHY,
-  RADIUS,
-  SHADOW,
-  GRADIENT,
-} from '@/lib/design-system'
-
 const SERVICES = [
   'Cybersecurity',
   'AI Automation',
@@ -34,14 +24,14 @@ const SERVICES = [
 const TRUST_BADGES = [
   { label: 'Rajasthan-based technical team', color: '#10b981' },
   { label: 'Udyam-registered delivery partner', color: '#3b82f6' },
-  { label: 'Boutique execution, senior oversight', color: BRAND.primary },
+  { label: 'Boutique execution, senior oversight', color: 'var(--color-violet)' },
 ]
 
 // Stats with status indicators - module level to prevent re-creation
 const STATS = [
   { label: '3 Active Clients', color: '#10b981' },
   { label: '2 Internal SaaS', color: '#3b82f6' },
-  { label: 'Udyam 2025', color: BRAND.primary },
+  { label: 'Udyam 2025', color: 'var(--color-violet)' },
   { label: 'Bikaner, RJ', color: '#f59e0b' },
 ]
 
@@ -52,37 +42,37 @@ const GLOW_STYLES = {
   top: '5%',
   width: 'clamp(300px, 45vw, 900px)',
   height: 'clamp(300px, 45vw, 900px)',
-  borderRadius: RADIUS.full,
-  background: GRADIENT.glow,
+  borderRadius: '9999px',
+  background: 'radial-gradient(circle, rgba(var(--color-accent-rgb),0.15) 0%, transparent 70%)',
   filter: 'blur(60px)',
 }
 
 const PRIMARY_BUTTON_STYLES = {
-  background: GRADIENT.brand,
+  background: 'linear-gradient(135deg, var(--color-violet) 0%, color-mix(in srgb, var(--color-violet) 70%, #fff) 100%)',
   color: 'white',
-  borderRadius: RADIUS.full,
-  boxShadow: `${SHADOW.lg}, 0 0 0 1px rgba(255,255,255,0.1) inset`,
+  borderRadius: '9999px',
+  boxShadow: '0 8px 32px rgba(0,0,0,0.08), 0 0 0 1px rgba(255,255,255,0.1) inset',
 }
 
 const SECONDARY_BUTTON_STYLES = {
-  color: BRAND.primary,
-  borderColor: BRAND.primary,
+  color: 'var(--color-violet)',
+  borderColor: 'var(--color-violet)',
   background: 'transparent',
-  borderRadius: RADIUS.full,
+  borderRadius: '9999px',
 }
 
 const BADGE_BASE_STYLE = {
-  fontSize: TYPOGRAPHY.micro,
+  fontSize: '0.625rem',
   color: 'var(--color-muted)',
-  letterSpacing: TYPOGRAPHY.tracking.wider,
+  letterSpacing: '0.16em',
   borderColor: 'var(--color-border)',
-  background: GRADIENT.brandSoft,
-  borderRadius: RADIUS.full,
-  boxShadow: SHADOW.sm,
+  background: 'linear-gradient(135deg, rgba(var(--color-accent-rgb),0.08) 0%, rgba(255,255,255,0.02) 100%)',
+  borderRadius: '9999px',
+  boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
 }
 
 const SCROLL_ANIMATION = {
-  duration: ANIMATION.duration.normal,
+  duration: 0.5,
   delay: 1.5,
 }
 
@@ -114,7 +104,7 @@ export function HeroSection() {
         aria-hidden
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: ANIMATION.duration.reveal, delay: 0.3 }}
+        transition={{ duration: 0.9, delay: 0.3 }}
       >
         <div style={GLOW_STYLES} />
       </motion.div>
@@ -128,9 +118,8 @@ export function HeroSection() {
           bottom: '10%',
           width: 'clamp(300px, 35vw, 600px)',
           height: 'clamp(300px, 35vw, 600px)',
-          borderRadius: RADIUS.full,
-          background: `radial-gradient(circle, ${BRAND.primarySoft} 0%, transparent 65%)`,
-        }}
+          borderRadius: '9999px',
+          background: 'radial-gradient(circle, rgba(var(--color-accent-rgb), 0.08) 0%, transparent 65%)' }}
       />
 
       {/* Content - parallax on desktop only */}
@@ -146,19 +135,18 @@ export function HeroSection() {
               className="flex min-w-0 items-center gap-3"
               initial={{ opacity: 0, x: -16 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: ANIMATION.duration.slow, delay: 0.05, ease: ANIMATION.ease }}
+              transition={{ duration: 0.7, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
             >
               <span
                 className="h-px"
-                style={{ width: '24px', backgroundColor: BRAND.primary, opacity: 0.72 }}
+                style={{ width: '24px', backgroundColor: 'var(--color-violet)', opacity: 0.72 }}
               />
               <span
                 className="min-w-0 font-mono uppercase leading-relaxed"
                 style={{
-                  fontSize: TYPOGRAPHY.label,
+                  fontSize: '0.6875rem',
                   color: 'var(--color-muted)',
-                  letterSpacing: TYPOGRAPHY.tracking.wider,
-                }}
+                  letterSpacing: '0.16em' }}
               >
                 MTA · Rajasthan Technical Partner
               </span>
@@ -169,12 +157,12 @@ export function HeroSection() {
               className="hidden sm:flex sm:flex-wrap items-center gap-3"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: ANIMATION.duration.normal, delay: 0.12, ease: ANIMATION.ease }}
+              transition={{ duration: 0.5, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
             >
               {TRUST_BADGES.map((item) => (
                 <motion.span
                   key={item.label}
-                  className="inline-flex items-center gap-2 rounded-full border px-4 py-2.5 font-mono uppercase transition-all duration-300 hover:border-[#6B1A1A] hover:bg-[rgba(107,26,26,0.12)]"
+                  className="inline-flex items-center gap-2 rounded-full border px-4 py-2.5 font-mono uppercase transition-all duration-300 hover:border-violet hover:bg-[rgba(var(--color-accent-rgb),0.12)]"
                   style={BADGE_BASE_STYLE}
                   whileHover={{ scale: 1.02 }}
                 >
@@ -190,7 +178,7 @@ export function HeroSection() {
             {/* Statement - three lines */}
             <div
               className="flex flex-col max-w-full"
-              style={{ gap: SPACING.gap.sm, overflowWrap: 'break-word', hyphens: 'none' }}
+              style={{ gap: '0.75rem', overflowWrap: 'break-word', hyphens: 'none' }}
             >
               <TextReveal
                 text="WE BUILD"
@@ -199,11 +187,10 @@ export function HeroSection() {
                 className="font-display font-black"
                 style={{
                   fontSize: 'clamp(2rem, 7.5vw, 5.1rem)',
-                  lineHeight: TYPOGRAPHY.leading.tight,
-                  letterSpacing: TYPOGRAPHY.tracking.normal,
+                  lineHeight: 0.92,
+                  letterSpacing: '0',
                   color: 'var(--color-foreground)',
-                  overflowWrap: 'anywhere',
-                }}
+                  overflowWrap: 'anywhere' }}
               />
               <TextReveal
                 text="DIGITAL"
@@ -212,12 +199,11 @@ export function HeroSection() {
                 className="font-display font-black"
                 style={{
                   fontSize: 'clamp(2rem, 7.5vw, 5.1rem)',
-                  lineHeight: TYPOGRAPHY.leading.tight,
-                  letterSpacing: TYPOGRAPHY.tracking.normal,
-                  color: BRAND.primary,
+                  lineHeight: 0.92,
+                  letterSpacing: '0',
+                  color: 'var(--color-violet)',
                   overflowWrap: 'anywhere',
-                  paddingLeft: 'clamp(0px, 2vw, 20px)',
-                }}
+                  paddingLeft: 'clamp(0px, 2vw, 20px)' }}
               />
               <TextReveal
                 text="INFRASTRUCTURE"
@@ -225,12 +211,11 @@ export function HeroSection() {
                 delay={0.45}
                 className="font-display font-black"
                 style={{
-                  fontSize: 'clamp(1.4rem, 5.5vw, 3.8rem)',
+                  fontSize: 'clamp(1.4rem, 5.5vw, 4.5rem)',
                   lineHeight: 0.96,
-                  letterSpacing: TYPOGRAPHY.tracking.normal,
+                  letterSpacing: '0',
                   color: 'var(--color-foreground)',
-                  overflowWrap: 'anywhere',
-                }}
+                  overflowWrap: 'normal' }}
               />
             </div>
 
@@ -240,7 +225,7 @@ export function HeroSection() {
               style={{ color: 'var(--color-muted)' }}
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: ANIMATION.duration.slow, delay: 0.7, ease: ANIMATION.ease }}
+              transition={{ duration: 0.7, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
               Delivering the output quality of a larger enterprise firm at the responsiveness
               and accountability of a boutique 3–4 professional team.
@@ -251,7 +236,7 @@ export function HeroSection() {
               className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-5 pt-2"
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: ANIMATION.duration.slow, delay: 0.85, ease: ANIMATION.ease }}
+              transition={{ duration: 0.7, delay: 0.85, ease: [0.16, 1, 0.3, 1] }}
             >
               <MagneticButton
                 href="/contact"
@@ -266,7 +251,7 @@ export function HeroSection() {
                 <Link
                   href="/portfolio"
                   data-cursor="pointer"
-                  className="group inline-flex w-full sm:w-auto items-center justify-center sm:justify-start gap-2 rounded-full border-2 px-7 sm:px-9 lg:px-10 py-4 sm:py-5 lg:py-5 text-[14px] sm:text-[15px] font-semibold transition-all duration-300 min-h-[56px] sm:min-h-[60px] hover:bg-[rgba(107,26,26,0.08)] hover:shadow-[0_4px_20px_rgba(107,26,26,0.15)]"
+                  className="group inline-flex w-full sm:w-auto items-center justify-center sm:justify-start gap-2 rounded-full border-2 px-7 sm:px-9 lg:px-10 py-4 sm:py-5 lg:py-5 text-[14px] sm:text-[15px] font-semibold transition-all duration-300 min-h-[56px] sm:min-h-[60px] hover:bg-[rgba(var(--color-accent-rgb),0.08)] hover:shadow-[0_4px_20px_rgba(var(--color-accent-rgb),0.15)]"
                   style={SECONDARY_BUTTON_STYLES}
                 >
                   See Our Work
@@ -280,7 +265,7 @@ export function HeroSection() {
               className="flex flex-wrap items-center justify-start gap-2 sm:gap-3 pt-6"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: ANIMATION.duration.normal, delay: 1.1 }}
+              transition={{ duration: 0.5, delay: 1.1 }}
             >
               {STATS.map((stat) => (
                 <motion.span
@@ -302,7 +287,7 @@ export function HeroSection() {
               {SERVICES.map((s) => (
                 <span
                   key={s}
-                  className="rounded-full shrink-0 px-3 py-1.5 text-xs font-semibold whitespace-nowrap transition-all duration-200 hover:border-[#6B1A1A]/30 bg-[rgba(107,26,26,0.08)] border border-[var(--color-border)] text-[var(--color-foreground)]"
+                  className="rounded-full shrink-0 px-3 py-1.5 text-xs font-semibold whitespace-nowrap transition-all duration-200 hover:border-violet/30 bg-[rgba(var(--color-accent-rgb),0.08)] border border-[var(--color-border)] text-[var(--color-foreground)]"
                 >
                   {s}
                 </span>
@@ -315,7 +300,7 @@ export function HeroSection() {
             className="hidden lg:flex items-center justify-center relative min-h-[500px]"
             initial={{ opacity: 0, scale: 0.88 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.1, delay: 0.4, ease: ANIMATION.ease }}
+            transition={{ duration: 1.1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
           >
             {/* Glow behind orbital */}
             <div
@@ -323,10 +308,9 @@ export function HeroSection() {
               style={{
                 width: '65%',
                 height: '65%',
-                borderRadius: RADIUS.full,
-                background: `radial-gradient(circle, ${BRAND.primarySoft} 0%, transparent 70%)`,
-                filter: 'blur(20px)',
-              }}
+                borderRadius: '9999px',
+                background: 'radial-gradient(circle, rgba(var(--color-accent-rgb), 0.08) 0%, transparent 70%)',
+                filter: 'blur(20px)' }}
             />
             <OrbitalRing />
           </motion.div>
@@ -346,7 +330,7 @@ export function HeroSection() {
         >
           <motion.div
             className="absolute top-0 left-0 w-full"
-            style={{ backgroundColor: BRAND.primary, opacity: 0.8 }}
+            style={{ backgroundColor: 'var(--color-violet)', opacity: 0.8 }}
             animate={{ height: ['0%', '100%'], top: ['0%', '100%'] }}
             transition={{ repeat: Infinity, duration: 2.2, ease: 'linear' }}
           />
@@ -354,12 +338,11 @@ export function HeroSection() {
         <span
           className="font-mono uppercase"
           style={{
-            fontSize: TYPOGRAPHY.micro,
+            fontSize: '0.625rem',
             color: 'var(--color-dead)',
-            letterSpacing: TYPOGRAPHY.tracking.wider,
+            letterSpacing: '0.16em',
             writingMode: 'vertical-rl',
-            transform: 'rotate(180deg)',
-          }}
+            transform: 'rotate(180deg)' }}
         >
           Scroll
         </span>

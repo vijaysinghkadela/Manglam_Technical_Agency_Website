@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronDown, Menu, X, ArrowUpRight } from 'lucide-react'
+import { ChevronDown, Menu, X } from 'lucide-react'
 import { services } from '@/lib/data/services'
 import { cn } from '@/lib/utils'
 import ThemeToggle from '@/components/ui/ThemeToggle'
@@ -21,8 +21,6 @@ const NAV_LINKS = [
   { href: '/services', label: 'Services', hasMega: true },
   { href: '/portfolio', label: 'Portfolio' },
   { href: '/pricing', label: 'Pricing' },
-  { href: '/research', label: 'Research' },
-  { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contact' },
 ]
 
@@ -38,7 +36,7 @@ const getNavStyles = (isLight: boolean, scrolled: boolean) => ({
         : 'rgb(13, 13, 14)',
     backdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
     WebkitBackdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
-    borderBottom: scrolled ? `1px solid ${isLight ? 'rgba(107, 26, 26, 0.08)' : 'rgba(255, 255, 255, 0.06)'}` : '1px solid transparent',
+    borderBottom: scrolled ? `1px solid ${isLight ? 'rgba(var(--color-accent-rgb), 0.08)' : 'rgba(255, 255, 255, 0.06)'}` : '1px solid transparent',
     boxShadow: scrolled
       ? isLight
         ? '0 4px 30px rgba(0, 0, 0, 0.04)'
@@ -47,9 +45,9 @@ const getNavStyles = (isLight: boolean, scrolled: boolean) => ({
   },
   navPill: {
     backgroundColor: isLight
-      ? 'rgba(107, 26, 26, 0.04)'
+      ? 'rgba(var(--color-accent-rgb), 0.04)'
       : 'rgba(255, 255, 255, 0.04)',
-    border: `1px solid ${isLight ? 'rgba(107, 26, 26, 0.08)' : 'rgba(255, 255, 255, 0.08)'}`,
+    border: `1px solid ${isLight ? 'rgba(var(--color-accent-rgb), 0.08)' : 'rgba(255, 255, 255, 0.08)'}`,
     boxShadow: isLight
       ? '0 2px 8px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8)'
       : '0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
@@ -60,19 +58,19 @@ const getNavStyles = (isLight: boolean, scrolled: boolean) => ({
       border: '1px solid transparent',
     },
     hover: {
-      backgroundColor: isLight ? 'rgba(107, 26, 26, 0.08)' : 'rgba(255, 255, 255, 0.08)',
-      borderColor: isLight ? 'rgba(107, 26, 26, 0.15)' : 'rgba(255, 255, 255, 0.15)',
+      backgroundColor: isLight ? 'rgba(var(--color-accent-rgb), 0.08)' : 'rgba(255, 255, 255, 0.08)',
+      borderColor: isLight ? 'rgba(var(--color-accent-rgb), 0.15)' : 'rgba(255, 255, 255, 0.15)',
     },
     active: {
-      backgroundColor: isLight ? 'rgba(107, 26, 26, 0.12)' : 'rgba(255, 255, 255, 0.1)',
-      borderColor: isLight ? 'rgba(107, 26, 26, 0.2)' : 'rgba(255, 255, 255, 0.2)',
+      backgroundColor: isLight ? 'rgba(var(--color-accent-rgb), 0.12)' : 'rgba(255, 255, 255, 0.1)',
+      borderColor: isLight ? 'rgba(var(--color-accent-rgb), 0.2)' : 'rgba(255, 255, 255, 0.2)',
     },
   },
   megaMenu: {
     backgroundColor: isLight ? 'rgba(250, 247, 244, 0.98)' : 'rgba(13, 13, 14, 0.98)',
-    borderColor: isLight ? 'rgba(107, 26, 26, 0.12)' : 'rgba(255, 255, 255, 0.08)',
+    borderColor: isLight ? 'rgba(var(--color-accent-rgb), 0.12)' : 'rgba(255, 255, 255, 0.08)',
     boxShadow: isLight
-      ? '0 25px 50px -12px rgba(107, 26, 26, 0.15), 0 0 0 1px rgba(107, 26, 26, 0.05)'
+      ? '0 25px 50px -12px rgba(var(--color-accent-rgb), 0.15), 0 0 0 1px rgba(var(--color-accent-rgb), 0.05)'
       : '0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05)',
   },
   megaItem: {
@@ -81,35 +79,19 @@ const getNavStyles = (isLight: boolean, scrolled: boolean) => ({
       border: '1px solid transparent',
     },
     hover: {
-      backgroundColor: isLight ? 'rgba(107, 26, 26, 0.06)' : 'rgba(255, 255, 255, 0.06)',
-      borderColor: isLight ? 'rgba(107, 26, 26, 0.1)' : 'rgba(255, 255, 255, 0.1)',
+      backgroundColor: isLight ? 'rgba(var(--color-accent-rgb), 0.06)' : 'rgba(255, 255, 255, 0.06)',
+      borderColor: isLight ? 'rgba(var(--color-accent-rgb), 0.1)' : 'rgba(255, 255, 255, 0.1)',
     },
   },
   iconBox: {
-    backgroundColor: isLight ? 'rgba(107, 26, 26, 0.08)' : 'rgba(255, 255, 255, 0.06)',
-    border: `1px solid ${isLight ? 'rgba(107, 26, 26, 0.12)' : 'rgba(255, 255, 255, 0.1)'}`,
+    backgroundColor: isLight ? 'rgba(var(--color-accent-rgb), 0.08)' : 'rgba(255, 255, 255, 0.06)',
+    border: `1px solid ${isLight ? 'rgba(var(--color-accent-rgb), 0.12)' : 'rgba(255, 255, 255, 0.1)'}`,
   },
-  ctaButton: {
-    default: {
-      backgroundColor: isLight ? 'rgba(107, 26, 26, 0.08)' : 'rgba(255, 255, 255, 0.06)',
-      border: `1px solid ${isLight ? 'rgba(107, 26, 26, 0.12)' : 'rgba(255, 255, 255, 0.1)'}`,
-      color: isLight ? 'var(--color-violet)' : '#FFFFFF',
-      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
-    },
-    hover: {
-      backgroundColor: isLight ? 'rgba(107, 26, 26, 0.12)' : 'rgba(255, 255, 255, 0.1)',
-      borderColor: isLight ? 'rgba(107, 26, 26, 0.2)' : 'rgba(255, 255, 255, 0.2)',
-      boxShadow: isLight ? '0 4px 20px rgba(107, 26, 26, 0.15)' : '0 4px 20px rgba(255, 255, 255, 0.1)',
-    },
-    pressed: {
-      backgroundColor: isLight ? 'rgba(107, 26, 26, 0.15)' : 'rgba(255, 255, 255, 0.12)',
-      boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.1)',
-    },
-  },
+
   mobileButton: {
     default: {
-      backgroundColor: isLight ? 'rgba(107, 26, 26, 0.06)' : 'rgba(255, 255, 255, 0.06)',
-      border: `1px solid ${isLight ? 'rgba(107, 26, 26, 0.1)' : 'rgba(255, 255, 255, 0.1)'}`,
+      backgroundColor: isLight ? 'rgba(var(--color-accent-rgb), 0.06)' : 'rgba(255, 255, 255, 0.06)',
+      border: `1px solid ${isLight ? 'rgba(var(--color-accent-rgb), 0.1)' : 'rgba(255, 255, 255, 0.1)'}`,
     },
     active: {
       backgroundColor: 'var(--color-violet)',
@@ -127,8 +109,6 @@ export function Navbar() {
   const { resolvedTheme } = useTheme()
   const [hoveredLink, setHoveredLink] = useState<string | null>(null)
   const [pressedLink, setPressedLink] = useState<string | null>(null)
-  const [ctaHovered, setCtaHovered] = useState(false)
-  const [ctaPressed, setCtaPressed] = useState(false)
 
   const prefersReducedMotion = useReducedMotion()
   const isTouchDevice = useMediaQuery('(hover: none) and (pointer: coarse)')
@@ -190,9 +170,7 @@ export function Navbar() {
 
   const isActive = useCallback((link: (typeof NAV_LINKS)[0]) => {
     if (link.href === '/') return path === '/'
-    if (link.href === '/blog') return path.startsWith('/blog')
     if (link.href === '/legal') return path.startsWith('/legal')
-    if (link.href === '/research') return path.startsWith('/research')
     if (link.href === '/services') return path.startsWith('/services')
     return path === link.href
   }, [path])
@@ -220,7 +198,7 @@ export function Navbar() {
       boxShadow: pressed
         ? 'inset 0 2px 4px rgba(0,0,0,0.1)'
         : hovered
-          ? '0 4px 12px rgba(107, 26, 26, 0.1)'
+          ? '0 4px 12px rgba(var(--color-accent-rgb), 0.1)'
           : 'none',
       transform: pressed ? 'scale(0.98)' : 'scale(1)',
     }
@@ -242,7 +220,7 @@ export function Navbar() {
           {/* Inner container */}
           <div
             className="w-full mx-auto flex items-center justify-between h-[64px] sm:h-[72px] lg:h-[80px] xl:h-[88px]"
-            style={{ maxWidth: '1600px', padding: '0 clamp(1rem, 5vw, 4rem)' }}
+            style={{ maxWidth: '1440px', padding: '0 clamp(1rem, 5vw, 4rem)' }}
           >
             {/* Logo */}
             <Link
@@ -326,8 +304,7 @@ export function Navbar() {
                               className="p-5 rounded-2xl border backdrop-blur-xl"
                               style={{
                                 width: '560px',
-                                ...styles.megaMenu,
-                              }}
+                                ...styles.megaMenu }}
                             >
                               <div className="grid grid-cols-2 gap-3">
                                 {services.map((s, idx) => (
@@ -340,16 +317,8 @@ export function Navbar() {
                                     <Link
                                       href={`/services/${s.slug}`}
                                       data-cursor="pointer"
-                                      className="flex items-start gap-3 p-3 rounded-xl transition-all duration-200 group"
+                                      className="flex items-start gap-3 p-3 rounded-xl transition-all duration-200 group hover:bg-[rgba(var(--color-accent-rgb),0.06)] dark:hover:bg-[rgba(255,255,255,0.06)] hover:border-[rgba(var(--color-accent-rgb),0.1)] dark:hover:border-[rgba(255,255,255,0.1)]"
                                       style={styles.megaItem.default}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = styles.megaItem.hover.backgroundColor
-                e.currentTarget.style.border = `1px solid ${styles.megaItem.hover.borderColor}`
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = styles.megaItem.default.backgroundColor
-                e.currentTarget.style.border = styles.megaItem.default.border
-              }}
                                     >
                                       <div
                                         className="w-10 h-10 flex items-center justify-center shrink-0 rounded-xl transition-colors duration-200"
@@ -402,55 +371,6 @@ export function Navbar() {
 
             {/* Right side actions */}
             <div className="flex items-center gap-2 sm:gap-3 xl:gap-4">
-              {/* Get Quote Button - Styled like ThemeToggle but darker */}
-              <motion.div
-                onMouseEnter={() => setCtaHovered(true)}
-                onMouseLeave={() => { setCtaHovered(false); setCtaPressed(false) }}
-                onMouseDown={() => setCtaPressed(true)}
-                onMouseUp={() => setCtaPressed(false)}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Link
-                  href="/contact"
-                  data-cursor="pointer"
-                  className="hidden sm:inline-flex items-center justify-center gap-2 h-9 px-4 rounded-full text-[13px] font-semibold transition-all duration-300 group relative overflow-hidden"
-                  style={{
-                    backgroundColor: ctaPressed
-                      ? isLight ? 'rgba(107, 26, 26, 0.2)' : 'rgba(124, 58, 237, 0.25)'
-                      : ctaHovered
-                        ? isLight ? 'rgba(107, 26, 26, 0.14)' : 'rgba(124, 58, 237, 0.18)'
-                        : isLight ? 'rgba(107, 26, 26, 0.1)' : 'rgba(124, 58, 237, 0.12)',
-                    border: `1px solid ${ctaPressed
-                      ? isLight ? 'rgba(107, 26, 26, 0.3)' : 'rgba(124, 58, 237, 0.4)'
-                      : ctaHovered
-                        ? isLight ? 'rgba(107, 26, 26, 0.25)' : 'rgba(124, 58, 237, 0.35)'
-                        : isLight ? 'rgba(107, 26, 26, 0.2)' : 'rgba(124, 58, 237, 0.25)'}`,
-                    color: isLight ? 'var(--color-violet)' : '#FFFFFF',
-                    boxShadow: ctaPressed
-                      ? 'inset 0 2px 4px rgba(0,0,0,0.1)'
-                      : ctaHovered
-                        ? isLight ? '0 4px 20px rgba(107, 26, 26, 0.2)' : '0 4px 20px rgba(124, 58, 237, 0.25)'
-                        : '0 2px 8px rgba(0,0,0,0.08)',
-                  }}
-                >
-                  {/* Subtle gradient background like ThemeToggle */}
-                  <motion.div
-                    className="absolute inset-0 rounded-full pointer-events-none"
-                    initial={false}
-                    animate={{
-                      background: ctaHovered
-                        ? isLight
-                          ? 'radial-gradient(circle at 30% 30%, rgba(107, 26, 26, 0.12), transparent 70%)'
-                          : 'radial-gradient(circle at 70% 30%, rgba(124, 58, 237, 0.15), transparent 70%)'
-                        : 'transparent',
-                    }}
-                    transition={{ duration: 0.4 }}
-                  />
-                  <span className="relative z-10">Get Quote</span>
-                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 relative z-10" />
-                </Link>
-              </motion.div>
-
               <ThemeToggle />
 
               {/* Mobile menu button */}
@@ -505,16 +425,14 @@ export function Navbar() {
               backgroundColor: isLight
                 ? 'rgba(250, 247, 244, 0.98)'
                 : 'rgba(13, 13, 14, 0.98)',
-              backdropFilter: 'blur(20px)',
-            }}
+              backdropFilter: 'blur(20px)' }}
           >
             {/* Background watermark */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
               <span
                 className="font-display font-black text-[30vw] select-none"
                 style={{
-                  color: isLight ? 'rgba(107, 26, 26, 0.03)' : 'rgba(255, 255, 255, 0.02)',
-                }}
+                  color: isLight ? 'rgba(var(--color-accent-rgb), 0.03)' : 'rgba(255, 255, 255, 0.02)' }}
               >
                 MTA
               </span>
@@ -533,8 +451,7 @@ export function Navbar() {
                       transition={{
                         delay: i * 0.05,
                         duration: 0.4,
-                        ease: [0.16, 1, 0.3, 1],
-                      }}
+                        ease: [0.16, 1, 0.3, 1] }}
                     >
                       <Link
                         href={link.href}
@@ -547,17 +464,15 @@ export function Navbar() {
                         )}
                         style={{
                           borderColor: isActive(link)
-                            ? 'rgba(124, 58, 237, 0.2)'
+                            ? 'rgba(var(--color-accent-rgb), 0.2)'
                             : isLight
-                              ? 'rgba(107, 26, 26, 0.08)'
-                              : 'rgba(255, 255, 255, 0.06)',
-                        }}
+                              ? 'rgba(var(--color-accent-rgb), 0.08)'
+                              : 'rgba(255, 255, 255, 0.06)' }}
                       >
                         <span
                           className="font-display font-black text-2xl"
                           style={{
-                            color: isActive(link) ? 'var(--color-violet)' : 'var(--color-foreground)',
-                          }}
+                            color: isActive(link) ? 'var(--color-violet)' : 'var(--color-foreground)' }}
                         >
                           {link.label}
                         </span>
@@ -579,20 +494,7 @@ export function Navbar() {
                   transition={{ delay: NAV_LINKS.length * 0.05 + 0.1 }}
                   className="mt-8"
                 >
-                  <Link
-                    href="/contact"
-                    onClick={() => setMobile(false)}
-                    className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl text-white font-display font-black text-lg transition-all duration-300"
-                    style={{
-                      backgroundColor: 'var(--color-violet)',
-                      boxShadow: isLight
-                        ? '0 8px 30px rgba(107, 26, 26, 0.3)'
-                        : '0 8px 30px rgba(124, 58, 237, 0.3)',
-                    }}
-                  >
-                    Get a Quote
-                    <ArrowUpRight className="w-5 h-5" />
-                  </Link>
+
                 </motion.div>
               </div>
 

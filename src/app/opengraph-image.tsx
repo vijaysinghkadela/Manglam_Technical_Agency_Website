@@ -17,8 +17,7 @@ export default function OgImage() {
           backgroundColor: '#0A0A0A',
           padding: '72px 80px',
           fontFamily: 'system-ui, sans-serif',
-          position: 'relative',
-        }}
+          position: 'relative' }}
       >
         {/* Grid pattern overlay */}
         <div
@@ -27,8 +26,7 @@ export default function OgImage() {
             inset: 0,
             backgroundImage:
               'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
-            backgroundSize: '60px 60px',
-          }}
+            backgroundSize: '60px 60px' }}
         />
 
         {/* Violet glow */}
@@ -40,8 +38,7 @@ export default function OgImage() {
             width: '600px',
             height: '600px',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(107,26,26,0.18) 0%, transparent 65%)',
-          }}
+            background: 'radial-gradient(circle, rgba(var(--color-accent-rgb),0.18) 0%, transparent 65%)' }}
         />
 
         {/* Content */}
@@ -53,15 +50,14 @@ export default function OgImage() {
               style={{
                 width: '44px',
                 height: '44px',
-                backgroundColor: 'rgba(107,26,26,0.15)',
-                border: '1px solid rgba(107,26,26,0.4)',
+                backgroundColor: 'rgba(var(--color-accent-rgb),0.15)',
+                border: '1px solid rgba(var(--color-accent-rgb),0.4)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 color: '#A78BFA',
                 fontSize: '18px',
-                fontWeight: 800,
-              }}
+                fontWeight: 800 }}
             >
               M
             </div>
@@ -78,8 +74,7 @@ export default function OgImage() {
                 color: '#A78BFA',
                 letterSpacing: '0.22em',
                 textTransform: 'uppercase',
-                marginBottom: '20px',
-              }}
+                marginBottom: '20px' }}
             >
               ✦ EMPOWERING YOUR DIGITAL FUTURE
             </div>
@@ -92,8 +87,7 @@ export default function OgImage() {
                   color: '#FAFAFA',
                   lineHeight: 0.9,
                   letterSpacing: 0,
-                  textTransform: 'uppercase',
-                }}
+                  textTransform: 'uppercase' }}
               >
                 DIGITAL
               </span>
@@ -104,8 +98,7 @@ export default function OgImage() {
                   color: '#6B1A1A',
                   lineHeight: 0.9,
                   letterSpacing: 0,
-                  textTransform: 'uppercase',
-                }}
+                  textTransform: 'uppercase' }}
               >
                 EXCELLENCE.
               </span>
@@ -117,8 +110,7 @@ export default function OgImage() {
                 fontSize: '18px',
                 color: '#888',
                 lineHeight: 1.6,
-                maxWidth: '560px',
-              }}
+                maxWidth: '560px' }}
             >
               Web development, AI automation, cybersecurity & digital operations for Indian businesses. Based in Rajasthan.
             </p>
@@ -131,8 +123,7 @@ export default function OgImage() {
               alignItems: 'center',
               justifyContent: 'space-between',
               paddingTop: '28px',
-              borderTop: '1px solid rgba(255,255,255,0.08)',
-            }}
+              borderTop: '1px solid rgba(255,255,255,0.08)' }}
           >
             <div style={{ display: 'flex', gap: '32px' }}>
               {['Web Dev', 'AI Automation', 'Cybersecurity', 'Social Media'].map(s => (

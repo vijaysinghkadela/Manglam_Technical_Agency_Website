@@ -22,8 +22,7 @@ export function DurationToggle({
         gap: '4px',
         padding: '6px',
         backgroundColor: 'var(--color-surface)',
-        border: '1px solid var(--color-border)',
-      }}
+        border: '1px solid var(--color-border)' }}
     >
       {durations.map((d, i) => (
         <button
@@ -38,8 +37,7 @@ export function DurationToggle({
               i === activeIndex
                 ? 'var(--color-canvas)'
                 : 'var(--color-muted)',
-            cursor: 'pointer',
-          }}
+            cursor: 'pointer' }}
         >
           {i === activeIndex && (
             <motion.span

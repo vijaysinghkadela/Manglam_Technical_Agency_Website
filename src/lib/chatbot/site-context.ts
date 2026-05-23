@@ -1,13 +1,8 @@
 import { services, getService } from "@/lib/data/services";
 import {
-  pricingPlans,
-  globalMarketBenchmarks,
-  costComparisonModels,
-} from "@/lib/data/pricing";
-import {
   departments as pricingDepartments,
   bundles as pricingBundles,
-} from "@/lib/data/pricing-2026";
+} from "@/lib/data/pricing";
 import {
   agreementSummaries,
   policyDocuments,
@@ -18,7 +13,6 @@ import {
   researchSections,
   leadToDeliveryPipeline,
 } from "@/lib/data/research";
-import { blogPosts } from "@/lib/data/blog";
 import { projects } from "@/lib/data/projects";
 import { testimonials } from "@/lib/data/testimonials";
 import { teamMembers } from "@/lib/data/team";
@@ -82,22 +76,6 @@ function summarizeService(service: (typeof services)[number]) {
     .join("\n");
 }
 
-function summarizePricingGroup(group: (typeof pricingPlans)[number]) {
-  return [
-    `${group.service} [${group.slug}]`,
-    `Badge: ${group.badge}`,
-    `Plans: ${group.plans
-      .slice(0, 3)
-      .map(
-        (plan) =>
-          `${plan.name} ${plan.price}${plan.period ? ` ${plan.period}` : ""}`,
-      )
-      .join(" | ")}`,
-  ]
-    .filter(Boolean)
-    .join("\n");
-}
-
 function summarizeProject(project: (typeof projects)[number]) {
   return [
     `${project.title} (${project.client})`,
@@ -106,16 +84,6 @@ function summarizeProject(project: (typeof projects)[number]) {
     `Value: ${project.value}`,
     `Summary: ${clip(project.description, 180)}`,
     `Deliverables: ${project.deliverables.slice(0, 4).join("; ")}`,
-  ]
-    .filter(Boolean)
-    .join("\n");
-}
-
-function summarizeBlogPost(post: (typeof blogPosts)[number]) {
-  return [
-    `${post.title} [${post.category}]`,
-    `Date: ${post.date} | Read time: ${post.readTime}`,
-    `Excerpt: ${clip(post.excerpt, 180)}`,
   ]
     .filter(Boolean)
     .join("\n");
@@ -201,23 +169,6 @@ function summarizePipelineStage(
     .join("\n");
 }
 
-function summarizeMarketBenchmark(
-  benchmark: (typeof globalMarketBenchmarks)[number],
-) {
-  return [
-    `${benchmark.service} [${benchmark.slug}]`,
-    `MTA advantage: ${clip(benchmark.mtaAdvantage, 180)}`,
-    `Top regions: ${benchmark.regions
-      .slice(0, 3)
-      .map(
-        (region) => `${region.region} ${region.lowRange}-${region.highRange}`,
-      )
-      .join(" | ")}`,
-  ]
-    .filter(Boolean)
-    .join("\n");
-}
-
 function summarizeDepartment(dept: (typeof pricingDepartments)[number]) {
   return [
     `${dept.department} [${dept.slug}]`,
@@ -230,17 +181,6 @@ function summarizeDepartment(dept: (typeof pricingDepartments)[number]) {
           `12-mo: ${plan.durations[2]?.price ?? "N/A"}`,
       )
       .join(" | ")}`,
-  ]
-    .filter(Boolean)
-    .join("\n");
-}
-
-function summarizeCostModel(model: (typeof costComparisonModels)[number]) {
-  return [
-    `${model.model}`,
-    `Monthly estimate: ${model.monthlyEstimate}`,
-    `Annual estimate: ${model.annualEstimate}`,
-    `Best for: ${clip(model.bestFor, 180)}`,
   ]
     .filter(Boolean)
     .join("\n");
@@ -285,26 +225,7 @@ function summarizePricingPage() {
     `Bundles: ${pricingBundles
       .map((b) => `${b.name} (${b.total})`)
       .join(" | ")}`,
-    `Old pricing groups: ${pricingPlans
-      .slice(0, 5)
-      .map((group) => `${group.service} (${group.badge})`)
-      .join(" | ")}`,
-    `Benchmarks: ${globalMarketBenchmarks
-      .slice(0, 4)
-      .map((benchmark) => benchmark.service)
-      .join(" | ")}`,
-    `Cost models: ${costComparisonModels.map((model) => model.model).join(" | ")}`,
-  ].join("\n");
-}
 
-function summarizeBlogPage() {
-  return [
-    "Page: /blog",
-    "Purpose: articles about web development, automation, cybersecurity, business, and AI implementation.",
-    `Top posts: ${blogPosts
-      .slice(0, 5)
-      .map((post) => `${post.title} [${post.category}]`)
-      .join(" | ")}`,
   ].join("\n");
 }
 
@@ -379,8 +300,6 @@ function summarizeCurrentPage(
     return joinDefined([titleLine, descriptionLine, summarizeServicesPage()]);
   if (route === "/pricing")
     return joinDefined([titleLine, descriptionLine, summarizePricingPage()]);
-  if (route === "/blog")
-    return joinDefined([titleLine, descriptionLine, summarizeBlogPage()]);
   if (route === "/portfolio")
     return joinDefined([titleLine, descriptionLine, summarizePortfolioPage()]);
   if (route === "/research")
@@ -395,17 +314,6 @@ function summarizeCurrentPage(
       descriptionLine,
       summarizeServicePage(route),
     ]);
-
-  if (route.startsWith("/blog/")) {
-    const slug = route.split("/")[2];
-    const post = blogPosts.find((item) => item.slug === slug);
-    return joinDefined([
-      titleLine,
-      descriptionLine,
-      `Page: Blog article (${post ? post.title : slug})`,
-      post ? summarizeBlogPost(post) : `Article slug: ${slug}`,
-    ]);
-  }
 
   if (route.startsWith("/portfolio/")) {
     const slug = route.split("/")[2];
@@ -500,21 +408,10 @@ export function buildSiteKnowledge(input: ChatContextInput = {}) {
       )
       .join("\n"),
     "",
-    "## PRICING PLANS (LEGACY)",
-    pricingPlans
-      .map((group) => `- ${summarizePricingGroup(group)}`)
-      .join("\n\n"),
-    "",
     "## PROJECTS (cite these by name when discussing proof)",
     projects
       .slice(0, 5)
       .map((project) => `- ${summarizeProject(project)}`)
-      .join("\n\n"),
-    "",
-    "## BLOG (relevant articles to share)",
-    blogPosts
-      .slice(0, 5)
-      .map((post) => `- ${summarizeBlogPost(post)}`)
       .join("\n\n"),
     "",
     "## TEAM",
@@ -553,16 +450,7 @@ export function buildSiteKnowledge(input: ChatContextInput = {}) {
       .map((stage) => `- ${summarizePipelineStage(stage)}`)
       .join("\n\n"),
     "",
-    "## MARKET BENCHMARKS",
-    globalMarketBenchmarks
-      .slice(0, 4)
-      .map((benchmark) => `- ${summarizeMarketBenchmark(benchmark)}`)
-      .join("\n\n"),
-    "",
-    "## COST MODELS",
-    costComparisonModels
-      .map((model) => `- ${summarizeCostModel(model)}`)
-      .join("\n\n"),
+
   ].join("\n");
 }
 

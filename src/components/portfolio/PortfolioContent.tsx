@@ -2,7 +2,9 @@
 
 import { motion } from 'framer-motion'
 import { ExternalLink, Lock } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
+import { useState } from 'react'
 import { projects } from '@/lib/data/projects'
 
 import type { Variants } from 'framer-motion'
@@ -16,15 +18,29 @@ const stagger = {
   show:   { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
 }
 
-const liveProjects   = projects.filter(p => p.status === 'live')
+type FilterType = 'all' | 'client' | 'product'
+
 const comingProjects = projects.filter(p => p.status === 'coming-soon')
 
 export function PortfolioContent() {
+  const [filter, setFilter] = useState<FilterType>('all')
+
+  const filteredProjects = projects.filter(p => {
+    if (p.status !== 'live') return false
+    if (filter === 'all') return true
+    return p.type === filter
+  })
+
+  const FILTERS: { key: FilterType; label: string }[] = [
+    { key: 'all', label: 'All Work' },
+    { key: 'client', label: 'Client Projects' },
+    { key: 'product', label: 'Our Products' },
+  ]
   return (
     <div style={{ backgroundColor: 'var(--color-canvas)' }}>
 
       {/* ── Case Studies (Live) ───────────────────────────────── */}
-      <section style={{ borderTop: '1px solid var(--color-border)', padding: 'clamp(72px, 10vw, 128px) 0' }}>
+      <section className="section" style={{ borderTop: '1px solid var(--color-border)' }}>
         <div className="container-site">
 
           <motion.span
@@ -32,14 +48,34 @@ export function PortfolioContent() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true }}
-            className="font-mono uppercase block mb-20"
+            className="font-mono uppercase block mb-10"
             style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.22em' }}
           >
             ✦ CASE STUDIES
           </motion.span>
 
+          <div className="flex flex-wrap gap-3 mb-14">
+            {FILTERS.map((f) => (
+              <button
+                key={f.key}
+                onClick={() => setFilter(f.key)}
+                className="font-mono uppercase transition-all duration-200 cursor-pointer"
+                style={{
+                  fontSize: '11px',
+                  letterSpacing: '0.18em',
+                  padding: '8px 18px',
+                  borderRadius: '9999px',
+                  border: `1px solid ${filter === f.key ? 'var(--color-violet)' : 'var(--color-border)'}`,
+                  color: filter === f.key ? 'var(--color-violet-light)' : 'var(--color-muted)',
+                  backgroundColor: filter === f.key ? 'rgba(var(--color-accent-rgb),0.1)' : 'transparent' }}
+              >
+                {f.label}
+              </button>
+            ))}
+          </div>
+
           <div className="flex flex-col" style={{ borderTop: '1px solid var(--color-border)' }}>
-            {liveProjects.map((p, i) => (
+            {filteredProjects.map((p, i) => (
               <motion.article
                 key={p.id}
                 variants={stagger}
@@ -49,15 +85,32 @@ export function PortfolioContent() {
                 className="grid grid-cols-1 lg:grid-cols-[45%_55%]"
                 style={{ borderBottom: '1px solid var(--color-border)' }}
               >
-                {/* Left — Gradient visual panel */}
+                {/* Left — Visual panel */}
                 <motion.div
                   variants={fadeUp}
                   className="relative overflow-hidden"
                   style={{
                     background: `linear-gradient(135deg, ${p.bgFrom} 0%, ${p.bgTo} 100%)`,
-                    minHeight: 'clamp(280px, 38vw, 540px)',
-                  }}
+                    minHeight: 'clamp(280px, 38vw, 540px)' }}
                 >
+                  {p.image && (
+                    <Image
+                      src={p.image}
+                      alt={`${p.title} screenshot`}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 45vw"
+                      className="object-contain"
+                    />
+                  )}
+
+                  {/* Edge gradient overlay for text readability */}
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: `linear-gradient(135deg, ${p.bgFrom}66 0%, ${p.bgFrom}22 40%, transparent 55%, ${p.bgTo}22 80%, ${p.bgTo}66 100%)`,
+                    }}
+                  />
+
                   {/* Watermark number */}
                   <span
                     className="absolute top-8 left-8 font-display font-black leading-none select-none pointer-events-none"
@@ -67,16 +120,15 @@ export function PortfolioContent() {
                     {String(i + 1).padStart(2, '0')}
                   </span>
 
-                  {/* Project identity */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-5 p-8">
+                  {/* Project identity — bottom-aligned */}
+                  <div className="absolute inset-x-0 bottom-0 flex flex-col items-center justify-end gap-4 p-8 pb-10" style={{ background: 'linear-gradient(0deg, rgba(0,0,0,0.65) 0%, transparent 100%)' }}>
                     <div
                       className="flex items-center justify-center"
                       style={{
-                        width: 'clamp(56px, 6vw, 80px)',
-                        height: 'clamp(56px, 6vw, 80px)',
+                        width: 'clamp(48px, 5vw, 64px)',
+                        height: 'clamp(48px, 5vw, 64px)',
                         border: '1px solid rgba(255,255,255,0.15)',
-                        backgroundColor: 'rgba(0,0,0,0.45)',
-                      }}
+                        backgroundColor: 'rgba(0,0,0,0.5)' }}
                     >
                       <span
                         className="font-display font-black text-white"
@@ -89,34 +141,47 @@ export function PortfolioContent() {
                     <div className="text-center">
                       <p
                         className="font-display font-bold text-white"
-                        style={{ fontSize: 'clamp(1rem, 1.8vw, 1.35rem)' }}
+                        style={{ fontSize: 'clamp(0.95rem, 1.5vw, 1.15rem)' }}
                       >
                         {p.title}
                       </p>
                       {p.url && (
                         <p
-                          className="font-mono mt-1"
-                          style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.05em' }}
+                          className="font-mono mt-0.5"
+                          style={{ fontSize: '10px', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.05em' }}
                         >
                           {p.url.replace('https://', '')}
                         </p>
                       )}
                     </div>
 
-                    {p.featured && (
+                    <div className="flex flex-wrap gap-2 justify-center">
+                      {p.featured && (
+                        <span
+                          className="font-mono uppercase text-white"
+                          style={{
+                            fontSize: '10px',
+                            letterSpacing: '0.22em',
+                            border: '1px solid rgba(var(--color-accent-rgb),0.5)',
+                            padding: '4px 14px',
+                            backgroundColor: 'rgba(var(--color-accent-rgb),0.22)' }}
+                        >
+                          ✦ Signature Project
+                        </span>
+                      )}
                       <span
-                        className="font-mono uppercase text-white"
+                        className="font-mono uppercase"
                         style={{
                           fontSize: '10px',
                           letterSpacing: '0.22em',
-                          border: '1px solid rgba(107,26,26,0.5)',
+                          border: p.type === 'client' ? '1px solid rgba(16,185,129,0.5)' : '1px solid rgba(59,130,246,0.5)',
                           padding: '4px 14px',
-                          backgroundColor: 'rgba(107,26,26,0.22)',
-                        }}
+                          backgroundColor: p.type === 'client' ? 'rgba(16,185,129,0.15)' : 'rgba(59,130,246,0.15)',
+                          color: p.type === 'client' ? '#10b981' : '#60a5fa' }}
                       >
-                        ✦ Signature Project
+                        {p.type === 'client' ? '✦ Client Project' : '✦ MTA Product'}
                       </span>
-                    )}
+                    </div>
                   </div>
                 </motion.div>
 
@@ -137,8 +202,7 @@ export function PortfolioContent() {
                           color: 'var(--color-dead)',
                           letterSpacing: '0.18em',
                           border: '1px solid var(--color-border)',
-                          padding: '3px 10px',
-                        }}
+                          padding: '3px 10px' }}
                       >
                         {t}
                       </span>
@@ -214,8 +278,7 @@ export function PortfolioContent() {
                               fontSize: '11px',
                               color: 'var(--color-muted)',
                               border: '1px solid var(--color-border)',
-                              padding: '3px 10px',
-                            }}
+                              padding: '3px 10px' }}
                           >
                             {t}
                           </span>
@@ -275,11 +338,10 @@ export function PortfolioContent() {
 
       {/* ── Pipeline (Coming Soon) ─────────────────────────────── */}
       <section
+        className="section"
         style={{
           borderTop: '1px solid var(--color-border)',
-          padding: 'clamp(72px, 10vw, 128px) 0',
-          backgroundColor: 'var(--color-surface)',
-        }}
+          backgroundColor: 'var(--color-surface)' }}
       >
         <div className="container-site">
 
@@ -327,11 +389,10 @@ export function PortfolioContent() {
                   className="font-display font-black leading-none select-none transition-colors duration-500 group-hover:text-violet"
                   style={{
                     fontSize: 'clamp(1.75rem, 3vw, 2.75rem)',
-                    color: 'rgba(107,26,26,0.15)',
-                    lineHeight: 1,
-                  }}
+                    color: 'rgba(var(--color-accent-rgb),0.15)',
+                    lineHeight: 1 }}
                 >
-                  {String(liveProjects.length + i + 1).padStart(2, '0')}
+                  {String(i + 1).padStart(2, '0')}
                 </span>
 
                 {/* Info */}
@@ -341,8 +402,7 @@ export function PortfolioContent() {
                     style={{
                       fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)',
                       color: 'var(--color-foreground)',
-                      lineHeight: 1.2,
-                    }}
+                      lineHeight: 1.2 }}
                   >
                     {p.title}
                   </h3>
@@ -399,10 +459,9 @@ export function PortfolioContent() {
             viewport={{ once: true, margin: "-50px" }}
             className="mt-24 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8"
             style={{
-              border: '1px solid rgba(107,26,26,0.3)',
+              border: '1px solid rgba(var(--color-accent-rgb),0.3)',
               padding: 'clamp(20px, 3vw, 36px)',
-              backgroundColor: 'rgba(107,26,26,0.03)',
-            }}
+              backgroundColor: 'rgba(var(--color-accent-rgb),0.03)' }}
           >
             <div>
               <span

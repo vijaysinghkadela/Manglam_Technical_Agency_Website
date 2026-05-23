@@ -2,6 +2,7 @@ import PageHero from '@/components/ui/PageHero'
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { Shield, FileText, AlertTriangle, Clock, Download, Lock, ShieldCheck, ChevronRight } from 'lucide-react'
+import Badge from '@/components/ui/Badge'
 
 export const metadata: Metadata = {
   title: 'Cybersecurity Legal Resources | Manglam Technical Agency',
@@ -24,12 +25,12 @@ export default function CybersecurityLegalPage() {
         <div className="container-site space-y-16">
 
           {/* Section 1: Critical Legal Baseline */}
-          <section className="relative overflow-hidden rounded-3xl bg-[#111] border border-red-900/50 p-8">
-            <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#6B1A1A]" />
+          <section className="relative overflow-hidden rounded-3xl bg-card border border-red-900/50 p-8">
+            <div className="absolute left-0 top-0 bottom-0 w-1 bg-violet" />
             <div className="flex items-start gap-6">
               <div className="shrink-0">
-                <div className="w-14 h-14 rounded-2xl bg-[#6B1A1A]/20 border border-[#6B1A1A]/40 flex items-center justify-center">
-                  <Shield className="w-7 h-7 text-[#6B1A1A]" />
+                <div className="w-14 h-14 rounded-2xl bg-violet/20 border border-violet/40 flex items-center justify-center">
+                  <Shield className="w-7 h-7 text-violet" />
                 </div>
               </div>
               <div className="flex-1">
@@ -45,7 +46,7 @@ export default function CybersecurityLegalPage() {
                     'All client data deleted within 7 days post-engagement',
                   ].map((point) => (
                     <li key={point} className="flex items-start gap-3 text-sm text-muted">
-                      <ShieldCheck className="w-4 h-4 text-[#6B1A1A] shrink-0 mt-0.5" />
+                      <ShieldCheck className="w-4 h-4 text-violet shrink-0 mt-0.5" />
                       <span>{point}</span>
                     </li>
                   ))}
@@ -88,9 +89,9 @@ export default function CybersecurityLegalPage() {
                   </div>
                 </div>
                 <div className="px-6 pb-6">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface border border-border text-xs font-mono text-muted">
+                  <Badge variant="subtle" size="sm">
                     Public template available on request
-                  </span>
+                  </Badge>
                 </div>
               </div>
 
@@ -98,8 +99,8 @@ export default function CybersecurityLegalPage() {
               <div className="group border border-border bg-card hover:border-red-900/50 transition-colors rounded-2xl overflow-hidden">
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-6">
-                    <div className="w-12 h-12 rounded-xl bg-[#6B1A1A]/10 border border-[#6B1A1A]/20 flex items-center justify-center">
-                      <AlertTriangle className="w-6 h-6 text-[#6B1A1A]" />
+                    <div className="w-12 h-12 rounded-xl bg-violet/10 border border-violet/20 flex items-center justify-center">
+                      <AlertTriangle className="w-6 h-6 text-violet" />
                     </div>
                     <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-muted bg-canvas px-2 py-1 rounded">MTA-DPDP-BREACH</span>
                   </div>
@@ -112,7 +113,7 @@ export default function CybersecurityLegalPage() {
                     <ul className="space-y-1.5">
                       {['Data Principal notice (plain language)', 'DPB detailed report (72-hour)', 'Processor-to-Fiduciary alert (24-hour)'].map((item) => (
                         <li key={item} className="flex items-center gap-2 text-xs text-muted">
-                          <span className="w-1 h-1 rounded-full bg-[#6B1A1A]" />
+                          <span className="w-1 h-1 rounded-full bg-violet" />
                           {item}
                         </li>
                       ))}
@@ -120,7 +121,7 @@ export default function CybersecurityLegalPage() {
                   </div>
                 </div>
                 <div className="px-6 pb-6">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#6B1A1A]/10 border border-[#6B1A1A]/30 text-xs font-mono text-[#c46c6c]">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-violet/10 border border-violet/30 text-xs font-mono text-accent">
                     <Lock className="w-3 h-3" />
                     Mandatory for all engagements
                   </span>
@@ -153,9 +154,9 @@ export default function CybersecurityLegalPage() {
                   </div>
                 </div>
                 <div className="px-6 pb-6">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface border border-border text-xs font-mono text-muted">
+                  <Badge variant="subtle" size="sm">
                     Required for body corporates
-                  </span>
+                  </Badge>
                 </div>
               </div>
             </div>
@@ -171,7 +172,7 @@ export default function CybersecurityLegalPage() {
             <div className="border border-border bg-card rounded-2xl p-8">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
                 {/* Timeline connector */}
-                <div className="hidden md:block absolute top-8 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-violet/30 via-[#6B1A1A]/50 to-violet/30" />
+                <div className="hidden md:block absolute top-8 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-violet/30 via-violet/50 to-violet/30" />
 
                 {[
                   {
@@ -205,15 +206,15 @@ export default function CybersecurityLegalPage() {
                 ].map((item, index) => (
                   <div key={item.step} className="relative flex flex-col items-center text-center">
                     <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-4 relative z-10 ${
-                      index === 1 ? 'bg-[#6B1A1A]/20 border-2 border-[#6B1A1A]' : 'bg-violet/10 border border-violet/30'
+                      index === 1 ? 'bg-violet/20 border-2 border-violet' : 'bg-violet/10 border border-violet/30'
                     }`}>
-                      <item.icon className={`w-7 h-7 ${index === 1 ? 'text-[#6B1A1A]' : 'text-violet-light'}`} />
+                      <item.icon className={`w-7 h-7 ${index === 1 ? 'text-violet' : 'text-violet-light'}`} />
                     </div>
                     <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-muted mb-1">Step {item.step}</span>
                     <h4 className="font-display font-bold text-lg text-white mb-2">{item.title}</h4>
                     <p className="text-xs text-muted leading-relaxed mb-3">{item.description}</p>
                     <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-mono uppercase tracking-wide ${
-                      index === 1 ? 'bg-[#6B1A1A]/20 text-[#c46c6c]' : 'bg-surface text-muted'
+                      index === 1 ? 'bg-violet/20 text-accent' : 'bg-surface text-muted'
                     }`}>
                       <Clock className="w-3 h-3" />
                       {item.time}
@@ -223,11 +224,11 @@ export default function CybersecurityLegalPage() {
               </div>
 
               <div className="mt-8 pt-6 border-t border-border">
-                <div className="flex items-start gap-3 p-4 rounded-xl bg-[#6B1A1A]/10 border border-[#6B1A1A]/30">
-                  <AlertTriangle className="w-5 h-5 text-[#6B1A1A] shrink-0 mt-0.5" />
+                <div className="flex items-start gap-3 p-4 rounded-xl bg-violet/10 border border-violet/30">
+                  <AlertTriangle className="w-5 h-5 text-violet shrink-0 mt-0.5" />
                   <div>
                     <p className="text-sm font-medium text-white mb-1">Critical Warning</p>
-                    <p className="text-xs text-muted">Failure to notify exposes both parties to penalties up to <span className="text-[#c46c6c] font-mono">₹250 Crore</span> under DPDP Act 2023.</p>
+                    <p className="text-xs text-muted">Failure to notify exposes both parties to penalties up to <span className="text-accent font-mono">₹250 Crore</span> under DPDP Act 2023.</p>
                   </div>
                 </div>
               </div>

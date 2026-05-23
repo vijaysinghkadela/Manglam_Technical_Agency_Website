@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { ContactContent } from '@/components/contact/ContactContent'
 import ContactForm from '@/components/contact/ContactForm'
+import { FAQSection } from '@/components/ui/FAQSection'
+import { contactFaqs } from '@/lib/data/faq'
 import { JsonLd }         from '@/components/seo/JsonLd'
 import { breadcrumbSchema, webPageSchema } from '@/lib/seo/schemas'
 
@@ -23,6 +25,7 @@ export default function ContactPage() {
       <JsonLd schema={breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Contact', url: '/contact' }])} />
       <JsonLd schema={webPageSchema({ url: '/contact', title: 'Contact Manglam Technical Agency', description: 'Get in touch with MTA engineers. Web development, AI automation, cybersecurity projects — Rajasthan.' })} />
       <ContactContent formNode={<ContactForm />} />
+      <FAQSection items={contactFaqs} title="Quick Answers" />
     </main>
   )
 }

@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import { ServicePricingSection } from "@/components/pricing/ServicePricingSection";
-import { departments as pricingDepartments } from "@/lib/data/pricing-2026";
+import { departments as pricingDepartments } from "@/lib/data/pricing";
 
 type Params = { slug: string };
 type ServiceData = NonNullable<ReturnType<typeof getService>>;
@@ -135,8 +135,7 @@ export default async function ServicePage({
             height: "clamp(300px, 38vw, 660px)",
             borderRadius: "50%",
             background:
-              "radial-gradient(circle, rgba(107,26,26,0.07) 0%, transparent 68%)",
-          }}
+              "radial-gradient(circle, rgba(var(--color-accent-rgb),0.07) 0%, transparent 68%)" }}
         />
 
         <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-12 sm:pb-16 lg:pb-20">
@@ -147,8 +146,7 @@ export default async function ServicePage({
               style={{
                 fontSize: "11px",
                 color: "var(--color-dead)",
-                letterSpacing: "0.18em",
-              }}
+                letterSpacing: "0.18em" }}
             >
               <Link href="/" className="hover-foreground transition-colors">
                 HOME
@@ -170,8 +168,7 @@ export default async function ServicePage({
               style={{
                 fontSize: "11px",
                 color: "var(--color-violet-light)",
-                letterSpacing: "0.22em",
-              }}
+                letterSpacing: "0.22em" }}
             >
               SERVICE OVERVIEW
             </span>
@@ -184,9 +181,8 @@ export default async function ServicePage({
               <div
                 className="w-10 h-10 flex items-center justify-center"
                 style={{
-                  border: "1px solid rgba(107,26,26,0.35)",
-                  backgroundColor: "rgba(107,26,26,0.08)",
-                }}
+                  border: "1px solid rgba(var(--color-accent-rgb),0.35)",
+                  backgroundColor: "rgba(var(--color-accent-rgb),0.08)" }}
               >
                 <service.Icon
                   className="w-5 h-5"
@@ -198,8 +194,7 @@ export default async function ServicePage({
                 style={{
                   fontSize: "11px",
                   color: "var(--color-violet-light)",
-                  letterSpacing: "0.22em",
-                }}
+                  letterSpacing: "0.22em" }}
               >
                 ✦ MTA SERVICE
               </span>
@@ -210,8 +205,7 @@ export default async function ServicePage({
               className="font-display font-black leading-none tracking-normal"
               style={{
                 fontSize: "clamp(3rem, 8vw, 8rem)",
-                color: "var(--color-foreground)",
-              }}
+                color: "var(--color-foreground)" }}
             >
               {service.name.split(" ").map((word, i, arr) => (
                 <span
@@ -221,8 +215,7 @@ export default async function ServicePage({
                     color:
                       i === arr.length - 1 && arr.length > 1
                         ? "var(--color-violet)"
-                        : "var(--color-foreground)",
-                  }}
+                        : "var(--color-foreground)" }}
                 >
                   {word}
                 </span>
@@ -237,8 +230,7 @@ export default async function ServicePage({
                   lineHeight: 1.7,
                   color: "var(--color-muted)",
                   maxWidth: "480px",
-                  fontStyle: "italic",
-                }}
+                  fontStyle: "italic" }}
               >
                 {service.tagline}
               </p>
@@ -249,8 +241,7 @@ export default async function ServicePage({
                   style={{
                     fontSize: "10px",
                     color: "var(--color-dead)",
-                    letterSpacing: "0.14em",
-                  }}
+                    letterSpacing: "0.14em" }}
                 >
                   Starting at
                 </span>
@@ -258,8 +249,7 @@ export default async function ServicePage({
                   className="font-display font-black"
                   style={{
                     fontSize: "clamp(1.25rem, 2.5vw, 2rem)",
-                    color: "var(--color-foreground)",
-                  }}
+                    color: "var(--color-foreground)" }}
                 >
                   {service.priceLabel.replace(/^(From |Starting at )/, "")}
                 </span>
@@ -274,8 +264,7 @@ export default async function ServicePage({
               className="inline-flex items-center gap-2 px-8 py-5 font-display font-black text-[15px] hover:bg-violet hover:text-white transition-all duration-300"
               style={{
                 backgroundColor: "var(--color-foreground)",
-                color: "var(--color-canvas)",
-              }}
+                color: "var(--color-canvas)" }}
               data-cursor="pointer"
             >
               Book Discovery Workshop →
@@ -289,8 +278,7 @@ export default async function ServicePage({
                   color: "var(--color-dead)",
                   letterSpacing: "0.22em",
                   writingMode: "vertical-rl",
-                  transform: "rotate(180deg)",
-                }}
+                  transform: "rotate(180deg)" }}
               >
                 Scroll
               </span>
@@ -298,8 +286,7 @@ export default async function ServicePage({
                 style={{
                   width: "1px",
                   height: "48px",
-                  backgroundColor: "var(--color-border)",
-                }}
+                  backgroundColor: "var(--color-border)" }}
               />
             </div>
           </div>
@@ -327,16 +314,14 @@ export default async function ServicePage({
                 style={{
                   borderRight: i < 3 ? "1px solid var(--color-border)" : "none",
                   borderBottom:
-                    i < 2 ? "1px solid var(--color-border)" : "none",
-                }}
+                    i < 2 ? "1px solid var(--color-border)" : "none" }}
               >
                 <p
                   className="font-mono uppercase mb-1"
                   style={{
                     fontSize: "10px",
                     color: "var(--color-dead)",
-                    letterSpacing: "0.15em",
-                  }}
+                    letterSpacing: "0.15em" }}
                 >
                   {label}
                 </p>
@@ -357,8 +342,7 @@ export default async function ServicePage({
         className="border-t border-border"
         style={{
           backgroundColor: "var(--color-canvas)",
-          padding: "clamp(72px, 10vw, 128px) 0",
-        }}
+          padding: "clamp(72px, 10vw, 128px) 0" }}
       >
         <div className="container-site">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.65fr] gap-20 lg:gap-28 items-start">
@@ -371,8 +355,7 @@ export default async function ServicePage({
                   style={{
                     fontSize: "11px",
                     color: "var(--color-violet-light)",
-                    letterSpacing: "0.22em",
-                  }}
+                    letterSpacing: "0.22em" }}
                 >
                   OVERVIEW
                 </span>
@@ -380,8 +363,7 @@ export default async function ServicePage({
                   style={{
                     fontSize: "16px",
                     lineHeight: 1.78,
-                    color: "var(--color-muted)",
-                  }}
+                    color: "var(--color-muted)" }}
                 >
                   {service.description}
                 </p>
@@ -394,8 +376,7 @@ export default async function ServicePage({
                   style={{
                     fontSize: "11px",
                     color: "var(--color-dead)",
-                    letterSpacing: "0.22em",
-                  }}
+                    letterSpacing: "0.22em" }}
                 >
                   INCLUDED
                 </span>
@@ -410,8 +391,7 @@ export default async function ServicePage({
                         style={{
                           color: "var(--color-violet-light)",
                           flexShrink: 0,
-                          marginTop: "1px",
-                        }}
+                          marginTop: "1px" }}
                       >
                         →
                       </span>
@@ -426,16 +406,14 @@ export default async function ServicePage({
                 style={{
                   border: "1px solid var(--color-border)",
                   padding: "28px",
-                  backgroundColor: "var(--color-surface)",
-                }}
+                  backgroundColor: "var(--color-surface)" }}
               >
                 <span
                   className="font-mono uppercase block mb-4"
                   style={{
                     fontSize: "10px",
                     color: "var(--color-violet-light)",
-                    letterSpacing: "0.18em",
-                  }}
+                    letterSpacing: "0.18em" }}
                 >
                   LEGAL & COMPLIANCE
                 </span>
@@ -445,8 +423,7 @@ export default async function ServicePage({
                     fontSize: "13px",
                     lineHeight: 1.72,
                     color: "var(--color-muted)",
-                    marginBottom: "16px",
-                  }}
+                    marginBottom: "16px" }}
                 >
                   {service.dpaTrigger}
                 </p>
@@ -460,9 +437,8 @@ export default async function ServicePage({
                         href={`/legal/agreements/${agreement.slug}`}
                         className="font-mono text-xs px-2 py-1 transition-colors hover:text-white"
                         style={{
-                          border: "1px solid rgba(107,26,26,0.35)",
-                          color: "var(--color-violet-light)",
-                        }}
+                          border: "1px solid rgba(var(--color-accent-rgb),0.35)",
+                          color: "var(--color-violet-light)" }}
                       >
                         {code}
                       </Link>
@@ -472,8 +448,7 @@ export default async function ServicePage({
                         className="font-mono text-xs px-2 py-1"
                         style={{
                           border: "1px solid var(--color-border)",
-                          color: "var(--color-muted)",
-                        }}
+                          color: "var(--color-muted)" }}
                       >
                         {code}
                       </span>
@@ -501,8 +476,7 @@ export default async function ServicePage({
                     style={{
                       fontSize: "10px",
                       color: "var(--color-dead)",
-                      letterSpacing: "0.15em",
-                    }}
+                      letterSpacing: "0.15em" }}
                   >
                     DELIVERY STAGES
                   </p>
@@ -513,8 +487,7 @@ export default async function ServicePage({
                         className="font-mono text-xs px-2 py-1"
                         style={{
                           border: "1px solid var(--color-border)",
-                          color: "var(--color-muted)",
-                        }}
+                          color: "var(--color-muted)" }}
                       >
                         {String(stage).padStart(2, "0")}
                       </span>
@@ -526,8 +499,7 @@ export default async function ServicePage({
                     style={{
                       fontSize: "12px",
                       color: "var(--color-violet-light)",
-                      display: "block",
-                    }}
+                      display: "block" }}
                   >
                     View stage definitions →
                   </Link>
@@ -540,8 +512,7 @@ export default async function ServicePage({
                 className="inline-flex items-center gap-2 w-fit px-8 py-5 font-display font-black text-[15px] hover:bg-violet hover:text-white transition-all duration-300"
                 style={{
                   backgroundColor: "var(--color-foreground)",
-                  color: "var(--color-canvas)",
-                }}
+                  color: "var(--color-canvas)" }}
                 data-cursor="pointer"
               >
                 Get a Quote →
@@ -555,8 +526,7 @@ export default async function ServicePage({
                 style={{
                   fontSize: "11px",
                   color: "var(--color-violet-light)",
-                  letterSpacing: "0.22em",
-                }}
+                  letterSpacing: "0.22em" }}
               >
                 HOW IT WORKS
               </span>
@@ -568,8 +538,7 @@ export default async function ServicePage({
                     className="group"
                     style={{
                       borderBottom: "1px solid var(--color-border)",
-                      padding: "40px 0",
-                    }}
+                      padding: "40px 0" }}
                   >
                     <div className="grid grid-cols-[80px_1fr] lg:grid-cols-[100px_1fr] gap-6 lg:gap-8">
                       {/* Big watermark number */}
@@ -577,8 +546,7 @@ export default async function ServicePage({
                         className="font-display font-black leading-none transition-colors duration-500 group-hover:text-violet"
                         style={{
                           fontSize: "clamp(3rem, 5vw, 4.5rem)",
-                          color: "rgba(107,26,26,0.15)",
-                        }}
+                          color: "rgba(var(--color-accent-rgb),0.15)" }}
                       >
                         {String(step.step).padStart(2, "0")}
                       </span>
@@ -589,8 +557,7 @@ export default async function ServicePage({
                             className="font-display font-bold"
                             style={{
                               fontSize: "clamp(1.1rem, 1.8vw, 1.5rem)",
-                              color: "var(--color-foreground)",
-                            }}
+                              color: "var(--color-foreground)" }}
                           >
                             {step.title}
                           </h3>
@@ -606,8 +573,7 @@ export default async function ServicePage({
                           style={{
                             fontSize: "14px",
                             lineHeight: 1.72,
-                            color: "var(--color-muted)",
-                          }}
+                            color: "var(--color-muted)" }}
                         >
                           {step.summary}
                         </p>
@@ -619,8 +585,7 @@ export default async function ServicePage({
                             color: "var(--color-dead)",
                             borderLeft: "2px solid var(--color-border)",
                             paddingLeft: "12px",
-                            marginTop: "4px",
-                          }}
+                            marginTop: "4px" }}
                         >
                           {step.detail}
                         </p>
@@ -647,8 +612,7 @@ export default async function ServicePage({
         className="border-t border-border"
         style={{
           backgroundColor: "var(--color-canvas)",
-          padding: "clamp(56px, 8vw, 96px) 0",
-        }}
+          padding: "clamp(56px, 8vw, 96px) 0" }}
       >
         <div className="container-site">
           <div
@@ -656,8 +620,7 @@ export default async function ServicePage({
             style={{
               border: "1px solid var(--color-border)",
               padding: "clamp(28px, 4vw, 56px)",
-              backgroundColor: "var(--color-surface)",
-            }}
+              backgroundColor: "var(--color-surface)" }}
           >
             <div>
               <span
@@ -665,8 +628,7 @@ export default async function ServicePage({
                 style={{
                   fontSize: "11px",
                   color: "var(--color-violet-light)",
-                  letterSpacing: "0.22em",
-                }}
+                  letterSpacing: "0.22em" }}
               >
                 COMPLIANCE BY DESIGN
               </span>
@@ -675,8 +637,7 @@ export default async function ServicePage({
                 style={{
                   fontSize: "clamp(1.2rem, 2.2vw, 1.9rem)",
                   color: "var(--color-foreground)",
-                  lineHeight: 1.1,
-                }}
+                  lineHeight: 1.1 }}
               >
                 This service is mapped to MTA&apos;s
                 <br />
@@ -688,8 +649,7 @@ export default async function ServicePage({
                   lineHeight: 1.72,
                   color: "var(--color-muted)",
                   marginTop: "10px",
-                  maxWidth: "480px",
-                }}
+                  maxWidth: "480px" }}
               >
                 Service execution is gated through signed agreements,
                 payment-linked transitions, and documented handover controls.
@@ -720,8 +680,7 @@ export default async function ServicePage({
         className="border-t border-border"
         style={{
           backgroundColor: "var(--color-canvas)",
-          padding: "clamp(72px, 10vw, 128px) 0",
-        }}
+          padding: "clamp(72px, 10vw, 128px) 0" }}
       >
         <div className="container-site" style={{ maxWidth: "860px" }}>
           <span
@@ -729,8 +688,7 @@ export default async function ServicePage({
             style={{
               fontSize: "11px",
               color: "var(--color-violet-light)",
-              letterSpacing: "0.22em",
-            }}
+              letterSpacing: "0.22em" }}
           >
             FAQ
           </span>
@@ -738,8 +696,7 @@ export default async function ServicePage({
             className="font-display font-black mb-14 lg:mb-20"
             style={{
               fontSize: "clamp(1.5rem, 3.5vw, 2.75rem)",
-              color: "var(--color-foreground)",
-            }}
+              color: "var(--color-foreground)" }}
           >
             Questions?
           </h2>
@@ -760,8 +717,7 @@ export default async function ServicePage({
                     className="font-display font-bold pr-8"
                     style={{
                       fontSize: "clamp(1rem, 1.5vw, 1.2rem)",
-                      color: "var(--color-foreground)",
-                    }}
+                      color: "var(--color-foreground)" }}
                   >
                     {faq.q}
                   </h3>
@@ -775,8 +731,7 @@ export default async function ServicePage({
                     style={{
                       fontSize: "15px",
                       lineHeight: 1.78,
-                      color: "var(--color-muted)",
-                    }}
+                      color: "var(--color-muted)" }}
                   >
                     {faq.a}
                   </p>
@@ -792,8 +747,7 @@ export default async function ServicePage({
         className="border-t border-border"
         style={{
           backgroundColor: "var(--color-surface)",
-          padding: "clamp(56px, 8vw, 112px) 0",
-        }}
+          padding: "clamp(56px, 8vw, 112px) 0" }}
       >
         <div className="container-site">
           <span
@@ -801,8 +755,7 @@ export default async function ServicePage({
             style={{
               fontSize: "11px",
               color: "var(--color-violet-light)",
-              letterSpacing: "0.22em",
-            }}
+              letterSpacing: "0.22em" }}
           >
             OTHER SERVICES
           </span>
@@ -810,8 +763,7 @@ export default async function ServicePage({
             className="font-display font-black mb-12"
             style={{
               fontSize: "clamp(1.5rem, 2.5vw, 2.25rem)",
-              color: "var(--color-foreground)",
-            }}
+              color: "var(--color-foreground)" }}
           >
             Keep Exploring
           </h2>
@@ -842,8 +794,7 @@ export default async function ServicePage({
                       className="font-display font-bold"
                       style={{
                         fontSize: "18px",
-                        color: "var(--color-foreground)",
-                      }}
+                        color: "var(--color-foreground)" }}
                     >
                       {s.name}
                     </h3>
@@ -851,8 +802,7 @@ export default async function ServicePage({
                       style={{
                         fontSize: "13px",
                         color: "var(--color-muted)",
-                        lineHeight: 1.6,
-                      }}
+                        lineHeight: 1.6 }}
                     >
                       {s.tagline}
                     </p>
@@ -879,8 +829,7 @@ function OldPricingSectionInline({ service }: { service: ServiceData }) {
       className="border-t border-border"
       style={{
         backgroundColor: "var(--color-surface)",
-        padding: "clamp(72px, 10vw, 128px) 0",
-      }}
+        padding: "clamp(72px, 10vw, 128px) 0" }}
     >
       <div className="container-site">
         <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 mb-12 lg:mb-20">
@@ -890,8 +839,7 @@ function OldPricingSectionInline({ service }: { service: ServiceData }) {
               style={{
                 fontSize: "11px",
                 color: "var(--color-violet-light)",
-                letterSpacing: "0.22em",
-              }}
+                letterSpacing: "0.22em" }}
             >
               PRICING
             </span>
@@ -899,8 +847,7 @@ function OldPricingSectionInline({ service }: { service: ServiceData }) {
               className="font-display font-black leading-tight"
               style={{
                 fontSize: "clamp(1.5rem, 3vw, 2.75rem)",
-                color: "var(--color-foreground)",
-              }}
+                color: "var(--color-foreground)" }}
             >
               Plans &<br />
               Investment
@@ -918,16 +865,14 @@ function OldPricingSectionInline({ service }: { service: ServiceData }) {
                   ? "1px solid var(--color-violet)"
                   : "1px solid var(--color-border)",
                 backgroundColor: plan.highlight
-                  ? "rgba(107,26,26,0.04)"
-                  : "var(--color-card)",
-              }}
+                  ? "rgba(var(--color-accent-rgb),0.04)"
+                  : "var(--color-card)" }}
             >
               {plan.highlight && (
                 <div
                   style={{
                     backgroundColor: "var(--color-violet)",
-                    padding: "6px 20px",
-                  }}
+                    padding: "6px 20px" }}
                 >
                   <span className="font-mono text-xs text-white uppercase tracking-widest">
                     ✦ Recommended
@@ -941,8 +886,7 @@ function OldPricingSectionInline({ service }: { service: ServiceData }) {
                     className="font-display font-bold mb-3"
                     style={{
                       fontSize: "17px",
-                      color: "var(--color-foreground)",
-                    }}
+                      color: "var(--color-foreground)" }}
                   >
                     {plan.label}
                   </p>
@@ -952,8 +896,7 @@ function OldPricingSectionInline({ service }: { service: ServiceData }) {
                       fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
                       color: plan.highlight
                         ? "var(--color-violet-light)"
-                        : "var(--color-foreground)",
-                    }}
+                        : "var(--color-foreground)" }}
                   >
                     {plan.amount}
                   </p>
@@ -974,8 +917,7 @@ function OldPricingSectionInline({ service }: { service: ServiceData }) {
                       color: "var(--color-dead)",
                       borderLeft: "2px solid var(--color-violet)",
                       paddingLeft: "10px",
-                      lineHeight: 1.65,
-                    }}
+                      lineHeight: 1.65 }}
                   >
                     {plan.subtext}
                   </p>
@@ -984,8 +926,7 @@ function OldPricingSectionInline({ service }: { service: ServiceData }) {
                 <div
                   style={{
                     height: "1px",
-                    backgroundColor: "var(--color-border)",
-                  }}
+                    backgroundColor: "var(--color-border)" }}
                 />
 
                 <ul className="flex flex-col gap-2.5 flex-1">
@@ -995,8 +936,7 @@ function OldPricingSectionInline({ service }: { service: ServiceData }) {
                       className="flex items-start gap-2.5"
                       style={{
                         fontSize: "13px",
-                        color: "var(--color-muted)",
-                      }}
+                        color: "var(--color-muted)" }}
                     >
                       <span
                         className="shrink-0 rounded-full"
@@ -1005,8 +945,7 @@ function OldPricingSectionInline({ service }: { service: ServiceData }) {
                           width: "5px",
                           height: "5px",
                           backgroundColor: "var(--color-violet)",
-                          opacity: 0.6,
-                        }}
+                          opacity: 0.6 }}
                       />
                       {f}
                     </li>
@@ -1022,8 +961,7 @@ function OldPricingSectionInline({ service }: { service: ServiceData }) {
                       : "1px solid var(--color-border)",
                     color: plan.highlight
                       ? "var(--color-violet-light)"
-                      : "var(--color-muted)",
-                  }}
+                      : "var(--color-muted)" }}
                 >
                   {plan.amount === "Custom"
                     ? "Request Quote"
@@ -1041,8 +979,7 @@ function OldPricingSectionInline({ service }: { service: ServiceData }) {
             style={{
               fontSize: "11px",
               color: "var(--color-dead)",
-              letterSpacing: "0.1em",
-            }}
+              letterSpacing: "0.1em" }}
           >
             * Ad spend is billed separately. 6-month and 12-month
             commitments unlock discounted monthly pricing.

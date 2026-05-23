@@ -2,21 +2,21 @@
 
 import toast from 'react-hot-toast';
 
-export function useToast() {
+export function toastHelpers() {
   return {
     success: (message: string) =>
       toast.success(message, {
-        style: { background: '#161625', color: '#F4F4F8', border: '1px solid rgba(16,185,129,0.3)' },
-        iconTheme: { primary: '#10B981', secondary: '#161625' },
+        style: { background: 'var(--color-card)', color: 'var(--color-foreground)', border: '1px solid rgba(16,185,129,0.3)' },
+        iconTheme: { primary: '#10B981', secondary: 'var(--color-card)' },
       }),
     error: (message: string) =>
       toast.error(message, {
-        style: { background: '#161625', color: '#F4F4F8', border: '1px solid rgba(239,68,68,0.3)' },
-        iconTheme: { primary: '#EF4444', secondary: '#161625' },
+        style: { background: 'var(--color-card)', color: 'var(--color-foreground)', border: '1px solid rgba(239,68,68,0.3)' },
+        iconTheme: { primary: '#EF4444', secondary: 'var(--color-card)' },
       }),
     info: (message: string) =>
       toast(message, {
-        style: { background: '#161625', color: '#F4F4F8', border: '1px solid rgba(107,26,26,0.3)' },
+        style: { background: 'var(--color-card)', color: 'var(--color-foreground)', border: '1px solid rgba(var(--color-accent-rgb),0.3)' },
         icon: '💡',
       }),
   };

@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import { TextReveal } from '@/components/ui/TextReveal'
 import type { CSSProperties } from 'react'
 
@@ -18,7 +19,7 @@ export function PageHero({ label, title, subtitle, breadcrumb }: Props) {
             {breadcrumb.map((b, i) => (
               <span key={b.href} className="flex items-center gap-2">
                 {i > 0 && <span>/</span>}
-                <a href={b.href} className="hover:text-muted transition-colors">{b.label}</a>
+                <Link href={b.href} className="hover:text-muted transition-colors">{b.label}</Link>
               </span>
             ))}
           </div>

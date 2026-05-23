@@ -54,8 +54,7 @@ export default function ThemeToggle() {
         className="h-9 w-9 sm:w-[88px] rounded-full flex items-center justify-center"
         style={{ 
           backgroundColor: 'var(--color-card)',
-          border: '1px solid var(--color-border)',
-        }}
+          border: '1px solid var(--color-border)' }}
         aria-hidden="true"
       >
         <div className="w-3.5 h-3.5 rounded-full bg-muted/20" />
@@ -81,15 +80,14 @@ export default function ThemeToggle() {
         backgroundColor: isHovered
           ? isDark
             ? 'rgba(255, 255, 255, 0.1)'
-            : 'rgba(107, 26, 26, 0.08)'
+            : 'rgba(var(--color-accent-rgb), 0.08)'
           : 'var(--color-card)',
         border: `1px solid ${isHovered ? 'var(--color-violet)' : 'var(--color-border)'}`,
         boxShadow: isPressed
           ? 'inset 0 2px 4px rgba(0,0,0,0.1)'
           : isHovered
-            ? '0 4px 20px rgba(107, 26, 26, 0.15)'
-            : '0 2px 8px rgba(0,0,0,0.08)',
-      }}
+            ? '0 4px 20px rgba(var(--color-accent-rgb), 0.15)'
+            : '0 2px 8px rgba(0,0,0,0.08)' }}
       aria-label={`Switch to ${nextTheme} mode`}
       data-cursor="pointer"
       whileTap={{ scale: 0.95 }}
@@ -100,9 +98,8 @@ export default function ThemeToggle() {
         initial={false}
         animate={{
           background: isDark
-            ? 'radial-gradient(circle at 30% 30%, rgba(124, 58, 237, 0.15), transparent 70%)'
-            : 'radial-gradient(circle at 70% 30%, rgba(251, 191, 36, 0.12), transparent 70%)',
-        }}
+            ? 'radial-gradient(circle at 30% 30%, rgba(var(--color-accent-rgb), 0.15), transparent 70%)'
+            : 'radial-gradient(circle at 70% 30%, rgba(251, 191, 36, 0.12), transparent 70%)' }}
         transition={{ duration: 0.4 }}
       />
 
@@ -129,12 +126,10 @@ export default function ThemeToggle() {
         <motion.span
           className="hidden sm:block text-[11px] font-medium tracking-wide"
           style={{
-            color: isDark ? '#FBBF24' : 'var(--color-violet)',
-          }}
+            color: isDark ? '#FBBF24' : 'var(--color-violet)' }}
           initial={false}
           animate={{
-            opacity: isHovered ? 1 : 0.8,
-          }}
+            opacity: isHovered ? 1 : 0.8 }}
         >
           {isDark ? 'Light' : 'Dark'}
         </motion.span>

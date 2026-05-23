@@ -8,8 +8,8 @@ import { buildPlanContactHref, DEPARTMENT_NAME_MAP } from '@/lib/pricing-contact
 
 const glowKeyframes = `
 @keyframes glowPulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(107,26,26,0.08); }
-  50%      { box-shadow: 0 0 32px rgba(107,26,26,0.15); }
+  0%, 100% { box-shadow: 0 0 20px rgba(var(--color-accent-rgb),0.08); }
+  50%      { box-shadow: 0 0 32px rgba(var(--color-accent-rgb),0.15); }
 }
 `;
 
@@ -79,8 +79,7 @@ export function PlanCard({
         transition={{
           delay: 0.06 + index * 0.12,
           duration: 0.45,
-          ease: 'easeInOut',
-        }}
+          ease: 'easeInOut' }}
         whileHover={{ y: -4, boxShadow: '0 12px 40px rgba(0,0,0,0.1)' }}
         className="flex flex-col overflow-hidden rounded-[24px] transition-shadow duration-300"
         style={{
@@ -88,21 +87,19 @@ export function PlanCard({
             ? '1px solid var(--color-violet)'
             : '1px solid var(--color-border)',
           backgroundColor: plan.highlight
-            ? 'rgba(107,26,26,0.04)'
+            ? 'rgba(var(--color-accent-rgb),0.04)'
             : 'var(--color-card)',
           boxShadow: plan.highlight
-            ? '0 0 24px rgba(107,26,26,0.08)'
+            ? '0 0 24px rgba(var(--color-accent-rgb),0.08)'
             : '0 1px 3px rgba(0,0,0,0.04)',
-          animation: plan.highlight ? 'glowPulse 3s ease-in-out infinite' : 'none',
-        }}
+          animation: plan.highlight ? 'glowPulse 3s ease-in-out infinite' : 'none' }}
     >
       {plan.highlight && (
         <div
           style={{
             background:
               'linear-gradient(90deg, var(--color-violet) 0%, #8b2d2d 100%)',
-            padding: '8px 24px',
-          }}
+            padding: '8px 24px' }}
         >
           <span className="font-mono text-xs text-white uppercase tracking-widest flex items-center gap-2">
             <span className="text-[13px]">✦</span> Recommended
@@ -127,8 +124,7 @@ export function PlanCard({
               style={{
                 fontSize: '11px',
                 color: 'var(--color-dead)',
-                lineHeight: 1.5,
-              }}
+                lineHeight: 1.5 }}
             >
               {plan.target}
             </p>
@@ -141,8 +137,7 @@ export function PlanCard({
               fontSize: '22px',
               borderRadius: '12px',
               backgroundColor: 'var(--color-surface)',
-              border: '1px solid var(--color-border)',
-            }}
+              border: '1px solid var(--color-border)' }}
           >
             {plan.icon}
           </span>
@@ -168,8 +163,7 @@ export function PlanCard({
                   fontSize: 'clamp(1.35rem, 2.5vw, 1.85rem)',
                   color: plan.highlight
                     ? 'var(--color-violet-light)'
-                    : 'var(--color-foreground)',
-                }}
+                    : 'var(--color-foreground)' }}
               >
                 {duration.price}
               </motion.p>
@@ -184,8 +178,7 @@ export function PlanCard({
                   color: '#fff',
                   backgroundColor: 'var(--color-violet)',
                   borderRadius: '6px',
-                  lineHeight: 1.3,
-                }}
+                  lineHeight: 1.3 }}
               >
                 {savings.percent}
               </span>
@@ -198,8 +191,7 @@ export function PlanCard({
               style={{
                 fontSize: '11px',
                 color: 'var(--color-muted)',
-                marginTop: duration.totalPrice ? '2px' : '0',
-              }}
+                marginTop: duration.totalPrice ? '2px' : '0' }}
             >
               {duration.totalPrice} total
             </p>
@@ -211,8 +203,7 @@ export function PlanCard({
               style={{
                 fontSize: '11px',
                 color: 'var(--color-dead)',
-                marginTop: '2px',
-              }}
+                marginTop: '2px' }}
             >
               {duration.note}
             </p>
@@ -225,8 +216,7 @@ export function PlanCard({
                 fontSize: '11px',
                 color: 'var(--color-muted)',
                 marginTop: '4px',
-                fontStyle: 'italic',
-              }}
+                fontStyle: 'italic' }}
             >
               {savings.label}
             </p>
@@ -245,8 +235,7 @@ export function PlanCard({
             style={{
               fontSize: '11px',
               color: 'var(--color-dead)',
-              letterSpacing: '0.12em',
-            }}
+              letterSpacing: '0.12em' }}
           >
             Deliverables
           </p>
@@ -258,8 +247,7 @@ export function PlanCard({
                 style={{
                   fontSize: '11px',
                   color: 'var(--color-muted)',
-                  lineHeight: 1.55,
-                }}
+                  lineHeight: 1.55 }}
               >
                 <span
                   className="shrink-0 rounded-full mt-[5px]"
@@ -267,8 +255,7 @@ export function PlanCard({
                     width: '3.5px',
                     height: '3.5px',
                     backgroundColor: 'var(--color-violet)',
-                    opacity: 0.5,
-                  }}
+                    opacity: 0.5 }}
                 />
                 {d}
               </li>
@@ -283,8 +270,7 @@ export function PlanCard({
                 fontSize: '11px',
                 color: 'var(--color-dead)',
                 letterSpacing: '0.06em',
-                marginTop: '4px',
-              }}
+                marginTop: '4px' }}
             >
               {showAllDeliverables
                 ? 'Show less'
@@ -316,8 +302,7 @@ export function PlanCard({
               : '1px solid var(--color-border)',
             color: plan.highlight
               ? 'var(--color-violet-light)'
-              : 'var(--color-muted)',
-          }}
+              : 'var(--color-muted)' }}
         >
           Get Started
           <motion.span

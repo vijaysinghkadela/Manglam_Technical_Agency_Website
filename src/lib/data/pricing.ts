@@ -1,492 +1,986 @@
-import { PricingPlan, ComparisonRow } from '@/types';
+import type {
+  DepartmentData,
+  PricingBundleData,
+} from '@/types';
 
-// =============================================================================
-// GLOBAL MARKET COMPARISON DATA (2026)
-// =============================================================================
-// Benchmarks derived from industry reports: Clutch.co, GoodFirms, Statista,
-// HubSpot State of Marketing, Gartner IT Services Pricing Guide
-// =============================================================================
-
-export interface GlobalMarketBenchmark {
-  service: string;
-  slug: string;
-  regions: {
-    region: string;
-    currency: string;
-    lowRange: string;
-    highRange: string;
-    notes?: string;
-  }[];
-  mtaAdvantage: string;
-  lastUpdated: string;
-}
-
-export const globalMarketBenchmarks: GlobalMarketBenchmark[] = [
+export const departments: DepartmentData[] = [
   {
-    service: 'Social Media Marketing (Monthly Retainer)',
-    slug: 'social-media-marketing',
-    regions: [
-      { region: 'India', currency: 'INR', lowRange: '₹25,000', highRange: '₹2,50,000', notes: 'Tier-1 agencies in metros' },
-      { region: 'India', currency: 'USD', lowRange: '$300', highRange: '$3,000', notes: 'USD equivalent' },
-      { region: 'United States', currency: 'USD', lowRange: '$3,000', highRange: '$25,000', notes: 'Mid-market agencies' },
-      { region: 'European Union', currency: 'EUR', lowRange: '€2,500', highRange: '€15,000', notes: 'Western EU agencies' },
-      { region: 'United Kingdom', currency: 'GBP', lowRange: '£2,000', highRange: '£12,000', notes: 'London-based agencies' },
-    ],
-    mtaAdvantage: 'MTA delivers US/EU-quality AI-powered SMM at 60-80% lower cost with DPDP/LGPD compliance built-in.',
-    lastUpdated: '2026-04-01',
-  },
-  {
-    service: 'SaaS MVP Development (One-Time)',
-    slug: 'web-development',
-    regions: [
-      { region: 'India', currency: 'INR', lowRange: '₹10,00,000', highRange: '₹80,00,000', notes: 'Quality varies significantly' },
-      { region: 'India', currency: 'USD', lowRange: '$12,000', highRange: '$95,000', notes: 'USD equivalent' },
-      { region: 'United States', currency: 'USD', lowRange: '$50,000', highRange: '$500,000', notes: 'Silicon Valley / NYC rates' },
-      { region: 'European Union', currency: 'EUR', lowRange: '€40,000', highRange: '€300,000', notes: 'Western EU dev shops' },
-      { region: 'Eastern Europe', currency: 'USD', lowRange: '$25,000', highRange: '$150,000', notes: 'Poland, Ukraine, Romania' },
-    ],
-    mtaAdvantage: 'MTA combines India cost efficiency with US-standard architecture, Next.js 16, and compliance-first design.',
-    lastUpdated: '2026-04-01',
-  },
-  {
-    service: 'Cybersecurity Audit (One-Time)',
-    slug: 'cybersecurity',
-    regions: [
-      { region: 'India', currency: 'INR', lowRange: '₹50,000', highRange: '₹5,00,000', notes: 'CERT-IN empaneled auditors' },
-      { region: 'India', currency: 'USD', lowRange: '$600', highRange: '$6,000', notes: 'USD equivalent' },
-      { region: 'United States', currency: 'USD', lowRange: '$5,000', highRange: '$50,000', notes: 'SOC 2 / penetration testing' },
-      { region: 'European Union', currency: 'EUR', lowRange: '€4,000', highRange: '€35,000', notes: 'GDPR compliance audits' },
-    ],
-    mtaAdvantage: 'MTA audits cover DPDP Act 2023, GDPR, and LGPD simultaneously—single audit, triple compliance.',
-    lastUpdated: '2026-04-01',
-  },
-  {
-    service: 'AI Workflow Automation (Setup)',
+    department: 'AI & Automation',
     slug: 'ai-automation',
-    regions: [
-      { region: 'India', currency: 'INR', lowRange: '₹1,50,000', highRange: '₹8,00,000', notes: 'n8n/Make specialists' },
-      { region: 'India', currency: 'USD', lowRange: '$1,800', highRange: '$9,500', notes: 'USD equivalent' },
-      { region: 'United States', currency: 'USD', lowRange: '$10,000', highRange: '$75,000', notes: 'Enterprise automation consultants' },
-      { region: 'European Union', currency: 'EUR', lowRange: '€8,000', highRange: '€50,000', notes: 'AI/ML consultancies' },
-    ],
-    mtaAdvantage: 'MTA delivers agentic AI workflows with C2PA provenance and DPDP-compliant data handling at India rates.',
-    lastUpdated: '2026-04-01',
-  },
-  {
-    service: 'Fractional CTO (Monthly Retainer)',
-    slug: 'fractional-cto',
-    regions: [
-      { region: 'India', currency: 'INR', lowRange: '₹1,50,000', highRange: '₹5,00,000', notes: 'Ex-startup CTOs' },
-      { region: 'India', currency: 'USD', lowRange: '$1,800', highRange: '$6,000', notes: 'USD equivalent' },
-      { region: 'United States', currency: 'USD', lowRange: '$8,000', highRange: '$25,000', notes: '10-20 hrs/month' },
-      { region: 'European Union', currency: 'EUR', lowRange: '€6,000', highRange: '€18,000', notes: 'Senior tech advisors' },
-    ],
-    mtaAdvantage: 'MTA Fractional CTO combines startup experience with enterprise compliance knowledge (iStart, QRate eligible).',
-    lastUpdated: '2026-04-01',
-  },
-];
-
-// =============================================================================
-// SMM TOOL ECOSYSTEM PRICING COMPARISON (2026)
-// =============================================================================
-// For clients evaluating DIY vs. managed SMM services
-// =============================================================================
-
-export interface SMMToolPricing {
-  tool: string;
-  category: string;
-  freeTeir: string;
-  paidRange: string;
-  enterpriseRange: string;
-  mtaNotes: string;
-}
-
-export const smmToolPricing: SMMToolPricing[] = [
-  {
-    tool: 'Sprout Social',
-    category: 'Scheduling & Analytics',
-    freeTeir: 'None',
-    paidRange: '$199–$399/user/month',
-    enterpriseRange: '$Custom',
-    mtaNotes: 'Included in Growth/Scale tiers; MTA manages on your behalf',
-  },
-  {
-    tool: 'Hootsuite',
-    category: 'Scheduling & Analytics',
-    freeTeir: 'None (trial only)',
-    paidRange: '$99–$249/month',
-    enterpriseRange: '$739+/month',
-    mtaNotes: 'MTA provides equivalent functionality via n8n pipelines',
-  },
-  {
-    tool: 'Buffer',
-    category: 'Scheduling',
-    freeTeir: '3 channels',
-    paidRange: '$5–$100/month',
-    enterpriseRange: 'N/A',
-    mtaNotes: 'Starter tier includes Buffer-equivalent scheduling',
-  },
-  {
-    tool: 'Canva Pro',
-    category: 'Design',
-    freeTeir: 'Limited',
-    paidRange: '$12.99/user/month',
-    enterpriseRange: '$30/user/month',
-    mtaNotes: 'All MTA SMM tiers include professional design—no client Canva needed',
-  },
-  {
-    tool: 'CapCut / Premiere Pro',
-    category: 'Video Editing',
-    freeTeir: 'Limited (CapCut)',
-    paidRange: '$22.99/month (PP)',
-    enterpriseRange: '$Corporate licensing',
-    mtaNotes: 'Growth/Scale tiers include short-form video production',
-  },
-  {
-    tool: 'Brandwatch / Sprinklr',
-    category: 'Social Listening',
-    freeTeir: 'None',
-    paidRange: '$800–$3,000/month',
-    enterpriseRange: '$10,000+/month',
-    mtaNotes: 'Scale tier includes AI-powered sentiment analysis',
-  },
-  {
-    tool: 'Jasper / Copy.ai',
-    category: 'AI Copywriting',
-    freeTeir: 'Limited',
-    paidRange: '$49–$125/month',
-    enterpriseRange: '$Custom',
-    mtaNotes: 'MTA uses fine-tuned LLMs with brand voice calibration',
-  },
-  {
-    tool: 'Meta Ads Manager',
-    category: 'Paid Ads',
-    freeTeir: 'Platform (ads extra)',
-    paidRange: 'Ad spend variable',
-    enterpriseRange: 'Ad spend variable',
-    mtaNotes: 'Growth/Scale tiers include ad coordination and optimization',
-  },
-];
-
-// =============================================================================
-// COST COMPARISON: IN-HOUSE VS AGENCY VS MTA
-// =============================================================================
-
-export interface CostComparisonModel {
-  model: string;
-  monthlyEstimate: string;
-  annualEstimate: string;
-  hiddenCosts: string[];
-  bestFor: string;
-}
-
-export const costComparisonModels: CostComparisonModel[] = [
-  {
-    model: 'In-House Team (US)',
-    monthlyEstimate: '$15,000–$35,000',
-    annualEstimate: '$180,000–$420,000',
-    hiddenCosts: ['Benefits (30%)', 'Tools ($500–$2,000/mo)', 'Training', 'Turnover risk'],
-    bestFor: 'Large enterprises with 24/7 needs and internal brand control requirements',
-  },
-  {
-    model: 'In-House Team (India)',
-    monthlyEstimate: '₹3,00,000–₹8,00,000',
-    annualEstimate: '₹36,00,000–₹96,00,000',
-    hiddenCosts: ['PF/ESI (13%)', 'Tools', 'Office space', 'Management overhead'],
-    bestFor: 'Indian enterprises with local focus and existing HR infrastructure',
-  },
-  {
-    model: 'US/EU Agency',
-    monthlyEstimate: '$5,000–$25,000',
-    annualEstimate: '$60,000–$300,000',
-    hiddenCosts: ['Onboarding fees', 'Revision charges', 'Platform markups'],
-    bestFor: 'Companies requiring native English and US timezone alignment',
-  },
-  {
-    model: 'MTA Managed SMM',
-    monthlyEstimate: '$1,250–$5,000',
-    annualEstimate: '$15,000–$60,000',
-    hiddenCosts: ['None—all-inclusive pricing', 'Tools included', 'Compliance included'],
-    bestFor: 'Startups and SMBs wanting enterprise-grade AI-powered SMM at India rates',
-  },
-];
-
-// =============================================================================
-// PRICING PLANS (Original Structure)
-// =============================================================================
-
-export const pricingPlans: PricingPlan[] = [
-  {
-    service: 'SaaS & Web Development',
-    slug: 'web-development',
-    badge: 'Build',
+    description:
+      'We design AI and automation systems that reduce manual work, improve operational speed, and keep implementation grounded in your actual business process.',
     plans: [
       {
-        name: 'Micro MVP',
-        price: '$15,000–$25,000',
-        period: 'one-time',
-        features: ['Basic auth setup', '1 CRUD core workflow', 'Simple dashboard', 'Launch-ready codebase', 'Responsive design', 'Deployment included'],
+        name: 'Spark',
+        tagline: 'First automation layer for small teams',
+        target: 'Solopreneurs, gyms, clinics, coaching institutes, small shops',
+        popular: false,
+        highlight: true,
+        icon: '⚡',
+        durations: [
+          {
+            label: '1-Month Build',
+            price: '₹85,000',
+            type: 'one-time',
+            note: '40% advance + 30% staging + 30% launch',
+          },
+          {
+            label: '6-Month Retainer',
+            price: '₹14,000/mo',
+            totalPrice: '₹84,000',
+            type: 'per-month',
+            note: 'Quarterly in advance',
+          },
+          {
+            label: '12-Month AMC',
+            price: '₹11,000/mo',
+            totalPrice: '₹1,32,000',
+            type: 'per-month',
+            note: 'Quarterly in advance',
+          },
+        ],
+        features: [
+          '3 production workflows',
+          'WhatsApp AI bot',
+          'Prompt engineering',
+          'API integrations',
+          'Testing + handover',
+        ],
+        deliverables: [
+          '3 production-ready n8n workflows (lead form to CRM, booking to calendar, invoice auto-send)',
+          'WhatsApp AI bot — 24/7 FAQ, lead capture, appointment booking',
+          'Admin dashboard view in n8n (live logs)',
+          'Integration with 1 external tool (CRM, Google Sheets, or calendar)',
+          'Prompt and system config documentation',
+          '1-hour live training session',
+          '30-day post-launch support (bug fixes, prompt tweaks)',
+          'LLM API allowance: ₹2,500/month included; excess billed transparently',
+        ],
+      },
+      {
+        name: 'Neural',
+        tagline: 'Custom AI agent with RAG and memory',
+        target: 'SMBs, e-commerce, HR teams, real estate agencies',
         popular: true,
-        cta: 'Build Micro MVP',
-        ctaLink: '/contact',
+        highlight: false,
+        icon: '🧠',
+        durations: [
+          {
+            label: '1-Month Build',
+            price: '₹2,00,000',
+            type: 'one-time',
+            note: '40% advance + 30% staging + 30% launch',
+          },
+          {
+            label: '6-Month Retainer',
+            price: '₹28,000/mo',
+            totalPrice: '₹1,68,000',
+            type: 'per-month',
+            note: 'Quarterly in advance',
+          },
+          {
+            label: '12-Month Retainer',
+            price: '₹22,000/mo',
+            totalPrice: '₹2,64,000',
+            type: 'per-month',
+            note: 'Quarterly in advance',
+          },
+        ],
+        features: [
+          'Custom AI agent',
+          'RAG pipeline setup',
+          '5 n8n workflows',
+          'CRM + WhatsApp + email',
+          'Admin panel',
+        ],
+        deliverables: [
+          'Custom AI agent (Claude-powered, persistent memory, tool-use enabled)',
+          'RAG pipeline — ingest client docs, catalog, policies',
+          '5 production n8n workflows',
+          'WhatsApp + email + CRM integration',
+          'Admin panel (view conversations, override responses, add docs)',
+          'Agent performance dashboard (response time, escalations, resolution rate)',
+          '2 training sessions (1 technical, 1 staff usage)',
+          'Full system documentation',
+          '45-day post-launch support',
+          'LLM API allowance: ₹4,000/month included; excess billed transparently',
+        ],
       },
       {
-        name: 'Standard MVP',
-        price: '$40,000–$99,000',
-        period: 'one-time',
-        features: ['Advanced Auth & SSO', 'Stripe Billing Integration', '3-5 major custom features', 'Advanced Reporting CMS', 'Scalable Architecture', 'Priority Support'],
-        cta: 'Build Standard MVP',
-        ctaLink: '/contact',
+        name: 'Cortex',
+        tagline: 'Multi-agent system with full operations suite',
+        target: 'Mid-size companies, SaaS products, ops-heavy businesses',
+        popular: false,
+        highlight: false,
+        icon: '🔷',
+        durations: [
+          {
+            label: '1-Month Build',
+            price: '₹4,00,000',
+            type: 'one-time',
+            note: '40% advance + 30% staging + 30% launch',
+          },
+          {
+            label: '6-Month Managed',
+            price: '₹48,000/mo',
+            totalPrice: '₹2,88,000',
+            type: 'per-month',
+            note: 'Quarterly in advance',
+          },
+          {
+            label: '12-Month Partnership',
+            price: '₹38,000/mo',
+            totalPrice: '₹4,56,000',
+            type: 'per-month',
+            note: 'Quarterly in advance',
+          },
+        ],
+        features: [
+          'Multi-agent crew',
+          'Voice AI agent',
+          '10+ n8n workflows',
+          'Full org RAG',
+          'Analytics dashboard',
+        ],
+        deliverables: [
+          'Multi-agent crew (3+ agents: sales, support, ops with shared memory)',
+          'Voice AI agent (handle inbound calls, qualify leads, book appointments)',
+          '10+ n8n workflows (lead pipeline, support routing, invoice, scheduling, reporting)',
+          'Full org RAG (company docs, SOPs, product catalog ingested)',
+          'Complete integration suite (WhatsApp, email, CRM, calendar, payment gateway)',
+          'Admin super-panel (monitor all agents, override, update knowledge)',
+          'Custom analytics dashboard (hours saved, leads converted, cost per query)',
+          '2 department training sessions + video walkthrough recording',
+          'Full technical and user documentation',
+          '60-day post-launch support',
+          'LLM API allowance: ₹8,000/month included; excess billed transparently',
+        ],
+      },
+    ],
+    note: 'LLM API costs are passed through at cost + 15% markup beyond included allowance.',
+  },
+  {
+    department: 'Branding & Identity',
+    slug: 'branding',
+    description:
+      'Brand identity work — logos, typography, color systems, and guidelines. Every deliverable is IP-clear and ready for production use.',
+    plans: [
+      {
+        name: 'Stamp',
+        tagline: 'Quick professional identity',
+        target: 'Solopreneurs, coaches, local shops, new startups, professionals',
+        popular: false,
+        highlight: false,
+        icon: '📌',
+        durations: [
+          {
+            label: '1-Month Build',
+            price: '₹35,000',
+            type: 'one-time',
+            note: '50% advance + 25% concept + 25% delivery',
+          },
+          {
+            label: '6-Month Retainer',
+            price: '₹8,500/mo',
+            totalPrice: '₹51,000',
+            type: 'per-month',
+            note: 'Quarterly in advance',
+          },
+          {
+            label: '12-Month Retainer',
+            price: '₹6,500/mo',
+            totalPrice: '₹78,000',
+            type: 'per-month',
+            note: 'Quarterly in advance',
+          },
+        ],
+        features: [
+          'Logo design',
+          'Business card',
+          'Letterhead',
+          'Social kit',
+          'Brand mini-guide',
+        ],
+        deliverables: [
+          'Logo (3 formats: horizontal, stacked, icon-only)',
+          'Color palette (primary, secondary, accent with hex and CMYK codes)',
+          'Typography pair (2 fonts with usage rules)',
+          'Business card (editable source + print-ready PDF)',
+          'Letterhead (A4, print-ready)',
+          'Social media kit (3 reusable Canva templates)',
+          'Brand mini-guide (1-page PDF: colors, fonts, logo usage)',
+          'All source files + usage license',
+          '2 rounds of revisions',
+        ],
       },
       {
-        name: 'SaaS Success Plan',
-        price: '$450',
-        period: '/month',
-        features: ['Uptime monitoring', 'Security patches', 'Core Web Vitals optimization', 'Hosting & Database management', '5 hrs developer support'],
-        cta: 'Secure Retainer',
-        ctaLink: '/contact',
+        name: 'Mark',
+        tagline: 'Full identity system with strategy',
+        target: 'Growing SMBs, D2C brands, clinics, law firms',
+        popular: true,
+        highlight: true,
+        icon: '◆',
+        durations: [
+          {
+            label: '1-Month Build',
+            price: '₹1,20,000',
+            type: 'one-time',
+            note: '50% advance + 25% concept + 25% delivery',
+          },
+          {
+            label: '6-Month Retainer',
+            price: '₹14,000/mo',
+            totalPrice: '₹84,000',
+            type: 'per-month',
+            note: 'Quarterly in advance',
+          },
+          {
+            label: '12-Month Retainer',
+            price: '₹11,000/mo',
+            totalPrice: '₹1,32,000',
+            type: 'per-month',
+            note: 'Quarterly in advance',
+          },
+        ],
+        features: [
+          'Brand discovery',
+          'Positioning statement',
+          'Logo system',
+          'Visual identity',
+          'Brand guidelines',
+        ],
+        deliverables: [
+          'Brand discovery report (competitor landscape, positioning map)',
+          'Brand strategy document (positioning, target audience, personality)',
+          'Logo system (primary + secondary + icon mark, all variants)',
+          'Visual identity system (color system, typography scale, iconography, pattern)',
+          'Brand guidelines (8-12 page PDF: dos and donts, usage rules, clear space)',
+          'Tagline + brand voice guide + 3 key messaging pillars',
+          'Full collateral: business card, letterhead, envelope, email signature, social kit (5 templates), brochure cover',
+          'Editable source files (Figma + Canva) + print-ready PDFs',
+          '3 revision rounds across entire project',
+          '1-hour brand walkthrough call',
+        ],
+      },
+      {
+        name: 'Signature',
+        tagline: 'Complete brand architecture and launch',
+        target: 'Established businesses, scaling brands, mid-size enterprises',
+        popular: false,
+        highlight: false,
+        icon: '✦',
+        durations: [
+          {
+            label: '1-Month Build',
+            price: '₹2,50,000',
+            type: 'one-time',
+            note: '50% advance + 25% concept + 25% delivery',
+          },
+          {
+            label: '6-Month Managed',
+            price: '₹22,000/mo',
+            totalPrice: '₹1,32,000',
+            type: 'per-month',
+            note: 'Quarterly in advance',
+          },
+          {
+            label: '12-Month Partnership',
+            price: '₹17,000/mo',
+            totalPrice: '₹2,04,000',
+            type: 'per-month',
+            note: 'Quarterly in advance',
+          },
+        ],
+        features: [
+          'Brand audit',
+          'Brand architecture',
+          'Full visual identity',
+          'Brand book',
+          'Launch kit',
+        ],
+        deliverables: [
+          'Brand audit report',
+          'Competitor and market positioning analysis',
+          'Brand strategy document (audience, personality, values, positioning, competitive moat)',
+          'Brand architecture framework',
+          'Brand story and narrative (500-word manifesto)',
+          'Logo system (6 concepts to refined variants: horizontal, stacked, icon, monochrome, reversed)',
+          'Complete visual identity (color system, type scale, iconography, illustration style, photography mood board)',
+          'Brand book (20-30 pages, print + digital PDF)',
+          'Messaging framework (tagline, 3 pillars, elevator pitch, long and short description)',
+          'Brand voice guide (personality, tone, vocabulary dos and donts, writing samples)',
+          'Complete collateral: business card, letterhead, brochure (4-page), pitch deck template, email signature, social kit (8 templates), packaging concept, presentation master',
+          'Brand launch kit (3 announcement creatives, LinkedIn banner)',
+          'All Figma source files + Canva templates + print-ready PDFs',
+          '4 revision rounds across project',
+          '2 presentations + 1-hour final walkthrough',
+        ],
+      },
+    ],
+    note: 'IP transfers only on full payment receipt. Source files withheld until 100% payment cleared.',
+  },
+  {
+    department: 'Content Creation',
+    slug: 'content-creation',
+    description:
+      'We produce human-edited content systems that combine research, structure, and distribution planning across blogs, social posts, email, and founder-led content.',
+    plans: [
+      {
+        name: 'Seed',
+        tagline: 'Consistent content on 1-2 platforms',
+        target: 'Solopreneurs, local businesses, new startups',
+        popular: false,
+        highlight: false,
+        icon: '🌱',
+        durations: [
+          {
+            label: '1-Month Package',
+            price: '₹28,000',
+            type: 'one-time',
+          },
+          {
+            label: '6-Month Retainer',
+            price: '₹25,000/mo',
+            totalPrice: '₹1,50,000',
+            type: 'per-month',
+          },
+          {
+            label: '12-Month Retainer',
+            price: '₹20,000/mo',
+            totalPrice: '₹2,40,000',
+            type: 'per-month',
+          },
+        ],
+        features: [
+          '12 social graphics',
+          '12 captions + hashtags',
+          '2 blog posts',
+          'Scheduling setup',
+          'Monthly summary',
+        ],
+        deliverables: [
+          'Monthly content calendar (topic clusters, post dates, format breakdown)',
+          '12 branded social media graphics (static + carousel mix)',
+          '12 captions with hashtag research and CTA',
+          '2 SEO-aware blog posts (800-1,000 words, publish-ready)',
+          'Scheduled and ready to post across 1-2 platforms',
+          'Monthly performance summary (reach, engagement, top post)',
+          '1 revision round per piece',
+        ],
+      },
+      {
+        name: 'Grow',
+        tagline: 'Volume content with reels and SEO',
+        target: 'Growing SMBs, clinics, coaches, D2C brands',
+        popular: true,
+        highlight: true,
+        icon: '📈',
+        durations: [
+          {
+            label: '1-Month Package',
+            price: '₹80,000',
+            type: 'one-time',
+          },
+          {
+            label: '6-Month Retainer',
+            price: '₹70,000/mo',
+            totalPrice: '₹4,20,000',
+            type: 'per-month',
+          },
+          {
+            label: '12-Month Retainer',
+            price: '₹55,000/mo',
+            totalPrice: '₹6,60,000',
+            type: 'per-month',
+          },
+        ],
+        features: [
+          '20 graphics',
+          '20 captions',
+          '4 reels scripts',
+          '4 SEO blog posts',
+          '1 newsletter',
+          'Analytics report',
+        ],
+        deliverables: [
+          'Content strategy doc with monthly calendar (themes, formats, platforms)',
+          'Competitor content audit (3 competitors benchmarked)',
+          '20 branded graphics (carousels, single posts, quote cards)',
+          '20 captions with CTAs and platform-optimized hashtags',
+          '4 Reels (scripted, subtitled, music, branding overlay)',
+          '4 SEO blog posts (keyword-targeted, internal linking, meta description)',
+          '1 email newsletter (design + copy, Mailchimp/Brevo-ready)',
+          'Scheduled and published across platforms',
+          'Monthly analytics report (engagement rate, reach, best performers, recommendations)',
+          '2 revision rounds per content piece',
+        ],
+      },
+      {
+        name: 'Lead',
+        tagline: 'Full multi-platform content ownership',
+        target: 'Established brands and scaling companies',
+        popular: false,
+        highlight: false,
+        icon: '🎯',
+        durations: [
+          {
+            label: '1-Month Package',
+            price: '₹1,50,000',
+            type: 'one-time',
+          },
+          {
+            label: '6-Month Partnership',
+            price: '₹1,30,000/mo',
+            totalPrice: '₹7,80,000',
+            type: 'per-month',
+          },
+          {
+            label: '12-Month Ownership',
+            price: '₹1,10,000/mo',
+            totalPrice: '₹13,20,000',
+            type: 'per-month',
+          },
+        ],
+        features: [
+          '30 graphics',
+          '30 captions',
+          '8 reels / shorts',
+          '6 SEO blog posts',
+          '4 LinkedIn posts',
+          '2 newsletters',
+          '1 YouTube script',
+        ],
+        deliverables: [
+          'Full content strategy doc (brand voice, content pillars, platform strategy, content mix)',
+          '30 branded graphics (static, carousel, story with Canva source files)',
+          '30 platform-native captions (Instagram casual, LinkedIn professional, Facebook community)',
+          '8 Reels/Shorts (scripted, subtitles, trending audio, branding)',
+          '6 SEO blog posts (keyword research, meta title + description, internal links)',
+          '4 LinkedIn articles (900-1,200 words, professional positioning)',
+          '2 email newsletters (branded HTML template, written + designed)',
+          '1 YouTube script (shot-by-shot breakdown, hooks, CTA placement)',
+          'Monthly analytics report (per-platform: reach, engagement, click-through, lead attribution)',
+          'Scheduled and published across all platforms',
+          '2 revision rounds on all pieces',
+          '1 monthly strategy call (45 minutes)',
+        ],
       },
     ],
   },
   {
-    service: 'Social Media Marketing',
+    department: 'Cybersecurity',
+    slug: 'cybersecurity',
+    description:
+      'Comprehensive ethical hacking service using PTES methodology, with DPDP compliance certification. We protect your business from digital threats with thorough testing and clear remediation roadmaps.',
+    plans: [
+      {
+        name: 'Shield',
+        tagline: 'Basic cyber hygiene and compliance check',
+        target: 'CA firms, coaching institutes, small hotels, schools, local businesses',
+        popular: false,
+        highlight: false,
+        icon: '🛡️',
+        durations: [
+          {
+            label: '1-Month Assessment',
+            price: '₹50,000',
+            type: 'one-time',
+            note: '50% advance + 30% mid + 20% on delivery',
+          },
+          {
+            label: '6-Month Retainer',
+            price: '₹8,500/mo',
+            totalPrice: '₹51,000',
+            type: 'per-month',
+            note: 'Quarterly in advance',
+          },
+          {
+            label: '12-Month AMC',
+            price: '₹6,500/mo',
+            totalPrice: '₹78,000',
+            type: 'per-month',
+            note: 'Quarterly in advance',
+          },
+        ],
+        features: [
+          'Email security audit',
+          'Basic VAPT up to 5 pages',
+          'DPDP gap assessment',
+          'Phishing simulation',
+          'Executive summary',
+        ],
+        deliverables: [
+          'Email security report (SPF, DKIM, DMARC + dark web credential check)',
+          'Basic VAPT report (findings, severity, fix recommendations)',
+          'DPDP Act compliance gap checklist (10-point)',
+          'Phishing simulation report (click rate, risk score)',
+          'Executive summary (2-page, board-presentable)',
+          '15-day post-delivery email support',
+        ],
+      },
+      {
+        name: 'Guard',
+        tagline: 'Full-scope audit with compliance mandate',
+        target: 'Private hospitals, NBFCs, textile exporters, diagnostic centres',
+        popular: true,
+        highlight: true,
+        icon: '🔒',
+        durations: [
+          {
+            label: '1-Month Engagement',
+            price: '₹1,30,000',
+            type: 'one-time',
+            note: '50% advance + 30% mid + 20% on delivery',
+          },
+          {
+            label: '6-Month Retainer',
+            price: '₹20,000/mo',
+            totalPrice: '₹1,20,000',
+            type: 'per-month',
+            note: 'Quarterly in advance',
+          },
+          {
+            label: '12-Month AMC',
+            price: '₹16,500/mo',
+            totalPrice: '₹1,98,000',
+            type: 'per-month',
+            note: 'Quarterly in advance',
+          },
+        ],
+        features: [
+          'Full VAPT web + API',
+          'Network VAPT up to 10 IPs',
+          'Social engineering',
+          'Staff training session',
+          'Remediation roadmap',
+        ],
+        deliverables: [
+          'Full VAPT report (CVSS-scored, prioritized fix list)',
+          'Network scan report (open ports, misconfigurations, CVEs)',
+          'Phishing + vishing simulation results with risk score',
+          'DPDP / RBI compliance gap assessment (20-point)',
+          'Staff training session (slides + attendance certificate)',
+          'Remediation roadmap (30/60/90-day plan)',
+          'Executive + technical reports (separate documents)',
+          '30-day post-delivery support',
+        ],
+      },
+      {
+        name: 'Fortress',
+        tagline: 'Enterprise-grade security and ISO readiness',
+        target: 'Cooperative banks, pharma, mid-size enterprises, EV/manufacturing',
+        popular: false,
+        highlight: false,
+        icon: '🏰',
+        durations: [
+          {
+            label: '1-Month Engagement',
+            price: '₹2,50,000',
+            type: 'one-time',
+            note: '50% advance + 30% mid + 20% on delivery',
+          },
+          {
+            label: '6-Month Managed',
+            price: '₹45,000/mo',
+            totalPrice: '₹2,70,000',
+            type: 'per-month',
+            note: 'Quarterly in advance',
+          },
+          {
+            label: '12-Month Contract',
+            price: '₹38,000/mo',
+            totalPrice: '₹4,56,000',
+            type: 'per-month',
+            note: 'Quarterly in advance',
+          },
+        ],
+        features: [
+          'Full-scope VAPT web + API + network + WiFi',
+          'Physical security test',
+          'ISO 27001 gap assessment',
+          'Board-level report',
+          '2-day onsite engagement',
+        ],
+        deliverables: [
+          'Full-scope VAPT report (web, API, network, WiFi)',
+          'Physical/onsite security observation notes',
+          'ISO 27001 Annex A gap report (114 controls assessed)',
+          'DPDP + RBI / SEBI compliance gap document',
+          'Staff training (2 sessions, attendance certificates)',
+          'Board-level executive summary + technical deep-dive',
+          'Remediation priority matrix (critical to low)',
+          '2-day onsite engagement',
+          '45-day post-audit support',
+        ],
+      },
+    ],
+    note: 'Never start VAPT without 50% advance. Minimum 15-day notice required for scheduling.',
+  },
+  {
+    department: 'Meta Ads Management',
     slug: 'social-media-marketing',
-    badge: 'Retainer',
+    description:
+      'We run Meta Ads and social growth programs with creative production, tracking architecture, and optimization built around measurable revenue outcomes.',
     plans: [
       {
         name: 'Starter',
-        price: '$1,250',
-        period: '/month',
-        features: ['2 platforms (e.g. FB/IG)', '3 posts per week', 'Static graphics', 'Community management', 'Basic analytics reporting'],
-        cta: 'Start Starter Plan',
-        ctaLink: '/contact',
+        tagline: 'Entry-level paid ads management',
+        target: 'Local shops, service providers, startups beginning with paid ads',
+        popular: false,
+        highlight: false,
+        icon: '▶️',
+        durations: [
+          {
+            label: '1 Month',
+            price: '₹18,000/mo',
+            type: 'per-month',
+            note: 'Recommended ad spend: ₹10,000-₹30,000/mo',
+          },
+          {
+            label: '6 Months',
+            price: '₹15,500/mo',
+            totalPrice: '₹93,000',
+            type: 'per-month',
+            note: 'Recommended ad spend: ₹10,000-₹30,000/mo',
+          },
+          {
+            label: '12 Months',
+            price: '₹13,500/mo',
+            totalPrice: '₹1,62,000',
+            type: 'per-month',
+            note: 'Recommended ad spend: ₹10,000-₹30,000/mo',
+          },
+        ],
+        features: [
+          'Campaign strategy',
+          'Pixel / CAPI setup',
+          '2 ad creatives/month',
+          '1 campaign, 2 ad sets',
+          'Monthly report',
+        ],
+        deliverables: [
+          'Campaign strategy and objective setting (traffic, leads, or awareness)',
+          'Facebook Pixel and CAPI setup',
+          '2 ad creatives per month (static, copy included)',
+          '1 active campaign with up to 2 ad sets',
+          'Audience research and targeting setup',
+          'Monthly performance report',
+          '1 revision round per creative',
+          'WhatsApp/email support (24-hour response)',
+        ],
       },
       {
         name: 'Growth',
-        price: '$2,750',
-        period: '/month',
-        features: ['3-4 platforms', 'Daily posting', 'Short-form video production (Reels/TikToks)', 'Active audience engagement', 'Ad coordination'],
+        tagline: 'Scaling ads with full-funnel strategy',
+        target: 'SMBs, coaching businesses, real estate, e-commerce stores',
         popular: true,
-        cta: 'Start Growth Plan',
-        ctaLink: '/contact',
+        highlight: true,
+        icon: '📊',
+        durations: [
+          {
+            label: '1 Month',
+            price: '₹35,000/mo',
+            type: 'per-month',
+            note: 'Recommended ad spend: ₹30,000-₹80,000/mo',
+          },
+          {
+            label: '6 Months',
+            price: '₹30,000/mo',
+            totalPrice: '₹1,80,000',
+            type: 'per-month',
+            note: 'Recommended ad spend: ₹30,000-₹80,000/mo',
+          },
+          {
+            label: '12 Months',
+            price: '₹26,000/mo',
+            totalPrice: '₹3,12,000',
+            type: 'per-month',
+            note: 'Recommended ad spend: ₹30,000-₹80,000/mo',
+          },
+        ],
+        features: [
+          'Full-funnel strategy',
+          '4-6 creatives/month',
+          'Up to 3 campaigns',
+          'A/B testing',
+          'Bi-weekly calls',
+        ],
+        deliverables: [
+          'Full-funnel campaign strategy (awareness to conversion)',
+          'Pixel + Conversion API + custom events',
+          '4-6 ad creatives per month (static + carousel, copy included)',
+          'Up to 3 campaigns, 6 ad sets',
+          'A/B testing for creatives and audiences',
+          'Lookalike + retargeting audience setup',
+          'Bi-weekly performance calls (30 minutes)',
+          'Weekly snapshot report + monthly deep-dive report',
+          'Competitor ad audit (monthly)',
+          '2 revision rounds per creative',
+          'WhatsApp/email support (12-hour response)',
+        ],
       },
       {
         name: 'Scale',
-        price: '$5,000+',
-        period: '/month',
-        features: ['5+ platforms', 'Multiple daily posts', 'Influencer strategy integration', 'Deep performance analytics', 'Generative Search Optimization (GSO)'],
-        cta: 'Start Scale Plan',
-        ctaLink: '/contact',
+        tagline: 'Full-service ad management for high growth',
+        target: 'E-commerce stores, established brands, high-growth businesses',
+        popular: false,
+        highlight: false,
+        icon: '🚀',
+        durations: [
+          {
+            label: '1 Month',
+            price: '₹65,000/mo',
+            type: 'per-month',
+            note: 'Recommended ad spend: ₹80,000-₹2,00,000+/mo',
+          },
+          {
+            label: '6 Months',
+            price: '₹55,000/mo',
+            totalPrice: '₹3,30,000',
+            type: 'per-month',
+            note: 'Recommended ad spend: ₹80,000-₹2,00,000+/mo',
+          },
+          {
+            label: '12 Months',
+            price: '₹48,000/mo',
+            totalPrice: '₹5,76,000',
+            type: 'per-month',
+            note: 'Recommended ad spend: ₹80,000-₹2,00,000+/mo',
+          },
+        ],
+        features: [
+          'Comprehensive media strategy',
+          '8-10 creatives/month',
+          'Unlimited campaigns',
+          'Dynamic product ads',
+          'Dedicated manager',
+        ],
+        deliverables: [
+          'Comprehensive media strategy (FB + IG + Reels + Stories)',
+          'Full Pixel, CAPI, and GA4 integration',
+          '8-10 creatives per month (static + video + UGC-style reels)',
+          'Unlimited campaigns and ad sets within scope',
+          'Full-funnel A/B testing (creative, audience, placement, objective)',
+          'Retargeting, lookalike, broad, and interest-based audience stacking',
+          'Dynamic product ads (e-commerce + catalog setup)',
+          'Weekly performance calls (45 minutes)',
+          'Weekly detailed report + monthly strategy review',
+          'Dedicated account manager (named contact)',
+          'Landing page conversion recommendations',
+          'Priority support — 4-hour WhatsApp response',
+          'Quarterly account audit + roadmap',
+        ],
       },
     ],
+    note: 'Ad spend is not included — client pays Meta directly. Onboarding fee: ₹5,000 one-time (waived for 6/12-month commitments).',
   },
   {
-    service: 'Cybersecurity & Compliance',
-    slug: 'cybersecurity',
-    badge: 'Security',
+    department: 'SaaS & Web Development',
+    slug: 'saas-products',
+    description:
+      'We partner with founders and businesses on SaaS and web development — from landing pages to full multi-tenant platforms. Boutique-quality Next.js and Flutter delivery at Tier-2 pricing.',
     plans: [
       {
-        name: 'Vulnerability & Privacy Audit',
-        price: '$1,500',
-        period: 'one-time',
-        features: ['Surface Threat Audit', 'Compliance Gap Check (GDPR/DPDP)', 'Immediate Risk Report', 'Actionable remediation plan'],
-        popular: true,
-        cta: 'Request Full Audit',
-        ctaLink: '/contact',
+        name: 'Sprint',
+        tagline: 'Quick website or landing page',
+        target: 'Startups needing landing pages, portfolio sites, brochure websites',
+        popular: false,
+        highlight: false,
+        icon: '🏃',
+        durations: [
+          {
+            label: '1-Month Fixed',
+            price: '₹65,000',
+            type: 'one-time',
+            note: '40% advance + 30% staging + 30% launch',
+          },
+          {
+            label: '6-Month Retainer',
+            price: '₹55,000/sprint',
+            type: 'per-sprint',
+            note: 'Quarterly sprint refresh',
+          },
+          {
+            label: '12-Month Retainer',
+            price: '₹50,000/sprint',
+            type: 'per-sprint',
+            note: 'Monthly sprint rotations',
+          },
+        ],
+        features: [
+          'Up to 6 pages',
+          'Mobile-first responsive',
+          'Contact form + WhatsApp',
+          'Basic SEO',
+          'Analytics setup',
+        ],
+        deliverables: [
+          'Up to 6 pages or sections',
+          'Mobile-first responsive design',
+          'Contact form with WhatsApp integration',
+          'Basic SEO (meta tags, OG tags, sitemap)',
+          'Google Analytics setup',
+          '1 round of revisions',
+          '30-day post-launch support',
+          'Deployment on Vercel or custom hosting',
+        ],
       },
       {
-        name: 'Managed Security Retainer',
-        price: '$250',
-        period: '/month',
-        features: ['24/7 Threat monitoring', 'Monthly vulnerability scanning', 'Managed Antivirus/Firewall checks', 'Security Awareness training access'],
-        cta: 'Secure Your Stack',
-        ctaLink: '/contact',
+        name: 'Build',
+        tagline: 'Full-featured web app or e-commerce',
+        target: 'Businesses needing e-commerce, client portals, booking systems',
+        popular: true,
+        highlight: true,
+        icon: '🔨',
+        durations: [
+          {
+            label: 'Fixed Project',
+            price: '₹2,80,000',
+            type: 'one-time',
+            note: '3-4 month delivery. 40% advance + 30% staging + 30% launch',
+          },
+          {
+            label: '6-Month Phased',
+            price: '₹50,000/mo',
+            totalPrice: '₹3,00,000',
+            type: 'per-month',
+            note: '40% advance + monthly installments',
+          },
+          {
+            label: '12-Month Build+Maintain',
+            price: '₹28,000/mo',
+            totalPrice: '₹3,36,000',
+            type: 'per-month',
+            note: '40% advance + monthly installments',
+          },
+        ],
+        features: [
+          'E-commerce or web app',
+          'Auth + DB design',
+          'Admin dashboard',
+          'API integrations',
+          'QA + deployment',
+        ],
+        deliverables: [
+          'Full requirements and wireframe session',
+          'Custom UI design (Figma to code)',
+          'Auth (email, phone, Google SSO via Supabase)',
+          'Role-based access control',
+          'Database design with RLS policies',
+          'API integrations (payment, SMS, maps)',
+          'Admin dashboard',
+          'Mobile-responsive web or Flutter app (cross-platform)',
+          '2 revision rounds',
+          'UAT and QA phase',
+          'Deployment, DNS, and SSL',
+          '60-day post-launch support',
+          'Handover documentation',
+        ],
+      },
+      {
+        name: 'Platform',
+        tagline: 'SaaS or multi-tenant platform',
+        target: 'Founders building SaaS products, marketplaces, enterprise tools',
+        popular: false,
+        highlight: false,
+        icon: '🏗️',
+        durations: [
+          {
+            label: '6-Month Fixed',
+            price: '₹8,00,000',
+            type: 'one-time',
+            note: 'Fixed-scope platform. 40% advance + 30% staging + 30% launch',
+          },
+          {
+            label: '12-Month Iterate',
+            price: '₹90,000/mo',
+            totalPrice: '₹10,80,000',
+            type: 'per-month',
+            note: 'Build + iterate + maintain',
+          },
+          {
+            label: 'Revenue Share',
+            price: '₹4,00,000 upfront + 15% MRR',
+            type: 'one-time',
+            note: 'Upfront build + ongoing revenue share',
+          },
+        ],
+        features: [
+          'Discovery workshop',
+          'Architecture design',
+          'Multi-role auth',
+          'CI/CD pipeline',
+          'Staff training',
+        ],
+        deliverables: [
+          'Discovery and scoping workshop',
+          'Full architecture design (DB schema, API design, component tree)',
+          'Figma design system',
+          'Multi-role auth with tenant isolation',
+          'Custom billing/subscription integration (Razorpay or Stripe)',
+          'Notification system (push + email + WhatsApp)',
+          'Admin super-panel',
+          'Flutter app (iOS + Android) or web app',
+          'CI/CD pipeline (GitHub Actions)',
+          'Automated testing setup',
+          'Production deployment with monitoring',
+          '90-day post-launch support',
+          'Staff training (1 session)',
+          'Full source code and documentation handover',
+        ],
       },
     ],
+    note: 'Never start without 40% advance. Post-launch AMC available from ₹8,000/month.',
   },
+];
+
+export const bundles: PricingBundleData[] = [
   {
-    service: 'AI & Workflow Automation',
-    slug: 'ai-automation',
-    badge: 'Efficiency',
+    name: 'Small Business Full Stack',
+    target: 'Ideal for solopreneurs and local businesses starting their digital presence',
     plans: [
-      {
-        name: 'Implementation (n8n/Make)',
-        price: '$3,000–$8,000',
-        period: 'setup',
-        features: ['Process audit & mapping', 'CRM / Data system sync', 'Zapier to n8n migration (save 80% on fees)', 'Custom Chatbot workflows'],
-        popular: true,
-        cta: 'Request Automation',
-        ctaLink: '/contact',
-      },
-      {
-        name: 'AI Support Retainer',
-        price: '$300–$700',
-        period: '/month',
-        features: ['Endpoint error resolution', 'API credit usage monitoring', 'Prompt tuning & drift prevention', 'Ongoing workflow adjustments'],
-        cta: 'Request Retainer',
-        ctaLink: '/contact',
-      },
+      { department: 'Content Creation', plan: 'Seed', price: '₹28,000', period: '1-month' },
+      { department: 'Branding & Identity', plan: 'Stamp', price: '₹8,500/mo', period: '6-month' },
+      { department: 'Meta Ads Management', plan: 'Starter', price: '₹18,000/mo', period: '1-month' },
     ],
+    total: '₹54,500/month',
   },
   {
-    service: 'Fractional CTO',
-    slug: 'fractional-cto',
-    badge: 'Advisory',
+    name: 'Growing SMB Stack',
+    target: 'Best for expanding businesses needing brand consistency and growth',
     plans: [
-      {
-        name: 'Advisory Retainer',
-        price: '$2,500',
-        period: '/month',
-        features: ['10-15 hours/month', 'Weekly strategy calls', 'Architecture reviews', 'High-level vendor evaluation', 'Code auditing'],
-        cta: 'Request Advisory',
-        ctaLink: '/contact',
-      },
-      {
-        name: 'Standard Partnership',
-        price: '$5,000',
-        period: '/month',
-        features: ['20-30 hours/month', 'Hands-on developer mentorship', 'Hiring and interview support', 'Detailed code reviews', 'Emergency response'],
-        popular: true,
-        cta: 'Hire Fractional CTO',
-        ctaLink: '/contact',
-      },
+      { department: 'Content Creation', plan: 'Grow', price: '₹70,000/mo', period: '6-month' },
+      { department: 'Branding & Identity', plan: 'Mark', price: '₹14,000/mo', period: '6-month' },
+      { department: 'Meta Ads Management', plan: 'Growth', price: '₹35,000/mo', period: '1-month' },
     ],
+    total: '₹1,19,000/month',
+  },
+  {
+    name: 'Enterprise Stack',
+    target: 'For established businesses requiring full-stack digital operations',
+    plans: [
+      { department: 'Content Creation', plan: 'Lead', price: '₹1,30,000/mo', period: '6-month' },
+      { department: 'AI & Automation', plan: 'Neural', price: '₹28,000/mo', period: '6-month' },
+      { department: 'Cybersecurity', plan: 'Guard', price: '₹20,000/mo', period: '6-month' },
+      { department: 'Meta Ads Management', plan: 'Scale', price: '₹65,000/mo', period: '1-month' },
+    ],
+    total: '₹2,43,000/month',
   },
 ];
 
-export const comparisonTable: ComparisonRow[] = [
-  { feature: 'Target Architecture', starter: 'Micro Validation', growth: 'Robust Mid-Level', custom: 'Enterprise Operations' },
-  { feature: 'Basic User Auth', starter: true, growth: true, custom: true },
-  { feature: 'Stripe Billing Logic', starter: false, growth: true, custom: true },
-  { feature: 'Custom Data Dashboard', starter: false, growth: true, custom: true },
-  { feature: 'AI/LLM Integrations', starter: false, growth: 'Supported', custom: 'Complex/RAG' },
-  { feature: 'Dedicated Project Manager', starter: false, growth: true, custom: true },
-  { feature: 'Estimated Build Time', starter: '2–4 weeks', growth: '3–5 months', custom: '6+ months' },
-  { feature: 'Development Cost (USD)', starter: '$15K–$25K', growth: '$40K–$99K', custom: '$100K+' },
-];
+export const paymentTerms = {
+  oneTime: '40-50% upfront, remainder on delivery',
+  monthlyRetainer: '100% advance, 1st of month',
+  sixMonth: '50% advance + monthly thereafter',
+  twelveMonth: '50% advance + monthly thereafter',
+  latePenalty: '2% per month after 15-day due date',
+};
 
-// =============================================================================
-// SMM TIER COMPARISON (Expanded)
-// =============================================================================
-
-export interface SMMComparisonRow {
-  feature: string;
-  starter: string | boolean;
-  growth: string | boolean;
-  scale: string | boolean;
-  enterprise?: string | boolean;
-}
-
-export const smmComparisonTable: SMMComparisonRow[] = [
-  { feature: 'Platforms Managed', starter: '2', growth: '3-4', scale: '5+', enterprise: 'Unlimited' },
-  { feature: 'Posts per Week', starter: '3', growth: 'Daily', scale: 'Multiple Daily', enterprise: 'Custom Cadence' },
-  { feature: 'Static Graphics', starter: true, growth: true, scale: true, enterprise: true },
-  { feature: 'Short-Form Video (Reels/TikTok)', starter: false, growth: true, scale: true, enterprise: true },
-  { feature: 'Long-Form Video', starter: false, growth: false, scale: true, enterprise: true },
-  { feature: 'AI Content Generation', starter: 'Basic', growth: 'Advanced', scale: 'Full Agentic', enterprise: 'Custom LLMs' },
-  { feature: 'C2PA Provenance Labeling', starter: false, growth: true, scale: true, enterprise: true },
-  { feature: 'Deepfake Detection Scanning', starter: false, growth: false, scale: true, enterprise: true },
-  { feature: 'Community Management', starter: 'Basic', growth: 'Active', scale: '24/7', enterprise: 'Dedicated Team' },
-  { feature: 'Paid Ad Coordination', starter: false, growth: true, scale: true, enterprise: true },
-  { feature: 'Influencer Strategy', starter: false, growth: false, scale: true, enterprise: true },
-  { feature: 'Analytics Reporting', starter: 'Monthly', growth: 'Bi-weekly', scale: 'Weekly', enterprise: 'Real-time Dashboard' },
-  { feature: 'GSO (Generative Search Optimization)', starter: false, growth: false, scale: true, enterprise: true },
-  { feature: 'DPDP/LGPD Compliance', starter: true, growth: true, scale: true, enterprise: true },
-  { feature: 'Dedicated Account Manager', starter: false, growth: false, scale: true, enterprise: true },
-  { feature: 'Monthly Investment (USD)', starter: '$1,250', growth: '$2,750', scale: '$5,000+', enterprise: 'Custom' },
-  { feature: 'Monthly Investment (INR)', starter: '₹1,04,000', growth: '₹2,29,000', scale: '₹4,15,000+', enterprise: 'Custom' },
-  { feature: 'US Agency Equivalent', starter: '$3,000–$5,000', growth: '$6,000–$10,000', scale: '$12,000–$20,000', enterprise: '$25,000+' },
-];
-
-// =============================================================================
-// COMPLIANCE COST CALCULATOR DATA
-// =============================================================================
-
-export interface ComplianceCostFactor {
-  regulation: string;
-  diyImplementationCost: string;
-  mtaIncludedCost: string;
-  penaltyRisk: string;
-  timeToCompliance: string;
-}
-
-export const complianceCostFactors: ComplianceCostFactor[] = [
-  {
-    regulation: 'DPDP Act 2023 (India)',
-    diyImplementationCost: '₹5,00,000–₹25,00,000',
-    mtaIncludedCost: 'Included in all tiers',
-    penaltyRisk: 'Up to ₹250 crore',
-    timeToCompliance: '3-6 months DIY vs. immediate with MTA',
-  },
-  {
-    regulation: 'GDPR (EU)',
-    diyImplementationCost: '€20,000–€100,000',
-    mtaIncludedCost: 'Included in all tiers',
-    penaltyRisk: 'Up to €20M or 4% global revenue',
-    timeToCompliance: '6-12 months DIY vs. immediate with MTA',
-  },
-  {
-    regulation: 'LGPD (Brazil)',
-    diyImplementationCost: 'R$50,000–R$300,000',
-    mtaIncludedCost: 'Included (FitNexora health data ready)',
-    penaltyRisk: 'Up to R$50 million (~₹8-9 crore)',
-    timeToCompliance: '4-8 months DIY vs. immediate with MTA',
-  },
-  {
-    regulation: 'IT Amendment Rules 2026 (India)',
-    diyImplementationCost: '₹2,00,000–₹10,00,000',
-    mtaIncludedCost: 'Included (SGI labeling built-in)',
-    penaltyRisk: 'Platform blocking + legal action',
-    timeToCompliance: '2-4 months DIY vs. immediate with MTA',
-  },
-];
-
-// =============================================================================
-// ROI CALCULATOR ASSUMPTIONS
-// =============================================================================
-
-export interface ROIAssumption {
-  metric: string;
-  industry_average: string;
-  mta_delivered: string;
-  improvement: string;
-  source: string;
-}
-
-export const roiAssumptions: ROIAssumption[] = [
-  {
-    metric: 'Cost per Lead (CPL)',
-    industry_average: '$50–$200',
-    mta_delivered: '$15–$60',
-    improvement: '60-70% reduction',
-    source: 'HubSpot State of Marketing 2025',
-  },
-  {
-    metric: 'Social Engagement Rate',
-    industry_average: '1-3%',
-    mta_delivered: '4-8%',
-    improvement: '2-4x improvement',
-    source: 'Sprout Social Industry Benchmarks',
-  },
-  {
-    metric: 'Content Production Time',
-    industry_average: '4-8 hours/post',
-    mta_delivered: '1-2 hours/post',
-    improvement: '75% time savings',
-    source: 'MTA internal benchmarks (agentic workflows)',
-  },
-  {
-    metric: 'Compliance Audit Preparation',
-    industry_average: '40-80 hours',
-    mta_delivered: '0 hours (pre-compliant)',
-    improvement: '100% time savings',
-    source: 'MTA DPDP implementation data',
-  },
-  {
-    metric: 'Brand Safety Incidents',
-    industry_average: '2-5 per year',
-    mta_delivered: '<1 per year',
-    improvement: '80%+ reduction',
-    source: 'C2PA + deepfake detection stack',
-  },
-];
+export const departmentOrder = [
+  'ai-automation',
+  'branding',
+  'content-creation',
+  'cybersecurity',
+  'social-media-marketing',
+  'saas-products',
+] as const;

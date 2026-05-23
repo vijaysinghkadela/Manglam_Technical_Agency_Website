@@ -4,15 +4,14 @@ import { motion, useSpring } from 'framer-motion'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 interface Props {
-  children:   React.ReactNode
+  children: React.ReactNode
   className?: string
-  href?:      string
-  style?:     React.CSSProperties
-  onClick?:   () => void
-  pull?:      number   // max px attraction
+  href?: string
+  style?: React.CSSProperties
+  onClick?: () => void
 }
 
-export const MagneticButton = memo(function MagneticButton({ children, className = '', href, style, onClick, pull = 14 }: Props) {
+export const MagneticButton = memo(function MagneticButton({ children, className = '', style, href, onClick }: Props) {
   const x = useSpring(0, { stiffness: 180, damping: 18 })
   const y = useSpring(0, { stiffness: 180, damping: 18 })
   const ref = useRef<HTMLDivElement>(null)
@@ -20,11 +19,10 @@ export const MagneticButton = memo(function MagneticButton({ children, className
 
   const onMove = (e: React.MouseEvent) => {
     if (!ref.current || reducedMotion) return
-    const r   = ref.current.getBoundingClientRect()
-    const dx  = (e.clientX - r.left - r.width  / 2) * 0.3
-    const dy  = (e.clientY - r.top  - r.height / 2) * 0.3
-    const cap = (v: number) => Math.max(-pull, Math.min(pull, v))
-    x.set(cap(dx)); y.set(cap(dy))
+    const r = ref.current.getBoundingClientRect()
+    const cap = (v: number) => Math.max(-14, Math.min(14, v))
+    x.set(cap((e.clientX - r.left - r.width / 2) * 0.3))
+    y.set(cap((e.clientY - r.top - r.height / 2) * 0.3))
   }
 
   const Tag = href ? motion.a : motion.div

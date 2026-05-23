@@ -20,10 +20,9 @@ export default function NotFound() {
           style={{
             width: '500px',
             height: '500px',
-            backgroundColor: 'rgba(107,26,26,0.07)',
+            backgroundColor: 'rgba(var(--color-accent-rgb),0.07)',
             borderRadius: '50%',
-            filter: 'blur(100px)',
-          }}
+            filter: 'blur(100px)' }}
         />
       </div>
 
@@ -86,8 +85,7 @@ export default function NotFound() {
             style={{
               backgroundColor: 'var(--color-foreground)',
               color: 'var(--color-canvas)',
-              padding: '12px 24px',
-            }}
+              padding: '12px 24px' }}
           >
             ← Back to Home
           </Link>
@@ -98,8 +96,7 @@ export default function NotFound() {
             style={{
               border: '1px solid var(--color-border)',
               color: 'var(--color-muted)',
-              padding: '12px 24px',
-            }}
+              padding: '12px 24px' }}
           >
             Contact Us →
           </Link>

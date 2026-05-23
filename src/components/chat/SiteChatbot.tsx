@@ -100,7 +100,7 @@ function getFollowUpPrompts(lastMessage: string, pathname: string): string[] {
   return prompts.slice(0, 3);
 }
 
-const BRAND = "#6B1A1A";
+const BRAND = "var(--color-violet)";
 
 function parseInline(text: string, keyBase = "k"): ReactNode[] {
   const nodes: ReactNode[] = [];
@@ -171,7 +171,7 @@ function MessageContent({ content, id }: { content: string; id: string }) {
       <ul key={`${id}-ul${keyIndex}`} className={cn("space-y-1.5", blocks.length > 0 && "mt-2.5")}>
         {snapshot.map((item, i) => (
           <li key={i} className="flex items-start gap-2.5">
-            <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#6B1A1A]/60" />
+            <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-violet/60" />
             <span>{parseInline(item, `${id}-li${keyIndex}-${i}`)}</span>
           </li>
         ))}
@@ -298,7 +298,6 @@ function getPageLabel(pathname: string) {
   if (pathname === "/contact") return "Contact";
   if (pathname === "/blog") return "Blog";
   if (pathname === "/portfolio") return "Portfolio";
-  if (pathname === "/research") return "Research";
   if (pathname === "/legal") return "Legal";
   if (pathname === "/trust-center") return "Trust Center";
   if (pathname.startsWith("/services/")) {
@@ -330,7 +329,8 @@ export function SiteChatbot() {
   const [input, setInput] = useState("");
   const [isSending, setIsSending] = useState(false);
   const [dailyUsage, setDailyUsage] = useState<DailyUsage>(() => loadDailyUsage());
-  const streamingIdRef = useRef<string | null>(null);
+  const [streamingId, setStreamingId] = useState<string | null>(null);
+  const accumulatedRef = useRef("");
 
   const scrollAnchorRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
@@ -409,7 +409,7 @@ export function SiteChatbot() {
     saveDailyUsage(newUsage);
 
     const replyId = genId();
-    streamingIdRef.current = replyId;
+    setStreamingId(replyId);
 
     try {
       const response = await fetch("/api/chat", {
@@ -430,7 +430,7 @@ export function SiteChatbot() {
         // ── Streaming mode ──
         const reader = response.body!.getReader();
         const decoder = new TextDecoder();
-        let accumulated = "";
+        accumulatedRef.current = "";
 
         setMessages((current) =>
           trimMessages([...current, { id: replyId, role: "assistant", content: "" }]),
@@ -439,15 +439,15 @@ export function SiteChatbot() {
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
-          accumulated += decoder.decode(value, { stream: true });
+          accumulatedRef.current += decoder.decode(value, { stream: true });
           setMessages((current) =>
             current.map((m) =>
-              m.id === replyId ? { ...m, content: accumulated } : m,
+              m.id === replyId ? { ...m, content: accumulatedRef.current } : m,
             ),
           );
         }
 
-        if (!accumulated.trim()) {
+        if (!accumulatedRef.current.trim()) {
           throw new Error("Empty response from assistant");
         }
       } else {
@@ -493,7 +493,7 @@ export function SiteChatbot() {
       });
     } finally {
       setIsSending(false);
-      streamingIdRef.current = null;
+      setStreamingId(null);
       window.requestAnimationFrame(() => inputRef.current?.focus());
     }
   }
@@ -563,8 +563,7 @@ export function SiteChatbot() {
                 style={{
                   backgroundColor: "var(--color-card)",
                   backgroundImage:
-                    "radial-gradient(circle at top right, rgba(107,26,26,0.07), transparent 42%), linear-gradient(180deg, var(--color-card), var(--color-surface))",
-                }}
+                    "radial-gradient(circle at top right, rgba(var(--color-accent-rgb),0.07), transparent 42%), linear-gradient(180deg, var(--color-card), var(--color-surface))" }}
                 className={cn(
                   "fixed z-[80] flex flex-col overflow-hidden rounded-3xl border border-border text-foreground shadow-[0_32px_100px_rgba(0,0,0,0.30)] backdrop-blur-xl outline-none",
                   "bottom-24 left-3 right-3 h-[min(80vh,640px)] max-h-[calc(100dvh-6.5rem)]",
@@ -575,7 +574,7 @@ export function SiteChatbot() {
                 {/* ── Header ──────────────────────────────────── */}
                 <div className="flex items-center justify-between gap-3 border-b border-border px-4 py-4 sm:px-6 sm:py-4">
                   <div className="flex min-w-0 items-center gap-3">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-accent-border bg-accent-soft shadow-[0_4px_12px_rgba(107,26,26,0.14)]">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-accent-border bg-accent-soft shadow-[0_4px_12px_rgba(var(--color-accent-rgb),0.14)]">
                       <Sparkles className="h-4.5 w-4.5 text-accent sm:h-5 sm:w-5" />
                     </span>
                     <div className="min-w-0">
@@ -678,7 +677,7 @@ export function SiteChatbot() {
                               message.role === "user" ? "px-4 py-2.5" : "px-4 py-3",
                               "text-[13px] leading-[1.65] sm:text-[14px] sm:leading-[1.7] lg:text-[15px]",
                               message.role === "user"
-                                ? "rounded-br-sm shadow-[0_8px_20px_rgba(107,26,26,0.22)]"
+                                ? "rounded-br-sm shadow-[0_8px_20px_rgba(var(--color-accent-rgb),0.22)]"
                                 : "rounded-bl-sm border border-border shadow-[0_2px_10px_rgba(0,0,0,0.06)]",
                               message.failed && "border-red-500/40",
                             )}
@@ -686,7 +685,7 @@ export function SiteChatbot() {
                               message.role === "user"
                                 ? {
                                     background:
-                                      "linear-gradient(135deg,rgba(107,26,26,0.92),rgba(80,18,18,0.85))",
+                                      "linear-gradient(135deg,rgba(var(--color-accent-rgb),0.92),rgba(80,18,18,0.85))",
                                     color: "#ffffff",
                                   }
                                 : {
@@ -698,7 +697,7 @@ export function SiteChatbot() {
                             {message.role === "assistant" ? (
                               <>
                                 <MessageContent content={message.content} id={message.id} />
-                                {message.id === streamingIdRef.current && isSending && (
+                                {message.id === streamingId && isSending && (
                                   <motion.span
                                     animate={{ opacity: [1, 0.2] }}
                                     transition={{ duration: 0.6, repeat: Infinity, ease: "easeInOut" }}
@@ -719,9 +718,9 @@ export function SiteChatbot() {
 
                     {/* ── Typing indicator ─────────────────────── */}
                     <AnimatePresence>
-                      {isSending && streamingIdRef.current && (() => {
+                      {isSending && streamingId && (() => {
                         const hasContent = messages.some(
-                          (m) => m.id === streamingIdRef.current && m.content.length > 0,
+                          (m) => m.id === streamingId && m.content.length > 0,
                         );
                         if (hasContent) return null; // hide dots once streaming started
                         return (
@@ -841,6 +840,7 @@ export function SiteChatbot() {
                           }}
                           disabled={isSending}
                           placeholder="Describe your goal, service, budget, and timeline…"
+                          aria-label="Type your message"
                           className="mta-chat-input w-full resize-none rounded-2xl border px-4 py-3 pr-13 text-[13px] leading-[1.55] outline-none transition-shadow focus:ring-2 focus:ring-accent/30 disabled:opacity-60 sm:text-[14px] lg:text-[15px]"
                           style={{
                             minHeight: "56px",
@@ -848,8 +848,7 @@ export function SiteChatbot() {
                             color: "var(--color-foreground)",
                             backgroundColor: "var(--color-card)",
                             borderColor: "var(--color-border)",
-                            caretColor: BRAND,
-                          }}
+                            caretColor: BRAND }}
                         />
                         <motion.button
                           type="submit"
@@ -857,7 +856,7 @@ export function SiteChatbot() {
                           aria-label="Send message"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.92 }}
-                          className="absolute bottom-2 right-2 flex h-9 w-9 items-center justify-center rounded-xl text-white shadow-[0_4px_14px_rgba(107,26,26,0.35)] transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
+                          className="absolute bottom-2 right-2 flex h-9 w-9 items-center justify-center rounded-xl text-white shadow-[0_4px_14px_rgba(var(--color-accent-rgb),0.35)] transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
                           style={{ backgroundColor: BRAND }}
                         >
                           <Send className="h-4 w-4" />

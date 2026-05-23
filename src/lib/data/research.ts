@@ -198,19 +198,6 @@ export const leadToDeliveryPipeline: PipelineStage[] = [
     legalInstruments: ['Final invoice clearance', 'Handover acknowledgment'],
     control: 'Final source/editable assets transfer only after final payment.',
   },
-  {
-    stage: 10,
-    title: 'Post-Delivery Retention',
-    trigger: 'Project closure and early-live performance window.',
-    actions: [
-      'Run post-delivery review (2–4 weeks).',
-      'Assess outcomes and identify optimization roadmap.',
-      'Convert project momentum into retainer continuity.',
-    ],
-    outputs: ['Retention proposal', 'Quarterly optimization roadmap'],
-    legalInstruments: ['Retainer proposal/addendum'],
-    control: 'Retention offer positioned at peak outcome confidence window.',
-  },
 ]
 
 export const riskMap: RiskControl[] = [

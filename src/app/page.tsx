@@ -5,7 +5,6 @@ import { HomeHero } from '@/components/home/HomeHero'
 import { MarqueeTicker } from '@/components/home/MarqueeTicker'
 import { ServicesHorizontal } from '@/components/home/ServicesHorizontal'
 import { StatsSection } from '@/components/home/StatsSection'
-import { FeaturedProject } from '@/components/home/FeaturedProject'
 import { ProcessSection } from '@/components/home/ProcessSection'
 import { ComplianceByDesign } from '@/components/home/ComplianceByDesign'
 import { TestimonialsSection } from '@/components/home/TestimonialsSection'
@@ -27,9 +26,7 @@ export const metadata: Metadata = {
   },
 }
 
-const Divider = () => (
-  <div aria-hidden style={{ width: '100%', height: '1px', backgroundColor: 'var(--color-border)' }} />
-)
+const Divider = () => <div className="section-divide" aria-hidden />
 
 export default function Home() {
   return (
@@ -38,8 +35,6 @@ export default function Home() {
       <HomeHero />
       <MarqueeTicker />
       <ServicesHorizontal />
-      <Divider />
-      <FeaturedProject />
       <Divider />
       <StatsSection />
       <Divider />

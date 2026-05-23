@@ -2,6 +2,8 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import PageHero from '@/components/ui/PageHero'
 import { Shield, Users, Award, ArrowRight, Check } from 'lucide-react'
+import { JsonLd } from '@/components/seo/JsonLd'
+import { breadcrumbSchema, webPageSchema } from '@/lib/seo/schemas'
 
 export const metadata: Metadata = {
   title: 'Cybersecurity Training & Workshops | Manglam Technical Agency',
@@ -99,6 +101,8 @@ const trainingProcess = [
 export default function CybersecurityTrainingPage() {
   return (
     <main className="min-h-screen bg-canvas">
+      <JsonLd schema={breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Cybersecurity Training', url: '/cybersecurity-training' }])} />
+      <JsonLd schema={webPageSchema({ url: '/cybersecurity-training', title: 'Cybersecurity Training & Workshops | Manglam Technical Agency', description: 'Hands-on ethical hacking workshops and DPDP compliance training for Rajasthan gyms, clinics, and SMBs.' })} />
       <PageHero
         breadcrumbBase="Services"
         breadcrumbBaseHref="/services"

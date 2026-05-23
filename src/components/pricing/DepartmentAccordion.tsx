@@ -56,15 +56,13 @@ export function DepartmentAccordion({
     <div
       className="relative"
       style={{
-        borderBottom: '1px solid var(--color-border)',
-      }}
+        borderBottom: '1px solid var(--color-border)' }}
     >
       <button
         onClick={onToggle}
         className="w-full flex items-center justify-between text-left group relative"
         style={{
-          padding: '26px 0',
-        }}
+          padding: '26px 0' }}
       >
         <div
           className="absolute left-0 top-0 bottom-0 w-[3px] transition-all duration-300 rounded-r"
@@ -72,8 +70,7 @@ export function DepartmentAccordion({
             backgroundColor: isOpen
               ? 'var(--color-violet)'
               : 'transparent',
-            opacity: isOpen ? 1 : 0,
-          }}
+            opacity: isOpen ? 1 : 0 }}
         />
 
         <div className="flex items-center gap-4 pl-4">
@@ -86,15 +83,13 @@ export function DepartmentAccordion({
               backgroundColor: isOpen
                 ? 'var(--color-violet)'
                 : 'var(--color-surface)',
-              border: '1px solid var(--color-border)',
-            }}
+              border: '1px solid var(--color-border)' }}
           >
             <span
               className="font-display font-black transition-colors duration-300"
               style={{
                 fontSize: '18px',
-                color: isOpen ? '#fff' : 'var(--color-muted)',
-              }}
+                color: isOpen ? '#fff' : 'var(--color-muted)' }}
             >
               {department.plans[0].icon}
             </span>
@@ -104,8 +99,7 @@ export function DepartmentAccordion({
               className="font-display font-bold transition-colors duration-200 group-hover:text-violet"
               style={{
                 fontSize: 'clamp(1.05rem, 1.6vw, 1.35rem)',
-                color: 'var(--color-foreground)',
-              }}
+                color: 'var(--color-foreground)' }}
             >
               {department.department}
             </h3>
@@ -128,8 +122,7 @@ export function DepartmentAccordion({
                       backgroundColor: 'var(--color-surface)',
                       border: '1px solid var(--color-border)',
                       color: 'var(--color-dead)',
-                      letterSpacing: '0.04em',
-                    }}
+                      letterSpacing: '0.04em' }}
                   >
                     {plan.name}{' '}
                     <span style={{ color: 'var(--color-muted)' }}>
@@ -149,8 +142,7 @@ export function DepartmentAccordion({
           style={{
             color: isOpen
               ? 'var(--color-violet-light)'
-              : 'var(--color-muted)',
-          }}
+              : 'var(--color-muted)' }}
         >
           <ChevronDown className="w-5 h-5" />
         </motion.div>
@@ -162,8 +154,7 @@ export function DepartmentAccordion({
           className="absolute left-0 top-0 bottom-0 w-[3px] transition-all duration-300 opacity-0 group-hover:opacity-40 rounded-r"
           style={{
             backgroundColor: 'var(--color-violet)',
-            pointerEvents: 'none',
-          }}
+            pointerEvents: 'none' }}
         />
       )}
 
@@ -185,8 +176,7 @@ export function DepartmentAccordion({
                 className="text-sm leading-relaxed max-w-2xl"
                 style={{
                   color: 'var(--color-muted)',
-                  marginBottom: '24px',
-                }}
+                  marginBottom: '24px' }}
               >
                 {department.description}
               </p>
@@ -218,8 +208,7 @@ export function DepartmentAccordion({
                         style={{
                           fontSize: '11px',
                           color: 'var(--color-violet-light)',
-                          letterSpacing: '0.04em',
-                        }}
+                          letterSpacing: '0.04em' }}
                       >
                         {label}
                       </motion.span>
@@ -253,8 +242,7 @@ export function DepartmentAccordion({
                     marginTop: '20px',
                     padding: '18px 22px',
                     borderColor: 'var(--color-border)',
-                    backgroundColor: 'var(--color-surface)',
-                  }}
+                    backgroundColor: 'var(--color-surface)' }}
                 >
                   <p
                     className="font-mono leading-relaxed"

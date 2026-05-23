@@ -1,8 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import { ScrambleCounter } from '@/components/ui/ScrambleCounter'
-import { BRAND, ANIMATION, SPACING, TYPOGRAPHY, RADIUS } from '@/lib/design-system'
-
+import Badge from '@/components/ui/Badge'
 const STATS = [
   { value: 3, suffix: '', label: 'ACTIVE CLIENTS', sub: 'tracked in Clients MOC' },
   { value: 2, suffix: '', label: 'INTERNAL SAAS PRODUCTS', sub: 'FitNexora & Fuxk_Scroll' },
@@ -12,17 +11,16 @@ const STATS = [
 
 const cardBg = (i: number) =>
   i % 2 === 0
-    ? 'radial-gradient(145% 120% at 0% 0%, rgba(107,26,26,0.04) 0%, transparent 60%)'
-    : 'radial-gradient(145% 120% at 100% 100%, rgba(107,26,26,0.04) 0%, transparent 60%)'
+    ? 'radial-gradient(145% 120% at 0% 0%, rgba(var(--color-accent-rgb),0.04) 0%, transparent 60%)'
+    : 'radial-gradient(145% 120% at 100% 100%, rgba(var(--color-accent-rgb),0.04) 0%, transparent 60%)'
 
 export function StatsSection() {
   return (
     <section
+      className="section"
       style={{
         backgroundColor: 'var(--color-canvas)',
-        padding: `${SPACING.section.lg} 0`,
-        position: 'relative',
-      }}
+        position: 'relative' }}
     >
       <div
         className="pointer-events-none absolute inset-0 overflow-hidden"
@@ -31,16 +29,14 @@ export function StatsSection() {
         <div
           className="absolute top-0 right-0 w-[640px] h-[640px] opacity-[0.03]"
           style={{
-            background: `radial-gradient(circle, ${BRAND.primary} 0%, transparent 70%)`,
-            transform: 'translate(30%, -30%)',
-          }}
+            background: `radial-gradient(circle, var(--color-violet) 0%, transparent 70%)`,
+            transform: 'translate(30%, -30%)' }}
         />
         <div
           className="absolute bottom-0 left-0 w-[480px] h-[480px] opacity-[0.03]"
           style={{
-            background: `radial-gradient(circle, ${BRAND.primary} 0%, transparent 70%)`,
-            transform: 'translate(-20%, 20%)',
-          }}
+            background: `radial-gradient(circle, var(--color-violet) 0%, transparent 70%)`,
+            transform: 'translate(-20%, 20%)' }}
         />
       </div>
 
@@ -51,28 +47,25 @@ export function StatsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-40px' }}
           transition={{
-            duration: ANIMATION.duration.slow,
-            ease: ANIMATION.ease,
-          }}
+            duration: 0.7,
+            ease: [0.16, 1, 0.3, 1] }}
         >
           <div>
             <span
               className="font-mono uppercase block mb-4"
               style={{
-                fontSize: TYPOGRAPHY.label,
-                color: BRAND.primary,
-                letterSpacing: '0.22em',
-              }}
+                fontSize: '0.6875rem',
+                color: 'var(--color-violet)',
+                letterSpacing: '0.22em' }}
             >
               PROOF OF DELIVERY
             </span>
             <h2
               className="font-display font-black tracking-normal"
               style={{
-                fontSize: TYPOGRAPHY.section,
+                fontSize: 'clamp(1.75rem, 4vw, 3rem)',
                 color: 'var(--color-foreground)',
-                lineHeight: 0.92,
-              }}
+                lineHeight: 0.92 }}
             >
               Small Team.<br />Real Output.
             </h2>
@@ -80,17 +73,16 @@ export function StatsSection() {
           <p
             className="max-w-[440px]"
             style={{
-              fontSize: TYPOGRAPHY.bodySm,
-              lineHeight: TYPOGRAPHY.leading.relaxed,
-              color: 'var(--color-muted)',
-            }}
+              fontSize: '0.9375rem',
+              lineHeight: 1.72,
+              color: 'var(--color-muted)' }}
           >
             The numbers below are deliberately small because the delivery model is small, direct, and accountable.
             Every project is handled by specialists, not a layer of account management.
           </p>
         </motion.div>
 
-        <div className="relative grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+        <div className="relative grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8">
           {STATS.map((s, i) => (
             <motion.article
               key={s.label}
@@ -99,15 +91,13 @@ export function StatsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{
-                duration: ANIMATION.duration.normal,
+                duration: 0.5,
                 delay: i * 0.1,
-                ease: ANIMATION.ease,
-              }}
+                ease: [0.16, 1, 0.3, 1] }}
               style={{
-                borderRadius: RADIUS.xl,
+                borderRadius: '24px',
                 backgroundImage: cardBg(i),
-                transition: `all ${ANIMATION.duration.fast}s cubic-bezier(${ANIMATION.ease.join(',')})`,
-              }}
+                transition: `all ${0.3}s cubic-bezier(${'0.16,1,0.3,1'})` }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundImage = cardBg(i).replace('0.04', '0.08')
               }}
@@ -117,7 +107,7 @@ export function StatsSection() {
             >
               <div
                 className="absolute inset-x-0 top-0 h-px"
-                style={{ background: `linear-gradient(90deg, ${BRAND.primary}, transparent 80%)` }}
+                style={{ background: `linear-gradient(90deg, var(--color-violet), transparent 80%)` }}
                 aria-hidden
               />
 
@@ -125,64 +115,52 @@ export function StatsSection() {
                 className="absolute -top-3 -right-3 font-display font-black select-none pointer-events-none leading-none"
                 style={{
                   fontSize: 'clamp(5rem, 10vw, 7rem)',
-                  color: BRAND.primary,
-                  opacity: 0.04,
-                }}
+                  color: 'var(--color-violet)',
+                  opacity: 0.04 }}
                 aria-hidden
               >
                 {String(i + 1).padStart(2, '0')}
               </span>
 
-              <div className="flex h-full flex-col p-8 sm:p-10">
+              <div className="flex h-full flex-col p-10 sm:p-12">
                 <div className="flex items-start justify-between gap-4">
-                  <span
-                    className="font-mono text-[10px] uppercase tracking-[0.2em] rounded-full px-3 py-1"
-                    style={{
-                      color: BRAND.primary,
-                      border: `1px solid ${BRAND.primaryMedium}`,
-                      backgroundColor: BRAND.primarySoft,
-                      borderRadius: RADIUS.full,
-                    }}
-                  >
+                  <Badge variant="brand" size="sm">
                     #{String(i + 1).padStart(2, '0')}
-                  </span>
+                  </Badge>
                 </div>
 
                 <ScrambleCounter
                   target={s.value}
                   suffix={s.suffix}
-                  className="font-display font-black leading-none tracking-normal mt-6"
+                  className="font-display font-black leading-none tracking-normal mt-8"
                   style={{
-                    fontSize: TYPOGRAPHY.display,
-                    lineHeight: TYPOGRAPHY.leading.tight,
-                    background: `linear-gradient(135deg, var(--color-foreground) 40%, ${BRAND.primaryLight} 100%)`,
+                    fontSize: 'clamp(3rem, 8vw, 6rem)',
+                    lineHeight: 0.92,
+                    background: `linear-gradient(135deg, var(--color-foreground) 40%, var(--color-violet) 100%)`,
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                  }}
+                    backgroundClip: 'text' }}
                 />
 
                 <div
-                  className="mt-5 h-px w-10 transition-all duration-500 group-hover:w-16"
-                  style={{ backgroundColor: BRAND.primary, opacity: 0.72 }}
+                  className="mt-6 h-px w-10 transition-all duration-500 group-hover:w-16"
+                  style={{ backgroundColor: 'var(--color-violet)', opacity: 0.72 }}
                 />
 
                 <p
-                  className="mt-4 font-mono uppercase"
+                  className="mt-5 font-mono uppercase"
                   style={{
-                    fontSize: TYPOGRAPHY.label,
+                    fontSize: '0.6875rem',
                     color: 'var(--color-muted)',
-                    letterSpacing: '0.18em',
-                  }}
+                    letterSpacing: '0.18em' }}
                 >
                   {s.label}
                 </p>
                 <p
-                  className="mt-2 text-sm leading-relaxed"
+                  className="mt-3 text-sm leading-relaxed"
                   style={{
                     color: 'var(--color-dead)',
-                    lineHeight: TYPOGRAPHY.leading.normal,
-                  }}
+                    lineHeight: 1.5 }}
                 >
                   {s.sub}
                 </p>

@@ -50,7 +50,8 @@ export function useMagnet(
       window.removeEventListener('resize', handleResize);
       if (timeoutId) clearTimeout(timeoutId);
     };
-  }, [ref]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onMouseMove = useCallback(
     (e: React.MouseEvent) => {

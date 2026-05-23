@@ -4,8 +4,6 @@ import { useRef } from 'react'
 import { MagneticButton } from '@/components/ui/MagneticButton'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { AGENCY_WHATSAPP } from '@/lib/constants'
-import { BRAND, ANIMATION, SPACING } from '@/lib/design-system'
-
 const FLOATING_DOTS = [
   { x: '12%', y: '18%', size: 3, delay: 0    },
   { x: '88%', y: '12%', size: 2, delay: 0.6  },
@@ -26,8 +24,8 @@ export function CTABanner() {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden"
-      style={{ backgroundColor: BRAND.primary, padding: `${SPACING.section.lg} 0` }}
+      className="section relative overflow-hidden"
+      style={{ backgroundColor: 'var(--color-violet)' }}
     >
       {/* Diagonal grid overlay */}
       <div
@@ -39,8 +37,7 @@ export function CTABanner() {
             rgba(255,255,255,0.025) 1px,
             transparent 1px,
             transparent 40px
-          )`,
-        }}
+          )` }}
         aria-hidden
       />
 
@@ -66,8 +63,7 @@ export function CTABanner() {
           style={{
             left: dot.x, top: dot.y,
             width: dot.size, height: dot.size,
-            backgroundColor: 'rgba(255,255,255,0.25)',
-          }}
+            backgroundColor: 'rgba(255,255,255,0.25)' }}
           animate={{ y: [0, -12, 0], opacity: [0.25, 0.6, 0.25] }}
           transition={{ duration: 3.5 + i * 0.4, delay: dot.delay, repeat: Infinity, ease: 'easeInOut' }}
           aria-hidden
@@ -85,18 +81,18 @@ export function CTABanner() {
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.6, ease: ANIMATION.ease }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           ✦ READY TO SCALE?
         </motion.span>
 
       <motion.h2
-        className="font-display font-black leading-[0.90] tracking-normal"
-        style={{ fontSize:'clamp(42px, 8vw, 108px)', color:'#FFFFFF' }}
+        className="font-display font-black leading-[0.90] tracking-normal text-white"
+        style={{ fontSize:'clamp(42px, 8vw, 108px)' }}
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.75, delay: 0.08, ease: ANIMATION.ease }}
+          transition={{ duration: 0.75, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
         >
           Scale With<br />Certainty
         </motion.h2>
@@ -106,7 +102,7 @@ export function CTABanner() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.65, delay: 0.16, ease: ANIMATION.ease }}
+          transition={{ duration: 0.65, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
         >
           Free consultation. Honest scope. Real timelines.<br />
           Book our ₹25,000 Discovery Workshop today.
@@ -117,12 +113,12 @@ export function CTABanner() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.6, delay: 0.24, ease: ANIMATION.ease }}
+        transition={{ duration: 0.6, delay: 0.24, ease: [0.16, 1, 0.3, 1] }}
       >
         <MagneticButton
           href="/contact"
-          className="inline-flex w-full sm:w-auto items-center justify-center gap-2 font-display font-black text-[16px] sm:text-[17px] px-6 sm:px-8 py-4 transition-all duration-300 min-h-[56px] sm:min-h-0 touch-manipulation"
-          style={{ backgroundColor:'#FAFAFA', color:BRAND.primary, touchAction: 'manipulation' }}
+          className="inline-flex w-full sm:w-auto items-center justify-center gap-2 font-display font-black text-[16px] sm:text-[17px] px-6 sm:px-8 py-4 transition-all duration-300 min-h-[56px] sm:min-h-0 touch-manipulation bg-foreground"
+          style={{ color:'var(--color-violet)', touchAction: 'manipulation' }}
         >
           Book Discovery Workshop →
         </MagneticButton>
@@ -137,8 +133,7 @@ export function CTABanner() {
             color: 'rgba(255,255,255,0.72)',
             border: '1px solid rgba(255,255,255,0.22)',
             padding: '14px 24px',
-            touchAction: 'manipulation',
-          }}
+            touchAction: 'manipulation' }}
           onMouseEnter={e => {
             (e.currentTarget as HTMLElement).style.color = '#fff'
             ;(e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.55)'

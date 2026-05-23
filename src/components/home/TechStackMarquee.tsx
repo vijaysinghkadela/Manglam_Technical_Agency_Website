@@ -5,13 +5,13 @@ const techRow1 = ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Node.js', '
 const techRow2 = ['Cloudinary', 'Vercel', 'AWS', 'n8n', 'OpenAI', 'Figma', 'GitHub', 'Meta Ads']
 
 const EASE: [number,number,number,number] = [0.16, 1, 0.3, 1]
-const ACCENT = '#6B1A1A'
+const ACCENT = 'var(--color-violet)'
 
 function TechItem({ name }: { name: string }) {
   return (
     <span
       className="flex items-center gap-4 whitespace-nowrap group rounded-full border px-4 py-2.5"
-      style={{ borderColor: 'rgba(107,26,26,0.14)', backgroundColor: 'rgba(107,26,26,0.03)' }}
+      style={{ borderColor: 'rgba(var(--color-accent-rgb),0.14)', backgroundColor: 'rgba(var(--color-accent-rgb),0.03)' }}
     >
       <span
         className="text-[12px] font-mono uppercase tracking-widest transition-colors duration-200 group-hover:text-foreground"
@@ -43,9 +43,7 @@ export function TechStackMarquee() {
       style={{
         backgroundColor: 'var(--color-surface)',
         borderTop: '1px solid var(--color-border)',
-        borderBottom: '1px solid var(--color-border)',
-        padding: 'clamp(56px, 8vw, 80px) 0',
-      }}
+        borderBottom: '1px solid var(--color-border)' }}
     >
       <motion.div
         className="container-site text-center mb-8"

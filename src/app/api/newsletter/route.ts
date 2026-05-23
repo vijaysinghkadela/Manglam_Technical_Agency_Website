@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { Resend } from 'resend'
-
-const ADMIN_EMAIL = 'manglamtechnicalagency@gmail.com'
+import { sendAdminEmail } from '@/lib/email'
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,19 +12,17 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const resendApiKey = process.env.RESEND_API_KEY
-    if (resendApiKey) {
-      const resend = new Resend(resendApiKey)
-      const { error } = await resend.emails.send({
-        from: 'MTA Website <onboarding@resend.dev>',
-        to: [ADMIN_EMAIL],
-        subject: '[MTA Newsletter] New subscriber',
-        text: `New newsletter subscriber: ${body.email}`,
-      })
+    const { error } = await sendAdminEmail({
+      subject: '[MTA Newsletter] New subscriber',
+      text: `New newsletter subscriber: ${body.email}`,
+      replyTo: body.email,
+    })
 
-      if (error && process.env.NODE_ENV === 'development') {
-        console.error('[MTA Newsletter] Resend error:', error)
-      }
+    if (error) {
+      return NextResponse.json(
+        { success: false, message: 'Subscription failed. Please try again.' },
+        { status: 500 },
+      )
     }
 
     return NextResponse.json(

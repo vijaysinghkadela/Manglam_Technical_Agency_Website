@@ -1,6 +1,5 @@
 'use client'
 import { memo, useMemo } from 'react'
-import { BRAND, ANIMATION, TYPOGRAPHY, RADIUS } from '@/lib/design-system'
 
 const ITEMS = [
   'WEB DEVELOPMENT', 'SOCIAL MEDIA MARKETING', 'CYBERSECURITY',
@@ -8,38 +7,36 @@ const ITEMS = [
   'BRANDING & IDENTITY', 'CONTENT CREATION', 'MSME REGISTERED (UDYAM)',
 ]
 
+const ITEM_STYLE: React.CSSProperties = {
+  fontSize: '0.625rem',
+  letterSpacing: '0.2em',
+}
+
 // Memoized item component to prevent re-renders
 const MarqueeItem = memo(function MarqueeItem({ item }: { item: string }) {
   return (
     <span
       className="flex items-center gap-3 font-mono uppercase mr-4 rounded-full border px-3.5 py-2.5 transition-all duration-300 hover:scale-105"
       style={{
-        fontSize: TYPOGRAPHY.micro,
+        ...ITEM_STYLE,
         color: 'var(--color-muted)',
-        letterSpacing: '0.2em',
         borderColor: 'var(--color-border)',
         backgroundColor: 'var(--color-card)',
-        borderRadius: RADIUS.full,
-        transition: `all ${ANIMATION.duration.fast}s cubic-bezier(${ANIMATION.ease.join(',')})`,
-      }}
+        borderRadius: '9999px' }}
     >
       {item}
-      <span style={{ 
-        color: BRAND.primary, 
-        fontSize: '12px', 
-        lineHeight: 1, 
-        opacity: 0.7,
-        transition: `opacity ${ANIMATION.duration.fast}s ease`
-      }}>✦</span>
+      <span style={{
+        color: 'var(--color-violet)',
+        fontSize: '12px',
+        lineHeight: 1,
+        opacity: 0.7 }}>✦</span>
     </span>
   )
 })
 
 export const MarqueeTicker = memo(function MarqueeTicker() {
-  // Triple the items for seamless loop - memoized to prevent re-creation
   const repeated = useMemo(() => [...ITEMS, ...ITEMS, ...ITEMS], [])
 
-  // Memoized container styles with design system tokens
   const containerStyle = useMemo(() => ({
     backgroundColor: 'var(--color-card)',
     borderTop: '1px solid var(--color-border)',
@@ -54,18 +51,10 @@ export const MarqueeTicker = memo(function MarqueeTicker() {
       role="region"
       aria-label="Services marquee"
     >
-      {/*
-        GPU-optimized animation:
-        - Uses CSS animation (compositor-driven)
-        - backface-visibility: hidden (promotes to GPU layer)
-        - transform: translateZ(0) (ensures GPU acceleration)
-        - Pauses on touch devices via CSS media query
-      */}
-      <div 
+      <div
         className="flex whitespace-nowrap animate-marquee-left gap-2 py-1"
         style={{
-          willChange: 'transform',
-        }}
+          willChange: 'transform' }}
       >
         {repeated.map((item, i) => (
           <MarqueeItem key={`${item}-${i}`} item={item} />
@@ -75,5 +64,4 @@ export const MarqueeTicker = memo(function MarqueeTicker() {
   )
 })
 
-// Default export for dynamic imports
 export default MarqueeTicker

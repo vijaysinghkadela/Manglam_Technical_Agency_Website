@@ -4,6 +4,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema } from "@/lib/seo/schemas";
 import { ServicesGrid } from "@/components/services/ServicesGrid";
 import { services } from "@/lib/data/services";
+import Badge from "@/components/ui/Badge";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -65,8 +66,7 @@ export default function ServicesPage() {
             height: "clamp(300px, 40vw, 700px)",
             borderRadius: "50%",
             background:
-              "radial-gradient(circle, rgba(107,26,26,0.09) 0%, transparent 68%)",
-          }}
+              "radial-gradient(circle, rgba(var(--color-accent-rgb),0.09) 0%, transparent 68%)" }}
         />
 
         <div className="relative z-10 container-site grid min-h-[68svh] gap-12 py-28 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:py-36">
@@ -76,8 +76,7 @@ export default function ServicesPage() {
               style={{
                 fontSize: "11px",
                 color: "var(--color-dead)",
-                letterSpacing: "0.18em",
-              }}
+                letterSpacing: "0.18em" }}
             >
               <Link href="/" className="hover-foreground transition-colors">
                 HOME
@@ -91,8 +90,7 @@ export default function ServicesPage() {
               style={{
                 fontSize: "11px",
                 color: "var(--color-violet-light)",
-                letterSpacing: "0.24em",
-              }}
+                letterSpacing: "0.24em" }}
             >
               ✦ WHAT WE DO
             </span>
@@ -102,8 +100,7 @@ export default function ServicesPage() {
                 className="font-display font-black leading-none tracking-normal uppercase"
                 style={{
                   fontSize: "clamp(2.9rem, 8.5vw, 8.8rem)",
-                  color: "var(--color-foreground)",
-                }}
+                  color: "var(--color-foreground)" }}
               >
                 SERVICES
               </h1>
@@ -111,8 +108,7 @@ export default function ServicesPage() {
                 className="font-display font-black leading-none tracking-normal uppercase"
                 style={{
                   fontSize: "clamp(2.9rem, 8.5vw, 8.8rem)",
-                  color: "var(--color-violet)",
-                }}
+                  color: "var(--color-violet)" }}
               >
                 THAT SCALE.
               </h1>
@@ -123,8 +119,7 @@ export default function ServicesPage() {
               style={{
                 fontSize: "16px",
                 lineHeight: 1.72,
-                color: "var(--color-muted)",
-              }}
+                color: "var(--color-muted)" }}
             >
               End-to-end digital infrastructure for Indian businesses. We build,
               secure, and automate your operations so you can focus on growth
@@ -135,7 +130,7 @@ export default function ServicesPage() {
               <Link
                 href={buildContactHref()}
                 className="inline-flex items-center gap-2 rounded-full px-7 py-4 min-h-[52px] font-display text-[14px] font-black transition-all duration-300"
-                style={{ backgroundColor: "#6B1A1A", color: "#FFFFFF" }}
+                style={{ backgroundColor: "var(--color-violet)", color: "#FFFFFF" }}
                 data-cursor="pointer"
               >
                 Start a Project <span>→</span>
@@ -145,8 +140,7 @@ export default function ServicesPage() {
                 className="inline-flex items-center gap-2 rounded-full border px-7 py-4 min-h-[52px] font-display text-[14px] font-black transition-all duration-300"
                 style={{
                   borderColor: "var(--color-border)",
-                  color: "var(--color-violet-light)",
-                }}
+                  color: "var(--color-violet-light)" }}
                 data-cursor="pointer"
               >
                 View Pricing <span>→</span>
@@ -157,7 +151,7 @@ export default function ServicesPage() {
               {heroStats.map((item) => (
                 <div
                   key={item.label}
-                  className="rounded-[20px] border border-border bg-[rgba(255,255,255,0.02)] px-5 py-5"
+                  className="rounded-[20px] border border-border bg-accent-soft px-5 py-5"
                 >
                   <p
                     className="font-display text-[15px] font-semibold leading-tight"
@@ -192,12 +186,13 @@ export default function ServicesPage() {
                   Designed for clear scopes and smooth handoff.
                 </h2>
               </div>
-              <span
-                className="shrink-0 rounded-full border border-border bg-surface px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em]"
-                style={{ color: "var(--color-violet-light)" }}
+              <Badge
+                variant="subtle"
+                size="sm"
+                className="text-violet-light"
               >
                 7 tracks
-              </span>
+              </Badge>
             </div>
 
             <div className="mt-6 grid gap-3">
@@ -233,7 +228,7 @@ export default function ServicesPage() {
             </div>
 
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-2xl border border-border bg-[rgba(107,26,26,0.04)] px-5 py-5">
+              <div className="rounded-2xl border border-border bg-[rgba(var(--color-accent-rgb),0.04)] px-5 py-5">
                 <p
                   className="font-mono text-[10px] uppercase tracking-[0.18em]"
                   style={{ color: "var(--color-violet-light)" }}
@@ -248,7 +243,7 @@ export default function ServicesPage() {
                   preferences.
                 </p>
               </div>
-              <div className="rounded-2xl border border-border bg-[rgba(107,26,26,0.04)] px-5 py-5">
+              <div className="rounded-2xl border border-border bg-[rgba(var(--color-accent-rgb),0.04)] px-5 py-5">
                 <p
                   className="font-mono text-[10px] uppercase tracking-[0.18em]"
                   style={{ color: "var(--color-violet-light)" }}
@@ -273,15 +268,13 @@ export default function ServicesPage() {
 
       {/* ── GOVERNANCE CALLOUT ───────────────────────────── */}
       <section
-        className="border-t border-border"
+        className="section border-t border-border"
         style={{
-          backgroundColor: "var(--color-surface)",
-          padding: "clamp(56px, 8vw, 96px) 0",
-        }}
+          backgroundColor: "var(--color-surface)" }}
       >
         <div className="container-site">
           <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="rounded-[30px] border border-[rgba(107,26,26,0.18)] bg-[rgba(107,26,26,0.04)] p-8 sm:p-10">
+            <div className="rounded-[30px] border border-[rgba(var(--color-accent-rgb),0.18)] bg-[rgba(var(--color-accent-rgb),0.04)] p-8 sm:p-10">
               <p
                 className="font-mono text-[11px] tracking-[0.18em] uppercase mb-2"
                 style={{ color: "var(--color-violet-light)" }}
@@ -292,8 +285,7 @@ export default function ServicesPage() {
                 className="font-display font-black mb-3"
                 style={{
                   fontSize: "clamp(1.2rem, 2vw, 1.8rem)",
-                  color: "var(--color-foreground)",
-                }}
+                  color: "var(--color-foreground)" }}
               >
                 Every service is mapped to legal controls before execution.
               </h2>
@@ -308,13 +300,9 @@ export default function ServicesPage() {
 
               <div className="mt-6 flex flex-wrap gap-2.5">
                 {governanceChips.map((chip) => (
-                  <span
-                    key={chip}
-                    className="rounded-full border border-border bg-card px-3 py-2 font-mono text-[10px] uppercase tracking-[0.16em]"
-                    style={{ color: "var(--color-dead)" }}
-                  >
+                  <Badge key={chip} variant="subtle" size="sm">
                     {chip}
-                  </span>
+                  </Badge>
                 ))}
               </div>
             </div>
@@ -322,7 +310,7 @@ export default function ServicesPage() {
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
               <Link
                 href="/legal"
-                className="rounded-[28px] border border-border bg-card p-6 transition-colors hover:border-violet/40 hover:bg-[rgba(107,26,26,0.04)]"
+                className="rounded-[28px] border border-border bg-card p-6 transition-colors hover:border-violet/40 hover:bg-[rgba(var(--color-accent-rgb),0.04)]"
                 data-cursor="pointer"
               >
                 <p
@@ -342,7 +330,7 @@ export default function ServicesPage() {
 
               <Link
                 href="/research"
-                className="rounded-[28px] border border-border bg-card p-8 transition-colors hover:border-violet/40 hover:bg-[rgba(107,26,26,0.04)]"
+                className="rounded-[28px] border border-border bg-card p-8 transition-colors hover:border-violet/40 hover:bg-[rgba(var(--color-accent-rgb),0.04)]"
                 data-cursor="pointer"
               >
                 <p

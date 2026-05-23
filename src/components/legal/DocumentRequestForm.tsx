@@ -9,7 +9,7 @@ import toast from 'react-hot-toast'
 
 const schema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.email('Enter a valid email address'),
+  email: z.string().email('Enter a valid email address'),
   company: z.string().optional(),
   requestedDocuments: z.array(z.string()).min(1, 'Select at least one document'),
   useCase: z.string().min(20, 'Use case must be at least 20 characters'),
@@ -91,7 +91,7 @@ export function DocumentRequestForm({ docs }: DocumentRequestFormProps) {
         <div className="flex items-center gap-4">
           <div
             className="w-12 h-12 flex items-center justify-center shrink-0"
-            style={{ border: '1px solid rgba(107,26,26,0.4)', backgroundColor: 'rgba(107,26,26,0.08)' }}
+            style={{ border: '1px solid rgba(var(--color-accent-rgb),0.4)', backgroundColor: 'rgba(var(--color-accent-rgb),0.08)' }}
           >
             <CheckCircle2 className="w-6 h-6" style={{ color: 'var(--color-violet-light)' }} />
           </div>
@@ -158,8 +158,7 @@ export function DocumentRequestForm({ docs }: DocumentRequestFormProps) {
             style={{
               backgroundColor: 'var(--color-canvas)',
               border: '1px solid var(--color-border)',
-              color: 'var(--color-foreground)',
-            }}
+              color: 'var(--color-foreground)' }}
             onFocus={e => (e.currentTarget.style.borderColor = 'var(--color-violet)')}
             onBlur={e => (e.currentTarget.style.borderColor = 'var(--color-border)')}
           />
@@ -183,8 +182,7 @@ export function DocumentRequestForm({ docs }: DocumentRequestFormProps) {
             style={{
               backgroundColor: 'var(--color-canvas)',
               border: '1px solid var(--color-border)',
-              color: 'var(--color-foreground)',
-            }}
+              color: 'var(--color-foreground)' }}
             onFocus={e => (e.currentTarget.style.borderColor = 'var(--color-violet)')}
             onBlur={e => (e.currentTarget.style.borderColor = 'var(--color-border)')}
           />
@@ -209,8 +207,7 @@ export function DocumentRequestForm({ docs }: DocumentRequestFormProps) {
           style={{
             backgroundColor: 'var(--color-canvas)',
             border: '1px solid var(--color-border)',
-            color: 'var(--color-foreground)',
-          }}
+            color: 'var(--color-foreground)' }}
           onFocus={e => (e.currentTarget.style.borderColor = 'var(--color-violet)')}
           onBlur={e => (e.currentTarget.style.borderColor = 'var(--color-border)')}
         />
@@ -235,10 +232,9 @@ export function DocumentRequestForm({ docs }: DocumentRequestFormProps) {
                 className="text-left px-4 py-3 transition-all duration-200"
                 style={{
                   border: selected
-                    ? '1px solid rgba(107,26,26,0.6)'
+                    ? '1px solid rgba(var(--color-accent-rgb),0.6)'
                     : '1px solid var(--color-border)',
-                  backgroundColor: selected ? 'rgba(107,26,26,0.08)' : 'var(--color-canvas)',
-                }}
+                  backgroundColor: selected ? 'rgba(var(--color-accent-rgb),0.08)' : 'var(--color-canvas)' }}
               >
                 <p className="text-sm font-semibold" style={{ color: 'var(--color-foreground)' }}>
                   {doc.name}
@@ -271,8 +267,7 @@ export function DocumentRequestForm({ docs }: DocumentRequestFormProps) {
           style={{
             backgroundColor: 'var(--color-canvas)',
             border: '1px solid var(--color-border)',
-            color: 'var(--color-foreground)',
-          }}
+            color: 'var(--color-foreground)' }}
           onFocus={e => (e.currentTarget.style.borderColor = 'var(--color-violet)')}
           onBlur={e => (e.currentTarget.style.borderColor = 'var(--color-border)')}
         />
@@ -283,17 +278,19 @@ export function DocumentRequestForm({ docs }: DocumentRequestFormProps) {
 
       {/* Consent checkboxes */}
       <div className="grid gap-4">
-        <label className="flex items-start gap-3 text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
+        <label className="flex items-start gap-3 text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }} htmlFor="privacy">
           <input
             type="checkbox"
+            id="privacy"
             {...register('privacy')}
             className="mt-0.5 w-5 h-5 accent-violet shrink-0"
           />
           I confirm this request is for legitimate evaluation or onboarding and I agree to MTA processing this submission for document access review.
         </label>
-        <label className="flex items-start gap-3 text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
+        <label className="flex items-start gap-3 text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }} htmlFor="retentionConsent">
           <input
             type="checkbox"
+            id="retentionConsent"
             {...register('retentionConsent')}
             className="mt-0.5 w-5 h-5 accent-violet shrink-0"
           />

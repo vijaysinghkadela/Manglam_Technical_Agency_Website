@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { departments } from '@/lib/data/pricing-2026';
+import { departments } from '@/lib/data/pricing';
 import { DurationToggle } from './DurationToggle';
 import { buildPlanContactHref } from '@/lib/pricing-contact';
 
@@ -24,11 +24,9 @@ export function ServicePricingSection({
 
   return (
     <section
-      className="border-t border-border"
+      className="section border-t border-border"
       style={{
-        backgroundColor: 'var(--color-surface)',
-        padding: 'clamp(72px, 10vw, 128px) 0',
-      }}
+        backgroundColor: 'var(--color-surface)' }}
     >
       <div className="container-site">
         <motion.div
@@ -44,8 +42,7 @@ export function ServicePricingSection({
               style={{
                 fontSize: '13px',
                 color: 'var(--color-violet-light)',
-                letterSpacing: '0.22em',
-              }}
+                letterSpacing: '0.22em' }}
             >
               PRICING
             </span>
@@ -53,8 +50,7 @@ export function ServicePricingSection({
               className="font-display font-black leading-tight"
               style={{
                 fontSize: 'clamp(1.5rem, 3vw, 2.75rem)',
-                color: 'var(--color-foreground)',
-              }}
+                color: 'var(--color-foreground)' }}
             >
               Plans &<br />
               Investment
@@ -92,16 +88,14 @@ export function ServicePricingSection({
                     ? '1px solid var(--color-violet)'
                     : '1px solid var(--color-border)',
                   backgroundColor: plan.highlight
-                    ? 'rgba(107,26,26,0.04)'
-                    : 'var(--color-card)',
-                }}
+                    ? 'rgba(var(--color-accent-rgb),0.04)'
+                    : 'var(--color-card)' }}
               >
                 {plan.highlight && (
                   <div
                     style={{
                       backgroundColor: 'var(--color-violet)',
-                      padding: '6px 20px',
-                    }}
+                      padding: '6px 20px' }}
                   >
                     <span className="font-mono text-xs text-white uppercase tracking-widest">
                       ✦ Recommended
@@ -116,16 +110,14 @@ export function ServicePricingSection({
                         className="font-display font-bold mb-1"
                         style={{
                           fontSize: '17px',
-                          color: 'var(--color-foreground)',
-                        }}
+                          color: 'var(--color-foreground)' }}
                       >
                         {plan.name}
                       </p>
                       <p
                         style={{
                           fontSize: '11px',
-                          color: 'var(--color-dead)',
-                        }}
+                          color: 'var(--color-dead)' }}
                       >
                         {plan.tagline}
                       </p>
@@ -140,8 +132,7 @@ export function ServicePricingSection({
                         fontSize: 'clamp(1.4rem, 2.5vw, 2rem)',
                         color: plan.highlight
                           ? 'var(--color-violet-light)'
-                          : 'var(--color-foreground)',
-                      }}
+                          : 'var(--color-foreground)' }}
                     >
                       {dur.price}
                     </p>
@@ -158,8 +149,7 @@ export function ServicePricingSection({
                   <div
                     style={{
                       height: '1px',
-                      backgroundColor: 'var(--color-border)',
-                    }}
+                      backgroundColor: 'var(--color-border)' }}
                   />
 
                   <ul className="flex flex-col gap-2.5 flex-1">
@@ -169,8 +159,7 @@ export function ServicePricingSection({
                         className="flex items-start gap-2.5"
                         style={{
                           fontSize: '13px',
-                          color: 'var(--color-muted)',
-                        }}
+                          color: 'var(--color-muted)' }}
                       >
                         <span
                           className="shrink-0 rounded-full"
@@ -179,8 +168,7 @@ export function ServicePricingSection({
                             width: '5px',
                             height: '5px',
                             backgroundColor: 'var(--color-violet)',
-                            opacity: 0.6,
-                          }}
+                            opacity: 0.6 }}
                         />
                         {f}
                       </li>
@@ -197,8 +185,7 @@ export function ServicePricingSection({
                         : '1px solid var(--color-border)',
                       color: plan.highlight
                         ? 'var(--color-violet-light)'
-                        : 'var(--color-muted)',
-                    }}
+                        : 'var(--color-muted)' }}
                   >
                     Get Started
                     <ArrowRight className="w-4 h-4" />
@@ -214,8 +201,7 @@ export function ServicePricingSection({
           style={{
             fontSize: '13px',
             color: 'var(--color-dead)',
-            letterSpacing: '0.1em',
-          }}
+            letterSpacing: '0.1em' }}
         >
           All prices in INR. See{' '}
           <Link

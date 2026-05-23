@@ -98,8 +98,8 @@ export function AboutContent() {
     <>
       {/* ── WHO WE ARE — STATEMENT ──────────────────────────── */}
       <section
-        className="w-full border-t border-border overflow-hidden relative"
-        style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(48px, 6vw, 80px) 0' }}
+        className="section-sm w-full border-t border-border overflow-hidden relative"
+        style={{ backgroundColor: 'var(--color-surface)' }}
       >
         <div className="absolute inset-0 grain opacity-25 pointer-events-none" />
 
@@ -141,10 +141,10 @@ export function AboutContent() {
             transition={{ duration: 0.7, delay: 0.25, ease: EASE }}
           >
             <p style={{ fontSize: '17px', lineHeight: 1.78, color: 'var(--color-muted)' }}>
-              Manglam Technical Agency (MTA) is a specialized fractional technical partner
-              based in Bikaner, Rajasthan. We bridge the gap for companies scaling internationally:
-              supplying the uncompromised engineering depth of Indian technology hubs combined
-              with strict adherence to Western compliance and professional parity.
+              Manglam Technical Agency (MTA) is a technical agency based in Bikaner, Rajasthan.
+              We build software, automate workflows, and handle security — for Indian businesses
+              and international clients who want a direct working relationship without the
+              overhead of a large firm.
             </p>
             <p style={{ fontSize: '17px', lineHeight: 1.78, color: 'var(--color-muted)' }}>
               We operate exclusively through rigorous documentation, signed service level agreements,
@@ -177,8 +177,7 @@ export function AboutContent() {
                   letterSpacing: '0.14em',
                   border: '1px solid var(--color-border)',
                   padding: '5px 12px',
-                  backgroundColor: 'var(--color-card)',
-                }}
+                  backgroundColor: 'var(--color-card)' }}
               >
                 {tag}
               </span>
@@ -189,8 +188,8 @@ export function AboutContent() {
 
       {/* ── THE TEAM ─────────────────────────────────────────── */}
       <section
-        className="w-full border-t border-border"
-        style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(72px, 10vw, 128px) 0' }}
+        className="section w-full border-t border-border"
+        style={{ backgroundColor: 'var(--color-canvas)' }}
       >
         <div className="container-site">
           <motion.div
@@ -225,8 +224,7 @@ export function AboutContent() {
                 className="flex flex-col sm:flex-row overflow-hidden"
                 style={{
                   border: '1px solid var(--color-border)',
-                  backgroundColor: 'var(--color-card)',
-                }}
+                  backgroundColor: 'var(--color-card)' }}
               >
                 {/* Portrait image — full width on mobile, fixed-width sidebar on sm+ */}
                 <div className="relative shrink-0 h-72 w-full sm:h-auto sm:w-44 md:w-52 xl:w-60 sm:self-stretch overflow-hidden">
@@ -243,10 +241,9 @@ export function AboutContent() {
                     <div
                       className="absolute inset-0 flex items-center justify-center font-display font-black"
                       style={{
-                        backgroundColor: 'rgba(107,26,26,0.08)',
+                        backgroundColor: 'rgba(var(--color-accent-rgb),0.08)',
                         color: 'var(--color-violet-light)',
-                        fontSize: '2.5rem',
-                      }}
+                        fontSize: '2.5rem' }}
                     >
                       {member.initials}
                     </div>
@@ -295,8 +292,7 @@ export function AboutContent() {
                             letterSpacing: '0.12em',
                             border: '1px solid var(--color-border)',
                             padding: '3px 8px',
-                            backgroundColor: 'var(--color-surface)',
-                          }}
+                            backgroundColor: 'var(--color-surface)' }}
                         >
                           {tag}
                         </span>
@@ -347,8 +343,8 @@ export function AboutContent() {
 
       {/* ── MISSION ─────────────────────────────────────────── */}
       <section
-        className="w-full border-t border-border"
-        style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(72px, 10vw, 128px) 0' }}
+        className="section w-full border-t border-border"
+        style={{ backgroundColor: 'var(--color-canvas)' }}
       >
         <div className="container-site">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-14 lg:gap-28 items-start">
@@ -365,8 +361,7 @@ export function AboutContent() {
                 style={{
                   fontSize: 'clamp(4rem, 9vw, 8rem)',
                   color: 'var(--color-dead)',
-                  letterSpacing: 0,
-                }}
+                  letterSpacing: 0 }}
                 aria-hidden
               >
                 WHY
@@ -387,13 +382,11 @@ export function AboutContent() {
                   fontSize: 'clamp(1.25rem, 2.4vw, 1.85rem)',
                   color: 'var(--color-foreground)',
                   borderLeft: '2px solid var(--color-violet)',
-                  paddingLeft: '1.5rem',
-                }}
+                  paddingLeft: '1.5rem' }}
               >
-                To deliver customised technical and innovative engineering solutions that drive
-                sustainable growth for our clients — combining the output quality of a larger
-                firm with the responsiveness and personal accountability that only a boutique
-                agency can offer.
+                To deliver technical work that actually works — on time, documented, and
+                supported after launch. We keep our engagements small enough that every
+                client gets direct access to the team building their solution.
               </p>
             </motion.div>
           </div>
@@ -402,8 +395,8 @@ export function AboutContent() {
 
       {/* ── WHAT WE DO — Editorial numbered list ─────────── */}
       <section
-        className="w-full border-t border-border"
-        style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(72px, 10vw, 128px) 0' }}
+        className="section w-full border-t border-border"
+        style={{ backgroundColor: 'var(--color-surface)' }}
       >
         <div className="container-site">
           {/* Header */}
@@ -461,10 +454,9 @@ export function AboutContent() {
                     className="font-display font-black leading-none select-none transition-colors duration-400 group-hover:text-violet"
                     style={{
                       fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
-                      color: 'rgba(107,26,26,0.12)',
+                      color: 'rgba(var(--color-accent-rgb),0.12)',
                       transitionDuration: '400ms',
-                      lineHeight: 1,
-                    }}
+                      lineHeight: 1 }}
                   >
                     {svc.num}
                   </span>
@@ -488,8 +480,7 @@ export function AboutContent() {
                       style={{
                         fontSize: 'clamp(1rem, 1.8vw, 1.35rem)',
                         color: 'var(--color-foreground)',
-                        lineHeight: 1.15,
-                      }}
+                        lineHeight: 1.15 }}
                     >
                       {svc.name}
                     </h3>
@@ -538,8 +529,8 @@ export function AboutContent() {
 
       {/* ── OUR STORY ───────────────────────────────────────── */}
       <section
-        className="w-full border-t border-border"
-        style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(64px, 10vw, 120px) 0' }}
+        className="section w-full border-t border-border"
+        style={{ backgroundColor: 'var(--color-canvas)' }}
       >
         <div className="container-site">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.8fr] gap-16 lg:gap-24 items-start">
@@ -557,8 +548,7 @@ export function AboutContent() {
                 style={{
                   fontSize: 'clamp(5rem, 10vw, 9rem)',
                   color: 'var(--color-dead)',
-                  letterSpacing: 0,
-                }}
+                  letterSpacing: 0 }}
                 aria-hidden
               >
                 MTA
@@ -588,20 +578,17 @@ export function AboutContent() {
                   fontSize: 'clamp(1.2rem, 2.4vw, 1.7rem)',
                   color: 'var(--color-foreground)',
                   borderLeft: '2px solid var(--color-violet)',
-                  paddingLeft: '1.5rem',
-                }}
+                  paddingLeft: '1.5rem' }}
               >
-                MTA was built on a straightforward observation: the global digital services sector
-                has shifted from simple labor-based cost arbitrage to high-value technical integration.
-                Founders and executives in high-cost jurisdictions require more than just code; they
-                need a fractional CTO acting as a true technical partner who mitigates risk and enforces compliance.
+                The global digital services sector has shifted from labour arbitrage to high-value
+                technical integration. Clients need more than code — they need a fractional CTO who
+                mitigates risk and enforces compliance. That&apos;s what MTA is built for.
               </p>
 
               <p style={{ fontSize: '17px', lineHeight: 1.78, color: 'var(--color-muted)' }}>
-                Registered as an MSME (Udyam: UDYAM-RJ-15-0094091), we align delivery with Indian legal
-                requirements including DPDP Act 2023 and relevant IT Act obligations. Our track record is
-                built on honest communication, transparent ownership, and technical depth that holds up in
-                real client environments.
+                Registered MSME (UDYAM-RJ-15-0094091) aligned with DPDP Act 2023 and IT Act
+                obligations. Our track record runs on honest communication, transparent ownership,
+                and technical depth that holds up in real environments.
               </p>
             </motion.div>
           </div>
@@ -610,7 +597,7 @@ export function AboutContent() {
 
       {/* ── CORE VALUES ─────────────────────────────────────── */}
       <section
-        className="w-full border-t border-border"
+        className="section w-full border-t border-border"
         style={{ backgroundColor: 'var(--color-surface)' }}
       >
         <div className="container-site py-8 border-b border-border">
@@ -645,9 +632,8 @@ export function AboutContent() {
                 className="font-display font-black block leading-none transition-colors duration-400 group-hover:text-violet"
                 style={{
                   fontSize: 'clamp(3rem, 5vw, 5rem)',
-                  color: 'rgba(107,26,26,0.15)',
-                  transitionDuration: '400ms',
-                }}
+                  color: 'rgba(var(--color-accent-rgb),0.15)',
+                  transitionDuration: '400ms' }}
               >
                 {v.num}
               </span>
@@ -657,8 +643,7 @@ export function AboutContent() {
                 style={{
                   fontSize: 'clamp(1.1rem, 1.8vw, 1.6rem)',
                   color: 'var(--color-foreground)',
-                  lineHeight: 1.15,
-                }}
+                  lineHeight: 1.15 }}
               >
                 {v.title}
               </h3>
@@ -676,8 +661,8 @@ export function AboutContent() {
 
       {/* ── HOW WE WORK ─────────────────────────────────────── */}
       <section
-        className="w-full border-t border-border"
-        style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(72px, 10vw, 128px) 0' }}
+        className="section w-full border-t border-border"
+        style={{ backgroundColor: 'var(--color-canvas)' }}
       >
         <div className="container-site">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.8fr] gap-20 lg:gap-28 items-start">
@@ -694,8 +679,7 @@ export function AboutContent() {
                 style={{
                   fontSize: 'clamp(4rem, 9vw, 8rem)',
                   color: 'var(--color-dead)',
-                  letterSpacing: 0,
-                }}
+                  letterSpacing: 0 }}
                 aria-hidden
               >
                 OPS
@@ -716,20 +700,16 @@ export function AboutContent() {
                   fontSize: 'clamp(1.2rem, 2.4vw, 1.7rem)',
                   color: 'var(--color-foreground)',
                   borderLeft: '2px solid var(--color-violet)',
-                  paddingLeft: '1.5rem',
-                }}
+                  paddingLeft: '1.5rem' }}
               >
-                MTA operates as a remote-first team with a culture built on high trust and
-                high accountability. Our specialists act as data processors under strict Data
-                Processing Agreements (DPAs) and Non-Disclosure Agreements (NDAs), ensuring
-                compliance across international borders.
+                Remote-first, high-trust, high-accountability. Specialists operate under
+                strict DPAs and NDAs — compliance baked in, not bolted on.
               </p>
 
               <p style={{ fontSize: '17px', lineHeight: 1.78, color: 'var(--color-muted)' }}>
-                We communicate early when problems arise and document architecture decisions
-                so nothing depends on memory alone. This operational discipline translates
-                directly into reliable, scalable outcomes for clients—because agencies that
-                enforce rigorous internal standards produce significantly better external codebases.
+                We flag problems early and document every architecture decision so nothing
+                depends on memory. Rigorous internal standards produce better codebases —
+                that&apos;s the only way we know how to work.
               </p>
 
               {/* Highlight badges */}
@@ -740,8 +720,7 @@ export function AboutContent() {
                     className="p-5"
                     style={{
                       border: '1px solid var(--color-border)',
-                      backgroundColor: 'var(--color-card)',
-                    }}
+                      backgroundColor: 'var(--color-card)' }}
                   >
                     <p
                       className="font-display font-bold mb-1"
@@ -749,9 +728,9 @@ export function AboutContent() {
                     >
                       {h.value}
                     </p>
-                    <p
-                      className="font-mono uppercase"
-                      style={{ fontSize: '9px', color: 'var(--color-dead)', letterSpacing: '0.16em' }}
+                  <p
+                    className="font-mono uppercase"
+                    style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.16em' }}
                     >
                       {h.label}
                     </p>
@@ -765,8 +744,8 @@ export function AboutContent() {
 
       {/* ── CTA BAND ─────────────────────────────────────────── */}
       <section
-        className="w-full border-t border-border"
-        style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(56px, 8vw, 96px) 0' }}
+        className="section w-full border-t border-border"
+        style={{ backgroundColor: 'var(--color-surface)' }}
       >
         <div className="container-site">
           <motion.div
@@ -776,10 +755,9 @@ export function AboutContent() {
             transition={{ duration: 0.65, ease: EASE }}
             className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-10"
             style={{
-              border: '1px solid rgba(107,26,26,0.3)',
+              border: '1px solid rgba(var(--color-accent-rgb),0.3)',
               padding: 'clamp(20px, 3vw, 36px)',
-              backgroundColor: 'rgba(107,26,26,0.03)',
-            }}
+              backgroundColor: 'rgba(var(--color-accent-rgb),0.03)' }}
           >
             <div>
               <span

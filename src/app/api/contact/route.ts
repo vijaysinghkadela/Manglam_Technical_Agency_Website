@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
-import { Resend } from 'resend'
+import { sendAdminEmail } from '@/lib/email'
 import { sanitizeEmail, sanitizeInput } from '@/lib/security'
 
 const schema = z.object({
@@ -27,7 +27,6 @@ type ContactData = z.infer<typeof schema> & {
 
 function buildHtml(data: ContactData): string {
   const ts = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
-  // Sanitize all user inputs before interpolation
   const safeName = sanitizeInput(data.name, 100)
   const safeEmail = sanitizeInput(data.email, 100)
   const safePhone = data.phone ? sanitizeInput(data.phone, 20) : ''
@@ -157,7 +156,6 @@ Reply to ${safeName} →
 
 function buildTextFallback(data: ContactData): string {
   const ts = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
-  // Sanitize text content
   const safeName = sanitizeInput(data.name, 100)
   const safeEmail = sanitizeInput(data.email, 100)
 
@@ -193,68 +191,38 @@ function buildTextFallback(data: ContactData): string {
 export async function POST(req: NextRequest) {
   try {
     const parsed = schema.parse(await req.json())
-  // Get client IP with proxy support
-  const getClientIP = (): string => {
-    // Cloudflare
-    const cfConnectingIp = req.headers.get('cf-connecting-ip')
-    if (cfConnectingIp) return cfConnectingIp
 
-    // X-Forwarded-For (may contain multiple IPs)
-    const forwardedFor = req.headers.get('x-forwarded-for')
-    if (forwardedFor) {
-      const firstIp = forwardedFor.split(',')[0]?.trim()
-      if (firstIp && firstIp !== '127.0.0.1' && firstIp !== '::1') {
-        return firstIp
+    const getClientIP = (): string => {
+      const cfConnectingIp = req.headers.get('cf-connecting-ip')
+      if (cfConnectingIp) return cfConnectingIp
+      const forwardedFor = req.headers.get('x-forwarded-for')
+      if (forwardedFor) {
+        const firstIp = forwardedFor.split(',')[0]?.trim()
+        if (firstIp && firstIp !== '127.0.0.1' && firstIp !== '::1') return firstIp
       }
+      const realIp = req.headers.get('x-real-ip')
+      if (realIp && realIp !== '127.0.0.1' && realIp !== '::1') return realIp
+      return 'unavailable'
     }
 
-    // X-Real-IP
-    const realIp = req.headers.get('x-real-ip')
-    if (realIp && realIp !== '127.0.0.1' && realIp !== '::1') {
-      return realIp
+    const data: ContactData = {
+      ...parsed,
+      serverConsentTimestamp: new Date().toISOString(),
+      serverConsentIP: getClientIP(),
+      serverUserAgent: sanitizeInput(req.headers.get('user-agent') || 'unavailable', 500),
     }
 
-    // Fallback
-    return 'unavailable'
-  }
-
-  const data: ContactData = {
-    ...parsed,
-    serverConsentTimestamp: new Date().toISOString(),
-    serverConsentIP: getClientIP(),
-    serverUserAgent: sanitizeInput(req.headers.get('user-agent') || 'unavailable', 500),
-  }
-
-    const resendApiKey = process.env.RESEND_API_KEY
-
-    if (!resendApiKey) {
-      if (process.env.NODE_ENV === 'development') {
-        console.error('[MTA Contact] RESEND_API_KEY not set.')
-      }
-      return NextResponse.json(
-        { success: false, message: 'Email service not configured.' },
-        { status: 503 }
-      )
-    }
-
-    const resend = new Resend(resendApiKey)
-
-      // Send email using Resend
-      // Note: In production, use a verified domain. For testing, Resend allows sending to your own email.
-      const { error } = await resend.emails.send({
-        from: 'MTA Website <onboarding@resend.dev>',
-        to: ['manglamtechnicalagency@gmail.com'],
-        replyTo: sanitizeEmail(data.email),
-        subject: `[MTA Enquiry] ${sanitizeInput(data.service, 50)} — ${sanitizeInput(data.name, 50)}`,
-        text: buildTextFallback(data),
-        html: buildHtml(data),
-      })
+    const { error } = await sendAdminEmail({
+      subject: `[MTA Enquiry] ${sanitizeInput(data.service, 50)} — ${sanitizeInput(data.name, 50)}`,
+      text: buildTextFallback(data),
+      html: buildHtml(data),
+      replyTo: sanitizeEmail(data.email),
+    })
 
     if (error) {
-      console.error('[MTA Contact] Resend error:', error)
       return NextResponse.json(
         { success: false, message: 'Failed to send email.' },
-        { status: 500 }
+        { status: 500 },
       )
     }
 

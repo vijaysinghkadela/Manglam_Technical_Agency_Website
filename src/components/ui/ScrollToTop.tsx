@@ -46,8 +46,7 @@ export function ScrollToTop() {
       "
       style={{
         bottom: 'calc(1.5rem + env(safe-area-inset-bottom))',
-        right: 'calc(1.5rem + env(safe-area-inset-right))',
-      }}
+        right: 'calc(1.5rem + env(safe-area-inset-right))' }}
     >
       <ArrowUp className="w-4 h-4 text-muted transition-colors group-hover:text-violet" />
     </button>

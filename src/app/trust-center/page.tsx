@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import PageHero from '@/components/ui/PageHero'
 import { legalFrameworks } from '@/lib/data/research'
+import { JsonLd } from '@/components/seo/JsonLd'
+import { breadcrumbSchema, webPageSchema } from '@/lib/seo/schemas'
 
 export const metadata: Metadata = {
   title: 'Trust Center & AI Ethics | Manglam Technical Agency',
@@ -30,6 +32,8 @@ const operationalPillars = [
 export default function TrustCenterPage() {
   return (
     <main className="min-h-screen bg-canvas">
+      <JsonLd schema={breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Trust Center', url: '/trust-center' }])} />
+      <JsonLd schema={webPageSchema({ url: '/trust-center', title: 'Trust Center & AI Ethics | Manglam Technical Agency', description: 'Executive summary of MTA compliance, security, and ethical AI controls with links to legal and research documentation.' })} />
       <PageHero
         breadcrumbBase="Home"
         breadcrumbBaseHref="/"

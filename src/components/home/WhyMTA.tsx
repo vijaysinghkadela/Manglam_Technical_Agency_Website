@@ -1,12 +1,10 @@
 'use client'
 import { motion } from 'framer-motion'
 import { Check } from 'lucide-react'
-import { BRAND, ANIMATION } from '@/lib/design-system'
-
 const values = [
   {
     title: 'India-Based, Globally-Minded',
-    body: 'Bikaner, Rajasthan HQ with world-class standards. We combine local understanding with international quality.',
+    body: 'Bikaner, Rajasthan. We build for Indian businesses using modern tools and practices — no outsourcing, no middlemen.',
   },
   {
     title: 'Written Agreements for Every Project',
@@ -32,7 +30,7 @@ const values = [
 
 export function WhyMTA() {
   return (
-    <section style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(72px, 10vw, 128px) 0' }}>
+    <section className="section" style={{ backgroundColor: 'var(--color-surface)' }}>
       <div className="container-site">
         <div className="grid grid-cols-1 lg:grid-cols-[0.92fr_1.08fr] gap-8 lg:gap-16">
 
@@ -40,20 +38,20 @@ export function WhyMTA() {
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.75, ease: ANIMATION.ease }}
-            className="lg:sticky lg:top-[120px] lg:self-start flex flex-col gap-6 rounded-[28px] border border-border bg-card p-8 sm:p-10"
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:sticky lg:top-[120px] lg:self-start flex flex-col gap-6 rounded-[28px] border border-border bg-card p-10 sm:p-12"
           >
             <div>
-              <span className="font-mono uppercase block mb-3" style={{ fontSize: '11px', color: BRAND.primary, letterSpacing: '0.22em' }}>
+              <span className="font-mono uppercase block mb-3" style={{ fontSize: '11px', color: 'var(--color-violet)', letterSpacing: '0.22em' }}>
                 WHY CHOOSE US
               </span>
               <h2
-                className="font-display font-black tracking-normal leading-[0.92] mb-5"
+                className="font-display font-black tracking-normal leading-[0.92] mb-6"
                 style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.85rem)', color: 'var(--color-foreground)' }}
               >
                 Built Different.<br />Delivered Right.
               </h2>
-              <p className="text-[15px] leading-[1.72] mb-4" style={{ color: 'var(--color-muted)' }}>
+              <p className="text-[15px] leading-[1.72] mb-5" style={{ color: 'var(--color-muted)' }}>
                 We&apos;re not a body shop or an outsourcing mill. MTA is a lean agency that treats every project like our own product.
               </p>
               <p className="text-[15px] leading-[1.72]" style={{ color: 'var(--color-muted)' }}>
@@ -62,16 +60,16 @@ export function WhyMTA() {
               </p>
             </div>
 
-            <div className="grid grid-cols-3 gap-3 pt-4" style={{ borderTop: '1px solid var(--color-border)' }}>
+            <div className="grid grid-cols-3 gap-4 pt-6" style={{ borderTop: '1px solid var(--color-border)' }}>
               {[['3', 'Active Clients'], ['2', 'SaaS Products'], ['6', 'Practice Areas']].map(([num, lbl]) => (
                 <div
                   key={lbl}
-                  className="rounded-2xl border border-border bg-surface px-3 py-4 text-center"
+                  className="rounded-2xl border border-border bg-surface px-4 py-5 text-center"
                 >
                   <span className="block font-display font-black" style={{ fontSize: 'clamp(1.4rem, 3vw, 2rem)', color: 'var(--color-foreground)' }}>
                     {num}
                   </span>
-                  <span className="mt-2 block font-mono uppercase" style={{ fontSize: '9px', color: 'var(--color-dead)', letterSpacing: '0.16em' }}>
+                  <span className="mt-3 block font-mono uppercase" style={{ fontSize: '9px', color: 'var(--color-dead)', letterSpacing: '0.16em' }}>
                     {lbl}
                   </span>
                 </div>
@@ -79,26 +77,26 @@ export function WhyMTA() {
             </div>
           </motion.div>
 
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-6">
             {values.map((val, i) => (
               <motion.article
                 key={val.title}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
-                transition={{ delay: i * 0.08, duration: 0.6, ease: ANIMATION.ease }}
-                className="group rounded-[24px] border border-border bg-card p-6 sm:p-8"
+                transition={{ delay: i * 0.08, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="group rounded-[24px] border border-border bg-card p-8 sm:p-10"
               >
                 <div className="flex items-start gap-4">
                   <div
                     className="w-9 h-9 flex items-center justify-center shrink-0 rounded-xl transition-colors duration-300"
-                    style={{ backgroundColor: 'rgba(107,26,26,0.08)', border: '1px solid rgba(107,26,26,0.18)' }}
+                    style={{ backgroundColor: 'rgba(var(--color-accent-rgb),0.08)', border: '1px solid rgba(var(--color-accent-rgb),0.18)' }}
                   >
-                    <Check className="w-4 h-4" style={{ color: BRAND.primary }} />
+                    <Check className="w-4 h-4" style={{ color: 'var(--color-violet)' }} />
                   </div>
                   <div className="min-w-0">
                     <h3
-                      className="font-display font-bold mb-1 transition-colors duration-200 group-hover:text-[#6B1A1A]"
+                      className="font-display font-bold mb-2 transition-colors duration-200 group-hover:text-violet"
                       style={{ fontSize: '17px', color: 'var(--color-foreground)', lineHeight: 1.2 }}
                     >
                       {val.title}

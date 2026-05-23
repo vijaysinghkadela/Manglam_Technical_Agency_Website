@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Check, ArrowRight, Zap, TrendingUp, Building2 } from 'lucide-react';
-import { bundles } from '@/lib/data/pricing-2026';
+import { bundles } from '@/lib/data/pricing';
 import { buildBundleContactHref } from '@/lib/pricing-contact';
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -19,8 +19,8 @@ const bundleMeta = [
     icon: TrendingUp,
     label: 'Most Popular',
     labelColor: 'var(--color-violet-light)',
-    borderColor: 'rgba(107,26,26,0.3)',
-    glowColor: 'rgba(107,26,26,0.06)',
+    borderColor: 'rgba(var(--color-accent-rgb),0.3)',
+    glowColor: 'rgba(var(--color-accent-rgb),0.06)',
   },
   {
     icon: Building2,
@@ -36,21 +36,12 @@ function extractTotalValue(total: string): number {
   return parseInt(num, 10) || 0;
 }
 
-function formatCompactPrice(price: string): string {
-  const num = parseInt(price.replace(/[₹,]/g, ''), 10);
-  if (num >= 100000) return `₹${(num / 100000).toFixed(1)}L`;
-  if (num >= 1000) return `₹${(num / 1000).toFixed(0)}K`;
-  return price;
-}
-
 export function PricingBundles() {
   return (
     <section
-      className="border-t border-border"
+      className="section border-t border-border"
       style={{
-        backgroundColor: 'var(--color-canvas)',
-        padding: 'clamp(56px, 8vw, 96px) 0',
-      }}
+        backgroundColor: 'var(--color-canvas)' }}
     >
       <div className="container-site">
         <motion.div
@@ -66,8 +57,7 @@ export function PricingBundles() {
             style={{
               fontSize: '13px',
               color: 'var(--color-violet-light)',
-              letterSpacing: '0.22em',
-            }}
+              letterSpacing: '0.22em' }}
           >
             🔗 COMBINED SOLUTIONS
           </span>
@@ -75,8 +65,7 @@ export function PricingBundles() {
             className="font-display font-black leading-tight"
             style={{
               fontSize: 'clamp(1.5rem, 3vw, 2.75rem)',
-              color: 'var(--color-foreground)',
-            }}
+              color: 'var(--color-foreground)' }}
           >
             Cross-Department Bundles
           </h2>
@@ -85,8 +74,7 @@ export function PricingBundles() {
             style={{
               fontSize: '15px',
               lineHeight: 1.72,
-              color: 'var(--color-muted)',
-            }}
+              color: 'var(--color-muted)' }}
           >
             Combine services from multiple departments for a unified digital
             strategy at a consolidated monthly investment.
@@ -101,10 +89,6 @@ export function PricingBundles() {
             const meta = bundleMeta[i];
             const Icon = meta.icon;
             const totalVal = extractTotalValue(bundle.total);
-            const barMax = Math.max(
-              ...bundles.map((b) => extractTotalValue(b.total)),
-              1,
-            );
 
             return (
               <motion.div
@@ -118,8 +102,7 @@ export function PricingBundles() {
                 style={{
                   borderColor: meta.borderColor,
                   backgroundColor: 'var(--color-card)',
-                  boxShadow: `0 1px 3px rgba(0,0,0,0.04)`,
-                }}
+                  boxShadow: `0 1px 3px rgba(0,0,0,0.04)` }}
               >
                 <div className="flex flex-col flex-1 p-6 sm:p-7">
                   {/* Header */}
@@ -130,8 +113,7 @@ export function PricingBundles() {
                         fontSize: '11px',
                         color: meta.labelColor,
                         border: `1px solid ${meta.borderColor}`,
-                        backgroundColor: meta.glowColor,
-                      }}
+                        backgroundColor: meta.glowColor }}
                     >
                       <Icon className="w-3 h-3" />
                       {meta.label}
@@ -149,8 +131,7 @@ export function PricingBundles() {
                     style={{
                       fontSize: '17px',
                       color: 'var(--color-foreground)',
-                      marginBottom: '6px',
-                    }}
+                      marginBottom: '6px' }}
                   >
                     {bundle.name}
                   </h3>
@@ -159,8 +140,7 @@ export function PricingBundles() {
                     className="text-xs leading-relaxed"
                     style={{
                       color: 'var(--color-dead)',
-                      marginBottom: '20px',
-                    }}
+                      marginBottom: '20px' }}
                   >
                     {bundle.target}
                   </p>
@@ -170,8 +150,7 @@ export function PricingBundles() {
                     style={{
                       height: '1px',
                       backgroundColor: 'var(--color-border)',
-                      marginBottom: '20px',
-                    }}
+                      marginBottom: '20px' }}
                   />
 
                   {/* Plan list */}
@@ -197,8 +176,7 @@ export function PricingBundles() {
                             className="font-mono"
                             style={{
                               fontSize: '11px',
-                              color: 'var(--color-dead)',
-                            }}
+                              color: 'var(--color-dead)' }}
                           >
                             {plan.plan} — {plan.price}
                           </span>
@@ -214,8 +192,7 @@ export function PricingBundles() {
                       height: '4px',
                       backgroundColor: 'var(--color-surface)',
                       marginTop: '16px',
-                      marginBottom: '16px',
-                    }}
+                      marginBottom: '16px' }}
                   >
                     {bundle.plans.map((plan, idx) => {
                       const pVal =
@@ -235,18 +212,15 @@ export function PricingBundles() {
                           key={idx}
                           initial={{ width: 0 }}
                           whileInView={{
-                            width: `${Math.max(pct, 8)}%`,
-                          }}
+                            width: `${Math.max(pct, 8)}%` }}
                           viewport={{ once: true }}
                           transition={{
                             duration: 0.6,
                             delay: idx * 0.1,
-                            ease: EASE,
-                          }}
+                            ease: EASE }}
                           style={{
                             backgroundColor: colors[idx % colors.length],
-                            opacity: 0.7,
-                          }}
+                            opacity: 0.7 }}
                         />
                       );
                     })}
@@ -259,8 +233,7 @@ export function PricingBundles() {
                         className="font-mono uppercase tracking-widest"
                         style={{
                           fontSize: '11px',
-                          color: 'var(--color-dead)',
-                        }}
+                          color: 'var(--color-dead)' }}
                       >
                         Combined
                       </span>
@@ -268,8 +241,7 @@ export function PricingBundles() {
                         className="font-display font-black"
                         style={{
                           fontSize: 'clamp(1.1rem, 2vw, 1.5rem)',
-                          color: 'var(--color-violet-light)',
-                        }}
+                          color: 'var(--color-violet-light)' }}
                       >
                         {bundle.total}
                       </p>
@@ -283,8 +255,7 @@ export function PricingBundles() {
                         fontSize: '13px',
                         borderRadius: '10px',
                         border: '1px solid var(--color-violet)',
-                        color: 'var(--color-violet-light)',
-                      }}
+                        color: 'var(--color-violet-light)' }}
                     >
                       Inquire
                       <motion.span

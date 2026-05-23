@@ -13,14 +13,12 @@ interface AnimatedCounterProps {
 
 export default function AnimatedCounter({ end, suffix = '', prefix = '', duration = 2000, className }: AnimatedCounterProps) {
   const reducedMotion = useReducedMotion();
-  // Initialize to end value if reduced motion is preferred
-  const [count, setCount] = useState(() => reducedMotion ? end : 0);
+  const [count, setCount] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
   const startTimeRef = useRef<number | null>(null);
   const hasAnimatedRef = useRef(false);
 
-  // Intersection observer for animation trigger - runs once
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
@@ -39,7 +37,6 @@ export default function AnimatedCounter({ end, suffix = '', prefix = '', duratio
     return () => observer.disconnect();
   }, []);
 
-  // Trigger animation when visible (only if not reduced motion)
   useEffect(() => {
     if (!isVisible || reducedMotion) return;
 
@@ -69,21 +66,11 @@ export default function AnimatedCounter({ end, suffix = '', prefix = '', duratio
     };
   }, [isVisible, end, duration, reducedMotion]);
 
-  // Update count when end changes in reduced motion mode
-  // Using flushSync pattern to avoid cascading renders
-  useEffect(() => {
-    if (reducedMotion) {
-      // Schedule update in next tick to avoid sync setState in effect
-      const timeoutId = setTimeout(() => {
-        setCount(end);
-      }, 0);
-      return () => clearTimeout(timeoutId);
-    }
-  }, [reducedMotion, end]);
+  const displayCount = reducedMotion ? end : count;
 
   return (
     <span ref={ref} className={className}>
-      {prefix}{count}{suffix}
+      {prefix}{displayCount}{suffix}
     </span>
   );
 }

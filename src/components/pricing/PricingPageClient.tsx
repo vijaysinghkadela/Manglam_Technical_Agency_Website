@@ -5,13 +5,15 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, FileText, Calendar, Repeat, Clock } from 'lucide-react';
 import { TextReveal } from '@/components/ui/TextReveal';
+import { FAQSection } from '@/components/ui/FAQSection';
+import { pricingFaqs } from '@/lib/data/faq';
 import { DepartmentAccordion } from './DepartmentAccordion';
 import { PricingBundles } from './PricingBundles';
 import {
   departments,
   paymentTerms,
   departmentOrder,
-} from '@/lib/data/pricing-2026';
+} from '@/lib/data/pricing';
 import type { DepartmentData } from '@/types';
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -24,24 +26,6 @@ const deptEmojis: Record<string, string> = {
   'social-media-marketing': '📱',
   'saas-products': '💻',
 };
-
-function getLowestPrice(dept: DepartmentData): string {
-  let min = Infinity;
-  let label = '';
-  for (const plan of dept.plans) {
-    for (const dur of plan.durations) {
-      const num = parseInt(
-        dur.price.replace(/[₹,]/g, '').replace(/\/.*$/, ''),
-        10,
-      );
-      if (num && num < min) {
-        min = num;
-        label = dur.price;
-      }
-    }
-  }
-  return label;
-}
 
 const statItems = [
   { label: '🏢 Departments', value: '6' },
@@ -89,8 +73,7 @@ export function PricingPageClient() {
             height: 'clamp(300px, 40vw, 700px)',
             borderRadius: '50%',
             background:
-              'radial-gradient(circle, rgba(107,26,26,0.07) 0%, transparent 68%)',
-          }}
+              'radial-gradient(circle, rgba(var(--color-accent-rgb),0.07) 0%, transparent 68%)' }}
         />
 
         <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-14 sm:pb-16 lg:pb-20">
@@ -103,8 +86,7 @@ export function PricingPageClient() {
               fontSize: '13px',
               color: 'var(--color-dead)',
               letterSpacing: '0.18em',
-              marginBottom: 'clamp(40px, 8vw, 80px)',
-            }}
+              marginBottom: 'clamp(40px, 8vw, 80px)' }}
           >
             <Link href="/" className="hover-foreground transition-colors">
               HOME
@@ -123,8 +105,7 @@ export function PricingPageClient() {
                 fontSize: '13px',
                 color: 'var(--color-violet-light)',
                 letterSpacing: '0.22em',
-                marginBottom: '24px',
-              }}
+                marginBottom: '24px' }}
             >
               ✦ TIER-2 BOUTIQUE PRICING
             </motion.span>
@@ -137,8 +118,7 @@ export function PricingPageClient() {
                 className="font-display font-black leading-none tracking-normal uppercase"
                 style={{
                   fontSize: 'clamp(3rem, 9vw, 9rem)',
-                  color: 'var(--color-foreground)',
-                }}
+                  color: 'var(--color-foreground)' }}
               />
               <TextReveal
                 text="STRUCTURE."
@@ -147,8 +127,7 @@ export function PricingPageClient() {
                 className="font-display font-black leading-none tracking-normal uppercase"
                 style={{
                   fontSize: 'clamp(3rem, 9vw, 9rem)',
-                  color: 'var(--color-violet)',
-                }}
+                  color: 'var(--color-violet)' }}
               />
             </div>
 
@@ -161,8 +140,7 @@ export function PricingPageClient() {
                 fontSize: '16px',
                 lineHeight: 1.72,
                 color: 'var(--color-muted)',
-                maxWidth: '520px',
-              }}
+                maxWidth: '520px' }}
             >
               {departments.length} departments · {totalPlans} plans · 1-month,
               6-month, and 12-month options across all services.
@@ -175,8 +153,7 @@ export function PricingPageClient() {
               style={{
                 fontSize: '13px',
                 color: 'var(--color-violet-light)',
-                letterSpacing: '0.22em',
-              }}
+                letterSpacing: '0.22em' }}
             >
               ✦ ALL PRICES IN INR
             </span>
@@ -188,8 +165,7 @@ export function PricingPageClient() {
                   color: 'var(--color-dead)',
                   letterSpacing: '0.22em',
                   writingMode: 'vertical-rl',
-                  transform: 'rotate(180deg)',
-                }}
+                  transform: 'rotate(180deg)' }}
               >
                 Scroll
               </span>
@@ -197,8 +173,7 @@ export function PricingPageClient() {
                 style={{
                   width: '1px',
                   height: '48px',
-                  backgroundColor: 'var(--color-border)',
-                }}
+                  backgroundColor: 'var(--color-border)' }}
               />
             </div>
           </div>
@@ -207,10 +182,9 @@ export function PricingPageClient() {
 
       {/* ── STATS BAR ───────────────────────────────────── */}
       <section
-        className="border-t border-b border-border"
+        className="section-sm border-t border-b border-border"
         style={{
-          backgroundColor: 'var(--color-surface)',
-        }}
+          backgroundColor: 'var(--color-surface)' }}
       >
         <div className="container-site">
           <div
@@ -231,8 +205,7 @@ export function PricingPageClient() {
                   className="font-display font-black leading-none"
                   style={{
                     fontSize: 'clamp(1.3rem, 2.5vw, 1.8rem)',
-                    color: 'var(--color-foreground)',
-                  }}
+                    color: 'var(--color-foreground)' }}
                 >
                   {stat.value}
                 </span>
@@ -241,8 +214,7 @@ export function PricingPageClient() {
                   style={{
                     fontSize: '11px',
                     color: 'var(--color-dead)',
-                    letterSpacing: '0.1em',
-                  }}
+                    letterSpacing: '0.1em' }}
                 >
                   {stat.label}
                 </span>
@@ -256,8 +228,7 @@ export function PricingPageClient() {
       <div
         className="sticky top-0 z-30 border-b border-border overflow-x-auto"
         style={{
-          backgroundColor: 'var(--color-canvas)',
-        }}
+          backgroundColor: 'var(--color-canvas)' }}
       >
         <div
           className="container-site flex items-center"
@@ -265,8 +236,7 @@ export function PricingPageClient() {
             gap: '6px',
             paddingTop: '14px',
             paddingBottom: '14px',
-            minWidth: 'max-content',
-          }}
+            minWidth: 'max-content' }}
         >
           {ordered.map((dept) => (
             <button
@@ -284,15 +254,13 @@ export function PricingPageClient() {
                 border:
                   openDept === dept.slug
                     ? '1px solid var(--color-violet)'
-                    : '1px solid var(--color-border)',
-              }}
+                    : '1px solid var(--color-border)' }}
             >
               <span
                 className="absolute inset-0 rounded-full transition-opacity duration-300"
                 style={{
-                  backgroundColor: 'rgba(107,26,26,0.06)',
-                  opacity: openDept === dept.slug ? 1 : 0,
-                }}
+                  backgroundColor: 'rgba(var(--color-accent-rgb),0.06)',
+                  opacity: openDept === dept.slug ? 1 : 0 }}
               />
               <span className="relative z-10 flex items-center gap-1.5">
                 <span style={{ fontSize: '11px', lineHeight: 1 }}>
@@ -307,11 +275,9 @@ export function PricingPageClient() {
 
       {/* ── DEPARTMENTS ACCORDION ─────────────────────────── */}
       <section
-        className="border-t-0 relative overflow-hidden"
+        className="section-sm border-t-0 relative overflow-hidden"
         style={{
-          backgroundColor: 'var(--color-canvas)',
-          padding: 'clamp(56px, 8vw, 96px) 0',
-        }}
+          backgroundColor: 'var(--color-canvas)' }}
       >
         <div
           className="absolute pointer-events-none"
@@ -322,8 +288,7 @@ export function PricingPageClient() {
             height: 'clamp(350px, 40vw, 650px)',
             borderRadius: '50%',
             background:
-              'radial-gradient(circle, rgba(107,26,26,0.05) 0%, transparent 65%)',
-          }}
+              'radial-gradient(circle, rgba(var(--color-accent-rgb),0.05) 0%, transparent 65%)' }}
         />
         <div className="container-site">
           <motion.div
@@ -339,8 +304,7 @@ export function PricingPageClient() {
               style={{
                 fontSize: '13px',
                 color: 'var(--color-violet-light)',
-                letterSpacing: '0.22em',
-              }}
+                letterSpacing: '0.22em' }}
             >
               💰 STARTING RATES
             </span>
@@ -348,8 +312,7 @@ export function PricingPageClient() {
               className="font-display font-black leading-tight"
               style={{
                 fontSize: 'clamp(1.5rem, 3vw, 2.75rem)',
-                color: 'var(--color-foreground)',
-              }}
+                color: 'var(--color-foreground)' }}
             >
               What You&apos;ll Pay
             </h2>
@@ -358,8 +321,7 @@ export function PricingPageClient() {
               style={{
                 fontSize: '15px',
                 color: 'var(--color-muted)',
-                lineHeight: 1.72,
-              }}
+                lineHeight: 1.72 }}
             >
               Select a department below to see plan options, full deliverables,
               and contract duration pricing.
@@ -392,11 +354,9 @@ export function PricingPageClient() {
 
       {/* ── PAYMENT TERMS ────────────────────────────────── */}
       <section
-        className="border-t border-border"
+        className="section-sm border-t border-border"
         style={{
-          backgroundColor: 'var(--color-surface)',
-          padding: 'clamp(56px, 8vw, 96px) 0',
-        }}
+          backgroundColor: 'var(--color-surface)' }}
       >
         <div className="container-site">
           <motion.div
@@ -408,11 +368,10 @@ export function PricingPageClient() {
             <div
               className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 items-start"
               style={{
-                border: '1px solid rgba(107,26,26,0.2)',
+                border: '1px solid rgba(var(--color-accent-rgb),0.2)',
                 padding: 'clamp(28px, 4vw, 48px)',
-                backgroundColor: 'rgba(107,26,26,0.02)',
-                borderRadius: '24px',
-              }}
+                backgroundColor: 'rgba(var(--color-accent-rgb),0.02)',
+                borderRadius: '24px' }}
             >
               <div className="flex flex-col" style={{ gap: '12px' }}>
                 <span
@@ -420,8 +379,7 @@ export function PricingPageClient() {
                   style={{
                     fontSize: '13px',
                     color: 'var(--color-violet-light)',
-                    letterSpacing: '0.22em',
-                  }}
+                    letterSpacing: '0.22em' }}
                 >
                   💳 PAYMENT TERMS
                 </span>
@@ -430,8 +388,7 @@ export function PricingPageClient() {
                   style={{
                     fontSize: 'clamp(1.2rem, 2.2vw, 1.9rem)',
                     color: 'var(--color-foreground)',
-                    lineHeight: 1.1,
-                  }}
+                    lineHeight: 1.1 }}
                 >
                   Payment structure is fixed before delivery starts.
                 </h2>
@@ -440,8 +397,7 @@ export function PricingPageClient() {
                   style={{
                     fontSize: '14px',
                     lineHeight: 1.72,
-                    color: 'var(--color-muted)',
-                  }}
+                    color: 'var(--color-muted)' }}
                 >
                   All contract types follow standard payment schedules. Late
                   payments incur a 2% monthly penalty after the 15-day due date.
@@ -484,8 +440,7 @@ export function PricingPageClient() {
                   fontSize: '15px',
                   borderRadius: '14px',
                   border: '1px solid var(--color-violet)',
-                  color: 'var(--color-violet-light)',
-                }}
+                  color: 'var(--color-violet-light)' }}
                 data-cursor="pointer"
               >
                 Book Discovery Call{' '}
@@ -502,78 +457,11 @@ export function PricingPageClient() {
         </div>
       </section>
 
-      {/* ── MARKET POSITIONING ───────────────────────────── */}
-      <section
-        className="border-t border-border"
-        style={{
-          backgroundColor: 'var(--color-canvas)',
-          padding: 'clamp(56px, 8vw, 96px) 0',
-        }}
-      >
-        <div className="container-site">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.55, ease: EASE }}
-            className="flex flex-col"
-            style={{ gap: '12px', marginBottom: '24px' }}
-          >
-            <span
-              className="font-mono uppercase block"
-              style={{
-                fontSize: '13px',
-                color: 'var(--color-violet-light)',
-                letterSpacing: '0.22em',
-              }}
-            >
-              🎯 MARKET POSITIONING
-            </span>
-            <h2
-              className="font-display font-black"
-              style={{
-                fontSize: 'clamp(1.5rem, 3.5vw, 2.75rem)',
-                color: 'var(--color-foreground)',
-              }}
-            >
-              India, 2026
-            </h2>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.5, ease: EASE }}
-            className="rounded-[24px] border border-border max-w-2xl"
-            style={{
-              backgroundColor: 'var(--color-card)',
-              padding: '24px 28px',
-            }}
-          >
-            <p
-              style={{
-                fontSize: '15px',
-                lineHeight: 1.72,
-                color: 'var(--color-muted)',
-              }}
-            >
-              🇮🇳 MTA sits in the boutique-agency tier at Tier-2 pricing —
-              competitive against Jaipur and Delhi rates while delivering
-              comparable quality. All plans are designed for Indian businesses
-              with clear scope, written agreements, and no hidden costs. 💼
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
       {/* ── CTA ─────────────────────────────────────────── */}
       <section
-        className="border-t border-border"
+        className="section border-t border-border"
         style={{
-          backgroundColor: 'var(--color-surface)',
-          padding: 'clamp(64px, 10vw, 120px) 0',
-        }}
+          backgroundColor: 'var(--color-surface)' }}
       >
         <div className="container-site">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-28 items-center">
@@ -590,8 +478,7 @@ export function PricingPageClient() {
                 style={{
                   fontSize: '13px',
                   color: 'var(--color-violet-light)',
-                  letterSpacing: '0.22em',
-                }}
+                  letterSpacing: '0.22em' }}
               >
                 🚀 GET STARTED
               </span>
@@ -599,8 +486,7 @@ export function PricingPageClient() {
                 className="font-display font-black leading-tight"
                 style={{
                   fontSize: 'clamp(1.5rem, 4vw, 3.5rem)',
-                  color: 'var(--color-foreground)',
-                }}
+                  color: 'var(--color-foreground)' }}
               >
                 Start Your
                 <br />
@@ -610,8 +496,7 @@ export function PricingPageClient() {
                 className="max-w-sm"
                 style={{
                   color: 'var(--color-muted)',
-                  lineHeight: 1.72,
-                }}
+                  lineHeight: 1.72 }}
               >
                 Free consultation and honest scope — no sales pitch, no
                 lock-in.
@@ -634,8 +519,7 @@ export function PricingPageClient() {
                   fontSize: '17px',
                   borderRadius: '14px',
                   backgroundColor: 'var(--color-foreground)',
-                  color: 'var(--color-canvas)',
-                }}
+                  color: 'var(--color-canvas)' }}
                 data-cursor="pointer"
               >
                 Contact Us{' '}
@@ -655,8 +539,7 @@ export function PricingPageClient() {
                   fontSize: '15px',
                   borderRadius: '14px',
                   border: '1px solid var(--color-border)',
-                  color: 'var(--color-muted)',
-                }}
+                  color: 'var(--color-muted)' }}
                 data-cursor="pointer"
               >
                 Explore Services
@@ -672,6 +555,7 @@ export function PricingPageClient() {
           </div>
         </div>
       </section>
+      <FAQSection items={pricingFaqs} title="Pricing Questions" />
     </main>
   );
 }
@@ -692,17 +576,15 @@ function PaymentTermCard({
         padding: '18px',
         gap: '10px',
         borderColor: 'var(--color-border)',
-        backgroundColor: 'var(--color-card)',
-      }}
+        backgroundColor: 'var(--color-card)' }}
     >
       <div
         className="flex items-center justify-center rounded-lg shrink-0"
         style={{
           width: '36px',
           height: '36px',
-          backgroundColor: 'rgba(107,26,26,0.08)',
-          border: '1px solid rgba(107,26,26,0.15)',
-        }}
+          backgroundColor: 'rgba(var(--color-accent-rgb),0.08)',
+          border: '1px solid rgba(var(--color-accent-rgb),0.15)' }}
       >
         <Icon
           className="w-4 h-4"
@@ -714,8 +596,7 @@ function PaymentTermCard({
           className="font-display font-bold"
           style={{
             fontSize: '14px',
-            color: 'var(--color-foreground)',
-          }}
+            color: 'var(--color-foreground)' }}
         >
           {label}
         </span>
@@ -723,8 +604,7 @@ function PaymentTermCard({
           className="font-mono leading-snug"
           style={{
             fontSize: '12px',
-            color: 'var(--color-muted)',
-          }}
+            color: 'var(--color-muted)' }}
         >
           {value}
         </span>

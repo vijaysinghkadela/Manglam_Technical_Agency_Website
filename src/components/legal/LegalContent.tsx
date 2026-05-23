@@ -74,10 +74,9 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
                   <span
                     className="font-mono text-[10px] uppercase tracking-widest px-2 py-1 shrink-0"
                     style={{
-                      border: '1px solid rgba(107,26,26,0.35)',
+                      border: '1px solid rgba(var(--color-accent-rgb),0.35)',
                       color: 'var(--color-violet-light)',
-                      backgroundColor: 'rgba(107,26,26,0.06)',
-                    }}
+                      backgroundColor: 'rgba(var(--color-accent-rgb),0.06)' }}
                   >
                     {a.code}
                   </span>
@@ -88,8 +87,7 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
                       className="font-display font-bold truncate transition-colors duration-200 group-hover:text-violet"
                       style={{
                         fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)',
-                        color: 'var(--color-foreground)',
-                      }}
+                        color: 'var(--color-foreground)' }}
                     >
                       {a.name}
                     </span>
@@ -180,8 +178,7 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
                                     fontSize: '10px',
                                     color: 'var(--color-muted)',
                                     border: '1px solid var(--color-border)',
-                                    padding: '3px 8px',
-                                  }}
+                                    padding: '3px 8px' }}
                                 >
                                   {law}
                                 </span>
@@ -204,10 +201,9 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
                                     key={code}
                                     className="font-mono text-[10px] uppercase tracking-wider px-2 py-0.5"
                                     style={{
-                                      border: '1px solid rgba(107,26,26,0.35)',
+                                      border: '1px solid rgba(var(--color-accent-rgb),0.35)',
                                       color: 'var(--color-violet-light)',
-                                      backgroundColor: 'rgba(107,26,26,0.06)',
-                                    }}
+                                      backgroundColor: 'rgba(var(--color-accent-rgb),0.06)' }}
                                   >
                                     {code}
                                   </span>
@@ -224,8 +220,7 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
                               style={{
                                 fontSize: '10px',
                                 color: 'var(--color-violet-light)',
-                                letterSpacing: '0.16em',
-                              }}
+                                letterSpacing: '0.16em' }}
                             >
                               Request Template →
                             </a>
@@ -296,10 +291,9 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
                         key={code}
                         className="font-mono text-[10px] px-2 py-0.5 uppercase"
                         style={{
-                          border: '1px solid rgba(107,26,26,0.35)',
+                          border: '1px solid rgba(var(--color-accent-rgb),0.35)',
                           color: 'var(--color-violet-light)',
-                          backgroundColor: 'rgba(107,26,26,0.06)',
-                        }}
+                          backgroundColor: 'rgba(var(--color-accent-rgb),0.06)' }}
                       >
                         {code}
                       </span>
@@ -366,10 +360,9 @@ export function LegalContent({ agreements, matrix, policies }: Props) {
                           key={code}
                           className="font-mono text-[10px] px-2 py-0.5 uppercase"
                           style={{
-                            border: '1px solid rgba(107,26,26,0.35)',
+                            border: '1px solid rgba(var(--color-accent-rgb),0.35)',
                             color: 'var(--color-violet-light)',
-                            backgroundColor: 'rgba(107,26,26,0.06)',
-                          }}
+                            backgroundColor: 'rgba(var(--color-accent-rgb),0.06)' }}
                         >
                           {code}
                         </span>

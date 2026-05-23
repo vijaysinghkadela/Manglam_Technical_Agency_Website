@@ -165,10 +165,6 @@ export default function ContactForm() {
       return;
     }
 
-    if (typeof window === "undefined") {
-      return;
-    }
-
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildWhatsAppMessage(data))}`;
     window.location.assign(whatsappUrl);
   };
@@ -268,7 +264,7 @@ export default function ContactForm() {
               type="checkbox"
               id="privacy"
               className="mt-1 h-5 w-5 shrink-0 cursor-pointer rounded"
-              style={{ accentColor: "#6B1A1A" }}
+              style={{ accentColor: "var(--color-violet)" }}
             />
             <label
               htmlFor="privacy"
@@ -281,7 +277,7 @@ export default function ContactForm() {
               <a
                 href="/legal/privacy-policy"
                 className="transition-colors hover-foreground"
-                style={{ color: "#6B1A1A" }}
+                style={{ color: "var(--color-violet)" }}
               >
                 Privacy Policy
               </a>
@@ -290,7 +286,7 @@ export default function ContactForm() {
               <a
                 href="mailto:contact@manglamtechnicalagency.com"
                 className="transition-colors hover-foreground"
-                style={{ color: "#6B1A1A" }}
+                style={{ color: "var(--color-violet)" }}
               >
                 contact@manglamtechnicalagency.com
               </a>
@@ -312,7 +308,7 @@ export default function ContactForm() {
                 {...register("followUpConsent")}
                 type="checkbox"
                 className="mt-1 h-5 w-5 shrink-0 cursor-pointer rounded"
-                style={{ accentColor: "#6B1A1A" }}
+                style={{ accentColor: "var(--color-violet)" }}
               />
               <span
                 className="text-sm leading-relaxed"
@@ -338,18 +334,7 @@ export default function ContactForm() {
           type="submit"
           disabled={isSubmitting}
           data-cursor="pointer"
-          className="inline-flex min-h-[54px] w-full items-center justify-center gap-2 rounded-full px-5 py-4 font-display text-[15px] font-black uppercase tracking-wide transition-all duration-300 disabled:opacity-60 hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet"
-          style={{
-            backgroundColor: "#6B1A1A",
-            color: "#fff",
-            boxShadow: "0 16px 40px rgba(107,26,26,0.24)",
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.backgroundColor = "#4f1111";
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.backgroundColor = "#6B1A1A";
-          }}
+          className="btn btn-primary btn-lg w-full font-black uppercase tracking-wide"
         >
           {isSubmitting ? (
             <>
@@ -365,8 +350,7 @@ export default function ContactForm() {
           style={{
             fontSize: "11px",
             color: "var(--color-dead)",
-            letterSpacing: "0.1em",
-          }}
+            letterSpacing: "0.1em" }}
         >
           Avg. response · 2–4 hours · Mon–Sat 9AM–7PM IST
         </p>
@@ -406,20 +390,18 @@ const Field = ({
         style={{
           fontSize: "10px",
           color: "var(--color-dead)",
-          letterSpacing: "0.15em",
-        }}
+          letterSpacing: "0.15em" }}
       >
         {label}
       </label>
-      {React.cloneElement(
-        children as React.ReactElement<React.HTMLAttributes<HTMLElement>>,
-        {
-          id,
-          ...(error
-            ? { "aria-describedby": errId, "aria-invalid": "true" }
-            : {}),
-        },
-      )}
+      {React.isValidElement(children)
+        ? React.cloneElement(children, {
+            id,
+            ...(error
+              ? { "aria-describedby": errId, "aria-invalid": "true" }
+              : {}),
+          } as Partial<unknown>)
+        : children}
       {error && (
         <p
           id={errId}
@@ -445,7 +427,7 @@ const inputStyle: React.CSSProperties = {
   borderRadius: "12px",
   outline: "none",
   transition: "border-color 0.2s, box-shadow 0.2s, background-color 0.2s",
-  boxShadow: "inset 0 1px 0 rgba(255,255,255,0.02)",
+  boxShadow: "inset 0 1px 0 rgba(var(--color-accent-rgb), 0.04)",
 };
 
 const Input = ({ ...props }: React.InputHTMLAttributes<HTMLInputElement>) => (
@@ -454,12 +436,12 @@ const Input = ({ ...props }: React.InputHTMLAttributes<HTMLInputElement>) => (
     className="placeholder:text-dead"
     style={inputStyle}
     onFocus={(e) => {
-      e.target.style.borderColor = "#6B1A1A";
-      e.target.style.boxShadow = "0 0 0 4px rgba(107,26,26,0.08)";
+      e.target.style.borderColor = "var(--color-violet)";
+      e.target.style.boxShadow = "0 0 0 4px rgba(var(--color-accent-rgb),0.08)";
     }}
     onBlur={(e) => {
       e.target.style.borderColor = "var(--color-border)";
-      e.target.style.boxShadow = "inset 0 1px 0 rgba(255,255,255,0.02)";
+      e.target.style.boxShadow = "inset 0 1px 0 rgba(var(--color-accent-rgb), 0.04)";
     }}
   />
 );
@@ -480,8 +462,7 @@ const Select = ({
       backgroundSize: "5px 5px, 5px 5px, 100% 100%",
       backgroundRepeat: "no-repeat",
       cursor: "pointer",
-      paddingRight: "46px",
-    }}
+      paddingRight: "46px" }}
   >
     {children}
   </select>
@@ -497,15 +478,14 @@ const Textarea = ({
       ...inputStyle,
       fontFamily: "var(--font-body)",
       resize: "vertical",
-      minHeight: "144px",
-    }}
+      minHeight: "144px" }}
     onFocus={(e) => {
-      e.target.style.borderColor = "#6B1A1A";
-      e.target.style.boxShadow = "0 0 0 4px rgba(107,26,26,0.08)";
+      e.target.style.borderColor = "var(--color-violet)";
+      e.target.style.boxShadow = "0 0 0 4px rgba(var(--color-accent-rgb),0.08)";
     }}
     onBlur={(e) => {
       e.target.style.borderColor = "var(--color-border)";
-      e.target.style.boxShadow = "inset 0 1px 0 rgba(255,255,255,0.02)";
+      e.target.style.boxShadow = "inset 0 1px 0 rgba(var(--color-accent-rgb), 0.04)";
     }}
   />
 );
@@ -519,12 +499,12 @@ const SectionLabel = ({
   label: string;
   hint: string;
 }) => (
-  <div className="flex flex-col gap-2 rounded-[18px] border border-border bg-[rgba(255,255,255,0.02)] px-4 py-3.5">
+  <div className="flex flex-col gap-2 rounded-[18px] border border-border bg-accent-soft px-4 py-3.5">
     <div className="flex items-center justify-between gap-4">
       <div className="flex items-center gap-3">
         <span
           className="font-display text-[1.5rem] font-black leading-none select-none"
-          style={{ color: "rgba(107,26,26,0.22)" }}
+          style={{ color: "rgba(var(--color-accent-rgb),0.22)" }}
         >
           {index}
         </span>
@@ -533,8 +513,7 @@ const SectionLabel = ({
           style={{
             fontSize: "11px",
             color: "var(--color-dead)",
-            letterSpacing: "0.2em",
-          }}
+            letterSpacing: "0.2em" }}
         >
           {label}
         </span>

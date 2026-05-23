@@ -9,6 +9,8 @@ import {
 import { DocumentRequestForm } from '@/components/legal/DocumentRequestForm'
 import { LegalContent } from '@/components/legal/LegalContent'
 import { TextReveal } from '@/components/ui/TextReveal'
+import { JsonLd } from '@/components/seo/JsonLd'
+import { breadcrumbSchema, webPageSchema } from '@/lib/seo/schemas'
 
 export const metadata: Metadata = {
   title: 'Legal Hub',
@@ -22,6 +24,8 @@ export default function LegalHubPage() {
 
   return (
     <main style={{ backgroundColor: 'var(--color-canvas)', minHeight: '100vh' }}>
+      <JsonLd schema={breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Legal', url: '/legal' }])} />
+      <JsonLd schema={webPageSchema({ url: '/legal', title: 'Legal Hub | Manglam Technical Agency', description: 'Agreement summaries, service applicability matrix, and controlled request workflow for legal templates used by MTA.' })} />
 
       {/* ── HERO — Full viewport ─────────────────────────── */}
       <section
@@ -37,8 +41,7 @@ export default function LegalHubPage() {
             width: 'clamp(300px, 40vw, 700px)',
             height: 'clamp(300px, 40vw, 700px)',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(107,26,26,0.07) 0%, transparent 68%)',
-          }}
+            background: 'radial-gradient(circle, rgba(var(--color-accent-rgb),0.07) 0%, transparent 68%)' }}
         />
 
         <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-12 sm:pb-16 lg:pb-20">
@@ -99,19 +102,18 @@ export default function LegalHubPage() {
               <div
                 className="absolute inset-0 legal-stack-back"
                 style={{
-                  transform: 'rotate(-9deg) translate(-18px, 22px)',
-                }}
+                  transform: 'rotate(-9deg) translate(-18px, 22px)' }}
               >
                 <div className="p-4">
                   <span
                     className="font-mono uppercase"
-                    style={{ fontSize: '9px', color: 'rgba(107,26,26,0.25)', letterSpacing: '0.18em' }}
+                    style={{ fontSize: '9px', color: 'rgba(var(--color-accent-rgb),0.25)', letterSpacing: '0.18em' }}
                   >
                     MTA-FC
                   </span>
                   <div
                     className="mt-2 font-mono uppercase"
-                    style={{ fontSize: '7px', color: 'rgba(107,26,26,0.18)', letterSpacing: '0.14em' }}
+                    style={{ fontSize: '7px', color: 'rgba(var(--color-accent-rgb),0.18)', letterSpacing: '0.14em' }}
                   >
                     RESTRICTED
                   </div>
@@ -123,8 +125,7 @@ export default function LegalHubPage() {
                     style={{
                       left: '16px', top: `${76 + idx * 18}px`,
                       width: `${w}%`, height: '2px',
-                      backgroundColor: 'rgba(107,26,26,0.08)',
-                    }}
+                      backgroundColor: 'rgba(var(--color-accent-rgb),0.08)' }}
                   />
                 ))}
               </div>
@@ -133,13 +134,12 @@ export default function LegalHubPage() {
               <div
                 className="absolute inset-0 legal-stack-mid"
                 style={{
-                  transform: 'rotate(-3.5deg) translate(6px, 10px)',
-                }}
+                  transform: 'rotate(-3.5deg) translate(6px, 10px)' }}
               >
                 <div className="p-4">
                   <span
                     className="font-mono uppercase"
-                    style={{ fontSize: '9px', color: 'rgba(107,26,26,0.45)', letterSpacing: '0.18em' }}
+                    style={{ fontSize: '9px', color: 'rgba(var(--color-accent-rgb),0.45)', letterSpacing: '0.18em' }}
                   >
                     MTA-DPA
                   </span>
@@ -151,8 +151,7 @@ export default function LegalHubPage() {
                     style={{
                       left: '16px', top: `${60 + idx * 16}px`,
                       width: `${w}%`, height: '2px',
-                      backgroundColor: 'rgba(107,26,26,0.13)',
-                    }}
+                      backgroundColor: 'rgba(var(--color-accent-rgb),0.13)' }}
                   />
                 ))}
               </div>
@@ -161,8 +160,7 @@ export default function LegalHubPage() {
               <div
                 className="absolute inset-0 legal-stack-front"
                 style={{
-                  transform: 'rotate(2.5deg)',
-                }}
+                  transform: 'rotate(2.5deg)' }}
               >
                 <div className="p-4">
                   <span
@@ -173,7 +171,7 @@ export default function LegalHubPage() {
                   </span>
                   <div
                     className="mt-2 w-full"
-                    style={{ height: '1px', backgroundColor: 'rgba(107,26,26,0.2)' }}
+                    style={{ height: '1px', backgroundColor: 'rgba(var(--color-accent-rgb),0.2)' }}
                   />
                 </div>
                 {[62, 78, 52, 84, 66, 58, 74].map((w, idx) => (
@@ -183,24 +181,23 @@ export default function LegalHubPage() {
                     style={{
                       left: '16px', top: `${60 + idx * 22}px`,
                       width: `${w}%`, height: '2px',
-                      backgroundColor: 'rgba(107,26,26,0.18)',
-                    }}
+                      backgroundColor: 'rgba(var(--color-accent-rgb),0.18)' }}
                   />
                 ))}
                 {/* Footer */}
                 <div
                   className="absolute bottom-4 left-4 right-4 flex items-center justify-between"
-                  style={{ borderTop: '1px solid rgba(107,26,26,0.18)', paddingTop: '8px' }}
+                  style={{ borderTop: '1px solid rgba(var(--color-accent-rgb),0.18)', paddingTop: '8px' }}
                 >
                   <span
                     className="font-mono"
-                    style={{ fontSize: '8px', color: 'rgba(107,26,26,0.4)', letterSpacing: '0.12em' }}
+                    style={{ fontSize: '8px', color: 'rgba(var(--color-accent-rgb),0.4)', letterSpacing: '0.12em' }}
                   >
                     PUBLIC
                   </span>
                   <span
                     className="font-mono"
-                    style={{ fontSize: '8px', color: 'rgba(107,26,26,0.4)' }}
+                    style={{ fontSize: '8px', color: 'rgba(var(--color-accent-rgb),0.4)' }}
                   >
                     ✦ MTA
                   </span>
@@ -242,8 +239,7 @@ export default function LegalHubPage() {
                   color: 'var(--color-dead)',
                   letterSpacing: '0.22em',
                   writingMode: 'vertical-rl',
-                  transform: 'rotate(180deg)',
-                }}
+                  transform: 'rotate(180deg)' }}
               >
                 Scroll
               </span>
@@ -255,8 +251,8 @@ export default function LegalHubPage() {
 
       {/* ── MAIN CONTENT ─────────────────────────────────── */}
       <section
-        className="border-t border-border"
-        style={{ backgroundColor: 'var(--color-canvas)', padding: 'clamp(72px, 10vw, 128px) 0' }}
+        className="section border-t border-border"
+        style={{ backgroundColor: 'var(--color-canvas)' }}
       >
         <div className="container-site grid grid-cols-1 lg:grid-cols-[220px_1fr_380px] gap-10 lg:gap-14 xl:gap-20 items-start">
 
@@ -282,8 +278,7 @@ export default function LegalHubPage() {
                     fontSize: '12px',
                     color: 'var(--color-muted)',
                     letterSpacing: '0.06em',
-                    borderBottom: '1px solid var(--color-border)',
-                  }}
+                    borderBottom: '1px solid var(--color-border)' }}
                 >
                   <span style={{ color: 'var(--color-dead)', fontSize: '9px', letterSpacing: '0.1em' }}>{num}</span>
                   {label}

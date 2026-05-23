@@ -3,7 +3,6 @@
 import { ReactNode, memo } from 'react'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
-import { BRAND } from '@/lib/design-system'
 
 interface BadgeProps {
   children: ReactNode
@@ -28,7 +27,7 @@ const Badge = memo(function Badge({
 
   const variantClasses = {
     default: 'bg-white/5 border-white/10 text-white/70 hover:border-white/20',
-    brand: `bg-[${BRAND.primarySoft}] border-[${BRAND.primaryMedium}] text-[${BRAND.primaryText}]`,
+    brand: 'bg-[rgba(var(--color-accent-rgb),0.08)] border-[rgba(var(--color-accent-rgb),0.15)] text-accent',
     accent: 'bg-cyan-400/10 border-cyan-400/25 text-cyan-400',
     subtle: 'bg-card border-border text-muted',
     outline: 'bg-transparent border-border text-muted hover:border-white/20',
@@ -51,14 +50,13 @@ const Badge = memo(function Badge({
         className,
       )}
       style={{
-        letterSpacing: size === 'sm' ? '0.16em' : '0.18em',
-      }}
+        letterSpacing: size === 'sm' ? '0.16em' : '0.18em' }}
       {...motionProps}
     >
       {variant === 'brand' && (
         <span
           className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-          style={{ backgroundColor: BRAND.primary }}
+          style={{ backgroundColor: 'var(--color-violet)' }}
         />
       )}
       {children}

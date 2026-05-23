@@ -24,12 +24,4 @@ export const testimonials: Testimonial[] = [
     company: 'Bikaner, Rajasthan',
     initials:'PS',
   },
-  {
-    id:      'mtaclient',
-    quote:   'We interviewed three agencies before picking MTA. What sold us was the contract clarity — no vague timelines, no hidden costs. They delivered the admin dashboard ahead of schedule, and the documentation was thorough enough for our team to take over.',
-    name:    'Ravi K. G.',
-    role:    'Director of Operations',
-    company: 'Rajasthan Healthcare Trust',
-    initials:'RG',
-  },
 ]

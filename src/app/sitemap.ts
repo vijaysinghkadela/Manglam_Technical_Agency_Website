@@ -1,5 +1,4 @@
 import type { MetadataRoute } from 'next'
-import { blogPosts }                            from '@/lib/data/blog'
 import { agreementSummaries, policyDocuments } from '@/lib/data/legal'
 import { services }                             from '@/lib/data/services'
 
@@ -21,7 +20,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/about`,               lastModified: DATES.core,     changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/portfolio`,            lastModified: DATES.core,     changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/pricing`,              lastModified: DATES.core,     changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE_URL}/blog`,                 lastModified: DATES.blog,     changeFrequency: 'weekly',  priority: 0.8 },
     { url: `${BASE_URL}/research`,             lastModified: DATES.core,     changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE_URL}/legal`,               lastModified: DATES.legal,    changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE_URL}/trust-center`,         lastModified: DATES.legal,    changeFrequency: 'monthly', priority: 0.5 },
@@ -33,13 +31,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified:    DATES.services,
     changeFrequency: 'monthly' as const,
     priority:        0.8,
-  }))
-
-  const blogPages: MetadataRoute.Sitemap = blogPosts.map(p => ({
-    url:             `${BASE_URL}/blog/${p.slug}`,
-    lastModified:    DATES.blog,
-    changeFrequency: 'weekly' as const,
-    priority:        0.7,
   }))
 
   const legalPolicyPages: MetadataRoute.Sitemap = policyDocuments.map(p => ({
@@ -58,5 +49,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority:        0.4,
     }))
 
-  return [...staticPages, ...servicePages, ...blogPages, ...legalPolicyPages, ...agreementPages]
+  return [...staticPages, ...servicePages, ...legalPolicyPages, ...agreementPages]
 }

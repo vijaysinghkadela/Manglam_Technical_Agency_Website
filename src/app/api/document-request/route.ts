@@ -1,34 +1,29 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { ZodError } from 'zod/v4'
-import { Resend } from 'resend'
+import { sendAdminEmail } from '@/lib/email'
 import { documentRequestSchema } from '@/lib/validations'
-
-const ADMIN_EMAIL = 'manglamtechnicalagency@gmail.com'
 
 export async function POST(request: NextRequest) {
   try {
     const data = documentRequestSchema.parse(await request.json())
 
-    const resendApiKey = process.env.RESEND_API_KEY
-    if (resendApiKey) {
-      const resend = new Resend(resendApiKey)
-      const { error } = await resend.emails.send({
-        from: 'MTA Website <onboarding@resend.dev>',
-        to: [ADMIN_EMAIL],
-        replyTo: data.email,
-        subject: `[MTA Document Request] ${data.name}`,
-        text: [
-          `Name: ${data.name}`,
-          `Email: ${data.email}`,
-          `Company: ${data.company || 'N/A'}`,
-          `Requested Documents: ${data.requestedDocuments.join(', ')}`,
-          `Use Case: ${data.useCase}`,
-        ].join('\n'),
-      })
+    const { error } = await sendAdminEmail({
+      subject: `[MTA Document Request] ${data.name}`,
+      text: [
+        `Name: ${data.name}`,
+        `Email: ${data.email}`,
+        `Company: ${data.company || 'N/A'}`,
+        `Requested Documents: ${data.requestedDocuments.join(', ')}`,
+        `Use Case: ${data.useCase}`,
+      ].join('\n'),
+      replyTo: data.email,
+    })
 
-      if (error && process.env.NODE_ENV === 'development') {
-        console.error('[MTA Document Request] Resend error:', error)
-      }
+    if (error) {
+      return NextResponse.json(
+        { success: false, message: 'Failed to submit request. Please try again.' },
+        { status: 500 },
+      )
     }
 
     return NextResponse.json({

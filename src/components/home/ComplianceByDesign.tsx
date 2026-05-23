@@ -2,8 +2,6 @@
 import { motion } from 'framer-motion'
 import { Lock, FileText, CreditCard, Package } from 'lucide-react'
 import Link from 'next/link'
-import { BRAND, ANIMATION } from '@/lib/design-system'
-
 const highlights = [
   {
     Icon: Lock,
@@ -29,17 +27,17 @@ const highlights = [
 
 export function ComplianceByDesign() {
   return (
-    <section className="border-t border-border" style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(72px, 10vw, 128px) 0' }}>
+    <section className="section border-t border-border" style={{ backgroundColor: 'var(--color-surface)' }}>
       <div className="container-site">
         <motion.div
-          className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 sm:gap-8 lg:gap-16 mb-14 lg:mb-20"
+          className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-8 sm:gap-10 lg:gap-16 mb-16 lg:mb-24"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.7, ease: ANIMATION.ease }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
           <div>
-            <p className="font-mono text-label tracking-[0.22em] uppercase mb-4" style={{ color: BRAND.primary }}>
+            <p className="font-mono text-label tracking-[0.22em] uppercase mb-4" style={{ color: 'var(--color-violet)' }}>
               LEGAL & COMPLIANCE BY DESIGN
             </p>
             <h2
@@ -51,62 +49,61 @@ export function ComplianceByDesign() {
           </div>
           <div className="flex items-center gap-4 flex-wrap text-sm">
             <Link
-              href="/research"
+              href="/blog"
               className="font-mono text-sm transition-colors rounded-full border border-border px-5 py-2.5"
-              style={{ color: BRAND.primary }}
+              style={{ color: 'var(--color-violet)' }}
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-foreground)' }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = BRAND.primary }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-violet)' }}
             >
-              Read Research →
+              Read Our Blog →
             </Link>
             <Link
               href="/legal"
               className="font-mono text-sm transition-colors rounded-full border border-border px-5 py-2.5"
-              style={{ color: BRAND.primary }}
+              style={{ color: 'var(--color-violet)' }}
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-foreground)' }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = BRAND.primary }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-violet)' }}
             >
               Open Legal Hub →
             </Link>
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
           {highlights.map((item, i) => (
             <motion.article
               key={item.title}
-              className="group relative overflow-hidden rounded-[24px] border border-border bg-card p-8 sm:p-10"
+              className="group relative overflow-hidden rounded-[24px] border border-border bg-card p-10 sm:p-12"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.55, delay: (i % 2) * 0.08, ease: ANIMATION.ease }}
+              transition={{ duration: 0.55, delay: (i % 2) * 0.08, ease: [0.16, 1, 0.3, 1] }}
             >
               <div
                 className="absolute inset-x-0 top-0 h-px"
-                style={{ background: `linear-gradient(90deg, ${BRAND.primary}, transparent 75%)` }}
+                style={{ background: `linear-gradient(90deg, var(--color-violet), transparent 75%)` }}
                 aria-hidden
               />
 
               <span
                 className="absolute top-5 right-6 font-display font-black select-none pointer-events-none"
-                style={{ fontSize: '72px', lineHeight: 1, color: BRAND.primary, opacity: 0.04 }}
+                style={{ fontSize: '72px', lineHeight: 1, color: 'var(--color-violet)', opacity: 0.04 }}
                 aria-hidden
               >
                 {String(i + 1).padStart(2, '0')}
               </span>
 
               <div
-                className="w-11 h-11 flex items-center justify-center mb-6 rounded-xl transition-colors duration-300"
+                className="w-11 h-11 flex items-center justify-center mb-8 rounded-xl transition-colors duration-300"
                 style={{
-                  border: '1px solid rgba(107,26,26,0.18)',
-                  backgroundColor: 'rgba(107,26,26,0.05)',
-                }}
+                  border: '1px solid rgba(var(--color-accent-rgb),0.18)',
+                  backgroundColor: 'rgba(var(--color-accent-rgb),0.05)' }}
               >
-                <item.Icon className="w-4.5 h-4.5 transition-colors duration-300" style={{ color: BRAND.primary }} />
+                <item.Icon className="w-4.5 h-4.5 transition-colors duration-300" style={{ color: 'var(--color-violet)' }} />
               </div>
 
               <h3
-                className="font-display font-bold text-[17px] sm:text-lg mb-3 transition-colors duration-200"
+                className="font-display font-bold text-[17px] sm:text-lg mb-4 transition-colors duration-200"
                 style={{ color: 'var(--color-foreground)' }}
               >
                 {item.title}

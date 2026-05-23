@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { projects } from '@/lib/data/projects'
 import { PortfolioContent } from '@/components/portfolio/PortfolioContent'
+import { FAQSection } from '@/components/ui/FAQSection'
+import { portfolioFaqs } from '@/lib/data/faq'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbSchema } from '@/lib/seo/schemas'
 
@@ -33,8 +35,7 @@ export default function PortfolioPage() {
             width: 'clamp(320px, 44vw, 760px)',
             height: 'clamp(320px, 44vw, 760px)',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(107,26,26,0.09) 0%, transparent 65%)',
-          }}
+            background: 'radial-gradient(circle, rgba(var(--color-accent-rgb),0.09) 0%, transparent 65%)' }}
         />
         <div
           className="absolute pointer-events-none"
@@ -44,8 +45,7 @@ export default function PortfolioPage() {
             width: 'clamp(200px, 28vw, 480px)',
             height: 'clamp(200px, 28vw, 480px)',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(107,26,26,0.04) 0%, transparent 65%)',
-          }}
+            background: 'radial-gradient(circle, rgba(var(--color-accent-rgb),0.04) 0%, transparent 65%)' }}
         />
 
         <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-12 sm:pb-16 lg:pb-20">
@@ -63,13 +63,13 @@ export default function PortfolioPage() {
           {/* Headline */}
           <div className="flex-1 flex flex-col justify-center">
             <span
-                className="font-mono uppercase block mb-8"
+                className="font-mono uppercase block mb-10"
               style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.22em' }}
             >
               ✦ OUR WORK
             </span>
 
-          <div className="flex flex-col" style={{ gap: '0.25rem' }}>
+          <div className="flex flex-col" style={{ gap: '0.5rem' }}>
               <h1
                 className="font-display font-black leading-none tracking-normal uppercase"
                 style={{ fontSize: 'clamp(3.5rem, 10vw, 10rem)', color: 'var(--color-foreground)' }}
@@ -85,7 +85,7 @@ export default function PortfolioPage() {
             </div>
 
             <p
-              className="mt-10 lg:mt-14"
+              className="mt-12 lg:mt-16"
               style={{ fontSize: '16px', lineHeight: 1.75, color: 'var(--color-muted)', maxWidth: '500px' }}
             >
               From internal SaaS builds to active client implementations, explore what MTA is
@@ -95,10 +95,10 @@ export default function PortfolioPage() {
 
           {/* Bottom stats strip */}
           <div
-            className="mt-14 lg:mt-20 flex flex-wrap items-center justify-between gap-6"
-            style={{ borderTop: '1px solid var(--color-border)', paddingTop: '28px' }}
+            className="mt-16 lg:mt-24 flex flex-wrap items-center justify-between gap-8"
+            style={{ borderTop: '1px solid var(--color-border)', paddingTop: '32px' }}
           >
-            <div className="flex flex-wrap items-center gap-10">
+            <div className="flex flex-wrap items-center gap-12">
               <div className="flex items-baseline gap-2">
                 <span
                   className="font-display font-black"
@@ -151,8 +151,7 @@ export default function PortfolioPage() {
                   color: 'var(--color-dead)',
                   letterSpacing: '0.22em',
                   writingMode: 'vertical-rl',
-                  transform: 'rotate(180deg)',
-                }}
+                  transform: 'rotate(180deg)' }}
               >
                 Scroll
               </span>
@@ -164,6 +163,7 @@ export default function PortfolioPage() {
 
       {/* ── CONTENT ──────────────────────────────────────────── */}
       <PortfolioContent />
+      <FAQSection items={portfolioFaqs} title="Portfolio Questions" />
     </main>
   )
 }

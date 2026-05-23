@@ -40,8 +40,7 @@ export function SpotlightCard({ children, className = '', style, intensity = 0.0
           : '0 14px 40px rgba(0,0,0,0.10)',
         backgroundImage: isHovered
           ? `radial-gradient(320px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(var(--color-accent-rgb), ${intensity}), transparent 68%)`
-          : 'none',
-      }}
+          : 'none' }}
       onMouseMove={(e) => {
         if (!ref.current) return
 

@@ -28,7 +28,7 @@ export function ConsentBanner() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm"
-            onClick={() => {}} // Prevent clicking through
+            onClick={(e) => e.stopPropagation()}
             aria-hidden="true"
           />
           
@@ -45,8 +45,7 @@ export function ConsentBanner() {
               style={{ 
                 backgroundColor: 'var(--color-card)',
                 border: '1px solid var(--color-border)',
-                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(107, 26, 26, 0.1)',
-              }}
+                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(var(--color-accent-rgb), 0.1)' }}
             >
               {/* Top accent bar */}
               <div 
@@ -75,9 +74,8 @@ export function ConsentBanner() {
                     transition={{ delay: 0.1, duration: 0.3 }}
                     className="w-16 h-16 flex items-center justify-center rounded-2xl mb-4"
                     style={{ 
-                      backgroundColor: 'rgba(107, 26, 26, 0.1)',
-                      border: '1px solid rgba(107, 26, 26, 0.2)',
-                    }}
+                      backgroundColor: 'rgba(var(--color-accent-rgb), 0.1)',
+                      border: '1px solid rgba(var(--color-accent-rgb), 0.2)' }}
                   >
                     <Shield className="w-8 h-8" style={{ color: 'var(--color-violet)' }} />
                   </motion.div>
@@ -110,9 +108,8 @@ export function ConsentBanner() {
                   transition={{ delay: 0.25, duration: 0.3 }}
                   className="p-4 rounded-xl mb-6"
                   style={{ 
-                    backgroundColor: 'rgba(107, 26, 26, 0.04)',
-                    border: '1px solid rgba(107, 26, 26, 0.1)',
-                  }}
+                    backgroundColor: 'rgba(var(--color-accent-rgb), 0.04)',
+                    border: '1px solid rgba(var(--color-accent-rgb), 0.1)' }}
                 >
                   <p className="text-sm leading-relaxed text-center" style={{ color: 'var(--color-muted)' }}>
                     We respect your privacy. We process data under the{' '}
@@ -169,9 +166,8 @@ export function ConsentBanner() {
                       <div
                         className="p-4 rounded-xl text-sm space-y-3"
                         style={{
-                          backgroundColor: 'rgba(107, 26, 26, 0.06)',
-                          border: '1px solid rgba(107, 26, 26, 0.15)',
-                        }}
+                          backgroundColor: 'rgba(var(--color-accent-rgb), 0.06)',
+                          border: '1px solid rgba(var(--color-accent-rgb), 0.15)' }}
                       >
                         <div>
                           <strong style={{ color: 'var(--color-foreground)' }}>What we collect:</strong>{' '}
@@ -235,8 +231,7 @@ export function ConsentBanner() {
                       style={{ 
                         color: 'var(--color-muted)',
                         border: '1px solid var(--color-border)',
-                        backgroundColor: 'transparent',
-                      }}
+                        backgroundColor: 'transparent' }}
                     >
                       Decline
                     </button>
@@ -248,8 +243,7 @@ export function ConsentBanner() {
                       style={{
                         backgroundColor: 'var(--color-foreground)',
                         color: 'var(--color-canvas)',
-                        boxShadow: '0 4px 14px rgba(107, 26, 26, 0.25)',
-                      }}
+                        boxShadow: '0 4px 14px rgba(var(--color-accent-rgb), 0.25)' }}
                     >
                       Accept & Continue
                     </button>

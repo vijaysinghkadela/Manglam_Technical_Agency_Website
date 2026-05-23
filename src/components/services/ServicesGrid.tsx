@@ -6,6 +6,7 @@ import { ArrowRight } from 'lucide-react'
 import { services } from '@/lib/data/services'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
+import Badge from '@/components/ui/Badge'
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
 
@@ -15,7 +16,7 @@ export function ServicesGrid() {
   const animateCards = !prefersReducedMotion && !isTouchDevice
 
   return (
-    <section className="border-t border-border" style={{ backgroundColor: 'var(--color-surface)', padding: 'clamp(72px, 10vw, 128px) 0' }}>
+    <section className="section border-t border-border" style={{ backgroundColor: 'var(--color-surface)' }}>
       <div className="container-site">
         <div className="mb-12 flex flex-col gap-5 lg:mb-16 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
@@ -42,13 +43,9 @@ export function ServicesGrid() {
 
           <div className="flex flex-wrap gap-2.5">
             {['Transparent pricing', 'Mobile-first layouts', 'Low-motion defaults'].map((chip) => (
-              <span
-                key={chip}
-                className="rounded-full border border-border bg-card px-3 py-2 font-mono text-[10px] uppercase tracking-[0.16em]"
-                style={{ color: 'var(--color-dead)' }}
-              >
+              <Badge key={chip} variant="subtle" size="sm">
                 {chip}
-              </span>
+              </Badge>
             ))}
           </div>
         </div>
@@ -71,12 +68,12 @@ export function ServicesGrid() {
                   className="group relative flex h-full min-h-[300px] flex-col overflow-hidden rounded-[30px] border border-border bg-card p-8 shadow-[0_18px_60px_rgba(0,0,0,0.04)] transition-all duration-300 sm:p-10"
                   data-cursor="link"
                 >
-                  <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top_right,rgba(107,26,26,0.08),transparent_50%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top_right,rgba(var(--color-accent-rgb),0.08),transparent_50%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
                   <div className="relative flex items-start justify-between gap-4">
                     <div className="flex items-center gap-3">
                       <span
-                        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-border bg-surface transition-colors duration-300 group-hover:border-violet/30 group-hover:bg-[rgba(107,26,26,0.08)]"
+                        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-border bg-surface transition-colors duration-300 group-hover:border-violet/30 group-hover:bg-[rgba(var(--color-accent-rgb),0.08)]"
                       >
                         <service.Icon
                           className="h-5 w-5 transition-colors duration-300 group-hover:text-violet-light"
@@ -98,12 +95,13 @@ export function ServicesGrid() {
                         </h3>
                       </div>
                     </div>
-                    <div
-                      className="shrink-0 rounded-full border border-border bg-surface px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em]"
-                      style={{ color: 'var(--color-violet-light)' }}
+                    <Badge
+                      variant="subtle"
+                      size="sm"
+                      className="text-violet-light"
                     >
                       {service.priceLabel}
-                    </div>
+                    </Badge>
                   </div>
 
                   <p className="relative mt-5 text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
@@ -112,13 +110,9 @@ export function ServicesGrid() {
 
                   <div className="relative mt-6 flex flex-wrap gap-2.5">
                     {service.features.slice(0, 3).map((feature) => (
-                      <span
-                        key={feature}
-                        className="rounded-full border border-border bg-surface px-3 py-1.5 font-mono text-[10px] uppercase leading-none tracking-[0.12em]"
-                        style={{ color: 'var(--color-dead)' }}
-                      >
+                      <Badge key={feature} variant="subtle" size="sm">
                         {feature}
-                      </span>
+                      </Badge>
                     ))}
                   </div>
 

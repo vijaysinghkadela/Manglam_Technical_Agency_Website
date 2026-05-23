@@ -4,7 +4,6 @@ import {
   Shield,
   Globe,
   PenTool,
-  ShoppingCart,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -42,20 +41,20 @@ export const services: Service[] = [
   {
     slug: "ai-automation",
     name: "AI Automation",
-    tagline: "LLM-powered workflows & intelligent integrations",
+    tagline: "Custom AI agents, RAG pipelines, and workflow automation for Indian businesses",
     Icon: Bot,
     description:
-      "We design AI and automation systems that reduce manual work, improve operational speed, and keep implementation grounded in your actual business process.",
+      "We build AI automation that fits your actual operations. Chatbots, document processors, workflow triggers — deployed on your infrastructure or ours.",
     features: [
-      "Outcome-based workflow engineering",
-      "RAG custom knowledge bases",
-      "n8n & self-hosted integrations",
-      "LLM parameter and prompt tuning",
+      "Workflow engineering with n8n",
+      "RAG knowledge bases from your documents",
+      "WhatsApp AI bots",
+      "LLM prompt tuning and optimization",
     ],
     priceLabel: "From ₹85,000",
     requiredAgreements: ["MTA-AI", "MTA-DPA", "MTA-NDA"],
     dpaTrigger:
-      "Required whenever user, customer, or employee personal data enters prompts, workflows, or storage layers.",
+      "Required when personal data enters prompts, workflows, or storage layers.",
     governingLaws: [
       "Indian Contract Act, 1872",
       "DPDPA, 2023",
@@ -76,8 +75,6 @@ export const services: Service[] = [
           "API integrations",
           "Testing + handover",
         ],
-        subtext:
-          "Best for solopreneurs and small teams needing a first automation layer.",
       },
       {
         label: "Neural",
@@ -91,8 +88,6 @@ export const services: Service[] = [
           "Monthly analytics",
           "Incident response",
         ],
-        subtext:
-          "6-month total: ₹1,68,000. Included API allowance billed transparently.",
       },
       {
         label: "Cortex",
@@ -106,7 +101,6 @@ export const services: Service[] = [
           "Monthly ROI report",
           "Priority support",
         ],
-        subtext: "12-month total: ₹4,56,000. Flagship AI partnership tier.",
       },
     ],
     process: [
@@ -158,10 +152,10 @@ export const services: Service[] = [
     slug: "social-media-marketing",
     name: "Social Media Marketing",
     tagline:
-      "Paid social retainers, Meta Ads systems & compliance-first growth",
+      "Meta Ads management, creative production, and growth campaigns",
     Icon: Share2,
     description:
-      "We run Meta Ads and social growth programs with creative production, tracking architecture, and optimization built around measurable revenue outcomes. Every engagement includes human review, ad account hygiene, and consent-aware data handling.",
+      "We run Meta Ads and social growth campaigns for Indian businesses. Creative production, tracking setup, and ongoing optimization — with compliance-aware data handling built in.",
     features: [
       "Campaign strategy & objective setting",
       "Meta Pixel / CAPI / custom event setup",
@@ -171,7 +165,7 @@ export const services: Service[] = [
     priceLabel: "From ₹18,000/mo",
     requiredAgreements: ["MTA-DM", "MTA-DPA", "MTA-NDA", "MTA-AIE"],
     dpaTrigger:
-      "Required when audience data, lead forms, CRM sync, AI tool processing, or social automation handles personal data. All AI-generated content labeled per IT Amendment Rules 2026.",
+      "Required when audience data, lead forms, CRM sync, or social automation handles personal data.",
     governingLaws: [
       "Indian Contract Act, 1872",
       "ASCI Guidelines, 2021",
@@ -196,8 +190,6 @@ export const services: Service[] = [
           "1 revision round per creative",
           "WhatsApp/email support (24 hr)",
         ],
-        subtext:
-          "6-month: ₹15,500/mo (₹93,000 total) · 12-month: ₹13,500/mo (₹1,62,000 total)",
       },
       {
         label: "Growth",
@@ -217,7 +209,6 @@ export const services: Service[] = [
           "2 revision rounds per creative",
           "WhatsApp/email support (12 hr)",
         ],
-        subtext: "1-month: ₹35,000 · 12-month: ₹26,000/mo (₹3,12,000 total)",
       },
       {
         label: "Scale",
@@ -236,8 +227,6 @@ export const services: Service[] = [
           "Weekly detailed report + monthly strategy review",
           "Dedicated account manager and priority support",
         ],
-        subtext:
-          "6-month: ₹55,000/mo (₹3,30,000 total) · 12-month: ₹48,000/mo (₹5,76,000 total)",
       },
     ],
     process: [
@@ -300,24 +289,22 @@ export const services: Service[] = [
   {
     slug: "cybersecurity",
     name: "Cybersecurity",
-    tagline: "PTES-Based Ethical Hacking, DPDP Compliance & Incident Response",
+    tagline: "Ethical hacking, VAPT, and DPDP compliance for Indian businesses",
     Icon: Shield,
     description:
-      "Comprehensive ethical hacking service using PTES methodology, with DPDP compliance certification.",
+      "Security assessments using PTES methodology. VAPT, compliance gap analysis, and incident response — with clear reporting and remediation paths.",
     features: [
-      "PTES 7-Phase Penetration Testing Execution Standard",
-      "DPDP Act 2023 Section 8(5) Compliance Certification",
-      "LINDDUN Privacy Threat Modeling for PII Protection",
-      "OWASP Top 10:2025 Web Application Security Testing",
-      "NIST Cybersecurity Framework 2.0 Aligned Reporting",
-      "CERT-In 6-Hour Incident Reporting Compliance",
-      "Real Case Studies: FitNexora, MNSS Healthcare, Doctor App",
-      "180-Day Log Retention with Encrypted Offline Storage",
+      "PTES methodology penetration testing",
+      "DPDP Act compliance assessment",
+      "Web application and API security testing",
+      "Social engineering simulation",
+      "Network vulnerability testing",
+      "Remediation roadmap and retesting",
     ],
     priceLabel: "From ₹50,000",
     requiredAgreements: ["MTA-CS", "MTA-NDA", "MTA-DPA", "MTA-ROE"],
     dpaTrigger:
-      "Mandatory for all engagements processing personal data under DPDP Act 2023. Includes breach notification obligations.",
+      "Required for all engagements processing personal data under DPDP Act 2023.",
     governingLaws: [
       "IT Act, 2000 (Sections 43, 66 & 70B)",
       "DPDPA, 2023 (Sections 8, 12-15)",
@@ -340,7 +327,6 @@ export const services: Service[] = [
           "Executive summary",
           "15-day support",
         ],
-        subtext: "6-month retainer: ₹8,500/mo · 12-month AMC: ₹6,500/mo",
       },
       {
         label: "Guard",
@@ -355,7 +341,6 @@ export const services: Service[] = [
           "Staff training session",
           "Remediation roadmap",
         ],
-        subtext: "6-month retainer: ₹20,000/mo · 12-month AMC: ₹16,500/mo",
       },
       {
         label: "Fortress",
@@ -370,7 +355,6 @@ export const services: Service[] = [
           "Board-level report",
           "2-day onsite engagement",
         ],
-        subtext: "6-month managed: ₹45,000/mo · 12-month contract: ₹38,000/mo",
       },
     ],
     process: [
@@ -411,15 +395,15 @@ export const services: Service[] = [
     faqs: [
       {
         q: "What is PTES and why does MTA use it?",
-        a: "PTES stands for Penetration Testing Execution Standard, a 7-phase methodology widely recognized as the most comprehensive framework for ethical hacking in 2026. It covers Pre-engagement, Intelligence Gathering, Threat Modeling, Vulnerability Analysis, Exploitation, Post-Exploitation, and Reporting - ensuring no attack vector is overlooked.",
+        a: "PTES (Penetration Testing Execution Standard) is the 7-phase methodology we follow for security assessments. It covers pre-engagement through reporting — each phase has clear deliverables. We use it because it produces thorough, documented results that clients can act on.",
       },
       {
         q: "What is the DPDP 24-hour breach notification requirement?",
-        a: "Under DPDP Act 2023, MTA acts as Data Processor and notifies the client (Data Fiduciary) within 24 hours of detecting a breach. The client then has 72 hours to notify the Data Protection Board of India. Our contracts clearly delineate these obligations to ensure regulatory compliance.",
+        a: "Under DPDP Act 2023, MTA (as Data Processor) notifies the client within 24 hours of detecting a breach. The client then has 72 hours to report to the Data Protection Board. Our contracts spell out these roles and timelines clearly.",
       },
       {
         q: "What's the difference between Gray-box, White-box, and Black-box testing?",
-        a: "Gray-box testing (our default) uses limited credentials and internal documentation to simulate privileged insider threats. White-box testing provides full source code access for comprehensive static analysis. Black-box testing proceeds with zero prior knowledge, simulating pure external attacker perspective. We recommend Gray-box for optimal coverage-to-cost ratio.",
+        a: "Gray-box (our default) gives testers limited credentials to simulate an insider threat. White-box provides full source code access for deeper analysis. Black-box starts from scratch like an external attacker. Gray-box gives the best balance of depth and cost for most engagements.",
       },
       {
         q: "Do you provide proof-of-concept exploits without disrupting production?",
@@ -430,20 +414,20 @@ export const services: Service[] = [
   {
     slug: "saas-products",
     name: "SaaS & Web Development",
-    tagline: "Development partner for web apps, SaaS platforms & landing pages",
+    tagline: "Web apps, SaaS platforms, and landing pages built with modern stacks",
     Icon: Globe,
     description:
-      "We partner with founders and businesses on SaaS and web development - contributing to architecture, feature work, and ongoing builds. We do not build complete SaaS products for clients from scratch as a packaged service. Where a client handles their own legal and compliance responsibilities, we can take full delivery ownership of a SaaS project.",
+      "We build websites, web applications, and SaaS platforms. From a landing page to a multi-tenant platform — scoped, delivered, and handed over with documentation.",
     features: [
       "Next.js / React / Flutter ecosystems",
-      "Feature development & architecture contributions",
-      "Landing pages & web application builds",
-      "Full SaaS ownership when client manages legal/compliance",
+      "Feature development and architecture",
+      "Landing pages and web applications",
+      "SaaS platform builds",
     ],
     priceLabel: "From ₹65,000",
     requiredAgreements: ["MTA-SL", "MTA-DPA", "MTA-NDA"],
     dpaTrigger:
-      "Required when platform includes user accounts, analytics, or any personal data processing.",
+      "Required when platform includes user accounts, analytics, or personal data processing.",
     governingLaws: [
       "Indian Contract Act, 1872",
       "Copyright Act, 1957",
@@ -464,8 +448,6 @@ export const services: Service[] = [
           "Contact form + WhatsApp integration",
           "Basic SEO + analytics",
         ],
-        subtext:
-          "6-month retainer: ₹55,000/sprint · 12-month retainer: ₹50,000/sprint",
       },
       {
         label: "Build",
@@ -479,8 +461,6 @@ export const services: Service[] = [
           "Admin dashboard",
           "API integrations",
         ],
-        subtext:
-          "6-month phased delivery: ₹3,00,000 total · 12-month build + maintain: ₹3,36,000 total",
       },
       {
         label: "Platform",
@@ -494,8 +474,6 @@ export const services: Service[] = [
           "CI/CD and monitoring",
           "Maintenance + handover",
         ],
-        subtext:
-          "12-month iterate: ₹10,80,000 total · revenue-share option available",
       },
     ],
     process: [
@@ -504,7 +482,7 @@ export const services: Service[] = [
         title: "Discovery Workshop",
         summary: "Translating ideas to technical scope.",
         detail:
-          "We lock down the exact feature set and user journeys to avoid scope creep.",
+          "We lock down the exact feature set and user journeys before any code is written.",
         duration: "1 week",
       },
       {
@@ -512,7 +490,7 @@ export const services: Service[] = [
         title: "Design & Architecture",
         summary: "Wireframes and DB schemas.",
         detail:
-          "We design the UI for WCAG 2.1 AA compliance and model the database for scalability.",
+          "UI design, database modeling, and architecture planning.",
         duration: "2 weeks",
       },
       {
@@ -520,7 +498,7 @@ export const services: Service[] = [
         title: "Sprints",
         summary: "Agile development with previews.",
         detail:
-          "We build in 2-week sprints. You test specific features on live staging URLs.",
+          "We build in 2-week sprints with live staging URLs for your review.",
         duration: "4-12 weeks",
       },
       {
@@ -528,38 +506,38 @@ export const services: Service[] = [
         title: "QA & Launch",
         summary: "Security checks and go-live.",
         detail:
-          "Load testing, penetration testing, and DNS handover. Year 1 maintenance begins.",
+          "Testing, deployment, and handover with documentation.",
         duration: "1 week",
       },
     ],
     faqs: [
       {
         q: "Can MTA build my entire SaaS product?",
-        a: "Yes, under specific conditions. We contribute to SaaS builds as a development partner. Full project ownership is available when you take on the legal, compliance, and business responsibilities for the product.",
+        a: "We contribute as a development partner. Full project ownership is available when you handle the legal and compliance side.",
       },
       {
-        q: "Why WCAG 2.1 AA?",
-        a: "Digital accessibility is non-negotiable for modern businesses. We ensure your app is usable by people with varying auditory, cognitive, and physical abilities.",
+        q: "Do you build e-commerce stores?",
+        a: "Yes, that falls under our E-Commerce service. Check the e-commerce section for details.",
       },
     ],
   },
   {
     slug: "branding",
     name: "Branding",
-    tagline: "Brand systems & IP-clear visual assets",
+    tagline: "Logo design, brand guidelines, and visual identity systems",
     Icon: PenTool,
     description:
-      "We develop cohesive brand systems - not just logos. From typography rules to exact color math, we deliver comprehensive guidelines that ensure your brand is protected, scalable, and entirely IP-clear.",
+      "We design brand identities — logos, color systems, typography, and full guidelines. Every asset is delivered with full IP rights, no licensing strings attached.",
     features: [
-      "Logo & mark generation",
+      "Logo and visual mark design",
       "Comprehensive brand guidelines",
-      "Color systems & typography rules",
-      "100% IP-clear asset handover",
+      "Color systems and typography rules",
+      "Full IP transfer on delivery",
     ],
     priceLabel: "From ₹35,000",
     requiredAgreements: ["MTA-NDA"],
     dpaTrigger:
-      "Usually not required unless campaign data, audience databases, or personal data tooling is included.",
+      "Not usually required. Only if the engagement involves audience data or personal information.",
     governingLaws: [
       "Indian Contract Act, 1872",
       "Copyright Act, 1957",
@@ -579,7 +557,6 @@ export const services: Service[] = [
           "Social kit",
           "Brand mini-guide",
         ],
-        subtext: "6-month retainer: ₹8,500/mo · 12-month retainer: ₹6,500/mo",
       },
       {
         label: "Mark",
@@ -593,7 +570,6 @@ export const services: Service[] = [
           "Visual identity system",
           "Brand guidelines",
         ],
-        subtext: "6-month retainer: ₹14,000/mo · 12-month retainer: ₹11,000/mo",
       },
       {
         label: "Signature",
@@ -607,8 +583,6 @@ export const services: Service[] = [
           "Brand book",
           "Launch kit",
         ],
-        subtext:
-          "6-month managed: ₹22,000/mo · 12-month partnership: ₹17,000/mo",
       },
     ],
     process: [
@@ -656,137 +630,22 @@ export const services: Service[] = [
     ],
   },
   {
-    slug: "ecommerce",
-    name: "E-Commerce Solutions",
-    tagline: "Full-service online store setup, management & growth",
-    Icon: ShoppingCart,
-    description:
-      "We build and manage complete e-commerce operations - from store design and product listings to Meta / Google ads and ongoing sales management. One team handles everything: the website, the marketing, and the results.",
-    features: [
-      "Custom e-commerce website design & development",
-      "Product catalog setup & inventory management",
-      "Meta Ads & Google Ads campaign management",
-      "SEO optimization for product pages",
-      "Order management & payment gateway integration",
-    ],
-    priceLabel: "From ₹40,000",
-    requiredAgreements: ["MTA-EC", "MTA-DPA", "MTA-NDA"],
-    dpaTrigger:
-      "Required when the store processes customer personal data, payment information, or runs targeted ad campaigns using audience data.",
-    governingLaws: [
-      "Indian Contract Act, 1872",
-      "Consumer Protection Act, 2019",
-      "DPDPA, 2023",
-      "IT Act, 2000",
-    ],
-    deliveryStages: [2, 3, 5, 6, 7, 8, 9, 10],
-    pricing: [
-      {
-        label: "Store Setup",
-        amount: "₹40,000 - ₹1,20,000",
-        period: "one-time",
-        highlight: false,
-        features: [
-          "Custom design",
-          "Product listings (up to 100 SKUs)",
-          "Payment gateway integration",
-          "Mobile-responsive build",
-        ],
-      },
-      {
-        label: "Growth Management",
-        amount: "₹25,000 - ₹60,000",
-        period: "/month",
-        highlight: true,
-        features: [
-          "Meta & Google Ads management",
-          "SEO & product page updates",
-          "Performance reporting",
-          "Inventory & order support",
-        ],
-        subtext:
-          "Ad spend billed separately to your ad accounts. 15% management fee applies.",
-      },
-      {
-        label: "Full Operations",
-        amount: "₹60,000 - ₹1,50,000",
-        period: "/month",
-        highlight: false,
-        features: [
-          "Everything in Growth",
-          "Dedicated account manager",
-          "Advanced ad optimization",
-          "CRM integration",
-          "Customer support setup",
-        ],
-      },
-    ],
-    process: [
-      {
-        step: 1,
-        title: "Discovery & Catalog Audit",
-        summary: "Map products, audience, and competitors.",
-        detail:
-          "We review your product range, target buyers, and competitor stores to define the right platform and ad strategy.",
-        duration: "1 week",
-      },
-      {
-        step: 2,
-        title: "Store Design & Build",
-        summary: "Custom storefront built to convert.",
-        detail:
-          "We design and develop the store, upload your product catalog, configure payment gateways, and run pre-launch QA.",
-        duration: "2-4 weeks",
-      },
-      {
-        step: 3,
-        title: "Ads & Marketing Launch",
-        summary: "Meta and Google campaigns go live.",
-        detail:
-          "We set up pixel tracking, ad accounts, and launch initial campaigns with A/B testing from day one.",
-        duration: "1 week",
-      },
-      {
-        step: 4,
-        title: "Optimize & Scale",
-        summary: "Monthly optimization based on data.",
-        detail:
-          "We analyze sales data, ad performance, and customer behavior to improve ROAS and conversion rates every month.",
-        duration: "Ongoing",
-      },
-    ],
-    faqs: [
-      {
-        q: "Do you manage ad spend on our behalf?",
-        a: "No. Ad budgets are managed through your own Meta / Google ad accounts. We charge a 15% management fee on ad spend for strategy, creative, and optimization.",
-      },
-      {
-        q: "What platforms do you build on?",
-        a: "We build on Shopify (recommended for most businesses), WooCommerce for WordPress sites, or custom Next.js stores for high-scale or unique requirements.",
-      },
-      {
-        q: "Can you handle product uploads from day one?",
-        a: "Yes. Your initial catalog is uploaded as part of setup. Ongoing catalog management is included in Growth and Full Operations plans.",
-      },
-    ],
-  },
-  {
     slug: "content-creation",
     name: "Content Creation",
-    tagline: "SEO writing, social content, and long-form thought leadership",
+    tagline: "Blog posts, social content, and brand writing",
     Icon: PenTool,
     description:
-      "We produce human-edited content systems that combine research, structure, and distribution planning across blogs, social posts, email, and founder-led content.",
+      "Content production for businesses that need regular blogs, social media posts, and long-form articles. Human-edited, SEO-aware, and delivered on schedule.",
     features: [
       "Blog posts and SEO articles",
       "Social media graphics and captions",
-      "Reels / short-form scripts",
-      "LinkedIn thought leadership and newsletters",
+      "Reels and short-form video scripts",
+      "Newsletters and brand writing",
     ],
     priceLabel: "From ₹28,000",
     requiredAgreements: ["MTA-NDA"],
     dpaTrigger:
-      "Required only where content workflows process personal data from forms, CRM exports, or user datasets.",
+      "Only required when content workflows process personal data from forms or CRM exports.",
     governingLaws: [
       "Indian Contract Act, 1872",
       "Copyright Act, 1957",
@@ -806,7 +665,6 @@ export const services: Service[] = [
           "Scheduling setup",
           "Monthly summary",
         ],
-        subtext: "6-month retainer: ₹25,000/mo · 12-month retainer: ₹20,000/mo",
       },
       {
         label: "Grow",
@@ -821,7 +679,6 @@ export const services: Service[] = [
           "1 newsletter",
           "Monthly analytics",
         ],
-        subtext: "6-month retainer: ₹70,000/mo · 12-month retainer: ₹55,000/mo",
       },
       {
         label: "Lead",
@@ -837,8 +694,6 @@ export const services: Service[] = [
           "2 newsletters",
           "1 YouTube script",
         ],
-        subtext:
-          "6-month partnership: ₹1,30,000/mo · 12-month ownership: ₹1,10,000/mo",
       },
     ],
     process: [
