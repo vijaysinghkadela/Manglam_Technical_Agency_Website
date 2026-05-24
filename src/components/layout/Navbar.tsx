@@ -29,28 +29,32 @@ const getNavStyles = (isLight: boolean, scrolled: boolean) => ({
   container: {
     backgroundColor: scrolled
       ? isLight
-        ? 'rgba(250, 247, 244, 0.95)'
-        : 'rgba(13, 13, 14, 0.95)'
+        ? 'rgba(248, 246, 244, 0.74)'
+        : 'rgba(9, 7, 6, 0.72)'
       : isLight
-        ? 'rgb(250, 247, 244)'
-        : 'rgb(13, 13, 14)',
-    backdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
-    WebkitBackdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
-    borderBottom: scrolled ? `1px solid ${isLight ? 'rgba(var(--color-accent-rgb), 0.08)' : 'rgba(255, 255, 255, 0.06)'}` : '1px solid transparent',
+        ? 'rgba(248, 246, 244, 0.50)'
+        : 'rgba(9, 7, 6, 0.54)',
+    backdropFilter: 'blur(18px) saturate(170%)',
+    WebkitBackdropFilter: 'blur(18px) saturate(170%)',
+    borderBottom: `1px solid ${isLight ? 'rgba(var(--color-accent-rgb), 0.12)' : 'rgba(255, 255, 255, 0.10)'}`,
     boxShadow: scrolled
       ? isLight
-        ? '0 4px 30px rgba(0, 0, 0, 0.04)'
-        : '0 4px 30px rgba(0, 0, 0, 0.2)'
-      : 'none',
+        ? '0 14px 40px rgba(26, 20, 18, 0.08), inset 0 1px 0 rgba(255,255,255,0.72)'
+        : '0 14px 40px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255,255,255,0.08)'
+      : isLight
+        ? '0 10px 32px rgba(26, 20, 18, 0.04), inset 0 1px 0 rgba(255,255,255,0.56)'
+        : '0 10px 32px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255,255,255,0.06)',
   },
   navPill: {
     backgroundColor: isLight
-      ? 'rgba(var(--color-accent-rgb), 0.04)'
-      : 'rgba(255, 255, 255, 0.04)',
-    border: `1px solid ${isLight ? 'rgba(var(--color-accent-rgb), 0.08)' : 'rgba(255, 255, 255, 0.08)'}`,
+      ? 'rgba(255, 255, 255, 0.46)'
+      : 'rgba(255, 255, 255, 0.07)',
+    border: `1px solid ${isLight ? 'rgba(var(--color-accent-rgb), 0.14)' : 'rgba(255, 255, 255, 0.12)'}`,
+    backdropFilter: 'blur(16px) saturate(160%)',
+    WebkitBackdropFilter: 'blur(16px) saturate(160%)',
     boxShadow: isLight
-      ? '0 2px 8px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8)'
-      : '0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+      ? '0 8px 24px rgba(26, 20, 18, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.76)'
+      : '0 8px 24px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.08)',
   },
   link: {
     default: {
@@ -67,11 +71,13 @@ const getNavStyles = (isLight: boolean, scrolled: boolean) => ({
     },
   },
   megaMenu: {
-    backgroundColor: isLight ? 'rgba(250, 247, 244, 0.98)' : 'rgba(13, 13, 14, 0.98)',
-    borderColor: isLight ? 'rgba(var(--color-accent-rgb), 0.12)' : 'rgba(255, 255, 255, 0.08)',
+    backgroundColor: isLight ? 'rgba(248, 246, 244, 0.82)' : 'rgba(13, 13, 14, 0.82)',
+    borderColor: isLight ? 'rgba(var(--color-accent-rgb), 0.16)' : 'rgba(255, 255, 255, 0.12)',
+    backdropFilter: 'blur(22px) saturate(170%)',
+    WebkitBackdropFilter: 'blur(22px) saturate(170%)',
     boxShadow: isLight
-      ? '0 25px 50px -12px rgba(var(--color-accent-rgb), 0.15), 0 0 0 1px rgba(var(--color-accent-rgb), 0.05)'
-      : '0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05)',
+      ? '0 25px 60px -18px rgba(var(--color-accent-rgb), 0.20), 0 0 0 1px rgba(var(--color-accent-rgb), 0.06)'
+      : '0 25px 60px -18px rgba(0, 0, 0, 0.58), 0 0 0 1px rgba(255, 255, 255, 0.06)',
   },
   megaItem: {
     default: {
@@ -90,8 +96,10 @@ const getNavStyles = (isLight: boolean, scrolled: boolean) => ({
 
   mobileButton: {
     default: {
-      backgroundColor: isLight ? 'rgba(var(--color-accent-rgb), 0.06)' : 'rgba(255, 255, 255, 0.06)',
-      border: `1px solid ${isLight ? 'rgba(var(--color-accent-rgb), 0.1)' : 'rgba(255, 255, 255, 0.1)'}`,
+      backgroundColor: isLight ? 'rgba(255,255,255,0.48)' : 'rgba(255, 255, 255, 0.08)',
+      border: `1px solid ${isLight ? 'rgba(var(--color-accent-rgb), 0.16)' : 'rgba(255, 255, 255, 0.12)'}`,
+      backdropFilter: 'blur(14px)',
+      WebkitBackdropFilter: 'blur(14px)',
     },
     active: {
       backgroundColor: 'var(--color-violet)',
@@ -239,7 +247,7 @@ export function Navbar() {
             <Link
               href="/"
               data-cursor="pointer"
-              className="flex items-center gap-3 sm:gap-4 shrink-0 group"
+              className="flex items-center gap-3 sm:gap-4 shrink-0 group rounded-full border border-border/70 bg-card/55 px-2.5 py-1.5 shadow-[0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur-md transition-colors hover:bg-card/75"
             >
               <motion.div
                 className="relative"
@@ -257,10 +265,16 @@ export function Navbar() {
                 />
               </motion.div>
               <div className="hidden sm:flex flex-col leading-none">
-                <span className="font-display font-black text-[14px] tracking-tight text-foreground">
+                <span
+                  className="font-display font-black text-[14px] tracking-tight text-foreground"
+                  style={{ textShadow: isLight ? '0 1px 0 rgba(255,255,255,0.72)' : '0 1px 10px rgba(0,0,0,0.55)' }}
+                >
                   MTA
                 </span>
-                <span className="font-mono uppercase text-muted text-[8px] tracking-wider">
+                <span
+                  className="font-mono uppercase text-muted text-[8px] tracking-wider"
+                  style={{ textShadow: isLight ? '0 1px 0 rgba(255,255,255,0.72)' : '0 1px 10px rgba(0,0,0,0.55)' }}
+                >
                   Agency
                 </span>
               </div>
@@ -288,7 +302,7 @@ export function Navbar() {
                         aria-expanded={mega}
                         aria-haspopup="true"
                         className={cn(
-                          'flex items-center gap-1.5 px-4 py-2 rounded-full text-[13px] font-medium transition-all duration-200',
+                          'flex items-center gap-1.5 px-4 py-2 rounded-full text-[13px] font-semibold transition-all duration-200',
                           isActive(link) ? 'text-foreground' : 'text-muted'
                         )}
                         style={getLinkStyle(link)}
@@ -370,6 +384,7 @@ export function Navbar() {
                         data-cursor="pointer"
                         className={cn(
                           'block px-4 py-2 text-[13px] font-medium rounded-full transition-all duration-200',
+                          'font-semibold',
                           isActive(link) ? 'text-foreground' : 'text-muted'
                         )}
                         style={getLinkStyle(link)}
@@ -517,8 +532,8 @@ export function Navbar() {
                 transition={{ delay: 0.5 }}
                 className="py-6 text-center"
               >
-                <p className="font-mono text-[10px] text-muted tracking-wider uppercase">
-                  Manglam Technical Agency • UDYAM-RJ-15-0094091
+              <p className="font-mono text-[10px] text-muted tracking-wider uppercase">
+                  Manglam Technical Agency • Bikaner, Rajasthan
                 </p>
               </motion.div>
             </div>

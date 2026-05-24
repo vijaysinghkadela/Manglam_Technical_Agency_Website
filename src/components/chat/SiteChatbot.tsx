@@ -313,6 +313,7 @@ export function SiteChatbot() {
 
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>(() => {
+    if (typeof window === "undefined") return [WELCOME_MESSAGE];
     try {
       const raw = window.localStorage.getItem(STORAGE_KEY);
       if (raw) {
@@ -410,6 +411,8 @@ export function SiteChatbot() {
     setStreamingId(replyId);
 
     try {
+      const pageDescription =
+        document.querySelector<HTMLMetaElement>('meta[name="description"]')?.content ?? "";
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -419,6 +422,7 @@ export function SiteChatbot() {
             .map(({ role, content }) => ({ role, content })),
           pathname,
           pageTitle: document.title,
+          pageDescription,
         }),
       });
 
@@ -426,7 +430,10 @@ export function SiteChatbot() {
 
       if (contentType.includes("text/event-stream")) {
         // ── Streaming mode ──
-        const reader = response.body!.getReader();
+        if (!response.body) {
+          throw new Error("Assistant response was empty.");
+        }
+        const reader = response.body.getReader();
         const decoder = new TextDecoder();
         accumulatedRef.current = "";
 
@@ -521,8 +528,6 @@ export function SiteChatbot() {
         type="button"
         onClick={() => setOpen(true)}
         className="fixed bottom-5 right-5 z-[70] flex h-14 w-14 items-center justify-center rounded-full border border-accent-border bg-card/95 shadow-[0_12px_40px_rgba(0,0,0,0.25)] backdrop-blur-xl transition-colors hover:border-accent hover:bg-accent-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas sm:bottom-6 sm:right-6 sm:h-16 sm:w-16"
-        animate={{ y: [0, -4, 0] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
         whileHover={{ scale: 1.06, transition: { duration: 0.18 } }}
         whileTap={{ scale: 0.92, transition: { duration: 0.1 } }}
         aria-label="Open AI assistant"

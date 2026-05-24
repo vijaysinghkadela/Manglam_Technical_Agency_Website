@@ -49,10 +49,14 @@ function localFallback(parsed: z.infer<typeof requestSchema>) {
   });
 }
 
-async function openRouterStream(orResponse: Response): Promise<Response> {
+async function openRouterStream(
+  orResponse: Response,
+  fallbackText: string,
+): Promise<Response> {
   const encoder = new TextEncoder();
   const reader = orResponse.body!.getReader();
   const decoder = new TextDecoder();
+  let emittedContent = false;
 
   const stream = new ReadableStream({
     async pull(controller) {
@@ -74,7 +78,10 @@ async function openRouterStream(orResponse: Response): Promise<Response> {
             try {
               const parsed = JSON.parse(data);
               const content = parsed.choices?.[0]?.delta?.content || "";
-              if (content) controller.enqueue(encoder.encode(content));
+              if (content) {
+                emittedContent = true;
+                controller.enqueue(encoder.encode(content));
+              }
             } catch {
               // skip malformed JSON
             }
@@ -82,6 +89,9 @@ async function openRouterStream(orResponse: Response): Promise<Response> {
         }
       } catch {
         // stream interrupted — partial content is still valid
+      }
+      if (!emittedContent) {
+        controller.enqueue(encoder.encode(fallbackText));
       }
       controller.close();
     },
@@ -170,7 +180,16 @@ export async function POST(request: NextRequest) {
       return localFallback(parsed);
     }
 
-    return openRouterStream(response);
+    const fallbackText = buildLocalAssistantReply(
+      {
+        pathname: parsed.pathname,
+        pageTitle: parsed.pageTitle,
+        pageDescription: parsed.pageDescription,
+      },
+      getLastUserMessage(parsed.messages),
+    );
+
+    return openRouterStream(response, fallbackText);
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(

@@ -547,17 +547,135 @@ export function buildLocalAssistantReply(
     ? route.split("/")[2]
     : undefined;
   const service = serviceSlug ? getService(serviceSlug) : undefined;
-  const featuredServices = services.slice(0, 4);
+  const featuredServices = services.slice(0, 5);
+  const includesAny = (terms: string[]) => terms.some((term) => message.includes(term));
+  const contactLine =
+    "Next step: use **/contact** or WhatsApp **+91 96943 22131** with your scope, budget, and timeline.";
 
-  if (service) {
+  const socialService = getService("social-media-marketing");
+  const aiService = getService("ai-automation");
+  const securityService = getService("cybersecurity");
+  const webService = getService("saas-products") ?? getService("web-development");
+  const contentService = getService("content-creation");
+  const brandingService = getService("branding");
+
+  const pickService = () => {
+    if (includesAny(["social", "instagram", "facebook", "meta", "ads", "lead", "campaign"])) return socialService;
+    if (includesAny(["ai", "automation", "bot", "chatbot", "rag", "workflow", "n8n"])) return aiService;
+    if (includesAny(["security", "cyber", "audit", "vapt", "pentest", "penetration"])) return securityService;
+    if (includesAny(["website", "web", "app", "saas", "portal", "ecommerce", "store"])) return webService;
+    if (includesAny(["content", "copy", "script", "reels", "video"])) return contentService;
+    if (includesAny(["brand", "logo", "identity", "design"])) return brandingService;
+    return service;
+  };
+
+  const recommendedService = pickService();
+
+  if (
+    /\b(hi|hello|hey)\b/.test(message) ||
+    includesAny(["what do you do", "about mta", "your services", "mta services"])
+  ) {
+    return [
+      "MTA helps businesses with practical digital work: websites, AI automation, cybersecurity, social media, content, and branding.",
+      "",
+      ...featuredServices.slice(0, 4).map(
+        (item) => `- **${item.name}** — starts at **${item.priceLabel}**: ${clip(item.tagline, 72)}`,
+      ),
+      "",
+      "Which of these matches what you are trying to build?",
+    ].join("\n");
+  }
+
+  if (
+    includesAny(["pricing", "price", "cost", "plan", "budget", "charge", "fee", "package"])
+  ) {
+    const target = recommendedService;
+    if (target) {
+      return [
+        `${target.name} starts at **${target.priceLabel}**.`,
+        "",
+        ...target.pricing.slice(0, 3).map(
+          (plan) => `- **${plan.label}**: **${plan.amount}**${plan.period ? ` (${plan.period})` : ""}`,
+        ),
+        "",
+        "Final scope depends on deliverables, integrations, and timeline. What budget range should I plan around?",
+      ].join("\n");
+    }
+
+    return [
+      "Here are the main starting points:",
+      "",
+      ...featuredServices.map((item) => `- **${item.name}** — **${item.priceLabel}**`),
+      "",
+      "Which service do you want priced more closely?",
+    ].join("\n");
+  }
+
+  if (includesAny(["compare", " vs ", "versus", "difference", "which is better"])) {
+    return [
+      "Quick verdict: choose based on the bottleneck.",
+      "",
+      "- **SaaS & Web Development** fits when you need a site, store, app, portal, or product built.",
+      "- **AI Automation** fits when manual work, documents, WhatsApp replies, or internal workflows are slowing the team.",
+      "- **Social Media Marketing** fits when the problem is acquisition, ad creatives, tracking, and campaign optimisation.",
+      "",
+      "What are you comparing for your current project?",
+    ].join("\n");
+  }
+
+  if (
+    includesAny(["legal", "privacy", "dpa", "nda", "agreement", "consent", "dpdp", "gdpr"])
+  ) {
+    return [
+      "MTA uses service-specific agreements, NDAs, DPAs, and consent-aware workflows where personal data is involved.",
+      "",
+      `Key documents: ${agreementSummaries
+        .slice(0, 4)
+        .map((item) => `**${item.code}** ${item.name}`)
+        .join(" | ")}`,
+      "",
+      "Next step: review **/legal** or share the service you are considering so I can point to the relevant agreement.",
+    ].join("\n");
+  }
+
+  if (
+    includesAny(["portfolio", "work", "case study", "example", "client", "proof"])
+  ) {
+    return [
+      "You can review MTA work on **/portfolio**. Current project examples include:",
+      "",
+      ...projects.slice(0, 3).map(
+        (project) => `- **${project.title}** (${project.status}) — ${clip(project.description, 86)}`,
+      ),
+      "",
+      "Which type of example should I match to your project?",
+    ].join("\n");
+  }
+
+  if (
+    includesAny(["process", "timeline", "delivery", "how do you work", "steps"])
+  ) {
+    return [
+      "MTA delivery is scope-first and documented.",
+      "",
+      "1. **Discovery**: clarify goal, budget, and constraints.",
+      "2. **Scope + agreements**: confirm deliverables, data handling, and timelines.",
+      "3. **Build / run**: execute with checkpoints and practical handover notes.",
+      "4. **Support**: fix issues, retest, or continue on retainer where needed.",
+      "",
+      "When do you want the work to start?",
+    ].join("\n");
+  }
+
+  if (recommendedService) {
     return [
       pageLine,
       pageDescription,
-      `${service.name}: ${service.tagline}`,
-      `Starting price: ${service.priceLabel}`,
-      `Best fit: ${service.features.slice(0, 3).join(", ")}`,
-      `Compliance note: ${clip(service.dpaTrigger, 160)}`,
-      "If you want a quote, share your budget and timeline, or use the contact CTA on this page and I will carry the details forward.",
+      `Recommended service: **${recommendedService.name}**`,
+      `Starting price: **${recommendedService.priceLabel}**`,
+      `Best fit: ${recommendedService.features.slice(0, 3).join(", ")}`,
+      `Typical path: ${recommendedService.process.slice(0, 3).map((step) => step.title).join(" → ")}`,
+      contactLine,
     ]
       .filter(Boolean)
       .join("\n");
@@ -586,7 +704,7 @@ export function buildLocalAssistantReply(
     message.includes("app") ||
     message.includes("saas")
   ) {
-    const webService = getService("web-development") ?? featuredServices[0];
+    const webService = getService("saas-products") ?? featuredServices[0];
     return [
       pageLine,
       pageDescription,
@@ -674,11 +792,41 @@ export function buildLocalAssistantReply(
       .join("\n");
   }
 
+  if (
+    includesAny(["process", "timeline", "delivery", "how do you work", "steps"])
+  ) {
+    return [
+      "MTA delivery is scope-first and documented.",
+      "",
+      "1. **Discovery**: clarify goal, budget, and constraints.",
+      "2. **Scope + agreements**: confirm deliverables, data handling, and timelines.",
+      "3. **Build / run**: execute with checkpoints and practical handover notes.",
+      "4. **Support**: fix issues, retest, or continue on retainer where needed.",
+      "",
+      "When do you want the work to start?",
+    ].join("\n");
+  }
+
+  if (
+    includesAny(["portfolio", "work", "case study", "example", "client", "proof"])
+  ) {
+    return [
+      "You can review MTA work on **/portfolio**. Current project examples include:",
+      "",
+      ...projects.slice(0, 3).map(
+        (project) => `- **${project.title}** (${project.status}) — ${clip(project.description, 86)}`,
+      ),
+      "",
+      "Which type of example should I match to your project?",
+    ].join("\n");
+  }
+
   return [
     pageLine,
     pageDescription,
-    `MTA can help with ${featuredServices.map((item) => `${item.name}`).join(", ")} and related compliance work.`,
-    "Tell me what you need, and I will ask for the missing details one step at a time.",
+    "I can help with MTA services, pricing, timelines, project fit, legal documents, and contact routing.",
+    `Main options: ${featuredServices.map((item) => `**${item.name}** (${item.priceLabel})`).join(" | ")}`,
+    "What are you trying to build or fix?",
   ]
     .filter(Boolean)
     .join("\n");
