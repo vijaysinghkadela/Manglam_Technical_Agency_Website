@@ -98,7 +98,7 @@ export const generalFaqs: FAQItem[] = [
     a: "We specialise in Next.js, React, Node.js, TypeScript, Python, PostgreSQL, Tailwind CSS, and cloud infrastructure on AWS/Vercel. For e-commerce, we use Shopify and custom solutions. AI/automation work uses Google Gemini, OpenAI, and custom RAG pipelines.",
   },
   {
-    q: "Is MTA an iStart Rajasthan registered startup?",
-    a: "Yes. MTA is registered with iStart Rajasthan and is QRate eligible. This allows us to work with government-recognised startup initiatives and avail relevant benefits.",
+    q: "Is MTA connected with Rajasthan startup programs?",
+    a: "MTA works in the Rajasthan business ecosystem and can share relevant registration or program details during a client conversation when they matter for the engagement.",
   },
 ]

@@ -18,7 +18,7 @@ const operationalPillars = [
   },
   {
     title: 'Data Protection by Default',
-    body: 'Personal-data handling runs under documented processor controls and DPA-driven obligations.',
+    body: 'Personal-data handling is planned around documented controls, consent, and data-processing obligations.',
   },
   {
     title: 'Authorization-Gated Security Testing',
@@ -41,7 +41,7 @@ export default function TrustCenterPage() {
         breadcrumbCurrent="Trust Center"
         label="GOVERNANCE & SECURITY"
         title="Trust Is an Operating System"
-        subheading="This page is the executive layer. Detailed pipeline, legal matrices, and template-access workflow live in Research and Legal hub pages."
+        subheading="A plain-language overview of how MTA approaches compliance, security, and responsible AI work. Detailed templates and legal matrices live in the Legal hub."
       />
 
       <section className="py-16 lg:py-24 bg-surface border-t border-border">
@@ -91,7 +91,7 @@ export default function TrustCenterPage() {
               <tbody>
                 {legalFrameworks.map((framework) => (
                   <tr key={framework.framework} className="border-b border-border/70">
-                    <td className="p-4 text-sm text-white font-medium">{framework.framework}</td>
+                    <td className="p-4 text-sm text-foreground font-medium">{framework.framework}</td>
                     <td className="p-4 text-sm text-muted">{framework.applicability}</td>
                     <td className="p-4 text-sm text-muted">{framework.usage}</td>
                   </tr>

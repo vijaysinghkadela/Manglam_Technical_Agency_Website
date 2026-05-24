@@ -36,6 +36,7 @@ export const TextReveal = memo(function TextReveal({
               transition={reducedMotion ? { duration: 0 } : { duration: 0.7, ease: EASE, delay: delay + i * 0.042 }}
             >
               {word}
+              {i < words.length - 1 ? '\u00A0' : ''}
             </motion.span>
           </span>
         ))}

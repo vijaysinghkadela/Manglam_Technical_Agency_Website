@@ -9,14 +9,14 @@ import Badge from "@/components/ui/Badge";
 export const metadata: Metadata = {
   title: "Services — Manglam Technical Agency",
   description:
-    "Explore MTA's premium digital infrastructure services: Web Development, Cybersecurity, AI Automation, and more.",
+    "Explore MTA's practical digital services: web development, cybersecurity, AI automation, content, branding, and digital operations.",
   alternates: { canonical: 'https://manglamtechnicalagency.com/services' },
 };
 
 const heroStats = [
   { value: "6", label: "Service tracks" },
   { value: "Mobile-first", label: "Layouts by default" },
-  { value: "Transparent", label: "Pricing & contracts" },
+  { value: "Clear", label: "Pricing & contracts" },
 ];
 
 const governanceChips = [
@@ -70,7 +70,7 @@ export default function ServicesPage() {
               "radial-gradient(circle, rgba(var(--color-accent-rgb),0.09) 0%, transparent 68%)" }}
         />
 
-        <div className="relative z-10 container-site grid min-h-[68svh] gap-12 py-28 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:py-36">
+        <div className="relative z-10 container-site grid min-h-[68svh] gap-12 page-hero-safe pb-20 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:pb-28">
           <div className="flex flex-col">
             <nav
               className="flex items-center gap-2 font-mono mb-12 lg:mb-16"
@@ -96,24 +96,17 @@ export default function ServicesPage() {
               ✦ WHAT WE DO
             </span>
 
-            <div className="flex flex-col" style={{ gap: "0.25rem" }}>
-              <h1
-                className="font-display font-black leading-none tracking-normal uppercase"
-                style={{
-                  fontSize: "clamp(2.9rem, 8.5vw, 8.8rem)",
-                  color: "var(--color-foreground)" }}
-              >
-                SERVICES
-              </h1>
-              <h1
-                className="font-display font-black leading-none tracking-normal uppercase"
-                style={{
-                  fontSize: "clamp(2.9rem, 8.5vw, 8.8rem)",
-                  color: "var(--color-violet)" }}
-              >
-                THAT SCALE.
-              </h1>
-            </div>
+            <h1
+              aria-label="Services built to fit"
+              className="flex flex-col font-display font-black leading-none tracking-normal uppercase"
+              style={{
+                gap: "0.25rem",
+                fontSize: "clamp(2.9rem, 8.5vw, 8.8rem)",
+                color: "var(--color-foreground)" }}
+            >
+              <span>Services</span>
+              <span style={{ color: "var(--color-violet)" }}>built to fit.</span>
+            </h1>
 
             <p
               className="mt-9 max-w-[56ch]"
@@ -122,9 +115,8 @@ export default function ServicesPage() {
                 lineHeight: 1.72,
                 color: "var(--color-muted)" }}
             >
-              End-to-end digital infrastructure for Indian businesses. We build,
-              secure, and automate your operations so you can focus on growth
-              without hidden scope or bloated handoffs.
+              Choose the help you need now, then expand when the work calls for it.
+              We keep scope, ownership, and next steps clear from the first conversation.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">

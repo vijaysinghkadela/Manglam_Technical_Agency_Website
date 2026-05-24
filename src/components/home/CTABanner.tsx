@@ -83,7 +83,7 @@ export function CTABanner() {
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          ✦ READY TO SCALE?
+          ✦ READY TO TALK?
         </motion.span>
 
       <motion.h2
@@ -94,7 +94,7 @@ export function CTABanner() {
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.75, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
         >
-          Scale With<br />Certainty
+          Plan the next<br /> step clearly
         </motion.h2>
 
         <motion.p
@@ -104,8 +104,8 @@ export function CTABanner() {
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.65, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
         >
-          Free consultation. Honest scope. Real timelines.<br />
-          Book our ₹25,000 Discovery Workshop today.
+          Bring the rough idea, the broken workflow, or the urgent question.
+          We will help you choose a practical next step.
         </motion.p>
 
       <motion.div
@@ -163,4 +163,3 @@ export function CTABanner() {
     </section>
   )
 }
-

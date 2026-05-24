@@ -142,7 +142,7 @@ export default async function ServicePage({
               "radial-gradient(circle, rgba(var(--color-accent-rgb),0.07) 0%, transparent 68%)" }}
         />
 
-        <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-12 sm:pb-16 lg:pb-20">
+        <div className="relative z-10 container-site flex flex-col flex-1 page-hero-safe pb-12 sm:pb-16 lg:pb-20">
           {/* Breadcrumb + label */}
           <div className="flex items-start justify-between gap-4 mb-12 lg:mb-24">
             <nav
@@ -206,6 +206,7 @@ export default async function ServicePage({
 
             {/* Service name — massive */}
             <h1
+              aria-label={service.name}
               className="font-display font-black leading-none tracking-normal"
               style={{
                 fontSize: "clamp(3rem, 8vw, 8rem)",

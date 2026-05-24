@@ -11,7 +11,7 @@ export function AgreementSummaryView({ agreement }: AgreementSummaryViewProps) {
   const requestableDocs = documentRegistry.filter((item) => item.requestable)
 
   return (
-    <main className="min-h-screen bg-canvas">
+    <div className="min-h-screen bg-canvas">
       <PageHero
         breadcrumbBase="Legal"
         breadcrumbBaseHref="/legal"
@@ -30,17 +30,17 @@ export function AgreementSummaryView({ agreement }: AgreementSummaryViewProps) {
             </div>
 
             <section className="mb-10">
-              <h2 className="font-display font-black text-2xl text-white mb-3">When to Use</h2>
+              <h2 className="font-display font-black text-2xl text-foreground mb-3">When to Use</h2>
               <p className="text-[15px] text-muted leading-[1.7]">{agreement.whenRequired}</p>
             </section>
 
             <section className="mb-10">
-              <h2 className="font-display font-black text-2xl text-white mb-3">Primary Use</h2>
+              <h2 className="font-display font-black text-2xl text-foreground mb-3">Primary Use</h2>
               <p className="text-[15px] text-muted leading-[1.7]">{agreement.primaryUse}</p>
             </section>
 
             <section className="mb-10">
-              <h2 className="font-display font-black text-2xl text-white mb-4">Key Clauses</h2>
+              <h2 className="font-display font-black text-2xl text-foreground mb-4">Key Clauses</h2>
               <ul className="flex flex-col gap-3">
                 {agreement.keyClauses.map((clause) => (
                   <li key={clause} className="flex items-start gap-3 text-sm text-muted leading-relaxed">
@@ -52,7 +52,7 @@ export function AgreementSummaryView({ agreement }: AgreementSummaryViewProps) {
             </section>
 
             <section className="mb-10">
-              <h2 className="font-display font-black text-2xl text-white mb-4">Governing Laws</h2>
+              <h2 className="font-display font-black text-2xl text-foreground mb-4">Governing Laws</h2>
               <div className="flex flex-wrap gap-2">
                 {agreement.governingLaws.map((law) => (
                   <span key={law} className="px-3 py-1 border border-border bg-canvas text-xs text-muted font-mono uppercase tracking-[0.1em]">
@@ -64,7 +64,7 @@ export function AgreementSummaryView({ agreement }: AgreementSummaryViewProps) {
 
             {agreement.companionAgreements.length > 0 && (
               <section>
-                <h2 className="font-display font-black text-2xl text-white mb-4">Companion Agreements</h2>
+                <h2 className="font-display font-black text-2xl text-foreground mb-4">Companion Agreements</h2>
                 <div className="flex flex-wrap gap-2">
                   {agreement.companionAgreements.map((code) => (
                     <span key={code} className="px-3 py-1 border border-violet/30 text-xs text-violet-light font-mono uppercase tracking-[0.1em]">
@@ -79,11 +79,11 @@ export function AgreementSummaryView({ agreement }: AgreementSummaryViewProps) {
             <aside className="flex flex-col gap-8">
             <div className="border border-border bg-card p-8">
               <p className="font-mono text-[11px] tracking-[0.18em] uppercase text-violet-light mb-3">Access Model</p>
-              <h3 className="font-display font-black text-xl text-white mb-3">Template Distribution</h3>
+              <h3 className="font-display font-black text-xl text-foreground mb-3">Template Distribution</h3>
               <p className="text-sm text-muted leading-relaxed mb-4">
                 Public summaries are provided here. Full templates are shared only through request-and-review workflow.
               </p>
-              <Link href="/legal" className="text-sm text-violet-light hover:text-white transition-colors">
+              <Link href="/legal" className="text-sm text-violet-light hover:text-foreground transition-colors">
                 View legal hub matrix →
               </Link>
             </div>
@@ -91,6 +91,6 @@ export function AgreementSummaryView({ agreement }: AgreementSummaryViewProps) {
           </aside>
         </div>
       </section>
-    </main>
+    </div>
   )
 }

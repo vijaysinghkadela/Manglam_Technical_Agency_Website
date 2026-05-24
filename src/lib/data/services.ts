@@ -387,9 +387,9 @@ export const services: Service[] = [
         step: 4,
         title: "Reporting & Remediation",
         summary:
-          "Executive + technical reports, DPDP compliance certificate, retest",
+          "Executive + technical reports, DPDP readiness notes, retest",
         detail:
-          "We deliver executive summaries and detailed technical reports with CVSS scoring, issue DPDP compliance certificates where applicable, and conduct remediation retests.",
+          "We deliver executive summaries and detailed technical reports with CVSS scoring, add DPDP readiness notes where applicable, and conduct remediation retests.",
         duration: "2-3 days",
       },
     ],

@@ -97,7 +97,7 @@ export function ConsentBanner() {
                     className="text-sm leading-relaxed max-w-md"
                     style={{ color: 'var(--color-muted)' }}
                   >
-                    Manglam Technical Agency — Empowering Your Digital Future
+                    We use a small amount of website data to understand what visitors need.
                   </motion.p>
                 </div>
 
@@ -135,7 +135,7 @@ export function ConsentBanner() {
                   {[
                     { icon: Eye, label: 'Analytics', desc: 'Usage data' },
                     { icon: Lock, label: 'Secure', desc: 'Encrypted' },
-                    { icon: CheckCircle2, label: 'DPDP', desc: 'Compliant' },
+                    { icon: CheckCircle2, label: 'DPDP', desc: 'Aware' },
                   ].map((item) => (
                     <div
                       key={item.label}
@@ -190,7 +190,7 @@ export function ConsentBanner() {
                         <div>
                           <strong style={{ color: 'var(--color-foreground)' }}>Compliance:</strong>{' '}
                           <span style={{ color: 'var(--color-muted)' }}>
-                            DPDP Act 2023 (India) | UDYAM-RJ-15-0094091
+                            DPDP Act 2023 (India). Business registration details can be shared where relevant.
                           </span>
                         </div>
                       </div>

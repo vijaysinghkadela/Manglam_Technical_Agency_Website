@@ -43,7 +43,7 @@ export function PageHero({
         : []
 
   return (
-    <section className="w-full bg-canvas pt-[calc(var(--nav-offset)+40px)] pb-20 relative overflow-hidden grain">
+    <section className="w-full bg-canvas page-hero-safe pb-20 relative overflow-hidden grain">
       {/* Line grid background */}
       <div className="absolute inset-0 bg-line-grid pointer-events-none opacity-60" aria-hidden />
 

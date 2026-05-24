@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { TextReveal } from '@/components/ui/TextReveal'
 import { AboutContent } from '@/components/about/AboutContent'
 import { FAQSection } from '@/components/ui/FAQSection'
 import { aboutFaqs } from '@/lib/data/faq'
@@ -9,15 +8,15 @@ import { breadcrumbSchema, webPageSchema } from '@/lib/seo/schemas'
 
 export const metadata: Metadata = {
   title: 'About — Manglam Technical Agency',
-  description: 'Manglam Technical Agency is a full-service technical agency based in Bikaner, Rajasthan. A lean team of specialists delivering AI automation, cybersecurity, web development, and digital operations for Indian businesses.',
+  description: 'Manglam Technical Agency is a small technical agency based in Bikaner, Rajasthan, helping businesses with websites, automation, security, content, and digital operations.',
   alternates: { canonical: 'https://manglamtechnicalagency.com/about' },
 }
 
 const STATS = [
   { value: '2', label: 'Core Team' },
-  { value: '2025', label: 'Udyam Registered' },
+  { value: 'MSME', label: 'Details on Request' },
   { value: '6', label: 'Practice Areas' },
-  { value: '∞', label: 'Accountability' },
+  { value: 'Direct', label: 'Working Style' },
 ]
 
 const SERVICE_TAGS = ['AI', 'Security', 'Web', 'SMM', 'Branding', 'Content']
@@ -26,7 +25,7 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen" style={{ backgroundColor: 'var(--color-canvas)' }}>
       <JsonLd schema={breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'About', url: '/about' }])} />
-      <JsonLd schema={webPageSchema({ url: '/about', title: 'About Manglam Technical Agency', description: 'Full-service technical agency based in Bikaner, Rajasthan. AI automation, cybersecurity, web development, and digital operations for Indian businesses.' })} />
+      <JsonLd schema={webPageSchema({ url: '/about', title: 'About Manglam Technical Agency', description: 'Small technical agency based in Bikaner, Rajasthan. Websites, automation, security, content, and digital operations for Indian businesses.' })} />
 
       {/* ── HERO — Full viewport ─────────────────────────── */}
       <section
@@ -46,7 +45,7 @@ export default function AboutPage() {
             background: 'radial-gradient(circle, rgba(var(--color-accent-rgb),0.07) 0%, transparent 68%)' }}
         />
 
-        <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-12 sm:pb-16 lg:pb-20">
+        <div className="relative z-10 container-site flex flex-col flex-1 page-hero-safe pb-12 sm:pb-16 lg:pb-20">
 
           {/* Breadcrumb */}
           <nav
@@ -69,33 +68,23 @@ export default function AboutPage() {
               >
                 ✦ MANGLAM TECHNICAL AGENCY
               </span>
-              <div className="flex flex-col" style={{ gap: '0.25rem' }}>
-                <TextReveal
-                  text="EXCELLENCE"
-                  as="h1"
-                  delay={0.1}
-                  className="font-display font-black leading-none tracking-normal uppercase"
-                  style={{ fontSize: 'clamp(2.2rem, 5.5vw, 6rem)', color: 'var(--color-foreground)' }}
-                />
-                <TextReveal
-                  text="IN TECHNOLOGY."
-                  as="h1"
-                  delay={0.22}
-                  className="font-display font-black leading-none tracking-normal uppercase"
-                  style={{ fontSize: 'clamp(2.2rem, 5.5vw, 6rem)', color: 'var(--color-violet)' }}
-                />
-                <TextReveal
-                  text="Delivered by Specialists Who Actually Do the Work."
-                  as="h1"
-                  delay={0.38}
-                  className="font-display font-black leading-none tracking-normal"
+              <h1
+                aria-label="Technical work with a human line. Built by people clients can actually reach."
+                className="flex flex-col font-display font-black leading-none tracking-normal uppercase"
+                style={{ gap: '0.35rem', fontSize: 'clamp(2.2rem, 5.5vw, 6rem)', color: 'var(--color-foreground)' }}
+              >
+                <span>Technical work</span>
+                <span style={{ color: 'var(--color-violet)' }}>with a human line.</span>
+                <span
+                  className="normal-case"
                   style={{
-                    fontSize: 'clamp(0.9rem, 2.5vw, 2.5rem)',
+                    fontSize: 'clamp(1rem, 2.2vw, 2.2rem)',
                     color: 'var(--color-muted)',
-                    paddingLeft: 'clamp(4px, 0.8vw, 14px)',
-                    fontStyle: 'italic' }}
-                />
-              </div>
+                    paddingLeft: 'clamp(4px, 0.8vw, 14px)' }}
+                >
+                  Built by people clients can actually reach.
+                </span>
+              </h1>
 
               <p
                 className="mt-10 lg:mt-14 animate-fade-up stagger-4"
@@ -105,9 +94,9 @@ export default function AboutPage() {
                   color: 'var(--color-muted)',
                   maxWidth: '540px' }}
               >
-                Manglam Technical Agency (MTA) is a technical and creative agency
-                based in Bikaner, Rajasthan. We work directly with clients — no account managers,
-                no layers of approval, just the people building your solution.
+                Manglam Technical Agency (MTA) is a small technical and creative agency
+                based in Bikaner, Rajasthan. We help businesses improve the websites, systems,
+                automations, and content they depend on day to day.
               </p>
             </div>
 
@@ -284,7 +273,7 @@ export default function AboutPage() {
                 className="font-mono"
                 style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.14em' }}
               >
-                Udyam Registered 2025 · 6 Practice Areas · 2 Core Team Members
+                MSME details on request · 6 Practice Areas · 2 Core Team Members
               </span>
             </div>
             <div className="hidden lg:flex flex-col items-center gap-2">
@@ -311,6 +300,3 @@ export default function AboutPage() {
     </main>
   )
 }
-
-
-

@@ -5,8 +5,8 @@
   --color-surface: #F0EDEA;
   --color-card: #FFFFFF;
   --color-border: #E2DDD8;
-  --color-muted: #7A6E66;
-  --color-dead: #B0A69E;
+  --color-muted: #5F554F;
+  --color-dead: #70645C;
   --color-violet: #6B1A1A;
   --color-violet-light: #A04040;
   --color-violet-dark: #4A1212;
@@ -23,6 +23,7 @@
   --font-display: "Outfit", "Inter", sans-serif;
   --font-body: "Outfit", "Inter", sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  --nav-offset: 84px;
 }
 
 html.dark {
@@ -48,6 +49,7 @@ html.dark {
   --font-display: "Outfit", "Inter", sans-serif;
   --font-body: "Outfit", "Inter", sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  --nav-offset: 84px;
 }
 
 @theme {
@@ -89,6 +91,12 @@ html.dark {
   --duration-reveal: 0.9s;
 }
 
+@media (min-width: 1024px) {
+  :root, html.light, html.dark {
+    --nav-offset: 104px;
+  }
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -107,6 +115,10 @@ html {
 
 html.dark { color-scheme: dark; }
 html:not(.dark) { color-scheme: light; }
+
+:target {
+  scroll-margin-top: calc(var(--nav-offset, 84px) + 24px);
+}
 
 body {
   background-color: var(--color-canvas);
@@ -137,6 +149,14 @@ body {
 
 ::selection { background: var(--color-violet); color: #fff; }
 ::-moz-selection { background: var(--color-violet); color: #fff; }
+
+.page-hero-safe {
+  padding-top: calc(var(--nav-offset, 84px) + clamp(36px, 6vw, 72px));
+}
+
+.page-top-safe {
+  padding-top: calc(var(--nav-offset, 84px) + 48px);
+}
 
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { 

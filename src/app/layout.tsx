@@ -10,6 +10,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { SiteChatbot } from "@/components/chat/SiteChatbot";
+import { ConsentBanner } from "@/components/ui/ConsentBanner";
 import { organizationSchema, websiteSchema } from "@/lib/seo/schemas";
 import "@fontsource/outfit/400.css";
 import "@fontsource/outfit/500.css";
@@ -34,11 +35,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
   title: {
-    default: "Manglam Technical Agency — Empowering Your Digital Future",
+    default: "Manglam Technical Agency — Practical Technology Support",
     template: "%s | Manglam Technical Agency",
   },
   description:
-    "End-to-end technology services for Indian businesses — web development, AI automation, cybersecurity, social media, and digital operations. Based in Rajasthan and Udyam-registered in 2025.",
+    "Practical technology services for Indian businesses: web development, AI automation, cybersecurity, social media, and digital operations. Based in Rajasthan.",
 
   keywords: [
     "web development Rajasthan",
@@ -64,7 +65,7 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: SITE_URL,
     siteName: "Manglam Technical Agency",
-    title: "Manglam Technical Agency — Empowering Your Digital Future",
+    title: "Manglam Technical Agency — Practical Technology Support",
     description:
       "End-to-end technology services for Indian businesses — web development, AI automation, cybersecurity, and more. Based in Rajasthan.",
     images: [
@@ -72,7 +73,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: "Manglam Technical Agency — Empowering Your Digital Future",
+        alt: "Manglam Technical Agency — Practical Technology Support",
         type: "image/png",
       },
     ],
@@ -80,7 +81,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Manglam Technical Agency — Empowering Your Digital Future",
+    title: "Manglam Technical Agency — Practical Technology Support",
     description:
       "End-to-end technology services for Indian businesses — web development, AI automation, cybersecurity, and more.",
     images: ["/opengraph-image.png"],
@@ -150,6 +151,7 @@ export default function RootLayout({
             <main id="main-content" className="relative w-full overflow-x-clip">{children}</main>
             <Footer />
             <SiteChatbot />
+            <ConsentBanner />
             <Analytics />
             <SpeedInsights />
             <ScrollToTop />

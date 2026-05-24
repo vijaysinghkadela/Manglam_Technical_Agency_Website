@@ -7,7 +7,7 @@ interface PolicyDocumentViewProps {
 
 export function PolicyDocumentView({ policy }: PolicyDocumentViewProps) {
   return (
-    <main className="min-h-screen bg-canvas">
+    <div className="min-h-screen bg-canvas">
       <PageHero
         breadcrumbBase="Legal"
         breadcrumbBaseHref="/legal"
@@ -27,7 +27,7 @@ export function PolicyDocumentView({ policy }: PolicyDocumentViewProps) {
             <div className="space-y-10">
               {policy.sections.map((section, index) => (
                 <section key={section.heading} className="border-b border-border pb-6 last:border-b-0 last:pb-0">
-                  <h2 className="font-display font-black text-2xl text-white mb-3">
+                  <h2 className="font-display font-black text-2xl text-foreground mb-3">
                     {index + 1}. {section.heading}
                   </h2>
                   <p className="text-[15px] text-muted leading-[1.75]">{section.body}</p>
@@ -37,6 +37,6 @@ export function PolicyDocumentView({ policy }: PolicyDocumentViewProps) {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   )
 }

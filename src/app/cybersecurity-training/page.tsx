@@ -20,7 +20,7 @@ const workshopOfferings = [
     priceDetail: 'per session (up to 15 participants)',
     location: 'On-site (Bikaner, Nagaur, Jaipur) or Virtual',
     content: [
-      'Live demo of real gym website exploitation',
+      'Live demo of common gym website weaknesses',
       'OWASP Top 3 threats for fitness businesses',
       'DPDP compliance for member data',
       'Certificate of completion',
@@ -60,11 +60,11 @@ const workshopOfferings = [
 const whyMTA = [
   {
     title: 'Rajasthan-Focused',
-    description: 'Local examples from Bikaner, Nagaur, Jaipur businesses',
+    description: 'Local examples for Bikaner, Nagaur, and Jaipur businesses',
   },
   {
     title: 'Hands-On',
-    description: 'Live demonstrations, not just slides',
+    description: 'Live demonstrations with room for practical questions',
   },
   {
     title: 'Compliance-First',
@@ -72,7 +72,7 @@ const whyMTA = [
   },
   {
     title: 'Certification',
-    description: 'Professional completion certificates with UDYAM registration',
+    description: 'Completion certificates with MTA business details',
   },
 ]
 
@@ -110,7 +110,7 @@ export default function CybersecurityTrainingPage() {
         breadcrumbCurrent="Cybersecurity Training"
         label="SECURITY EDUCATION"
         title="Cybersecurity Training & Workshops"
-        subheading="Hands-on ethical hacking education for gym owners, clinic administrators, and Rajasthan SMBs. Learn to identify threats before attackers do."
+        subheading="Practical security education for gym owners, clinic administrators, and Rajasthan SMBs. Learn where common risks appear and how to respond with less confusion."
       />
 
       {/* Section 1: Free DPDP Gap Assessment Lead Magnet */}
@@ -126,7 +126,7 @@ export default function CybersecurityTrainingPage() {
                   Free DPDP Compliance Gap Assessment
                 </h2>
                 <p className="text-muted text-base lg:text-lg leading-relaxed max-w-2xl mb-6">
-                  Not sure if your gym or clinic meets DPDP Act 2023 requirements? Get a complimentary 30-minute assessment identifying your top 3 compliance gaps.
+                  Not sure how your gym or clinic handles DPDP Act 2023 responsibilities? Request a complimentary 30-minute review and leave with a short list of practical next steps.
                 </p>
                 <div className="flex flex-wrap gap-3">
                   {['No obligation', 'Rajasthan-specific guidance', 'Immediate action items'].map((benefit) => (
@@ -275,7 +275,7 @@ export default function CybersecurityTrainingPage() {
               Ready to Train Your Team?
             </h2>
             <p className="text-muted text-base lg:text-lg max-w-2xl mx-auto mb-8">
-              Book a workshop or request your free DPDP gap assessment today.
+              Book a workshop or request a short DPDP gap review.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link

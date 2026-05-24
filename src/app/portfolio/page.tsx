@@ -10,7 +10,7 @@ import { breadcrumbSchema } from '@/lib/seo/schemas'
 export const metadata: Metadata = {
   title: 'Our Work — Manglam Technical Agency',
   description:
-    "From internal SaaS products to active client implementations. Browse MTA's recent deliveries and project pipeline.",
+    "Browse MTA's internal SaaS products, active builds, and project pipeline.",
   alternates: { canonical: 'https://manglamtechnicalagency.com/portfolio' },
 }
 
@@ -49,7 +49,7 @@ export default function PortfolioPage() {
             background: 'radial-gradient(circle, rgba(var(--color-accent-rgb),0.04) 0%, transparent 65%)' }}
         />
 
-        <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-12 sm:pb-16 lg:pb-20">
+        <div className="relative z-10 container-site flex flex-col flex-1 page-hero-safe pb-12 sm:pb-16 lg:pb-20">
 
           {/* Breadcrumb */}
           <nav
@@ -70,27 +70,21 @@ export default function PortfolioPage() {
               ✦ OUR WORK
             </span>
 
-          <div className="flex flex-col" style={{ gap: '0.5rem' }}>
-              <h1
-                className="font-display font-black leading-none tracking-normal uppercase"
-                style={{ fontSize: 'clamp(3.5rem, 10vw, 10rem)', color: 'var(--color-foreground)' }}
-              >
-                DIGITAL
-              </h1>
-              <h1
-                className="font-display font-black leading-none tracking-normal uppercase"
-                style={{ fontSize: 'clamp(3.5rem, 10vw, 10rem)', color: 'var(--color-violet)' }}
-              >
-                PRODUCTS.
-              </h1>
-            </div>
+            <h1
+              aria-label="Digital products"
+              className="flex flex-col font-display font-black leading-none tracking-normal uppercase"
+              style={{ gap: '0.5rem', fontSize: 'clamp(3.5rem, 10vw, 10rem)', color: 'var(--color-foreground)' }}
+            >
+              <span>Digital</span>
+              <span style={{ color: 'var(--color-violet)' }}>products.</span>
+            </h1>
 
             <p
               className="mt-12 lg:mt-16"
               style={{ fontSize: '16px', lineHeight: 1.75, color: 'var(--color-muted)', maxWidth: '500px' }}
             >
-              From internal SaaS builds to active client implementations, explore what MTA is
-              currently shipping and what is in the near-term pipeline.
+              A look at products, client work, and experiments we are actively shaping.
+              Some projects are live, while others are shown as in-progress work.
             </p>
           </div>
 
@@ -168,6 +162,4 @@ export default function PortfolioPage() {
     </main>
   )
 }
-
-
 

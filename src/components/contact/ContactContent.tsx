@@ -10,7 +10,6 @@ import {
   AGENCY_WHATSAPP,
   OFFICE_HOURS,
 } from '@/lib/constants'
-import { TextReveal } from '@/components/ui/TextReveal'
 import Badge from '@/components/ui/Badge'
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
@@ -50,7 +49,7 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
       />
 
       <div
-        className="relative z-10 mx-auto flex w-full max-w-[1280px] flex-col px-[clamp(1rem,3.2vw,3rem)] pb-24 pt-32 sm:pt-40 lg:pt-44 lg:pb-32"
+        className="relative z-10 mx-auto flex w-full max-w-[1280px] flex-col px-[clamp(1rem,3.2vw,3rem)] page-hero-safe pb-24 lg:pb-32"
       >
         <nav
           className="mb-12 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] sm:mb-16 lg:mb-24"
@@ -93,29 +92,23 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
                 Get in touch
               </span>
 
-              <div className="mb-12 flex flex-col" style={{ gap: '0.25rem' }}>
-                <TextReveal
-                  text="START A"
-                  as="h1"
-                  delay={0.1}
-                  className="font-display font-black leading-none tracking-normal uppercase"
-                  style={{ fontSize: 'clamp(2.2rem, 4.8vw, 5.2rem)', color: 'var(--color-foreground)' }}
-                />
-                <TextReveal
-                  text="CONVERSATION."
-                  as="h1"
-                  delay={0.22}
-                  className="font-display font-black leading-none tracking-normal uppercase"
-                  style={{ fontSize: 'clamp(1.75rem, 3.5vw, 3.9rem)', color: 'var(--color-violet)' }}
-                />
-              </div>
+              <h1
+                aria-label="Start a conversation"
+                className="mb-12 flex flex-col font-display font-black leading-none tracking-normal uppercase"
+                style={{ gap: '0.25rem', fontSize: 'clamp(2.2rem, 4.8vw, 5.2rem)', color: 'var(--color-foreground)' }}
+              >
+                <span>Start a</span>
+                <span style={{ fontSize: 'clamp(1.75rem, 3.5vw, 3.9rem)', color: 'var(--color-violet)' }}>
+                  conversation.
+                </span>
+              </h1>
 
               <p
                 className="mb-16 max-w-[420px]"
                 style={{ fontSize: '15px', lineHeight: 1.75, color: 'var(--color-muted)' }}
               >
-                Ready to build? We promise a technical engineer will read it, not a salesperson.
-                Response within 2–4 hours.
+                Tell us what you are trying to solve. A technical team member will read your note
+                and reply with a practical next step.
               </p>
 
               <div className="mb-16 flex flex-wrap gap-3">
@@ -261,4 +254,3 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
     </section>
   )
 }
-

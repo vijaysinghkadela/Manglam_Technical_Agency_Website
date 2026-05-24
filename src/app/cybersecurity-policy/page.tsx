@@ -17,11 +17,11 @@ export default function CybersecurityPolicyPage() {
       <JsonLd schema={webPageSchema({ url: '/cybersecurity-policy', title: 'Cybersecurity Trust Center & Policies', description: 'MTA legal baseline, explicit authorization, incident response SLAs, and operational policies for cybersecurity services.' })} />
       <PageHero
         breadcrumbBase="Compliance"
-        breadcrumbBaseHref="#"
+        breadcrumbBaseHref="/trust-center"
         breadcrumbCurrent="Cybersecurity Policy"
         label="TRUST CENTER"
         title="Cybersecurity Policies"
-        subheading="Operational guidelines, PTES methodology, DPDP Rule 6 compliance, and NIST CSF 2.0 alignment for cybersecurity services."
+        subheading="Operational guidelines for authorized testing, incident response, DPDP safeguards, CERT-In reporting, and security-service boundaries."
       />
 
       <div className="w-full max-w-[1000px] mx-auto px-6 lg:px-12 mt-20 flex flex-col gap-16">
@@ -33,7 +33,7 @@ export default function CybersecurityPolicyPage() {
             <div className="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center border border-red-500/20">
               <ShieldAlert className="w-6 h-6 text-red-500" />
             </div>
-            <h2 className="font-display font-black text-white text-2xl lg:text-3xl">
+            <h2 className="font-display font-black text-foreground text-2xl lg:text-3xl">
               1. Legal Baseline & Explicit Authorisation
             </h2>
           </div>
@@ -47,7 +47,7 @@ export default function CybersecurityPolicyPage() {
               "MTA assumes no liability for downtime outside agreed testing windows.",
               "Unauthorized testing requests will be immediately declined and reported if malicious intent is suspected."
             ].map((item, i) => (
-              <li key={i} className="flex items-start gap-3 text-sm text-white/80">
+              <li key={i} className="flex items-start gap-3 text-sm text-muted">
                 <ShieldCheck className="w-4 h-4 mt-0.5 text-red-400 shrink-0" />
                 <span>{item}</span>
               </li>
@@ -114,7 +114,7 @@ export default function CybersecurityPolicyPage() {
                 <td className="p-5 font-semibold">7. Reporting</td>
                 <td className="p-5">Executive summary, technical report, retest</td>
                 <td className="p-5">2-3 days</td>
-                <td className="p-5">Full report + DPDP certificate</td>
+                <td className="p-5">Full report + DPDP readiness notes where applicable</td>
               </tr>
             </tbody>
           </table>
@@ -135,9 +135,9 @@ export default function CybersecurityPolicyPage() {
           </div>
           <div className="bg-card border border-violet/30 p-8 rounded-lg relative">
             <div className="absolute top-0 right-0 bg-violet/20 text-violet-light text-xs font-mono px-3 py-1 rounded-bl-lg">DEFAULT</div>
-            <h3 className="font-display font-bold text-white text-lg mb-2 mt-2">Gray-box</h3>
+            <h3 className="font-display font-bold text-foreground text-lg mb-2 mt-2">Gray-box</h3>
             <p className="text-muted text-sm mb-4">Limited credentials and documentation</p>
-            <ul className="text-sm text-white/80 space-y-2">
+            <ul className="text-sm text-muted space-y-2">
               <li><span className="text-violet-light">Duration:</span> Standard</li>
               <li><span className="text-violet-light">Best for:</span> Most cost-effective testing</li>
             </ul>
@@ -156,11 +156,11 @@ export default function CybersecurityPolicyPage() {
       {/* Section 4: DPDP Rule 6 Compliance */}
       <section className="bg-card border border-violet/30 p-10 rounded-lg relative overflow-hidden">
         <div className="absolute top-0 left-0 w-1 h-full bg-violet" />
-        <h2 className="font-display font-black text-white text-2xl mb-5">
+        <h2 className="font-display font-black text-foreground text-2xl mb-5">
           4. DPDP Act 2023 Rule 6 Safeguards
         </h2>
         <p className="text-muted leading-relaxed mb-6">
-          Rule 6 mandates minimum technical and organizational measures for personal data protection. Failure = up to ₹250 Crore penalty.
+          Rule 6 describes technical and organizational safeguards for personal data protection. Penalties can be significant, so project-specific obligations should be confirmed before implementation.
         </p>
         <div className="w-full overflow-x-auto">
           <table className="w-full text-left border-collapse min-w-[700px]">
@@ -171,7 +171,7 @@ export default function CybersecurityPolicyPage() {
                 <th className="p-5 text-xs font-mono tracking-widest text-muted uppercase">MTA Implementation</th>
               </tr>
             </thead>
-            <tbody className="text-sm text-white/90">
+            <tbody className="text-sm text-foreground/90">
               <tr className="border-b border-border hover:bg-white/5 transition-colors">
                 <td className="p-5 font-semibold">Technical Controls</td>
                 <td className="p-5">Encryption, obfuscation, masking</td>
@@ -249,7 +249,7 @@ export default function CybersecurityPolicyPage() {
           6. OWASP Top 10:2025 Integration
         </h2>
         <p className="text-muted leading-relaxed mb-6">
-          All web application testing aligns with the latest OWASP Top 10:2025 standard.
+          Web application testing references current OWASP Top 10 guidance, including the 2025 update where it applies to the system under review.
         </p>
         <div className="space-y-5">
           <div className="flex items-start gap-4 p-5 bg-red-500/5 border border-red-500/20 rounded-xl">
@@ -293,30 +293,30 @@ export default function CybersecurityPolicyPage() {
       {/* Section 7: Client Case Studies */}
       <section className="bg-card border border-border p-10 rounded-2xl">
         <h2 className="font-display font-black text-foreground text-2xl mb-8">
-          7. Real Client Implementations
+          7. Example Assessment Themes
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-surface border border-border p-8 rounded-xl">
             <h3 className="font-display font-bold text-foreground text-lg mb-3">FitNexora (SaaS)</h3>
             <ul className="text-sm text-muted space-y-2">
-              <li>• Multi-tenant Supabase RLS vulnerabilities discovered</li>
-              <li>• IDOR threat on member data</li>
-              <li>• DPDP Section 8(5) gap remediation</li>
+              <li>• Multi-tenant access-control review</li>
+              <li>• Member-data authorization checks</li>
+              <li>• DPDP safeguard mapping</li>
             </ul>
           </div>
           <div className="bg-surface border border-border p-8 rounded-xl">
             <h3 className="font-display font-bold text-foreground text-lg mb-3">MNSS Healthcare</h3>
             <ul className="text-sm text-muted space-y-2">
-              <li>• Next.js path traversal vulnerability</li>
-              <li>• MongoDB patient PII exposure risk</li>
-              <li>• HIPAA-aligned DPDP compliance</li>
+              <li>• Route and file-access review</li>
+              <li>• Patient-data exposure checks</li>
+              <li>• Consent and retention review</li>
             </ul>
           </div>
           <div className="bg-surface border border-border p-8 rounded-xl">
             <h3 className="font-display font-bold text-foreground text-lg mb-3">Doctor Appointment App</h3>
             <ul className="text-sm text-muted space-y-2">
-              <li>• Weak authentication on booking API</li>
-              <li>• WhatsApp phishing simulation</li>
+              <li>• Booking API authentication review</li>
+              <li>• WhatsApp safety awareness exercise</li>
               <li>• Consent flow testing</li>
             </ul>
           </div>
@@ -380,7 +380,7 @@ export default function CybersecurityPolicyPage() {
           9. CERT-In Directions 2022
         </h2>
         <p className="text-muted leading-relaxed">
-          CERT-In compliance mandatory for all body corporates with websites/apps. Includes 6-hour incident reporting, 180-day log retention in India, accurate NTP synchronization, and mandatory cooperation with CERT-In investigations.
+          CERT-In Directions 2022 include incident reporting, log-retention, time-synchronization, and cooperation obligations for covered entities. Applicability should be confirmed against the client’s role and service model.
         </p>
       </section>
 

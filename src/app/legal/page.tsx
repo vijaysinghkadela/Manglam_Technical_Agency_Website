@@ -8,7 +8,6 @@ import {
 } from '@/lib/data/legal'
 import { DocumentRequestForm } from '@/components/legal/DocumentRequestForm'
 import { LegalContent } from '@/components/legal/LegalContent'
-import { TextReveal } from '@/components/ui/TextReveal'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbSchema, webPageSchema } from '@/lib/seo/schemas'
 
@@ -45,7 +44,7 @@ export default function LegalHubPage() {
             background: 'radial-gradient(circle, rgba(var(--color-accent-rgb),0.07) 0%, transparent 68%)' }}
         />
 
-        <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-12 sm:pb-16 lg:pb-20">
+        <div className="relative z-10 container-site flex flex-col flex-1 page-hero-safe pb-12 sm:pb-16 lg:pb-20">
 
           {/* Breadcrumb */}
           <nav
@@ -69,28 +68,20 @@ export default function LegalHubPage() {
                 ✦ LEGAL &amp; COMPLIANCE
               </span>
 
-              <div className="flex flex-col" style={{ gap: '0.25rem' }}>
-                <TextReveal
-                  text="LEGAL"
-                  as="h1"
-                  delay={0.1}
-                  className="font-display font-black leading-none tracking-normal uppercase"
-                  style={{ fontSize: 'clamp(3rem, 9vw, 9rem)', color: 'var(--color-foreground)' }}
-                />
-                <TextReveal
-                  text="HUB."
-                  as="h1"
-                  delay={0.2}
-                  className="font-display font-black leading-none tracking-normal uppercase"
-                  style={{ fontSize: 'clamp(3rem, 9vw, 9rem)', color: 'var(--color-violet)' }}
-                />
-              </div>
+              <h1
+                aria-label="Legal hub"
+                className="flex flex-col font-display font-black leading-none tracking-normal uppercase"
+                style={{ gap: '0.25rem', fontSize: 'clamp(3rem, 9vw, 9rem)', color: 'var(--color-foreground)' }}
+              >
+                <span>Legal</span>
+                <span style={{ color: 'var(--color-violet)' }}>hub.</span>
+              </h1>
 
               <p
                 className="mt-8 lg:mt-10 animate-fade-up stagger-4"
                 style={{ fontSize: '16px', lineHeight: 1.72, color: 'var(--color-muted)', maxWidth: '520px' }}
               >
-                Agreement summaries, applicability matrix, and request-only template access designed for client-safe transparency.
+                Agreement summaries, applicability notes, and request-only template access for safer client conversations.
               </p>
             </div>
 
@@ -316,6 +307,4 @@ export default function LegalHubPage() {
     </main>
   )
 }
-
-
 

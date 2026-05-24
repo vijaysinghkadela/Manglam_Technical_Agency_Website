@@ -567,7 +567,7 @@ export const departments: DepartmentData[] = [
       },
       {
         name: 'Fortress',
-        tagline: 'Enterprise-grade security and ISO readiness',
+        tagline: 'Structured security review and ISO readiness support',
         target: 'Cooperative banks, pharma, mid-size enterprises, EV/manufacturing',
         popular: false,
         highlight: false,

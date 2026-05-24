@@ -19,7 +19,7 @@ export default function CybersecurityLegalPage() {
         breadcrumbCurrent="Cybersecurity Legal"
         label="LEGAL FRAMEWORK"
         title="Cybersecurity Legal Resources"
-        subheading="Complete legal framework for ethical hacking engagements including RoE templates, breach notification protocols, and compliance documentation."
+        subheading="Plain-language legal resources for authorized security work, including rules of engagement, breach-notification templates, and CERT-In documentation."
       />
 
       <section className="py-20 bg-surface border-t border-border">
@@ -35,7 +35,7 @@ export default function CybersecurityLegalPage() {
                 </div>
               </div>
               <div className="flex-1">
-                <h2 className="font-display font-black text-2xl text-white mb-3">Explicit Authorization Required</h2>
+                <h2 className="font-display font-black text-2xl text-foreground mb-3">Explicit Authorization Required</h2>
                 <p className="text-[15px] text-muted leading-[1.75] mb-6">
                   No penetration testing begins without signed Rules of Engagement (RoE) and NDA. MTA operates strictly under IT Act 2000 with Jaipur jurisdiction.
                 </p>
@@ -60,7 +60,7 @@ export default function CybersecurityLegalPage() {
           <section>
             <div className="mb-8">
               <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-violet-light block mb-2">01 / DOCUMENTS</span>
-              <h2 className="font-display font-black text-3xl text-white">Document Templates</h2>
+              <h2 className="font-display font-black text-3xl text-foreground">Document Templates</h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -73,7 +73,7 @@ export default function CybersecurityLegalPage() {
                     </div>
                     <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-muted bg-canvas px-2 py-1 rounded">MTA-ROE</span>
                   </div>
-                  <h3 className="font-display font-bold text-xl text-white mb-2">Rules of Engagement</h3>
+                  <h3 className="font-display font-bold text-xl text-foreground mb-2">Rules of Engagement</h3>
                   <p className="text-sm text-muted leading-relaxed mb-4">
                     Defines scope, boundaries, and legal authorization for penetration testing.
                   </p>
@@ -105,7 +105,7 @@ export default function CybersecurityLegalPage() {
                     </div>
                     <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-muted bg-canvas px-2 py-1 rounded">MTA-DPDP-BREACH</span>
                   </div>
-                  <h3 className="font-display font-bold text-xl text-white mb-2">DPDP Breach Notification Pack</h3>
+                  <h3 className="font-display font-bold text-xl text-foreground mb-2">DPDP Breach Notification Pack</h3>
                   <p className="text-sm text-muted leading-relaxed mb-4">
                     Templates for personal data breach notifications under DPDP Act 2023.
                   </p>
@@ -138,7 +138,7 @@ export default function CybersecurityLegalPage() {
                     </div>
                     <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-muted bg-canvas px-2 py-1 rounded">MTA-CERT-IN</span>
                   </div>
-                  <h3 className="font-display font-bold text-xl text-white mb-2">CERT-In Compliance Addendum</h3>
+                  <h3 className="font-display font-bold text-xl text-foreground mb-2">CERT-In Compliance Addendum</h3>
                   <p className="text-sm text-muted leading-relaxed mb-4">
                     Compliance with CERT-In Directions 2022 for incident reporting.
                   </p>
@@ -167,7 +167,7 @@ export default function CybersecurityLegalPage() {
           <section>
             <div className="mb-8">
               <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-violet-light block mb-2">02 / TIMELINE</span>
-              <h2 className="font-display font-black text-3xl text-white">DPDP Breach Notification Timeline</h2>
+              <h2 className="font-display font-black text-3xl text-foreground">DPDP Breach Notification Timeline</h2>
             </div>
 
             <div className="border border-border bg-card rounded-2xl p-8">
@@ -212,7 +212,7 @@ export default function CybersecurityLegalPage() {
                       <item.icon className={`w-7 h-7 ${index === 1 ? 'text-violet' : 'text-violet-light'}`} />
                     </div>
                     <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-muted mb-1">Step {item.step}</span>
-                    <h4 className="font-display font-bold text-lg text-white mb-2">{item.title}</h4>
+                    <h4 className="font-display font-bold text-lg text-foreground mb-2">{item.title}</h4>
                     <p className="text-xs text-muted leading-relaxed mb-3">{item.description}</p>
                     <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-mono uppercase tracking-wide ${
                       index === 1 ? 'bg-violet/20 text-accent' : 'bg-surface text-muted'
@@ -228,8 +228,8 @@ export default function CybersecurityLegalPage() {
                 <div className="flex items-start gap-3 p-4 rounded-xl bg-violet/10 border border-violet/30">
                   <AlertTriangle className="w-5 h-5 text-violet shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-sm font-medium text-white mb-1">Critical Warning</p>
-                    <p className="text-xs text-muted">Failure to notify exposes both parties to penalties up to <span className="text-accent font-mono">₹250 Crore</span> under DPDP Act 2023.</p>
+                    <p className="text-sm font-medium text-foreground mb-1">Important reminder</p>
+                    <p className="text-xs text-muted">DPDP penalties can be significant, so breach roles and timelines should be confirmed in each engagement.</p>
                   </div>
                 </div>
               </div>
@@ -240,7 +240,7 @@ export default function CybersecurityLegalPage() {
           <section>
             <div className="mb-8">
               <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-violet-light block mb-2">03 / COMPLIANCE</span>
-              <h2 className="font-display font-black text-3xl text-white">Compliance Requirements Matrix</h2>
+              <h2 className="font-display font-black text-3xl text-foreground">Compliance Requirements Matrix</h2>
             </div>
 
             <div className="border border-border bg-card rounded-2xl overflow-hidden">
@@ -282,7 +282,7 @@ export default function CybersecurityLegalPage() {
                       },
                     ].map((row) => (
                       <tr key={row.requirement} className="border-b border-border last:border-b-0 hover:bg-canvas/30 transition-colors">
-                        <td className="px-6 py-4 text-sm text-white font-medium">{row.requirement}</td>
+                        <td className="px-6 py-4 text-sm text-foreground font-medium">{row.requirement}</td>
                         <td className="px-6 py-4 text-sm text-muted">{row.dpdp}</td>
                         <td className="px-6 py-4 text-sm text-muted">{row.cert}</td>
                         <td className="px-6 py-4 text-sm text-muted">{row.it}</td>
@@ -302,7 +302,7 @@ export default function CybersecurityLegalPage() {
                   <div className="w-10 h-10 rounded-xl bg-violet/10 border border-violet/20 flex items-center justify-center">
                     <Download className="w-5 h-5 text-violet-light" />
                   </div>
-                  <h2 className="font-display font-black text-2xl text-white">Request Legal Templates</h2>
+                  <h2 className="font-display font-black text-2xl text-foreground">Request Legal Templates</h2>
                 </div>
                 <p className="text-[15px] text-muted leading-[1.75] mb-6 max-w-2xl">
                   All cybersecurity legal templates are available upon request. We review each request to ensure appropriate use.
@@ -341,7 +341,7 @@ export default function CybersecurityLegalPage() {
                   <div key={doc.name} className="flex items-center gap-3 p-4 rounded-xl bg-canvas border border-border">
                     <FileText className="w-5 h-5 text-muted" />
                     <div>
-                      <p className="text-sm text-white font-medium">{doc.name}</p>
+                      <p className="text-sm text-foreground font-medium">{doc.name}</p>
                       <p className="text-[10px] text-dead font-mono uppercase">{doc.formats}</p>
                     </div>
                   </div>

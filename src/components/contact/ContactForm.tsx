@@ -342,8 +342,7 @@ export default function ContactForm() {
             style={{ color: "var(--color-dead)" }}
           >
             <Shield className="mr-1 inline-block h-3 w-3" />
-            DPDP Act 2023 (India) compliant •
-            UDYAM-RJ-15-0094091
+            DPDP Act 2023 consent captured. Business registration details are available where relevant.
           </p>
         </div>
 

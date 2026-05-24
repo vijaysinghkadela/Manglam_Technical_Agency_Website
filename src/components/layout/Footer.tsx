@@ -89,8 +89,8 @@ export function Footer() {
                 className="max-w-[28ch] text-sm leading-relaxed"
                 style={{ color: "var(--color-muted)" }}
               >
-                Technology services for Indian businesses ready to scale. Based
-                in Bikaner, Rajasthan.
+                Practical technology support for small teams and growing
+                businesses. Based in Bikaner, Rajasthan.
               </p>
             </div>
 
@@ -156,7 +156,7 @@ export function Footer() {
           >
             <h4
               className="mb-5 font-mono uppercase tracking-[0.18em]"
-              style={{ fontSize: "11px", color: "var(--color-dead)" }}
+              style={{ fontSize: "11px", color: "var(--color-muted)" }}
             >
               Services
             </h4>
@@ -177,7 +177,7 @@ export function Footer() {
           >
             <h4
               className="mb-5 font-mono uppercase tracking-[0.18em]"
-              style={{ fontSize: "11px", color: "var(--color-dead)" }}
+              style={{ fontSize: "11px", color: "var(--color-muted)" }}
             >
               Legal
             </h4>
@@ -194,7 +194,7 @@ export function Footer() {
           >
             <h4
               className="mb-5 font-mono uppercase tracking-[0.18em]"
-              style={{ fontSize: "11px", color: "var(--color-dead)" }}
+              style={{ fontSize: "11px", color: "var(--color-muted)" }}
             >
               Company
             </h4>
@@ -211,7 +211,7 @@ export function Footer() {
           >
             <h4
               className="mb-5 font-mono uppercase tracking-[0.18em]"
-              style={{ fontSize: "11px", color: "var(--color-dead)" }}
+              style={{ fontSize: "11px", color: "var(--color-muted)" }}
             >
               Contact
             </h4>

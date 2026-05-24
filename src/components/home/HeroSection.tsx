@@ -5,7 +5,6 @@ import { useRef } from 'react'
 import Link from 'next/link'
 
 import { useMediaQuery } from '@/hooks/useMediaQuery'
-import { TextReveal } from '@/components/ui/TextReveal'
 import { MagneticButton } from '@/components/ui/MagneticButton'
 import OrbitalRing from '@/components/home/OrbitalRing'
 import { MTA_STATS } from '@/lib/data/stats'
@@ -24,15 +23,15 @@ const SERVICES = [
 // Trust badges with status colors - module level to prevent re-creation
 const TRUST_BADGES = [
   { label: 'Rajasthan-based technical team', color: '#10b981' },
-  { label: 'Udyam-registered delivery partner', color: '#3b82f6' },
-  { label: 'Boutique execution, senior oversight', color: 'var(--color-violet)' },
+  { label: 'MSME details available on request', color: '#3b82f6' },
+  { label: 'Small team, direct responsibility', color: 'var(--color-violet)' },
 ]
 
 // Stats with status indicators - module level to prevent re-creation
 const STATS = [
   { label: `${MTA_STATS.activeClients} Active Clients`, color: '#10b981' },
   { label: `${MTA_STATS.internalSaaS} Internal SaaS`, color: '#3b82f6' },
-  { label: 'Udyam 2025', color: 'var(--color-violet)' },
+  { label: 'MSME profile', color: 'var(--color-violet)' },
   { label: 'Bikaner, RJ', color: '#f59e0b' },
 ]
 
@@ -127,7 +126,7 @@ export function HeroSection() {
       {/* Content - parallax on desktop only */}
       <motion.div
         style={{ y: isDesktop ? txtY : '0%' }}
-        className="relative z-10 w-full container-site pt-[88px] sm:pt-[108px] lg:pt-[112px] pb-14 sm:pb-16 lg:pb-20"
+        className="relative z-10 w-full container-site page-hero-safe pb-14 sm:pb-16 lg:pb-20"
       >
         <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-center">
           {/* Left Content */}
@@ -178,48 +177,23 @@ export function HeroSection() {
             </motion.div>
 
             {/* Statement - three lines */}
-            <div
-              className="flex flex-col max-w-full"
-              style={{ gap: '0.75rem', overflowWrap: 'break-word', hyphens: 'none' }}
+            <h1
+              aria-label="We build digital infrastructure"
+              className="flex max-w-full flex-col font-display font-black tracking-normal uppercase"
+              style={{
+                gap: '0.55rem',
+                overflowWrap: 'break-word',
+                hyphens: 'none',
+                lineHeight: 0.94,
+                fontSize: 'clamp(2rem, 7.5vw, 5.1rem)',
+                color: 'var(--color-foreground)' }}
             >
-              <TextReveal
-                text="WE BUILD"
-                as="h1"
-                delay={0.25}
-                className="font-display font-black"
-                style={{
-                  fontSize: 'clamp(2rem, 7.5vw, 5.1rem)',
-                  lineHeight: 0.92,
-                  letterSpacing: '0',
-                  color: 'var(--color-foreground)',
-                  overflowWrap: 'anywhere' }}
-              />
-              <TextReveal
-                text="DIGITAL"
-                as="h1"
-                delay={0.35}
-                className="font-display font-black"
-                style={{
-                  fontSize: 'clamp(2rem, 7.5vw, 5.1rem)',
-                  lineHeight: 0.92,
-                  letterSpacing: '0',
-                  color: 'var(--color-violet)',
-                  overflowWrap: 'anywhere',
-                  paddingLeft: 'clamp(0px, 2vw, 20px)' }}
-              />
-              <TextReveal
-                text="INFRASTRUCTURE"
-                as="h1"
-                delay={0.45}
-                className="font-display font-black"
-                style={{
-                  fontSize: 'clamp(1.4rem, 5.5vw, 4.5rem)',
-                  lineHeight: 0.96,
-                  letterSpacing: '0',
-                  color: 'var(--color-foreground)',
-                  overflowWrap: 'normal' }}
-              />
-            </div>
+              <span>We build</span>
+              <span style={{ color: 'var(--color-violet)', paddingLeft: 'clamp(0px, 2vw, 20px)' }}>
+                digital
+              </span>
+              <span style={{ fontSize: 'clamp(1.4rem, 5.5vw, 4.5rem)' }}>infrastructure</span>
+            </h1>
 
             {/* Body */}
             <motion.p
@@ -229,8 +203,8 @@ export function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
-              Delivering the output quality of a larger enterprise firm at the responsiveness
-              and accountability of a boutique 3–4 professional team.
+              Practical web, automation, security, and content support for teams that want direct
+              communication with the people doing the work.
             </motion.p>
 
             {/* CTAs - Enhanced */}

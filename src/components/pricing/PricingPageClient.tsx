@@ -4,7 +4,6 @@ import { useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, FileText, Calendar, Repeat, Clock } from 'lucide-react';
-import { TextReveal } from '@/components/ui/TextReveal';
 import { FAQSection } from '@/components/ui/FAQSection';
 import { pricingFaqs } from '@/lib/data/faq';
 import { DepartmentAccordion } from './DepartmentAccordion';
@@ -76,7 +75,7 @@ export function PricingPageClient() {
               'radial-gradient(circle, rgba(var(--color-accent-rgb),0.07) 0%, transparent 68%)' }}
         />
 
-        <div className="relative z-10 container-site flex flex-col flex-1 pt-24 sm:pt-28 lg:pt-36 pb-14 sm:pb-16 lg:pb-20">
+        <div className="relative z-10 container-site flex flex-col flex-1 page-hero-safe pb-14 sm:pb-16 lg:pb-20">
           <motion.nav
             initial={{ opacity: 0, x: -12 }}
             animate={{ opacity: 1, x: 0 }}
@@ -110,26 +109,17 @@ export function PricingPageClient() {
               ✦ TIER-2 BOUTIQUE PRICING
             </motion.span>
 
-            <div className="flex flex-col" style={{ gap: '0.25rem' }}>
-              <TextReveal
-                text="COMPLETE"
-                as="h1"
-                delay={0.1}
-                className="font-display font-black leading-none tracking-normal uppercase"
-                style={{
-                  fontSize: 'clamp(3rem, 9vw, 9rem)',
-                  color: 'var(--color-foreground)' }}
-              />
-              <TextReveal
-                text="STRUCTURE."
-                as="h1"
-                delay={0.22}
-                className="font-display font-black leading-none tracking-normal uppercase"
-                style={{
-                  fontSize: 'clamp(3rem, 9vw, 9rem)',
-                  color: 'var(--color-violet)' }}
-              />
-            </div>
+            <h1
+              aria-label="Clear pricing"
+              className="flex flex-col font-display font-black leading-none tracking-normal uppercase"
+              style={{
+                gap: '0.25rem',
+                fontSize: 'clamp(3rem, 9vw, 9rem)',
+                color: 'var(--color-foreground)' }}
+            >
+              <span>Clear</span>
+              <span style={{ color: 'var(--color-violet)' }}>pricing.</span>
+            </h1>
 
             <motion.p
               initial={{ opacity: 0, y: 12 }}
@@ -142,8 +132,8 @@ export function PricingPageClient() {
                 color: 'var(--color-muted)',
                 maxWidth: '520px' }}
             >
-              {departments.length} departments · {totalPlans} plans · 1-month,
-              6-month, and 12-month options across all services.
+              Compare starting points across {departments.length} departments and {totalPlans} plans.
+              Each plan is meant to make scope, payment terms, and next steps easier to discuss.
             </motion.p>
           </div>
 
