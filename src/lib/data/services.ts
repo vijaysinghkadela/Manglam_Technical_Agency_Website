@@ -6,6 +6,7 @@ import {
   PenTool,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { PRICE_FROM } from "@/lib/data/priceConstants";
 
 export interface Service {
   slug: string;
@@ -51,7 +52,7 @@ export const services: Service[] = [
       "WhatsApp AI bots",
       "LLM prompt tuning and optimization",
     ],
-    priceLabel: "From ₹85,000",
+    priceLabel: PRICE_FROM.aiAutomation,
     requiredAgreements: ["MTA-AI", "MTA-DPA", "MTA-NDA"],
     dpaTrigger:
       "Required when personal data enters prompts, workflows, or storage layers.",
@@ -162,7 +163,7 @@ export const services: Service[] = [
       "Creative production for static, carousel, and short-form assets",
       "Retargeting, lookalikes, and audience testing",
     ],
-    priceLabel: "From ₹18,000/mo",
+    priceLabel: PRICE_FROM.socialMedia,
     requiredAgreements: ["MTA-DM", "MTA-DPA", "MTA-NDA", "MTA-AIE"],
     dpaTrigger:
       "Required when audience data, lead forms, CRM sync, or social automation handles personal data.",
@@ -301,7 +302,7 @@ export const services: Service[] = [
       "Network vulnerability testing",
       "Remediation roadmap and retesting",
     ],
-    priceLabel: "From ₹50,000",
+    priceLabel: PRICE_FROM.cybersecurity,
     requiredAgreements: ["MTA-CS", "MTA-NDA", "MTA-DPA", "MTA-ROE"],
     dpaTrigger:
       "Required for all engagements processing personal data under DPDP Act 2023.",
@@ -424,7 +425,7 @@ export const services: Service[] = [
       "Landing pages and web applications",
       "SaaS platform builds",
     ],
-    priceLabel: "From ₹65,000",
+    priceLabel: PRICE_FROM.saasWeb,
     requiredAgreements: ["MTA-SL", "MTA-DPA", "MTA-NDA"],
     dpaTrigger:
       "Required when platform includes user accounts, analytics, or personal data processing.",
@@ -534,7 +535,7 @@ export const services: Service[] = [
       "Color systems and typography rules",
       "Full IP transfer on delivery",
     ],
-    priceLabel: "From ₹35,000",
+    priceLabel: PRICE_FROM.branding,
     requiredAgreements: ["MTA-NDA"],
     dpaTrigger:
       "Not usually required. Only if the engagement involves audience data or personal information.",
@@ -642,7 +643,7 @@ export const services: Service[] = [
       "Reels and short-form video scripts",
       "Newsletters and brand writing",
     ],
-    priceLabel: "From ₹28,000",
+    priceLabel: PRICE_FROM.contentCreation,
     requiredAgreements: ["MTA-NDA"],
     dpaTrigger:
       "Only required when content workflows process personal data from forms or CRM exports.",

@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
+import { useInView } from 'framer-motion'
 
 const CHARS = '0123456789'
 
@@ -13,43 +14,48 @@ interface Props {
 
 export function ScrambleCounter({ target, suffix = '', duration = 1500, className, style }: Props) {
   const [display, setDisplay] = useState('0')
-  const ref     = useRef<HTMLSpanElement>(null)
-  const started = useRef(false)
+  const ref = useRef<HTMLSpanElement>(null)
+  const hasAnimated = useRef(false)
+  const rafRef = useRef<number | null>(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   useEffect(() => {
-    const io = new IntersectionObserver(([e]) => {
-      if (!e.isIntersecting || started.current) return
-      started.current = true
+    if (!isInView || hasAnimated.current) return
+    hasAnimated.current = true
 
-      const t0    = performance.now()
-      const count = String(target).length
-      let   raf: number
+    const t0 = performance.now()
+    const count = String(target).length
 
-      const tick = (now: number) => {
-        const p     = Math.min((now - t0) / duration, 1)
-        const eased = 1 - Math.pow(1 - p, 3)
-        const cur   = Math.round(eased * target)
+    const tick = (now: number) => {
+      const p = Math.min((now - t0) / duration, 1)
+      const eased = 1 - Math.pow(1 - p, 3)
+      const cur = Math.round(eased * target)
 
-        // Scramble phase (0–75%): random digits, same digit count as target
+      if (p < 0.75) {
         setDisplay(
-          p < 0.75
-            ? Array.from({ length: count }, () =>
-                CHARS[Math.floor(Math.random() * 10)]
-              ).join('')
-            : String(cur)
+          Array.from({ length: count }, () =>
+            CHARS[Math.floor(Math.random() * 10)]
+          ).join('')
         )
-
-        if (p < 1) { raf = requestAnimationFrame(tick) }
-        else       { setDisplay(String(target)) }
+      } else {
+        setDisplay(String(cur))
       }
 
-      raf = requestAnimationFrame(tick)
-      return () => cancelAnimationFrame(raf)
-    }, { threshold: 0.2 })
+      if (p < 1) {
+        rafRef.current = requestAnimationFrame(tick)
+      } else {
+        setDisplay(String(target))
+      }
+    }
 
-    if (ref.current) io.observe(ref.current)
-    return () => io.disconnect()
-  }, [target, duration])
+    rafRef.current = requestAnimationFrame(tick)
+
+    return () => {
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current)
+      }
+    }
+  }, [isInView, target, duration])
 
   return (
     <span ref={ref} className={className} style={style}>

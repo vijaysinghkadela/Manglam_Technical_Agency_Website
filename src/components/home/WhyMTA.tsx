@@ -1,6 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import { Check } from 'lucide-react'
+import { MTA_STATS } from '@/lib/data/stats'
 const values = [
   {
     title: 'India-Based, Globally-Minded',
@@ -61,7 +62,7 @@ export function WhyMTA() {
             </div>
 
             <div className="grid grid-cols-3 gap-4 pt-6" style={{ borderTop: '1px solid var(--color-border)' }}>
-              {[['3', 'Active Clients'], ['2', 'SaaS Products'], ['6', 'Practice Areas']].map(([num, lbl]) => (
+              {[[String(MTA_STATS.activeClients), 'Active Clients'], [String(MTA_STATS.internalSaaS), 'SaaS Products'], [String(MTA_STATS.practiceAreas), 'Practice Areas']].map(([num, lbl]) => (
                 <div
                   key={lbl}
                   className="rounded-2xl border border-border bg-surface px-4 py-5 text-center"

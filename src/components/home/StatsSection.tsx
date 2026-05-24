@@ -2,11 +2,12 @@
 import { motion } from 'framer-motion'
 import { ScrambleCounter } from '@/components/ui/ScrambleCounter'
 import Badge from '@/components/ui/Badge'
+import { MTA_STATS } from '@/lib/data/stats'
 const STATS = [
-  { value: 3, suffix: '', label: 'ACTIVE CLIENTS', sub: 'tracked in Clients MOC' },
-  { value: 2, suffix: '', label: 'INTERNAL SAAS PRODUCTS', sub: 'FitNexora & Fuxk_Scroll' },
-  { value: 6, suffix: '', label: 'PRACTICE AREAS', sub: 'integrated service model' },
-  { value: 2025, suffix: '', label: 'UDYAM REGISTERED', sub: 'UDYAM-RJ-15-0094091' },
+  { value: MTA_STATS.activeClients, suffix: '', label: 'ACTIVE CLIENTS', sub: 'tracked in Clients MOC' },
+  { value: MTA_STATS.internalSaaS, suffix: '', label: 'INTERNAL SAAS PRODUCTS', sub: 'FitNexora & Fuxk_Scroll' },
+  { value: MTA_STATS.practiceAreas, suffix: '', label: 'PRACTICE AREAS', sub: 'integrated service model' },
+  { value: MTA_STATS.udyamYear, suffix: '', label: 'UDYAM REGISTERED', sub: 'UDYAM-RJ-15-0094091' },
 ]
 
 const cardBg = (i: number) =>

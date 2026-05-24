@@ -29,7 +29,7 @@ const BRAND_FACTS = [
   "Brand color: deep red #6B1A1A",
   "Core services: web development, AI automation, cybersecurity, social media marketing, SaaS/licensing, and legal-compliance aware delivery",
   "Primary response path: service pages prefill the contact form, and the contact flow sends the final enquiry to WhatsApp at +91 96943 22131",
-  "Typical response expectation: 2-4 hours, Mon-Sat 9AM-7PM IST",
+  "Typical response expectation: 2-4 hours, Mon-Sat 10AM-7PM IST",
 ];
 
 function clip(value: string, limit = 180) {
@@ -355,7 +355,7 @@ export function buildSiteKnowledge(input: ChatContextInput = {}) {
     "- **Locations**: Bikaner, Nagaur, Jodhpur — Rajasthan, India",
     "- **Phone / WhatsApp**: +91 96943 22131",
     "- **Email**: manglamtechnicalagency@gmail.com",
-    "- **Hours**: Mon-Sat, 9 AM - 7 PM IST (response 2-4h during hours)",
+    "- **Hours**: Mon-Sat, 10 AM - 7 PM IST (response 2-4h during hours)",
     "- **Brand color**: deep red #6B1A1A",
     "- **Approach**: Contract-first delivery, DPDP-compliant, agreement-led engagement",
     "- **Final routing**: Every contact form submission is formatted and sent to WhatsApp +91 96943 22131",

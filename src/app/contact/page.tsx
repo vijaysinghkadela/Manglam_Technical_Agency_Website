@@ -9,7 +9,7 @@ import { breadcrumbSchema, webPageSchema } from '@/lib/seo/schemas'
 export const metadata: Metadata = {
   title: 'Contact Us — Start a Project',
   description:
-    'Ready to build? Drop us a line. MTA engineers respond within 2–4 hours, Mon–Sat 9AM–7PM IST. Web development, AI automation, cybersecurity — Rajasthan.',
+    'Ready to build? Drop us a line. MTA engineers respond within 2–4 hours, Mon–Sat 10AM–7PM IST. Web development, AI automation, cybersecurity — Rajasthan.',
   keywords: ['contact digital agency Rajasthan', 'hire web developer Jaipur', 'get a quote AI automation', 'cybersecurity consultation India'],
   openGraph: {
     title:       'Contact Manglam Technical Agency — Start a Project',

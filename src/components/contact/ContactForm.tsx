@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { Loader2, Shield } from "lucide-react";
 import { services as serviceCatalog } from "@/lib/data/services";
 import { hasMaliciousInput } from "@/lib/security";
+import { OFFICE_HOURS, AGENCY_EMAIL } from "@/lib/constants";
 
 const schema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -19,7 +20,7 @@ const schema = z.object({
   timeline: z.string().min(1, "Please select a timeline"),
   message: z.string().min(20, "Message must be at least 20 characters"),
   privacy: z.boolean().refine((val) => val === true, {
-    message: "Explicit consent required under DPDP Act 2023 and LGPD",
+    message: "Explicit consent required under DPDP Act 2023",
   }),
   followUpConsent: z.boolean().optional(),
 });
@@ -284,11 +285,11 @@ export default function ContactForm() {
               . This consent is free, specific, informed, and unambiguous. I
               understand I may withdraw this consent at any time by contacting{" "}
               <a
-                href="mailto:contact@manglamtechnicalagency.com"
+                href={`mailto:${AGENCY_EMAIL}`}
                 className="transition-colors hover-foreground"
                 style={{ color: "var(--color-violet)" }}
               >
-                contact@manglamtechnicalagency.com
+                {AGENCY_EMAIL}
               </a>
               .
             </label>
@@ -325,7 +326,7 @@ export default function ContactForm() {
             style={{ color: "var(--color-dead)" }}
           >
             <Shield className="mr-1 inline-block h-3 w-3" />
-            DPDP Act 2023 (India) & LGPD (Brazil) compliant •
+            DPDP Act 2023 (India) compliant •
             UDYAM-RJ-15-0094091
           </p>
         </div>
@@ -352,7 +353,7 @@ export default function ContactForm() {
             color: "var(--color-dead)",
             letterSpacing: "0.1em" }}
         >
-          Avg. response · 2–4 hours · Mon–Sat 9AM–7PM IST
+          Avg. response · 2–4 hours · {OFFICE_HOURS.weekdays}
         </p>
       </div>
     </form>

@@ -12,6 +12,7 @@ import {
   AGENCY_X_URL,
   AGENCY_INSTAGRAM_URL,
   AGENCY_LINKEDIN_URL,
+  OFFICE_HOURS,
 } from "@/lib/constants";
 import { services } from "@/lib/data/services";
 
@@ -229,7 +230,7 @@ export function Footer() {
                 className="font-mono pt-1"
                 style={{ fontSize: "11px", color: "var(--color-dead)" }}
               >
-                Mon–Sat · 10 AM – 7 PM IST
+                {OFFICE_HOURS.weekdays}
               </p>
             </div>
           </motion.div>

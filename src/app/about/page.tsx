@@ -277,7 +277,7 @@ export default function AboutPage() {
                 className="font-mono uppercase"
                 style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.22em' }}
               >
-                ✦ NAGAUR, RAJASTHAN
+                ✦ BIKANER, RAJASTHAN
               </span>
               <span
                 className="font-mono"

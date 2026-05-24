@@ -21,6 +21,8 @@ const NAV_LINKS = [
   { href: '/services', label: 'Services', hasMega: true },
   { href: '/portfolio', label: 'Portfolio' },
   { href: '/pricing', label: 'Pricing' },
+  { href: '/research', label: 'Research' },
+  { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contact' },
 ]
 
@@ -371,6 +373,19 @@ export function Navbar() {
 
             {/* Right side actions */}
             <div className="flex items-center gap-2 sm:gap-3 xl:gap-4">
+              {/* Desktop CTA */}
+              <Link
+                href="/contact"
+                data-cursor="pointer"
+                className="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-semibold transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+                style={{
+                  backgroundColor: 'var(--color-violet)',
+                  color: '#fff',
+                }}
+              >
+                Get Quote
+              </Link>
+
               <ThemeToggle />
 
               {/* Mobile menu button */}
@@ -492,9 +507,19 @@ export function Navbar() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: NAV_LINKS.length * 0.05 + 0.1 }}
-                  className="mt-8"
+                  className="mt-8 px-4"
                 >
-
+                  <Link
+                    href="/contact"
+                    data-cursor="pointer"
+                    className="flex items-center justify-center w-full gap-2 px-6 py-3.5 rounded-full text-[15px] font-semibold transition-all duration-200"
+                    style={{
+                      backgroundColor: 'var(--color-violet)',
+                      color: '#fff',
+                    }}
+                  >
+                    Get Quote
+                  </Link>
                 </motion.div>
               </div>
 

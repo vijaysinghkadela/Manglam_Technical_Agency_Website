@@ -8,6 +8,7 @@ import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { TextReveal } from '@/components/ui/TextReveal'
 import { MagneticButton } from '@/components/ui/MagneticButton'
 import OrbitalRing from '@/components/home/OrbitalRing'
+import { MTA_STATS } from '@/lib/data/stats'
 const SERVICES = [
   'Cybersecurity',
   'AI Automation',
@@ -29,8 +30,8 @@ const TRUST_BADGES = [
 
 // Stats with status indicators - module level to prevent re-creation
 const STATS = [
-  { label: '3 Active Clients', color: '#10b981' },
-  { label: '2 Internal SaaS', color: '#3b82f6' },
+  { label: `${MTA_STATS.activeClients} Active Clients`, color: '#10b981' },
+  { label: `${MTA_STATS.internalSaaS} Internal SaaS`, color: '#3b82f6' },
   { label: 'Udyam 2025', color: 'var(--color-violet)' },
   { label: 'Bikaner, RJ', color: '#f59e0b' },
 ]
@@ -87,6 +88,7 @@ export function HeroSection() {
   return (
     <section
       ref={ref}
+      id="hero-section"
       className="relative w-full min-h-[92svh] flex items-center overflow-hidden grain"
       style={{ backgroundColor: 'var(--color-canvas)' }}
     >
@@ -318,11 +320,21 @@ export function HeroSection() {
       </motion.div>
 
       {/* Scroll indicator */}
-      <motion.div
+      <motion.button
         className="absolute bottom-8 left-[clamp(1.5rem,4vw,3rem)] hidden lg:flex items-center gap-4"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={SCROLL_ANIMATION}
+        onClick={() => {
+          const hero = document.getElementById('hero-section')
+          if (hero) {
+            window.scrollTo({
+              top: hero.offsetHeight,
+              behavior: 'smooth',
+            })
+          }
+        }}
+        aria-label="Scroll to content"
       >
         <div
           className="relative overflow-hidden"
@@ -346,7 +358,7 @@ export function HeroSection() {
         >
           Scroll
         </span>
-      </motion.div>
+      </motion.button>
     </section>
   )
 }

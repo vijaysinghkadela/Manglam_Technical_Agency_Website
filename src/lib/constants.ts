@@ -8,12 +8,12 @@ export const AGENCY_TAGLINE = "Empowering Your Digital Future";
 export const AGENCY_FOUNDED = 2025;
 export const AGENCY_URL = "https://www.manglamtechnicalagency.com";
 export const AGENCY_X_URL = "https://x.com/MAgency67224";
-export const AGENCY_LINKEDIN_URL = "https://www.linkedin.com/in/manglam-technical-agency-undefined-571606405/";
+export const AGENCY_LINKEDIN_URL = "https://www.linkedin.com/in/manglam-technical-agency-571606405/";
 export const AGENCY_INSTAGRAM_URL =
   "https://www.instagram.com/manglam_technical/";
 
 export const OFFICE_HOURS = {
-  weekdays: "Mon–Sat: 9:00 AM – 7:00 PM IST",
+  weekdays: "Mon–Sat · 10:00 AM – 7:00 PM IST",
   weekend: "Sunday: Emergency only",
 };
 

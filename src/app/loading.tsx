@@ -35,12 +35,7 @@ export default function Loading() {
         ))}
       </div>
 
-      <span
-        className="font-mono uppercase"
-        style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.22em' }}
-      >
-        Loading
-      </span>
+
     </div>
   )
 }
