@@ -7,6 +7,7 @@ import Badge from '@/components/ui/Badge'
 export const metadata: Metadata = {
   title: 'Cybersecurity Legal Resources | Manglam Technical Agency',
   description: 'Rules of Engagement, DPDP breach notification templates, and CERT-In compliance documentation for ethical hacking engagements.',
+  alternates: { canonical: 'https://manglamtechnicalagency.com/legal/cybersecurity' },
 }
 
 export default function CybersecurityLegalPage() {

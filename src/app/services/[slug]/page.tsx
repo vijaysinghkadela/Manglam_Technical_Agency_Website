@@ -19,7 +19,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const service = getService(slug);
   if (!service) return { title: "Service Not Found" };
-  return { title: service.name, description: service.description };
+  return {
+    title: service.name,
+    description: service.description,
+    alternates: { canonical: `https://manglamtechnicalagency.com/services/${slug}` },
+  };
 }
 
 export function generateStaticParams() {
@@ -493,16 +497,6 @@ export default async function ServicePage({
                       </span>
                     ))}
                   </div>
-                  <Link
-                    href="/research#pipeline"
-                    className="hover-foreground transition-colors"
-                    style={{
-                      fontSize: "12px",
-                      color: "var(--color-violet-light)",
-                      display: "block" }}
-                  >
-                    View stage definitions →
-                  </Link>
                 </div>
               </div>
 
@@ -641,7 +635,7 @@ export default async function ServicePage({
               >
                 This service is mapped to MTA&apos;s
                 <br />
-                10-stage delivery pipeline.
+                9-stage delivery pipeline.
               </h2>
               <p
                 style={{
@@ -656,13 +650,6 @@ export default async function ServicePage({
               </p>
             </div>
             <div className="flex items-center gap-6">
-              <Link
-                href="/research"
-                className="hover-foreground transition-colors font-mono text-sm"
-                style={{ color: "var(--color-violet-light)" }}
-              >
-                View Pipeline →
-              </Link>
               <Link
                 href="/legal"
                 className="hover-foreground transition-colors font-mono text-sm"

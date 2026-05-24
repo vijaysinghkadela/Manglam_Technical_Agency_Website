@@ -15,6 +15,7 @@ const schema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Enter a valid email address"),
   phone: z.string().optional(),
+  company: z.string().optional(),
   service: z.string().min(1, "Please select a service"),
   budget: z.string().min(1, "Please select a budget range"),
   timeline: z.string().min(1, "Please select a timeline"),
@@ -23,6 +24,7 @@ const schema = z.object({
     message: "Explicit consent required under DPDP Act 2023",
   }),
   followUpConsent: z.boolean().optional(),
+  honeypot: z.string().max(0, "Bot detected").optional(),
 });
 
 type F = z.infer<typeof schema>;
@@ -103,6 +105,7 @@ const buildWhatsAppMessage = (data: F) => {
     `Name: ${data.name}`,
     `Email: ${data.email}`,
     data.phone ? `Phone: ${data.phone}` : null,
+    data.company ? `Company: ${data.company}` : null,
     `Service: ${data.service}`,
     `Budget: ${data.budget}`,
     `Timeline: ${data.timeline}`,
@@ -176,6 +179,12 @@ export default function ContactForm() {
       className="flex flex-col gap-8"
       noValidate
     >
+      {/* Honeypot — hidden from humans, visible to bots */}
+      <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', opacity: 0 }}>
+        <label htmlFor="honeypot">Leave this empty</label>
+        <input id="honeypot" {...register("honeypot")} tabIndex={-1} autoComplete="off" />
+      </div>
+
       <div className="flex flex-col gap-5">
         <SectionLabel
           index="01"
@@ -206,6 +215,13 @@ export default function ContactForm() {
             type="tel"
             inputMode="tel"
             placeholder="+91 98765 43210"
+          />
+        </Field>
+        <Field label="Company">
+          <Input
+            {...register("company")}
+            autoComplete="organization"
+            placeholder="Your company or organisation"
           />
         </Field>
       </div>

@@ -21,7 +21,7 @@ export function ServicesHorizontal() {
               color: 'var(--color-muted)',
               lineHeight: 1.72 }}
           >
-            Seven practice areas, one delivery standard. Each service is scoped, priced, and documented before any work begins.
+            Six practice areas, one delivery standard. Each service is scoped, priced, and documented before any work begins.
           </p>
         </div>
 

@@ -8,9 +8,10 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbSchema } from '@/lib/seo/schemas'
 
 export const metadata: Metadata = {
-  title: 'Our Work',
+  title: 'Our Work — Manglam Technical Agency',
   description:
     "From internal SaaS products to active client implementations. Browse MTA's recent deliveries and project pipeline.",
+  alternates: { canonical: 'https://manglamtechnicalagency.com/portfolio' },
 }
 
 const liveCount   = projects.filter(p => p.status === 'live').length

@@ -21,8 +21,6 @@ const NAV_LINKS = [
   { href: '/services', label: 'Services', hasMega: true },
   { href: '/portfolio', label: 'Portfolio' },
   { href: '/pricing', label: 'Pricing' },
-  { href: '/research', label: 'Research' },
-  { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contact' },
 ]
 
@@ -158,6 +156,18 @@ export function Navbar() {
     return () => clearTimeout(id)
   }, [path])
 
+  // Escape key closes mobile menu and mega menu
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        if (mobile) setMobile(false)
+        if (mega) setMega(false)
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [mobile, mega])
+
   // Mobile scroll lock
   useEffect(() => {
     if (mobile) {
@@ -209,6 +219,7 @@ export function Navbar() {
   return (
     <>
       <motion.nav
+        aria-label="Main navigation"
         className="fixed top-0 left-0 right-0 z-[100]"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -373,19 +384,6 @@ export function Navbar() {
 
             {/* Right side actions */}
             <div className="flex items-center gap-2 sm:gap-3 xl:gap-4">
-              {/* Desktop CTA */}
-              <Link
-                href="/contact"
-                data-cursor="pointer"
-                className="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-semibold transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
-                style={{
-                  backgroundColor: 'var(--color-violet)',
-                  color: '#fff',
-                }}
-              >
-                Get Quote
-              </Link>
-
               <ThemeToggle />
 
               {/* Mobile menu button */}
@@ -456,7 +454,7 @@ export function Navbar() {
             {/* Content */}
             <div className="relative h-full flex flex-col pt-[80px] px-6">
               <div className="flex-1 overflow-y-auto">
-                <nav className="space-y-1">
+                <nav aria-label="Mobile navigation" className="space-y-1">
                   {NAV_LINKS.map((link, i) => (
                     <motion.div
                       key={link.href}
@@ -509,17 +507,6 @@ export function Navbar() {
                   transition={{ delay: NAV_LINKS.length * 0.05 + 0.1 }}
                   className="mt-8 px-4"
                 >
-                  <Link
-                    href="/contact"
-                    data-cursor="pointer"
-                    className="flex items-center justify-center w-full gap-2 px-6 py-3.5 rounded-full text-[15px] font-semibold transition-all duration-200"
-                    style={{
-                      backgroundColor: 'var(--color-violet)',
-                      color: '#fff',
-                    }}
-                  >
-                    Get Quote
-                  </Link>
                 </motion.div>
               </div>
 

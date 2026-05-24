@@ -195,7 +195,7 @@ export const services: Service[] = [
       {
         label: "Growth",
         amount: "₹35,000/mo",
-        period: "6-month commitment",
+        period: "1-month starting",
         highlight: true,
         features: [
           "Full-funnel campaign strategy (awareness → conversion)",
@@ -214,7 +214,7 @@ export const services: Service[] = [
       {
         label: "Scale",
         amount: "₹65,000/mo",
-        period: "12-month commitment",
+        period: "1-month starting",
         highlight: false,
         features: [
           "Comprehensive media strategy (FB + IG + Reels + Stories)",
@@ -518,7 +518,7 @@ export const services: Service[] = [
       },
       {
         q: "Do you build e-commerce stores?",
-        a: "Yes, that falls under our E-Commerce service. Check the e-commerce section for details.",
+        a: "Yes, we build e-commerce stores as part of our SaaS & Web Development service. Contact us for a custom quote.",
       },
     ],
   },

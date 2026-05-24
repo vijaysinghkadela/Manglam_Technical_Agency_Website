@@ -9,7 +9,6 @@ const DATES = {
   core:     '2025-01-10',
   services: '2025-01-10',
   legal:    '2025-01-05',
-  blog:     '2025-01-12',
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -20,10 +19,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/about`,               lastModified: DATES.core,     changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/portfolio`,            lastModified: DATES.core,     changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/pricing`,              lastModified: DATES.core,     changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE_URL}/research`,             lastModified: DATES.core,     changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE_URL}/legal`,               lastModified: DATES.legal,    changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE_URL}/trust-center`,         lastModified: DATES.legal,    changeFrequency: 'monthly', priority: 0.5 },
     { url: `${BASE_URL}/cybersecurity-policy`, lastModified: DATES.legal,    changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE_URL}/cybersecurity-training`,lastModified: DATES.legal,    changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE_URL}/legal/cybersecurity`,    lastModified: DATES.legal,    changeFrequency: 'monthly', priority: 0.5 },
   ]
 
   const servicePages: MetadataRoute.Sitemap = services.map(s => ({

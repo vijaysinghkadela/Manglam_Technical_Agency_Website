@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import { useInView } from 'framer-motion'
+import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 const CHARS = '0123456789'
 
@@ -13,15 +14,17 @@ interface Props {
 }
 
 export function ScrambleCounter({ target, suffix = '', duration = 1500, className, style }: Props) {
-  const [display, setDisplay] = useState('0')
+  const [display, setDisplay] = useState(String(target))
   const ref = useRef<HTMLSpanElement>(null)
   const hasAnimated = useRef(false)
   const rafRef = useRef<number | null>(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const reducedMotion = useReducedMotion()
 
   useEffect(() => {
     if (!isInView || hasAnimated.current) return
     hasAnimated.current = true
+    if (reducedMotion) return
 
     const t0 = performance.now()
     const count = String(target).length
@@ -55,7 +58,7 @@ export function ScrambleCounter({ target, suffix = '', duration = 1500, classNam
         cancelAnimationFrame(rafRef.current)
       }
     }
-  }, [isInView, target, duration])
+  }, [isInView, target, duration, reducedMotion])
 
   return (
     <span ref={ref} className={className} style={style}>

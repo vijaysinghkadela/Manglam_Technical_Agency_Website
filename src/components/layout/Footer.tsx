@@ -60,7 +60,7 @@ export function Footer() {
       </div>
 
       <div className="container-site py-12 sm:py-14 lg:py-16">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-12">
           <motion.div
             className="flex flex-col gap-5 sm:col-span-2 lg:col-span-1"
             initial={{ opacity: 0, y: 20 }}
@@ -174,6 +174,23 @@ export function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0.14, ease: EASE }}
+          >
+            <h4
+              className="mb-5 font-mono uppercase tracking-[0.18em]"
+              style={{ fontSize: "11px", color: "var(--color-dead)" }}
+            >
+              Legal
+            </h4>
+            {legalLinks.map((link) => (
+              <FooterLink key={link.href} href={link.href} label={link.label} />
+            ))}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, delay: 0.21, ease: EASE }}
           >
             <h4
               className="mb-5 font-mono uppercase tracking-[0.18em]"

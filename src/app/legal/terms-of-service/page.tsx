@@ -6,6 +6,7 @@ import { getPolicyBySlug } from '@/lib/data/legal'
 export const metadata: Metadata = {
   title: 'Terms of Service',
   description: 'Terms of service summary for Manglam Technical Agency.',
+  alternates: { canonical: 'https://manglamtechnicalagency.com/legal/terms-of-service' },
 }
 
 export default function TermsOfServicePage() {

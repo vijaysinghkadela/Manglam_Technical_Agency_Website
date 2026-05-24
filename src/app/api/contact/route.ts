@@ -3,6 +3,22 @@ import { z } from 'zod'
 import { sendAdminEmail } from '@/lib/email'
 import { sanitizeEmail, sanitizeInput } from '@/lib/security'
 
+const rateLimit = new Map<string, { count: number; resetAt: number }>()
+const RATE_LIMIT_WINDOW = 60_000
+const RATE_LIMIT_MAX = 5
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now()
+  const entry = rateLimit.get(ip)
+  if (!entry || now > entry.resetAt) {
+    rateLimit.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW })
+    return true
+  }
+  if (entry.count >= RATE_LIMIT_MAX) return false
+  entry.count++
+  return true
+}
+
 const schema = z.object({
   name: z.string().min(2).max(100),
   email: z.string().email().max(100),
@@ -190,8 +206,6 @@ function buildTextFallback(data: ContactData): string {
 
 export async function POST(req: NextRequest) {
   try {
-    const parsed = schema.parse(await req.json())
-
     const getClientIP = (): string => {
       const cfConnectingIp = req.headers.get('cf-connecting-ip')
       if (cfConnectingIp) return cfConnectingIp
@@ -204,6 +218,16 @@ export async function POST(req: NextRequest) {
       if (realIp && realIp !== '127.0.0.1' && realIp !== '::1') return realIp
       return 'unavailable'
     }
+
+    const clientIP = getClientIP()
+    if (!checkRateLimit(clientIP)) {
+      return NextResponse.json(
+        { success: false, message: 'Too many requests. Please try again later.' },
+        { status: 429 },
+      )
+    }
+
+    const parsed = schema.parse(await req.json())
 
     const data: ContactData = {
       ...parsed,

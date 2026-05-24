@@ -6,6 +6,7 @@ import { getAgreementBySlug } from '@/lib/data/legal'
 export const metadata: Metadata = {
   title: 'NDA Template',
   description: 'Non-Disclosure Agreement summary and controlled template request workflow.',
+  alternates: { canonical: 'https://manglamtechnicalagency.com/legal/nda' },
 }
 
 export default function NDAPage() {

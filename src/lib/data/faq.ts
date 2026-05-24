@@ -19,7 +19,7 @@ export const aboutFaqs: FAQItem[] = [
   },
   {
     q: "What compliance frameworks do you follow?",
-    a: "Our engagements align with DPDP Act 2023, LGPD (Brazil), GDPR (EU) standards, the IT Act 2000, and the Indian Contract Act 1872. Every service maps to our 10-stage delivery pipeline with signed agreements.",
+    a: "Our engagements align with DPDP Act 2023, LGPD (Brazil), GDPR (EU) standards, the IT Act 2000, and the Indian Contract Act 1872. Every service maps to our 9-stage delivery pipeline with signed agreements.",
   },
 ]
 
@@ -87,7 +87,7 @@ export const portfolioFaqs: FAQItem[] = [
 export const generalFaqs: FAQItem[] = [
   {
     q: "What is the typical engagement process?",
-    a: "Our 10-stage delivery pipeline covers: Enquiry → Discovery Workshop → Proposal → Agreement → Setup → Build → Review → Deploy → Handover → Support. Each stage has defined deliverables and payment milestones.",
+    a: "Our 9-stage delivery pipeline covers: Enquiry → Discovery Workshop → Proposal → Agreement → Setup → Build → Review → Handover → Support. Each stage has defined deliverables and payment milestones.",
   },
   {
     q: "Do you provide post-launch support?",

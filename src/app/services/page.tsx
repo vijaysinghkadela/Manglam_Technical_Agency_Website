@@ -7,13 +7,14 @@ import { services } from "@/lib/data/services";
 import Badge from "@/components/ui/Badge";
 
 export const metadata: Metadata = {
-  title: "Services",
+  title: "Services — Manglam Technical Agency",
   description:
     "Explore MTA's premium digital infrastructure services: Web Development, Cybersecurity, AI Automation, and more.",
+  alternates: { canonical: 'https://manglamtechnicalagency.com/services' },
 };
 
 const heroStats = [
-  { value: "7", label: "Service tracks" },
+  { value: "6", label: "Service tracks" },
   { value: "Mobile-first", label: "Layouts by default" },
   { value: "Transparent", label: "Pricing & contracts" },
 ];
@@ -191,7 +192,7 @@ export default function ServicesPage() {
                 size="sm"
                 className="text-violet-light"
               >
-                7 tracks
+                6 tracks
               </Badge>
             </div>
 
@@ -325,26 +326,6 @@ export default function ServicesPage() {
                 >
                   Review agreements, privacy policy, and trust center
                   documentation.
-                </p>
-              </Link>
-
-              <Link
-                href="/research"
-                className="rounded-[28px] border border-border bg-card p-8 transition-colors hover:border-violet/40 hover:bg-[rgba(var(--color-accent-rgb),0.04)]"
-                data-cursor="pointer"
-              >
-                <p
-                  className="font-mono text-[11px] tracking-[0.18em] uppercase mb-2"
-                  style={{ color: "var(--color-violet-light)" }}
-                >
-                  Research Pipeline →
-                </p>
-                <p
-                  className="text-sm leading-relaxed"
-                  style={{ color: "var(--color-muted)" }}
-                >
-                  Explore the same evidence base we use to shape services,
-                  pricing, and delivery.
                 </p>
               </Link>
             </div>

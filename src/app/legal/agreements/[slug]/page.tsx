@@ -15,6 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   return {
     title: `${agreement.name} | Legal`,
     description: agreement.publicSummary,
+    alternates: { canonical: `https://manglamtechnicalagency.com/legal/agreements/${slug}` },
   }
 }
 

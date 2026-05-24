@@ -6,6 +6,7 @@ import { getPolicyBySlug } from '@/lib/data/legal'
 export const metadata: Metadata = {
   title: 'AI Ethics Policy',
   description: 'AI Ethics Policy for Social Media Marketing at Manglam Technical Agency.',
+  alternates: { canonical: 'https://manglamtechnicalagency.com/legal/ai-ethics-policy' },
 }
 
 export default function AIEthicsPolicyPage() {

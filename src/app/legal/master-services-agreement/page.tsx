@@ -6,6 +6,7 @@ import { getAgreementBySlug } from '@/lib/data/legal'
 export const metadata: Metadata = {
   title: 'Master Services Agreement',
   description: 'Master Services Agreement summary and request-only template workflow.',
+  alternates: { canonical: 'https://manglamtechnicalagency.com/legal/master-services-agreement' },
 }
 
 export default function MasterServicesAgreementPage() {

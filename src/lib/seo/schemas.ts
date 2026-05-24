@@ -97,7 +97,7 @@ export function websiteSchema() {
     publisher: { '@id': `${BASE_URL}/#organization` },
     potentialAction: {
       '@type': 'SearchAction',
-      target: { '@type': 'EntryPoint', urlTemplate: `${BASE_URL}/blog?q={search_term_string}` },
+      target: { '@type': 'EntryPoint', urlTemplate: `${BASE_URL}/?q={search_term_string}` },
       'query-input': 'required name=search_term_string',
     },
     inLanguage: 'en-IN',

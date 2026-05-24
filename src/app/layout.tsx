@@ -139,8 +139,15 @@ export default function RootLayout({
         >
           <LenisProvider>
             <MagneticCursor />
+            <a
+              href="#main-content"
+              className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-full focus:text-sm focus:font-semibold focus:outline-none"
+              style={{ backgroundColor: 'var(--color-violet)', color: '#fff' }}
+            >
+              Skip to content
+            </a>
             <Navbar />
-            <main className="relative w-full overflow-x-clip">{children}</main>
+            <main id="main-content" className="relative w-full overflow-x-clip">{children}</main>
             <Footer />
             <SiteChatbot />
             <Analytics />

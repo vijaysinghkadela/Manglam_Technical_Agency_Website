@@ -7,6 +7,7 @@ import { breadcrumbSchema, webPageSchema } from '@/lib/seo/schemas'
 export const metadata: Metadata = {
   title: 'Cybersecurity Trust Center & Policies',
   description: 'MTA legal baseline, explicit authorization, incident response SLAs, and operational policies for cybersecurity services.',
+  alternates: { canonical: 'https://manglamtechnicalagency.com/cybersecurity-policy' },
 }
 
 export default function CybersecurityPolicyPage() {

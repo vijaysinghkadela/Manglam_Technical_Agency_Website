@@ -5,7 +5,7 @@ import Badge from '@/components/ui/Badge'
 import { MTA_STATS } from '@/lib/data/stats'
 const STATS = [
   { value: MTA_STATS.activeClients, suffix: '', label: 'ACTIVE CLIENTS', sub: 'tracked in Clients MOC' },
-  { value: MTA_STATS.internalSaaS, suffix: '', label: 'INTERNAL SAAS PRODUCTS', sub: 'FitNexora & Fuxk_Scroll' },
+  { value: MTA_STATS.internalSaaS, suffix: '', label: 'INTERNAL SAAS PRODUCTS', sub: 'FitNexora & FuxkScroll' },
   { value: MTA_STATS.practiceAreas, suffix: '', label: 'PRACTICE AREAS', sub: 'integrated service model' },
   { value: MTA_STATS.udyamYear, suffix: '', label: 'UDYAM REGISTERED', sub: 'UDYAM-RJ-15-0094091' },
 ]

@@ -302,8 +302,6 @@ function summarizeCurrentPage(
     return joinDefined([titleLine, descriptionLine, summarizePricingPage()]);
   if (route === "/portfolio")
     return joinDefined([titleLine, descriptionLine, summarizePortfolioPage()]);
-  if (route === "/research")
-    return joinDefined([titleLine, descriptionLine, summarizeResearchPage()]);
   if (route === "/legal" || route.startsWith("/legal/"))
     return joinDefined([titleLine, descriptionLine, summarizeLegalPage()]);
   if (route === "/contact")
@@ -371,7 +369,7 @@ export function buildSiteKnowledge(input: ChatContextInput = {}) {
     "## ROUTING DECISION GUIDE",
     "Use this table to pick which service to recommend based on visitor intent:",
     "- Visitor wants a website / landing page / corporate site → **Web Development**",
-    "- Visitor wants an online store / e-commerce / shopping cart / product catalog → **E-Commerce Solutions** (standalone service, distinct from SaaS Build plan which is for custom web apps)",
+    "- Visitor wants an online store / e-commerce / shopping cart / product catalog → **SaaS & Web Development** (Build plan includes e-commerce features)",
     "- Visitor wants AI agents / chatbots / RAG / workflow automation / n8n → **AI Automation**",
     "- Visitor wants pen-test / VAPT / security audit / SOC / compliance hardening → **Cybersecurity**",
     "- Visitor wants social media / paid ads / content / brand growth → **Social Media Marketing**",
@@ -379,7 +377,7 @@ export function buildSiteKnowledge(input: ChatContextInput = {}) {
     "- Visitor asks about NDA / DPA / MSA / privacy → direct to /legal",
     "- Visitor wants to compare prices / see plans → direct to /pricing",
     "- Visitor wants proof of work / case studies → direct to /portfolio",
-    "- Visitor asks 'how do you deliver?' → reference research pipeline + agreement model",
+    "- Visitor asks 'how do you deliver?' → reference delivery pipeline + agreement model",
     "- Visitor asks about meeting / call / quote → direct to /contact (form sends to WhatsApp)",
     "",
     "## BRAND FACTS",

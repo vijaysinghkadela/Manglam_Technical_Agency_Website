@@ -6,6 +6,7 @@ import { getPolicyBySlug } from '@/lib/data/legal'
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description: 'Privacy policy summary for Manglam Technical Agency.',
+  alternates: { canonical: 'https://manglamtechnicalagency.com/legal/privacy-policy' },
 }
 
 export default function PrivacyPolicyPage() {

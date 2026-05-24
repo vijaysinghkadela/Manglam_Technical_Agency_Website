@@ -49,15 +49,6 @@ export function ComplianceByDesign() {
           </div>
           <div className="flex items-center gap-4 flex-wrap text-sm">
             <Link
-              href="/blog"
-              className="font-mono text-sm transition-colors rounded-full border border-border px-5 py-2.5"
-              style={{ color: 'var(--color-violet)' }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-foreground)' }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-violet)' }}
-            >
-              Read Our Blog →
-            </Link>
-            <Link
               href="/legal"
               className="font-mono text-sm transition-colors rounded-full border border-border px-5 py-2.5"
               style={{ color: 'var(--color-violet)' }}

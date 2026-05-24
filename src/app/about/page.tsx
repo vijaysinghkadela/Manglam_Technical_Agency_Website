@@ -10,6 +10,7 @@ import { breadcrumbSchema, webPageSchema } from '@/lib/seo/schemas'
 export const metadata: Metadata = {
   title: 'About — Manglam Technical Agency',
   description: 'Manglam Technical Agency is a full-service technical agency based in Bikaner, Rajasthan. A lean team of specialists delivering AI automation, cybersecurity, web development, and digital operations for Indian businesses.',
+  alternates: { canonical: 'https://manglamtechnicalagency.com/about' },
 }
 
 const STATS = [

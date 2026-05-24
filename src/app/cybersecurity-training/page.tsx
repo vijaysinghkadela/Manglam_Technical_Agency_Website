@@ -8,6 +8,7 @@ import { breadcrumbSchema, webPageSchema } from '@/lib/seo/schemas'
 export const metadata: Metadata = {
   title: 'Cybersecurity Training & Workshops | Manglam Technical Agency',
   description: 'Hands-on ethical hacking workshops and DPDP compliance training for Rajasthan gyms, clinics, and SMBs.',
+  alternates: { canonical: 'https://manglamtechnicalagency.com/cybersecurity-training' },
 }
 
 const workshopOfferings = [

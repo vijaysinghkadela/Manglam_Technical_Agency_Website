@@ -296,7 +296,6 @@ function getPageLabel(pathname: string) {
   if (pathname === "/services") return "All Services";
   if (pathname === "/pricing") return "Pricing";
   if (pathname === "/contact") return "Contact";
-  if (pathname === "/blog") return "Blog";
   if (pathname === "/portfolio") return "Portfolio";
   if (pathname === "/legal") return "Legal";
   if (pathname === "/trust-center") return "Trust Center";
@@ -304,7 +303,6 @@ function getPageLabel(pathname: string) {
     const slug = pathname.split("/")[2] ?? "";
     return slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
   }
-  if (pathname.startsWith("/blog/")) return "Blog article";
   if (pathname.startsWith("/portfolio/")) return "Portfolio item";
   return pathname.replace(/\//g, " · ").replace(/^ · /, "") || "Website";
 }

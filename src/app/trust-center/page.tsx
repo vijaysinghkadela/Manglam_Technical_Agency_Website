@@ -8,6 +8,7 @@ import { breadcrumbSchema, webPageSchema } from '@/lib/seo/schemas'
 export const metadata: Metadata = {
   title: 'Trust Center & AI Ethics | Manglam Technical Agency',
   description: 'Executive summary of MTA compliance, security, and ethical AI controls with links to legal and research documentation.',
+  alternates: { canonical: 'https://manglamtechnicalagency.com/trust-center' },
 }
 
 const operationalPillars = [
@@ -61,9 +62,6 @@ export default function TrustCenterPage() {
             <p className="font-mono text-label tracking-[0.18em] uppercase text-violet-light mb-3">Explore Depth</p>
             <h3 className="font-display font-black text-2xl text-foreground mb-4">Documentation Layers</h3>
             <div className="flex flex-col gap-3 text-sm">
-              <Link href="/research" className="text-violet-light hover:text-foreground transition-colors py-2 min-h-[44px] flex items-center">
-                Research: lead-to-delivery pipeline & risk map →
-              </Link>
               <Link href="/legal" className="text-violet-light hover:text-foreground transition-colors py-2 min-h-[44px] flex items-center">
                 Legal Hub: agreements, applicability matrix, request workflow →
               </Link>
