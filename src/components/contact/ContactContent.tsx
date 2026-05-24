@@ -230,7 +230,7 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
             transition={{ duration: 0.65, ease: EASE, delay: 0.15 }}
             className="order-2 flex flex-col"
           >
-            <div className="rounded-[28px] border border-border bg-card p-8 shadow-[0_24px_80px_rgba(0,0,0,0.10)] sm:p-10 lg:p-12">
+            <div className="overflow-visible rounded-[28px] border border-border bg-card p-6 shadow-[0_24px_80px_rgba(0,0,0,0.10)] sm:p-10 lg:p-12">
               <span
                 className="mb-4 block font-mono uppercase tracking-[0.22em] text-violet-light"
                 style={{ fontSize: '11px' }}

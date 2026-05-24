@@ -107,6 +107,13 @@ function buildContactHref(service: ServiceData, plan?: ServicePlan) {
   params.set("budget", inferBudgetRange(plan?.amount ?? service.priceLabel));
   params.set("timeline", inferTimeline(plan?.period, plan?.subtext));
   params.set("message", buildPrefilledMessage(service, plan));
+  params.set("selectionType", plan ? "plan" : "service");
+  params.set("serviceName", service.name);
+  params.set("departmentName", service.name);
+  params.set("price", plan?.amount ?? service.priceLabel);
+  params.set("durationLabel", plan?.period ?? "Discovery");
+  if (plan?.label) params.set("planName", plan.label);
+  if (plan?.subtext) params.set("durationNote", plan.subtext);
 
   return `/contact?${params.toString()}`;
 }

@@ -59,7 +59,8 @@ export function PortfolioContent() {
               <button
                 key={f.key}
                 onClick={() => setFilter(f.key)}
-                className="font-mono uppercase transition-all duration-200 cursor-pointer"
+                aria-pressed={filter === f.key}
+                className="font-mono uppercase transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
                 style={{
                   fontSize: '11px',
                   letterSpacing: '0.18em',
@@ -322,7 +323,8 @@ export function PortfolioContent() {
                       target="_blank"
                       rel="noopener noreferrer"
                       data-cursor="pointer"
-                      className="mt-auto inline-flex items-center gap-2 px-8 py-5 font-display font-black text-sm uppercase tracking-wide transition-all duration-300 hover:bg-violet hover:text-white hover:border-violet w-fit"
+                      aria-label={`View live site for ${p.title}`}
+                      className="mt-auto inline-flex items-center gap-2 px-8 py-5 font-display font-black text-sm uppercase tracking-wide transition-all duration-300 hover:bg-violet hover:text-white hover:border-violet w-fit focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-card"
                       style={{ border: '1px solid var(--color-foreground)', color: 'var(--color-foreground)' }}
                     >
                       View Live Site
@@ -489,5 +491,4 @@ export function PortfolioContent() {
     </div>
   )
 }
-
 

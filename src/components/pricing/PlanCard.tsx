@@ -265,7 +265,9 @@ export function PlanCard({
           {hasMoreDeliverables && (
             <button
               onClick={() => setShowAllDeliverables(!showAllDeliverables)}
-              className="flex items-center gap-1.5 font-mono transition-colors duration-200 hover:text-violet self-start"
+              aria-expanded={showAllDeliverables}
+              aria-label={`${showAllDeliverables ? 'Show fewer' : 'Show all'} deliverables for ${plan.name}`}
+              className="flex items-center gap-1.5 font-mono transition-colors duration-200 hover:text-violet self-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-card"
               style={{
                 fontSize: '11px',
                 color: 'var(--color-dead)',
@@ -292,7 +294,7 @@ export function PlanCard({
         <Link
           href={buildPlanContactHref(departmentSlug, plan.name, DEPARTMENT_NAME_MAP[departmentSlug] || departmentSlug, duration.price, duration.label, duration.note)}
           data-cursor="pointer"
-          className="inline-flex items-center justify-center gap-2 font-display font-bold transition-all duration-300 hover:bg-violet hover:text-white hover:border-violet"
+          className="inline-flex items-center justify-center gap-2 font-display font-bold transition-all duration-300 hover:bg-violet hover:text-white hover:border-violet focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-card"
           style={{
             padding: '16px 28px',
             fontSize: '14px',

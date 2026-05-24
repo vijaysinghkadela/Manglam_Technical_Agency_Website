@@ -1,21 +1,31 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useConsentStore } from '@/stores/useConsentStore';
 import { useIsClient } from '@/hooks/useIsClient';
 import { X, Shield, ChevronDown, ChevronUp, Lock, Eye, CheckCircle2 } from 'lucide-react';
 
 export function ConsentBanner() {
-  const { hasConsent, showBanner, grantConsent, dismissBanner } = useConsentStore();
+  const { showBanner, hasHydrated, grantConsent, dismissBanner, hydrateConsent } = useConsentStore();
   const [isExpanded, setIsExpanded] = useState(false);
   const isClient = useIsClient();
 
-  // Don't render until client-side (prevent hydration issues)
-  if (!isClient) return null;
+  useEffect(() => {
+    try {
+      Promise.resolve(useConsentStore.persist.rehydrate()).catch(() => {
+        hydrateConsent();
+      });
+    } catch {
+      hydrateConsent();
+    }
+  }, [hydrateConsent]);
 
-  // Don't show if already consented and banner dismissed
-  if (!showBanner && hasConsent) return null;
+  // Don't render until client-side (prevent hydration issues)
+  if (!isClient || !hasHydrated) return null;
+
+  // Don't show after a current accept or decline decision.
+  if (!showBanner) return null;
 
   return (
     <AnimatePresence>

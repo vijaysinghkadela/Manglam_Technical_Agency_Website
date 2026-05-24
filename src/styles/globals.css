@@ -175,6 +175,36 @@ body {
 a { color: inherit; text-decoration: none; }
 img, video { max-width: 100%; height: auto; display: block; }
 
+:where(a, button, input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--color-violet);
+  outline-offset: 3px;
+  scroll-margin-top: calc(var(--nav-offset, 84px) + 24px);
+  scroll-margin-bottom: 64px;
+}
+
+button,
+[role="button"],
+input,
+select,
+textarea {
+  min-height: 24px;
+}
+
+.mta-select {
+  position: relative;
+  z-index: 1;
+}
+
+.mta-select option {
+  color: #1A1412;
+  background-color: #FFFFFF;
+}
+
+html.dark .mta-select option {
+  color: #FAFAFA;
+  background-color: #171110;
+}
+
 .gpu-accelerated {
   -webkit-transform: translateZ(0);
   -moz-transform: translateZ(0);

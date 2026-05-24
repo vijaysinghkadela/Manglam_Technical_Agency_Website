@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import toast from "react-hot-toast";
-import { Loader2, Shield } from "lucide-react";
+import { CheckCircle2, Loader2, Shield } from "lucide-react";
 import { services as serviceCatalog } from "@/lib/data/services";
 import { hasMaliciousInput } from "@/lib/security";
 import { OFFICE_HOURS, AGENCY_EMAIL } from "@/lib/constants";
@@ -98,6 +98,36 @@ const inferTimeline = (hint: string) => {
   return "Within 3 months";
 };
 
+const getSelectionSummary = (searchParams: ReturnType<typeof useSearchParams>) => {
+  const selectionType = searchParams.get("selectionType");
+  const planName = searchParams.get("planName");
+  const bundleName = searchParams.get("bundleName");
+  const departmentName = searchParams.get("departmentName");
+  const serviceName = searchParams.get("serviceName") ?? searchParams.get("service");
+  const price = searchParams.get("price") ?? searchParams.get("planAmount");
+  const durationLabel = searchParams.get("durationLabel") ?? searchParams.get("planPeriod");
+
+  if (!selectionType && !planName && !bundleName && !price) return null;
+
+  const title =
+    selectionType === "bundle"
+      ? bundleName
+      : [departmentName ?? serviceName, planName].filter(Boolean).join(" - ");
+
+  const details = [price, durationLabel].filter(Boolean).join(" - ");
+
+  return {
+    title: title || serviceName || "Selected option",
+    details,
+    label:
+      selectionType === "bundle"
+        ? "Bundle selected"
+        : selectionType === "service"
+          ? "Service selected"
+          : "Plan selected",
+  };
+};
+
 const buildWhatsAppMessage = (data: F) => {
   const lines = [
     "New enquiry from the MTA website",
@@ -139,6 +169,7 @@ export default function ContactForm() {
     TIMELINES,
   );
   const initialMessage = searchParams.get("message") ?? "";
+  const selectedSummary = getSelectionSummary(searchParams);
 
   const {
     register,
@@ -184,6 +215,42 @@ export default function ContactForm() {
         <label htmlFor="honeypot">Leave this empty</label>
         <input id="honeypot" {...register("honeypot")} tabIndex={-1} autoComplete="off" />
       </div>
+
+      {selectedSummary && (
+        <div
+          className="rounded-2xl border border-[rgba(var(--color-accent-rgb),0.22)] bg-[rgba(var(--color-accent-rgb),0.06)] p-4 sm:p-5"
+          aria-live="polite"
+        >
+          <div className="flex items-start gap-3">
+            <CheckCircle2
+              className="mt-0.5 h-5 w-5 shrink-0"
+              style={{ color: "var(--color-violet-light)" }}
+              aria-hidden="true"
+            />
+            <div className="min-w-0">
+              <p
+                className="font-mono text-[10px] uppercase tracking-[0.18em]"
+                style={{ color: "var(--color-violet-light)" }}
+              >
+                {selectedSummary.label}
+              </p>
+              <p
+                className="mt-1 text-sm font-semibold leading-snug"
+                style={{ color: "var(--color-foreground)" }}
+              >
+                You selected {selectedSummary.title}
+                {selectedSummary.details ? ` - ${selectedSummary.details}` : ""}.
+              </p>
+              <p
+                className="mt-1 text-xs leading-relaxed"
+                style={{ color: "var(--color-muted)" }}
+              >
+                The form below has been pre-filled from that selection.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="flex flex-col gap-5">
         <SectionLabel
@@ -313,6 +380,7 @@ export default function ContactForm() {
           {errors.privacy && (
             <p
               className="mt-3 font-mono"
+              role="alert"
               style={{ fontSize: "11px", color: "#ef4444" }}
             >
               {errors.privacy.message}
@@ -323,6 +391,7 @@ export default function ContactForm() {
             <label className="grid gap-3 sm:grid-cols-[24px_1fr]">
               <input
                 {...register("followUpConsent")}
+                id="followUpConsent"
                 type="checkbox"
                 className="mt-1 h-5 w-5 shrink-0 cursor-pointer rounded"
                 style={{ accentColor: "var(--color-violet)" }}
@@ -442,6 +511,7 @@ const inputStyle: React.CSSProperties = {
   minHeight: "52px",
   borderRadius: "12px",
   outline: "none",
+  colorScheme: "light dark",
   transition: "border-color 0.2s, box-shadow 0.2s, background-color 0.2s",
   boxShadow: "inset 0 1px 0 rgba(var(--color-accent-rgb), 0.04)",
 };
@@ -468,6 +538,7 @@ const Select = ({
 }: React.SelectHTMLAttributes<HTMLSelectElement>) => (
   <select
     {...props}
+    className="mta-select"
     style={{
       ...inputStyle,
       appearance: "none",
@@ -479,6 +550,14 @@ const Select = ({
       backgroundRepeat: "no-repeat",
       cursor: "pointer",
       paddingRight: "46px" }}
+    onFocus={(e) => {
+      e.target.style.borderColor = "var(--color-violet)";
+      e.target.style.boxShadow = "0 0 0 4px rgba(var(--color-accent-rgb),0.08)";
+    }}
+    onBlur={(e) => {
+      e.target.style.borderColor = "var(--color-border)";
+      e.target.style.boxShadow = "inset 0 1px 0 rgba(var(--color-accent-rgb), 0.04)";
+    }}
   >
     {children}
   </select>

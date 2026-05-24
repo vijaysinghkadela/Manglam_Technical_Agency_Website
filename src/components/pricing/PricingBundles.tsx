@@ -249,7 +249,7 @@ export function PricingBundles() {
                     <Link
                       href={buildBundleContactHref(bundle.name, bundle.total, bundle.plans)}
                       data-cursor="pointer"
-                      className="inline-flex items-center gap-1.5 font-display font-bold transition-all duration-300 hover:bg-violet hover:text-white whitespace-nowrap shrink-0"
+                      className="inline-flex items-center gap-1.5 font-display font-bold transition-all duration-300 hover:bg-violet hover:text-white whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-card"
                       style={{
                         padding: '14px 24px',
                         fontSize: '13px',

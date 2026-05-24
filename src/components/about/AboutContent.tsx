@@ -141,7 +141,7 @@ export function AboutContent() {
                     {member.image ? (
                       <Image
                         src={member.image}
-                        alt={member.name}
+                        alt={`${member.name}, ${member.role} at Manglam Technical Agency`}
                         fill
                         className="object-cover"
                         style={{ objectPosition: member.imagePosition ?? '50% 20%' }}

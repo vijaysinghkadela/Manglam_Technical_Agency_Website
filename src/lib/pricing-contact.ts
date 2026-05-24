@@ -91,7 +91,15 @@ export function buildPlanContactHref(
     budget,
     timeline,
     message,
+    selectionType: 'plan',
+    planName,
+    departmentName,
+    serviceName: service,
+    price,
+    durationLabel,
   });
+
+  if (durationNote) params.set('durationNote', durationNote);
 
   return `/contact?${params.toString()}`;
 }
@@ -118,6 +126,12 @@ export function buildBundleContactHref(
     budget,
     timeline: 'Flexible',
     message,
+    selectionType: 'bundle',
+    bundleName,
+    departmentName: firstDept,
+    serviceName,
+    price: total,
+    durationLabel: 'Flexible',
   });
 
   return `/contact?${params.toString()}`;

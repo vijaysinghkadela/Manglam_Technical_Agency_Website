@@ -178,7 +178,7 @@ export function ServicePricingSection({
                   <Link
                     href={buildPlanContactHref(departmentSlug, plan.name, dept.department, dur.price, dur.label, dur.note)}
                     data-cursor="pointer"
-                    className="mt-auto inline-flex items-center justify-center gap-2 py-3.5 px-5 font-display font-bold text-sm transition-all duration-300 hover:bg-violet hover:text-white hover:border-violet rounded-xl"
+                    className="mt-auto inline-flex items-center justify-center gap-2 py-3.5 px-5 font-display font-bold text-sm transition-all duration-300 hover:bg-violet hover:text-white hover:border-violet rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-card"
                     style={{
                       border: plan.highlight
                         ? '1px solid var(--color-violet)'

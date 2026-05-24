@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { useState, useEffect, useCallback, useMemo } from 'react'
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown, Menu, X } from 'lucide-react'
 import { services } from '@/lib/data/services'
@@ -111,6 +111,7 @@ const getNavStyles = (isLight: boolean, scrolled: boolean) => ({
 export function Navbar() {
   const path = usePathname()
   const isClient = useIsClient()
+  const servicesMenuRef = useRef<HTMLDivElement | null>(null)
   const [scrolled, setScrolled] = useState(false)
   const [mobile, setMobile] = useState(false)
   const [mega, setMega] = useState(false)
@@ -130,6 +131,7 @@ export function Navbar() {
     ? '/images/mta-logo-transparent.png'
     : '/images/mta-logo-transparent-white.png'
   const animateLogo = !prefersReducedMotion && !isTouchDevice
+  const servicesMenuId = 'services-menu'
 
   // Scroll detection with RAF throttling
   useEffect(() => {
@@ -175,6 +177,20 @@ export function Navbar() {
     document.addEventListener('keydown', handleKeyDown)
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [mobile, mega])
+
+  // Close the services menu when clicking outside it.
+  useEffect(() => {
+    if (!mega) return
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!servicesMenuRef.current?.contains(event.target as Node)) {
+        setMega(false)
+      }
+    }
+
+    document.addEventListener('pointerdown', handlePointerDown)
+    return () => document.removeEventListener('pointerdown', handlePointerDown)
+  }, [mega])
 
   // Mobile scroll lock
   useEffect(() => {
@@ -291,19 +307,31 @@ export function Navbar() {
                   link.hasMega ? (
                     <div
                       key={link.href}
+                      ref={servicesMenuRef}
                       className="relative"
-                      onMouseEnter={() => setMega(true)}
-                      onMouseLeave={() => setMega(false)}
+                      onMouseEnter={() => setHoveredLink(link.href)}
+                      onMouseLeave={() => setHoveredLink(null)}
                     >
                       <motion.button
                         data-cursor="pointer"
-                        onFocus={() => setMega(true)}
-                        onBlur={() => setTimeout(() => setMega(false), 200)}
+                        onClick={() => setMega((open) => !open)}
+                        onKeyDown={(event) => {
+                          if (event.key === 'ArrowDown') {
+                            event.preventDefault()
+                            setMega(true)
+                            window.setTimeout(() => {
+                              servicesMenuRef.current
+                                ?.querySelector<HTMLElement>('[role="menuitem"]')
+                                ?.focus()
+                            }, 0)
+                          }
+                        }}
                         aria-label={mega ? 'Close services menu' : 'Open services menu'}
                         aria-expanded={mega}
-                        aria-haspopup="true"
+                        aria-haspopup="menu"
+                        aria-controls={servicesMenuId}
                         className={cn(
-                          'flex items-center gap-1.5 px-4 py-2.5 rounded-full text-[13px] font-semibold transition-all duration-200',
+                          'flex items-center gap-1.5 px-4 py-2.5 rounded-full text-[13px] font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas',
                           isActive(link) ? 'text-foreground' : 'text-muted'
                         )}
                         style={getLinkStyle(link)}
@@ -322,6 +350,9 @@ export function Navbar() {
                       <AnimatePresence>
                         {mega && (
                           <motion.div
+                            id={servicesMenuId}
+                            role="menu"
+                            aria-label="Services"
                             initial={{ opacity: 0, y: 10, scale: 0.98 }}
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: 10, scale: 0.98 }}
@@ -344,8 +375,10 @@ export function Navbar() {
                                   >
                                     <Link
                                       href={`/services/${s.slug}`}
+                                      role="menuitem"
+                                      onClick={() => setMega(false)}
                                       data-cursor="pointer"
-                                      className="flex items-start gap-3 p-3 rounded-xl transition-all duration-200 group hover:bg-[rgba(var(--color-accent-rgb),0.06)] dark:hover:bg-[rgba(255,255,255,0.06)] hover:border-[rgba(var(--color-accent-rgb),0.1)] dark:hover:border-[rgba(255,255,255,0.1)]"
+                                      className="flex items-start gap-3 p-3 rounded-xl transition-all duration-200 group hover:bg-[rgba(var(--color-accent-rgb),0.06)] dark:hover:bg-[rgba(255,255,255,0.06)] hover:border-[rgba(var(--color-accent-rgb),0.1)] dark:hover:border-[rgba(255,255,255,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
                                       style={styles.megaItem.default}
                                     >
                                       <div
