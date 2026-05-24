@@ -7,7 +7,7 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbSchema, webPageSchema } from '@/lib/seo/schemas'
 
 export const metadata: Metadata = {
-  title: 'About — Manglam Technical Agency',
+  title: 'About',
   description: 'Manglam Technical Agency is a small technical agency based in Bikaner, Rajasthan, helping businesses with websites, automation, security, content, and digital operations.',
   alternates: { canonical: 'https://manglamtechnicalagency.com/about' },
 }

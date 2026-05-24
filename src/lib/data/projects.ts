@@ -80,7 +80,7 @@ export const projects: Project[] = [
       'Appointment scheduler with status filters: Scheduled, Waiting, In Progress, Completed',
       'Razorpay + UPI + Cash payment tracking with receipt verification and pending balance view',
       'Multi-doctor clinic settings, operating hours, QR payment setup, and WhatsApp notification config',
-      'Supabase PostgreSQL backend with row-level security and DPDP Act 2023-compliant data handling',
+      'Supabase PostgreSQL backend with row-level security and consent-aware data handling',
     ],
   },
   {

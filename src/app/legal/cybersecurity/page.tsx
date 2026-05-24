@@ -5,7 +5,7 @@ import { Shield, FileText, AlertTriangle, Clock, Download, Lock, ShieldCheck, Ch
 import Badge from '@/components/ui/Badge'
 
 export const metadata: Metadata = {
-  title: 'Cybersecurity Legal Resources | Manglam Technical Agency',
+  title: 'Cybersecurity Legal Resources',
   description: 'Rules of Engagement, DPDP breach notification templates, and CERT-In compliance documentation for ethical hacking engagements.',
   alternates: { canonical: 'https://manglamtechnicalagency.com/legal/cybersecurity' },
 }

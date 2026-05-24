@@ -8,7 +8,7 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbSchema } from '@/lib/seo/schemas'
 
 export const metadata: Metadata = {
-  title: 'Our Work — Manglam Technical Agency',
+  title: 'Our Work',
   description:
     "Browse MTA's internal SaaS products, active builds, and project pipeline.",
   alternates: { canonical: 'https://manglamtechnicalagency.com/portfolio' },
@@ -162,4 +162,3 @@ export default function PortfolioPage() {
     </main>
   )
 }
-

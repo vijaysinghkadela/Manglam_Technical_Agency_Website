@@ -6,7 +6,7 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbSchema, webPageSchema } from '@/lib/seo/schemas'
 
 export const metadata: Metadata = {
-  title: 'Trust Center & AI Ethics | Manglam Technical Agency',
+  title: 'Trust Center & AI Ethics',
   description: 'Executive summary of MTA compliance, security, and ethical AI controls with links to legal and research documentation.',
   alternates: { canonical: 'https://manglamtechnicalagency.com/trust-center' },
 }

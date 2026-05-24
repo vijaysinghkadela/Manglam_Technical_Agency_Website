@@ -61,7 +61,7 @@ export default function CybersecurityPolicyPage() {
           2. Penetration Testing Execution Standard (PTES)
         </h2>
         <p className="text-muted leading-relaxed mb-6">
-          MTA follows the 7-phase PTES methodology for all ethical hacking engagements. This framework ensures comprehensive coverage from pre-engagement through post-exploitation reporting.
+          MTA follows the 7-phase PTES methodology for ethical hacking engagements. This framework gives each assessment a structured path from pre-engagement through reporting.
         </p>
         <div className="w-full overflow-x-auto">
           <table className="w-full text-left border-collapse min-w-[700px]">

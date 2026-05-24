@@ -112,7 +112,7 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
               </p>
 
               <div className="mb-16 flex flex-wrap gap-3">
-                {['Engineer-led replies', 'DPDP compliant', 'Rajasthan / IST'].map((chip) => (
+                {['Engineer-led replies', 'Consent-aware', 'Rajasthan / IST'].map((chip) => (
                   <Badge key={chip} variant="subtle" size="sm">
                     {chip}
                   </Badge>

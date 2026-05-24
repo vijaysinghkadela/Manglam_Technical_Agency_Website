@@ -240,17 +240,17 @@ export function Navbar() {
         >
           {/* Inner container */}
           <div
-            className="w-full mx-auto flex items-center justify-between h-[64px] sm:h-[72px] lg:h-[80px] xl:h-[88px]"
-            style={{ maxWidth: '1440px', padding: '0 clamp(1rem, 5vw, 4rem)' }}
+            className="w-full mx-auto flex items-center justify-between h-[72px] sm:h-[80px] lg:h-[88px] xl:h-[96px]"
+            style={{ maxWidth: '1440px', padding: '0 clamp(1.1rem, 4vw, 3.5rem)' }}
           >
             {/* Logo */}
             <Link
               href="/"
               data-cursor="pointer"
-              className="flex items-center gap-3 sm:gap-4 shrink-0 group rounded-full border border-border/70 bg-card/55 px-2.5 py-1.5 shadow-[0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur-md transition-colors hover:bg-card/75"
+              className="flex items-center gap-2.5 sm:gap-3.5 shrink-0 group rounded-full border border-border/70 bg-card/60 px-3 py-2 sm:px-3.5 shadow-[0_10px_30px_rgba(0,0,0,0.10)] backdrop-blur-md transition-all duration-300 hover:border-violet/30 hover:bg-card/80 hover:shadow-[0_14px_36px_rgba(var(--color-accent-rgb),0.12)]"
             >
               <motion.div
-                className="relative"
+                className="relative flex h-10 w-10 items-center justify-center rounded-full border border-border/70 bg-canvas/70 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)] sm:h-11 sm:w-11"
                 whileHover={animateLogo ? { scale: 1.05 } : undefined}
                 transition={animateLogo ? { duration: 0.2 } : { duration: 0 }}
               >
@@ -260,19 +260,20 @@ export function Navbar() {
                   width={40}
                   height={40}
                   sizes="(max-width: 640px) 36px, 40px"
-                  className="h-9 w-9 shrink-0 object-contain sm:h-10 sm:w-10"
+                  className="h-8 w-8 shrink-0 object-contain sm:h-9 sm:w-9"
                   loading="eager"
                 />
               </motion.div>
-              <div className="hidden sm:flex flex-col leading-none">
+              <div className="hidden sm:flex flex-col gap-0.5 pr-1 leading-none">
                 <span
-                  className="font-display font-black text-[14px] tracking-tight text-foreground"
+                  className="font-display font-black text-[14px] tracking-normal text-foreground xl:text-[15px]"
                   style={{ textShadow: isLight ? '0 1px 0 rgba(255,255,255,0.72)' : '0 1px 10px rgba(0,0,0,0.55)' }}
                 >
-                  MTA
+                  <span className="xl:hidden">MTA</span>
+                  <span className="hidden xl:inline">Manglam Technical</span>
                 </span>
                 <span
-                  className="font-mono uppercase text-muted text-[8px] tracking-wider"
+                  className="font-mono uppercase text-muted text-[8px] tracking-[0.22em] xl:text-[9px]"
                   style={{ textShadow: isLight ? '0 1px 0 rgba(255,255,255,0.72)' : '0 1px 10px rgba(0,0,0,0.55)' }}
                 >
                   Agency
@@ -283,7 +284,7 @@ export function Navbar() {
             {/* Desktop Navigation - Pill Container */}
             <div className="hidden lg:block absolute left-1/2 -translate-x-1/2">
               <div
-                className="flex items-center gap-1 xl:gap-1.5 px-2 py-1.5 rounded-full transition-all duration-300"
+                className="flex items-center gap-1.5 xl:gap-2 px-2.5 py-2 rounded-full transition-all duration-300"
                 style={styles.navPill}
               >
                 {NAV_LINKS.map((link) =>
@@ -302,7 +303,7 @@ export function Navbar() {
                         aria-expanded={mega}
                         aria-haspopup="true"
                         className={cn(
-                          'flex items-center gap-1.5 px-4 py-2 rounded-full text-[13px] font-semibold transition-all duration-200',
+                          'flex items-center gap-1.5 px-4 py-2.5 rounded-full text-[13px] font-semibold transition-all duration-200',
                           isActive(link) ? 'text-foreground' : 'text-muted'
                         )}
                         style={getLinkStyle(link)}
@@ -383,8 +384,7 @@ export function Navbar() {
                         href={link.href}
                         data-cursor="pointer"
                         className={cn(
-                          'block px-4 py-2 text-[13px] font-medium rounded-full transition-all duration-200',
-                          'font-semibold',
+                          'block px-4 py-2.5 text-[13px] font-semibold rounded-full transition-all duration-200',
                           isActive(link) ? 'text-foreground' : 'text-muted'
                         )}
                         style={getLinkStyle(link)}
@@ -398,7 +398,7 @@ export function Navbar() {
             </div>
 
             {/* Right side actions */}
-            <div className="flex items-center gap-2 sm:gap-3 xl:gap-4">
+            <div className="flex items-center gap-3 sm:gap-3.5 xl:gap-4">
               <ThemeToggle />
 
               {/* Mobile menu button */}
@@ -467,9 +467,9 @@ export function Navbar() {
             </div>
 
             {/* Content */}
-            <div className="relative h-full flex flex-col pt-[80px] px-6">
+            <div className="relative h-full flex flex-col pt-[92px] px-6">
               <div className="flex-1 overflow-y-auto">
-                <nav aria-label="Mobile navigation" className="space-y-1">
+                <nav aria-label="Mobile navigation" className="space-y-2">
                   {NAV_LINKS.map((link, i) => (
                     <motion.div
                       key={link.href}
@@ -485,7 +485,7 @@ export function Navbar() {
                         href={link.href}
                         onClick={() => setMobile(false)}
                         className={cn(
-                          'flex items-center justify-between py-4 border-b transition-colors duration-200',
+                          'flex items-center justify-between rounded-2xl border px-5 py-4 transition-colors duration-200',
                           isActive(link)
                             ? 'text-foreground border-violet/30'
                             : 'text-muted border-border hover:text-foreground'

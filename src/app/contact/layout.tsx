@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Contact Us | MTA',
-  description: 'Start a conversation with Manglam Technical Agency. We promise a technical engineer will read it and respond within 2-4 hours, not a salesperson.',
+  title: 'Contact Us',
+  description: 'Start a conversation with Manglam Technical Agency. A technical team member will read your note and respond within 2-4 hours during business hours.',
 };
 
 export default function ContactLayout({

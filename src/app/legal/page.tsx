@@ -12,7 +12,7 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbSchema, webPageSchema } from '@/lib/seo/schemas'
 
 export const metadata: Metadata = {
-  title: 'Legal Hub — Manglam Technical Agency',
+  title: 'Legal Hub',
   description:
     'Agreement summaries, service applicability matrix, and controlled request workflow for legal templates used by MTA.',
   alternates: { canonical: 'https://manglamtechnicalagency.com/legal' },
@@ -307,4 +307,3 @@ export default function LegalHubPage() {
     </main>
   )
 }
-

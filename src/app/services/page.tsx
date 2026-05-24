@@ -7,7 +7,7 @@ import { services } from "@/lib/data/services";
 import Badge from "@/components/ui/Badge";
 
 export const metadata: Metadata = {
-  title: "Services — Manglam Technical Agency",
+  title: "Services",
   description:
     "Explore MTA's practical digital services: web development, cybersecurity, AI automation, content, branding, and digital operations.",
   alternates: { canonical: 'https://manglamtechnicalagency.com/services' },

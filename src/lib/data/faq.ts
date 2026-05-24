@@ -11,7 +11,7 @@ export const aboutFaqs: FAQItem[] = [
   },
   {
     q: "Where is MTA registered?",
-    a: "Manglam Technical Agency is registered as an MSME under UDYAM-RJ-15-0094091, with operations across Bikaner, Nagaur, and Jodhpur, Rajasthan.",
+    a: "Manglam Technical Agency is a Rajasthan-based technical agency with operations across Bikaner, Nagaur, and Jodhpur. MSME registration details can be shared where they are relevant to an engagement.",
   },
   {
     q: "Do you only work with Rajasthan-based clients?",

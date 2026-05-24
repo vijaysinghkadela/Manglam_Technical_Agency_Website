@@ -471,7 +471,7 @@ export const departments: DepartmentData[] = [
     department: 'Cybersecurity',
     slug: 'cybersecurity',
     description:
-      'Comprehensive ethical hacking service using PTES methodology, with DPDP compliance certification. We protect your business from digital threats with thorough testing and clear remediation roadmaps.',
+      'Structured ethical hacking service using PTES methodology, with DPDP readiness notes where applicable. We help identify digital risks with thorough testing and clear remediation roadmaps.',
     plans: [
       {
         name: 'Shield',
@@ -721,7 +721,7 @@ export const departments: DepartmentData[] = [
       },
       {
         name: 'Scale',
-        tagline: 'Full-service ad management for high growth',
+        tagline: 'End-to-end ad management for growth campaigns',
         target: 'E-commerce stores, established brands, high-growth businesses',
         popular: false,
         highlight: false,
