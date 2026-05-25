@@ -23,10 +23,16 @@ export function MagneticCursor() {
   useEffect(() => {
     if (isTouch) return
     const move = (e: MouseEvent) => { mx.set(e.clientX); my.set(e.clientY); setVisible(true) }
+    const hide = () => setVisible(false)
+    const show = () => setVisible(true)
     window.addEventListener('mousemove', move, { passive: true })
-    document.documentElement.addEventListener('mouseleave', () => setVisible(false))
-    document.documentElement.addEventListener('mouseenter', () => setVisible(true))
-    return () => window.removeEventListener('mousemove', move)
+    document.documentElement.addEventListener('mouseleave', hide)
+    document.documentElement.addEventListener('mouseenter', show)
+    return () => {
+      window.removeEventListener('mousemove', move)
+      document.documentElement.removeEventListener('mouseleave', hide)
+      document.documentElement.removeEventListener('mouseenter', show)
+    }
   }, [mx, my, isTouch])
 
   if (isTouch) return null

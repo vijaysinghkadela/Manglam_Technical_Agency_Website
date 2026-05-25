@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import Link from 'next/link'
 
@@ -83,6 +83,8 @@ export function HeroSection() {
   const txtY = useTransform(scrollYProgress, [0, 1], ['0%', '10%'])
   const glowY = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
   const isDesktop = useMediaQuery('(min-width: 1024px)') ?? false
+  const prefersReducedMotion = useReducedMotion()
+  const shouldAnimateScrollCue = isDesktop && !prefersReducedMotion
 
   return (
     <section
@@ -317,8 +319,8 @@ export function HeroSection() {
           <motion.div
             className="absolute top-0 left-0 w-full"
             style={{ backgroundColor: 'var(--color-violet)', opacity: 0.8 }}
-            animate={{ height: ['0%', '100%'], top: ['0%', '100%'] }}
-            transition={{ repeat: Infinity, duration: 2.2, ease: 'linear' }}
+            animate={shouldAnimateScrollCue ? { height: ['0%', '100%'], top: ['0%', '100%'] } : { height: '100%', top: '0%' }}
+            transition={shouldAnimateScrollCue ? { repeat: Infinity, duration: 2.2, ease: 'linear' } : { duration: 0 }}
           />
         </div>
         <span

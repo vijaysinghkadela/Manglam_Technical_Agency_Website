@@ -1,7 +1,7 @@
 "use client";
 
 import * as Dialog from "@radix-ui/react-dialog";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   Bot,
   RefreshCcw,
@@ -40,6 +40,7 @@ const MAX_HISTORY = 30;
 const DAILY_MESSAGES_LIMIT = 20;
 const API_CONTEXT_WINDOW = 15;
 const COOKIE_MAX_AGE = 86_400; // 24 hours
+const MAX_MESSAGE_CHARS = 800;
 
 const WELCOME_MESSAGE: ChatMessage = {
   id: "welcome",
@@ -310,6 +311,7 @@ function getPageLabel(pathname: string) {
 export function SiteChatbot() {
   const pathname = usePathname() || "/";
   const pageLabel = useMemo(() => getPageLabel(pathname), [pathname]);
+  const reducedMotion = useReducedMotion();
 
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>(() => {
@@ -333,6 +335,7 @@ export function SiteChatbot() {
 
   const scrollAnchorRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
+  const isSendingRef = useRef(false);
 
   const dailyRemaining = Math.max(0, DAILY_MESSAGES_LIMIT - dailyUsage.count);
   const isLimitReached = dailyUsage.count >= DAILY_MESSAGES_LIMIT;
@@ -374,14 +377,15 @@ export function SiteChatbot() {
   }, [input]);
 
   async function sendMessage(messageText: string, retryId?: string) {
-    const trimmed = messageText.trim();
-    if (!trimmed || isSending) return;
+    const trimmed = messageText.trim().slice(0, MAX_MESSAGE_CHARS);
+    if (!trimmed || isSendingRef.current) return;
 
     if (isLimitReached) {
       toast.error(`Daily limit of ${DAILY_MESSAGES_LIMIT} messages reached. Try again tomorrow.`);
       return;
     }
 
+    isSendingRef.current = true;
     setOpen(true);
     setIsSending(true);
 
@@ -497,10 +501,15 @@ export function SiteChatbot() {
         ]);
       });
     } finally {
+      isSendingRef.current = false;
       setIsSending(false);
       setStreamingId(null);
       window.requestAnimationFrame(() => inputRef.current?.focus());
     }
+  }
+
+  function sendSuggestion(prompt: string) {
+    void sendMessage(prompt);
   }
 
   function retryLast() {
@@ -528,15 +537,15 @@ export function SiteChatbot() {
         type="button"
         onClick={() => setOpen(true)}
         className="fixed bottom-5 right-5 z-[70] flex h-14 w-14 items-center justify-center rounded-full border border-accent-border bg-card/95 shadow-[0_12px_40px_rgba(0,0,0,0.25)] backdrop-blur-xl transition-colors hover:border-accent hover:bg-accent-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas sm:bottom-6 sm:right-6 sm:h-16 sm:w-16"
-        whileHover={{ scale: 1.06, transition: { duration: 0.18 } }}
-        whileTap={{ scale: 0.92, transition: { duration: 0.1 } }}
+        whileHover={reducedMotion ? undefined : { scale: 1.06, transition: { duration: 0.18 } }}
+        whileTap={reducedMotion ? undefined : { scale: 0.92, transition: { duration: 0.1 } }}
         aria-label="Open AI assistant"
       >
         <span className="relative flex items-center justify-center">
           <Bot className="h-6 w-6 text-accent sm:h-7 sm:w-7" />
           <motion.span
-            animate={{ scale: [1, 1.8, 1], opacity: [0.5, 0, 0.5] }}
-            transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut" }}
+            animate={reducedMotion ? undefined : { scale: [1, 1.8, 1], opacity: [0.5, 0, 0.5] }}
+            transition={reducedMotion ? undefined : { duration: 2.2, repeat: Infinity, ease: "easeOut" }}
             className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-emerald-400"
             aria-hidden="true"
           />
@@ -559,10 +568,10 @@ export function SiteChatbot() {
 
             <Dialog.Content asChild>
               <motion.div
-                initial={{ opacity: 0, y: 28, scale: 0.96 }}
+                initial={reducedMotion ? false : { opacity: 0, y: 28, scale: 0.96 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 20, scale: 0.96 }}
-                transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
+                exit={reducedMotion ? undefined : { opacity: 0, y: 20, scale: 0.96 }}
+                transition={reducedMotion ? { duration: 0 } : { duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
                 style={{
                   backgroundColor: "var(--color-card)",
                   backgroundImage:
@@ -636,8 +645,8 @@ export function SiteChatbot() {
                               key={prompt}
                               type="button"
                               disabled={isSending || isLimitReached}
-                              onClick={() => void sendMessage(prompt)}
-                              whileHover={{ x: 2 }}
+                              onClick={() => sendSuggestion(prompt)}
+                              whileHover={reducedMotion ? undefined : { x: 2 }}
                               className="group flex items-center gap-2 rounded-xl border border-border bg-canvas/75 px-3 py-2.5 text-left text-[11px] leading-snug text-foreground transition-colors hover:border-accent-border hover:bg-accent-soft disabled:cursor-not-allowed disabled:opacity-50 sm:px-3.5 sm:text-[12px]"
                             >
                               <span className="flex-1">{prompt}</span>
@@ -791,9 +800,9 @@ export function SiteChatbot() {
                               key={prompt}
                               type="button"
                               disabled={isSending || isLimitReached}
-                              onClick={() => void sendMessage(prompt)}
-                              whileHover={{ scale: 1.03 }}
-                              whileTap={{ scale: 0.97 }}
+                              onClick={() => sendSuggestion(prompt)}
+                              whileHover={reducedMotion ? undefined : { scale: 1.03 }}
+                              whileTap={reducedMotion ? undefined : { scale: 0.97 }}
                               className="rounded-full border border-border bg-canvas/60 px-3.5 py-2 text-[11px] text-muted transition-colors hover:border-accent-border hover:bg-accent-soft hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:text-[12px]"
                             >
                               {prompt}
@@ -842,9 +851,10 @@ export function SiteChatbot() {
                             }
                           }}
                           disabled={isSending}
-                          placeholder="Describe your goal, service, budget, and timeline…"
+                          maxLength={MAX_MESSAGE_CHARS}
+                          placeholder="Ask about services, pricing, compliance, budget, or timeline..."
                           aria-label="Type your message"
-                          className="mta-chat-input w-full resize-none rounded-2xl border px-4 py-3 pr-13 text-[13px] leading-[1.55] outline-none transition-shadow focus:ring-2 focus:ring-accent/30 disabled:opacity-60 sm:text-[14px] lg:text-[15px]"
+                          className="mta-chat-input w-full resize-none rounded-2xl border px-4 py-3 pr-14 text-[13px] leading-[1.55] outline-none transition-shadow focus:ring-2 focus:ring-accent/30 disabled:opacity-60 sm:text-[14px] lg:text-[15px]"
                           style={{
                             minHeight: "56px",
                             maxHeight: "160px",
@@ -857,9 +867,9 @@ export function SiteChatbot() {
                           type="submit"
                           disabled={isSending || !input.trim()}
                           aria-label="Send message"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.92 }}
-                          className="absolute bottom-2 right-2 flex h-9 w-9 items-center justify-center rounded-xl text-white shadow-[0_4px_14px_rgba(var(--color-accent-rgb),0.35)] transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
+                          whileHover={reducedMotion ? undefined : { scale: 1.05 }}
+                          whileTap={reducedMotion ? undefined : { scale: 0.92 }}
+                          className="absolute bottom-1.5 right-1.5 flex h-11 w-11 items-center justify-center rounded-xl text-white shadow-[0_4px_14px_rgba(var(--color-accent-rgb),0.35)] transition-all hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-card disabled:cursor-not-allowed disabled:opacity-40"
                           style={{ backgroundColor: BRAND }}
                         >
                           <Send className="h-4 w-4" />
@@ -882,7 +892,7 @@ export function SiteChatbot() {
                           </span>
                         </div>
                         <span className="shrink-0 font-mono text-[9px] tracking-[0.08em] text-muted/60 sm:text-[10px]">
-                          ↵ Send · ⇧↵ Newline
+                          {input.length}/{MAX_MESSAGE_CHARS} chars · Enter sends
                         </span>
                       </div>
                     </form>

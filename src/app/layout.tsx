@@ -9,7 +9,7 @@ import { ThemeProvider } from "next-themes";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { SiteChatbot } from "@/components/chat/SiteChatbot";
+import { DeferredSiteChatbot } from "@/components/chat/DeferredSiteChatbot";
 import { ConsentBanner } from "@/components/ui/ConsentBanner";
 import { organizationSchema, websiteSchema } from "@/lib/seo/schemas";
 import "@fontsource/outfit/400.css";
@@ -134,7 +134,7 @@ export default function RootLayout({
 
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange={false}
         >
@@ -150,7 +150,7 @@ export default function RootLayout({
             <Navbar />
             <main id="main-content" className="relative w-full overflow-x-clip">{children}</main>
             <Footer />
-            <SiteChatbot />
+            <DeferredSiteChatbot />
             <ConsentBanner />
             <Analytics />
             <SpeedInsights />

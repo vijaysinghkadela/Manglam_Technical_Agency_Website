@@ -1,10 +1,10 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { ExternalLink, Lock } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { type KeyboardEvent, useRef, useState } from 'react'
 import { projects } from '@/lib/data/projects'
 
 import type { Variants } from 'framer-motion'
@@ -24,6 +24,8 @@ const comingProjects = projects.filter(p => p.status === 'coming-soon')
 
 export function PortfolioContent() {
   const [filter, setFilter] = useState<FilterType>('all')
+  const filterButtonRefs = useRef<Array<HTMLButtonElement | null>>([])
+  const reducedMotion = useReducedMotion()
 
   const filteredProjects = projects.filter(p => {
     if (p.status !== 'live') return false
@@ -36,6 +38,22 @@ export function PortfolioContent() {
     { key: 'client', label: 'Client Projects' },
     { key: 'product', label: 'Our Products' },
   ]
+
+  const handleFilterKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
+    const lastIndex = FILTERS.length - 1
+    let nextIndex: number | null = null
+
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') nextIndex = index === lastIndex ? 0 : index + 1
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') nextIndex = index === 0 ? lastIndex : index - 1
+    if (event.key === 'Home') nextIndex = 0
+    if (event.key === 'End') nextIndex = lastIndex
+
+    if (nextIndex === null) return
+    event.preventDefault()
+    setFilter(FILTERS[nextIndex].key)
+    filterButtonRefs.current[nextIndex]?.focus()
+  }
+
   return (
     <div style={{ backgroundColor: 'var(--color-canvas)' }}>
 
@@ -44,9 +62,9 @@ export function PortfolioContent() {
         <div className="container-site">
 
           <motion.span
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            initial={reducedMotion ? false : { opacity: 0, y: 16 }}
+            whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+            transition={reducedMotion ? { duration: 0 } : { duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true }}
             className="font-mono uppercase block mb-10"
             style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.22em' }}
@@ -54,12 +72,19 @@ export function PortfolioContent() {
             ✦ CASE STUDIES
           </motion.span>
 
-          <div className="flex flex-wrap gap-3 mb-14">
-            {FILTERS.map((f) => (
+          <div className="flex flex-wrap gap-3 mb-14" role="tablist" aria-label="Portfolio filters">
+            {FILTERS.map((f, index) => (
               <button
                 key={f.key}
+                ref={(el) => {
+                  filterButtonRefs.current[index] = el
+                }}
+                type="button"
+                role="tab"
                 onClick={() => setFilter(f.key)}
-                aria-pressed={filter === f.key}
+                onKeyDown={(event) => handleFilterKeyDown(event, index)}
+                aria-selected={filter === f.key}
+                tabIndex={filter === f.key ? 0 : -1}
                 className="font-mono uppercase transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
                 style={{
                   fontSize: '11px',
@@ -79,16 +104,16 @@ export function PortfolioContent() {
             {filteredProjects.map((p, i) => (
               <motion.article
                 key={p.id}
-                variants={stagger}
-                initial="hidden"
-                whileInView="show"
+                variants={reducedMotion ? undefined : stagger}
+                initial={reducedMotion ? false : "hidden"}
+                whileInView={reducedMotion ? undefined : "show"}
                 viewport={{ once: true, margin: "-50px" }}
                 className="grid grid-cols-1 lg:grid-cols-[45%_55%]"
                 style={{ borderBottom: '1px solid var(--color-border)' }}
               >
                 {/* Left — Visual panel */}
                 <motion.div
-                  variants={fadeUp}
+                  variants={reducedMotion ? undefined : fadeUp}
                   className="relative overflow-hidden"
                   style={{
                     background: `linear-gradient(135deg, ${p.bgFrom} 0%, ${p.bgTo} 100%)`,
@@ -97,10 +122,11 @@ export function PortfolioContent() {
                   {p.image && (
                     <Image
                       src={p.image}
-                      alt={`${p.title} screenshot`}
+                      alt={`${p.title} ${p.type === 'client' ? 'client project' : 'MTA product'} interface screenshot for ${p.client}`}
                       fill
                       sizes="(max-width: 1024px) 100vw, 45vw"
                       className="object-contain"
+                      loading="lazy"
                     />
                   )}
 
@@ -188,7 +214,7 @@ export function PortfolioContent() {
 
                 {/* Right — Project details */}
                 <motion.div
-                  variants={fadeUp}
+                  variants={reducedMotion ? undefined : fadeUp}
                   className="flex flex-col p-8 sm:p-10 lg:p-14 xl:p-20"
                   style={{ borderLeft: '1px solid var(--color-border)' }}
                 >
@@ -491,4 +517,3 @@ export function PortfolioContent() {
     </div>
   )
 }
-

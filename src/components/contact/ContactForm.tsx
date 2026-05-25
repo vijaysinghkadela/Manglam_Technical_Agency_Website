@@ -1,8 +1,9 @@
 "use client";
 
 import React from "react";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
+import type { FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import toast from "react-hot-toast";
@@ -100,7 +101,7 @@ const inferTimeline = (hint: string) => {
 
 const getSelectionSummary = (searchParams: ReturnType<typeof useSearchParams>) => {
   const selectionType = searchParams.get("selectionType");
-  const planName = searchParams.get("planName");
+  const planName = searchParams.get("planName") ?? searchParams.get("plan");
   const bundleName = searchParams.get("bundleName");
   const departmentName = searchParams.get("departmentName");
   const serviceName = searchParams.get("serviceName") ?? searchParams.get("service");
@@ -128,6 +129,31 @@ const getSelectionSummary = (searchParams: ReturnType<typeof useSearchParams>) =
   };
 };
 
+const SELECTION_QUERY_KEYS = [
+  "selectionType",
+  "planName",
+  "plan",
+  "bundleName",
+  "departmentName",
+  "serviceName",
+  "price",
+  "durationLabel",
+  "durationNote",
+  "planAmount",
+  "planPeriod",
+  "planNote",
+];
+
+const FORM_FIELD_ORDER: (keyof F)[] = [
+  "name",
+  "email",
+  "service",
+  "budget",
+  "timeline",
+  "message",
+  "privacy",
+];
+
 const buildWhatsAppMessage = (data: F) => {
   const lines = [
     "New enquiry from the MTA website",
@@ -150,12 +176,19 @@ const buildWhatsAppMessage = (data: F) => {
   return lines.filter(Boolean).join("\n");
 };
 
-export default function ContactForm() {
+export default function ContactForm({
+  serviceOptions = SERVICES,
+}: {
+  serviceOptions?: string[];
+} = {}) {
+  const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
-  const initialService = normalizeOption(searchParams.get("service"), SERVICES);
-  const planAmount = searchParams.get("planAmount");
-  const planPeriod = searchParams.get("planPeriod");
-  const planNote = searchParams.get("planNote");
+  const hasServiceOptions = serviceOptions.length > 0;
+  const initialService = normalizeOption(searchParams.get("service"), serviceOptions);
+  const planAmount = searchParams.get("planAmount") ?? searchParams.get("price");
+  const planPeriod = searchParams.get("planPeriod") ?? searchParams.get("durationLabel");
+  const planNote = searchParams.get("planNote") ?? searchParams.get("durationNote");
   const initialBudget = normalizeOption(
     searchParams.get("budget") ??
       (planAmount ? inferBudgetRange(planAmount) : ""),
@@ -174,6 +207,7 @@ export default function ContactForm() {
   const {
     register,
     handleSubmit,
+    setFocus,
     formState: { errors, isSubmitting },
   } = useForm<F>({
     resolver: zodResolver(schema),
@@ -186,6 +220,18 @@ export default function ContactForm() {
       message: initialMessage,
     },
   });
+
+  const clearSelection = () => {
+    const params = new URLSearchParams(searchParams.toString());
+    SELECTION_QUERY_KEYS.forEach((key) => params.delete(key));
+    const query = params.toString();
+    router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+  };
+
+  const onInvalid = (fieldErrors: FieldErrors<F>) => {
+    const first = FORM_FIELD_ORDER.find((field) => fieldErrors[field]);
+    if (first) setFocus(first);
+  };
 
   const onSubmit = async (data: F) => {
     if (
@@ -206,7 +252,7 @@ export default function ContactForm() {
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(onSubmit, onInvalid)}
       className="flex flex-col gap-8"
       noValidate
     >
@@ -247,6 +293,14 @@ export default function ContactForm() {
               >
                 The form below has been pre-filled from that selection.
               </p>
+              <button
+                type="button"
+                onClick={clearSelection}
+                className="mt-3 inline-flex min-h-[36px] items-center rounded-full border border-border px-4 py-2 font-mono text-[11px] uppercase tracking-[0.14em] transition-colors hover:border-violet hover:text-violet focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-card"
+                style={{ color: "var(--color-muted)" }}
+              >
+                Change selection
+              </button>
             </div>
           </div>
         </div>
@@ -263,6 +317,7 @@ export default function ContactForm() {
             <Input
               {...register("name")}
               autoComplete="name"
+              required
               placeholder="Your name"
             />
           </Field>
@@ -271,6 +326,7 @@ export default function ContactForm() {
               {...register("email")}
               autoComplete="email"
               type="email"
+              required
               placeholder="you@example.com"
             />
           </Field>
@@ -281,7 +337,7 @@ export default function ContactForm() {
             autoComplete="tel"
             type="tel"
             inputMode="tel"
-            placeholder="+91 98765 43210"
+            placeholder="Your phone number (10 digits)"
           />
         </Field>
         <Field label="Company">
@@ -301,9 +357,13 @@ export default function ContactForm() {
         />
         <Row>
           <Field label="Service Needed *" error={errors.service?.message}>
-            <Select {...register("service")}>
-              <option value="">Select a service</option>
-              {SERVICES.map((s) => (
+            <Select {...register("service")} required disabled={!hasServiceOptions}>
+              <option value="">
+                {hasServiceOptions
+                  ? "Select a service"
+                  : "Service options failed to load. Please refresh."}
+              </option>
+              {serviceOptions.map((s) => (
                 <option key={s} value={s}>
                   {s}
                 </option>
@@ -311,7 +371,7 @@ export default function ContactForm() {
             </Select>
           </Field>
           <Field label="Budget Range *" error={errors.budget?.message}>
-            <Select {...register("budget")}>
+            <Select {...register("budget")} required>
               <option value="">Select budget</option>
               {BUDGETS.map((b) => (
                 <option key={b} value={b}>
@@ -322,7 +382,7 @@ export default function ContactForm() {
           </Field>
         </Row>
         <Field label="Timeline *" error={errors.timeline?.message}>
-          <Select {...register("timeline")}>
+          <Select {...register("timeline")} required>
             <option value="">Select timeline</option>
             {TIMELINES.map((t) => (
               <option key={t} value={t}>
@@ -344,10 +404,13 @@ export default function ContactForm() {
         <div className="rounded-lg border border-border bg-surface p-4 sm:p-5">
           <div className="grid gap-4 sm:grid-cols-[24px_1fr] sm:gap-3">
             <input
-              {...register("privacy")}
-              type="checkbox"
-              id="privacy"
-              className="mt-1 h-5 w-5 shrink-0 cursor-pointer rounded"
+            {...register("privacy")}
+            type="checkbox"
+            id="privacy"
+            required
+            aria-required="true"
+            aria-invalid={errors.privacy ? "true" : "false"}
+            className="mt-1 h-5 w-5 shrink-0 cursor-pointer rounded"
               style={{ accentColor: "var(--color-violet)" }}
             />
             <label
@@ -467,6 +530,7 @@ const Field = ({
 }) => {
   const id = toId(label);
   const errId = `${id}-error`;
+  const required = label.includes("*");
   return (
     <div className="flex flex-col gap-2">
       <label
@@ -482,6 +546,8 @@ const Field = ({
       {React.isValidElement(children)
         ? React.cloneElement(children, {
             id,
+            ...(required ? { "aria-required": "true" } : {}),
+            "aria-invalid": error ? "true" : "false",
             ...(error
               ? { "aria-describedby": errId, "aria-invalid": "true" }
               : {}),

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
+import type { KeyboardEvent as ReactKeyboardEvent } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown, Menu, X } from 'lucide-react'
 import { services } from '@/lib/data/services'
@@ -112,9 +113,11 @@ export function Navbar() {
   const path = usePathname()
   const isClient = useIsClient()
   const servicesMenuRef = useRef<HTMLDivElement | null>(null)
+  const serviceItemRefs = useRef<Array<HTMLAnchorElement | null>>([])
   const [scrolled, setScrolled] = useState(false)
   const [mobile, setMobile] = useState(false)
   const [mega, setMega] = useState(false)
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false)
   const { resolvedTheme } = useTheme()
   const [hoveredLink, setHoveredLink] = useState<string | null>(null)
   const [pressedLink, setPressedLink] = useState<string | null>(null)
@@ -132,6 +135,7 @@ export function Navbar() {
     : '/images/mta-logo-transparent-white.png'
   const animateLogo = !prefersReducedMotion && !isTouchDevice
   const servicesMenuId = 'services-menu'
+  const mobileServicesMenuId = 'mobile-services-menu'
 
   // Scroll detection with RAF throttling
   useEffect(() => {
@@ -162,6 +166,7 @@ export function Navbar() {
     const id = setTimeout(() => {
       setMobile(false)
       setMega(false)
+      setMobileServicesOpen(false)
     }, 0)
     return () => clearTimeout(id)
   }, [path])
@@ -182,14 +187,21 @@ export function Navbar() {
   useEffect(() => {
     if (!mega) return
 
-    const handlePointerDown = (event: PointerEvent) => {
+    const handleOutsidePress = (event: Event) => {
       if (!servicesMenuRef.current?.contains(event.target as Node)) {
         setMega(false)
       }
     }
 
-    document.addEventListener('pointerdown', handlePointerDown)
-    return () => document.removeEventListener('pointerdown', handlePointerDown)
+    document.addEventListener('pointerdown', handleOutsidePress, true)
+    document.addEventListener('mousedown', handleOutsidePress, true)
+    document.addEventListener('touchstart', handleOutsidePress, true)
+
+    return () => {
+      document.removeEventListener('pointerdown', handleOutsidePress, true)
+      document.removeEventListener('mousedown', handleOutsidePress, true)
+      document.removeEventListener('touchstart', handleOutsidePress, true)
+    }
   }, [mega])
 
   // Mobile scroll lock
@@ -203,6 +215,41 @@ export function Navbar() {
       document.body.style.overflow = 'unset'
     }
   }, [mobile])
+
+  const focusServiceItem = useCallback((index: number) => {
+    const items = serviceItemRefs.current.filter(Boolean)
+    if (items.length === 0) return
+    const nextIndex = (index + items.length) % items.length
+    items[nextIndex]?.focus()
+  }, [])
+
+  const handleServiceItemKeyDown = useCallback((event: ReactKeyboardEvent<HTMLAnchorElement>, index: number) => {
+    if (event.key === 'ArrowDown') {
+      event.preventDefault()
+      focusServiceItem(index + 1)
+      return
+    }
+    if (event.key === 'ArrowUp') {
+      event.preventDefault()
+      focusServiceItem(index - 1)
+      return
+    }
+    if (event.key === 'Home') {
+      event.preventDefault()
+      focusServiceItem(0)
+      return
+    }
+    if (event.key === 'End') {
+      event.preventDefault()
+      focusServiceItem(services.length - 1)
+      return
+    }
+    if (event.key === 'Escape') {
+      event.preventDefault()
+      setMega(false)
+      servicesMenuRef.current?.querySelector<HTMLButtonElement>('button[aria-controls="services-menu"]')?.focus()
+    }
+  }, [focusServiceItem])
 
   const isActive = useCallback((link: (typeof NAV_LINKS)[0]) => {
     if (link.href === '/') return path === '/'
@@ -245,9 +292,7 @@ export function Navbar() {
       <motion.nav
         aria-label="Main navigation"
         className="fixed top-0 left-0 right-0 z-[100]"
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        initial={false}
       >
         {/* Main navbar container */}
         <div
@@ -256,7 +301,7 @@ export function Navbar() {
         >
           {/* Inner container */}
           <div
-            className="w-full mx-auto flex items-center justify-between h-[72px] sm:h-[80px] lg:h-[88px] xl:h-[96px]"
+            className="w-full mx-auto flex items-center justify-between h-[72px] sm:h-[80px] lg:h-[80px] xl:h-[84px]"
             style={{ maxWidth: '1440px', padding: '0 clamp(1.1rem, 4vw, 3.5rem)' }}
           >
             {/* Logo */}
@@ -320,9 +365,14 @@ export function Navbar() {
                             event.preventDefault()
                             setMega(true)
                             window.setTimeout(() => {
-                              servicesMenuRef.current
-                                ?.querySelector<HTMLElement>('[role="menuitem"]')
-                                ?.focus()
+                              focusServiceItem(0)
+                            }, 0)
+                          }
+                          if (event.key === 'ArrowUp') {
+                            event.preventDefault()
+                            setMega(true)
+                            window.setTimeout(() => {
+                              focusServiceItem(services.length - 1)
                             }, 0)
                           }
                         }}
@@ -376,7 +426,11 @@ export function Navbar() {
                                     <Link
                                       href={`/services/${s.slug}`}
                                       role="menuitem"
+                                      ref={(el) => {
+                                        serviceItemRefs.current[idx] = el
+                                      }}
                                       onClick={() => setMega(false)}
+                                      onKeyDown={(event) => handleServiceItemKeyDown(event, idx)}
                                       data-cursor="pointer"
                                       className="flex items-start gap-3 p-3 rounded-xl transition-all duration-200 group hover:bg-[rgba(var(--color-accent-rgb),0.06)] dark:hover:bg-[rgba(255,255,255,0.06)] hover:border-[rgba(var(--color-accent-rgb),0.1)] dark:hover:border-[rgba(255,255,255,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
                                       style={styles.megaItem.default}
@@ -514,36 +568,100 @@ export function Navbar() {
                         duration: 0.4,
                         ease: [0.16, 1, 0.3, 1] }}
                     >
-                      <Link
-                        href={link.href}
-                        onClick={() => setMobile(false)}
-                        className={cn(
-                          'flex items-center justify-between rounded-2xl border px-5 py-4 transition-colors duration-200',
-                          isActive(link)
-                            ? 'text-foreground border-violet/30'
-                            : 'text-muted border-border hover:text-foreground'
-                        )}
-                        style={{
-                          borderColor: isActive(link)
-                            ? 'rgba(var(--color-accent-rgb), 0.2)'
-                            : isLight
-                              ? 'rgba(var(--color-accent-rgb), 0.08)'
-                              : 'rgba(255, 255, 255, 0.06)' }}
-                      >
-                        <span
-                          className="font-display font-black text-2xl"
+                      {link.hasMega ? (
+                        <div>
+                          <button
+                            type="button"
+                            onClick={() => setMobileServicesOpen((open) => !open)}
+                            aria-expanded={mobileServicesOpen}
+                            aria-controls={mobileServicesMenuId}
+                            className={cn(
+                              'flex w-full items-center justify-between rounded-2xl border px-5 py-4 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas',
+                              isActive(link)
+                                ? 'text-foreground border-violet/30'
+                                : 'text-muted border-border hover:text-foreground'
+                            )}
+                            style={{
+                              borderColor: isActive(link)
+                                ? 'rgba(var(--color-accent-rgb), 0.2)'
+                                : isLight
+                                  ? 'rgba(var(--color-accent-rgb), 0.08)'
+                                  : 'rgba(255, 255, 255, 0.06)' }}
+                          >
+                            <span
+                              className="font-display font-black text-2xl"
+                              style={{
+                                color: isActive(link) ? 'var(--color-violet)' : 'var(--color-foreground)' }}
+                            >
+                              {link.label}
+                            </span>
+                            <ChevronDown className={cn('h-5 w-5 transition-transform', mobileServicesOpen && 'rotate-180')} />
+                          </button>
+                          <AnimatePresence initial={false}>
+                            {mobileServicesOpen && (
+                              <motion.div
+                                id={mobileServicesMenuId}
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: 'auto', opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.22 }}
+                                className="overflow-hidden"
+                              >
+                                <div className="mt-2 grid gap-2 pl-4">
+                                  <Link
+                                    href="/services"
+                                    onClick={() => setMobile(false)}
+                                    className="rounded-xl border border-border px-4 py-3 font-display text-base font-bold text-foreground"
+                                  >
+                                    All Services
+                                  </Link>
+                                  {services.map((service) => (
+                                    <Link
+                                      key={service.slug}
+                                      href={`/services/${service.slug}`}
+                                      onClick={() => setMobile(false)}
+                                      className="rounded-xl border border-border px-4 py-3 text-sm font-semibold text-muted transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+                                    >
+                                      {service.name}
+                                    </Link>
+                                  ))}
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      ) : (
+                        <Link
+                          href={link.href}
+                          onClick={() => setMobile(false)}
+                          className={cn(
+                            'flex items-center justify-between rounded-2xl border px-5 py-4 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas',
+                            isActive(link)
+                              ? 'text-foreground border-violet/30'
+                              : 'text-muted border-border hover:text-foreground'
+                          )}
                           style={{
-                            color: isActive(link) ? 'var(--color-violet)' : 'var(--color-foreground)' }}
+                            borderColor: isActive(link)
+                              ? 'rgba(var(--color-accent-rgb), 0.2)'
+                              : isLight
+                                ? 'rgba(var(--color-accent-rgb), 0.08)'
+                                : 'rgba(255, 255, 255, 0.06)' }}
                         >
-                          {link.label}
-                        </span>
-                        {isActive(link) && (
-                          <motion.div
-                            layoutId="mobileActiveIndicator"
-                            className="w-2 h-2 rounded-full bg-violet"
-                          />
-                        )}
-                      </Link>
+                          <span
+                            className="font-display font-black text-2xl"
+                            style={{
+                              color: isActive(link) ? 'var(--color-violet)' : 'var(--color-foreground)' }}
+                          >
+                            {link.label}
+                          </span>
+                          {isActive(link) && (
+                            <motion.div
+                              layoutId="mobileActiveIndicator"
+                              className="w-2 h-2 rounded-full bg-violet"
+                            />
+                          )}
+                        </Link>
+                      )}
                     </motion.div>
                   ))}
                 </nav>

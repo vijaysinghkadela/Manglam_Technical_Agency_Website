@@ -1,11 +1,34 @@
 'use client';
 
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { createJSONStorage, persist, type StateStorage } from 'zustand/middleware';
 
-const CONSENT_VERSION = '2026-05-24';
-const CONSENT_PERIOD_DAYS = 180;
+export const CONSENT_VERSION = '2026-05-24';
+export const CONSENT_PERIOD_DAYS = 180;
 const CONSENT_PERIOD_MS = CONSENT_PERIOD_DAYS * 24 * 60 * 60 * 1000;
+const consentStorageFallback: StateStorage = {
+  getItem: () => null,
+  setItem: () => undefined,
+  removeItem: () => undefined,
+};
+
+const getConsentStorage = (): StateStorage => {
+  if (typeof window === 'undefined') {
+    return consentStorageFallback;
+  }
+
+  try {
+    const storage = window.localStorage;
+    if (!storage) return consentStorageFallback;
+
+    const probeKey = '__mta_consent_storage_probe__';
+    storage.setItem(probeKey, '1');
+    storage.removeItem(probeKey);
+    return storage;
+  } catch {
+    return consentStorageFallback;
+  }
+};
 
 type ConsentStatus = 'accepted' | 'declined' | null;
 
@@ -42,7 +65,7 @@ interface ConsentState {
   };
 }
 
-const isDecisionCurrent = (state: Pick<ConsentState, 'consentStatus' | 'consentExpiresAt' | 'consentVersion'>) => {
+export const isConsentDecisionCurrent = (state: Pick<ConsentState, 'consentStatus' | 'consentExpiresAt' | 'consentVersion'>) => {
   if (!state.consentStatus || !state.consentExpiresAt) return false;
   if (state.consentVersion !== CONSENT_VERSION) return false;
 
@@ -51,8 +74,8 @@ const isDecisionCurrent = (state: Pick<ConsentState, 'consentStatus' | 'consentE
 };
 
 const normalizeVisibility = (state: ConsentState) => ({
-  hasConsent: state.consentStatus === 'accepted' && isDecisionCurrent(state),
-  showBanner: !isDecisionCurrent(state),
+  hasConsent: state.consentStatus === 'accepted' && isConsentDecisionCurrent(state),
+  showBanner: !isConsentDecisionCurrent(state),
 });
 
 export const useConsentStore = create<ConsentState>()(
@@ -96,7 +119,11 @@ export const useConsentStore = create<ConsentState>()(
         // Clear analytics cookies if any
         if (typeof window !== 'undefined') {
           // Disable analytics
-          window.localStorage.removeItem('va-consent');
+          try {
+            window.localStorage.removeItem('va-consent');
+          } catch {
+            // Storage may be unavailable in embedded or privacy-restricted browsers.
+          }
         }
       },
 
@@ -135,6 +162,7 @@ export const useConsentStore = create<ConsentState>()(
     }),
     {
       name: 'mta-consent-storage',
+      storage: createJSONStorage(getConsentStorage),
       skipHydration: true, // For Next.js SSR
       partialize: (state) => ({
         hasConsent: state.hasConsent,

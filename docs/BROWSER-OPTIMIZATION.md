@@ -25,6 +25,17 @@ Browser targets configured in `.browserslistrc` for automatic vendor prefixing v
 
 ---
 
+## Performance Budget
+
+Release QA should measure these targets with Lighthouse or WebPageTest before deployment:
+
+- First Contentful Paint: under 2 seconds on a throttled mobile/3G profile
+- Largest Contentful Paint: under 3 seconds on a throttled mobile/3G profile
+- No horizontal layout overflow at 390px, 768px, or 1440px viewport widths
+- No service worker is required for this pass; caching changes should stay at platform/static-asset level unless a later project scopes offline support
+
+---
+
 ## 🔧 Critical Fixes Applied
 
 ### 1. **CRITICAL: Cursor Accessibility Fix** ✅

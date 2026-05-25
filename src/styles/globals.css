@@ -31,8 +31,8 @@ html.dark {
   --color-surface: #120e0d;
   --color-card: #171110;
   --color-border: #2a1f1c;
-  --color-muted: #8a7a72;
-  --color-dead: #4a403b;
+  --color-muted: #B8AAA2;
+  --color-dead: #9D8F87;
   --color-violet: #6B1A1A;
   --color-violet-light: #c96a63;
   --color-violet-dark: #4a1212;
@@ -191,8 +191,7 @@ textarea {
 }
 
 .mta-select {
-  position: relative;
-  z-index: 1;
+  color-scheme: light dark;
 }
 
 .mta-select option {
@@ -203,6 +202,59 @@ textarea {
 html.dark .mta-select option {
   color: #FAFAFA;
   background-color: #171110;
+}
+
+.marquee-mask {
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+
+.animate-marquee-left,
+.animate-marquee-right {
+  min-width: max-content;
+  animation-duration: 34s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.animate-marquee-left {
+  animation-name: marquee-left;
+}
+
+.animate-marquee-right {
+  animation-name: marquee-right;
+}
+
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-33.333%); }
+}
+
+@keyframes marquee-right {
+  from { transform: translateX(-33.333%); }
+  to { transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce), (hover: none), (max-width: 767px) {
+  .animate-marquee-left,
+  .animate-marquee-right {
+    animation: none;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 .gpu-accelerated {

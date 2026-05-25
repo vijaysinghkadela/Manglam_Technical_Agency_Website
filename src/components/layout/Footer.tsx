@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useTheme } from "next-themes";
 import { Linkedin, Instagram, Twitter, ArrowUpRight } from "lucide-react";
 import {
   AGENCY_NAME,
@@ -15,6 +16,8 @@ import {
   OFFICE_HOURS,
 } from "@/lib/constants";
 import { services } from "@/lib/data/services";
+import { useConsentStore } from "@/stores/useConsentStore";
+import { useIsClient } from "@/hooks/useIsClient";
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -51,7 +54,34 @@ function FooterLink({ href, label }: { href: string; label: string }) {
   );
 }
 
+function FooterButton({ label, onClick }: { label: string; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="group flex min-h-[44px] w-full items-center justify-between gap-4 py-2.5 text-left text-sm text-muted transition-colors duration-200 touch-manipulation hover-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+      data-cursor="pointer"
+      style={{ touchAction: "manipulation" }}
+    >
+      <span>{label}</span>
+      <ArrowUpRight className="h-3 w-3 shrink-0 -translate-x-1 opacity-0 transition-opacity duration-200 group-hover:translate-x-0 group-hover:opacity-60" />
+    </button>
+  );
+}
+
 export function Footer() {
+  const showBannerAgain = useConsentStore((state) => state.showBannerAgain);
+  const { resolvedTheme } = useTheme();
+  const isClient = useIsClient();
+  const isLight = isClient ? resolvedTheme !== "dark" : true;
+  const logoSrc = isLight
+    ? "/images/mta-logo-transparent.png"
+    : "/images/mta-logo-transparent-white.png";
+  const openCookiePreferences = () => {
+    showBannerAgain();
+    window.dispatchEvent(new Event("mta:show-consent-banner"));
+  };
+
   return (
     <footer className="safe-area-bottom w-full border-t border-border bg-canvas">
 
@@ -70,14 +100,16 @@ export function Footer() {
           >
             <div>
               <div className="mb-3 flex items-center gap-3">
-                <Image
-                  src="/images/mta-logo-transparent.png"
-                  alt="MTA Logo"
-                  width={40}
-                  height={40}
-                  sizes="40px"
-                  className="h-10 w-10 shrink-0 object-contain"
-                />
+                <div className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border/70 bg-canvas/70 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)]">
+                  <Image
+                    src={logoSrc}
+                    alt="Manglam Technical Agency"
+                    width={40}
+                    height={40}
+                    sizes="40px"
+                    className="h-9 w-9 shrink-0 object-contain"
+                  />
+                </div>
                 <span
                   className="font-display text-[15px] font-black tracking-normal"
                   style={{ color: "var(--color-foreground)" }}
@@ -185,6 +217,7 @@ export function Footer() {
             {legalLinks.map((link) => (
               <FooterLink key={link.href} href={link.href} label={link.label} />
             ))}
+            <FooterButton label="Cookie Preferences" onClick={openCookiePreferences} />
           </motion.div>
 
           <motion.div
