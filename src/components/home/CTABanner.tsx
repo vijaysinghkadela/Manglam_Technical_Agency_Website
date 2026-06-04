@@ -2,6 +2,8 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import { MagneticButton } from '@/components/ui/MagneticButton'
+import { ParticleField } from '@/components/ui/ParticleField'
+import { SplitWords } from '@/components/ui/SplitWords'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { AGENCY_WHATSAPP } from '@/lib/constants'
 const FLOATING_DOTS = [
@@ -27,6 +29,7 @@ export function CTABanner() {
       className="section relative overflow-hidden"
       style={{ backgroundColor: 'var(--color-violet)' }}
     >
+      <ParticleField count={22} color="255, 255, 255" />
       {/* Diagonal grid overlay */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -93,8 +96,10 @@ export function CTABanner() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.75, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-        >
-          Plan the next<br /> step clearly
+      >
+          <SplitWords text="Plan the next" blur delay={0.08} />
+          <br />
+          <SplitWords text="step clearly" blur delay={0.28} />
         </motion.h2>
 
         <motion.p
@@ -117,7 +122,7 @@ export function CTABanner() {
       >
         <MagneticButton
           href="/contact"
-          className="inline-flex w-full sm:w-auto items-center justify-center gap-2 font-display font-black text-[16px] sm:text-[17px] px-6 sm:px-8 py-4 transition-all duration-300 min-h-[56px] sm:min-h-0 touch-manipulation bg-foreground"
+          className="btn liquid-hover inline-flex w-full sm:w-auto items-center justify-center gap-2 font-display font-black text-[16px] sm:text-[17px] px-6 sm:px-8 py-4 transition-all duration-300 min-h-[56px] sm:min-h-0 touch-manipulation bg-foreground"
           style={{ color:'var(--color-violet)', touchAction: 'manipulation' }}
         >
           Book Discovery Workshop →
@@ -128,7 +133,7 @@ export function CTABanner() {
           target="_blank"
           rel="noopener noreferrer"
           data-cursor="pointer"
-          className="inline-flex w-full sm:w-auto items-center justify-center gap-2 font-mono text-sm transition-all duration-200 min-h-[52px] sm:min-h-0 touch-manipulation rounded-full"
+          className="relative inline-flex w-full sm:w-auto items-center justify-center gap-2 font-mono text-sm transition-all duration-200 min-h-[52px] sm:min-h-0 touch-manipulation rounded-full before:absolute before:left-4 before:h-3 before:w-3 before:rounded-full before:bg-[#25D366] before:opacity-70 before:content-[''] after:absolute after:left-4 after:h-3 after:w-3 after:animate-ping after:rounded-full after:bg-[#25D366] after:content-['']"
           style={{
             color: 'rgba(255,255,255,0.72)',
             border: '1px solid rgba(255,255,255,0.22)',
@@ -145,7 +150,7 @@ export function CTABanner() {
             ;(e.currentTarget as HTMLElement).style.backgroundColor = 'transparent'
           }}
         >
-          WhatsApp Us
+          <span className="pl-5">WhatsApp Us</span>
         </a>
       </motion.div>
 

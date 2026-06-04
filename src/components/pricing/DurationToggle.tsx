@@ -31,7 +31,7 @@ export function DurationToggle({
           className="relative font-mono uppercase tracking-widest rounded-full transition-colors duration-200"
           style={{
             padding: '12px 22px',
-            fontSize: '11px',
+            fontSize: 'var(--pricing-micro)',
             letterSpacing: '0.12em',
             color:
               i === activeIndex
@@ -48,7 +48,7 @@ export function DurationToggle({
             />
           )}
           <span className="relative z-10 whitespace-nowrap flex items-center gap-1.5">
-            <span style={{ fontSize: '12px', lineHeight: 1 }}>
+            <span style={{ fontSize: 'var(--pricing-small)', lineHeight: 1 }}>
               {durationEmojis[i] || ''}
             </span>
             {d.label}

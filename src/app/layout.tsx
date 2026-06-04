@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { DM_Sans, Fraunces, JetBrains_Mono } from "next/font/google";
 import { LenisProvider } from "@/providers/LenisProvider";
 import { MagneticCursor } from "@/components/ui/MagneticCursor";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "react-hot-toast";
@@ -12,14 +14,28 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { DeferredSiteChatbot } from "@/components/chat/DeferredSiteChatbot";
 import { ConsentBanner } from "@/components/ui/ConsentBanner";
 import { organizationSchema, websiteSchema } from "@/lib/seo/schemas";
-import "@fontsource/outfit/400.css";
-import "@fontsource/outfit/500.css";
-import "@fontsource/outfit/600.css";
-import "@fontsource/outfit/700.css";
-import "@fontsource/outfit/800.css";
 import "@/styles/globals.css";
 
 const SITE_URL = "https://manglamtechnicalagency.com";
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  display: "swap",
+  axes: ["SOFT", "WONK", "opsz"],
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-dm-sans",
+  display: "swap",
+});
+
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+});
 
 export const viewport: import("next").Viewport = {
   width: "device-width",
@@ -127,7 +143,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="bg-canvas text-foreground" suppressHydrationWarning>
+      <body
+        className={`${fraunces.variable} ${dmSans.variable} ${jetBrainsMono.variable} bg-canvas text-foreground`}
+        suppressHydrationWarning
+      >
         {/* Global structured data — Organisation + Website */}
         <JsonLd schema={organizationSchema()} />
         <JsonLd schema={websiteSchema()} />
@@ -139,6 +158,7 @@ export default function RootLayout({
           disableTransitionOnChange={false}
         >
           <LenisProvider>
+            <ScrollProgress />
             <MagneticCursor />
             <a
               href="#main-content"

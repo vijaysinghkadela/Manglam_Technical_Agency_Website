@@ -88,7 +88,7 @@ export function DepartmentAccordion({
             <span
               className="font-display font-black transition-colors duration-300"
               style={{
-                fontSize: '18px',
+                fontSize: 'var(--pricing-card-title)',
                 color: isOpen ? '#fff' : 'var(--color-muted)' }}
             >
               {department.plans[0].icon}
@@ -98,14 +98,14 @@ export function DepartmentAccordion({
             <h3
               className="font-display font-bold transition-colors duration-200 group-hover:text-violet"
               style={{
-                fontSize: 'clamp(1.05rem, 1.6vw, 1.35rem)',
+                fontSize: 'var(--pricing-card-title)',
                 color: 'var(--color-foreground)' }}
             >
               {department.department}
             </h3>
             <p
               className="font-mono"
-              style={{ fontSize: '11px', color: 'var(--color-dead)' }}
+              style={{ fontSize: 'var(--pricing-micro)', color: 'var(--color-dead)' }}
             >
               {department.plans.length} plans · from{' '}
               {department.plans[0].durations[0].price}
@@ -117,7 +117,7 @@ export function DepartmentAccordion({
                     key={plan.name}
                     className="font-mono rounded"
                     style={{
-                      fontSize: '11px',
+                      fontSize: 'var(--pricing-micro)',
                       padding: '4px 10px',
                       backgroundColor: 'var(--color-surface)',
                       border: '1px solid var(--color-border)',
@@ -173,8 +173,9 @@ export function DepartmentAccordion({
               style={{ paddingBottom: '32px' }}
             >
               <p
-                className="text-sm leading-relaxed max-w-2xl"
+                className="leading-relaxed max-w-2xl"
                 style={{
+                  fontSize: 'var(--pricing-body)',
                   color: 'var(--color-muted)',
                   marginBottom: '24px' }}
               >
@@ -206,7 +207,7 @@ export function DepartmentAccordion({
                         transition={{ duration: 0.2 }}
                         className="font-mono"
                         style={{
-                          fontSize: '11px',
+                          fontSize: 'var(--pricing-micro)',
                           color: 'var(--color-violet-light)',
                           letterSpacing: '0.04em' }}
                       >
@@ -246,7 +247,7 @@ export function DepartmentAccordion({
                 >
                   <p
                     className="font-mono leading-relaxed"
-                    style={{ fontSize: '12px', color: 'var(--color-dead)' }}
+                    style={{ fontSize: 'var(--pricing-small)', color: 'var(--color-dead)' }}
                   >
                     {department.note}
                   </p>

@@ -116,13 +116,13 @@ export function PlanCard({
           <div className="flex flex-col" style={{ gap: '6px' }}>
             <span
               className="font-display font-bold"
-              style={{ fontSize: '18px', color: 'var(--color-foreground)' }}
+              style={{ fontSize: 'var(--pricing-card-title)', color: 'var(--color-foreground)' }}
             >
               {plan.name}
             </span>
             <p
               style={{
-                fontSize: '11px',
+                fontSize: 'var(--pricing-small)',
                 color: 'var(--color-dead)',
                 lineHeight: 1.5 }}
             >
@@ -160,7 +160,7 @@ export function PlanCard({
                 transition={{ duration: 0.18 }}
                 className="font-display font-black leading-none"
                 style={{
-                  fontSize: 'clamp(1.35rem, 2.5vw, 1.85rem)',
+                  fontSize: 'var(--pricing-price)',
                   color: plan.highlight
                     ? 'var(--color-violet-light)'
                     : 'var(--color-foreground)' }}
@@ -173,7 +173,7 @@ export function PlanCard({
               <span
                 className="font-mono font-bold rounded"
                 style={{
-                  fontSize: '11px',
+                  fontSize: 'var(--pricing-micro)',
                   padding: '4px 10px',
                   color: '#fff',
                   backgroundColor: 'var(--color-violet)',
@@ -189,7 +189,7 @@ export function PlanCard({
             <p
               className="font-mono"
               style={{
-                fontSize: '11px',
+                fontSize: 'var(--pricing-micro)',
                 color: 'var(--color-muted)',
                 marginTop: duration.totalPrice ? '2px' : '0' }}
             >
@@ -201,7 +201,7 @@ export function PlanCard({
             <p
               className="font-mono uppercase tracking-wider"
               style={{
-                fontSize: '11px',
+                fontSize: 'var(--pricing-micro)',
                 color: 'var(--color-dead)',
                 marginTop: '2px' }}
             >
@@ -213,7 +213,7 @@ export function PlanCard({
             <p
               className="font-mono"
               style={{
-                fontSize: '11px',
+                fontSize: 'var(--pricing-micro)',
                 color: 'var(--color-muted)',
                 marginTop: '4px',
                 fontStyle: 'italic' }}
@@ -233,7 +233,7 @@ export function PlanCard({
           <p
             className="font-mono uppercase tracking-widest"
             style={{
-              fontSize: '11px',
+              fontSize: 'var(--pricing-micro)',
               color: 'var(--color-dead)',
               letterSpacing: '0.12em' }}
           >
@@ -245,7 +245,7 @@ export function PlanCard({
                 key={d}
                 className="flex items-start gap-2.5"
                 style={{
-                  fontSize: '11px',
+                  fontSize: 'var(--pricing-small)',
                   color: 'var(--color-muted)',
                   lineHeight: 1.55 }}
               >
@@ -269,7 +269,7 @@ export function PlanCard({
               aria-label={`${showAllDeliverables ? 'Show fewer' : 'Show all'} deliverables for ${plan.name}`}
               className="flex items-center gap-1.5 font-mono transition-colors duration-200 hover:text-violet self-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-card"
               style={{
-                fontSize: '11px',
+                fontSize: 'var(--pricing-micro)',
                 color: 'var(--color-dead)',
                 letterSpacing: '0.06em',
                 marginTop: '4px' }}
@@ -297,7 +297,7 @@ export function PlanCard({
           className="inline-flex items-center justify-center gap-2 font-display font-bold transition-all duration-300 hover:bg-violet hover:text-white hover:border-violet focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-card"
           style={{
             padding: '16px 28px',
-            fontSize: '14px',
+            fontSize: 'var(--pricing-button)',
             borderRadius: '12px',
             border: plan.highlight
               ? '1px solid var(--color-violet)'

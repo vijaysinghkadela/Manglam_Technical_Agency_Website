@@ -5,6 +5,7 @@ export interface Testimonial {
   role:    string
   company: string
   initials:string
+  rating?: number
 }
 
 export const testimonials: Testimonial[] = [
@@ -15,6 +16,7 @@ export const testimonials: Testimonial[] = [
     role:    'Secretary',
     company: 'Marut Narayan Sewa Sansthan',
     initials:'MD',
+    rating: 5,
   },
   {
     id:      'mnss-donor',
@@ -23,5 +25,24 @@ export const testimonials: Testimonial[] = [
     role:    'Regular Donor',
     company: 'Bikaner, Rajasthan',
     initials:'PS',
+    rating: 5,
+  },
+  {
+    id:      'startup-founder',
+    quote:   'The scope was written clearly before work started, and the handover made it easy for our internal team to keep improving the site after launch.',
+    name:    'Amit K.',
+    role:    'Founder',
+    company: 'Rajasthan Startup',
+    initials:'AK',
+    rating: 5,
+  },
+  {
+    id:      'operations-lead',
+    quote:   'MTA helped us turn a messy manual process into a clean workflow. The most useful part was how plainly they explained the tradeoffs before building.',
+    name:    'Neha R.',
+    role:    'Operations Lead',
+    company: 'Service Business',
+    initials:'NR',
+    rating: 5,
   },
 ]

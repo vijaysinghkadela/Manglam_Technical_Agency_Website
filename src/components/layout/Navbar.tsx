@@ -139,13 +139,13 @@ export function Navbar() {
 
   // Scroll detection with RAF throttling
   useEffect(() => {
-    let prev = window.scrollY > 20
+    let prev = window.scrollY > 80
     let rafId: number | null = null
 
     const fn = () => {
       if (rafId !== null) return
       rafId = requestAnimationFrame(() => {
-        const next = window.scrollY > 20
+        const next = window.scrollY > 80
         if (next !== prev) {
           prev = next
           setScrolled(next)
@@ -312,8 +312,8 @@ export function Navbar() {
             >
               <motion.div
                 className="relative flex h-10 w-10 items-center justify-center rounded-full border border-border/70 bg-canvas/70 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)] sm:h-11 sm:w-11"
-                whileHover={animateLogo ? { scale: 1.05 } : undefined}
-                transition={animateLogo ? { duration: 0.2 } : { duration: 0 }}
+                whileHover={animateLogo ? { scale: 1.05, rotate: 360 } : undefined}
+                transition={animateLogo ? { duration: 0.6, ease: [0.16, 1, 0.3, 1] } : { duration: 0 }}
               >
                 <Image
                   src={logoSrc}
@@ -381,19 +381,27 @@ export function Navbar() {
                         aria-haspopup="menu"
                         aria-controls={servicesMenuId}
                         className={cn(
-                          'flex items-center gap-1.5 px-4 py-2.5 rounded-full text-[13px] font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas',
+                          'relative flex items-center gap-1.5 overflow-hidden px-4 py-2.5 rounded-full text-[13px] font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas',
                           isActive(link) ? 'text-foreground' : 'text-muted'
                         )}
                         style={getLinkStyle(link)}
                         whileTap={{ scale: 0.98 }}
                       >
-                        {link.label}
+                        <span className="relative z-10">{link.label}</span>
                         <motion.div
+                          className="relative z-10"
                           animate={{ rotate: mega ? 180 : 0 }}
                           transition={{ duration: 0.2 }}
                         >
                           <ChevronDown className="w-3.5 h-3.5 opacity-60" />
                         </motion.div>
+                        {(hoveredLink === link.href || (!hoveredLink && isActive(link))) && (
+                          <motion.span
+                            layoutId="desktopNavIndicator"
+                            className="absolute inset-x-3 bottom-1 h-0.5 rounded-full bg-violet"
+                            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                          />
+                        )}
                       </motion.button>
 
                       {/* Mega Menu */}
@@ -448,6 +456,9 @@ export function Navbar() {
                                         <p className="text-[11px] text-muted mt-1 leading-snug truncate">
                                           {s.tagline}
                                         </p>
+                                        <p className="mt-2 inline-flex rounded-full border border-[rgba(var(--color-accent-rgb),0.18)] bg-[rgba(var(--color-accent-rgb),0.07)] px-2 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-violet">
+                                          {s.priceLabel}
+                                        </p>
                                       </div>
                                     </Link>
                                   </motion.div>
@@ -471,12 +482,19 @@ export function Navbar() {
                         href={link.href}
                         data-cursor="pointer"
                         className={cn(
-                          'block px-4 py-2.5 text-[13px] font-semibold rounded-full transition-all duration-200',
+                          'relative block overflow-hidden px-4 py-2.5 text-[13px] font-semibold rounded-full transition-all duration-200',
                           isActive(link) ? 'text-foreground' : 'text-muted'
                         )}
                         style={getLinkStyle(link)}
                       >
-                        {link.label}
+                        <span className="relative z-10">{link.label}</span>
+                        {(hoveredLink === link.href || (!hoveredLink && isActive(link))) && (
+                          <motion.span
+                            layoutId="desktopNavIndicator"
+                            className="absolute inset-x-3 bottom-1 h-0.5 rounded-full bg-violet"
+                            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                          />
+                        )}
                       </Link>
                     </motion.div>
                   )

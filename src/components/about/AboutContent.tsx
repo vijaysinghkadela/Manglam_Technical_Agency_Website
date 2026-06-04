@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { teamMembers } from '@/lib/data/team'
+import { TiltCard } from '@/components/ui/TiltCard'
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
 
@@ -134,10 +135,17 @@ export function AboutContent() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.55, delay: index * 0.08, ease: EASE }}
-                className="overflow-hidden rounded-2xl border border-border bg-card"
+                className="overflow-visible"
               >
+                <TiltCard className="overflow-hidden rounded-lg border border-border bg-card" max={8}>
                 <div className="grid gap-0 sm:grid-cols-[180px_1fr]">
-                  <div className="relative h-72 bg-accent-soft sm:h-full">
+                  <motion.div
+                    className="relative h-72 bg-accent-soft sm:h-full"
+                    initial={{ clipPath: 'circle(0% at 50% 50%)' }}
+                    whileInView={{ clipPath: 'circle(72% at 50% 50%)' }}
+                    viewport={{ once: true, margin: '-60px' }}
+                    transition={{ duration: 0.8, ease: EASE }}
+                  >
                     {member.image ? (
                       <Image
                         src={member.image}
@@ -152,7 +160,7 @@ export function AboutContent() {
                         {member.initials}
                       </div>
                     )}
-                  </div>
+                  </motion.div>
                   <div className="p-7 sm:p-8">
                     <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-violet-light">
                       {member.role}
@@ -173,6 +181,7 @@ export function AboutContent() {
                     </div>
                   </div>
                 </div>
+                </TiltCard>
               </motion.article>
             ))}
           </div>

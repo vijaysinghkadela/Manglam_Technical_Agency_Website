@@ -83,7 +83,13 @@ export function Footer() {
   };
 
   return (
-    <footer className="safe-area-bottom w-full border-t border-border bg-canvas">
+    <motion.footer
+      className="safe-area-bottom w-full border-t border-border bg-canvas"
+      initial={{ clipPath: "inset(18% 0 0 0)" }}
+      whileInView={{ clipPath: "inset(0% 0 0 0)" }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.65, ease: EASE }}
+    >
 
       <div className="container-site">
         <div className="border-t border-border" />
@@ -142,7 +148,7 @@ export function Footer() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-border text-muted transition-colors hover:border-violet/50 hover-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+                    className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-border text-muted transition-all duration-300 hover:scale-110 hover:rotate-[8deg] hover:border-violet/50 hover:text-violet focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
                     aria-label={label}
                     data-cursor="pointer"
                     style={{ touchAction: "manipulation" }}
@@ -256,7 +262,7 @@ export function Footer() {
               <p>{AGENCY_LOCATION}</p>
               <a
                 href={`mailto:${AGENCY_EMAIL}`}
-                className="break-all transition-colors hover-foreground"
+                className="break-all transition-colors hover:text-violet"
                 data-cursor="pointer"
               >
                 {AGENCY_EMAIL}
@@ -302,7 +308,7 @@ export function Footer() {
           </div>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 }
 

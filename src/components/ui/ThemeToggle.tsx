@@ -1,7 +1,7 @@
 'use client'
 
 import { useTheme } from 'next-themes'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useIsClient } from '@/hooks/useIsClient'
 
@@ -46,6 +46,11 @@ export default function ThemeToggle() {
   const isClient = useIsClient()
   const [isHovered, setIsHovered] = useState(false)
   const [isPressed, setIsPressed] = useState(false)
+
+  useEffect(() => {
+    if (!resolvedTheme) return
+    document.documentElement.dataset.theme = resolvedTheme
+  }, [resolvedTheme])
 
   // Prevent flash during hydration
   if (!isClient) {

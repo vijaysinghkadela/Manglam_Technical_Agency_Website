@@ -214,9 +214,10 @@ export default async function ServicePage({
             {/* Service name — massive */}
             <h1
               aria-label={service.name}
-              className="font-display font-black leading-none tracking-normal"
+              className="max-w-[min(100%,920px)] break-words font-display font-black leading-none tracking-normal"
               style={{
-                fontSize: "clamp(3rem, 8vw, 8rem)",
+                fontSize: "clamp(2.75rem, 7vw, 7.4rem)",
+                lineHeight: 0.92,
                 color: "var(--color-foreground)" }}
             >
               {service.name.split(" ").map((word, i, arr) => (
@@ -643,7 +644,7 @@ export default async function ServicePage({
               >
                 This service is mapped to MTA&apos;s
                 <br />
-                9-stage delivery pipeline.
+                documented delivery pipeline.
               </h2>
               <p
                 style={{

@@ -11,6 +11,7 @@ import {
   OFFICE_HOURS,
 } from '@/lib/constants'
 import Badge from '@/components/ui/Badge'
+import { SplitWords } from '@/components/ui/SplitWords'
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
 
@@ -97,9 +98,9 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
                 className="mb-12 flex flex-col font-display font-black leading-none tracking-normal uppercase"
                 style={{ gap: '0.25rem', fontSize: 'clamp(2.2rem, 4.8vw, 5.2rem)', color: 'var(--color-foreground)' }}
               >
-                <span>Start a</span>
+                <SplitWords text="Start a" delay={0.1} />
                 <span style={{ fontSize: 'clamp(1.75rem, 3.5vw, 3.9rem)', color: 'var(--color-violet)' }}>
-                  conversation.
+                  <SplitWords text="conversation." delay={0.24} />
                 </span>
               </h1>
 

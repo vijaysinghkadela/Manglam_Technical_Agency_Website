@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import type { FieldErrors } from "react-hook-form";
@@ -11,6 +11,7 @@ import { CheckCircle2, Loader2, Shield } from "lucide-react";
 import { services as serviceCatalog } from "@/lib/data/services";
 import { hasMaliciousInput } from "@/lib/security";
 import { OFFICE_HOURS, AGENCY_EMAIL } from "@/lib/constants";
+import { AnimatedCheckbox } from "@/components/ui/AnimatedCheckbox";
 
 const schema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -29,6 +30,7 @@ const schema = z.object({
 });
 
 type F = z.infer<typeof schema>;
+type SubmitState = "idle" | "validating" | "redirecting" | "error";
 
 const SERVICES = [...serviceCatalog.map((service) => service.name), "Other"];
 const BUDGETS = [
@@ -181,6 +183,7 @@ export default function ContactForm({
 }: {
   serviceOptions?: string[];
 } = {}) {
+  const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -229,11 +232,13 @@ export default function ContactForm({
   };
 
   const onInvalid = (fieldErrors: FieldErrors<F>) => {
+    setSubmitState("error");
     const first = FORM_FIELD_ORDER.find((field) => fieldErrors[field]);
     if (first) setFocus(first);
   };
 
   const onSubmit = async (data: F) => {
+    setSubmitState("validating");
     if (
       hasMaliciousInput(data.name) ||
       hasMaliciousInput(data.email) ||
@@ -242,12 +247,19 @@ export default function ContactForm({
       hasMaliciousInput(data.timeline) ||
       hasMaliciousInput(data.message)
     ) {
+      setSubmitState("error");
       toast.error("Invalid characters detected in form input");
       return;
     }
 
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildWhatsAppMessage(data))}`;
-    window.location.assign(whatsappUrl);
+    try {
+      const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildWhatsAppMessage(data))}`;
+      setSubmitState("redirecting");
+      window.location.assign(whatsappUrl);
+    } catch {
+      setSubmitState("error");
+      toast.error("Could not open WhatsApp. Please use the WhatsApp link on this page.");
+    }
   };
 
   return (
@@ -403,15 +415,12 @@ export default function ContactForm({
       <div className="flex flex-col gap-5">
         <div className="rounded-lg border border-border bg-surface p-4 sm:p-5">
           <div className="grid gap-4 sm:grid-cols-[24px_1fr] sm:gap-3">
-            <input
+            <AnimatedCheckbox
             {...register("privacy")}
-            type="checkbox"
             id="privacy"
             required
             aria-required="true"
             aria-invalid={errors.privacy ? "true" : "false"}
-            className="mt-1 h-5 w-5 shrink-0 cursor-pointer rounded"
-              style={{ accentColor: "var(--color-violet)" }}
             />
             <label
               htmlFor="privacy"
@@ -452,12 +461,9 @@ export default function ContactForm({
 
           <div className="mt-4 grid gap-3 border-t border-border pt-4">
             <label className="grid gap-3 sm:grid-cols-[24px_1fr]">
-              <input
+              <AnimatedCheckbox
                 {...register("followUpConsent")}
                 id="followUpConsent"
-                type="checkbox"
-                className="mt-1 h-5 w-5 shrink-0 cursor-pointer rounded"
-                style={{ accentColor: "var(--color-violet)" }}
               />
               <span
                 className="text-sm leading-relaxed"
@@ -484,9 +490,17 @@ export default function ContactForm({
           data-cursor="pointer"
           className="btn btn-primary btn-lg w-full font-black uppercase tracking-wide"
         >
-          {isSubmitting ? (
+          {submitState === "validating" ? (
             <>
-              <Loader2 className="h-4 w-4 animate-spin" /> Sending...
+              <Loader2 className="h-4 w-4 animate-spin" /> Checking...
+            </>
+          ) : submitState === "redirecting" ? (
+            <>
+              <Loader2 className="h-4 w-4 animate-spin" /> Opening WhatsApp...
+            </>
+          ) : submitState === "error" ? (
+            <>
+              <span className="inline-block animate-[shake_420ms_ease-in-out]">Try Again →</span>
             </>
           ) : (
             "Send Message →"
@@ -532,14 +546,10 @@ const Field = ({
   const errId = `${id}-error`;
   const required = label.includes("*");
   return (
-    <div className="flex flex-col gap-2">
+    <div className="relative">
       <label
         htmlFor={id}
-        className="font-mono uppercase"
-        style={{
-          fontSize: "10px",
-          color: "var(--color-dead)",
-          letterSpacing: "0.15em" }}
+        className="pointer-events-none absolute left-4 top-2 z-10 font-mono text-[10px] uppercase tracking-[0.16em] text-dead transition-all duration-200 peer-placeholder-shown:top-[17px] peer-placeholder-shown:text-xs peer-placeholder-shown:tracking-[0.12em] peer-focus:top-2 peer-focus:text-[10px] peer-focus:tracking-[0.16em] peer-focus:text-violet"
       >
         {label}
       </label>
@@ -557,7 +567,7 @@ const Field = ({
         <p
           id={errId}
           role="alert"
-          className="font-mono"
+          className="mt-2 font-mono"
           style={{ fontSize: "11px", color: "#ef4444" }}
         >
           {error}
@@ -585,7 +595,7 @@ const inputStyle: React.CSSProperties = {
 const Input = ({ ...props }: React.InputHTMLAttributes<HTMLInputElement>) => (
   <input
     {...props}
-    className="placeholder:text-dead"
+    className="peer placeholder:text-transparent"
     style={inputStyle}
     onFocus={(e) => {
       e.target.style.borderColor = "var(--color-violet)";
@@ -604,7 +614,7 @@ const Select = ({
 }: React.SelectHTMLAttributes<HTMLSelectElement>) => (
   <select
     {...props}
-    className="mta-select"
+    className="peer mta-select"
     style={{
       ...inputStyle,
       appearance: "none",
@@ -634,7 +644,7 @@ const Textarea = ({
 }: React.TextareaHTMLAttributes<HTMLTextAreaElement>) => (
   <textarea
     {...props}
-    className="resize-y placeholder:text-dead"
+    className="peer resize-y placeholder:text-transparent"
     style={{
       ...inputStyle,
       fontFamily: "var(--font-body)",

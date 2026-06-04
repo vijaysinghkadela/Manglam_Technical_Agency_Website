@@ -2,37 +2,25 @@
 
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { MagneticButton } from '@/components/ui/MagneticButton'
 import OrbitalRing from '@/components/home/OrbitalRing'
-import { MTA_STATS } from '@/lib/data/stats'
-const SERVICES = [
-  'Cybersecurity',
-  'AI Automation',
-  'SaaS Products',
-  'Social Media Marketing',
-  'Content Creation',
-  'Branding',
-  'Web Development',
-  'Application Development',
-  'AI Agents',
-]
+import { ParticleField } from '@/components/ui/ParticleField'
+import { SplitWords } from '@/components/ui/SplitWords'
+
+const ThreeOrbitalRing = dynamic(() => import('@/components/home/ThreeOrbitalRing'), {
+  ssr: false,
+  loading: () => <OrbitalRing />,
+})
 
 // Trust badges with status colors - module level to prevent re-creation
 const TRUST_BADGES = [
   { label: 'Rajasthan-based technical team', color: '#10b981' },
   { label: 'MSME details available on request', color: '#3b82f6' },
   { label: 'Small team, direct responsibility', color: 'var(--color-violet)' },
-]
-
-// Stats with status indicators - module level to prevent re-creation
-const STATS = [
-  { label: `${MTA_STATS.activeClients} Active Clients`, color: '#10b981' },
-  { label: `${MTA_STATS.internalSaaS} Internal SaaS`, color: '#3b82f6' },
-  { label: 'MSME profile', color: 'var(--color-violet)' },
-  { label: 'Bikaner, RJ', color: '#f59e0b' },
 ]
 
 // Pre-defined styles to prevent re-creation
@@ -93,6 +81,7 @@ export function HeroSection() {
       className="relative w-full min-h-[92svh] flex items-center overflow-hidden grain"
       style={{ backgroundColor: 'var(--color-canvas)' }}
     >
+      <ParticleField count={56} color="123, 28, 28" />
       {/* Line grid - parallax on desktop only */}
       <motion.div
         style={{ y: isDesktop ? bgY : '0%' }}
@@ -130,7 +119,7 @@ export function HeroSection() {
         style={{ y: isDesktop ? txtY : '0%' }}
         className="relative z-10 w-full container-site page-hero-safe pb-14 sm:pb-16 lg:pb-20"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-center">
           {/* Left Content */}
           <div className="flex flex-col gap-6 sm:gap-8 max-w-[760px]">
             {/* Micro label */}
@@ -181,7 +170,7 @@ export function HeroSection() {
             {/* Statement - three lines */}
             <h1
               aria-label="We build digital infrastructure"
-              className="flex max-w-full flex-col font-display font-black tracking-normal uppercase"
+              className="flex max-w-[min(100%,780px)] flex-col font-display font-black tracking-normal uppercase"
               style={{
                 gap: '0.55rem',
                 overflowWrap: 'break-word',
@@ -190,16 +179,24 @@ export function HeroSection() {
                 fontSize: 'clamp(2rem, 7.5vw, 5.1rem)',
                 color: 'var(--color-foreground)' }}
             >
-              <span>We build</span>
-              <span style={{ color: 'var(--color-violet)', paddingLeft: 'clamp(0px, 2vw, 20px)' }}>
-                digital
-              </span>
-              <span style={{ fontSize: 'clamp(1.4rem, 5.5vw, 4.5rem)' }}>infrastructure</span>
+              <SplitWords text="We build" delay={0.18} />
+              <SplitWords
+                text="digital"
+                delay={0.34}
+                className="block"
+                wordClassName="inline-block text-violet"
+              />
+              <SplitWords
+                text="infrastructure"
+                delay={0.5}
+                className="block"
+                wordClassName="inline-block"
+              />
             </h1>
 
             {/* Body */}
             <motion.p
-              className="text-[15px] leading-relaxed max-w-[34rem]"
+              className="text-[15px] leading-relaxed max-w-[36rem]"
               style={{ color: 'var(--color-muted)' }}
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
@@ -211,7 +208,7 @@ export function HeroSection() {
 
             {/* CTAs - Enhanced */}
             <motion.div
-              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-5 pt-2"
+              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-5 pt-4"
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.85, ease: [0.16, 1, 0.3, 1] }}
@@ -238,39 +235,6 @@ export function HeroSection() {
               </motion.div>
             </motion.div>
 
-            {/* Stats - Enhanced with colored indicators */}
-            <motion.div
-              className="flex flex-wrap items-center justify-start gap-2 sm:gap-3 pt-6"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 1.1 }}
-            >
-              {STATS.map((stat) => (
-                <motion.span
-                  key={stat.label}
-                  className="inline-flex items-center gap-2 rounded-full border px-3.5 py-2.5 text-center transition-all duration-300 hover:scale-[1.02]"
-                  style={BADGE_BASE_STYLE}
-                >
-                  <span
-                    className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: stat.color }}
-                  />
-                  <span className="font-mono uppercase whitespace-nowrap text-[10px]">{stat.label}</span>
-                </motion.span>
-              ))}
-            </motion.div>
-
-            {/* Mobile service badges */}
-            <div className="flex flex-wrap lg:hidden gap-2 pt-1">
-              {SERVICES.map((s) => (
-                <span
-                  key={s}
-                  className="rounded-full shrink-0 px-3 py-1.5 text-xs font-semibold whitespace-nowrap transition-all duration-200 hover:border-violet/30 bg-[rgba(var(--color-accent-rgb),0.08)] border border-[var(--color-border)] text-[var(--color-foreground)]"
-                >
-                  {s}
-                </span>
-              ))}
-            </div>
           </div>
 
           {/* Right - orbital visual (desktop only) */}
@@ -290,7 +254,7 @@ export function HeroSection() {
                 background: 'radial-gradient(circle, rgba(var(--color-accent-rgb), 0.08) 0%, transparent 70%)',
                 filter: 'blur(20px)' }}
             />
-            <OrbitalRing />
+            {isDesktop ? <ThreeOrbitalRing /> : null}
           </motion.div>
         </div>
       </motion.div>

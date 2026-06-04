@@ -55,7 +55,7 @@ export function PricingBundles() {
           <span
             className="font-mono uppercase block"
             style={{
-              fontSize: '13px',
+              fontSize: 'var(--pricing-micro)',
               color: 'var(--color-violet-light)',
               letterSpacing: '0.22em' }}
           >
@@ -64,7 +64,7 @@ export function PricingBundles() {
           <h2
             className="font-display font-black leading-tight"
             style={{
-              fontSize: 'clamp(1.5rem, 3vw, 2.75rem)',
+              fontSize: 'var(--pricing-section-title)',
               color: 'var(--color-foreground)' }}
           >
             Cross-Department Bundles
@@ -72,7 +72,7 @@ export function PricingBundles() {
           <p
             className="max-w-lg"
             style={{
-              fontSize: '15px',
+              fontSize: 'var(--pricing-body)',
               lineHeight: 1.72,
               color: 'var(--color-muted)' }}
           >
@@ -110,7 +110,7 @@ export function PricingBundles() {
                     <span
                       className="font-mono uppercase tracking-widest rounded-full px-3 py-1 flex items-center gap-1.5"
                       style={{
-                        fontSize: '11px',
+                        fontSize: 'var(--pricing-micro)',
                         color: meta.labelColor,
                         border: `1px solid ${meta.borderColor}`,
                         backgroundColor: meta.glowColor }}
@@ -120,7 +120,7 @@ export function PricingBundles() {
                     </span>
                     <span
                       className="font-mono"
-                      style={{ fontSize: '11px', color: 'var(--color-dead)' }}
+                      style={{ fontSize: 'var(--pricing-micro)', color: 'var(--color-dead)' }}
                     >
                       Bundle {i + 1}
                     </span>
@@ -129,7 +129,7 @@ export function PricingBundles() {
                   <h3
                     className="font-display font-bold"
                     style={{
-                      fontSize: '17px',
+                      fontSize: 'var(--pricing-card-title)',
                       color: 'var(--color-foreground)',
                       marginBottom: '6px' }}
                   >
@@ -137,8 +137,9 @@ export function PricingBundles() {
                   </h3>
 
                   <p
-                    className="text-xs leading-relaxed"
+                    className="leading-relaxed"
                     style={{
+                      fontSize: 'var(--pricing-small)',
                       color: 'var(--color-dead)',
                       marginBottom: '20px' }}
                   >
@@ -167,15 +168,15 @@ export function PricingBundles() {
                         />
                         <div className="flex flex-col" style={{ gap: '1px' }}>
                           <span
-                            className="text-sm"
-                            style={{ color: 'var(--color-foreground)' }}
+                            className=""
+                            style={{ fontSize: 'var(--pricing-small)', color: 'var(--color-foreground)' }}
                           >
                             {plan.department}
                           </span>
                           <span
                             className="font-mono"
                             style={{
-                              fontSize: '11px',
+                              fontSize: 'var(--pricing-micro)',
                               color: 'var(--color-dead)' }}
                           >
                             {plan.plan} — {plan.price}
@@ -232,7 +233,7 @@ export function PricingBundles() {
                       <span
                         className="font-mono uppercase tracking-widest"
                         style={{
-                          fontSize: '11px',
+                          fontSize: 'var(--pricing-micro)',
                           color: 'var(--color-dead)' }}
                       >
                         Combined
@@ -240,7 +241,7 @@ export function PricingBundles() {
                       <p
                         className="font-display font-black"
                         style={{
-                          fontSize: 'clamp(1.1rem, 2vw, 1.5rem)',
+                          fontSize: 'clamp(1.3rem, 2vw, 1.7rem)',
                           color: 'var(--color-violet-light)' }}
                       >
                         {bundle.total}
@@ -252,7 +253,7 @@ export function PricingBundles() {
                       className="inline-flex items-center gap-1.5 font-display font-bold transition-all duration-300 hover:bg-violet hover:text-white whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-card"
                       style={{
                         padding: '14px 24px',
-                        fontSize: '13px',
+                        fontSize: 'var(--pricing-button)',
                         borderRadius: '10px',
                         border: '1px solid var(--color-violet)',
                         color: 'var(--color-violet-light)' }}

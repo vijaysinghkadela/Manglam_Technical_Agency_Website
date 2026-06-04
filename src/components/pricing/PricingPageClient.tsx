@@ -8,6 +8,7 @@ import { FAQSection } from '@/components/ui/FAQSection';
 import { pricingFaqs } from '@/lib/data/faq';
 import { DepartmentAccordion } from './DepartmentAccordion';
 import { PricingBundles } from './PricingBundles';
+import { ScrambleCounter } from '@/components/ui/ScrambleCounter';
 import {
   departments,
   paymentTerms,
@@ -55,6 +56,7 @@ export function PricingPageClient() {
 
   return (
     <main
+      className="pricing-page"
       style={{ backgroundColor: 'var(--color-canvas)', minHeight: '100vh' }}
     >
       {/* ── HERO ─────────────────────────────────────────── */}
@@ -82,7 +84,7 @@ export function PricingPageClient() {
             transition={{ duration: 0.5, ease: EASE }}
             className="flex items-center gap-2 font-mono"
             style={{
-              fontSize: '13px',
+              fontSize: 'var(--pricing-micro)',
               color: 'var(--color-dead)',
               letterSpacing: '0.18em',
               marginBottom: 'clamp(40px, 8vw, 80px)' }}
@@ -101,7 +103,7 @@ export function PricingPageClient() {
               transition={{ duration: 0.5, delay: 0.05, ease: EASE }}
               className="font-mono uppercase block"
               style={{
-                fontSize: '13px',
+                fontSize: 'var(--pricing-micro)',
                 color: 'var(--color-violet-light)',
                 letterSpacing: '0.22em',
                 marginBottom: '24px' }}
@@ -127,7 +129,7 @@ export function PricingPageClient() {
               transition={{ duration: 0.6, delay: 0.35, ease: EASE }}
               className="mt-10 lg:mt-14"
               style={{
-                fontSize: '16px',
+                fontSize: 'var(--pricing-body)',
                 lineHeight: 1.72,
                 color: 'var(--color-muted)',
                 maxWidth: '520px' }}
@@ -141,7 +143,7 @@ export function PricingPageClient() {
             <span
               className="font-mono uppercase"
               style={{
-                fontSize: '13px',
+                fontSize: 'var(--pricing-micro)',
                 color: 'var(--color-violet-light)',
                 letterSpacing: '0.22em' }}
             >
@@ -151,7 +153,7 @@ export function PricingPageClient() {
               <span
                 className="font-mono uppercase"
                 style={{
-                  fontSize: '10px',
+                  fontSize: 'var(--pricing-micro)',
                   color: 'var(--color-dead)',
                   letterSpacing: '0.22em',
                   writingMode: 'vertical-rl',
@@ -194,15 +196,15 @@ export function PricingPageClient() {
                 <span
                   className="font-display font-black leading-none"
                   style={{
-                    fontSize: 'clamp(1.3rem, 2.5vw, 1.8rem)',
+                    fontSize: 'var(--pricing-price)',
                     color: 'var(--color-foreground)' }}
                 >
-                  {stat.value}
+                  {i === 0 ? <><ScrambleCounter target={6} /> Depts</> : i === 1 ? <><ScrambleCounter target={18} /> Plans</> : i === 3 ? <><ScrambleCounter target={4} /> Types</> : stat.value}
                 </span>
                 <span
                   className="font-mono uppercase tracking-wider"
                   style={{
-                    fontSize: '11px',
+                    fontSize: 'var(--pricing-micro)',
                     color: 'var(--color-dead)',
                     letterSpacing: '0.1em' }}
                 >
@@ -235,7 +237,7 @@ export function PricingPageClient() {
               className="relative font-mono uppercase tracking-wider rounded-full whitespace-nowrap transition-all duration-200 hover:bg-violet/10 flex items-center gap-1.5"
               style={{
                 padding: '8px 18px',
-                fontSize: '11px',
+                fontSize: 'var(--pricing-micro)',
                 letterSpacing: '0.1em',
                 color:
                   openDept === dept.slug
@@ -253,7 +255,7 @@ export function PricingPageClient() {
                   opacity: openDept === dept.slug ? 1 : 0 }}
               />
               <span className="relative z-10 flex items-center gap-1.5">
-                <span style={{ fontSize: '11px', lineHeight: 1 }}>
+                <span style={{ fontSize: 'var(--pricing-micro)', lineHeight: 1 }}>
                   {deptEmojis[dept.slug] || ''}
                 </span>
                 {dept.department}
@@ -292,7 +294,7 @@ export function PricingPageClient() {
             <span
               className="font-mono uppercase block"
               style={{
-                fontSize: '13px',
+                fontSize: 'var(--pricing-micro)',
                 color: 'var(--color-violet-light)',
                 letterSpacing: '0.22em' }}
             >
@@ -301,7 +303,7 @@ export function PricingPageClient() {
             <h2
               className="font-display font-black leading-tight"
               style={{
-                fontSize: 'clamp(1.5rem, 3vw, 2.75rem)',
+                fontSize: 'var(--pricing-section-title)',
                 color: 'var(--color-foreground)' }}
             >
               What You&apos;ll Pay
@@ -309,7 +311,7 @@ export function PricingPageClient() {
             <p
               className="max-w-lg"
               style={{
-                fontSize: '15px',
+                fontSize: 'var(--pricing-body)',
                 color: 'var(--color-muted)',
                 lineHeight: 1.72 }}
             >
@@ -367,7 +369,7 @@ export function PricingPageClient() {
                 <span
                   className="font-mono uppercase block"
                   style={{
-                    fontSize: '13px',
+                    fontSize: 'var(--pricing-micro)',
                     color: 'var(--color-violet-light)',
                     letterSpacing: '0.22em' }}
                 >
@@ -376,7 +378,7 @@ export function PricingPageClient() {
                 <h2
                   className="font-display font-black leading-tight"
                   style={{
-                    fontSize: 'clamp(1.2rem, 2.2vw, 1.9rem)',
+                    fontSize: 'clamp(1.45rem, 2.2vw, 2.1rem)',
                     color: 'var(--color-foreground)',
                     lineHeight: 1.1 }}
                 >
@@ -385,7 +387,7 @@ export function PricingPageClient() {
                 <p
                   className="max-w-md"
                   style={{
-                    fontSize: '14px',
+                    fontSize: 'var(--pricing-small)',
                     lineHeight: 1.72,
                     color: 'var(--color-muted)' }}
                 >
@@ -427,7 +429,7 @@ export function PricingPageClient() {
                 className="inline-flex items-center justify-center gap-2 font-display font-black transition-all duration-300 hover:bg-violet hover:text-white"
                 style={{
                   padding: '16px 32px',
-                  fontSize: '15px',
+                  fontSize: 'var(--pricing-button)',
                   borderRadius: '14px',
                   border: '1px solid var(--color-violet)',
                   color: 'var(--color-violet-light)' }}
@@ -466,7 +468,7 @@ export function PricingPageClient() {
               <span
                 className="font-mono uppercase block"
                 style={{
-                  fontSize: '13px',
+                  fontSize: 'var(--pricing-micro)',
                   color: 'var(--color-violet-light)',
                   letterSpacing: '0.22em' }}
               >
@@ -506,7 +508,7 @@ export function PricingPageClient() {
                 className="inline-flex items-center justify-center gap-2 font-display font-black transition-all duration-300 hover:bg-violet hover:text-white rounded-xl"
                 style={{
                   padding: '18px 36px',
-                  fontSize: '17px',
+                  fontSize: 'var(--pricing-button)',
                   borderRadius: '14px',
                   backgroundColor: 'var(--color-foreground)',
                   color: 'var(--color-canvas)' }}
@@ -526,7 +528,7 @@ export function PricingPageClient() {
                 className="inline-flex items-center justify-center gap-2 font-display font-bold transition-all duration-300 hover:border-violet rounded-xl"
                 style={{
                   padding: '18px 36px',
-                  fontSize: '15px',
+                  fontSize: 'var(--pricing-button)',
                   borderRadius: '14px',
                   border: '1px solid var(--color-border)',
                   color: 'var(--color-muted)' }}
@@ -585,7 +587,7 @@ function PaymentTermCard({
         <span
           className="font-display font-bold"
           style={{
-            fontSize: '14px',
+            fontSize: 'var(--pricing-small)',
             color: 'var(--color-foreground)' }}
         >
           {label}
@@ -593,7 +595,7 @@ function PaymentTermCard({
         <span
           className="font-mono leading-snug"
           style={{
-            fontSize: '12px',
+            fontSize: 'var(--pricing-small)',
             color: 'var(--color-muted)' }}
         >
           {value}

@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Star } from 'lucide-react'
 import { testimonials } from '@/lib/data/testimonials'
 import { SectionLabel } from '@/components/ui/SectionLabel'
 
@@ -48,15 +48,27 @@ function TestimonialsSection() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4, ease: [0.33, 1, 0.68, 1] }}
-              className="flex flex-col items-center text-center rounded-[28px] border border-border bg-card px-6 sm:px-10 py-10 sm:py-14 shadow-[0_18px_70px_rgba(0,0,0,0.12)] w-full"
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.16}
+              onDragEnd={(_, info) => {
+                if (info.offset.x < -80 || info.velocity.x < -360) next()
+                if (info.offset.x > 80 || info.velocity.x > 360) prev()
+              }}
+              className="flex w-full cursor-grab flex-col items-center rounded-lg border border-border bg-card px-6 py-10 text-center shadow-[0_18px_70px_rgba(0,0,0,0.12)] active:cursor-grabbing sm:px-10 sm:py-14"
             >
+              <div className="mb-6 flex items-center gap-1" aria-label={`${current.rating ?? 5} star rating`}>
+                {Array.from({ length: current.rating ?? 5 }).map((_, starIndex) => (
+                  <Star key={starIndex} className="h-4 w-4 fill-violet text-violet" />
+                ))}
+              </div>
               <blockquote className="font-display font-bold leading-snug italic mb-8 sm:mb-10 select-text text-[clamp(1rem,4vw,1.75rem)] text-foreground max-w-[640px] [line-height:1.6]">
                 {current.quote}
               </blockquote>
 
               <div className="flex items-center gap-3 sm:gap-4">
                 <div
-                  className="w-10 sm:w-12 h-10 sm:h-12 shrink-0 flex items-center justify-center text-xs sm:text-sm font-display font-bold"
+                  className="h-10 w-10 shrink-0 animate-[avatar-pulse_4s_ease-in-out_infinite] rounded-full flex items-center justify-center text-xs font-display font-bold sm:h-12 sm:w-12 sm:text-sm"
                   style={{
                     backgroundColor: 'rgba(var(--color-accent-rgb),0.08)',
                     border: '1px solid rgba(var(--color-accent-rgb),0.24)',
