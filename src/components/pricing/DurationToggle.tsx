@@ -27,8 +27,9 @@ export function DurationToggle({
       {durations.map((d, i) => (
         <button
           key={d.label}
+          type="button"
           onClick={() => onChange(i)}
-          className="relative font-mono uppercase tracking-widest rounded-full transition-colors duration-200"
+          className="relative min-h-[44px] touch-manipulation rounded-full font-mono uppercase tracking-widest transition-colors duration-200"
           style={{
             padding: '12px 22px',
             fontSize: 'var(--pricing-micro)',

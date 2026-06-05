@@ -262,7 +262,7 @@ export function Footer() {
               <p>{AGENCY_LOCATION}</p>
               <a
                 href={`mailto:${AGENCY_EMAIL}`}
-                className="break-all transition-colors hover:text-violet"
+                className="inline-flex min-h-[44px] items-center break-all transition-colors hover:text-violet"
                 data-cursor="pointer"
               >
                 {AGENCY_EMAIL}
@@ -271,7 +271,7 @@ export function Footer() {
                 href={AGENCY_WHATSAPP}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 transition-colors hover:text-[#25D366] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+                className="flex min-h-[44px] items-center gap-2 transition-colors hover:text-[#25D366] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
                 data-cursor="pointer"
               >
                 <svg

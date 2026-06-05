@@ -6,13 +6,14 @@ import { usePathname } from 'next/navigation'
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import type { KeyboardEvent as ReactKeyboardEvent } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronDown, Menu, X } from 'lucide-react'
+import { ArrowRight, ChevronDown, Menu, MessageCircle, X } from 'lucide-react'
 import { services } from '@/lib/data/services'
 import { cn } from '@/lib/utils'
 import ThemeToggle from '@/components/ui/ThemeToggle'
 import { useIsClient } from '@/hooks/useIsClient'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
+import { AGENCY_WHATSAPP } from '@/lib/constants'
 
 import { useTheme } from 'next-themes'
 
@@ -482,7 +483,7 @@ export function Navbar() {
                         href={link.href}
                         data-cursor="pointer"
                         className={cn(
-                          'relative block overflow-hidden px-4 py-2.5 text-[13px] font-semibold rounded-full transition-all duration-200',
+                          'relative flex min-h-[44px] items-center overflow-hidden px-4 py-2.5 text-[13px] font-semibold rounded-full transition-all duration-200',
                           isActive(link) ? 'text-foreground' : 'text-muted'
                         )}
                         style={getLinkStyle(link)}
@@ -505,6 +506,14 @@ export function Navbar() {
             {/* Right side actions */}
             <div className="flex items-center gap-3 sm:gap-3.5 xl:gap-4">
               <ThemeToggle />
+              <Link
+                href="/contact"
+                data-cursor="pointer"
+                className="hidden min-h-[44px] items-center gap-2 rounded-full border border-violet/35 bg-[rgba(var(--color-accent-rgb),0.12)] px-4 font-display text-sm font-black text-violet-light transition-colors hover:bg-violet hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas lg:inline-flex"
+              >
+                Get Quote
+                <ArrowRight className="h-4 w-4" />
+              </Link>
 
               {/* Mobile menu button */}
               <motion.button
@@ -689,8 +698,25 @@ export function Navbar() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: NAV_LINKS.length * 0.05 + 0.1 }}
-                  className="mt-8 px-4"
+                  className="mt-8 grid gap-3 px-1"
                 >
+                  <Link
+                    href="/contact"
+                    onClick={() => setMobile(false)}
+                    className="inline-flex min-h-[54px] items-center justify-center gap-2 rounded-2xl bg-violet px-5 font-display text-base font-black text-white"
+                  >
+                    Get a Quote
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <a
+                    href={AGENCY_WHATSAPP}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-[54px] items-center justify-center gap-2 rounded-2xl border border-border px-5 font-display text-base font-bold text-foreground"
+                  >
+                    <MessageCircle className="h-4 w-4 text-[#25D366]" />
+                    WhatsApp Us
+                  </a>
                 </motion.div>
               </div>
 

@@ -64,7 +64,7 @@ export function ServicePricingSection({
             />
             <Link
               href="/pricing"
-              className="font-mono text-xs transition-colors hover:text-violet"
+              className="inline-flex min-h-[44px] items-center font-mono text-xs transition-colors hover:text-violet"
               style={{ color: 'var(--color-dead)' }}
             >
               Compare all departments →
@@ -206,7 +206,7 @@ export function ServicePricingSection({
           All prices in INR. See{' '}
           <Link
             href="/pricing"
-            className="underline hover:text-violet transition-colors"
+            className="inline-flex min-h-[44px] items-center underline transition-colors hover:text-violet"
           >
             full pricing page
           </Link>{' '}

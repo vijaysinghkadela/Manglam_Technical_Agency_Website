@@ -59,8 +59,9 @@ export function DepartmentAccordion({
         borderBottom: '1px solid var(--color-border)' }}
     >
       <button
+        type="button"
         onClick={onToggle}
-        className="w-full flex items-center justify-between text-left group relative"
+        className="w-full flex items-center justify-between text-left group relative touch-manipulation"
         style={{
           padding: '26px 0' }}
       >

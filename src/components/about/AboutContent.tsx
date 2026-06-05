@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
+import { useState } from 'react'
 import { teamMembers } from '@/lib/data/team'
 import { TiltCard } from '@/components/ui/TiltCard'
 
@@ -44,6 +45,8 @@ const expectations = [
 ]
 
 export function AboutContent() {
+  const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({})
+
   return (
     <>
       <section className="section-sm w-full border-t border-border bg-surface">
@@ -146,7 +149,7 @@ export function AboutContent() {
                     viewport={{ once: true, margin: '-60px' }}
                     transition={{ duration: 0.8, ease: EASE }}
                   >
-                    {member.image ? (
+                    {member.image && !imageErrors[member.name] ? (
                       <Image
                         src={member.image}
                         alt={`${member.name}, ${member.role} at Manglam Technical Agency`}
@@ -154,6 +157,7 @@ export function AboutContent() {
                         className="object-cover"
                         style={{ objectPosition: member.imagePosition ?? '50% 20%' }}
                         unoptimized
+                        onError={() => setImageErrors((current) => ({ ...current, [member.name]: true }))}
                       />
                     ) : (
                       <div className="flex h-full items-center justify-center font-display text-4xl font-black text-violet-light">

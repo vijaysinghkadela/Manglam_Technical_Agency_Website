@@ -233,8 +233,9 @@ export function PricingPageClient() {
           {ordered.map((dept) => (
             <button
               key={dept.slug}
+              type="button"
               onClick={() => handleNavClick(dept.slug)}
-              className="relative font-mono uppercase tracking-wider rounded-full whitespace-nowrap transition-all duration-200 hover:bg-violet/10 flex items-center gap-1.5"
+              className="relative min-h-[44px] touch-manipulation font-mono uppercase tracking-wider rounded-full whitespace-nowrap transition-all duration-200 hover:bg-violet/10 flex items-center gap-1.5"
               style={{
                 padding: '8px 18px',
                 fontSize: 'var(--pricing-micro)',

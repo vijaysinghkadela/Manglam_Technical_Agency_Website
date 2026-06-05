@@ -64,7 +64,7 @@ export function ConsentBanner() {
           aria-label="Cookie and privacy consent"
         >
             <div 
-              className="pointer-events-auto relative w-full max-w-3xl overflow-hidden rounded-2xl shadow-2xl"
+              className="pointer-events-auto relative w-full max-w-2xl overflow-hidden rounded-lg shadow-2xl"
               style={{ 
                 backgroundColor: 'var(--color-card)',
                 border: '1px solid var(--color-border)',
@@ -85,21 +85,62 @@ export function ConsentBanner() {
                   setIsManagingPreferences(false);
                   dismissBanner();
                 }}
-                className="absolute top-4 right-4 p-2 rounded-full transition-all duration-200 hover:bg-white/5 z-10"
+                className="absolute top-3 right-3 z-10 flex h-11 w-11 items-center justify-center rounded-full transition-all duration-200 hover:bg-white/5 sm:top-4 sm:right-4"
                 style={{ color: 'var(--color-muted)' }}
                 aria-label="Dismiss cookie notice"
               >
                 <X className="w-5 h-5" />
               </button>
 
-              <div className="p-4 sm:p-5">
+              {!isExpanded && (
+                <div className="p-4 pr-12 sm:hidden">
+                  <div className="mb-3">
+                    <p className="font-display text-sm font-black" style={{ color: 'var(--color-foreground)' }}>
+                      Privacy choices
+                    </p>
+                    <p className="mt-1 text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }}>
+                      Optional analytics stays off unless you accept it.
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setIsExpanded(true)}
+                      aria-expanded={isExpanded}
+                      aria-controls={detailsId}
+                      className="min-h-[44px] rounded-lg border px-3 text-sm font-medium"
+                      style={{
+                        borderColor: 'var(--color-border)',
+                        color: 'var(--color-muted)',
+                        backgroundColor: 'transparent' }}
+                    >
+                      Manage
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsManagingPreferences(false);
+                        grantConsent('analytics-and-communications');
+                      }}
+                      className="min-h-[44px] rounded-lg px-3 font-display text-sm font-bold"
+                      style={{
+                        backgroundColor: 'var(--color-foreground)',
+                        color: 'var(--color-canvas)' }}
+                    >
+                      Accept
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              <div className={isExpanded ? "p-4 sm:p-5" : "hidden p-4 sm:block sm:p-5"}>
                 {/* Header with icon */}
-                <div className="mb-4 flex flex-col items-center text-center sm:flex-row sm:items-center sm:gap-4 sm:text-left">
+                <div className="mb-3 flex flex-col items-center text-center sm:flex-row sm:items-center sm:gap-4 sm:text-left">
                   <motion.div
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ delay: 0.1, duration: 0.3 }}
-                    className="mb-3 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl sm:mb-0"
+                    className="mb-3 hidden h-11 w-11 shrink-0 items-center justify-center rounded-lg sm:mb-0 sm:flex"
                     style={{ 
                       backgroundColor: 'rgba(var(--color-accent-rgb), 0.1)',
                       border: '1px solid rgba(var(--color-accent-rgb), 0.2)' }}
@@ -113,7 +154,7 @@ export function ConsentBanner() {
                       initial={{ y: 10, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ delay: 0.15, duration: 0.3 }}
-                      className="mb-1 font-display text-base font-black md:text-lg"
+                      className="mb-1 font-display text-base font-black"
                       style={{ color: 'var(--color-foreground)' }}
                     >
                       Data Privacy & Consent
@@ -123,7 +164,7 @@ export function ConsentBanner() {
                       initial={{ y: 10, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ delay: 0.2, duration: 0.3 }}
-                      className="max-w-2xl text-xs leading-relaxed sm:text-sm"
+                      className="max-w-xl text-xs leading-relaxed sm:text-sm"
                       style={{ color: 'var(--color-muted)' }}
                     >
                       Essential storage keeps the site working. Optional analytics helps us understand what visitors need, under the DPDP Act, 2023.
@@ -191,7 +232,7 @@ export function ConsentBanner() {
                       onClick={() => setIsExpanded(!isExpanded)}
                       aria-expanded={isExpanded}
                       aria-controls={detailsId}
-                      className="flex items-center gap-1.5 text-xs font-medium transition-colors hover:text-foreground"
+                      className="flex min-h-[44px] items-center gap-1.5 text-xs font-medium transition-colors hover:text-foreground"
                       style={{ color: 'var(--color-muted)' }}
                     >
                       {isExpanded ? (
@@ -214,7 +255,7 @@ export function ConsentBanner() {
                         setIsManagingPreferences(false);
                         dismissBanner();
                       }}
-                      className="flex-1 px-5 py-3 text-sm font-medium rounded-xl transition-all duration-200 hover:opacity-80"
+                      className="flex-1 rounded-lg px-5 py-3 text-sm font-medium transition-all duration-200 hover:opacity-80"
                       style={{ 
                         color: 'var(--color-muted)',
                         border: '1px solid var(--color-border)',
@@ -230,7 +271,7 @@ export function ConsentBanner() {
                         setIsManagingPreferences(false);
                         grantConsent('analytics-and-communications');
                       }}
-                      className="flex-1 px-5 py-3 text-sm font-display font-bold rounded-xl transition-all duration-200 hover:opacity-90 hover:shadow-lg"
+                      className="flex-1 rounded-lg px-5 py-3 text-sm font-display font-bold transition-all duration-200 hover:opacity-90 hover:shadow-lg"
                       style={{
                         backgroundColor: 'var(--color-foreground)',
                         color: 'var(--color-canvas)',

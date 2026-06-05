@@ -94,10 +94,14 @@ function TestimonialsSection() {
                 <button
                   key={i} role="tab" aria-selected={i === index} aria-label={`Go to testimonial ${i + 1}`}
                   onClick={() => setIndex(i)}
-                  className="h-1.5 rounded-full transition-all duration-300"
-                  style={{ width: i === index ? '24px' : '6px', backgroundColor: i === index ? 'var(--color-violet)' : 'var(--color-border)' }}
+                  className="flex h-11 min-w-[44px] items-center justify-center rounded-full transition-all duration-300"
                   data-cursor="pointer"
-                />
+                >
+                  <span
+                    className="h-1.5 rounded-full transition-all duration-300"
+                    style={{ width: i === index ? '24px' : '8px', backgroundColor: i === index ? 'var(--color-violet)' : 'var(--color-border)' }}
+                  />
+                </button>
               ))}
             </div>
 

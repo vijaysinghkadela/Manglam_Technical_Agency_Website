@@ -24,6 +24,7 @@ const comingProjects = projects.filter(p => p.status === 'coming-soon')
 
 export function PortfolioContent() {
   const [filter, setFilter] = useState<FilterType>('all')
+  const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({})
   const filterButtonRefs = useRef<Array<HTMLButtonElement | null>>([])
   const reducedMotion = useReducedMotion()
 
@@ -85,7 +86,7 @@ export function PortfolioContent() {
                 onKeyDown={(event) => handleFilterKeyDown(event, index)}
                 aria-selected={filter === f.key}
                 tabIndex={filter === f.key ? 0 : -1}
-                className="font-mono uppercase transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+                className="min-h-[44px] font-mono uppercase transition-all duration-200 cursor-pointer touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
                 style={{
                   fontSize: '11px',
                   letterSpacing: '0.18em',
@@ -119,7 +120,7 @@ export function PortfolioContent() {
                     background: `linear-gradient(135deg, ${p.bgFrom} 0%, ${p.bgTo} 100%)`,
                     minHeight: 'clamp(280px, 38vw, 540px)' }}
                 >
-                  {p.image && (
+                  {p.image && !imageErrors[p.id] ? (
                     <Image
                       src={p.image}
                       alt={`${p.title} ${p.type === 'client' ? 'client project' : 'MTA product'} interface screenshot for ${p.client}`}
@@ -127,7 +128,17 @@ export function PortfolioContent() {
                       sizes="(max-width: 1024px) 100vw, 45vw"
                       className="object-contain"
                       loading="lazy"
+                      unoptimized
+                      onError={() => setImageErrors((current) => ({ ...current, [p.id]: true }))}
                     />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center p-8">
+                      <div className="flex h-32 w-32 items-center justify-center rounded-lg border border-white/15 bg-black/25">
+                        <span className="font-display text-5xl font-black text-white/80">
+                          {p.title[0]}
+                        </span>
+                      </div>
+                    </div>
                   )}
 
                   {/* Edge gradient overlay for text readability */}
@@ -229,7 +240,7 @@ export function PortfolioContent() {
                           color: 'var(--color-dead)',
                           letterSpacing: '0.18em',
                           border: '1px solid var(--color-border)',
-                          padding: '3px 10px' }}
+                          padding: '7px 10px' }}
                       >
                         {t}
                       </span>
@@ -444,11 +455,11 @@ export function PortfolioContent() {
                           {t}
                         </span>
                         {ti < p.tags.length - 1 && (
-                          <span style={{ color: 'var(--color-border)' }}>·</span>
+                          <span aria-hidden="true" style={{ color: 'var(--color-border)' }}>·</span>
                         )}
                       </span>
                     ))}
-                    <span style={{ color: 'var(--color-border)' }}>·</span>
+                    <span aria-hidden="true" style={{ color: 'var(--color-border)' }}>·</span>
                     <span
                       className="font-mono"
                       style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.06em' }}

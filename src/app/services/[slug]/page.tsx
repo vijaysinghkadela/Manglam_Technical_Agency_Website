@@ -118,6 +118,13 @@ function buildContactHref(service: ServiceData, plan?: ServicePlan) {
   return `/contact?${params.toString()}`;
 }
 
+const servicePageNav = [
+  { href: "#overview", label: "Overview" },
+  { href: "#pricing", label: "Pricing" },
+  { href: "#compliance", label: "Compliance" },
+  { href: "#faq", label: "FAQ" },
+] as const;
+
 export default async function ServicePage({
   params,
 }: {
@@ -159,13 +166,13 @@ export default async function ServicePage({
                 color: "var(--color-dead)",
                 letterSpacing: "0.18em" }}
             >
-              <Link href="/" className="hover-foreground transition-colors">
+              <Link href="/" className="inline-flex min-h-[44px] items-center hover-foreground transition-colors">
                 HOME
               </Link>
               <span>/</span>
               <Link
                 href="/services"
-                className="hover-foreground transition-colors"
+                className="inline-flex min-h-[44px] items-center hover-foreground transition-colors"
               >
                 SERVICES
               </Link>
@@ -350,8 +357,26 @@ export default async function ServicePage({
         </div>
       </section>
 
+      <nav
+        aria-label={`${service.name} page sections`}
+        className="sticky top-[var(--nav-offset)] z-20 border-t border-b border-border bg-canvas/95 backdrop-blur-xl"
+      >
+        <div className="container-site flex gap-2 overflow-x-auto py-3">
+          {servicePageNav.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="inline-flex min-h-[44px] shrink-0 items-center rounded-full border border-border px-4 font-mono text-xs uppercase tracking-[0.14em] text-muted transition-colors hover:border-violet/50 hover:text-violet-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </nav>
+
       {/* ── OVERVIEW + PROCESS ──────────────────────────── */}
       <section
+        id="overview"
         className="border-t border-border"
         style={{
           backgroundColor: "var(--color-canvas)",
@@ -448,7 +473,7 @@ export default async function ServicePage({
                       <Link
                         key={code}
                         href={`/legal/agreements/${agreement.slug}`}
-                        className="font-mono text-xs px-2 py-1 transition-colors hover:text-white"
+                        className="inline-flex min-h-[44px] items-center font-mono text-xs px-3 py-2 transition-colors hover:text-white"
                         style={{
                           border: "1px solid rgba(var(--color-accent-rgb),0.35)",
                           color: "var(--color-violet-light)" }}
@@ -458,7 +483,7 @@ export default async function ServicePage({
                     ) : (
                       <span
                         key={code}
-                        className="font-mono text-xs px-2 py-1"
+                        className="inline-flex min-h-[44px] items-center font-mono text-xs px-3 py-2"
                         style={{
                           border: "1px solid var(--color-border)",
                           color: "var(--color-muted)" }}
@@ -605,13 +630,18 @@ export default async function ServicePage({
       {/* ── PRICING ─────────────────────────────────────── */}
       {service.pricing.length > 0 &&
         (pricingDepartments.some((d) => d.slug === service.slug) ? (
-          <ServicePricingSection departmentSlug={service.slug} />
+          <div id="pricing">
+            <ServicePricingSection departmentSlug={service.slug} />
+          </div>
         ) : (
-          <OldPricingSectionInline service={service} />
+          <div id="pricing">
+            <OldPricingSectionInline service={service} />
+          </div>
         ))}
 
       {/* ── COMPLIANCE BANNER ───────────────────────────── */}
       <section
+        id="compliance"
         className="border-t border-border"
         style={{
           backgroundColor: "var(--color-canvas)",
@@ -661,7 +691,7 @@ export default async function ServicePage({
             <div className="flex items-center gap-6">
               <Link
                 href="/legal"
-                className="hover-foreground transition-colors font-mono text-sm"
+                className="inline-flex min-h-[44px] items-center hover-foreground transition-colors font-mono text-sm"
                 style={{ color: "var(--color-violet-light)" }}
               >
                 Open Legal Hub →
@@ -673,6 +703,7 @@ export default async function ServicePage({
 
       {/* ── FAQ ─────────────────────────────────────────── */}
       <section
+        id="faq"
         className="border-t border-border"
         style={{
           backgroundColor: "var(--color-canvas)",

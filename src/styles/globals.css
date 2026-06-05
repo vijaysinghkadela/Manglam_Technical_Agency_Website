@@ -198,6 +198,12 @@ body::after {
   padding-top: calc(var(--nav-offset, 84px) + 48px);
 }
 
+.page-hero-safe nav a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+}
+
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { 
   background: var(--color-canvas);
