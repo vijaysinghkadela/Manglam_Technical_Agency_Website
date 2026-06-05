@@ -96,10 +96,10 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
               <h1
                 aria-label="Start a conversation"
                 className="mb-12 flex flex-col font-display font-black leading-none tracking-normal uppercase"
-                style={{ gap: '0.25rem', fontSize: 'clamp(2.2rem, 4.8vw, 5.2rem)', color: 'var(--color-foreground)' }}
+                style={{ gap: '0.25rem', fontSize: 'var(--text-display-lg)', color: 'var(--color-foreground)' }}
               >
                 <SplitWords text="Start a" delay={0.1} />
-                <span style={{ fontSize: 'clamp(1.75rem, 3.5vw, 3.9rem)', color: 'var(--color-violet)' }}>
+                <span style={{ fontSize: 'var(--text-display-md)', color: 'var(--color-violet)' }}>
                   <SplitWords text="conversation." delay={0.24} />
                 </span>
               </h1>

@@ -9,6 +9,7 @@ import {
   AGENCY_NAME,
   AGENCY_EMAIL,
   AGENCY_LOCATION,
+  AGENCY_PHONE,
   AGENCY_WHATSAPP,
   AGENCY_X_URL,
   AGENCY_INSTAGRAM_URL,
@@ -109,7 +110,7 @@ export function Footer() {
                 <div className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border/70 bg-canvas/70 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)]">
                   <Image
                     src={logoSrc}
-                    alt="Manglam Technical Agency"
+                    alt="Manglam Technical Agency logo"
                     width={40}
                     height={40}
                     sizes="40px"
@@ -259,7 +260,22 @@ export function Footer() {
               className="flex flex-col gap-3 text-sm"
               style={{ color: "var(--color-muted)" }}
             >
-              <p>{AGENCY_LOCATION}</p>
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(AGENCY_LOCATION)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-[44px] items-center transition-colors hover:text-violet focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+                data-cursor="pointer"
+              >
+                {AGENCY_LOCATION}
+              </a>
+              <a
+                href={`tel:${AGENCY_PHONE.replace(/[^\d+]/g, "")}`}
+                className="inline-flex min-h-[44px] items-center transition-colors hover:text-violet focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+                data-cursor="pointer"
+              >
+                {AGENCY_PHONE}
+              </a>
               <a
                 href={`mailto:${AGENCY_EMAIL}`}
                 className="inline-flex min-h-[44px] items-center break-all transition-colors hover:text-violet"

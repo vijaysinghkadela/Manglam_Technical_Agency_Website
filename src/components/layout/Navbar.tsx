@@ -318,7 +318,7 @@ export function Navbar() {
               >
                 <Image
                   src={logoSrc}
-                  alt="Manglam Technical Agency"
+                  alt="Manglam Technical Agency logo"
                   width={40}
                   height={40}
                   sizes="(max-width: 640px) 36px, 40px"

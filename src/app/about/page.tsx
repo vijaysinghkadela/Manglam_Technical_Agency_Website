@@ -71,14 +71,14 @@ export default function AboutPage() {
               <h1
                 aria-label="Technical work with a human line. Built by people clients can actually reach."
                 className="flex flex-col font-display font-black leading-none tracking-normal uppercase"
-                style={{ gap: '0.35rem', fontSize: 'clamp(2.2rem, 5.5vw, 6rem)', color: 'var(--color-foreground)' }}
+                style={{ gap: '0.35rem', fontSize: 'var(--text-display-lg)', color: 'var(--color-foreground)' }}
               >
                 <span>Technical work</span>
                 <span style={{ color: 'var(--color-violet)' }}>with a human line.</span>
                 <span
                   className="normal-case"
                   style={{
-                    fontSize: 'clamp(1rem, 2.2vw, 2.2rem)',
+                    fontSize: 'var(--text-display-sm)',
                     color: 'var(--color-muted)',
                     paddingLeft: 'clamp(4px, 0.8vw, 14px)' }}
                 >

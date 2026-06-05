@@ -37,8 +37,8 @@
   --space-8: 64px;
   --space-12: 96px;
   --space-16: 128px;
-  --text-body-fluid: clamp(14px, 2vw, 18px);
-  --text-hero-fluid: clamp(48px, 8vw, 120px);
+  --text-body-fluid: clamp(14px, 1.2vw, 17px);
+  --text-hero-fluid: clamp(2.15rem, 5.6vw, 5.25rem);
 }
 
 html.dark, html[data-theme="dark"] {
@@ -98,10 +98,10 @@ html.dark, html[data-theme="dark"] {
   --font-body: var(--font-dm-sans), Inter, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
 
-  --text-display-xl: clamp(48px, 8vw, 120px);
-  --text-display-lg: clamp(44px, 6vw, 90px);
-  --text-display-md: clamp(30px, 4vw, 58px);
-  --text-display-sm: clamp(22px, 2.5vw, 38px);
+  --text-display-xl: clamp(2.35rem, 5.8vw, 5.25rem);
+  --text-display-lg: clamp(2.05rem, 4.8vw, 4.45rem);
+  --text-display-md: clamp(1.75rem, 3.4vw, 3.2rem);
+  --text-display-sm: clamp(1.35rem, 2.4vw, 2.25rem);
   --text-label: 12px;
   --nav-offset: 104px;
   --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);

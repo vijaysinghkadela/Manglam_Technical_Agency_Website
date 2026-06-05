@@ -223,7 +223,7 @@ export default async function ServicePage({
               aria-label={service.name}
               className="max-w-[min(100%,920px)] break-words font-display font-black leading-none tracking-normal"
               style={{
-                fontSize: "clamp(2.75rem, 7vw, 7.4rem)",
+                fontSize: "var(--text-display-xl)",
                 lineHeight: 0.92,
                 color: "var(--color-foreground)" }}
             >

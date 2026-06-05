@@ -71,7 +71,7 @@ export default function LegalHubPage() {
               <h1
                 aria-label="Legal hub"
                 className="flex flex-col font-display font-black leading-none tracking-normal uppercase"
-                style={{ gap: '0.25rem', fontSize: 'clamp(3rem, 9vw, 9rem)', color: 'var(--color-foreground)' }}
+                style={{ gap: '0.25rem', fontSize: 'var(--text-display-xl)', color: 'var(--color-foreground)' }}
               >
                 <span>Legal</span>
                 <span style={{ color: 'var(--color-violet)' }}>hub.</span>

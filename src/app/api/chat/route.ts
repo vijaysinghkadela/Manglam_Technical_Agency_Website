@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 
 const messageSchema = z.object({
   role: z.enum(["user", "assistant"]),
-  content: z.string().min(1).max(4000),
+  content: z.string().min(1).max(1000),
 });
 
 const requestSchema = z.object({
@@ -23,6 +23,38 @@ const requestSchema = z.object({
 const API_CONTEXT_WINDOW = 15;
 const OPENROUTER_ENDPOINT =
   "https://openrouter.ai/api/v1/chat/completions";
+const CHAT_TIMEOUT_MS = 20_000;
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const RATE_LIMIT_MAX_REQUESTS = 12;
+
+const rateLimitStore = new Map<string, { count: number; resetAt: number }>();
+
+function getClientIp(request: NextRequest) {
+  const forwardedFor = request.headers.get("x-forwarded-for");
+  if (forwardedFor) return forwardedFor.split(",")[0]?.trim() || "unknown";
+  return request.headers.get("x-real-ip") ?? "unknown";
+}
+
+function isRateLimited(key: string) {
+  const now = Date.now();
+
+  for (const [storeKey, value] of rateLimitStore) {
+    if (value.resetAt <= now) rateLimitStore.delete(storeKey);
+  }
+
+  const current = rateLimitStore.get(key);
+  if (!current || current.resetAt <= now) {
+    rateLimitStore.set(key, {
+      count: 1,
+      resetAt: now + RATE_LIMIT_WINDOW_MS,
+    });
+    return false;
+  }
+
+  current.count += 1;
+  rateLimitStore.set(key, current);
+  return current.count > RATE_LIMIT_MAX_REQUESTS;
+}
 
 function getLastUserMessage(
   messages: Array<{ role: "user" | "assistant"; content: string }>,
@@ -35,18 +67,25 @@ function getLastUserMessage(
 
 function localFallback(parsed: z.infer<typeof requestSchema>) {
   const lastUserMessage = getLastUserMessage(parsed.messages);
-  return NextResponse.json({
-    success: true,
-    source: "local-fallback",
-    message: buildLocalAssistantReply(
-      {
-        pathname: parsed.pathname,
-        pageTitle: parsed.pageTitle,
-        pageDescription: parsed.pageDescription,
+  return NextResponse.json(
+    {
+      success: true,
+      source: "local-fallback",
+      message: buildLocalAssistantReply(
+        {
+          pathname: parsed.pathname,
+          pageTitle: parsed.pageTitle,
+          pageDescription: parsed.pageDescription,
+        },
+        lastUserMessage,
+      ),
+    },
+    {
+      headers: {
+        "Cache-Control": "no-store",
       },
-      lastUserMessage,
-    ),
-  });
+    },
+  );
 }
 
 async function openRouterStream(
@@ -103,13 +142,30 @@ async function openRouterStream(
   return new Response(stream, {
     headers: {
       "Content-Type": "text/event-stream",
-      "Cache-Control": "no-cache",
+      "Cache-Control": "no-store",
+      Connection: "keep-alive",
+      "X-Accel-Buffering": "no",
     },
   });
 }
 
 export async function POST(request: NextRequest) {
   try {
+    if (isRateLimited(getClientIp(request))) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Too many assistant requests. Please wait a minute and try again.",
+        },
+        {
+          status: 429,
+          headers: {
+            "Cache-Control": "no-store",
+          },
+        },
+      );
+    }
+
     const apiKey = process.env.OPENROUTER_API_KEY;
     const parsed = requestSchema.parse(await request.json());
     const model =
@@ -122,7 +178,7 @@ export async function POST(request: NextRequest) {
     });
 
     if (!apiKey) {
-      console.error("[chat] OPENROUTER_API_KEY not set — using local fallback");
+      console.warn("[chat] OPENROUTER_API_KEY not set; using local fallback");
       return localFallback(parsed);
     }
 
@@ -131,7 +187,7 @@ export async function POST(request: NextRequest) {
       "https://manglamtechnicalagency.com";
 
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 30_000);
+    const timeoutId = setTimeout(() => controller.abort(), CHAT_TIMEOUT_MS);
 
     let response: Response;
     try {
@@ -155,7 +211,7 @@ export async function POST(request: NextRequest) {
           ],
           temperature: 0.3,
           top_p: 0.9,
-          max_tokens: 1200,
+          max_tokens: 800,
           stream: true,
         }),
       });
@@ -163,7 +219,7 @@ export async function POST(request: NextRequest) {
       clearTimeout(timeoutId);
       const reason =
         fetchErr instanceof Error && fetchErr.name === "AbortError"
-          ? "timeout (>30s)"
+          ? `timeout (>${CHAT_TIMEOUT_MS / 1000}s)`
           : fetchErr instanceof Error
             ? fetchErr.message
             : String(fetchErr);
@@ -194,7 +250,7 @@ export async function POST(request: NextRequest) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { success: false, message: "Invalid request." },
-        { status: 400 },
+        { status: 400, headers: { "Cache-Control": "no-store" } },
       );
     }
     console.error(
@@ -203,7 +259,7 @@ export async function POST(request: NextRequest) {
     );
     return NextResponse.json(
       { success: false, message: "Chatbot error." },
-      { status: 500 },
+      { status: 500, headers: { "Cache-Control": "no-store" } },
     );
   }
 }

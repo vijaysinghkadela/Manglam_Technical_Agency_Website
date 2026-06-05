@@ -3,14 +3,13 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
-  Bot,
   RefreshCcw,
   Send,
   X,
-  Sparkles,
   ArrowRight,
   AlertCircle,
 } from "lucide-react";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import toast from "react-hot-toast";
@@ -245,11 +244,15 @@ function MTAAvatar() {
   return (
     <span
       aria-hidden
-      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-accent-border bg-accent-soft"
+      className="relative flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-full border border-accent-border bg-canvas shadow-[0_4px_12px_rgba(var(--color-accent-rgb),0.16)]"
     >
-      <span className="font-display text-[11px] font-black leading-none" style={{ color: BRAND }}>
-        M
-      </span>
+      <Image
+        src="/images/mta-logo-transparent.png"
+        alt=""
+        fill
+        sizes="32px"
+        className="object-contain p-1"
+      />
     </span>
   );
 }
@@ -536,20 +539,28 @@ export function SiteChatbot() {
       <motion.button
         type="button"
         onClick={() => setOpen(true)}
-        className="fixed bottom-5 right-5 z-[70] flex h-14 w-14 items-center justify-center rounded-full border border-accent-border bg-card/95 shadow-[0_12px_40px_rgba(0,0,0,0.25)] backdrop-blur-xl transition-colors hover:border-accent hover:bg-accent-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas sm:bottom-6 sm:right-6 sm:h-16 sm:w-16"
+        className="fixed bottom-4 right-4 z-[45] flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-accent-border bg-card/95 shadow-[0_12px_40px_rgba(0,0,0,0.25)] backdrop-blur-xl transition-colors hover:border-accent hover:bg-accent-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas sm:bottom-6 sm:right-6 sm:z-[70] sm:h-16 sm:w-16"
         whileHover={reducedMotion ? undefined : { scale: 1.06, transition: { duration: 0.18 } }}
         whileTap={reducedMotion ? undefined : { scale: 0.92, transition: { duration: 0.1 } }}
         aria-label="Open AI assistant"
       >
-        <span className="relative flex items-center justify-center">
-          <Bot className="h-6 w-6 text-accent sm:h-7 sm:w-7" />
+        <span className="relative flex h-full w-full items-center justify-center">
+          <Image
+            src="/images/mta-logo-transparent.png"
+            alt=""
+            width={44}
+            height={44}
+            sizes="(min-width: 640px) 56px, 44px"
+            className="h-10 w-10 object-contain sm:h-14 sm:w-14"
+            priority={false}
+          />
           <motion.span
             animate={reducedMotion ? undefined : { scale: [1, 1.8, 1], opacity: [0.5, 0, 0.5] }}
             transition={reducedMotion ? undefined : { duration: 2.2, repeat: Infinity, ease: "easeOut" }}
-            className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-emerald-400"
+            className="absolute right-1 top-1 h-2.5 w-2.5 rounded-full bg-emerald-400"
             aria-hidden="true"
           />
-          <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full border-2 border-card bg-emerald-400" aria-hidden="true" />
+          <span className="absolute right-1 top-1 h-2.5 w-2.5 rounded-full border-2 border-card bg-emerald-400" aria-hidden="true" />
         </span>
       </motion.button>
 
@@ -586,8 +597,14 @@ export function SiteChatbot() {
                 {/* ── Header ──────────────────────────────────── */}
                 <div className="flex items-center justify-between gap-3 border-b border-border px-4 py-4 sm:px-6 sm:py-4">
                   <div className="flex min-w-0 items-center gap-3">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-accent-border bg-accent-soft shadow-[0_4px_12px_rgba(var(--color-accent-rgb),0.14)]">
-                      <Sparkles className="h-4.5 w-4.5 text-accent sm:h-5 sm:w-5" />
+                    <span className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-accent-border bg-canvas shadow-[0_4px_12px_rgba(var(--color-accent-rgb),0.14)]">
+                      <Image
+                        src="/images/mta-logo-transparent.png"
+                        alt=""
+                        fill
+                        sizes="40px"
+                        className="object-contain p-1.5"
+                      />
                     </span>
                     <div className="min-w-0">
                       <Dialog.Title className="font-display text-[15px] font-black leading-tight sm:text-[17px]">
@@ -606,7 +623,7 @@ export function SiteChatbot() {
                     <button
                       type="button"
                       onClick={resetConversation}
-                      className="inline-flex h-9 items-center gap-1.5 rounded-full border border-border bg-canvas/75 px-3 font-mono text-[9px] uppercase tracking-[0.14em] text-muted transition-colors hover:bg-accent-soft hover:text-foreground sm:px-3.5 sm:text-[10px]"
+                      className="inline-flex min-h-[44px] items-center gap-1.5 rounded-full border border-border bg-canvas/75 px-3 font-mono text-[9px] uppercase tracking-[0.14em] text-muted transition-colors hover:bg-accent-soft hover:text-foreground sm:px-3.5 sm:text-[10px]"
                       aria-label="Reset conversation"
                     >
                       <RefreshCcw className="h-3 w-3" />
@@ -615,7 +632,7 @@ export function SiteChatbot() {
                     <Dialog.Close asChild>
                       <button
                         type="button"
-                        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-canvas/75 text-muted transition-colors hover:bg-accent-soft hover:text-foreground"
+                        className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-canvas/75 text-muted transition-colors hover:bg-accent-soft hover:text-foreground"
                         aria-label="Close chat"
                       >
                         <X className="h-4 w-4" />
@@ -647,7 +664,7 @@ export function SiteChatbot() {
                               disabled={isSending || isLimitReached}
                               onClick={() => sendSuggestion(prompt)}
                               whileHover={reducedMotion ? undefined : { x: 2 }}
-                              className="group flex items-center gap-2 rounded-xl border border-border bg-canvas/75 px-3 py-2.5 text-left text-[11px] leading-snug text-foreground transition-colors hover:border-accent-border hover:bg-accent-soft disabled:cursor-not-allowed disabled:opacity-50 sm:px-3.5 sm:text-[12px]"
+                              className="group flex min-h-[48px] items-center gap-2 rounded-xl border border-border bg-canvas/75 px-3 py-2.5 text-left text-[11px] leading-snug text-foreground transition-colors hover:border-accent-border hover:bg-accent-soft disabled:cursor-not-allowed disabled:opacity-50 sm:px-3.5 sm:text-[12px]"
                             >
                               <span className="flex-1">{prompt}</span>
                               <ArrowRight className="h-3.5 w-3.5 shrink-0 text-muted transition-colors group-hover:text-accent" />
@@ -773,7 +790,7 @@ export function SiteChatbot() {
                           <button
                             type="button"
                             onClick={retryLast}
-                            className="inline-flex items-center gap-1.5 rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1.5 text-[11px] font-medium text-red-400 transition-colors hover:bg-red-500/20 sm:text-[12px]"
+                            className="inline-flex min-h-[44px] items-center gap-1.5 rounded-full border border-red-500/30 bg-red-500/10 px-3 py-2 text-[11px] font-medium text-red-400 transition-colors hover:bg-red-500/20 sm:text-[12px]"
                           >
                             <AlertCircle className="h-3 w-3" />
                             Retry failed response
@@ -803,7 +820,7 @@ export function SiteChatbot() {
                               onClick={() => sendSuggestion(prompt)}
                               whileHover={reducedMotion ? undefined : { scale: 1.03 }}
                               whileTap={reducedMotion ? undefined : { scale: 0.97 }}
-                              className="rounded-full border border-border bg-canvas/60 px-3.5 py-2 text-[11px] text-muted transition-colors hover:border-accent-border hover:bg-accent-soft hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:text-[12px]"
+                              className="min-h-[44px] rounded-full border border-border bg-canvas/60 px-3.5 py-2 text-[11px] text-muted transition-colors hover:border-accent-border hover:bg-accent-soft hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:text-[12px]"
                             >
                               {prompt}
                             </motion.button>

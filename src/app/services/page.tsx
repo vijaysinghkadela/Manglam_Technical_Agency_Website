@@ -101,7 +101,7 @@ export default function ServicesPage() {
               className="flex flex-col font-display font-black leading-none tracking-normal uppercase"
               style={{
                 gap: "0.25rem",
-                fontSize: "clamp(2.9rem, 8.5vw, 8.8rem)",
+                fontSize: "var(--text-display-xl)",
                 color: "var(--color-foreground)" }}
             >
               <span>Services</span>

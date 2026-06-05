@@ -116,7 +116,7 @@ export function PricingPageClient() {
               className="flex flex-col font-display font-black leading-none tracking-normal uppercase"
               style={{
                 gap: '0.25rem',
-                fontSize: 'clamp(3rem, 9vw, 9rem)',
+                fontSize: 'var(--text-display-xl)',
                 color: 'var(--color-foreground)' }}
             >
               <span>Clear</span>

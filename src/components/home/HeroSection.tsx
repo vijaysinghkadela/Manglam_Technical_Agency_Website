@@ -4,6 +4,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion
 import { useRef } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
+import { FileCheck2, MapPin, UsersRound } from 'lucide-react'
 
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { MagneticButton } from '@/components/ui/MagneticButton'
@@ -18,9 +19,9 @@ const ThreeOrbitalRing = dynamic(() => import('@/components/home/ThreeOrbitalRin
 
 // Trust badges with status colors - module level to prevent re-creation
 const TRUST_BADGES = [
-  { label: 'Rajasthan-based technical team', color: '#10b981' },
-  { label: 'MSME details available on request', color: '#3b82f6' },
-  { label: 'Small team, direct responsibility', color: 'var(--color-violet)' },
+  { label: 'Rajasthan-based technical team', color: '#10b981', Icon: MapPin },
+  { label: 'MSME details available on request', color: '#3b82f6', Icon: FileCheck2 },
+  { label: 'Small team, direct responsibility', color: 'var(--color-violet)', Icon: UsersRound },
 ]
 
 // Pre-defined styles to prevent re-creation
@@ -158,9 +159,10 @@ export function HeroSection() {
                   style={BADGE_BASE_STYLE}
                   whileHover={{ scale: 1.02 }}
                 >
-                  <span
-                    className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: item.color }}
+                  <item.Icon
+                    aria-hidden="true"
+                    className="h-3.5 w-3.5 shrink-0"
+                    style={{ color: item.color }}
                   />
                   {item.label}
                 </motion.span>
@@ -176,7 +178,7 @@ export function HeroSection() {
                 overflowWrap: 'break-word',
                 hyphens: 'none',
                 lineHeight: 0.94,
-                fontSize: 'clamp(2rem, 7.5vw, 5.1rem)',
+                fontSize: 'var(--text-display-xl)',
                 color: 'var(--color-foreground)' }}
             >
               <SplitWords text="We build" delay={0.18} />
