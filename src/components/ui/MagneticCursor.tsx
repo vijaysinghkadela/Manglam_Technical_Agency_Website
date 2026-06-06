@@ -1,7 +1,8 @@
 'use client'
-import { useEffect, useState, useSyncExternalStore } from 'react'
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 import { Cog } from 'lucide-react'
+import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 function subscribe(callback: () => void) {
   const mq = window.matchMedia('(pointer: fine)')
@@ -17,13 +18,16 @@ export function MagneticCursor() {
   const [visible, setVisible] = useState(false)
   const [interactive, setInteractive] = useState(false)
   const isTouch = useSyncExternalStore(subscribe, getSnapshot, () => false)
+  const reducedMotion = useReducedMotion()
   const mx = useMotionValue(-300)
   const my = useMotionValue(-300)
   const rx = useSpring(mx, { stiffness: 180, damping: 22, mass: 0.4 })
   const ry = useSpring(my, { stiffness: 180, damping: 22, mass: 0.4 })
+  const visibleRef = useRef(false)
+  const interactiveRef = useRef(false)
 
   useEffect(() => {
-    if (isTouch) return
+    if (isTouch || reducedMotion) return
     document.documentElement.classList.add('custom-cursor-hidden')
 
     const move = (e: MouseEvent) => {
@@ -34,11 +38,23 @@ export function MagneticCursor() {
 
       mx.set(e.clientX)
       my.set(e.clientY)
-      setInteractive(isInteractive)
+      if (interactiveRef.current !== isInteractive) {
+        interactiveRef.current = isInteractive
+        setInteractive(isInteractive)
+      }
+      if (!visibleRef.current) {
+        visibleRef.current = true
+        setVisible(true)
+      }
+    }
+    const hide = () => {
+      visibleRef.current = false
+      setVisible(false)
+    }
+    const show = () => {
+      visibleRef.current = true
       setVisible(true)
     }
-    const hide = () => setVisible(false)
-    const show = () => setVisible(true)
     window.addEventListener('mousemove', move, { passive: true })
     document.documentElement.addEventListener('mouseleave', hide)
     document.documentElement.addEventListener('mouseenter', show)
@@ -48,9 +64,9 @@ export function MagneticCursor() {
       document.documentElement.removeEventListener('mouseenter', show)
       document.documentElement.classList.remove('custom-cursor-hidden')
     }
-  }, [mx, my, isTouch])
+  }, [mx, my, isTouch, reducedMotion])
 
-  if (isTouch) return null
+  if (isTouch || reducedMotion) return null
 
   return (
     <motion.div
@@ -60,7 +76,7 @@ export function MagneticCursor() {
         width: interactive ? 42 : 32,
         height: interactive ? 42 : 32,
         opacity: visible ? 1 : 0,
-        willChange: 'transform, width, height' }}
+        willChange: 'transform' }}
       transition={{ duration: 0.18 }}
     >
       <div className="flex h-full w-full items-center justify-center rounded-full border border-[rgba(var(--color-accent-rgb),0.38)] bg-card/80 text-violet shadow-[0_10px_28px_rgba(var(--color-accent-rgb),0.18)] backdrop-blur-md">

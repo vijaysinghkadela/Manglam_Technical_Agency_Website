@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
+import { hasHardwareAcceleration, isSafari, isSaveDataEnabled } from '@/lib/browser-detect'
 
 const SERVICES = [
   'AI Automation',
@@ -30,7 +31,7 @@ export default function ThreeOrbitalRing() {
   useEffect(() => {
     const mount = mountRef.current
     if (!mount || reduced) return
-    if (!canUseWebGL()) {
+    if (isSafari() || !canUseWebGL() || !hasHardwareAcceleration() || isSaveDataEnabled()) {
       queueMicrotask(() => setFallback(true))
       return
     }
@@ -39,8 +40,12 @@ export default function ThreeOrbitalRing() {
     const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100)
     camera.position.set(0, 0.2, 8.2)
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' })
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5))
+    const renderer = new THREE.WebGLRenderer({
+      antialias: (window.devicePixelRatio || 1) <= 1.25,
+      alpha: true,
+      powerPreference: 'high-performance',
+    })
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.25))
     renderer.domElement.setAttribute('role', 'img')
     renderer.domElement.setAttribute(
       'aria-label',
@@ -104,11 +109,17 @@ export default function ThreeOrbitalRing() {
       camera.updateProjectionMatrix()
     }
 
-    let raf = 0
+    let raf: number | null = null
     let lastFrame = 0
-    const frameInterval = 1000 / 60
+    let inView = false
+    const frameInterval = 1000 / 45
     const startTime = performance.now()
     const animate = (now = 0) => {
+      if (!inView || document.hidden) {
+        stop()
+        return
+      }
+
       if (now - lastFrame < frameInterval) {
         raf = requestAnimationFrame(animate)
         return
@@ -127,19 +138,63 @@ export default function ThreeOrbitalRing() {
       raf = requestAnimationFrame(animate)
     }
 
+    const start = () => {
+      if (raf !== null || !inView || document.hidden) return
+      lastFrame = 0
+      raf = requestAnimationFrame(animate)
+    }
+
+    const stop = () => {
+      if (raf !== null) {
+        cancelAnimationFrame(raf)
+        raf = null
+      }
+    }
+
+    const handleVisibility = () => {
+      if (document.hidden) stop()
+      else start()
+    }
+
     resize()
-    window.addEventListener('resize', resize)
-    raf = requestAnimationFrame(animate)
+    const observer =
+      'IntersectionObserver' in window
+        ? new IntersectionObserver(
+            ([entry]) => {
+              inView = Boolean(entry?.isIntersecting)
+              if (inView) start()
+              else stop()
+            },
+            { threshold: 0.05 },
+          )
+        : null
+    const resizeObserver = 'ResizeObserver' in window ? new ResizeObserver(resize) : null
+
+    if (observer) observer.observe(mount)
+    else {
+      inView = true
+      start()
+    }
+
+    if (resizeObserver) resizeObserver.observe(mount)
+    else window.addEventListener('resize', resize)
+    document.addEventListener('visibilitychange', handleVisibility)
 
     return () => {
-      window.removeEventListener('resize', resize)
-      cancelAnimationFrame(raf)
+      observer?.disconnect()
+      if (resizeObserver) resizeObserver.disconnect()
+      else window.removeEventListener('resize', resize)
+      document.removeEventListener('visibilitychange', handleVisibility)
+      stop()
       renderer.dispose()
       torus.geometry.dispose()
       inner.geometry.dispose()
       core.geometry.dispose()
+      ;(inner.material as THREE.Material).dispose()
+      ;(core.material as THREE.Material).dispose()
       material.dispose()
       nodeMaterial.dispose()
+      renderer.forceContextLoss()
       mount.replaceChildren()
     }
   }, [reduced])
