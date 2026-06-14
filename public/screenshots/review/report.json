@@ -1,0 +1,322 @@
+[
+  {
+    "name": "home",
+    "viewport": "desktop",
+    "url": "http://localhost:3000/#home",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\home-desktop.png",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "overflowX": 0,
+    "brokenVisibleImages": [],
+    "clippedText": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "dx": 111,
+        "dy": 28
+      },
+      {
+        "tag": "A",
+        "text": "Start a project",
+        "dx": 48,
+        "dy": 8
+      }
+    ],
+    "nextIssue": false
+  },
+  {
+    "name": "about",
+    "viewport": "desktop",
+    "url": "http://localhost:3000/#about",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\about-desktop.png",
+    "consoleMessages": [
+      {
+        "type": "error",
+        "text": "A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML ta"
+      }
+    ],
+    "failedRequests": [],
+    "overflowX": 0,
+    "brokenVisibleImages": [],
+    "clippedText": [],
+    "nextIssue": false
+  },
+  {
+    "name": "services",
+    "viewport": "desktop",
+    "url": "http://localhost:3000/#services",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\services-desktop.png",
+    "consoleMessages": [
+      {
+        "type": "error",
+        "text": "A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML ta"
+      }
+    ],
+    "failedRequests": [],
+    "overflowX": 0,
+    "brokenVisibleImages": [],
+    "clippedText": [],
+    "nextIssue": false
+  },
+  {
+    "name": "portfolio",
+    "viewport": "desktop",
+    "url": "http://localhost:3000/#portfolio",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\portfolio-desktop.png",
+    "consoleMessages": [
+      {
+        "type": "warning",
+        "text": "Image with src \"/media/case-studies/nashamukti/instagram-profile.png\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading"
+      }
+    ],
+    "failedRequests": [],
+    "overflowX": 0,
+    "brokenVisibleImages": [],
+    "clippedText": [],
+    "nextIssue": false
+  },
+  {
+    "name": "contact",
+    "viewport": "desktop",
+    "url": "http://localhost:3000/#contact",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\contact-desktop.png",
+    "consoleMessages": [
+      {
+        "type": "error",
+        "text": "A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML ta"
+      }
+    ],
+    "failedRequests": [],
+    "overflowX": 0,
+    "brokenVisibleImages": [],
+    "clippedText": [],
+    "nextIssue": false
+  },
+  {
+    "name": "ai-service",
+    "viewport": "desktop",
+    "url": "http://localhost:3000/services/ai-automation",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\ai-service-desktop.png",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "overflowX": 0,
+    "brokenVisibleImages": [],
+    "clippedText": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "dx": 111,
+        "dy": 28
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "dx": 144,
+        "dy": 0
+      }
+    ],
+    "nextIssue": false
+  },
+  {
+    "name": "performance-service",
+    "viewport": "desktop",
+    "url": "http://localhost:3000/services/performance-marketing",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\performance-service-desktop.png",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "overflowX": 0,
+    "brokenVisibleImages": [],
+    "clippedText": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "dx": 111,
+        "dy": 28
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "dx": 137,
+        "dy": 0
+      }
+    ],
+    "nextIssue": false
+  },
+  {
+    "name": "cybersecurity-service",
+    "viewport": "desktop",
+    "url": "http://localhost:3000/services/cybersecurity",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\cybersecurity-service-desktop.png",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "overflowX": 0,
+    "brokenVisibleImages": [],
+    "clippedText": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "dx": 111,
+        "dy": 28
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "dx": 144,
+        "dy": 0
+      }
+    ],
+    "nextIssue": false
+  },
+  {
+    "name": "home",
+    "viewport": "mobile",
+    "url": "http://localhost:3000/#home",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\home-mobile.png",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "overflowX": 0,
+    "brokenVisibleImages": [],
+    "clippedText": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "dx": 92,
+        "dy": 23
+      },
+      {
+        "tag": "A",
+        "text": "Start a project",
+        "dx": 48,
+        "dy": 8
+      }
+    ],
+    "nextIssue": false
+  },
+  {
+    "name": "about",
+    "viewport": "mobile",
+    "url": "http://localhost:3000/#about",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\about-mobile.png",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "overflowX": 0,
+    "brokenVisibleImages": [],
+    "clippedText": [],
+    "nextIssue": false
+  },
+  {
+    "name": "services",
+    "viewport": "mobile",
+    "url": "http://localhost:3000/#services",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\services-mobile.png",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "overflowX": 0,
+    "brokenVisibleImages": [],
+    "clippedText": [
+      {
+        "tag": "P",
+        "text": "AI-powered workflow systems that reduce manual effort, remove bottlenecks, and scale opera",
+        "dx": 0,
+        "dy": 24
+      }
+    ],
+    "nextIssue": false
+  },
+  {
+    "name": "portfolio",
+    "viewport": "mobile",
+    "url": "http://localhost:3000/#portfolio",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\portfolio-mobile.png",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "overflowX": 0,
+    "brokenVisibleImages": [
+      "/media/case-studies/nashamukti/instagram-profile.png"
+    ],
+    "clippedText": [],
+    "nextIssue": false
+  },
+  {
+    "name": "contact",
+    "viewport": "mobile",
+    "url": "http://localhost:3000/#contact",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\contact-mobile.png",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "overflowX": 0,
+    "brokenVisibleImages": [],
+    "clippedText": [
+      {
+        "tag": "SPAN",
+        "text": "Start",
+        "dx": 0,
+        "dy": 40
+      },
+      {
+        "tag": "SPAN",
+        "text": "conversation.",
+        "dx": 0,
+        "dy": 40
+      }
+    ],
+    "nextIssue": false
+  },
+  {
+    "name": "ai-service",
+    "viewport": "mobile",
+    "url": "http://localhost:3000/services/ai-automation",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\ai-service-mobile.png",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "overflowX": 0,
+    "brokenVisibleImages": [],
+    "clippedText": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "dx": 92,
+        "dy": 23
+      }
+    ],
+    "nextIssue": false
+  },
+  {
+    "name": "performance-service",
+    "viewport": "mobile",
+    "url": "http://localhost:3000/services/performance-marketing",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\performance-service-mobile.png",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "overflowX": 0,
+    "brokenVisibleImages": [],
+    "clippedText": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "dx": 92,
+        "dy": 23
+      }
+    ],
+    "nextIssue": false
+  },
+  {
+    "name": "cybersecurity-service",
+    "viewport": "mobile",
+    "url": "http://localhost:3000/services/cybersecurity",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\cybersecurity-service-mobile.png",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "overflowX": 0,
+    "brokenVisibleImages": [],
+    "clippedText": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "dx": 92,
+        "dy": 23
+      }
+    ],
+    "nextIssue": false
+  }
+]

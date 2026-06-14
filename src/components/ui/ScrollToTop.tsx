@@ -43,7 +43,7 @@ export function ScrollToTop() {
         fixed z-50
         flex h-12 w-12 items-center justify-center
         rounded-full border border-border
-        bg-card/90 backdrop-blur-md
+        glass
         shadow-[0_16px_40px_rgba(0,0,0,0.24)]
         transition-all duration-300 group
         hover:-translate-y-0.5 hover:border-[color:var(--color-accent-border)] hover:bg-[color:var(--color-accent-soft)]

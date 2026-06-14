@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Fraunces, JetBrains_Mono } from "next/font/google";
+import { Instrument_Serif, Inter, Source_Serif_4 } from "next/font/google";
 import { LenisProvider } from "@/providers/LenisProvider";
 import { MagneticCursor } from "@/components/ui/MagneticCursor";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
@@ -9,7 +9,6 @@ import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "next-themes";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { DeferredSiteChatbot } from "@/components/chat/DeferredSiteChatbot";
 import { ConsentBanner } from "@/components/ui/ConsentBanner";
 import { ConsentControlledAnalytics } from "@/components/ui/ConsentControlledAnalytics";
 import { organizationSchema, websiteSchema } from "@/lib/seo/schemas";
@@ -17,23 +16,24 @@ import "@/styles/globals.css";
 
 const SITE_URL = "https://manglamtechnicalagency.com";
 
-const fraunces = Fraunces({
+const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
-  variable: "--font-fraunces",
-  display: "swap",
-  axes: ["SOFT", "WONK", "opsz"],
-});
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-dm-sans",
+  weight: "400",
+  variable: "--font-instrument-serif",
   display: "swap",
 });
 
-const jetBrainsMono = JetBrains_Mono({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
+  variable: "--font-inter",
   display: "swap",
+});
+
+const sourceSerif = Source_Serif_4({
+  subsets: ["latin"],
+  variable: "--font-source-serif",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const viewport: import("next").Viewport = {
@@ -50,11 +50,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
   title: {
-    default: "Manglam Technical Agency — Practical Technology Support",
+    default: "Manglam Technical Agency | Web, AI Automation & Cybersecurity in Rajasthan",
     template: "%s | Manglam Technical Agency",
   },
   description:
-    "Practical technology services for Indian businesses: web development, AI automation, cybersecurity, social media, and digital operations. Based in Rajasthan.",
+    "Bikaner-based technical team for websites, AI workflows, cybersecurity, digital campaigns, and business automation.",
 
   keywords: [
     "web development Rajasthan",
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     "cybersecurity Rajasthan",
     "digital agency Rajasthan",
     "NGO website development India",
-    "social media marketing Jaipur",
+    "Performance Marketing Jaipur",
     "SaaS development India",
     "n8n automation India",
     "IT services Rajasthan",
@@ -80,15 +80,15 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: SITE_URL,
     siteName: "Manglam Technical Agency",
-    title: "Manglam Technical Agency — Practical Technology Support",
+    title: "Manglam Technical Agency | Web, AI Automation & Cybersecurity in Rajasthan",
     description:
-      "End-to-end technology services for Indian businesses — web development, AI automation, cybersecurity, and more. Based in Rajasthan.",
+      "Websites, AI workflows, cybersecurity, and digital growth for Rajasthan businesses.",
     images: [
       {
         url: "/opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: "Manglam Technical Agency — Practical Technology Support",
+        alt: "Manglam Technical Agency — Web, AI Automation & Cybersecurity in Rajasthan",
         type: "image/png",
       },
     ],
@@ -96,9 +96,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Manglam Technical Agency — Practical Technology Support",
+    title: "Manglam Technical Agency | Web, AI Automation & Cybersecurity in Rajasthan",
     description:
-      "End-to-end technology services for Indian businesses — web development, AI automation, cybersecurity, and more.",
+      "Bikaner-based technical team for websites, AI workflows, cybersecurity, and digital growth.",
     images: ["/opengraph-image.png"],
   },
 
@@ -143,7 +143,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${fraunces.variable} ${dmSans.variable} ${jetBrainsMono.variable} bg-canvas text-foreground`}
+        className={`${instrumentSerif.variable} ${inter.variable} ${sourceSerif.variable} bg-canvas text-foreground`}
         suppressHydrationWarning
       >
         {/* Global structured data — Organisation + Website */}
@@ -152,8 +152,9 @@ export default function RootLayout({
 
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light"
+          forcedTheme="light"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <LenisProvider>
@@ -169,7 +170,6 @@ export default function RootLayout({
             <Navbar />
             <main id="main-content" className="relative w-full overflow-x-clip">{children}</main>
             <Footer />
-            <DeferredSiteChatbot />
             <ConsentBanner />
             <ConsentControlledAnalytics />
             <ScrollToTop />

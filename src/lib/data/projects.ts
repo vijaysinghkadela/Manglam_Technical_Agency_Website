@@ -11,14 +11,65 @@ export interface Project {
   description:  string
   url?:         string
   image?:       string
+  previewVideo?: string
+  previewVideoLabel?: string
+  previewVideos?: {
+    src: string
+    label: string
+  }[]
   featured:     boolean
   status:       'live' | 'coming-soon'
-  type:         'client' | 'product'
+  type:         'client' | 'product' | 'social-media-handle-manager'
   bgFrom:       string
   bgTo:         string
 }
 
 export const projects: Project[] = [
+  {
+    id: 'nashamukti-social',
+    slug: 'nashamukti-hospital-social-media',
+    featured: true,
+    status: 'live',
+    type: 'social-media-handle-manager',
+    client: 'Nashamukti Hospital Bikaner',
+    title: 'Social Media Handle For rehabilitation Hospital',
+    tags: ['Social Media Handle Manager', 'Healthcare', 'Instagram Reels'],
+    stack: ['Instagram', 'Meta Business Suite', 'Reel Production', 'Community Updates', 'Content Calendar'],
+    duration: 'Active 2026',
+    value: 'Live Instagram handle',
+    image: '/media/case-studies/nashamukti/instagram-profile.png',
+    previewVideos: [
+      {
+        src: '/media/case-studies/nashamukti/counseling-patient-short.mp4',
+        label: 'Patient counseling short',
+      },
+      {
+        src: '/media/case-studies/nashamukti/school-video-shoot.mp4',
+        label: 'School awareness reel preview',
+      },
+      {
+        src: '/media/case-studies/nashamukti/school-awareness.mp4',
+        label: 'School awareness reel',
+      },
+      {
+        src: '/media/case-studies/nashamukti/awareness-in-school.mp4',
+        label: 'Awareness in school',
+      },
+    ],
+    url: 'https://www.instagram.com/nashamuktihospitalbikaner/',
+    description:
+      'Ongoing social media handle management and local awareness growth for a Bikaner rehabilitation and mental health service provider. The work combines daily creative publishing across Instagram, Facebook, and X, credible awareness content, facility proof, event coverage, short-form reels, and performance marketing support designed to help more families in the city discover verified de-addiction care.',
+    bgFrom: '#07111F',
+    bgTo: '#0E2A3A',
+    deliverables: [
+      'Daily creative post planning for Instagram, Facebook, and X with a consistent hospital voice',
+      'Instagram profile positioning with clear service, location, credibility, and enquiry context',
+      'Reel-format video previews from counseling, school awareness, and on-ground activities',
+      'Performance marketing support to spread de-addiction awareness across Bikaner city',
+      'Feed planning for awareness posts, facility proof, community education, and trust-building stories',
+      'Publishing support with captions, creative direction, account hygiene, and discovery-path maintenance',
+    ],
+  },
   {
     id: 'securestart', slug: 'securestart', featured: false, status: 'coming-soon', type: 'product',
     client: 'MTA Product',

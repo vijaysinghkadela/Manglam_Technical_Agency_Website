@@ -93,6 +93,7 @@ export interface TeamMember {
   x?: string | null;
   image?: string;
   imagePosition?: string;
+  mobileImageHeightClass?: string;
 }
 
 export interface BlogPost {

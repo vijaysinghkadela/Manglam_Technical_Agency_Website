@@ -143,7 +143,8 @@ export default function CybersecurityTrainingPage() {
               <div className="shrink-0">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 px-10 py-5 bg-foreground text-canvas font-display font-black text-base hover:bg-violet transition-colors duration-300"
+                  className="inline-flex items-center gap-2 px-10 py-5 bg-violet text-white font-display font-black text-base hover:bg-violet-light transition-colors duration-300"
+                  style={{ color: '#fff' }}
                 >
                   Request Free Assessment
                   <ArrowRight className="w-4 h-4" />
@@ -280,7 +281,8 @@ export default function CybersecurityTrainingPage() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 px-10 py-5 bg-foreground text-canvas font-display font-black text-base hover:bg-violet transition-colors duration-300"
+                className="inline-flex items-center gap-2 px-10 py-5 bg-violet text-white font-display font-black text-base hover:bg-violet-light transition-colors duration-300"
+                style={{ color: '#fff' }}
               >
                 Schedule Training
                 <ArrowRight className="w-4 h-4" />

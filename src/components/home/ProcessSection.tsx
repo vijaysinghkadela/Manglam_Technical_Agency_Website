@@ -18,7 +18,7 @@ export function ProcessSection() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="grid grid-cols-1 lg:grid-cols-[0.92fr_1.08fr] gap-8 sm:gap-10 lg:gap-16 mb-16 lg:mb-20"
         >
-          <div className="rounded-[28px] border border-border bg-card p-10 sm:p-12 relative overflow-hidden">
+          <div className="glass-card rounded-[28px] p-10 sm:p-12">
             <div
               className="absolute top-0 left-0 w-[3px] h-full"
               style={{ background: `linear-gradient(180deg, var(--color-violet), transparent)` }}
@@ -41,7 +41,7 @@ export function ProcessSection() {
             </p>
           </div>
 
-          <div className="rounded-[28px] border border-border bg-card p-10 sm:p-12 relative">
+          <div className="glass-card rounded-[28px] p-10 sm:p-12">
             <div
               className="absolute top-0 right-0 w-[3px] h-full"
               style={{ background: `linear-gradient(180deg, transparent, var(--color-violet))` }}

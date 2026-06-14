@@ -1,9 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
 import { useState } from 'react'
 import { teamMembers } from '@/lib/data/team'
 import { TiltCard } from '@/components/ui/TiltCard'
@@ -64,11 +62,12 @@ export function AboutContent() {
             {narrativeSections.map((section, index) => (
               <motion.article
                 key={section.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={false}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.55, delay: index * 0.08, ease: EASE }}
                 className="border-b border-border pb-10 last:border-b-0 last:pb-0"
+                suppressHydrationWarning
               >
                 <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-violet-light">
                   {section.label}
@@ -124,6 +123,9 @@ export function AboutContent() {
             <h2 className="mt-4 font-display text-3xl font-black leading-tight text-foreground lg:text-4xl">
               People behind the work
             </h2>
+            <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.18em] text-violet-light lg:text-sm lg:tracking-[0.22em]">
+              Web systems &middot; AI automation &middot; Compliance-aware data
+            </p>
             <p className="mt-5 text-[16px] leading-[1.75] text-muted">
               MTA is intentionally small. That keeps responsibility visible and makes it easier for
               clients to understand who is handling strategy, technical direction, and delivery.
@@ -134,29 +136,26 @@ export function AboutContent() {
             {teamMembers.map((member, index) => (
               <motion.article
                 key={member.name}
-                initial={{ opacity: 0, y: 20 }}
+                initial={false}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.55, delay: index * 0.08, ease: EASE }}
                 className="overflow-visible"
+                suppressHydrationWarning
               >
                 <TiltCard className="overflow-hidden rounded-lg border border-border bg-card" max={8}>
                 <div className="grid gap-0 sm:grid-cols-[180px_1fr]">
-                  <motion.div
-                    className="relative h-72 bg-accent-soft sm:h-full"
-                    initial={{ clipPath: 'circle(0% at 50% 50%)' }}
-                    whileInView={{ clipPath: 'circle(72% at 50% 50%)' }}
-                    viewport={{ once: true, margin: '-60px' }}
-                    transition={{ duration: 0.8, ease: EASE }}
+                  <div
+                    className={`relative bg-accent-soft sm:h-full ${member.mobileImageHeightClass ?? 'h-72'}`}
                   >
                     {member.image && !imageErrors[member.name] ? (
                       <Image
                         src={member.image}
                         alt={`${member.name}, ${member.role} at Manglam Technical Agency`}
                         fill
+                        sizes="(max-width: 640px) 100vw, 180px"
                         className="object-cover"
                         style={{ objectPosition: member.imagePosition ?? '50% 20%' }}
-                        unoptimized
                         onError={() => setImageErrors((current) => ({ ...current, [member.name]: true }))}
                       />
                     ) : (
@@ -164,7 +163,7 @@ export function AboutContent() {
                         {member.initials}
                       </div>
                     )}
-                  </motion.div>
+                  </div>
                   <div className="p-7 sm:p-8">
                     <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-violet-light">
                       {member.role}
@@ -192,33 +191,6 @@ export function AboutContent() {
         </div>
       </section>
 
-      <section className="section-sm w-full border-t border-border bg-canvas">
-        <div className="container-site">
-          <div className="rounded-2xl border border-border bg-card p-8 sm:p-10 lg:p-12">
-            <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
-              <div>
-                <p className="font-mono text-label uppercase tracking-[0.2em] text-violet-light">
-                  Start with a conversation
-                </p>
-                <h2 className="mt-3 font-display text-2xl font-black leading-tight text-foreground lg:text-3xl">
-                  Share the problem, not a perfect brief.
-                </h2>
-                <p className="mt-4 max-w-2xl text-[15px] leading-[1.7] text-muted">
-                  If the right next step is a small fix, a discovery call, or a larger scope, we will
-                  say that plainly.
-                </p>
-              </div>
-              <Link
-                href="/contact"
-                className="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full bg-violet px-7 py-4 font-display text-sm font-black text-white transition-colors hover:bg-violet-light"
-              >
-                Contact MTA
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
     </>
   )
 }

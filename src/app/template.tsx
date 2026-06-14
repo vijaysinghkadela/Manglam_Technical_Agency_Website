@@ -8,11 +8,13 @@ export default function Template({ children }: { children: React.ReactNode }) {
 
   return (
     <motion.div
-      initial={reducedMotion ? false : { opacity: 0, y: 10 }}
+      initial={false}
       animate={{ opacity: 1, y: 0 }}
       transition={{ 
-        ease: [0.16, 1, 0.3, 1], // Custom easeOut (smoother than standard)
+        ease: [0.16, 1, 0.3, 1],
         duration: reducedMotion ? 0 : 0.36 }}
+      style={{ opacity: 0, transform: 'translateY(10px)' }}
+      suppressHydrationWarning
     >
       {children}
     </motion.div>

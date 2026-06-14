@@ -102,12 +102,9 @@ export default function AboutPage() {
 
             {/* Right: Floating Agency Card (desktop only) */}
             <div
-              className="hidden lg:flex flex-col shrink-0 animate-fade-up stagger-3 relative"
+              className="hidden lg:flex flex-col shrink-0 animate-fade-up stagger-3 relative glass-strong"
               style={{
                 width: '300px',
-                border: '2px solid rgba(var(--color-accent-rgb),0.35)',
-                backgroundColor: 'rgba(var(--color-accent-rgb),0.06)',
-                backdropFilter: 'blur(16px)',
                 borderRadius: '20px',
                 overflow: 'hidden',
                 boxShadow: `

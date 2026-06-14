@@ -363,7 +363,7 @@ export default function CybersecurityPolicyPage() {
                 </tr>
                 <tr className="hover:bg-white/5 transition-colors">
                   <td className="p-5 flex items-center gap-2 font-semibold">
-                    <span className="w-2 h-2 rounded-full bg-blue-500" /> Low (P4)
+                    <span className="w-2 h-2 rounded-full bg-[var(--color-violet)]" /> Low (P4)
                   </td>
                   <td className="p-5">24 Hours</td>
                   <td className="p-5">Weekly</td>

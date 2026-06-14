@@ -153,5 +153,5 @@ Private - Manglam Technical Agency
 ---
 
 **Manglam Technical Agency**  
-*Empowering Your Digital Future*  
+*Web, automation, and security delivery from Bikaner*  
 [manglamtechnicalagency.com](https://manglamtechnicalagency.com)

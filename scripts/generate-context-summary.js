@@ -408,8 +408,8 @@ Select-String -Path "src/**/*.tsx" -Pattern "useMousePosition"
 **Client**: Manglam Technical Agency  
 **Owner**: Vinay Pal Singh Kadela  
 **Email**: manglamtechnicalagency@gmail.com  
-**Phone**: +91 8003903572  
-**Location**: Bikaner, Rajasthan, India
+**Phone**: +91-9694322131  
+**Location**: F-18 Vallabh Garden, Bikaner 334001, Rajasthan, India
 
 ---
 

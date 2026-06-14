@@ -11,8 +11,8 @@ const SERVICES = [
   { name: 'Cybersecurity', icon: Shield },
   { name: 'AI Automation', icon: Bot },
   { name: 'SaaS Products', icon: Cloud },
-  { name: 'Social Media', icon: Share2 },
-  { name: 'Content Creation', icon: Palette },
+  { name: 'Performance', icon: Share2 },
+  { name: 'Brand Identity', icon: Palette },
   { name: 'Web Development', icon: Globe },
   { name: 'App Development', icon: Smartphone },
   { name: 'AI Agents', icon: Cpu },
@@ -101,7 +101,15 @@ function OrbitalRingComponent() {
         >
           <div className="absolute inset-2 rounded-full" style={{ background: 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2) 0%, transparent 60%)' }} />
           <div className="relative w-20 h-20 flex items-center justify-center">
-            <Image src="/images/mta-logo-transparent-white.png" alt="MTA" fill sizes="80px" className="object-contain drop-shadow-2xl" />
+            <Image
+              src="/images/mta-logo-transparent-white.png"
+              alt="MTA"
+              fill
+              sizes="80px"
+              className="object-contain drop-shadow-2xl"
+              loading="eager"
+              priority
+            />
           </div>
         </motion.div>
         <motion.div

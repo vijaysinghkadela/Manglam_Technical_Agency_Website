@@ -17,12 +17,13 @@ export function ServicesHorizontal() {
         <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <SectionLabel />
           <p
-            className="text-sm sm:text-base leading-relaxed max-w-md"
+            className="narrative-copy max-w-md"
             style={{
               color: 'var(--color-muted)',
               lineHeight: 1.72 }}
           >
-            Six practice areas, one delivery standard. Each service is scoped, priced, and documented before any work begins.
+            Web systems, automation, security checks, performance campaigns, and brand identity.
+            Every engagement starts with written scope, operating assumptions, ownership, and handover expectations.
           </p>
         </div>
 
@@ -30,7 +31,7 @@ export function ServicesHorizontal() {
           {services.map((s, i) => (
             <motion.div
               key={s.slug}
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-30px' }}
               transition={{
@@ -38,6 +39,7 @@ export function ServicesHorizontal() {
                 delay: i * 0.06,
                 ease: [0.16, 1, 0.3, 1]
               }}
+              suppressHydrationWarning
             >
               <TiltCard
                 className="group rounded-lg"
@@ -120,7 +122,7 @@ export function ServicesHorizontal() {
                   className="text-sm mt-3 inline-flex items-center gap-1 min-h-[44px] transition-colors duration-200 group-hover:text-violet"
                   style={{ color: 'var(--color-muted)' }}
                 >
-                  Explore <span className="transition-transform duration-300 inline-block group-hover:translate-x-2">→</span>
+                  Explore service <span className="transition-transform duration-300 inline-block group-hover:translate-x-2">→</span>
                 </span>
               </Link>
               </TiltCard>
@@ -145,13 +147,13 @@ function SectionLabel() {
         WHAT WE DO
       </span>
       <h2
-        className="font-display font-black leading-[0.92] tracking-normal"
+        className="marketing-heading font-display font-black leading-[0.92] tracking-normal"
         style={{
           fontSize: 'clamp(1.75rem, 4vw, 3rem)',
           color: 'var(--color-foreground)',
           lineHeight: 0.92 }}
       >
-        Services That<br />Scale With You
+        Services for <br />real business work
       </h2>
     </div>
   )

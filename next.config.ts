@@ -1,18 +1,18 @@
 import type { NextConfig } from "next";
-import bundleAnalyzer from "@next/bundle-analyzer";
 
 const isDevelopment = process.env.NODE_ENV === 'development'
 const enableStrictTransport =
   process.env.VERCEL === '1' ||
   process.env.ENABLE_STRICT_TRANSPORT_SECURITY === 'true'
 
+// Note: 'unsafe-inline' for scripts/styles needed by Next.js inline bundles. Nonce-based CSP requires server rendering of all JS.
 const contentSecurityPolicy = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline'${isDevelopment ? " 'unsafe-eval'" : ''} https://va.vercel-scripts.com https://vercel.live *.vercel.app`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https: blob:",
   "font-src 'self' data:",
-  "connect-src 'self' https://api.resend.dev https://*.vercel.app https://vitals.vercel-insights.com https://va.vercel-scripts.com",
+  "connect-src 'self' https://*.vercel.app https://vitals.vercel-insights.com https://va.vercel-scripts.com",
   "frame-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
@@ -47,13 +47,11 @@ const securityHeaders = [
   },
   {
     key: 'Cross-Origin-Embedder-Policy',
-    value: 'require-corp',
+    value: 'credentialless',
   },
 ]
 
-const withBundleAnalyzer = bundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true',
-})
+
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
@@ -83,16 +81,9 @@ const nextConfig: NextConfig = {
     ]
   },
 
-  // Proxy rewrites for API routes
   async rewrites() {
     return {
-      beforeFiles: [
-        // Proxy external APIs through Next.js to avoid CORS and hide API keys
-        {
-          source: '/api/proxy/resend/:path*',
-          destination: 'https://api.resend.dev/:path*',
-        },
-      ],
+      beforeFiles: [],
       afterFiles: [
         // Handle trailing slashes
         {
@@ -107,11 +98,6 @@ const nextConfig: NextConfig = {
   // Redirects
   async redirects() {
     return [
-      {
-        source: '/privacy',
-        destination: '/legal/privacy-policy',
-        permanent: true,
-      },
       // Redirect www to non-www
       {
         source: '/:path*',
@@ -128,4 +114,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withBundleAnalyzer(nextConfig);
+export default nextConfig;

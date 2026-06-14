@@ -1,7 +1,6 @@
 'use client'
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
-import { Cog } from 'lucide-react'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 function subscribe(callback: () => void) {
@@ -21,14 +20,13 @@ export function MagneticCursor() {
   const reducedMotion = useReducedMotion()
   const mx = useMotionValue(-300)
   const my = useMotionValue(-300)
-  const rx = useSpring(mx, { stiffness: 180, damping: 22, mass: 0.4 })
-  const ry = useSpring(my, { stiffness: 180, damping: 22, mass: 0.4 })
+  const rx = useSpring(mx, { stiffness: 120, damping: 28, mass: 0.6 })
+  const ry = useSpring(my, { stiffness: 120, damping: 28, mass: 0.6 })
   const visibleRef = useRef(false)
   const interactiveRef = useRef(false)
 
   useEffect(() => {
     if (isTouch || reducedMotion) return
-    document.documentElement.classList.add('custom-cursor-hidden')
 
     const move = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null
@@ -62,7 +60,6 @@ export function MagneticCursor() {
       window.removeEventListener('mousemove', move)
       document.documentElement.removeEventListener('mouseleave', hide)
       document.documentElement.removeEventListener('mouseenter', show)
-      document.documentElement.classList.remove('custom-cursor-hidden')
     }
   }, [mx, my, isTouch, reducedMotion])
 
@@ -73,15 +70,13 @@ export function MagneticCursor() {
       className="fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block"
       style={{
         x: rx, y: ry, translateX: '-50%', translateY: '-50%',
-        width: interactive ? 42 : 32,
-        height: interactive ? 42 : 32,
-        opacity: visible ? 1 : 0,
+        width: interactive ? 24 : 14,
+        height: interactive ? 24 : 14,
+        opacity: visible ? 0.34 : 0,
         willChange: 'transform' }}
       transition={{ duration: 0.18 }}
     >
-      <div className="flex h-full w-full items-center justify-center rounded-full border border-[rgba(var(--color-accent-rgb),0.38)] bg-card/80 text-violet shadow-[0_10px_28px_rgba(var(--color-accent-rgb),0.18)] backdrop-blur-md">
-        <Cog className={interactive ? 'h-5 w-5 animate-[spin_1.4s_linear_infinite]' : 'h-4 w-4 animate-[spin_4s_linear_infinite]'} />
-      </div>
+      <div className="h-full w-full rounded-full border border-[rgba(var(--color-accent-rgb),0.36)] bg-transparent shadow-[0_0_14px_rgba(var(--color-accent-rgb),0.08)]" />
     </motion.div>
   )
 }

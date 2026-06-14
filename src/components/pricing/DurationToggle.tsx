@@ -36,7 +36,7 @@ export function DurationToggle({
             letterSpacing: '0.12em',
             color:
               i === activeIndex
-                ? 'var(--color-canvas)'
+                ? '#fff'
                 : 'var(--color-muted)',
             cursor: 'pointer' }}
         >
@@ -44,7 +44,7 @@ export function DurationToggle({
             <motion.span
               layoutId="durationBg"
               className="absolute inset-0 rounded-full"
-              style={{ backgroundColor: 'var(--color-foreground)' }}
+              style={{ backgroundColor: 'var(--color-violet)' }}
               transition={{ type: 'spring', stiffness: 380, damping: 30 }}
             />
           )}

@@ -93,8 +93,8 @@ export function ConsentBanner() {
               </button>
 
               {!isExpanded && (
-                <div className="p-4 pr-12 sm:hidden">
-                  <div className="mb-3">
+                <div className="p-4 pr-12">
+                  <div className="mb-3 sm:mb-0">
                     <p className="font-display text-sm font-black" style={{ color: 'var(--color-foreground)' }}>
                       Privacy choices
                     </p>
@@ -102,7 +102,7 @@ export function ConsentBanner() {
                       Optional analytics stays off unless you accept it.
                     </p>
                   </div>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-2 gap-2 sm:mt-3">
                     <button
                       type="button"
                       onClick={() => setIsExpanded(true)}
@@ -124,8 +124,8 @@ export function ConsentBanner() {
                       }}
                       className="min-h-[44px] rounded-lg px-3 font-display text-sm font-bold"
                       style={{
-                        backgroundColor: 'var(--color-foreground)',
-                        color: 'var(--color-canvas)' }}
+                        backgroundColor: 'var(--color-violet)',
+                        color: '#fff' }}
                     >
                       Accept
                     </button>
@@ -133,7 +133,7 @@ export function ConsentBanner() {
                 </div>
               )}
 
-              <div className={isExpanded ? "p-4 sm:p-5" : "hidden p-4 sm:block sm:p-5"}>
+              <div className={isExpanded ? "p-4 sm:p-5" : "hidden p-4 sm:p-5"}>
                 {/* Header with icon */}
                 <div className="mb-3 flex flex-col items-center text-center sm:flex-row sm:items-center sm:gap-4 sm:text-left">
                   <motion.div
@@ -273,8 +273,8 @@ export function ConsentBanner() {
                       }}
                       className="flex-1 rounded-lg px-5 py-3 text-sm font-display font-bold transition-all duration-200 hover:opacity-90 hover:shadow-lg"
                       style={{
-                        backgroundColor: 'var(--color-foreground)',
-                        color: 'var(--color-canvas)',
+                        backgroundColor: 'var(--color-violet)',
+                        color: '#fff',
                         boxShadow: '0 4px 14px rgba(var(--color-accent-rgb), 0.25)' }}
                     >
                       Accept optional analytics

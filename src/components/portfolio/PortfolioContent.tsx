@@ -1,26 +1,42 @@
 'use client'
 
 import { motion, useReducedMotion } from 'framer-motion'
-import { ExternalLink, Lock } from 'lucide-react'
+import { ArrowUpRight, ExternalLink, Instagram, Lock, PlayCircle, Sparkles } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { type KeyboardEvent, useRef, useState } from 'react'
-import { projects } from '@/lib/data/projects'
+
+import { projects, type Project } from '@/lib/data/projects'
+import {
+  FintechBadge,
+  FintechButton,
+  FintechFrame,
+  FintechPanel,
+} from '@/components/ui/FintechPrimitives'
 
 import type { Variants } from 'framer-motion'
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 28 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
-}
-const stagger = {
-  hidden: {},
-  show:   { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
 }
 
-type FilterType = 'all' | 'client' | 'product'
+type FilterType = 'all' | 'client' | 'product' | 'social-media-handle-manager'
 
-const comingProjects = projects.filter(p => p.status === 'coming-soon')
+const comingProjects = projects.filter((project) => project.status === 'coming-soon')
+
+const getReelPreviews = (project: Project) => {
+  if (project.previewVideos?.length) return project.previewVideos
+  if (project.previewVideo) {
+    return [
+      {
+        src: project.previewVideo,
+        label: project.previewVideoLabel ?? 'Reel preview',
+      },
+    ]
+  }
+  return []
+}
 
 export function PortfolioContent() {
   const [filter, setFilter] = useState<FilterType>('all')
@@ -28,20 +44,27 @@ export function PortfolioContent() {
   const filterButtonRefs = useRef<Array<HTMLButtonElement | null>>([])
   const reducedMotion = useReducedMotion()
 
-  const filteredProjects = projects.filter(p => {
-    if (p.status !== 'live') return false
+  const filteredProjects = projects.filter((project) => {
+    if (project.status !== 'live') return false
     if (filter === 'all') return true
-    return p.type === filter
+    return project.type === filter
   })
 
-  const FILTERS: { key: FilterType; label: string }[] = [
+  const filters: { key: FilterType; label: string }[] = [
     { key: 'all', label: 'All Work' },
     { key: 'client', label: 'Client Projects' },
-    { key: 'product', label: 'Our Products' },
+    { key: 'social-media-handle-manager', label: 'Social Media Handle Manager' },
+    { key: 'product', label: 'MTA Products' },
   ]
 
+  const getProjectTypeLabel = (type: FilterType) => {
+    if (type === 'product') return 'MTA product'
+    if (type === 'social-media-handle-manager') return 'Social handle'
+    return 'Client project'
+  }
+
   const handleFilterKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
-    const lastIndex = FILTERS.length - 1
+    const lastIndex = filters.length - 1
     let nextIndex: number | null = null
 
     if (event.key === 'ArrowRight' || event.key === 'ArrowDown') nextIndex = index === lastIndex ? 0 : index + 1
@@ -51,480 +74,286 @@ export function PortfolioContent() {
 
     if (nextIndex === null) return
     event.preventDefault()
-    setFilter(FILTERS[nextIndex].key)
+    setFilter(filters[nextIndex].key)
     filterButtonRefs.current[nextIndex]?.focus()
   }
 
   return (
-    <div style={{ backgroundColor: 'var(--color-canvas)' }}>
+    <FintechFrame className="bg-white">
+      <section className="relative z-10 px-0 py-20 lg:px-16 lg:py-28">
+        <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
+          <div>
+            <motion.div
+              initial={false}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: reducedMotion ? 0 : 0.55, ease: [0.16, 1, 0.3, 1] }}
+              suppressHydrationWarning
+            >
+              <FintechBadge icon={<Sparkles className="h-[18px] w-[18px]" />}>Case studies</FintechBadge>
+            </motion.div>
+            <motion.h2
+              initial={false}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: reducedMotion ? 0 : 0.75, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+              className="marketing-heading mt-6 max-w-[760px] text-[clamp(2.6rem,6vw,5rem)] font-semibold leading-[1.02] tracking-[-0.02em] text-slate-950"
+              suppressHydrationWarning
+            >
+              Proof of systems that move from launch to measurable work.
+            </motion.h2>
+          </div>
 
-      {/* ── Case Studies (Live) ───────────────────────────────── */}
-      <section className="section" style={{ borderTop: '1px solid var(--color-border)' }}>
-        <div className="container-site">
-
-          <motion.span
-            initial={reducedMotion ? false : { opacity: 0, y: 16 }}
-            whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
-            transition={reducedMotion ? { duration: 0 } : { duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          <motion.p
+            initial={false}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-mono uppercase block mb-10"
-            style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.22em' }}
+            transition={{ duration: reducedMotion ? 0 : 0.65, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-2xl text-lg leading-8 text-slate-500"
+            suppressHydrationWarning
           >
-            ✦ CASE STUDIES
-          </motion.span>
+            This section provides proof of systems that transition from launch to measurable results, including
+            websites, SaaS products, dashboards, automation-ready interfaces, and managed social handles.
+          </motion.p>
+        </div>
 
-          <div className="flex flex-wrap gap-3 mb-14" role="tablist" aria-label="Portfolio filters">
-            {FILTERS.map((f, index) => (
+        <div className="mt-10 flex flex-wrap gap-3" role="tablist" aria-label="Portfolio filters">
+          {filters.map((filterOption, index) => {
+            const selected = filter === filterOption.key
+            return (
               <button
-                key={f.key}
+                key={filterOption.key}
                 ref={(el) => {
                   filterButtonRefs.current[index] = el
                 }}
                 type="button"
                 role="tab"
-                onClick={() => setFilter(f.key)}
+                onClick={() => setFilter(filterOption.key)}
                 onKeyDown={(event) => handleFilterKeyDown(event, index)}
-                aria-selected={filter === f.key}
-                tabIndex={filter === f.key ? 0 : -1}
-                className="min-h-[44px] font-mono uppercase transition-all duration-200 cursor-pointer touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
-                style={{
-                  fontSize: '11px',
-                  letterSpacing: '0.18em',
-                  padding: '8px 18px',
-                  borderRadius: '9999px',
-                  border: `1px solid ${filter === f.key ? 'var(--color-violet)' : 'var(--color-border)'}`,
-                  color: filter === f.key ? 'var(--color-violet-light)' : 'var(--color-muted)',
-                  backgroundColor: filter === f.key ? 'rgba(var(--color-accent-rgb),0.1)' : 'transparent' }}
+                aria-selected={selected}
+                tabIndex={selected ? 0 : -1}
+                className={`min-h-11 rounded-full border px-4 font-mono text-[11px] font-medium uppercase tracking-[0.12em] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(var(--color-accent-rgb),0.55)] focus-visible:ring-offset-2 lg:!min-h-9 lg:px-3 lg:text-[10px] lg:tracking-[0.08em] ${
+                  selected
+                    ? 'border-[rgba(var(--color-accent-rgb),0.28)] bg-[rgba(var(--color-accent-rgb),0.08)] text-[var(--color-violet-dark)] shadow-[0_8px_22px_rgba(31,122,122,0.10)]'
+                    : 'border-[var(--color-border)] bg-[var(--color-card)] text-[var(--color-muted)] hover:border-[rgba(var(--color-accent-rgb),0.28)] hover:text-[var(--color-violet-dark)]'
+                }`}
               >
-                {f.label}
+                {filterOption.label}
               </button>
-            ))}
-          </div>
+            )
+          })}
+        </div>
 
-          <div className="flex flex-col" style={{ borderTop: '1px solid var(--color-border)' }}>
-            {filteredProjects.map((p, i) => (
-              <motion.article
-                key={p.id}
-                variants={reducedMotion ? undefined : stagger}
-                initial={reducedMotion ? false : "hidden"}
-                whileInView={reducedMotion ? undefined : "show"}
-                viewport={{ once: true, margin: "-50px" }}
-                className="grid grid-cols-1 lg:grid-cols-[45%_55%]"
-                style={{ borderBottom: '1px solid var(--color-border)' }}
-              >
-                {/* Left — Visual panel */}
-                <motion.div
-                  variants={reducedMotion ? undefined : fadeUp}
-                  className="relative overflow-hidden"
-                  style={{
-                    background: `linear-gradient(135deg, ${p.bgFrom} 0%, ${p.bgTo} 100%)`,
-                    minHeight: 'clamp(280px, 38vw, 540px)' }}
+        <div className="mt-12 grid gap-6 xl:grid-cols-2">
+          {filteredProjects.map((project, index) => {
+            const reelPreviews = getReelPreviews(project)
+            const hasReelPreviews = reelPreviews.length > 0
+
+            return (
+            <motion.article
+              key={project.id}
+              variants={fadeUp}
+              initial={false}
+              whileInView="show"
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: reducedMotion ? 0 : 0.7, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
+              className={hasReelPreviews ? 'xl:col-span-2' : undefined}
+              suppressHydrationWarning
+            >
+              <FintechPanel className="group h-full overflow-hidden transition duration-300 hover:-translate-y-1 hover:border-[rgba(var(--color-accent-rgb),0.28)] hover:shadow-[0_8px_24px_rgba(23,21,18,0.08)]">
+                <div
+                  className={`relative overflow-hidden border-b border-slate-200 bg-slate-50 ${
+                    hasReelPreviews ? 'p-4 sm:p-5 lg:p-6' : 'min-h-[280px] sm:min-h-[360px]'
+                  }`}
                 >
-                  {p.image && !imageErrors[p.id] ? (
+                  <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(226,232,240,0.75)_1px,transparent_1px),linear-gradient(to_bottom,rgba(226,232,240,0.75)_1px,transparent_1px)] bg-[size:48px_48px] opacity-60" />
+                  {hasReelPreviews && project.image && !imageErrors[project.id] ? (
+                    <div className="relative z-10 grid gap-4 pt-11 sm:gap-5 lg:grid-cols-[minmax(0,1.15fr)_minmax(280px,0.85fr)] lg:pt-0">
+                      <div className="relative aspect-[16/10] min-h-[190px] overflow-hidden rounded-[22px] border border-slate-200 bg-[#080b10] shadow-[0_16px_44px_rgba(15,23,42,0.10)] sm:min-h-[300px] lg:h-full lg:min-h-0 lg:aspect-auto">
+                        <Image
+                          src={project.image}
+                          alt={`${project.client} Instagram profile and feed preview`}
+                          fill
+                          sizes="(max-width: 1024px) 100vw, 50vw"
+                          className="object-contain p-2 transition duration-500 group-hover:scale-[1.01] sm:p-4"
+                          loading="eager"
+                          unoptimized
+                          onError={() => setImageErrors((current) => ({ ...current, [project.id]: true }))}
+                        />
+                        <div className="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full border border-white/50 glass-overlay px-3 py-1 text-xs font-semibold text-white">
+                          <Instagram className="h-3.5 w-3.5" />
+                          Live handle
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-2">
+                        {reelPreviews.map((preview) => (
+                          <div
+                            key={preview.src}
+                            className="relative mx-auto aspect-[9/16] w-full max-w-[132px] overflow-hidden rounded-[18px] border-[4px] border-slate-950 bg-slate-950 shadow-[0_20px_50px_rgba(15,23,42,0.22)] sm:max-w-[150px] lg:max-w-[160px] xl:max-w-[170px]"
+                          >
+                            <video
+                              className="h-full w-full object-cover"
+                              src={preview.src}
+                              muted
+                              loop
+                              playsInline
+                              autoPlay
+                              preload="metadata"
+                              aria-label={`${project.client} ${preview.label}`}
+                            />
+                            <div className="absolute inset-x-2 bottom-2 rounded-2xl glass-overlay px-2.5 py-2 text-white">
+                              <div className="flex items-center gap-2">
+                                <PlayCircle className="h-3.5 w-3.5 shrink-0" />
+                                <span className="text-[11px] font-semibold leading-4">
+                                  {preview.label}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ) : project.image && !imageErrors[project.id] ? (
                     <Image
-                      src={p.image}
-                      alt={`${p.title} ${p.type === 'client' ? 'client project' : 'MTA product'} interface screenshot for ${p.client}`}
+                      src={project.image}
+                      alt={`${project.title} interface screenshot for ${project.client}`}
                       fill
-                      sizes="(max-width: 1024px) 100vw, 45vw"
-                      className="object-contain"
+                      sizes="(max-width: 1280px) 100vw, 50vw"
+                      className="object-contain p-6 transition duration-500 group-hover:scale-[1.025]"
                       loading="lazy"
                       unoptimized
-                      onError={() => setImageErrors((current) => ({ ...current, [p.id]: true }))}
+                      onError={() => setImageErrors((current) => ({ ...current, [project.id]: true }))}
                     />
                   ) : (
-                    <div className="absolute inset-0 flex items-center justify-center p-8">
-                      <div className="flex h-32 w-32 items-center justify-center rounded-lg border border-white/15 bg-black/25">
-                        <span className="font-display text-5xl font-black text-white/80">
-                          {p.title[0]}
-                        </span>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="grid h-28 w-28 grid-cols-3 gap-2 rounded-[24px] border border-[rgba(var(--color-accent-rgb),0.18)] bg-white p-5 shadow-[0_8px_24px_rgba(23,21,18,0.08)]">
+                        {[0, 2, 4, 6, 8].map((dot) => (
+                          <span key={dot} className="rounded bg-[var(--color-violet-dark)]" style={{ gridColumnStart: (dot % 3) + 1, gridRowStart: Math.floor(dot / 3) + 1 }} />
+                        ))}
                       </div>
                     </div>
                   )}
 
-                  {/* Edge gradient overlay for text readability */}
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background: `linear-gradient(135deg, ${p.bgFrom}66 0%, ${p.bgFrom}22 40%, transparent 55%, ${p.bgTo}22 80%, ${p.bgTo}66 100%)`,
-                    }}
-                  />
-
-                  {/* Watermark number */}
-                  <span
-                    className="absolute top-8 left-8 font-display font-black leading-none select-none pointer-events-none"
-                    style={{ fontSize: 'clamp(5rem, 12vw, 12rem)', color: 'rgba(255,255,255,0.04)', lineHeight: 1 }}
-                    aria-hidden
-                  >
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-
-                  {/* Project identity — bottom-aligned */}
-                  <div className="absolute inset-x-0 bottom-0 flex flex-col items-center justify-end gap-4 p-8 pb-10" style={{ background: 'linear-gradient(0deg, rgba(0,0,0,0.65) 0%, transparent 100%)' }}>
-                    <div
-                      className="flex items-center justify-center"
-                      style={{
-                        width: 'clamp(48px, 5vw, 64px)',
-                        height: 'clamp(48px, 5vw, 64px)',
-                        border: '1px solid rgba(255,255,255,0.15)',
-                        backgroundColor: 'rgba(0,0,0,0.5)' }}
-                    >
-                      <span
-                        className="font-display font-black text-white"
-                        style={{ fontSize: 'clamp(1.5rem, 3vw, 2.25rem)' }}
-                      >
-                        {p.title[0]}
+                  <div className="absolute left-5 top-5 flex flex-wrap gap-2">
+                    {project.featured ? (
+                      <span className="rounded-full border border-[rgba(var(--color-accent-rgb),0.18)] glass-strong px-3 py-1 text-xs font-medium text-[var(--color-violet-dark)]">
+                        Signature
                       </span>
-                    </div>
-
-                    <div className="text-center">
-                      <p
-                        className="font-display font-bold text-white"
-                        style={{ fontSize: 'clamp(0.95rem, 1.5vw, 1.15rem)' }}
-                      >
-                        {p.title}
-                      </p>
-                      {p.url && (
-                        <p
-                          className="font-mono mt-0.5"
-                          style={{ fontSize: '10px', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.05em' }}
-                        >
-                          {p.url.replace('https://', '')}
-                        </p>
-                      )}
-                    </div>
-
-                    <div className="flex flex-wrap gap-2 justify-center">
-                      {p.featured && (
-                        <span
-                          className="font-mono uppercase text-white"
-                          style={{
-                            fontSize: '10px',
-                            letterSpacing: '0.22em',
-                            border: '1px solid rgba(var(--color-accent-rgb),0.5)',
-                            padding: '4px 14px',
-                            backgroundColor: 'rgba(var(--color-accent-rgb),0.22)' }}
-                        >
-                          ✦ Signature Project
-                        </span>
-                      )}
-                      <span
-                        className="font-mono uppercase"
-                        style={{
-                          fontSize: '10px',
-                          letterSpacing: '0.22em',
-                          border: p.type === 'client' ? '1px solid rgba(16,185,129,0.5)' : '1px solid rgba(59,130,246,0.5)',
-                          padding: '4px 14px',
-                          backgroundColor: p.type === 'client' ? 'rgba(16,185,129,0.15)' : 'rgba(59,130,246,0.15)',
-                          color: p.type === 'client' ? '#10b981' : '#60a5fa' }}
-                      >
-                        {p.type === 'client' ? '✦ Client Project' : '✦ MTA Product'}
-                      </span>
-                    </div>
+                    ) : null}
+                    <span className="rounded-full border border-slate-200 glass-strong px-3 py-1 text-xs font-semibold text-slate-600">
+                      {getProjectTypeLabel(project.type)}
+                    </span>
                   </div>
-                </motion.div>
+                </div>
 
-                {/* Right — Project details */}
-                <motion.div
-                  variants={reducedMotion ? undefined : fadeUp}
-                  className="flex flex-col p-8 sm:p-10 lg:p-14 xl:p-20"
-                  style={{ borderLeft: '1px solid var(--color-border)' }}
-                >
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {p.tags.map(t => (
+                <div className="flex h-full flex-col p-6 sm:p-7">
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
                       <span
-                        key={t}
-                        className="font-mono uppercase"
-                        style={{
-                          fontSize: '10px',
-                          color: 'var(--color-dead)',
-                          letterSpacing: '0.18em',
-                          border: '1px solid var(--color-border)',
-                          padding: '7px 10px' }}
+                        key={tag}
+                        className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-slate-500"
                       >
-                        {t}
+                        {tag}
                       </span>
                     ))}
                   </div>
 
-                  {/* Title */}
-                  <h2
-                    className="font-display font-black leading-none tracking-normal uppercase mb-6"
-                    style={{ fontSize: 'clamp(2rem, 3.5vw, 3.25rem)', color: 'var(--color-foreground)' }}
-                  >
-                    {p.title}
-                  </h2>
-
-                  {/* Description */}
-                  <p
-                    className="mb-12"
-                    style={{ fontSize: '15px', lineHeight: 1.75, color: 'var(--color-muted)', maxWidth: '480px' }}
-                  >
-                    {p.description}
+                  <h3 className="mt-5 text-2xl font-semibold leading-tight tracking-[-0.045em] text-slate-950 sm:text-3xl">
+                    {project.title}
+                  </h3>
+                  <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-500">
+                    {project.description}
                   </p>
 
-                  {/* Duration + Client */}
-                  <div
-                    className="grid grid-cols-2 gap-6 mb-10 pb-10"
-                    style={{ borderBottom: '1px solid var(--color-border)' }}
-                  >
+                  <div className="mt-6 grid grid-cols-2 gap-3 border-t border-slate-200 pt-5">
                     <div>
-                      <span
-                        className="font-mono uppercase block mb-1"
-                        style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
-                      >
-                        Duration
-                      </span>
-                      <span
-                        className="font-display font-bold"
-                        style={{ fontSize: '1.1rem', color: 'var(--color-foreground)' }}
-                      >
-                        {p.duration}
-                      </span>
+                      <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-400">Duration</p>
+                      <p className="mt-1 text-sm font-semibold text-slate-950">{project.duration}</p>
                     </div>
                     <div>
-                      <span
-                        className="font-mono uppercase block mb-1"
-                        style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
-                      >
-                        Client
-                      </span>
-                      <span
-                        className="font-display font-bold"
-                        style={{ fontSize: '1.1rem', color: 'var(--color-foreground)', lineHeight: 1.3 }}
-                      >
-                        {p.client}
-                      </span>
+                      <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-400">Client</p>
+                      <p className="mt-1 text-sm font-semibold leading-5 text-slate-950">{project.client}</p>
                     </div>
                   </div>
 
-                  {/* Tech Stack */}
-                  {p.stack.length > 0 && (
-                    <div className="mb-10">
-                      <span
-                        className="font-mono uppercase block mb-4"
-                        style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
-                      >
-                        Tech Stack
-                      </span>
-                      <div className="flex flex-wrap gap-2">
-                        {p.stack.map(t => (
-                          <span
-                            key={t}
-                            className="font-mono"
-                            style={{
-                              fontSize: '11px',
-                              color: 'var(--color-muted)',
-                              border: '1px solid var(--color-border)',
-                              padding: '3px 10px' }}
-                          >
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                  {project.deliverables.length > 0 ? (
+                    <ul className="mt-5 grid gap-2">
+                      {project.deliverables.slice(0, hasReelPreviews ? 5 : 4).map((deliverable) => (
+                        <li key={deliverable} className="flex gap-2 text-sm leading-6 text-slate-500">
+                          <ArrowUpRight className="mt-1 h-3.5 w-3.5 shrink-0 text-[var(--color-violet-dark)]" />
+                          {deliverable}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
 
-                  {/* Deliverables */}
-                  {p.deliverables.length > 0 && (
-                    <div className="mb-12">
-                      <span
-                        className="font-mono uppercase block mb-5"
-                        style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
-                      >
-                        Deliverables
-                      </span>
-                      <ul className="flex flex-col gap-3">
-                        {p.deliverables.map(d => (
-                          <li
-                            key={d}
-                            className="flex items-start gap-3"
-                            style={{ fontSize: '14px', color: 'var(--color-muted)', lineHeight: 1.65 }}
-                          >
-                            <span
-                              style={{ color: 'var(--color-violet-light)', flexShrink: 0, marginTop: '2px' }}
-                            >
-                              →
-                            </span>
-                            {d}
-                          </li>
-                        ))}
-                      </ul>
+                  {project.url ? (
+                    <div className="mt-7">
+                      <FintechButton href={project.url} target="_blank" rel="noopener noreferrer" variant="secondary">
+                        {project.type === 'social-media-handle-manager' ? 'View Instagram handle' : 'View live site'}
+                      </FintechButton>
                     </div>
-                  )}
-
-                  {/* CTA */}
-                  {p.url && (
-                    <a
-                      href={p.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      data-cursor="pointer"
-                      aria-label={`View live site for ${p.title}`}
-                      className="mt-auto inline-flex items-center gap-2 px-8 py-5 font-display font-black text-sm uppercase tracking-wide transition-all duration-300 hover:bg-violet hover:text-white hover:border-violet w-fit focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-card"
-                      style={{ border: '1px solid var(--color-foreground)', color: 'var(--color-foreground)' }}
-                    >
-                      View Live Site
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
-                  )}
-                </motion.div>
-              </motion.article>
-            ))}
-          </div>
+                  ) : null}
+                </div>
+              </FintechPanel>
+            </motion.article>
+            )
+          })}
         </div>
       </section>
 
-      {/* ── Pipeline (Coming Soon) ─────────────────────────────── */}
-      <section
-        className="section"
-        style={{
-          borderTop: '1px solid var(--color-border)',
-          backgroundColor: 'var(--color-surface)' }}
-      >
-        <div className="container-site">
+      <section className="relative z-10 border-t border-slate-200/80 px-0 py-20 lg:px-16">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <FintechBadge>Pipeline</FintechBadge>
+            <h2 className="marketing-heading mt-6 text-[clamp(2.25rem,5vw,4.5rem)] font-semibold leading-[1.02] tracking-[-0.02em] text-slate-950">
+              Upcoming product work
+            </h2>
+          </div>
+          <p className="max-w-xl text-base leading-7 text-slate-500">
+            These builds are in progress and will be published as full case studies after launch.
+          </p>
+        </div>
 
-          <div className="flex items-end justify-between mb-20 gap-4">
-            <div>
-              <span
-                className="font-mono uppercase block mb-3"
-                style={{ fontSize: '11px', color: 'var(--color-violet-light)', letterSpacing: '0.22em' }}
-              >
-                ✦ PIPELINE
-              </span>
-              <h2
-                className="font-display font-black leading-none tracking-normal uppercase"
-                style={{ fontSize: 'clamp(1.75rem, 3.5vw, 3rem)', color: 'var(--color-foreground)' }}
-              >
-                Coming Soon
-              </h2>
-            </div>
-            <span
-              className="font-mono hidden sm:block shrink-0"
-              style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.14em' }}
+        <div className="mt-10 overflow-hidden rounded-[22px] border border-slate-200 bg-white shadow-[0_16px_44px_rgba(15,23,42,0.06)]">
+          {comingProjects.map((project, index) => (
+            <motion.div
+              key={project.id}
+              initial={false}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: reducedMotion ? 0 : 0.55, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
+              className="grid gap-4 border-b border-slate-200 px-5 py-5 last:border-b-0 sm:grid-cols-[64px_1fr_auto] sm:items-center sm:px-6"
+              suppressHydrationWarning
             >
-              Case studies in progress
-            </span>
+              <span className="font-mono text-sm font-semibold text-[var(--color-violet-dark)]">{String(index + 1).padStart(2, '0')}</span>
+              <div>
+                <h3 className="text-lg font-semibold tracking-[-0.035em] text-slate-950">{project.title}</h3>
+                <p className="mt-1 text-sm leading-6 text-slate-500">{project.tags.join(' / ')} · {project.client}</p>
+              </div>
+              <div className="inline-flex w-fit items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                <Lock className="h-3 w-3" />
+                Coming soon
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="mt-10 rounded-[22px] border border-[rgba(var(--color-accent-rgb),0.18)] bg-[rgba(var(--color-accent-rgb),0.08)] p-6 sm:flex sm:items-center sm:justify-between sm:gap-8">
+          <div>
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--color-violet-dark)]">Work with us</p>
+            <p className="mt-2 text-base leading-7 text-slate-600">Have a project in mind? Let&apos;s map the system, scope, and launch path.</p>
           </div>
-
-          <div className="flex flex-col" style={{ borderTop: '1px solid var(--color-border)' }}>
-            {comingProjects.map((p, i) => (
-              <motion.div
-                key={p.id}
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: i * 0.08 }}
-                viewport={{ once: true, margin: "-50px" }}
-                className="relative grid grid-cols-1 lg:grid-cols-[72px_1fr_auto] gap-4 lg:gap-8 items-center py-10 group overflow-hidden"
-                style={{ borderBottom: '1px solid var(--color-border)' }}
-              >
-                {/* Violet left accent */}
-                <div
-                  className="absolute left-0 top-0 bottom-0 w-[2px] scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-bottom"
-                  style={{ backgroundColor: 'var(--color-violet)' }}
-                />
-                {/* Watermark number */}
-                <span
-                  className="font-display font-black leading-none select-none transition-colors duration-500 group-hover:text-violet"
-                  style={{
-                    fontSize: 'clamp(1.75rem, 3vw, 2.75rem)',
-                    color: 'rgba(var(--color-accent-rgb),0.15)',
-                    lineHeight: 1 }}
-                >
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-
-                {/* Info */}
-                <div className="flex flex-col gap-2">
-                  <h3
-                    className="font-display font-bold"
-                    style={{
-                      fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)',
-                      color: 'var(--color-foreground)',
-                      lineHeight: 1.2 }}
-                  >
-                    {p.title}
-                  </h3>
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                    {p.tags.map((t, ti) => (
-                      <span key={t} className="flex items-center gap-3">
-                        <span
-                          className="font-mono"
-                          style={{ fontSize: '11px', color: 'var(--color-muted)', letterSpacing: '0.06em' }}
-                        >
-                          {t}
-                        </span>
-                        {ti < p.tags.length - 1 && (
-                          <span aria-hidden="true" style={{ color: 'var(--color-border)' }}>·</span>
-                        )}
-                      </span>
-                    ))}
-                    <span aria-hidden="true" style={{ color: 'var(--color-border)' }}>·</span>
-                    <span
-                      className="font-mono"
-                      style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.06em' }}
-                    >
-                      {p.client}
-                    </span>
-                    <span style={{ color: 'var(--color-border)' }}>·</span>
-                    <span
-                      className="font-mono"
-                      style={{ fontSize: '11px', color: 'var(--color-dead)', letterSpacing: '0.06em' }}
-                    >
-                      {p.duration}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Status */}
-                <div className="flex items-center gap-2 shrink-0">
-                  <Lock className="w-3 h-3 shrink-0" style={{ color: 'var(--color-dead)' }} />
-                  <span
-                    className="font-mono uppercase"
-                    style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
-                  >
-                    Coming Soon
-                  </span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* CTA callout */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-            viewport={{ once: true, margin: "-50px" }}
-            className="mt-24 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8"
-            style={{
-              border: '1px solid rgba(var(--color-accent-rgb),0.3)',
-              padding: 'clamp(20px, 3vw, 36px)',
-              backgroundColor: 'rgba(var(--color-accent-rgb),0.03)' }}
+          <Link
+            href="/#contact"
+            className="mt-5 inline-flex min-h-[52px] items-center gap-2 rounded-full bg-[#171512] px-5 text-sm font-medium text-white shadow-[0_8px_24px_rgba(23,21,18,0.16)] sm:mt-0"
+            style={{ color: '#fff' }}
           >
-            <div>
-              <span
-                className="font-mono uppercase block mb-2"
-                style={{ fontSize: '10px', color: 'var(--color-violet-light)', letterSpacing: '0.18em' }}
-              >
-                WORK WITH US
-              </span>
-              <p style={{ fontSize: '15px', lineHeight: 1.72, color: 'var(--color-muted)' }}>
-                Have a project in mind? Let&apos;s build it together.
-              </p>
-            </div>
-            <Link
-              href="/contact"
-              data-cursor="pointer"
-              className="inline-flex items-center gap-2 px-7 py-4 min-h-[52px] font-display font-bold text-sm hover:bg-violet hover:text-white transition-all duration-300 whitespace-nowrap"
-              style={{ border: '1px solid var(--color-violet)', color: 'var(--color-violet-light)' }}
-            >
-              Start a Project →
-            </Link>
-          </motion.div>
-
+            Start a project
+            <ExternalLink className="h-4 w-4" />
+          </Link>
         </div>
       </section>
-    </div>
+    </FintechFrame>
   )
 }

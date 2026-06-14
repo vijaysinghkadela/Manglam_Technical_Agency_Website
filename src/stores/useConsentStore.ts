@@ -46,6 +46,7 @@ interface ConsentState {
   
   // Banner visibility
   showBanner: boolean;
+  manualBannerRequest: boolean;
   
   // Actions
   grantConsent: (purpose?: string) => void;
@@ -90,6 +91,7 @@ export const useConsentStore = create<ConsentState>()(
       consentPurpose: null,
       hasHydrated: false,
       showBanner: true,
+      manualBannerRequest: false,
 
       // Grant consent
       grantConsent: (purpose = 'analytics-and-marketing') => {
@@ -101,6 +103,7 @@ export const useConsentStore = create<ConsentState>()(
           consentVersion: CONSENT_VERSION,
           consentPurpose: purpose,
           showBanner: false,
+          manualBannerRequest: false,
         });
       },
 
@@ -114,6 +117,7 @@ export const useConsentStore = create<ConsentState>()(
           consentVersion: null,
           consentPurpose: null,
           showBanner: true,
+          manualBannerRequest: false,
         });
         
         // Clear analytics cookies if any
@@ -137,17 +141,23 @@ export const useConsentStore = create<ConsentState>()(
           consentVersion: CONSENT_VERSION,
           consentPurpose: 'declined',
           showBanner: false,
+          manualBannerRequest: false,
         });
       },
 
       // Show banner again
       showBannerAgain: () => {
-        set({ showBanner: true });
+        set({ showBanner: true, manualBannerRequest: true });
       },
 
       hydrateConsent: () => {
+        const current = get();
         const normalized = normalizeVisibility(get());
-        set({ ...normalized, hasHydrated: true });
+        set({
+          ...normalized,
+          showBanner: current.manualBannerRequest || normalized.showBanner,
+          hasHydrated: true,
+        });
       },
 
       // Get consent data for logging

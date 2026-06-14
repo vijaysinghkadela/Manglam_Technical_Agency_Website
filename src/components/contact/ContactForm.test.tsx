@@ -12,7 +12,7 @@ vi.mock('next/navigation', () => ({
 }))
 
 vi.mock('react-hot-toast', () => ({
-  default: { error: vi.fn() },
+  default: { error: vi.fn(), success: vi.fn() },
 }))
 
 describe('ContactForm', () => {
@@ -78,7 +78,7 @@ describe('ContactForm', () => {
   it('shows inline validation errors for missing required fields', async () => {
     render(<ContactForm serviceOptions={['Cybersecurity']} />)
 
-    fireEvent.submit(screen.getByRole('button', { name: /send message/i }).closest('form')!)
+    fireEvent.submit(screen.getByRole('button', { name: /submit enquiry/i }).closest('form')!)
 
     await waitFor(() => {
       expect(screen.getByText('Name must be at least 2 characters')).toBeInTheDocument()

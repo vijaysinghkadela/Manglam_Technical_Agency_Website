@@ -4,9 +4,10 @@ export const AGENCY_EMAIL = "manglamtechnicalagency@gmail.com";
 export const AGENCY_PHONE = "+91-9694322131";
 export const AGENCY_WHATSAPP = "https://wa.me/919694322131";
 export const AGENCY_LOCATION = "F-18 Vallabh Garden, Bikaner 334001";
-export const AGENCY_TAGLINE = "Empowering Your Digital Future";
+export const AGENCY_TAGLINE =
+  "Web, automation, and security delivery from Bikaner";
 export const AGENCY_FOUNDED = 2025;
-export const AGENCY_URL = "https://www.manglamtechnicalagency.com";
+export const AGENCY_URL = "https://manglamtechnicalagency.com";
 export const AGENCY_X_URL = "https://x.com/MAgency67224";
 export const AGENCY_LINKEDIN_URL = "https://www.linkedin.com/in/manglam-technical-agency-571606405/";
 export const AGENCY_INSTAGRAM_URL =
@@ -19,10 +20,10 @@ export const OFFICE_HOURS = {
 
 export const CONTACT_INFO = {
   address: {
-    street: "Rampole Choraha",
+    street: "F-18 Vallabh Garden",
     city: "Bikaner",
     state: "Rajasthan",
-    pincode: "341001",
+    pincode: "334001",
     country: "India",
   },
   email: AGENCY_EMAIL,
@@ -43,7 +44,7 @@ export const TIMELINES = ["ASAP", "1 Month", "3 Months", "Flexible"];
 
 export const REFERRAL_SOURCES = [
   "Google",
-  "Social Media",
+  "Performance Marketing",
   "Referral",
   "Previous Client",
   "Other",

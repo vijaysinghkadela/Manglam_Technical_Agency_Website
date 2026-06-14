@@ -106,13 +106,13 @@ export const agreementSummaries: AgreementSummary[] = [
     ],
   },
   {
-    slug: 'social-media-marketing-services-agreement',
+    slug: 'performance-marketing-services-agreement',
     code: 'MTA-DM',
-    name: 'Social Media Marketing Services Agreement',
+    name: 'Performance Marketing Services Agreement',
     visibility: 'public',
     requestable: true,
     primaryUse: 'Monthly SMM management, campaign execution, and performance reporting.',
-    whenRequired: 'Required before social media retainer or campaign operations.',
+    whenRequired: 'Required before performance marketing retainer or campaign operations.',
     publicSummary:
       'Covers content lifecycle, approval windows, ad budget controls, disclosure compliance, and reporting responsibilities.',
     governingLaws: [
@@ -305,7 +305,7 @@ export const agreementSummaries: AgreementSummary[] = [
   {
     slug: 'ai-ethics-policy',
     code: 'MTA-AIE',
-    name: 'AI Ethics Policy for Social Media Marketing',
+    name: 'AI Ethics Policy for Performance Marketing',
     visibility: 'public',
     requestable: true,
     primaryUse: 'Defines ethical AI usage principles, transparency requirements, and human oversight obligations for all SMM operations.',
@@ -406,14 +406,14 @@ export const policyDocuments: PolicyDocument[] = [
   },
   {
     slug: 'ai-ethics-policy',
-    title: 'AI Ethics Policy for Social Media Marketing',
+    title: 'AI Ethics Policy for Performance Marketing',
     lastUpdated: 'April 2026',
     summary:
       'Defines MTA principles for ethical AI deployment in SMM operations: transparency, human oversight, bias mitigation, DPDP compliance, deepfake prohibition, and C2PA Content Credentials. Forms part of every SMM retainer, proposal, and client SOW.',
     sections: [
       {
         heading: 'Purpose & Scope',
-        body: 'This policy ensures ethical, transparent, and trustworthy social media content for clients (gyms, healthcare providers, local businesses in Rajasthan). AI must serve the client goals while protecting audience trust, complying with law, and avoiding bias or harm. Applies to all SMM services: content creation, Reels/Shorts, carousels, captions, images, videos, ad creatives, community replies, and AI-automated workflows.',
+        body: 'This policy ensures ethical, transparent, and trustworthy campaign content for clients (gyms, healthcare providers, local businesses in Rajasthan). AI must serve the client goals while protecting audience trust, complying with law, and avoiding bias or harm. Applies to performance marketing services: ad creatives, campaign copy, landing page recommendations, lead handling, community replies where scoped, and AI-automated workflows.',
       },
       {
         heading: 'Transparency & SGI Labeling',
@@ -519,7 +519,7 @@ export const agreementApplicabilityMatrix: ApplicabilityRow[] = [
     conditional: ['MTA-DPA (if personal data/analytics)', 'MTA-NDA (if confidential data shared pre-signature)'],
   },
   {
-    service: 'Social Media Marketing',
+    service: 'Performance Marketing',
     required: ['MTA-DM'],
     conditional: ['MTA-DPA (if user data/automation handling)', 'MTA-NDA'],
   },

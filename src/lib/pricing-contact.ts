@@ -1,18 +1,16 @@
 export const DEPARTMENT_SERVICE_MAP: Record<string, string> = {
   'ai-automation': 'AI Automation',
   branding: 'Branding',
-  'content-creation': 'Content Creation',
   cybersecurity: 'Cybersecurity',
-  'social-media-marketing': 'Social Media Marketing',
+  'performance-marketing': 'Performance Marketing',
   'saas-products': 'SaaS & Web Development',
 };
 
 export const DEPARTMENT_NAME_MAP: Record<string, string> = {
   'ai-automation': 'AI & Automation',
   branding: 'Branding & Identity',
-  'content-creation': 'Content Creation',
   cybersecurity: 'Cybersecurity',
-  'social-media-marketing': 'Meta Ads Management',
+  'performance-marketing': 'Performance Marketing',
   'saas-products': 'SaaS & Web Development',
 };
 
@@ -101,7 +99,7 @@ export function buildPlanContactHref(
 
   if (durationNote) params.set('durationNote', durationNote);
 
-  return `/contact?${params.toString()}`;
+  return `/?${params.toString()}#contact`;
 }
 
 export function buildBundleContactHref(
@@ -134,5 +132,5 @@ export function buildBundleContactHref(
     durationLabel: 'Flexible',
   });
 
-  return `/contact?${params.toString()}`;
+  return `/?${params.toString()}#contact`;
 }

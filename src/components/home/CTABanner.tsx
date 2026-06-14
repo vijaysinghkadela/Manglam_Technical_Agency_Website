@@ -90,7 +90,7 @@ export function CTABanner() {
         </motion.span>
 
       <motion.h2
-        className="font-display font-black leading-[0.90] tracking-normal text-white"
+        className="font-editorial font-display font-black leading-[0.90] tracking-normal text-white"
         style={{ fontSize:'clamp(42px, 8vw, 108px)' }}
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -68,58 +68,60 @@ test.describe('MTA UX and accessibility', () => {
     await expect(page.locator('#field-budget-range')).toHaveValue(`${rupee}1,00,000${dash}${rupee}5,00,000`)
   })
 
-  test('services menu works with click, keyboard, and outside click', async ({ page }) => {
+  test('desktop one-page navigation exposes current section anchors', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 950 })
     await gotoApp(page, '/')
 
-    await page.waitForFunction(() => {
-      const button = document.querySelector<HTMLButtonElement>('button[aria-controls="services-menu"]')
-      if (!button) return false
-      const rect = button.getBoundingClientRect()
-      return rect.top >= 0 && rect.left >= 0 && rect.right <= window.innerWidth
-    })
+    const navHrefs = await page.evaluate(() =>
+      Array.from(document.querySelectorAll<HTMLAnchorElement>('nav[aria-label="Main navigation"] a')).map((link) =>
+        link.getAttribute('href'),
+      ),
+    )
+    expect(navHrefs).toEqual(expect.arrayContaining(['/#home', '/#about', '/#portfolio', '/#contact']))
+    expect(navHrefs).not.toEqual(expect.arrayContaining(['/about', '/portfolio', '/contact', '/pricing']))
 
-    await page.evaluate(() => {
-      const button = document.querySelector<HTMLButtonElement>('button[aria-controls="services-menu"]')
-      button?.focus()
-      button?.click()
-    })
+    await page.getByRole('button', { name: 'Services' }).click()
+    await expect(page.getByRole('menu', { name: 'Services' })).toBeVisible()
+    await page.getByRole('menuitem', { name: 'View all services' }).click()
+    await page.waitForFunction(() => window.location.hash === '#services')
     await page.waitForFunction(() => {
-      const menu = document.querySelector<HTMLElement>('[role="menu"][aria-label="Services"]')
-      return menu && getComputedStyle(menu).visibility !== 'hidden'
+      const section = document.getElementById('services')
+      if (!section) return false
+      const rect = section.getBoundingClientRect()
+      return rect.top < window.innerHeight * 0.5 && rect.bottom > 120
     })
-
-    await page.keyboard.press('ArrowDown')
-    await page.waitForFunction(() => document.activeElement?.getAttribute('role') === 'menuitem')
-    await page.keyboard.press('ArrowDown')
-    await page.waitForFunction(() => {
-      const items = Array.from(document.querySelectorAll('[role="menuitem"]'))
-      return document.activeElement === items[1]
-    })
-    await page.keyboard.press('Escape')
-    await page.waitForFunction(() => !document.querySelector('[role="menu"][aria-label="Services"]'))
-
-    await page.waitForFunction(() => document.activeElement === document.querySelector('button[aria-controls="services-menu"]'))
-    await page.keyboard.press('Enter')
-    await page.waitForFunction(() => Boolean(document.querySelector('[role="menu"][aria-label="Services"]')))
-    await page.mouse.click(20, 500)
-    await page.waitForFunction(() => !document.querySelector('[role="menu"][aria-label="Services"]'))
   })
 
-  test('theme toggle shows current state and action aria label', async ({ page }) => {
+  test('desktop services menu supports hover, click fallback, keyboard, and escape close', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 950 })
     await gotoApp(page, '/')
 
-    await page.waitForFunction(() => {
-      const button = document.querySelector<HTMLButtonElement>('button[aria-label="Switch to dark mode"]')
-      return button?.textContent?.includes('Light')
-    })
-    await page.evaluate(() => {
-      document.querySelector<HTMLButtonElement>('button[aria-label="Switch to dark mode"]')?.click()
-    })
-    await page.waitForFunction(() => {
-      const button = document.querySelector<HTMLButtonElement>('button[aria-label="Switch to light mode"]')
-      return button?.textContent?.includes('Dark')
-    })
+    const servicesButton = page.getByRole('button', { name: 'Services' })
+    await servicesButton.hover()
+    await expect(page.getByRole('menu', { name: 'Services' })).toBeVisible()
+    await expect(servicesButton).toHaveAttribute('aria-expanded', 'true')
+    await expect(page.getByRole('menuitem', { name: /AI Automation/i })).toBeVisible()
+    await expect(page.getByRole('menuitem', { name: /Branding/i })).toBeVisible()
+
+    await page.keyboard.press('Escape')
+    await expect(page.getByRole('menu', { name: 'Services' })).toBeHidden()
+    await expect(servicesButton).toHaveAttribute('aria-expanded', 'false')
+
+    await servicesButton.focus()
+    await page.keyboard.press('ArrowDown')
+    await expect(page.getByRole('menu', { name: 'Services' })).toBeVisible()
+    await expect(page.getByRole('menuitem', { name: 'View all services' })).toBeFocused()
+    await page.keyboard.press('ArrowDown')
+    await expect(page.getByRole('menuitem', { name: /AI Automation/i })).toBeFocused()
+    await page.keyboard.press('End')
+    await expect(page.getByRole('menuitem', { name: /Branding/i })).toBeFocused()
+    await page.keyboard.press('Escape')
+    await expect(page.getByRole('menu', { name: 'Services' })).toBeHidden()
+
+    await servicesButton.click()
+    await expect(page.getByRole('menu', { name: 'Services' })).toBeVisible()
+    await page.mouse.click(20, 20)
+    await expect(page.getByRole('menu', { name: 'Services' })).toBeHidden()
   })
 
   test('consent accept persists across reload', async ({ browser }) => {
@@ -152,11 +154,9 @@ test.describe('MTA UX and accessibility', () => {
     await page.waitForFunction(() =>
       Array.from(document.querySelectorAll('button')).some((button) => button.textContent?.trim() === 'Cookie Preferences'),
     )
-    await page.evaluate(() => {
-      Array.from(document.querySelectorAll<HTMLButtonElement>('button'))
-        .find((button) => button.textContent?.trim() === 'Cookie Preferences')
-        ?.click()
-    })
+    const preferencesButton = page.getByRole('button', { name: 'Cookie Preferences' })
+    await preferencesButton.scrollIntoViewIfNeeded()
+    await preferencesButton.click()
 
     await page.waitForFunction(() => Boolean(document.querySelector('[role="region"][aria-label="Cookie and privacy consent"]')))
     const blockingOverlayCount = await page.evaluate(() => document.querySelectorAll('.fixed.inset-0').length)
@@ -169,62 +169,56 @@ test.describe('MTA UX and accessibility', () => {
     await page.waitForFunction(() => !document.querySelector('[role="region"][aria-label="Cookie and privacy consent"]'))
   })
 
-  test('mobile services menu opens on touch-sized viewports', async ({ page }) => {
+  test('mobile one-page menu links to sections on touch-sized viewports', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 })
     await gotoApp(page, '/')
 
-    await page.waitForFunction(() => Boolean(document.querySelector<HTMLButtonElement>('button[aria-label="Open menu"]')))
-    await page.waitForTimeout(1000)
-    await page.evaluate(() => {
-      document.querySelector<HTMLButtonElement>('button[aria-label="Open menu"]')?.click()
-    })
-    await page.waitForFunction(() => Boolean(document.querySelector<HTMLButtonElement>('button[aria-controls="mobile-services-menu"]')))
-    await page.evaluate(() => {
-      document.querySelector<HTMLButtonElement>('button[aria-controls="mobile-services-menu"]')?.click()
-    })
-    await page.waitForTimeout(500)
+    await page.locator('nav[aria-label="Main navigation"] button[aria-label="Open menu"]').click()
+    await page.waitForFunction(() => Boolean(document.querySelector('nav[aria-label="Mobile navigation"]')))
 
     const mobileLinks = await page.evaluate(() =>
-      Array.from(document.querySelectorAll<HTMLAnchorElement>('#mobile-services-menu a')).map((link) => link.textContent?.trim() ?? ''),
+      Array.from(document.querySelectorAll<HTMLAnchorElement>('nav[aria-label="Mobile navigation"] a')).map((link) => ({
+        href: link.getAttribute('href'),
+        label: link.textContent?.trim() ?? '',
+      })),
     )
-    expect(mobileLinks).toContain('All Services')
-    expect(mobileLinks.some((label) => /Cybersecurity/i.test(label))).toBe(true)
-  })
+    expect(mobileLinks.map((link) => link.href)).toEqual(expect.arrayContaining(['/#home', '/#about', '/#portfolio', '/#contact']))
+    expect(mobileLinks.map((link) => link.label)).toEqual(expect.arrayContaining(['Home', 'About', 'Portfolio', 'Contact']))
 
-  test('chatbot suggestions send prompt and update character counter', async ({ page }) => {
-    await page.route('**/api/chat', async (route) => {
-      const body = route.request().postDataJSON() as { messages: Array<{ role: string; content: string }> }
-      const last = body.messages.at(-1)
-      expect(last?.content).toBe('Compare web development vs AI automation.')
-      await route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({ success: true, message: 'Web development builds the product; AI automation improves workflows.' }),
-      })
-    })
-
-    await gotoApp(page, '/')
-    await page.getByRole('button', { name: 'Open AI assistant' }).click()
-    await expect(page.getByText('0/800 chars')).toBeVisible()
-    await page.getByRole('button', { name: /Compare web development vs AI automation/i }).click()
-
-    await expect(page.getByRole('log').getByText('Compare web development vs AI automation.')).toBeVisible()
-    await expect(page.getByText('Web development builds the product; AI automation improves workflows.')).toBeVisible()
-    await expect(page.getByText('0/800 chars')).toBeVisible()
-    await expect(page.getByRole('button', { name: 'Send message' })).toBeDisabled()
+    await page.getByRole('button', { name: 'Services' }).click()
+    const mobileNav = page.getByRole('navigation', { name: 'Mobile navigation' })
+    await expect(mobileNav.getByRole('link', { name: 'All Services' })).toBeVisible()
+    await expect(mobileNav.getByRole('link', { name: 'AI Automation' })).toBeVisible()
+    await mobileNav.getByRole('link', { name: 'All Services' }).click()
+    await page.waitForFunction(() => window.location.hash === '#services')
+    await page.waitForFunction(() => !document.querySelector('nav[aria-label="Mobile navigation"]'))
   })
 
   for (const width of [390, 768, 1440]) {
-    test(`pricing and contact avoid horizontal overflow at ${width}px`, async ({ page }) => {
+    test(`services and contact avoid horizontal overflow at ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 900 })
 
-      await gotoApp(page, '/pricing')
-      const pricingOverflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)
-      expect(pricingOverflow).toBeLessThanOrEqual(1)
+      await gotoApp(page, '/services')
+      const servicesOverflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)
+      expect(servicesOverflow).toBeLessThanOrEqual(1)
 
       await gotoApp(page, selectedContactUrl)
       const contactOverflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)
       expect(contactOverflow).toBeLessThanOrEqual(1)
     })
   }
+
+  test('contact API rejects invalid payloads with security headers', async ({ request }) => {
+    const response = await request.post('/api/contact', {
+      data: {
+        name: 'A',
+        email: 'not-an-email',
+        privacy: false,
+      },
+    })
+
+    expect(response.status()).toBe(400)
+    expect(response.headers()['x-content-type-options']).toBe('nosniff')
+    expect(response.headers()['x-frame-options']).toBe('DENY')
+  })
 })

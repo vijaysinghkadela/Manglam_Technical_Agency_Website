@@ -56,20 +56,15 @@ export function ServicePricingSection({
               Investment
             </h2>
           </div>
-          <div className="flex flex-col items-end gap-3">
-            <DurationToggle
-              durations={dept.plans[0].durations}
-              activeIndex={durationIndex}
-              onChange={setDurationIndex}
-            />
-            <Link
-              href="/pricing"
-              className="inline-flex min-h-[44px] items-center font-mono text-xs transition-colors hover:text-violet"
-              style={{ color: 'var(--color-dead)' }}
-            >
-              Compare all departments →
-            </Link>
-          </div>
+          {dept.plans[0].durations.length > 1 && (
+            <div className="flex flex-col items-end gap-3">
+              <DurationToggle
+                durations={dept.plans[0].durations}
+                activeIndex={durationIndex}
+                onChange={setDurationIndex}
+              />
+            </div>
+          )}
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -178,14 +173,13 @@ export function ServicePricingSection({
                   <Link
                     href={buildPlanContactHref(departmentSlug, plan.name, dept.department, dur.price, dur.label, dur.note)}
                     data-cursor="pointer"
-                    className="mt-auto inline-flex items-center justify-center gap-2 py-3.5 px-5 font-display font-bold text-sm transition-all duration-300 hover:bg-violet hover:text-white hover:border-violet rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-card"
+                    className="mt-auto inline-flex items-center justify-center gap-2 py-3.5 px-5 font-display font-bold text-sm transition-all duration-300 hover:bg-violet-light hover:border-violet rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-card"
                     style={{
                       border: plan.highlight
                         ? '1px solid var(--color-violet)'
                         : '1px solid var(--color-border)',
-                      color: plan.highlight
-                        ? 'var(--color-violet-light)'
-                        : 'var(--color-muted)' }}
+                      backgroundColor: 'var(--color-violet)',
+                      color: '#fff' }}
                   >
                     Get Started
                     <ArrowRight className="w-4 h-4" />
@@ -203,14 +197,7 @@ export function ServicePricingSection({
             color: 'var(--color-dead)',
             letterSpacing: '0.1em' }}
         >
-          All prices in INR. See{' '}
-          <Link
-            href="/pricing"
-            className="inline-flex min-h-[44px] items-center underline transition-colors hover:text-violet"
-          >
-            full pricing page
-          </Link>{' '}
-          for contract terms and cross-department bundles.
+          All prices in INR. Platform subscriptions, ad spend, hosting, tools, and third-party costs stay separate unless scoped in writing.
         </p>
       </div>
     </section>

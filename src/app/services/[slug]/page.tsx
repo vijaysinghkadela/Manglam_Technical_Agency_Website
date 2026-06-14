@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import { services, getService } from "@/lib/data/services";
-import { getAgreementByCode } from "@/lib/data/legal";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronDown, ArrowRight } from "lucide-react";
@@ -120,7 +119,7 @@ function buildContactHref(service: ServiceData, plan?: ServicePlan) {
 
 const servicePageNav = [
   { href: "#overview", label: "Overview" },
-  { href: "#pricing", label: "Pricing" },
+  { href: "#plans", label: "Plans" },
   { href: "#compliance", label: "Compliance" },
   { href: "#faq", label: "FAQ" },
 ] as const;
@@ -281,10 +280,10 @@ export default async function ServicePage({
           <div className="flex items-end justify-between mt-12 lg:mt-16">
             <Link
               href={buildContactHref(service)}
-              className="inline-flex items-center gap-2 px-8 py-5 font-display font-black text-[15px] hover:bg-violet hover:text-white transition-all duration-300"
+              className="inline-flex items-center gap-2 px-8 py-5 font-display font-black text-[15px] hover:bg-violet-light transition-all duration-300"
               style={{
-                backgroundColor: "var(--color-foreground)",
-                color: "var(--color-canvas)" }}
+                backgroundColor: "var(--color-violet)",
+                color: "#fff" }}
               data-cursor="pointer"
             >
               Book Discovery Workshop →
@@ -359,7 +358,7 @@ export default async function ServicePage({
 
       <nav
         aria-label={`${service.name} page sections`}
-        className="sticky top-[var(--nav-offset)] z-20 border-t border-b border-border bg-canvas/95 backdrop-blur-xl"
+        className="border-t border-b border-border bg-canvas"
       >
         <div className="container-site flex gap-2 overflow-x-auto py-3">
           {servicePageNav.map((item) => (
@@ -466,33 +465,7 @@ export default async function ServicePage({
                   {service.dpaTrigger}
                 </p>
 
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {service.requiredAgreements.map((code) => {
-                    const agreement = getAgreementByCode(code);
-                    return agreement ? (
-                      <Link
-                        key={code}
-                        href={`/legal/agreements/${agreement.slug}`}
-                        className="inline-flex min-h-[44px] items-center font-mono text-xs px-3 py-2 transition-colors hover:text-white"
-                        style={{
-                          border: "1px solid rgba(var(--color-accent-rgb),0.35)",
-                          color: "var(--color-violet-light)" }}
-                      >
-                        {code}
-                      </Link>
-                    ) : (
-                      <span
-                        key={code}
-                        className="inline-flex min-h-[44px] items-center font-mono text-xs px-3 py-2"
-                        style={{
-                          border: "1px solid var(--color-border)",
-                          color: "var(--color-muted)" }}
-                      >
-                        {code}
-                      </span>
-                    );
-                  })}
-                </div>
+
 
                 <ul className="flex flex-col gap-1.5">
                   {service.governingLaws.map((law) => (
@@ -537,10 +510,10 @@ export default async function ServicePage({
               {/* CTA */}
               <Link
                 href={buildContactHref(service)}
-                className="inline-flex items-center gap-2 w-fit px-8 py-5 font-display font-black text-[15px] hover:bg-violet hover:text-white transition-all duration-300"
+                className="inline-flex items-center gap-2 w-fit px-8 py-5 font-display font-black text-[15px] hover:bg-violet-light transition-all duration-300"
                 style={{
-                  backgroundColor: "var(--color-foreground)",
-                  color: "var(--color-canvas)" }}
+                  backgroundColor: "var(--color-violet)",
+                  color: "#fff" }}
                 data-cursor="pointer"
               >
                 Get a Quote →
@@ -630,11 +603,11 @@ export default async function ServicePage({
       {/* ── PRICING ─────────────────────────────────────── */}
       {service.pricing.length > 0 &&
         (pricingDepartments.some((d) => d.slug === service.slug) ? (
-          <div id="pricing">
+          <div id="plans">
             <ServicePricingSection departmentSlug={service.slug} />
           </div>
         ) : (
-          <div id="pricing">
+          <div id="plans">
             <OldPricingSectionInline service={service} />
           </div>
         ))}
@@ -688,15 +661,7 @@ export default async function ServicePage({
                 payment-linked transitions, and documented handover controls.
               </p>
             </div>
-            <div className="flex items-center gap-6">
-              <Link
-                href="/legal"
-                className="inline-flex min-h-[44px] items-center hover-foreground transition-colors font-mono text-sm"
-                style={{ color: "var(--color-violet-light)" }}
-              >
-                Open Legal Hub →
-              </Link>
-            </div>
+
           </div>
         </div>
       </section>
@@ -981,14 +946,13 @@ function OldPricingSectionInline({ service }: { service: ServiceData }) {
 
                 <Link
                   href={buildContactHref(service, plan)}
-                  className="mt-auto inline-flex items-center justify-center gap-2 py-3 font-display font-bold text-sm transition-all duration-300 hover:bg-violet hover:text-white hover:border-violet rounded-xl"
+                  className="mt-auto inline-flex items-center justify-center gap-2 py-3 font-display font-bold text-sm transition-all duration-300 hover:bg-violet-light hover:border-violet rounded-xl"
                   style={{
                     border: plan.highlight
                       ? "1px solid var(--color-violet)"
                       : "1px solid var(--color-border)",
-                    color: plan.highlight
-                      ? "var(--color-violet-light)"
-                      : "var(--color-muted)" }}
+                    backgroundColor: "var(--color-violet)",
+                    color: "#fff" }}
                 >
                   {plan.amount === "Custom"
                     ? "Request Quote"
@@ -1000,7 +964,7 @@ function OldPricingSectionInline({ service }: { service: ServiceData }) {
           ))}
         </div>
 
-        {slug === "social-media-marketing" && (
+        {slug === "performance-marketing" && (
           <p
             className="font-mono text-center mt-8"
             style={{

@@ -7,11 +7,11 @@ import { hasHardwareAcceleration, isSafari, isSaveDataEnabled } from '@/lib/brow
 
 const SERVICES = [
   'AI Automation',
-  'Social Media',
+  'Performance',
   'Cybersecurity',
   'SaaS',
   'Branding',
-  'Content',
+  'Web Apps',
 ]
 
 function canUseWebGL() {
@@ -49,7 +49,7 @@ export default function ThreeOrbitalRing() {
     renderer.domElement.setAttribute('role', 'img')
     renderer.domElement.setAttribute(
       'aria-label',
-      'Interactive diagram showing MTA services: AI Automation, Social Media, Cybersecurity, SaaS Development, Branding, and Content Creation',
+      'Interactive diagram showing MTA services: AI Automation, Performance Marketing, Cybersecurity, SaaS Development, Branding, and Web Apps',
     )
     mount.appendChild(renderer.domElement)
 

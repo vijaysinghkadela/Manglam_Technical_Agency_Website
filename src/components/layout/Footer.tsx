@@ -17,28 +17,13 @@ import {
   OFFICE_HOURS,
 } from "@/lib/constants";
 import { services } from "@/lib/data/services";
-import { useConsentStore } from "@/stores/useConsentStore";
-import { useIsClient } from "@/hooks/useIsClient";
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 const companyLinks = [
-  { label: "About", href: "/about" },
-  { label: "Portfolio", href: "/portfolio" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "Contact", href: "/contact" },
-];
-
-const legalLinks = [
-  { label: "Legal Hub", href: "/legal" },
-  { label: "DPDPA Privacy Policy", href: "/legal/privacy-policy" },
-  { label: "Terms", href: "/legal/terms-of-service" },
-  { label: "NDA", href: "/legal/nda" },
-  { label: "Trust Center & Ethics", href: "/trust-center" },
-  {
-    label: "Master Services Agreement",
-    href: "/legal/master-services-agreement",
-  },
+  { label: "About", href: "/#about" },
+  { label: "Portfolio", href: "/#portfolio" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 function FooterLink({ href, label }: { href: string; label: string }) {
@@ -55,41 +40,33 @@ function FooterLink({ href, label }: { href: string; label: string }) {
   );
 }
 
-function FooterButton({ label, onClick }: { label: string; onClick: () => void }) {
+function CookiePreferencesButton() {
   return (
     <button
       type="button"
-      onClick={onClick}
-      className="group flex min-h-[44px] w-full items-center justify-between gap-4 py-2.5 text-left text-sm text-muted transition-colors duration-200 touch-manipulation hover-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
-      data-cursor="pointer"
-      style={{ touchAction: "manipulation" }}
+      onClick={() => window.dispatchEvent(new Event("mta:show-consent-banner"))}
+      className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-border px-4 font-mono text-[11px] uppercase tracking-[0.14em] text-muted transition-colors hover:border-violet/50 hover:text-violet focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
     >
-      <span>{label}</span>
-      <ArrowUpRight className="h-3 w-3 shrink-0 -translate-x-1 opacity-0 transition-opacity duration-200 group-hover:translate-x-0 group-hover:opacity-60" />
+      Cookie Preferences
     </button>
   );
 }
 
 export function Footer() {
-  const showBannerAgain = useConsentStore((state) => state.showBannerAgain);
   const { resolvedTheme } = useTheme();
-  const isClient = useIsClient();
-  const isLight = isClient ? resolvedTheme !== "dark" : true;
+  const isLight = resolvedTheme !== "dark";
   const logoSrc = isLight
     ? "/images/mta-logo-transparent.png"
     : "/images/mta-logo-transparent-white.png";
-  const openCookiePreferences = () => {
-    showBannerAgain();
-    window.dispatchEvent(new Event("mta:show-consent-banner"));
-  };
 
   return (
     <motion.footer
       className="safe-area-bottom w-full border-t border-border bg-canvas"
-      initial={{ clipPath: "inset(18% 0 0 0)" }}
+      initial={false}
       whileInView={{ clipPath: "inset(0% 0 0 0)" }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.65, ease: EASE }}
+      suppressHydrationWarning
     >
 
       <div className="container-site">
@@ -97,13 +74,14 @@ export function Footer() {
       </div>
 
       <div className="container-site py-12 sm:py-14 lg:py-16">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-12">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
           <motion.div
             className="flex flex-col gap-5 sm:col-span-2 lg:col-span-1"
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0, ease: EASE }}
+            suppressHydrationWarning
           >
             <div>
               <div className="mb-3 flex items-center gap-3">
@@ -189,10 +167,11 @@ export function Footer() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0.07, ease: EASE }}
+            suppressHydrationWarning
           >
             <h4
               className="mb-5 font-mono uppercase tracking-[0.18em]"
@@ -210,28 +189,11 @@ export function Footer() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.55, delay: 0.14, ease: EASE }}
-          >
-            <h4
-              className="mb-5 font-mono uppercase tracking-[0.18em]"
-              style={{ fontSize: "11px", color: "var(--color-muted)" }}
-            >
-              Legal
-            </h4>
-            {legalLinks.map((link) => (
-              <FooterLink key={link.href} href={link.href} label={link.label} />
-            ))}
-            <FooterButton label="Cookie Preferences" onClick={openCookiePreferences} />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0.21, ease: EASE }}
+            suppressHydrationWarning
           >
             <h4
               className="mb-5 font-mono uppercase tracking-[0.18em]"
@@ -245,10 +207,11 @@ export function Footer() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0.21, ease: EASE }}
+            suppressHydrationWarning
           >
             <h4
               className="mb-5 font-mono uppercase tracking-[0.18em]"
@@ -321,6 +284,7 @@ export function Footer() {
               © {new Date().getFullYear()} {AGENCY_NAME} — Classification: MTA
               Proprietary
             </p>
+            <CookiePreferencesButton />
           </div>
         </div>
       </div>

@@ -4,16 +4,16 @@ import { Check } from 'lucide-react'
 import { MTA_STATS } from '@/lib/data/stats'
 const values = [
   {
-    title: 'India-Based, Globally-Minded',
-    body: 'Bikaner, Rajasthan. We build for Indian businesses using modern tools and practices — no outsourcing, no middlemen.',
+    title: 'Based in Bikaner, built for Indian businesses',
+    body: 'You work with the technical team directly. No outsourcing chain, no handoff maze, and no vague ownership.',
   },
   {
     title: 'Written Agreements for Every Project',
     body: 'No verbal commitments, ever. Clear contracts protect both sides before a single line of code is written.',
   },
   {
-    title: 'Full-Stack Execution',
-    body: 'Web, security, AI, automation, all under one roof. No need to coordinate between multiple vendors.',
+    title: 'One team across web, security, AI, and growth',
+    body: 'You do not need separate vendors for the website, lead flow, automation, campaign setup, and basic security review.',
   },
   {
     title: 'Post-Delivery Support',
@@ -24,8 +24,8 @@ const values = [
     body: 'Product and service pricing is documented in advance, with clear scope and no hidden line items.',
   },
   {
-    title: 'Proven Delivery',
-    body: 'From internal SaaS builds to NGO web delivery, MTA executes with documentation-first planning and measurable outcomes.',
+    title: 'Real builds, not pitch-deck services',
+    body: 'Our portfolio includes SaaS dashboards, CRM workflows, clinic systems, and an NGO website that visitors can inspect.',
   },
 ]
 
@@ -40,24 +40,23 @@ export function WhyMTA() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:sticky lg:top-[120px] lg:self-start flex flex-col gap-6 rounded-[28px] border border-border bg-card p-10 sm:p-12"
+            className="lg:sticky lg:top-[120px] lg:self-start flex flex-col gap-6 glass-card rounded-[28px] p-10 sm:p-12"
           >
             <div>
               <span className="font-mono uppercase block mb-3" style={{ fontSize: '11px', color: 'var(--color-violet)', letterSpacing: '0.22em' }}>
                 WHY CHOOSE US
               </span>
               <h2
-                className="font-display font-black tracking-normal leading-[0.92] mb-6"
+                className="marketing-heading font-display font-black tracking-normal leading-[0.92] mb-6"
                 style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.85rem)', color: 'var(--color-foreground)' }}
               >
-                Built Different.<br />Delivered Right.
+                Small team.<br />Written scope.<br />Direct delivery.
               </h2>
-              <p className="text-[15px] leading-[1.72] mb-5" style={{ color: 'var(--color-muted)' }}>
-                We&apos;re not a body shop or an outsourcing mill. MTA is a lean agency that treats every project like our own product.
+              <p className="narrative-copy mb-5" style={{ color: 'var(--color-muted)' }}>
+                MTA is a lean technical agency for business owners who want practical delivery, not a sales-heavy vendor.
               </p>
-              <p className="text-[15px] leading-[1.72]" style={{ color: 'var(--color-muted)' }}>
-                When you work with us, you get direct access to the people building your solution, no account managers,
-                no ticket queues, no runaround.
+              <p className="narrative-copy" style={{ color: 'var(--color-muted)' }}>
+                You speak with the people building your solution. Scope, pricing, approvals, and handover are documented before launch.
               </p>
             </div>
 
@@ -86,7 +85,7 @@ export function WhyMTA() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ delay: i * 0.08, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="group rounded-[24px] border border-border bg-card p-8 sm:p-10"
+                className="group glass-card rounded-[24px] p-8 sm:p-10"
               >
                 <div className="flex items-start gap-4">
                   <div
@@ -115,4 +114,3 @@ export function WhyMTA() {
     </section>
   )
 }
-
