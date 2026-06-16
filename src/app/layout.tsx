@@ -121,12 +121,13 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/images/mta-logo-dark.png", sizes: "512x512", type: "image/png" },
+      { url: "/images/mta-logo-192.png", sizes: "192x192", type: "image/png" },
       { url: "/images/mta-logo-64.png", sizes: "64x64", type: "image/png" },
       { url: "/images/mta-logo-32.png", sizes: "32x32", type: "image/png" },
       { url: "/favicon.ico", sizes: "any" },
     ],
     apple: [
-      { url: "/images/mta-logo-128.png", sizes: "128x128", type: "image/png" },
+      { url: "/images/mta-logo-180.png", sizes: "180x180", type: "image/png" },
     ],
     shortcut: "/images/mta-logo-dark.png",
   },
