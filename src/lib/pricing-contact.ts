@@ -4,7 +4,7 @@ export const DEPARTMENT_SERVICE_MAP: Record<string, string> = {
   'content-creation': 'Content Creation',
   cybersecurity: 'Cybersecurity',
   'social-media-marketing': 'Social Media Marketing',
-  'saas-products': 'SaaS & Web Development',
+  'saas-products': 'Web & App Development',
 };
 
 export const DEPARTMENT_NAME_MAP: Record<string, string> = {
@@ -13,7 +13,7 @@ export const DEPARTMENT_NAME_MAP: Record<string, string> = {
   'content-creation': 'Content Creation',
   cybersecurity: 'Cybersecurity',
   'social-media-marketing': 'Meta Ads Management',
-  'saas-products': 'SaaS & Web Development',
+  'saas-products': 'Web & App Development',
 };
 
 const BUDGET_RANGES = [

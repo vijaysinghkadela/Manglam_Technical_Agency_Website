@@ -42,15 +42,15 @@ export const services: Service[] = [
   {
     slug: "ai-automation",
     name: "AI Automation",
-    tagline: "Custom AI agents, RAG pipelines, and workflow automation for Indian businesses",
+    tagline: "Always-on lead follow-up, WhatsApp replies, CRM updates, and workflow automation",
     Icon: Bot,
     description:
-      "We build AI automation that fits your actual operations. Chatbots, document processors, workflow triggers — deployed on your infrastructure or ours.",
+      "We build AI automation systems that keep routine business work moving without waiting for someone to be online. Leads are answered, qualified, saved, followed up, booked, reminded, and reported through workflows designed around your real process.",
     features: [
-      "Workflow engineering with n8n",
-      "RAG knowledge bases from your documents",
-      "WhatsApp AI bots",
-      "LLM prompt tuning and optimization",
+      "24/7 WhatsApp AI reply and lead qualification",
+      "Automated follow-up, reminders, and appointment booking",
+      "CRM, email, invoice, and reporting workflows",
+      "RAG knowledge bases with human handoff controls",
     ],
     priceLabel: PRICE_FROM.aiAutomation,
     requiredAgreements: ["MTA-AI", "MTA-DPA", "MTA-NDA"],
@@ -107,38 +107,46 @@ export const services: Service[] = [
     process: [
       {
         step: 1,
-        title: "Discovery Workshop",
-        summary: "Map manual workflows and calculate ROI.",
+        title: "Workflow Audit",
+        summary: "Find the repetitive work that is slowing sales and operations.",
         detail:
-          "We document exact time-cost metrics and propose a defined architecture blueprint.",
+          "We map missed enquiries, manual follow-ups, data entry, reminders, and reporting work so automation starts with a clear business case.",
         duration: "3 days",
       },
       {
         step: 2,
-        title: "Data & Security Mapping",
-        summary: "Ensure no proprietary data leaks.",
+        title: "Automation Blueprint",
+        summary: "Design the exact bot, CRM, and workflow logic before build.",
         detail:
-          "We map API endpoints and design systems that do not train public models on your data.",
+          "We define triggers, customer messages, escalation rules, CRM fields, dashboards, and data handling controls before anything goes live.",
         duration: "2 days",
       },
       {
         step: 3,
-        title: "Build & Staging",
-        summary: "Workflows built and iteratively tested.",
+        title: "Build & Test",
+        summary: "Automations are built, tested, and reviewed with your team.",
         detail:
-          "We use dummy data on live staging. You review every branch logic.",
+          "We test WhatsApp replies, lead qualification, bookings, reminders, and CRM updates with sample data before production use.",
         duration: "2-3 weeks",
       },
       {
         step: 4,
-        title: "Deployment & Training",
-        summary: "System goes live alongside staff onboarding.",
+        title: "Launch & Optimize",
+        summary: "Go live with monitoring, handover, and practical tuning.",
         detail:
-          "We provide comprehensive runbooks so your team knows precisely how to use and override the automations.",
+          "Your team gets handover notes, override steps, and performance checks so the system keeps improving after launch.",
         duration: "Ongoing",
       },
     ],
     faqs: [
+      {
+        q: "Can AI handle enquiries after business hours?",
+        a: "Yes. We can set up WhatsApp and web chat flows that answer common questions, collect details, qualify the lead, save it in your CRM, and alert your team for the next step.",
+      },
+      {
+        q: "Will automation replace my staff?",
+        a: "The goal is to remove repetitive work, not remove judgment. Your team still handles relationships, decisions, and exceptions while AI manages replies, reminders, data entry, and routine follow-up.",
+      },
       {
         q: "Is my data used to train the AI?",
         a: "No. We use API endpoints (like OpenAI Enterprise) that explicitly forbid training on customer data.",
@@ -414,16 +422,16 @@ export const services: Service[] = [
   },
   {
     slug: "saas-products",
-    name: "SaaS & Web Development",
-    tagline: "Web apps, SaaS platforms, and landing pages built with modern stacks",
+    name: "Web & App Development",
+    tagline: "Websites, mobile apps, and customer platforms built to earn trust and convert enquiries",
     Icon: Globe,
     description:
-      "We build websites, web applications, and SaaS platforms. From a landing page to a multi-tenant platform — scoped, delivered, and handed over with documentation.",
+      "We design and build professional websites, mobile apps, e-commerce stores, booking systems, portals, and SaaS platforms. Every build is planned around trust, speed, security, user experience, and the enquiries your business needs to convert.",
     features: [
-      "Next.js / React / Flutter ecosystems",
-      "Feature development and architecture",
-      "Landing pages and web applications",
-      "SaaS platform builds",
+      "Professional business websites and landing pages",
+      "E-commerce, booking, portal, and CRM platforms",
+      "Flutter mobile apps for Android and iOS",
+      "Speed, security, SEO, analytics, and handover",
     ],
     priceLabel: PRICE_FROM.saasWeb,
     requiredAgreements: ["MTA-SL", "MTA-DPA", "MTA-NDA"],
@@ -480,45 +488,53 @@ export const services: Service[] = [
     process: [
       {
         step: 1,
-        title: "Discovery Workshop",
-        summary: "Translating ideas to technical scope.",
+        title: "Business & User Discovery",
+        summary: "Turn the idea into clear pages, screens, and conversion goals.",
         detail:
-          "We lock down the exact feature set and user journeys before any code is written.",
+          "We map what customers need to see, what actions they should take, and what your team needs behind the scenes.",
         duration: "1 week",
       },
       {
         step: 2,
         title: "Design & Architecture",
-        summary: "Wireframes and DB schemas.",
+        summary: "Plan the interface, flows, database, and integrations.",
         detail:
-          "UI design, database modeling, and architecture planning.",
+          "We create user journeys, UI direction, data models, and technical architecture before development begins.",
         duration: "2 weeks",
       },
       {
         step: 3,
-        title: "Sprints",
-        summary: "Agile development with previews.",
+        title: "Build Sprints",
+        summary: "Develop the website, app, or platform with reviewable previews.",
         detail:
-          "We build in 2-week sprints with live staging URLs for your review.",
+          "You get staging links and sprint checkpoints so design, content, forms, dashboards, and integrations can be reviewed before launch.",
         duration: "4-12 weeks",
       },
       {
         step: 4,
         title: "QA & Launch",
-        summary: "Security checks and go-live.",
+        summary: "Test performance, mobile experience, forms, and handover.",
         detail:
-          "Testing, deployment, and handover with documentation.",
+          "We check responsiveness, speed, security basics, contact flows, analytics, deployment, and documentation before the site or app goes live.",
         duration: "1 week",
       },
     ],
     faqs: [
+      {
+        q: "Can MTA build both the website and mobile app?",
+        a: "Yes. We can build a professional website, customer portal, admin dashboard, and Flutter mobile app as one connected system when the project needs it.",
+      },
+      {
+        q: "Will the website be mobile-friendly and fast?",
+        a: "Yes. Mobile-first layout, page speed, clean forms, basic SEO, analytics, and handover documentation are part of the delivery approach.",
+      },
       {
         q: "Can MTA build my entire SaaS product?",
         a: "We contribute as a development partner. Full project ownership is available when you handle the legal and compliance side.",
       },
       {
         q: "Do you build e-commerce stores?",
-        a: "Yes, we build e-commerce stores as part of our SaaS & Web Development service. Contact us for a custom quote.",
+        a: "Yes. We build e-commerce stores as part of Web & App Development, including catalog structure, checkout flows, payment integrations, admin views, and launch support.",
       },
     ],
   },

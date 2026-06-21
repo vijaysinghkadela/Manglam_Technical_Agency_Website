@@ -8,12 +8,12 @@ export const departments: DepartmentData[] = [
     department: 'AI & Automation',
     slug: 'ai-automation',
     description:
-      'We design AI and automation systems that reduce manual work, improve operational speed, and keep implementation grounded in your actual business process.',
+      'We build always-on AI automation systems for lead replies, follow-ups, appointment booking, reminders, CRM updates, reporting, and repetitive business workflows.',
     plans: [
       {
         name: 'Spark',
-        tagline: 'First automation layer for small teams',
-        target: 'Solopreneurs, gyms, clinics, coaching institutes, small shops',
+        tagline: 'Stop missing leads and routine follow-ups',
+        target: 'Solopreneurs, gyms, clinics, coaching institutes, small shops, and teams handling enquiries manually',
         popular: false,
         highlight: true,
         icon: '⚡',
@@ -59,8 +59,8 @@ export const departments: DepartmentData[] = [
       },
       {
         name: 'Neural',
-        tagline: 'Custom AI agent with RAG and memory',
-        target: 'SMBs, e-commerce, HR teams, real estate agencies',
+        tagline: 'AI assistant connected to your CRM, documents, WhatsApp, and email',
+        target: 'SMBs, e-commerce teams, HR teams, real estate agencies, clinics, and service businesses',
         popular: true,
         highlight: false,
         icon: '🧠',
@@ -108,8 +108,8 @@ export const departments: DepartmentData[] = [
       },
       {
         name: 'Cortex',
-        tagline: 'Multi-agent system with full operations suite',
-        target: 'Mid-size companies, SaaS products, ops-heavy businesses',
+        tagline: 'Full AI operations layer for sales, support, reminders, and reporting',
+        target: 'Mid-size companies, SaaS products, and operations-heavy businesses that need connected systems',
         popular: false,
         highlight: false,
         icon: '🔷',
@@ -775,15 +775,15 @@ export const departments: DepartmentData[] = [
     note: 'Ad spend is not included — client pays Meta directly. Onboarding fee: ₹5,000 one-time (waived for 6/12-month commitments).',
   },
   {
-    department: 'SaaS & Web Development',
+    department: 'Web & App Development',
     slug: 'saas-products',
     description:
-      'We partner with founders and businesses on SaaS and web development — from landing pages to full multi-tenant platforms. Boutique-quality Next.js and Flutter delivery at Tier-2 pricing.',
+      'We build professional websites, mobile apps, e-commerce stores, booking systems, portals, and SaaS platforms focused on trust, speed, user experience, and conversion.',
     plans: [
       {
         name: 'Sprint',
-        tagline: 'Quick website or landing page',
-        target: 'Startups needing landing pages, portfolio sites, brochure websites',
+        tagline: 'Professional website that makes the business look credible online',
+        target: 'Startups, local businesses, service providers, portfolios, brochure websites, and campaign landing pages',
         popular: false,
         highlight: false,
         icon: '🏃',
@@ -827,8 +827,8 @@ export const departments: DepartmentData[] = [
       },
       {
         name: 'Build',
-        tagline: 'Full-featured web app or e-commerce',
-        target: 'Businesses needing e-commerce, client portals, booking systems',
+        tagline: 'Conversion-ready web app, store, portal, booking system, or mobile app',
+        target: 'Businesses needing e-commerce, client portals, booking systems, dashboards, CRM flows, or Android/iOS apps',
         popular: true,
         highlight: true,
         icon: '🔨',
@@ -879,8 +879,8 @@ export const departments: DepartmentData[] = [
       },
       {
         name: 'Platform',
-        tagline: 'SaaS or multi-tenant platform',
-        target: 'Founders building SaaS products, marketplaces, enterprise tools',
+        tagline: 'Scalable SaaS, marketplace, or multi-role product platform',
+        target: 'Founders and teams building SaaS products, marketplaces, enterprise tools, or mobile-first platforms',
         popular: false,
         highlight: false,
         icon: '🏗️',

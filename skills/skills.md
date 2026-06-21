@@ -8,8 +8,8 @@
 
 | Skill | Description |
 |-------|-------------|
-| AI Automation | Custom AI agents, RAG pipelines, chatbot integration, workflow automation with Google Gemini, OpenAI |
-| Web Development | Next.js, React, Node.js, TypeScript — full-stack SaaS, landing pages, dashboards |
+| AI Automation | Always-on WhatsApp replies, lead qualification, CRM updates, appointment booking, reminders, reporting, and workflow automation |
+| Web & App Development | Professional websites, mobile apps, e-commerce, portals, booking systems, dashboards, and SaaS platforms built for trust and conversion |
 | Social Media Marketing | Meta Ads, Google Ads, content strategy, organic growth, campaign management |
 | Cybersecurity | Compliance audits, DPDP Act 2023 implementation, security assessments, incident response planning |
 | Content Creation | Blog posts, SEO articles, social media graphics, reels, brand writing, newsletters |

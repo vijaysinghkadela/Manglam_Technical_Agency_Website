@@ -61,7 +61,7 @@ export function organizationSchema() {
       '@type': 'OfferCatalog',
       name: 'Technology Services for Indian Businesses',
       itemListElement: [
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'SaaS & Web Development', url: `${BASE_URL}/services/saas-products` } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Web & App Development', url: `${BASE_URL}/services/saas-products` } },
         { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'AI Automation', url: `${BASE_URL}/services/ai-automation` } },
         { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Cybersecurity', url: `${BASE_URL}/services/cybersecurity` } },
         { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Social Media Marketing', url: `${BASE_URL}/services/social-media-marketing` } },
