@@ -35,16 +35,4 @@ export const teamMembers: TeamMember[] = [
     image: '/images/team/dhanpat-soni.jpeg',
     imagePosition: '50% 30%',
   },
-  {
-    name: 'Shubham Dungar',
-    role: 'Website & App Developer Expert',
-    initials: 'SD',
-    bio: 'Approaches every build with a balance of strategic thinking and technical execution. Specialises in translating complex requirements into clean, working application and SaaS architectures — from problem decomposition and logic design through to full-stack delivery. Works closely with the strategy team to ensure that what gets built aligns with what the business actually needs, not just what was requested.',
-    expertise: ['Problem Solving', 'Critical Thinking', 'SaaS Execution', 'Application Architecture'],
-    linkedin: null,
-    x: null,
-    image: '/images/team/shubham-dungar.jpeg',
-    imagePosition: '50% 28%',
-    mobileImageHeightClass: 'h-[26rem]',
-  },
 ];
