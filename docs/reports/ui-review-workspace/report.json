@@ -2,7 +2,7 @@
   {
     "route": "/",
     "viewport": "desktop",
-    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\tmp-ui-review\\home-desktop.png",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\home-desktop.png",
     "title": "Manglam Technical Agency — Practical Technology Support",
     "overflowX": false,
     "scrollWidth": 1440,
@@ -156,7 +156,7 @@
   {
     "route": "/services",
     "viewport": "desktop",
-    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\tmp-ui-review\\services-desktop.png",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\services-desktop.png",
     "title": "Services | Manglam Technical Agency",
     "overflowX": false,
     "scrollWidth": 1440,
@@ -295,7 +295,7 @@
   {
     "route": "/services/ai-automation",
     "viewport": "desktop",
-    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\tmp-ui-review\\services-ai-automation-desktop.png",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\services-ai-automation-desktop.png",
     "title": "AI Automation | Manglam Technical Agency",
     "overflowX": false,
     "scrollWidth": 1440,
@@ -445,7 +445,7 @@
   {
     "route": "/services/saas-products",
     "viewport": "desktop",
-    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\tmp-ui-review\\services-saas-products-desktop.png",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\services-saas-products-desktop.png",
     "title": "App & Website Development | Manglam Technical Agency",
     "overflowX": false,
     "scrollWidth": 1440,
@@ -595,7 +595,7 @@
   {
     "route": "/pricing",
     "viewport": "desktop",
-    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\tmp-ui-review\\pricing-desktop.png",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\pricing-desktop.png",
     "title": "Pricing | Manglam Technical Agency",
     "overflowX": false,
     "scrollWidth": 1440,
@@ -733,7 +733,7 @@
   {
     "route": "/portfolio",
     "viewport": "desktop",
-    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\tmp-ui-review\\portfolio-desktop.png",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\portfolio-desktop.png",
     "title": "Our Work | Manglam Technical Agency",
     "overflowX": false,
     "scrollWidth": 1440,
@@ -871,7 +871,7 @@
   {
     "route": "/about",
     "viewport": "desktop",
-    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\tmp-ui-review\\about-desktop.png",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\about-desktop.png",
     "title": "About | Manglam Technical Agency",
     "overflowX": false,
     "scrollWidth": 1440,
@@ -1009,7 +1009,7 @@
   {
     "route": "/contact",
     "viewport": "desktop",
-    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\tmp-ui-review\\contact-desktop.png",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\contact-desktop.png",
     "title": "Contact Us — Start a Project | Manglam Technical Agency",
     "overflowX": false,
     "scrollWidth": 1440,
@@ -1160,7 +1160,7 @@
   {
     "route": "/legal",
     "viewport": "desktop",
-    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\tmp-ui-review\\legal-desktop.png",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\legal-desktop.png",
     "title": "Legal Hub | Manglam Technical Agency",
     "overflowX": false,
     "scrollWidth": 1440,
@@ -1311,7 +1311,7 @@
   {
     "route": "/trust-center",
     "viewport": "desktop",
-    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\tmp-ui-review\\trust-center-desktop.png",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\trust-center-desktop.png",
     "title": "Trust Center & AI Ethics | Manglam Technical Agency",
     "overflowX": false,
     "scrollWidth": 1440,
@@ -1455,7 +1455,7 @@
   {
     "route": "/",
     "viewport": "mobile",
-    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\tmp-ui-review\\home-mobile.png",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\home-mobile.png",
     "title": "Manglam Technical Agency — Practical Technology Support",
     "overflowX": false,
     "scrollWidth": 390,
@@ -1587,7 +1587,7 @@
   {
     "route": "/services",
     "viewport": "mobile",
-    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\tmp-ui-review\\services-mobile.png",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\services-mobile.png",
     "title": "Services | Manglam Technical Agency",
     "overflowX": false,
     "scrollWidth": 390,
@@ -1695,7 +1695,7 @@
   {
     "route": "/services/ai-automation",
     "viewport": "mobile",
-    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\tmp-ui-review\\services-ai-automation-mobile.png",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\services-ai-automation-mobile.png",
     "title": "AI Automation | Manglam Technical Agency",
     "overflowX": false,
     "scrollWidth": 390,
@@ -1815,7 +1815,7 @@
   {
     "route": "/services/saas-products",
     "viewport": "mobile",
-    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\tmp-ui-review\\services-saas-products-mobile.png",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\services-saas-products-mobile.png",
     "title": "App & Website Development | Manglam Technical Agency",
     "overflowX": false,
     "scrollWidth": 390,
@@ -1935,7 +1935,7 @@
   {
     "route": "/pricing",
     "viewport": "mobile",
-    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\tmp-ui-review\\pricing-mobile.png",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\pricing-mobile.png",
     "title": "Pricing | Manglam Technical Agency",
     "overflowX": false,
     "scrollWidth": 390,
@@ -2043,7 +2043,7 @@
   {
     "route": "/portfolio",
     "viewport": "mobile",
-    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\tmp-ui-review\\portfolio-mobile.png",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\portfolio-mobile.png",
     "title": "Our Work | Manglam Technical Agency",
     "overflowX": false,
     "scrollWidth": 390,
@@ -2151,7 +2151,7 @@
   {
     "route": "/about",
     "viewport": "mobile",
-    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\tmp-ui-review\\about-mobile.png",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\about-mobile.png",
     "title": "About | Manglam Technical Agency",
     "overflowX": false,
     "scrollWidth": 390,
@@ -2259,7 +2259,7 @@
   {
     "route": "/contact",
     "viewport": "mobile",
-    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\tmp-ui-review\\contact-mobile.png",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\contact-mobile.png",
     "title": "Contact Us — Start a Project | Manglam Technical Agency",
     "overflowX": false,
     "scrollWidth": 390,
@@ -2391,7 +2391,7 @@
   {
     "route": "/legal",
     "viewport": "mobile",
-    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\tmp-ui-review\\legal-mobile.png",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\legal-mobile.png",
     "title": "Legal Hub | Manglam Technical Agency",
     "overflowX": false,
     "scrollWidth": 390,
@@ -2511,7 +2511,7 @@
   {
     "route": "/trust-center",
     "viewport": "mobile",
-    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\tmp-ui-review\\trust-center-mobile.png",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\trust-center-mobile.png",
     "title": "Trust Center & AI Ethics | Manglam Technical Agency",
     "overflowX": false,
     "scrollWidth": 390,

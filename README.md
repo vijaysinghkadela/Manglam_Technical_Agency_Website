@@ -39,35 +39,21 @@ npm run start
 **Note:** This is a single Next.js 16 app in the root directory, NOT a monorepo.
 
 ```
-src/
-├── app/                 # Next.js App Router pages
-│   ├── page.tsx        # Home
-│   ├── about/
-│   ├── blog/
-│   ├── contact/
-│   ├── services/
-│   ├── portfolio/
-│   ├── pricing/
-│   ├── research/
-│   ├── legal/
-│   └── api/            # API routes (contact, newsletter, quote)
-├── components/
-│   ├── home/           # Home page sections
-│   ├── layout/         # Navbar, Footer
-│   ├── ui/             # Reusable UI components
-│   ├── blog/
-│   ├── contact/
-│   ├── services/
-│   └── ...
-├── lib/
-│   ├── data/           # Static content (TypeScript files)
-│   ├── constants.ts
-│   ├── design-system.ts
-│   └── security.ts
-├── providers/          # React context providers (Lenis)
-├── stores/             # Zustand stores
-└── hooks/              # Custom React hooks
+src/app/           # Next.js App Router pages and API route handlers
+src/components/    # Feature components and reusable UI primitives
+src/lib/           # Utilities, security, email, SEO, and static data
+src/hooks/         # Custom React hooks
+src/providers/     # React providers
+src/stores/        # Zustand stores
+src/styles/        # Global CSS and theme tokens
+src/types/         # Shared TypeScript types
+public/            # App-visible static assets
+docs/              # Project, compliance, deployment, and report docs
+tests/             # Playwright e2e tests
 ```
+
+See [`docs/PROJECT_STRUCTURE.md`](docs/PROJECT_STRUCTURE.md) for the full file
+and folder placement guide.
 
 ---
 
@@ -140,6 +126,7 @@ Configured in `src/app/layout.tsx`:
 ## Documentation
 
 - `/docs/AGENTS.md` - Comprehensive agent guidance
+- `/docs/PROJECT_STRUCTURE.md` - File and folder placement guide
 - `/docs/COMPLIANCE.md` - DPDP/LGPD/GDPR implementation
 - `/docs/PIPELINE.md` - 10-stage client workflow
 - `/docs/ECOSYSTEM.md` - Rajasthan/iStart context

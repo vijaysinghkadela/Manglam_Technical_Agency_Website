@@ -4,7 +4,7 @@ import path from 'node:path';
 
 const baseURL = 'http://localhost:3000';
 const stamp = '20260614-133344';
-const outDir = path.resolve('tmp-ui-review', 'screenshots', stamp);
+const outDir = path.resolve('docs', 'reports', 'ui-review-workspace', 'screenshots', stamp);
 
 const routes = [
   ['home', '/'],

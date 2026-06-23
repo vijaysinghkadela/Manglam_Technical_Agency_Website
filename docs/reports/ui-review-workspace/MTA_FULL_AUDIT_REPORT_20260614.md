@@ -32,11 +32,11 @@ All listed routes were built and screenshot-tested at large desktop, laptop, tab
 | `/sitemap.xml`, `/robots.txt`, `/manifest.webmanifest` | Built successfully |
 
 ## Screenshot Inventory
-- After screenshots: `tmp-ui-review/screenshots/20260614-133344/`
-- Browser audit JSON: `tmp-ui-review/screenshots/20260614-133344/browser-console-network-audit.json`
-- Services menu screenshot: `tmp-ui-review/screenshots/20260614-133344/navbar-services-menu-desktop-after.png`
-- Baseline tracked diff: `tmp-ui-review/baseline/baseline-20260614-133344.patch`
-- Baseline status snapshot: `tmp-ui-review/baseline/baseline-20260614-133344-status.txt`
+- After screenshots: `docs/reports/ui-review-workspace/screenshots/20260614-133344/`
+- Browser audit JSON: `docs/reports/ui-review-workspace/screenshots/20260614-133344/browser-console-network-audit.json`
+- Services menu screenshot: `docs/reports/ui-review-workspace/screenshots/20260614-133344/navbar-services-menu-desktop-after.png`
+- Baseline tracked diff: `docs/reports/ui-review-workspace/baseline/baseline-20260614-133344.patch`
+- Baseline status snapshot: `docs/reports/ui-review-workspace/baseline/baseline-20260614-133344-status.txt`
 
 Note: the repository was already dirty before implementation. The baseline patch/status were captured before edits; fresh before screenshots were not captured before the first code change, so visual comparison uses the saved baseline artifacts and existing prior screenshot folders as historical references.
 
@@ -79,11 +79,11 @@ Files intentionally changed in this pass:
 - `src/components/layout/Footer.tsx`
 - `src/styles/globals.css`
 - `tests/e2e/ux-a11y.spec.ts`
-- `tmp-ui-review/audit-browser-pass.mjs`
-- `tmp-ui-review/audit-browser-resume.mjs`
-- `tmp-ui-review/MTA_FULL_AUDIT_REPORT_20260614.md`
-- `tmp-ui-review/baseline/*`
-- `tmp-ui-review/screenshots/20260614-133344/*`
+- `docs/reports/ui-review-workspace/audit-browser-pass.mjs`
+- `docs/reports/ui-review-workspace/audit-browser-resume.mjs`
+- `docs/reports/ui-review-workspace/MTA_FULL_AUDIT_REPORT_20260614.md`
+- `docs/reports/ui-review-workspace/baseline/*`
+- `docs/reports/ui-review-workspace/screenshots/20260614-133344/*`
 
 The worktree had many pre-existing tracked and untracked changes before this pass. They were preserved and not reverted.
 

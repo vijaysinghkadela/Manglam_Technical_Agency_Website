@@ -1,0 +1,125 @@
+ M .env.local.example
+ M README.md
+ M next.config.ts
+ M package-lock.json
+ M package.json
+ D "public/images/MNSS website Home Page Screenshot.png"
+ D public/images/agency_logo.png
+ M scripts/generate-context-summary.js
+ M src/app/about/page.tsx
+ D src/app/api/chat/route.ts
+ M src/app/api/contact/route.ts
+ M src/app/api/document-request/route.ts
+ M src/app/api/newsletter/route.ts
+ M src/app/api/quote/route.ts
+ M src/app/cybersecurity-policy/page.tsx
+ M src/app/cybersecurity-training/page.tsx
+ M src/app/layout.tsx
+ D src/app/legal/agreements/[slug]/page.tsx
+ D src/app/legal/ai-ethics-policy/page.tsx
+ D src/app/legal/cybersecurity/page.tsx
+ D src/app/legal/dpdp-implementation-checklist/page.tsx
+ D src/app/legal/master-services-agreement/page.tsx
+ D src/app/legal/nda/page.tsx
+ D src/app/legal/page.tsx
+ D src/app/legal/privacy-policy/page.tsx
+ D src/app/legal/terms-of-service/page.tsx
+ M src/app/manifest.ts
+ M src/app/not-found.tsx
+ M src/app/opengraph-image.tsx
+ M src/app/page.tsx
+ D src/app/pricing/layout.tsx
+ D src/app/pricing/page.tsx
+ M src/app/services/[slug]/page.tsx
+ M src/app/services/page.tsx
+ M src/app/sitemap.ts
+ M src/app/template.tsx
+ M src/app/trust-center/page.tsx
+ M src/components/about/AboutContent.tsx
+ D src/components/chat/DeferredSiteChatbot.tsx
+ D src/components/chat/SiteChatbot.tsx
+ M src/components/contact/ContactContent.tsx
+ M src/components/contact/ContactForm.test.tsx
+ M src/components/contact/ContactForm.tsx
+ M src/components/home/CTABanner.tsx
+ M src/components/home/ComplianceByDesign.tsx
+ M src/components/home/HeroSection.tsx
+ M src/components/home/MarqueeTicker.tsx
+ M src/components/home/OrbitalRing.tsx
+ M src/components/home/ProcessSection.tsx
+ M src/components/home/ServicesHorizontal.tsx
+ M src/components/home/ThreeOrbitalRing.tsx
+ M src/components/home/WhyMTA.tsx
+ M src/components/layout/Footer.tsx
+ M src/components/layout/Navbar.tsx
+ D src/components/legal/AgreementSummaryView.tsx
+ D src/components/legal/DocumentRequestForm.tsx
+ D src/components/legal/LegalContent.tsx
+ D src/components/legal/PolicyDocumentView.tsx
+ M src/components/portfolio/PortfolioContent.tsx
+ D src/components/pricing/DepartmentAccordion.tsx
+ M src/components/pricing/DurationToggle.tsx
+ D src/components/pricing/PlanCard.tsx
+ D src/components/pricing/PricingBundles.tsx
+ D src/components/pricing/PricingPageClient.tsx
+ M src/components/pricing/ServicePricingSection.tsx
+ M src/components/seo/JsonLd.tsx
+ M src/components/services/ServicesGrid.tsx
+ M src/components/ui/ConsentBanner.tsx
+ M src/components/ui/GlassCard.tsx
+ M src/components/ui/MagneticCursor.tsx
+ M src/components/ui/Modal.tsx
+ M src/components/ui/ScrollToTop.tsx
+ D src/lib/chatbot/site-context.ts
+ M src/lib/constants.ts
+ M src/lib/data/faq.ts
+ M src/lib/data/legal.ts
+ M src/lib/data/priceConstants.ts
+ M src/lib/data/pricing.ts
+ M src/lib/data/projects.ts
+ M src/lib/data/services.ts
+ M src/lib/data/team.ts
+ M src/lib/email.ts
+ M src/lib/pricing-contact.ts
+ M src/lib/security.ts
+ M src/lib/seo/schemas.ts
+ M src/lib/validations.ts
+ D src/middleware/security.ts
+ M src/proxy.ts
+ M src/stores/useConsentStore.ts
+ M src/styles/globals.css
+ M src/types/index.ts
+ M tests/e2e/ux-a11y.spec.ts
+?? .agents/skills/cavecrew/
+?? .agents/skills/caveman-commit/
+?? .agents/skills/caveman-compress/
+?? .agents/skills/caveman-help/
+?? .agents/skills/caveman-review/
+?? .agents/skills/caveman-stats/
+?? .agents/skills/caveman/
+?? audit-home-desktop-final.png
+?? audit-home-mobile-final.png
+?? contact-form-logic-review.png
+?? homepage-desktop-review-latest.png
+?? homepage-mobile-review-latest.png
+?? homepage-review-desktop.png
+?? homepage-review-mobile.png
+?? public/images/team/dhanpat-soni.jpeg
+?? public/media/
+?? public/screenshots/audit/
+?? public/screenshots/nashamukti-card-focused-desktop.png
+?? public/screenshots/nashamukti-card-focused-mobile-fixed.png
+?? public/screenshots/nashamukti-card-focused-mobile.png
+?? public/screenshots/nashamukti-social-case-study-desktop-clean.png
+?? public/screenshots/nashamukti-social-case-study-desktop.png
+?? public/screenshots/nashamukti-social-case-study-mobile-clean.png
+?? public/screenshots/nashamukti-social-case-study-mobile.png
+?? public/screenshots/nashamukti-social-case-study.png
+?? public/screenshots/nashamukti-social-mobile-tight.png
+?? public/screenshots/nashamukti-social-multi-reel-desktop.png
+?? public/screenshots/nashamukti-social-multi-reel-mobile.png
+?? public/screenshots/review/
+?? skills-lock.json
+?? src/components/ui/FintechPrimitives.tsx
+?? src/lib/api-security.ts
+?? docs/reports/ui-review-workspace/baseline/

@@ -37,23 +37,27 @@ export const projects: Project[] = [
     stack: ['Instagram', 'Meta Business Suite', 'Reel Production', 'Community Updates', 'Content Calendar'],
     duration: 'Active 2026',
     value: 'Live Instagram handle',
-    image: '/media/case-studies/nashamukti/instagram-profile.png',
+    image: '/media/case-studies/nashamukti/Nasha Mukti Hospital Instagram Profile.png',
     previewVideos: [
       {
         src: '/media/case-studies/nashamukti/counseling-patient-short.mp4',
-        label: 'Patient counseling short',
+        label: 'counseling-patient-short',
       },
       {
-        src: '/media/case-studies/nashamukti/school-video-shoot.mp4',
-        label: 'School awareness reel preview',
+        src: '/media/case-studies/nashamukti/Balika Vidyale Udasar.mp4',
+        label: 'Balika Vidyale Udasar',
       },
       {
-        src: '/media/case-studies/nashamukti/school-awareness.mp4',
-        label: 'School awareness reel',
+        src: '/media/case-studies/nashamukti/Krishna Academy Gangashar.mp4',
+        label: 'Krishna Academy Gangashar',
       },
       {
-        src: '/media/case-studies/nashamukti/awareness-in-school.mp4',
-        label: 'Awareness in school',
+        src: '/media/case-studies/nashamukti/MN Institute - Nasha mukti Hospital .mp4',
+        label: 'MN Institute - Nasha mukti Hospital',
+      },
+      {
+        src: '/media/case-studies/nashamukti/Nasha Mukti Awareness program - Balika Vidyale Udasar.mp4',
+        label: 'Nasha Mukti Awareness program - Balika Vidyale Udasar',
       },
     ],
     url: 'https://www.instagram.com/nashamuktihospitalbikaner/',

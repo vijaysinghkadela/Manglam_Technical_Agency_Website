@@ -22,10 +22,11 @@ const BUDGET_RANGES = [
 ] as const;
 
 export function inferBudget(price: string): string {
-  const num = parseInt(
-    price.replace(/[₹,]/g, '').replace(/\/.*$/, '').trim(),
-    10,
-  );
+  const amounts = price
+    .match(/\d[\d,]*/g)
+    ?.map((value) => Number(value.replace(/,/g, '')))
+    .filter((value) => Number.isFinite(value));
+  const num = amounts?.length ? Math.max(...amounts) : NaN;
   if (!num || isNaN(num)) return 'Not Sure';
   for (const r of BUDGET_RANGES) {
     if (num <= r.max) return r.label;

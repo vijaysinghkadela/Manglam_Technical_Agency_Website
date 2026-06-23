@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { PRICE_FROM } from "@/lib/data/priceConstants";
+import { departments } from "@/lib/data/pricing";
 
 export interface Service {
   slug: string;
@@ -38,6 +39,20 @@ export interface Service {
   faqs: { q: string; a: string }[];
 }
 
+function pricingSummary(slug: string): Service["pricing"] {
+  const department = departments.find((item) => item.slug === slug);
+  if (!department) return [];
+
+  return department.plans.map((plan) => ({
+    label: plan.name,
+    amount: plan.durations[0]?.price ?? "",
+    period: plan.durations[0]?.label,
+    highlight: plan.highlight,
+    features: plan.deliverables,
+    subtext: plan.target,
+  }));
+}
+
 export const services: Service[] = [
   {
     slug: "ai-automation",
@@ -63,92 +78,7 @@ export const services: Service[] = [
       "Copyright Act, 1957",
     ],
     deliveryStages: [1, 2, 3, 4, 5, 6, 7, 8],
-    pricing: [
-      {
-        label: "LaunchPad",
-        amount: "₹25,000",
-        period: "5-10 business days",
-        highlight: false,
-        features: [
-          "1 designed and deployed workflow",
-          "Lead capture from form, landing page, or messaging channel",
-          "Auto-response messages and WhatsApp lead notifications",
-          "Google Sheets logging, basic CRM, and calendar visibility",
-          "Simple lead dashboard and 7 days post-launch support",
-        ],
-        subtext: "Basic starter automation for solo founders, freelancers, coaches, and very small teams.",
-      },
-      {
-        label: "Growth Starter",
-        amount: "₹45,000",
-        period: "10-15 business days",
-        highlight: true,
-        features: [
-          "Up to 2 automation workflows",
-          "Multi-source lead capture from forms, WhatsApp, and social channels",
-          "Appointment flow with calendar sync and automated reminders",
-          "CRM, Google Sheets, email nurture, and team notifications",
-          "Basic analytics dashboard, workflow walkthrough, and 14 days support",
-        ],
-        subtext: "Smart business automation for clinics, salons, gyms, agencies, real estate, and coaching institutes.",
-      },
-      {
-        label: "SmartFlow",
-        amount: "₹65,000",
-        period: "15-20 business days",
-        highlight: false,
-        features: [
-          "Up to 3 automation workflows",
-          "AI-powered lead qualification and smart inquiry routing",
-          "WhatsApp AI chatbot for WhatsApp Business",
-          "CRM automation with AI scoring, email sequences, and team alerts",
-          "Performance dashboard, team walkthrough, documentation, and 21 days support",
-        ],
-        subtext: "AI-enhanced automation for growing teams with multiple operational needs.",
-      },
-      {
-        label: "Spark",
-        amount: "₹95,000",
-        period: "20-30 business days",
-        highlight: false,
-        features: [
-          "Up to 3 advanced automation workflows",
-          "Custom AI assistant for business communication",
-          "Smart inquiry handling across WhatsApp and email",
-          "Advanced CRM, sales pipeline, appointment, fallback, and reporting flows",
-          "Team training, complete documentation, and 30 days support",
-        ],
-        subtext: "Production-grade automation infrastructure for established businesses and D2C brands.",
-      },
-      {
-        label: "Neural",
-        amount: "₹2,50,000",
-        period: "30-60 business days",
-        highlight: false,
-        features: [
-          "Custom AI agent built for a specific business function",
-          "RAG knowledge base connected to business documents and policies",
-          "AI memory system for personalized customer interactions",
-          "Voice AI, advanced CRM, and custom workflow scope where applicable",
-          "Performance monitoring, onboarding, AI tuning guide, and full documentation",
-        ],
-        subtext: "Custom AI agent infrastructure for businesses ready to make AI a core operating layer.",
-      },
-      {
-        label: "Cortex",
-        amount: "₹6,00,000+",
-        period: "60+ business days",
-        highlight: false,
-        features: [
-          "Enterprise-scale multi-agent architecture across departments",
-          "Voice AI and complete internal AI operating system design",
-          "Unlimited enterprise workflows scoped per project",
-          "Multi-source RAG, enterprise integrations, and full infrastructure setup",
-          "Dedicated team, full support model, and enterprise-grade documentation",
-        ],
-        subtext: "A fully custom AI operating system for organizations that need multi-agent infrastructure.",
-      },
-    ],
+    pricing: pricingSummary("ai-automation"),
     process: [
       {
         step: 1,
@@ -268,50 +198,7 @@ export const services: Service[] = [
       "IT Amendment Rules, 2026 (SGI Labeling)",
     ],
     deliveryStages: [2, 3, 5, 6, 7, 8, 9, 10],
-    pricing: [
-      {
-        label: "Starter",
-        amount: "₹18,000/mo",
-        period: "1-month entry",
-        highlight: false,
-        features: [
-          "Market, offer, and audience review",
-          "1 active lead or traffic campaign",
-          "Meta Ads campaign setup with up to 2 ad sets",
-          "Ad copy direction and basic creative recommendations",
-          "Pixel or lead-flow tracking checklist",
-          "Monthly report covering spend, leads, CPL, and next actions",
-        ],
-      },
-      {
-        label: "Growth",
-        amount: "₹35,000/mo",
-        period: "1-month starting",
-        highlight: true,
-        features: [
-          "Full funnel plan for awareness, lead capture, and retargeting",
-          "Up to 3 active campaigns across Meta and/or Google Search",
-          "Audience structure, keyword intent review, and campaign architecture",
-          "Creative testing plan and copywriting for ad variations",
-          "Retargeting audiences and conversion path recommendations",
-          "Weekly optimization notes plus monthly performance report",
-        ],
-      },
-      {
-        label: "Scale",
-        amount: "₹65,000/mo",
-        period: "1-month starting",
-        highlight: false,
-        features: [
-          "Multi-channel acquisition system across Meta, Search, YouTube, and retargeting",
-          "Advanced campaign segmentation by intent, geography, audience, and funnel stage",
-          "Lead-quality feedback loop with sales or CRM team",
-          "Landing page, WhatsApp, call, and form conversion recommendations",
-          "Creative fatigue monitoring and structured test roadmap",
-          "Weekly review cadence, monthly strategy review, and priority support",
-        ],
-      },
-    ],
+    pricing: pricingSummary("performance-marketing"),
     process: [
       {
         step: 1,
@@ -394,47 +281,7 @@ export const services: Service[] = [
       "ISO 27001 / SOC 2 / NIST alignment where scoped",
     ],
     deliveryStages: [2, 5, 6, 7, 8, 9, 10],
-    pricing: [
-      {
-        label: "Basic VA",
-        amount: "₹30,000-₹50,000",
-        period: "Small business assessment",
-        highlight: false,
-        features: [
-          "External vulnerability assessment",
-          "Website and infrastructure scan",
-          "Misconfiguration and CVE review",
-          "Prioritized remediation report",
-          "Executive summary and fix checklist",
-        ],
-      },
-      {
-        label: "Web App VAPT",
-        amount: "₹50,000-₹2,50,000",
-        period: "Application security engagement",
-        highlight: true,
-        features: [
-          "OWASP web application testing",
-          "API and authentication review",
-          "Controlled exploitation with evidence",
-          "CVSS scoring and remediation roadmap",
-          "Retest option after fixes",
-        ],
-      },
-      {
-        label: "Security Retainer",
-        amount: "₹25,000/mo+",
-        period: "Monthly security support",
-        highlight: false,
-        features: [
-          "Monthly vulnerability review",
-          "Hardening and remediation guidance",
-          "Awareness training support",
-          "Policy and compliance advisory",
-          "Incident response readiness",
-        ],
-      },
-    ],
+    pricing: pricingSummary("cybersecurity"),
     process: [
       {
         step: 1,
@@ -512,78 +359,7 @@ export const services: Service[] = [
       "IT Act, 2000",
     ],
     deliveryStages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    pricing: [
-      {
-        label: "Starter Site",
-        amount: "₹25,000",
-        period: "5-10 business days",
-        highlight: false,
-        features: [
-          "1-3 page professional website",
-          "Custom design using your brand colors and logo",
-          "Mobile-responsive layout with working contact form",
-          "Social links, SEO basics, sitemap, Open Graph, and analytics",
-          "Vercel/Netlify deployment guidance and 7 days support",
-        ],
-        subtext: "A clean digital presence for freelancers, consultants, coaches, creators, and small local providers.",
-      },
-      {
-        label: "Business Site",
-        amount: "₹55,000",
-        period: "10-15 business days",
-        highlight: true,
-        features: [
-          "Up to 5 page business website",
-          "Headless CMS for easy content updates",
-          "Advanced validated forms and blog/news section",
-          "Full SEO pack, structured data, robots.txt, caching, and image optimization",
-          "Content management walkthrough and 14 days support",
-        ],
-        subtext: "A credibility-focused multi-page website for SMEs, clinics, restaurants, real estate, and institutes.",
-      },
-      {
-        label: "Pro Web App",
-        amount: "₹1,25,000",
-        period: "15-25 business days",
-        highlight: false,
-        features: [
-          "Full-stack web application with Next.js, TypeScript, Tailwind, and PostgreSQL",
-          "Authentication, database schema, dashboard, and API endpoints",
-          "Custom component library with brand styling",
-          "Security basics, CI/CD, analytics, error monitoring, and 90+ Lighthouse target",
-          "Technical documentation, team walkthrough, and 21 days support",
-        ],
-        subtext: "For startups, growing businesses, portals, dashboards, storefronts, and database-driven products.",
-      },
-      {
-        label: "Enterprise Suite",
-        amount: "₹3,50,000",
-        period: "30-60 business days",
-        highlight: false,
-        features: [
-          "Production-grade platform with multiple feature modules",
-          "Advanced auth with role-based access control",
-          "Database architecture, caching, integrations, admin panel, and documented APIs",
-          "Security review, load testing, monitoring, uptime alerts, and 95+ Lighthouse target",
-          "Complete documentation, comprehensive training, and 30 days support",
-        ],
-        subtext: "For established companies that need a serious system handling real business operations.",
-      },
-      {
-        label: "Custom Build",
-        amount: "₹6,00,000+",
-        period: "60+ business days",
-        highlight: false,
-        features: [
-          "Fully custom architecture designed for your use case",
-          "Best-fit stack, unlimited feature scope, and integrations defined during discovery",
-          "Enterprise-grade security and cloud infrastructure setup",
-          "Multi-environment CI/CD, runbooks, and dedicated development team",
-          "Support and maintenance scoped per project requirements",
-        ],
-        subtext: "For large organizations, multi-tenant platforms, enterprise portals, and unique technical requirements.",
-      },
-    ],
+    pricing: pricingSummary("saas-products"),
     process: [
       {
         step: 1,
@@ -614,7 +390,7 @@ export const services: Service[] = [
         title: "Invoice & Advance Payment",
         summary: "The project is commercially locked before development starts.",
         detail:
-          "Starter Site, Business Site, and Pro Web App use a 50% advance and 50% final payment. Enterprise Suite and Custom Build use milestone schedules agreed in writing.",
+          "Starter Presence, Business Website, and Workflow Web App use a 50% advance and 50% final payment. Scale Platform and Custom Platform use milestone schedules agreed in writing.",
         duration: "Before development",
       },
       {
@@ -716,47 +492,7 @@ export const services: Service[] = [
       "Trade Marks Act, 1999",
     ],
     deliveryStages: [2, 3, 5, 6, 7, 8, 9, 10],
-    pricing: [
-      {
-        label: "Stamp",
-        amount: "₹35,000",
-        period: "1-month build",
-        highlight: false,
-        features: [
-          "Logo design",
-          "Business card",
-          "Letterhead",
-          "Social kit",
-          "Brand mini-guide",
-        ],
-      },
-      {
-        label: "Mark",
-        amount: "₹1,20,000",
-        period: "1-month build",
-        highlight: true,
-        features: [
-          "Brand discovery",
-          "Positioning statement",
-          "Logo system",
-          "Visual identity system",
-          "Brand guidelines",
-        ],
-      },
-      {
-        label: "Signature",
-        amount: "₹2,50,000",
-        period: "1-month build",
-        highlight: false,
-        features: [
-          "Brand audit",
-          "Brand architecture",
-          "Full visual identity",
-          "Brand book",
-          "Launch kit",
-        ],
-      },
-    ],
+    pricing: pricingSummary("branding"),
     process: [
       {
         step: 1,
