@@ -68,7 +68,7 @@ test.describe('MTA UX and accessibility', () => {
     await expect(page.locator('#field-budget-range')).toHaveValue(`${rupee}1,00,000${dash}${rupee}5,00,000`)
   })
 
-  test('desktop one-page navigation exposes current section anchors', async ({ page }) => {
+  test('desktop navigation exposes canonical direct routes', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 950 })
     await gotoApp(page, '/')
 
@@ -77,19 +77,14 @@ test.describe('MTA UX and accessibility', () => {
         link.getAttribute('href'),
       ),
     )
-    expect(navHrefs).toEqual(expect.arrayContaining(['/#home', '/#about', '/#portfolio', '/#contact']))
-    expect(navHrefs).not.toEqual(expect.arrayContaining(['/about', '/portfolio', '/contact', '/pricing']))
+    expect(navHrefs).toEqual(expect.arrayContaining(['/', '/about', '/portfolio', '/contact']))
+    expect(navHrefs).not.toEqual(expect.arrayContaining(['/pricing']))
 
     await page.getByRole('button', { name: 'Services' }).click()
     await expect(page.getByRole('menu', { name: 'Services' })).toBeVisible()
     await page.getByRole('menuitem', { name: 'View all services' }).click()
-    await page.waitForFunction(() => window.location.hash === '#services')
-    await page.waitForFunction(() => {
-      const section = document.getElementById('services')
-      if (!section) return false
-      const rect = section.getBoundingClientRect()
-      return rect.top < window.innerHeight * 0.5 && rect.bottom > 120
-    })
+    await page.waitForURL('**/services')
+    await expect(page.getByRole('heading', { name: /Services/i }).first()).toBeVisible()
   })
 
   test('desktop services menu supports hover, click fallback, keyboard, and escape close', async ({ page }) => {
@@ -169,7 +164,7 @@ test.describe('MTA UX and accessibility', () => {
     await page.waitForFunction(() => !document.querySelector('[role="region"][aria-label="Cookie and privacy consent"]'))
   })
 
-  test('mobile one-page menu links to sections on touch-sized viewports', async ({ page }) => {
+  test('mobile menu links to canonical routes on touch-sized viewports', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 })
     await gotoApp(page, '/')
 
@@ -182,7 +177,7 @@ test.describe('MTA UX and accessibility', () => {
         label: link.textContent?.trim() ?? '',
       })),
     )
-    expect(mobileLinks.map((link) => link.href)).toEqual(expect.arrayContaining(['/#home', '/#about', '/#portfolio', '/#contact']))
+    expect(mobileLinks.map((link) => link.href)).toEqual(expect.arrayContaining(['/', '/about', '/portfolio', '/contact']))
     expect(mobileLinks.map((link) => link.label)).toEqual(expect.arrayContaining(['Home', 'About', 'Portfolio', 'Contact']))
 
     await page.getByRole('button', { name: 'Services' }).click()
@@ -190,7 +185,7 @@ test.describe('MTA UX and accessibility', () => {
     await expect(mobileNav.getByRole('link', { name: 'All Services' })).toBeVisible()
     await expect(mobileNav.getByRole('link', { name: 'AI Automation' })).toBeVisible()
     await mobileNav.getByRole('link', { name: 'All Services' }).click()
-    await page.waitForFunction(() => window.location.hash === '#services')
+    await page.waitForURL('**/services')
     await page.waitForFunction(() => !document.querySelector('nav[aria-label="Mobile navigation"]'))
   })
 

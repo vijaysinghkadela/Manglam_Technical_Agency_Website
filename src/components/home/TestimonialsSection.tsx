@@ -4,22 +4,30 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowLeft, ArrowRight, Star } from 'lucide-react'
 import { testimonials } from '@/lib/data/testimonials'
 import { SectionLabel } from '@/components/ui/SectionLabel'
+import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 function TestimonialsSection() {
   const [index, setIndex] = useState(0)
   const timerRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined)
   const current = testimonials[index]
+  const reducedMotion = Boolean(useReducedMotion())
 
   const prev = useCallback(() => setIndex(i => (i === 0 ? testimonials.length - 1 : i - 1)), [])
   const next = useCallback(() => setIndex(i => (i === testimonials.length - 1 ? 0 : i + 1)), [])
 
   useEffect(() => {
+    if (reducedMotion) return
     timerRef.current = setInterval(next, 5000)
     return () => clearInterval(timerRef.current)
-  }, [next])
+  }, [next, reducedMotion])
+
+  const pauseRotation = () => clearInterval(timerRef.current)
+  const resumeRotation = () => {
+    if (!reducedMotion) timerRef.current = setInterval(next, 5000)
+  }
 
   return (
-    <section className="section relative overflow-hidden" onMouseEnter={() => clearInterval(timerRef.current)} onMouseLeave={() => { timerRef.current = setInterval(next, 5000) }}>
+    <section className="section relative overflow-hidden" onMouseEnter={pauseRotation} onMouseLeave={resumeRotation}>
       <div className="container-site flex flex-col items-center">
         <div className="text-center mb-12 sm:mb-14 lg:mb-24 px-4">
           <SectionLabel>Testimonials</SectionLabel>
@@ -89,10 +97,13 @@ function TestimonialsSection() {
               <ArrowLeft className="w-4 h-4" />
             </button>
 
-            <div className="flex items-center gap-2" role="tablist" aria-label="Testimonial navigation">
+            <div className="flex items-center gap-2" aria-label="Testimonial navigation">
               {testimonials.map((_, i) => (
                 <button
-                  key={i} role="tab" aria-selected={i === index} aria-label={`Go to testimonial ${i + 1}`}
+                  key={i}
+                  type="button"
+                  aria-pressed={i === index}
+                  aria-label={`Show testimonial ${i + 1}`}
                   onClick={() => setIndex(i)}
                   className="flex h-11 min-w-[44px] items-center justify-center rounded-full transition-all duration-300"
                   data-cursor="pointer"

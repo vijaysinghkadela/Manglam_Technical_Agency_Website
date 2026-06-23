@@ -9,6 +9,7 @@ import {
   CheckCircle2,
   FileCheck2,
   Globe2,
+  MessageCircle,
   PlugZap,
   Radar,
   ScanSearch,
@@ -24,32 +25,33 @@ import {
   FintechFrame,
   FintechPanel,
 } from '@/components/ui/FintechPrimitives'
+import { HERO_CTA_LINKS } from '@/config/navigation'
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
 
 const METRICS = [
-  { label: 'Qualified leads', value: '1,248', change: '+18.4%', tone: 'text-emerald-600' },
-  { label: 'Auto-routed', value: '82%', change: 'Healthy', tone: 'text-[var(--color-violet-dark)]' },
-  { label: 'Risk drift', value: 'Low', change: 'Stable', tone: 'text-slate-500' },
+  { label: 'Lead capture', value: 'Consent-first', change: 'Form + WhatsApp', tone: 'text-emerald-600' },
+  { label: 'Follow-up', value: 'CRM-ready', change: 'Drafts + tasks', tone: 'text-[var(--color-violet-dark)]' },
+  { label: 'Risk checks', value: 'Reviewed', change: 'Security notes', tone: 'text-slate-500' },
 ]
 
 const PIPELINE = [
   {
     company: 'Website enquiry',
     detail: 'Captured with consent and routed to CRM',
-    value: '2m',
+    value: 'Intake',
     active: true,
   },
   {
     company: 'AI follow-up',
     detail: 'Lead brief, reply draft, and task assigned',
-    value: 'Live',
+    value: 'Draft',
     active: false,
   },
   {
     company: 'Security review',
     detail: 'Form, storage, and delivery checks logged',
-    value: 'DPDP',
+    value: 'Review',
     active: false,
   },
 ]
@@ -75,7 +77,7 @@ const SUPPORT_CARDS = [
 function OperationsConsole() {
   return (
     <motion.div
-      aria-label="Growth operations console showing lead qualification, automation routing, risk status, and delivery health"
+      aria-label="Growth operations workflow preview showing lead capture, automation routing, risk review, and delivery readiness"
       className="relative mx-auto w-full max-w-full overflow-hidden pb-2 lg:max-w-[760px]"
       initial={false}
       animate={{ opacity: 1, y: 0, rotateX: 0 }}
@@ -91,12 +93,12 @@ function OperationsConsole() {
               <ScanSearch className="h-5 w-5" />
             </span>
             <div>
-              <p className="text-sm font-semibold text-[var(--color-foreground)]">Growth operations console</p>
+              <p className="text-sm font-semibold text-[var(--color-foreground)]">Growth operations workflow</p>
               <p className="text-xs font-medium text-[var(--color-dead)]">Lead to delivery pipeline</p>
             </div>
           </div>
           <span className="rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-600">
-            Live
+            Workflow model
           </span>
         </div>
 
@@ -136,7 +138,7 @@ function OperationsConsole() {
             <div className="mt-5 min-w-0 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-4">
               <div className="mb-4 flex items-center justify-between">
                 <p className="text-sm font-semibold text-[var(--color-foreground)]">Automation queue</p>
-                <span className="text-xs font-semibold text-[var(--color-violet-dark)]">4 rules active</span>
+                <span className="text-xs font-semibold text-[var(--color-violet-dark)]">Configured checks</span>
               </div>
               <div className="space-y-3">
                 {PIPELINE.map((item) => (
@@ -165,8 +167,8 @@ function OperationsConsole() {
           <div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/20 to-transparent" />
           <div className="relative flex items-start justify-between gap-6">
             <div>
-              <p className="text-[0.72rem] font-bold uppercase tracking-[0.16em] text-white/90">Delivery health</p>
-              <p className="mt-3 text-4xl font-semibold tracking-[-0.05em] text-white">98.6%</p>
+              <p className="text-[0.72rem] font-bold uppercase tracking-[0.16em] text-white/90">Delivery readiness</p>
+              <p className="mt-3 text-4xl font-semibold tracking-normal text-white">Scoped</p>
             </div>
             <CheckCircle2 className="h-7 w-7 text-white/85" />
           </div>
@@ -222,13 +224,13 @@ export function HeroSection() {
           </motion.div>
 
           <motion.h1
-            className="mt-7 max-w-[780px] text-[2.75rem] font-semibold leading-[1.03] tracking-[-0.025em] text-[var(--color-foreground)] sm:text-6xl lg:text-[4.55rem] xl:text-[5.05rem]"
+            className="mt-7 max-w-[780px] text-[2.75rem] font-semibold leading-[1.03] tracking-normal text-[var(--color-foreground)] sm:text-6xl lg:text-[4.55rem] xl:text-[5.05rem]"
             initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.08, ease: EASE }}
             suppressHydrationWarning
           >
-            Lead capture, automation, and delivery systems for <span className="font-editorial text-[var(--color-violet-dark)]">accountable growth.</span>
+            AI-powered websites, automation, and growth systems for <span className="font-editorial text-[var(--color-violet-dark)]">Indian businesses.</span>
           </motion.h1>
 
           <motion.p
@@ -238,8 +240,9 @@ export function HeroSection() {
             transition={{ duration: 0.75, delay: 0.18, ease: EASE }}
             suppressHydrationWarning
           >
-            Manglam Technical Agency builds the operating layer behind serious digital work: fast web
-            systems, measurable acquisition flows, AI-assisted follow-up, and compliance-aware delivery.
+            Manglam Technical Agency helps startups, SMEs, clinics, institutes, real estate teams, and
+            service businesses capture more enquiries, respond faster, and scale with less manual work
+            through fast web systems, AI-assisted workflows, and compliance-aware delivery.
           </motion.p>
 
           <motion.div
@@ -249,8 +252,23 @@ export function HeroSection() {
             transition={{ duration: 0.75, delay: 0.28, ease: EASE }}
             suppressHydrationWarning
           >
-            <FintechButton href="/#contact" className="w-full sm:w-auto">Start a project</FintechButton>
-            <FintechButton href="/#portfolio" variant="secondary" className="w-full sm:w-auto">Review work</FintechButton>
+            <FintechButton href={HERO_CTA_LINKS.primary.href} className="w-full sm:w-auto">
+              {HERO_CTA_LINKS.primary.label}
+            </FintechButton>
+            <FintechButton
+              href={HERO_CTA_LINKS.secondary.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="secondary"
+              icon={false}
+              className="w-full gap-2 px-5 sm:w-auto"
+            >
+              <MessageCircle className="h-4 w-4 text-[#25D366]" />
+              {HERO_CTA_LINKS.secondary.label}
+            </FintechButton>
+            <FintechButton href={HERO_CTA_LINKS.tertiary.href} variant="secondary" className="w-full sm:w-auto">
+              {HERO_CTA_LINKS.tertiary.label}
+            </FintechButton>
           </motion.div>
         </div>
 

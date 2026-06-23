@@ -1,9 +1,15 @@
+import { services } from '@/lib/data/services';
+
+const SERVICE_NAME_BY_SLUG = Object.fromEntries(
+  services.map((service) => [service.slug, service.name]),
+) as Record<string, string>;
+
 export const DEPARTMENT_SERVICE_MAP: Record<string, string> = {
-  'ai-automation': 'AI Automation',
-  branding: 'Branding',
-  cybersecurity: 'Cybersecurity',
-  'performance-marketing': 'Performance Marketing',
-  'saas-products': 'SaaS & Web Development',
+  'ai-automation': SERVICE_NAME_BY_SLUG['ai-automation'] || 'AI Automation',
+  branding: SERVICE_NAME_BY_SLUG.branding || 'Branding',
+  cybersecurity: SERVICE_NAME_BY_SLUG.cybersecurity || 'Cybersecurity',
+  'performance-marketing': SERVICE_NAME_BY_SLUG['performance-marketing'] || 'Performance Marketing',
+  'saas-products': SERVICE_NAME_BY_SLUG['saas-products'] || 'App & Website Development',
 };
 
 export const DEPARTMENT_NAME_MAP: Record<string, string> = {
@@ -100,7 +106,7 @@ export function buildPlanContactHref(
 
   if (durationNote) params.set('durationNote', durationNote);
 
-  return `/?${params.toString()}#contact`;
+  return `/contact?${params.toString()}`;
 }
 
 export function buildBundleContactHref(
@@ -133,5 +139,5 @@ export function buildBundleContactHref(
     durationLabel: 'Flexible',
   });
 
-  return `/?${params.toString()}#contact`;
+  return `/contact?${params.toString()}`;
 }

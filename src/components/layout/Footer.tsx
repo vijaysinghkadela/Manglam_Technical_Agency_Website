@@ -17,14 +17,9 @@ import {
   OFFICE_HOURS,
 } from "@/lib/constants";
 import { services } from "@/lib/data/services";
+import { COMPANY_NAV_LINKS } from "@/config/navigation";
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
-
-const companyLinks = [
-  { label: "About", href: "/#about" },
-  { label: "Portfolio", href: "/#portfolio" },
-  { label: "Contact", href: "/#contact" },
-];
 
 function FooterLink({ href, label }: { href: string; label: string }) {
   return (
@@ -201,7 +196,7 @@ export function Footer() {
             >
               Company
             </h4>
-            {companyLinks.map((link) => (
+            {COMPANY_NAV_LINKS.map((link) => (
               <FooterLink key={link.href} href={link.href} label={link.label} />
             ))}
           </motion.div>

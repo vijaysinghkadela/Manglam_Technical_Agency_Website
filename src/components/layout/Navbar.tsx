@@ -11,14 +11,7 @@ import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 import { services } from '@/lib/data/services'
 import { AGENCY_WHATSAPP } from '@/lib/constants'
-
-const NAV_LINKS = [
-  { id: 'home', href: '/#home', label: 'Home' },
-  { id: 'about', href: '/#about', label: 'About' },
-  { id: 'services', href: '/#services', label: 'Services', hasMega: true },
-  { id: 'portfolio', href: '/#portfolio', label: 'Portfolio' },
-  { id: 'contact', href: '/#contact', label: 'Contact' },
-]
+import { PRIMARY_NAV_LINKS } from '@/config/navigation'
 
 const getNavStyles = (isLight: boolean, scrolled: boolean) => ({
   container: {
@@ -61,6 +54,8 @@ const getNavStyles = (isLight: boolean, scrolled: boolean) => ({
 export function Navbar() {
   const isClient = useIsClient()
   const pathname = usePathname()
+  const mobileButtonRef = useRef<HTMLButtonElement | null>(null)
+  const mobilePanelRef = useRef<HTMLDivElement | null>(null)
   const servicesMenuRef = useRef<HTMLDivElement | null>(null)
   const serviceItemRefs = useRef<Array<HTMLAnchorElement | null>>([])
   const closeServicesTimerRef = useRef<number | null>(null)
@@ -129,7 +124,7 @@ export function Navbar() {
   useEffect(() => {
     const onHashChange = () => {
       const id = window.location.hash.replace('#', '')
-      if (NAV_LINKS.some((link) => link.id === id)) setActiveSection(id)
+      if (PRIMARY_NAV_LINKS.some((link) => link.id === id)) setActiveSection(id)
     }
 
     onHashChange()
@@ -138,7 +133,7 @@ export function Navbar() {
   }, [])
 
   useEffect(() => {
-    const targets = NAV_LINKS.map((link) => document.getElementById(link.id)).filter(
+    const targets = PRIMARY_NAV_LINKS.map((link) => document.getElementById(link.id)).filter(
       (section): section is HTMLElement => Boolean(section),
     )
     if (targets.length === 0) return
@@ -163,6 +158,7 @@ export function Navbar() {
         setMobile(false)
         setServicesOpen(false)
         setHoveredLink(null)
+        mobileButtonRef.current?.focus()
       }
     }
     document.addEventListener('keydown', handleKeyDown)
@@ -192,11 +188,56 @@ export function Navbar() {
   }, [mobile])
 
   useEffect(() => {
+    if (!mobile) return
+
+    const focusableSelector =
+      'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+
+    const getFocusable = () =>
+      Array.from(mobilePanelRef.current?.querySelectorAll<HTMLElement>(focusableSelector) ?? []).filter(
+        (element) => !element.hasAttribute('disabled') && element.getAttribute('aria-hidden') !== 'true',
+      )
+
+    window.setTimeout(() => {
+      getFocusable()[0]?.focus()
+    }, 0)
+
+    const handleTabKey = (event: KeyboardEvent) => {
+      if (event.key !== 'Tab') return
+
+      const focusable = getFocusable()
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+
+      if (!first || !last) {
+        event.preventDefault()
+        return
+      }
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
+    }
+
+    document.addEventListener('keydown', handleTabKey)
+    return () => document.removeEventListener('keydown', handleTabKey)
+  }, [mobile])
+
+  useEffect(() => {
     return () => clearServicesCloseTimer()
   }, [])
 
   const getLinkStyle = (id: string) => {
-    const active = id === 'services' ? activeSection === id || pathname.startsWith('/services') : activeSection === id
+    const active =
+      pathname === '/'
+        ? activeSection === id
+        : id === 'services'
+          ? pathname.startsWith('/services')
+          : PRIMARY_NAV_LINKS.some((link) => link.id === id && link.href === pathname)
     const hovered = hoveredLink === id
     const pressed = pressedLink === id
 
@@ -277,7 +318,7 @@ export function Navbar() {
             style={{ maxWidth: '1440px', padding: '0 clamp(1.1rem, 4vw, 3.5rem)' }}
           >
             <Link
-              href="/#home"
+              href="/"
               data-cursor="pointer"
               className="group flex shrink-0 items-center gap-2.5 rounded-[22px] border border-white/80 bg-white/45 px-3 py-2 shadow-[0_18px_42px_rgba(15,23,42,0.09),inset_0_1px_0_rgba(255,255,255,0.92)] backdrop-blur-2xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/60 hover:shadow-[0_22px_54px_rgba(15,23,42,0.12),inset_0_1px_0_rgba(255,255,255,0.95)] sm:gap-3.5 sm:px-3.5"
             >
@@ -313,8 +354,13 @@ export function Navbar() {
               <div className="glass-strong relative flex items-center gap-1.5 overflow-visible rounded-full px-2.5 py-2 transition-all duration-300 xl:gap-2" style={styles.navPill}>
                 <span className="pointer-events-none absolute inset-x-4 top-0 h-px bg-white/90" />
                 <span className="pointer-events-none absolute -left-10 top-1/2 h-16 w-24 -translate-y-1/2 rounded-full bg-white/35 blur-2xl" />
-                {NAV_LINKS.map((link) => {
-                  const active = link.id === 'services' ? activeSection === link.id || pathname.startsWith('/services') : activeSection === link.id
+                {PRIMARY_NAV_LINKS.map((link) => {
+                  const active =
+                    pathname === '/'
+                      ? activeSection === link.id
+                      : link.id === 'services'
+                        ? pathname.startsWith('/services')
+                        : link.href === pathname
                   if (link.hasMega) {
                     return (
                       <motion.div
@@ -389,7 +435,7 @@ export function Navbar() {
                             >
                               <div className="grid grid-cols-2 gap-2">
                                 <Link
-                                  href="/#services"
+                                  href="/services"
                                   role="menuitem"
                                   ref={(el) => {
                                     serviceItemRefs.current[0] = el
@@ -457,7 +503,7 @@ export function Navbar() {
 
             <div className="flex items-center gap-3 sm:gap-3.5 xl:gap-4">
               <Link
-                href="/#contact"
+                href="/contact"
                 data-cursor="pointer"
                 className="hidden min-h-[48px] items-center gap-2 rounded-full bg-[#171512] px-4 font-body text-sm font-medium text-white shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-all hover:-translate-y-0.5 hover:bg-black hover:shadow-[0_8px_24px_rgba(23,21,18,0.16)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(var(--color-accent-rgb),0.55)] focus-visible:ring-offset-2 focus-visible:ring-offset-canvas lg:inline-flex"
                 style={{ color: '#fff' }}
@@ -467,6 +513,7 @@ export function Navbar() {
               </Link>
 
               <motion.button
+                ref={mobileButtonRef}
                 type="button"
                 onClick={() => setMobile((v) => !v)}
                 aria-label={mobile ? 'Close menu' : 'Open menu'}
@@ -509,6 +556,10 @@ export function Navbar() {
       <AnimatePresence>
         {mobile && (
           <motion.div
+            ref={mobilePanelRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -531,8 +582,13 @@ export function Navbar() {
             <div className="relative flex h-full flex-col px-6 pt-[92px]">
               <div className="flex-1 overflow-y-auto">
                 <nav aria-label="Mobile navigation" className="space-y-2">
-                  {NAV_LINKS.map((link, index) => {
-                    const active = link.id === 'services' ? activeSection === link.id || pathname.startsWith('/services') : activeSection === link.id
+                  {PRIMARY_NAV_LINKS.map((link, index) => {
+                    const active =
+                      pathname === '/'
+                        ? activeSection === link.id
+                        : link.id === 'services'
+                          ? pathname.startsWith('/services')
+                          : link.href === pathname
                     return (
                       <motion.div
                         key={link.id}
@@ -575,7 +631,7 @@ export function Navbar() {
                                 >
                                   <div className="mt-2 grid gap-2 pl-4">
                                     <Link
-                                      href="/#services"
+                                      href="/services"
                                       onClick={() => setMobile(false)}
                                       className="rounded-2xl border border-white/75 bg-white/52 px-4 py-3 font-display text-base font-medium text-[var(--color-violet-dark)] shadow-[inset_0_1px_0_rgba(255,255,255,0.86)] backdrop-blur-xl"
                                     >
@@ -625,11 +681,11 @@ export function Navbar() {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: NAV_LINKS.length * 0.04 + 0.1 }}
+                  transition={{ delay: PRIMARY_NAV_LINKS.length * 0.04 + 0.1 }}
                   className="mt-8 px-1"
                 >
                   <Link
-                    href="/#contact"
+                    href="/contact"
                     onClick={() => setMobile(false)}
                     className="inline-flex min-h-[54px] w-full items-center justify-center gap-2 rounded-full border border-white/40 bg-[#171512] px-5 font-display text-base font-medium text-white shadow-[0_8px_24px_rgba(23,21,18,0.16),inset_0_1px_0_rgba(255,255,255,0.12)]"
                     style={{ color: '#fff' }}

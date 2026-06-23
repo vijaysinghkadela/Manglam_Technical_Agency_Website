@@ -30,6 +30,10 @@ export function getAllowedOrigins(): string[] {
     .filter(Boolean)
 }
 
+export function isAllowedOrigin(origin: string | null): boolean {
+  return !origin || getAllowedOrigins().includes(origin)
+}
+
 export function getClientIp(request: NextRequest): string {
   const cfConnectingIp = request.headers.get('cf-connecting-ip')
   if (cfConnectingIp) return cfConnectingIp
@@ -229,6 +233,18 @@ export async function checkWriteRateLimit(request: NextRequest, scope: string): 
 }
 
 export async function parseJsonBody<T = unknown>(request: NextRequest, maxBytes = DEFAULT_MAX_JSON_BYTES): Promise<T> {
+  const origin = request.headers.get('origin')
+  const fetchSite = request.headers.get('sec-fetch-site')
+  const contentType = request.headers.get('content-type')?.toLowerCase() ?? ''
+
+  if (!isAllowedOrigin(origin) || fetchSite === 'cross-site') {
+    throw new Error('DISALLOWED_ORIGIN')
+  }
+
+  if (contentType.split(';')[0]?.trim() !== 'application/json') {
+    throw new Error('UNSUPPORTED_MEDIA_TYPE')
+  }
+
   const contentLength = Number(request.headers.get('content-length') ?? '0')
   if (contentLength > maxBytes) {
     throw new Error('PAYLOAD_TOO_LARGE')
@@ -262,6 +278,22 @@ export function createJsonParseErrorResponse(request: NextRequest, error: unknow
       request,
       { success: false, message: 'Invalid JSON payload.' },
       { status: 400 },
+    )
+  }
+
+  if (error.message === 'UNSUPPORTED_MEDIA_TYPE') {
+    return createApiResponse(
+      request,
+      { success: false, message: 'Content-Type must be application/json.' },
+      { status: 415 },
+    )
+  }
+
+  if (error.message === 'DISALLOWED_ORIGIN') {
+    return createApiResponse(
+      request,
+      { success: false, message: 'Request origin is not allowed.' },
+      { status: 403 },
     )
   }
 

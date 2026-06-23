@@ -31,7 +31,15 @@ const contactItems = [
   { label: 'Office', value: AGENCY_LOCATION, href: null, note: 'Rajasthan, India', external: false },
 ]
 
-export function ContactContent({ formNode }: { formNode: ReactNode }) {
+export function ContactContent({
+  formNode,
+  headingLevel = 'h1',
+}: {
+  formNode: ReactNode
+  headingLevel?: 'h1' | 'h2'
+}) {
+  const Heading = headingLevel
+
   return (
     <section
       className="relative w-full overflow-hidden grain"
@@ -56,7 +64,7 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
           className="mb-12 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] sm:mb-16 lg:mb-24"
           style={{ color: 'var(--color-dead)' }}
         >
-          <Link href="/#home" className="hover-foreground transition-colors">
+          <Link href="/" className="hover-foreground transition-colors">
             Home
           </Link>
           <span>/</span>
@@ -93,7 +101,7 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
                 Get in touch
               </span>
 
-              <h1
+              <Heading
                 aria-label="Start a conversation"
                 className="mb-12 flex flex-col font-display font-black leading-[1.08] tracking-normal uppercase"
                 style={{ gap: '0.25rem', fontSize: 'var(--text-display-lg)', color: 'var(--color-foreground)' }}
@@ -102,7 +110,7 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
                 <span style={{ fontSize: 'var(--text-display-md)', color: 'var(--color-violet)' }}>
                   <SplitWords text="conversation." delay={0.24} wordClassName="inline-block pb-1" />
                 </span>
-              </h1>
+              </Heading>
 
               <p
                 className="mb-16 max-w-[420px]"

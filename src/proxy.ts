@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server'
-import { createApiPreflightResponse, setApiCorsHeaders, setSecurityHeaders } from '@/lib/api-security'
+import { createApiPreflightResponse, isAllowedOrigin, setApiCorsHeaders, setSecurityHeaders } from '@/lib/api-security'
 
 function hasMaliciousPatterns(url: string, headers: Headers): boolean {
   const suspiciousPatterns = [
@@ -49,6 +49,15 @@ export async function proxy(request: NextRequest) {
   const isApiRoute = request.nextUrl.pathname.startsWith('/api/')
 
   if (isApiRoute && request.method === 'OPTIONS') {
+    if (!isAllowedOrigin(request.headers.get('origin'))) {
+      const response = NextResponse.json(
+        { success: false, message: 'Request origin is not allowed.' },
+        { status: 403 },
+      )
+      setSecurityHeaders(response)
+      return response
+    }
+
     return createApiPreflightResponse(request)
   }
 

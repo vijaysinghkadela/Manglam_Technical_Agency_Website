@@ -17,6 +17,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/about`,               lastModified: DATES.core,     changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/portfolio`,            lastModified: DATES.core,     changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/trust-center`,         lastModified: DATES.core,    changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE_URL}/cybersecurity-policy`, lastModified: DATES.core,     changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE_URL}/cybersecurity-training`, lastModified: DATES.core,   changeFrequency: 'monthly', priority: 0.5 },
   ]
 
   const servicePages: MetadataRoute.Sitemap = services.map(s => ({

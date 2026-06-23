@@ -5,6 +5,8 @@ import Link from "next/link";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import { ServicePricingSection } from "@/components/pricing/ServicePricingSection";
 import { departments as pricingDepartments } from "@/lib/data/pricing";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqSchema, serviceSchema } from "@/lib/seo/schemas";
 
 type Params = { slug: string };
 type ServiceData = NonNullable<ReturnType<typeof getService>>;
@@ -134,9 +136,18 @@ export default async function ServicePage({
   if (!service) notFound();
 
   return (
-    <main
-      style={{ backgroundColor: "var(--color-canvas)", minHeight: "100vh" }}
-    >
+    <>
+      <JsonLd
+        schema={serviceSchema({
+          name: service.name,
+          description: service.description,
+          url: `/services/${service.slug}`,
+        })}
+      />
+      {service.faqs.length > 0 ? <JsonLd schema={faqSchema(service.faqs)} /> : null}
+      <main
+        style={{ backgroundColor: "var(--color-canvas)", minHeight: "100vh" }}
+      >
       {/* ── HERO — Full viewport ─────────────────────────── */}
       <section
         className="relative w-full min-h-[92svh] flex flex-col overflow-hidden grain"
@@ -810,7 +821,8 @@ export default async function ServicePage({
           </div>
         </div>
       </section>
-    </main>
+      </main>
+    </>
   );
 }
 

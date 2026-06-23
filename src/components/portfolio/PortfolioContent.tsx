@@ -38,11 +38,11 @@ const getReelPreviews = (project: Project) => {
   return []
 }
 
-export function PortfolioContent() {
+export function PortfolioContent({ enableRichMedia = true }: { enableRichMedia?: boolean }) {
   const [filter, setFilter] = useState<FilterType>('all')
   const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({})
   const filterButtonRefs = useRef<Array<HTMLButtonElement | null>>([])
-  const reducedMotion = useReducedMotion()
+  const reducedMotion = Boolean(useReducedMotion())
 
   const filteredProjects = projects.filter((project) => {
     if (project.status !== 'live') return false
@@ -100,7 +100,7 @@ export function PortfolioContent() {
               className="marketing-heading mt-6 max-w-[760px] text-[clamp(2.6rem,6vw,5rem)] font-semibold leading-[1.02] tracking-[-0.02em] text-slate-950"
               suppressHydrationWarning
             >
-              Proof of systems that move from launch to measurable work.
+              Documented systems that move from launch to useful work.
             </motion.h2>
           </div>
 
@@ -112,12 +112,12 @@ export function PortfolioContent() {
             className="max-w-2xl text-lg leading-8 text-slate-500"
             suppressHydrationWarning
           >
-            This section provides proof of systems that transition from launch to measurable results, including
-            websites, SaaS products, dashboards, automation-ready interfaces, and managed social handles.
+            This section shows shipped systems, product demos, dashboards, automation-ready interfaces,
+            and managed social handles with visible scope and delivery notes.
           </motion.p>
         </div>
 
-        <div className="mt-10 flex flex-wrap gap-3" role="tablist" aria-label="Portfolio filters">
+        <div className="mt-10 flex flex-wrap gap-3" aria-label="Portfolio filters">
           {filters.map((filterOption, index) => {
             const selected = filter === filterOption.key
             return (
@@ -127,11 +127,9 @@ export function PortfolioContent() {
                   filterButtonRefs.current[index] = el
                 }}
                 type="button"
-                role="tab"
                 onClick={() => setFilter(filterOption.key)}
                 onKeyDown={(event) => handleFilterKeyDown(event, index)}
-                aria-selected={selected}
-                tabIndex={selected ? 0 : -1}
+                aria-pressed={selected}
                 className={`min-h-11 rounded-full border px-4 font-mono text-[11px] font-medium uppercase tracking-[0.12em] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(var(--color-accent-rgb),0.55)] focus-visible:ring-offset-2 lg:!min-h-9 lg:px-3 lg:text-[10px] lg:tracking-[0.08em] ${
                   selected
                     ? 'border-[rgba(var(--color-accent-rgb),0.28)] bg-[rgba(var(--color-accent-rgb),0.08)] text-[var(--color-violet-dark)] shadow-[0_8px_22px_rgba(31,122,122,0.10)]'
@@ -146,7 +144,7 @@ export function PortfolioContent() {
 
         <div className="mt-12 grid gap-6 xl:grid-cols-2">
           {filteredProjects.map((project, index) => {
-            const reelPreviews = getReelPreviews(project)
+            const reelPreviews = enableRichMedia ? getReelPreviews(project) : []
             const hasReelPreviews = reelPreviews.length > 0
 
             return (
@@ -195,9 +193,10 @@ export function PortfolioContent() {
                               className="h-full w-full object-cover"
                               src={preview.src}
                               muted
-                              loop
+                              loop={!reducedMotion}
                               playsInline
-                              autoPlay
+                              autoPlay={!reducedMotion}
+                              controls={reducedMotion}
                               preload="metadata"
                               aria-label={`${project.client} ${preview.label}`}
                             />
@@ -273,6 +272,10 @@ export function PortfolioContent() {
                     <div>
                       <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-400">Client</p>
                       <p className="mt-1 text-sm font-semibold leading-5 text-slate-950">{project.client}</p>
+                    </div>
+                    <div>
+                      <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-400">Status</p>
+                      <p className="mt-1 text-sm font-semibold text-slate-950">{project.value}</p>
                     </div>
                   </div>
 

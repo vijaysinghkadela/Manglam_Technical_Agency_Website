@@ -356,15 +356,18 @@ export default function ContactForm({
 
       if (!response.ok) {
         const body = await response.json().catch(() => null);
+        setWhatsappUrl(nextWhatsappUrl);
+        setSubmitState("redirecting");
         toast.error(
           body?.message || "Could not save the enquiry. Opening WhatsApp with your details.",
         );
+        window.location.assign(nextWhatsappUrl);
+        return;
       }
 
       setWhatsappUrl(nextWhatsappUrl);
-      setSubmitState("redirecting");
-      toast.success("Opening WhatsApp with your enquiry details.");
-      window.location.assign(nextWhatsappUrl);
+      setSubmitState("success");
+      toast.success("Enquiry submitted securely. You can continue on WhatsApp if urgent.");
     } catch {
       const nextWhatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildWhatsAppMessage(data))}`;
       setWhatsappUrl(nextWhatsappUrl);
@@ -577,11 +580,12 @@ export default function ContactForm({
         <div className="rounded-lg border border-border bg-surface p-4 sm:p-5">
           <div className="grid gap-4 sm:grid-cols-[24px_1fr] sm:gap-3">
             <AnimatedCheckbox
-            {...register("privacy")}
-            id="privacy"
-            required
-            aria-required="true"
-            aria-invalid={errors.privacy ? "true" : "false"}
+              {...register("privacy")}
+              id="privacy"
+              required
+              aria-required="true"
+              aria-invalid={errors.privacy ? "true" : "false"}
+              aria-describedby={errors.privacy ? "privacy-error" : undefined}
             />
             <label
               htmlFor="privacy"
@@ -611,6 +615,7 @@ export default function ContactForm({
           </div>
           {errors.privacy && (
             <p
+              id="privacy-error"
               className="mt-3 font-mono"
               role="alert"
               style={{ fontSize: "11px", color: "#ef4444" }}

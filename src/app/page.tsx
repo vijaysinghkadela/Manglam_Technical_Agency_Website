@@ -6,7 +6,9 @@ import { ContactContent } from '@/components/contact/ContactContent'
 import ContactForm from '@/components/contact/ContactForm'
 import { HomeHero } from '@/components/home/HomeHero'
 import { MarqueeTicker } from '@/components/home/MarqueeTicker'
+import { ProofStrip } from '@/components/home/ProofStrip'
 import { ServicesHorizontal } from '@/components/home/ServicesHorizontal'
+import { TestimonialsSection } from '@/components/home/TestimonialsSection'
 import { PortfolioContent } from '@/components/portfolio/PortfolioContent'
 
 export const metadata: Metadata = {
@@ -32,6 +34,7 @@ export default function Home() {
       <div id="home" className="scroll-mt-[var(--nav-offset)]">
         <HomeHero />
       </div>
+      <ProofStrip />
       <MarqueeTicker />
       <div id="about" className="scroll-mt-[var(--nav-offset)]">
         <AboutContent />
@@ -42,11 +45,13 @@ export default function Home() {
       </div>
       <Divider />
       <div id="portfolio" className="scroll-mt-[var(--nav-offset)]">
-        <PortfolioContent />
+        <PortfolioContent enableRichMedia={false} />
       </div>
       <Divider />
+      <TestimonialsSection />
+      <Divider />
       <div id="contact" className="scroll-mt-[var(--nav-offset)]">
-        <ContactContent formNode={<ContactForm />} />
+        <ContactContent headingLevel="h2" formNode={<ContactForm />} />
       </div>
     </>
   )

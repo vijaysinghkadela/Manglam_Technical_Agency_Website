@@ -48,7 +48,7 @@ function buildHtml(data: ContactData): string {
   const safeServerConsentTimestamp = sanitizeInput(data.serverConsentTimestamp, 50)
   const safeConsentPurpose = data.consentPurpose ? sanitizeInput(data.consentPurpose, 100) : 'contact-form-submission'
   const safeServerConsentIP = sanitizeInput(data.serverConsentIP, 80)
-  const safeUserAgent = sanitizeInput(data.consentUserAgent ?? data.serverUserAgent, 500)
+  const safeUserAgent = sanitizeInput(data.serverUserAgent, 500)
 
   return `
 <!DOCTYPE html>
@@ -184,7 +184,7 @@ function buildTextFallback(data: ContactData): string {
   const safeServerConsentTimestamp = sanitizeInput(data.serverConsentTimestamp, 50)
   const safeConsentPurpose = data.consentPurpose ? sanitizeInput(data.consentPurpose, 100) : 'contact-form-submission'
   const safeServerConsentIP = sanitizeInput(data.serverConsentIP, 80)
-  const safeUserAgent = sanitizeInput(data.consentUserAgent ?? data.serverUserAgent, 500)
+  const safeUserAgent = sanitizeInput(data.serverUserAgent, 500)
 
   return [
     `NEW ENQUIRY — Manglam Technical Agency`,
