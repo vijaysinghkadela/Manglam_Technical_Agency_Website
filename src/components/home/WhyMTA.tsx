@@ -36,8 +36,8 @@ export function WhyMTA() {
         <div className="grid grid-cols-1 lg:grid-cols-[0.92fr_1.08fr] gap-8 lg:gap-16">
 
           <motion.div
-            initial={{ opacity: 0, x: -24 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={false}
+            whileInView={{ x: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
             className="lg:sticky lg:top-[120px] lg:self-start flex flex-col gap-6 rounded-[28px] border border-border bg-card p-10 sm:p-12"
@@ -82,8 +82,8 @@ export function WhyMTA() {
             {values.map((val, i) => (
               <motion.article
                 key={val.title}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={false}
+                whileInView={{ y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ delay: i * 0.08, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 className="group rounded-[24px] border border-border bg-card p-8 sm:p-10"

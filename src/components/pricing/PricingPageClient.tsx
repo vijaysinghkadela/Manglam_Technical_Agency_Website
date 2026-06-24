@@ -184,8 +184,8 @@ export function PricingPageClient() {
             {statItems.map((stat, i) => (
               <motion.div
                 key={stat.label}
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={false}
+                whileInView={{ y: 0 }}
                 viewport={{ once: true, margin: '-20px' }}
                 transition={{ delay: i * 0.1, duration: 0.45, ease: EASE }}
                 className="flex flex-col items-center sm:items-start"
@@ -282,8 +282,8 @@ export function PricingPageClient() {
         />
         <div className="container-site">
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={false}
+            whileInView={{ y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.55, ease: EASE }}
             className="flex flex-col"
@@ -350,8 +350,8 @@ export function PricingPageClient() {
       >
         <div className="container-site">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={false}
+            whileInView={{ y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.6, ease: EASE }}
           >
@@ -406,8 +406,8 @@ export function PricingPageClient() {
                 ].map((item, i) => (
                   <motion.div
                     key={item.label}
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    initial={false}
+                    whileInView={{ y: 0 }}
                     viewport={{ once: true, margin: '-20px' }}
                     transition={{ delay: i * 0.08, duration: 0.4, ease: EASE }}
                   >
@@ -456,8 +456,8 @@ export function PricingPageClient() {
         <div className="container-site">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-28 items-center">
             <motion.div
-              initial={{ opacity: 0, x: -16 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={false}
+              whileInView={{ x: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.6, ease: EASE }}
               className="flex flex-col"
@@ -494,8 +494,8 @@ export function PricingPageClient() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 16 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={false}
+              whileInView={{ x: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
               className="flex flex-col"

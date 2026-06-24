@@ -12,8 +12,8 @@ export function ProcessSection() {
     <section className="section" style={{ backgroundColor: 'var(--color-canvas)' }}>
       <div className="container-site">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={false}
+          whileInView={{ y: 0 }}
           viewport={{ once: true, margin: '-50px' }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="grid grid-cols-1 lg:grid-cols-[0.92fr_1.08fr] gap-8 sm:gap-10 lg:gap-16 mb-16 lg:mb-20"
@@ -70,8 +70,8 @@ export function ProcessSection() {
               return (
                 <motion.article
                   key={stage.stage}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={false}
+                  whileInView={{ y: 0 }}
                   viewport={{ once: true, margin: '-30px' }}
                   transition={{ duration: 0.5, delay: index * 0.03, ease: [0.16, 1, 0.3, 1] }}
                   className={`overflow-hidden rounded-[24px] border transition-all duration-300`}

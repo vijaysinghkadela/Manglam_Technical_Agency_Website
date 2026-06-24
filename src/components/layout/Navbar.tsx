@@ -244,10 +244,8 @@ export function Navbar() {
     <>
       <motion.nav
         aria-label="Main navigation"
-        className="fixed top-0 left-0 right-0 z-[100]"
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="fixed top-0 left-0 right-0 z-[160]"
+        initial={false}
       >
         {/* Main navbar container */}
         <div
@@ -434,145 +432,104 @@ export function Navbar() {
             <div className="flex items-center gap-3 sm:gap-3.5 xl:gap-4">
               <ThemeToggle />
 
-              {/* Mobile menu button */}
-              <motion.button
-                onClick={() => setMobile((v) => !v)}
-                aria-label={mobile ? 'Close menu' : 'Open menu'}
-                aria-expanded={mobile}
+              <button
+                type="button"
+                popoverTarget="mobile-nav-popover"
+                aria-label="Open menu"
                 data-cursor="pointer"
                 className="lg:hidden h-11 w-11 min-w-[44px] flex items-center justify-center rounded-full transition-all duration-200"
-                style={mobile ? styles.mobileButton.active : styles.mobileButton.default}
-                whileTap={{ scale: 0.95 }}
+                style={styles.mobileButton.default}
               >
-                <AnimatePresence mode="wait">
-                  {mobile ? (
-                    <motion.div
-                      key="close"
-                      initial={{ rotate: -90, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: 90, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <X className="w-5 h-5 text-white" />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="menu"
-                      initial={{ rotate: 90, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: -90, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Menu className="w-5 h-5 text-muted" />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.button>
+                <Menu className="w-5 h-5 text-muted" />
+              </button>
             </div>
           </div>
         </div>
       </motion.nav>
 
-      {/* Mobile menu overlay */}
-      <AnimatePresence>
-        {mobile && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 lg:hidden"
+      <div
+        id="mobile-nav-popover"
+        popover="auto"
+        className="mta-mobile-popover fixed inset-0 z-[220] hidden overflow-hidden border-0 p-0 lg:hidden"
+        style={{
+          backgroundColor: isLight
+            ? 'rgb(250, 247, 244)'
+            : 'rgb(13, 13, 14)' }}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile navigation"
+      >
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+          <span
+            className="font-display font-black text-[30vw] select-none"
             style={{
-              backgroundColor: isLight
-                ? 'rgba(250, 247, 244, 0.98)'
-                : 'rgba(13, 13, 14, 0.98)',
-              backdropFilter: 'blur(20px)' }}
+              color: isLight ? 'rgba(var(--color-accent-rgb), 0.03)' : 'rgba(255, 255, 255, 0.02)' }}
           >
-            {/* Background watermark */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-              <span
-                className="font-display font-black text-[30vw] select-none"
-                style={{
-                  color: isLight ? 'rgba(var(--color-accent-rgb), 0.03)' : 'rgba(255, 255, 255, 0.02)' }}
-              >
-                MTA
-              </span>
-            </div>
+            MTA
+          </span>
+        </div>
 
-            {/* Content */}
-            <div className="relative h-full flex flex-col pt-[92px] px-6">
-              <div className="flex-1 overflow-y-auto">
-                <nav aria-label="Mobile navigation" className="space-y-2">
-                  {NAV_LINKS.map((link, i) => (
-                    <motion.div
-                      key={link.href}
-                      initial={{ opacity: 0, x: -30 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -30 }}
-                      transition={{
-                        delay: i * 0.05,
-                        duration: 0.4,
-                        ease: [0.16, 1, 0.3, 1] }}
+        <div
+          className="relative h-full flex flex-col"
+          style={{ padding: '104px 24px 0' }}
+        >
+          <button
+            type="button"
+            popoverTarget="mobile-nav-popover"
+            popoverTargetAction="hide"
+            aria-label="Close menu"
+            className="absolute right-6 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-violet text-white"
+          >
+            <X className="h-5 w-5" />
+          </button>
+
+          <div className="flex-1 overflow-y-auto">
+            <nav aria-label="Mobile navigation" className="space-y-2">
+              {NAV_LINKS.map((link) => (
+                <div key={link.href}>
+                  <Link
+                    href={link.href}
+                    className={cn(
+                      'flex items-center justify-between border transition-colors duration-200',
+                      isActive(link)
+                        ? 'text-foreground border-violet/30'
+                        : 'text-muted border-border hover:text-foreground'
+                    )}
+                    style={{
+                      borderRadius: '18px',
+                      padding: '14px 20px',
+                      borderColor: isActive(link)
+                        ? 'rgba(var(--color-accent-rgb), 0.2)'
+                        : isLight
+                          ? 'rgba(var(--color-accent-rgb), 0.08)'
+                          : 'rgba(255, 255, 255, 0.06)' }}
+                  >
+                    <span
+                      className="font-display font-black text-xl"
+                      style={{
+                        color: isActive(link) ? 'var(--color-violet)' : 'var(--color-foreground)' }}
                     >
-                      <Link
-                        href={link.href}
-                        onClick={() => setMobile(false)}
-                        className={cn(
-                          'flex items-center justify-between rounded-2xl border px-5 py-4 transition-colors duration-200',
-                          isActive(link)
-                            ? 'text-foreground border-violet/30'
-                            : 'text-muted border-border hover:text-foreground'
-                        )}
-                        style={{
-                          borderColor: isActive(link)
-                            ? 'rgba(var(--color-accent-rgb), 0.2)'
-                            : isLight
-                              ? 'rgba(var(--color-accent-rgb), 0.08)'
-                              : 'rgba(255, 255, 255, 0.06)' }}
-                      >
-                        <span
-                          className="font-display font-black text-2xl"
-                          style={{
-                            color: isActive(link) ? 'var(--color-violet)' : 'var(--color-foreground)' }}
-                        >
-                          {link.label}
-                        </span>
-                        {isActive(link) && (
-                          <motion.div
-                            layoutId="mobileActiveIndicator"
-                            className="w-2 h-2 rounded-full bg-violet"
-                          />
-                        )}
-                      </Link>
-                    </motion.div>
-                  ))}
-                </nav>
+                      {link.label}
+                    </span>
+                    {isActive(link) && (
+                      <motion.div
+                        layoutId="mobileActiveIndicator"
+                        className="w-2 h-2 rounded-full bg-violet"
+                      />
+                    )}
+                  </Link>
+                </div>
+              ))}
+            </nav>
+          </div>
 
-                {/* Mobile CTA */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: NAV_LINKS.length * 0.05 + 0.1 }}
-                  className="mt-8 px-4"
-                >
-                </motion.div>
-              </div>
-
-              {/* Bottom info */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                className="py-6 text-center"
-              >
-              <p className="font-mono text-[10px] text-muted tracking-wider uppercase">
-                  Manglam Technical Agency • Bikaner, Rajasthan
-                </p>
-              </motion.div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          <div className="py-6 text-center">
+            <p className="font-mono text-[10px] text-muted tracking-wider uppercase">
+              Manglam Technical Agency • Bikaner, Rajasthan
+            </p>
+          </div>
+        </div>
+      </div>
     </>
   )
 }

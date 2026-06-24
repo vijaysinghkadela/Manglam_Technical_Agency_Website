@@ -1,10 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ChevronDown, ChevronUp, X } from 'lucide-react';
 import { useConsentStore } from '@/stores/useConsentStore';
 import { useIsClient } from '@/hooks/useIsClient';
-import { X, Shield, ChevronDown, ChevronUp, Lock, Eye, CheckCircle2 } from 'lucide-react';
 
 export function ConsentBanner() {
   const { showBanner, hasHydrated, grantConsent, dismissBanner, hydrateConsent } = useConsentStore();
@@ -21,249 +21,101 @@ export function ConsentBanner() {
     }
   }, [hydrateConsent]);
 
-  // Don't render until client-side (prevent hydration issues)
-  if (!isClient || !hasHydrated) return null;
-
-  // Don't show after a current accept or decline decision.
-  if (!showBanner) return null;
+  if (!isClient || !hasHydrated || !showBanner) return null;
 
   return (
     <AnimatePresence>
-      {showBanner && (
-        <>
-          {/* Backdrop overlay */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm"
-            onClick={(e) => e.stopPropagation()}
-            aria-hidden="true"
-          />
-          
-          {/* Centered modal */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6"
+      <motion.aside
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 24 }}
+        transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+        role="region"
+        aria-label="Privacy choices"
+        className="fixed inset-x-3 bottom-3 z-[80] mx-auto max-w-4xl overflow-hidden rounded-2xl border border-border shadow-[0_18px_54px_rgba(0,0,0,0.20)] backdrop-blur-xl sm:inset-x-6 sm:bottom-6"
+        style={{
+          backgroundColor: 'color-mix(in srgb, var(--color-card) 94%, transparent)',
+          paddingBottom: 'env(safe-area-inset-bottom)' }}
+      >
+        <div className="h-1 w-full bg-violet" aria-hidden="true" />
+
+        <div className="grid gap-3 p-4 sm:grid-cols-[1fr_auto] sm:items-center sm:p-5">
+          <div className="min-w-0 pr-8 sm:pr-0">
+            <p className="font-display text-sm font-black leading-tight text-foreground sm:text-base">
+              Privacy choices
+            </p>
+            <p className="mt-1 max-w-2xl text-xs leading-relaxed text-muted sm:text-sm">
+              Optional analytics stays off unless you accept it. Project forms keep explicit consent separate.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            onClick={dismissBanner}
+            className="absolute right-3 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full text-muted transition-colors hover:bg-accent-soft hover:text-foreground sm:right-4"
+            aria-label="Dismiss privacy choices"
           >
-            <div 
-              className="relative w-full max-w-xl overflow-hidden rounded-2xl shadow-2xl"
-              style={{ 
-                backgroundColor: 'var(--color-card)',
-                border: '1px solid var(--color-border)',
-                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(var(--color-accent-rgb), 0.1)' }}
+            <X className="h-4 w-4" />
+          </button>
+
+          <div className="grid grid-cols-2 gap-2 sm:flex sm:min-w-[360px] sm:justify-end">
+            <button
+              type="button"
+              onClick={() => setIsExpanded((open) => !open)}
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border px-4 text-sm font-semibold text-muted transition-colors hover:bg-accent-soft hover:text-foreground"
+              aria-expanded={isExpanded}
             >
-              {/* Top accent bar */}
-              <div 
-                className="absolute top-0 left-0 right-0 h-1"
-                style={{ 
-                  background: 'linear-gradient(90deg, var(--color-violet) 0%, var(--color-violet-light) 50%, var(--color-violet) 100%)' 
-                }}
-              />
+              {isExpanded ? (
+                <>
+                  Less <ChevronUp className="h-4 w-4" />
+                </>
+              ) : (
+                <>
+                  Manage <ChevronDown className="h-4 w-4" />
+                </>
+              )}
+            </button>
 
-              {/* Close button */}
-              <button
-                onClick={dismissBanner}
-                className="absolute top-4 right-4 p-2 rounded-full transition-all duration-200 hover:bg-white/5 z-10"
-                style={{ color: 'var(--color-muted)' }}
-                aria-label="Dismiss"
-              >
-                <X className="w-5 h-5" />
-              </button>
+            <button
+              type="button"
+              onClick={() => grantConsent('analytics-and-communications')}
+              className="inline-flex min-h-11 items-center justify-center rounded-xl bg-violet px-5 text-sm font-black text-white transition-colors hover:bg-violet-dark"
+            >
+              Accept
+            </button>
+          </div>
+        </div>
 
-              <div className="p-6 md:p-8">
-                {/* Header with icon */}
-                <div className="flex flex-col items-center text-center mb-6">
-                  <motion.div
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ delay: 0.1, duration: 0.3 }}
-                    className="w-16 h-16 flex items-center justify-center rounded-2xl mb-4"
-                    style={{ 
-                      backgroundColor: 'rgba(var(--color-accent-rgb), 0.1)',
-                      border: '1px solid rgba(var(--color-accent-rgb), 0.2)' }}
-                  >
-                    <Shield className="w-8 h-8" style={{ color: 'var(--color-violet)' }} />
-                  </motion.div>
-                  
-                  <motion.h3
-                    initial={{ y: 10, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.15, duration: 0.3 }}
-                    className="font-display font-black text-lg md:text-xl mb-2"
-                    style={{ color: 'var(--color-foreground)' }}
-                  >
-                    Data Privacy & Consent
-                  </motion.h3>
-                  
-                  <motion.p
-                    initial={{ y: 10, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.2, duration: 0.3 }}
-                    className="text-sm leading-relaxed max-w-md"
-                    style={{ color: 'var(--color-muted)' }}
-                  >
-                    We use a small amount of website data to understand what visitors need.
-                  </motion.p>
+        <AnimatePresence initial={false}>
+          {isExpanded && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+              className="overflow-hidden border-t border-border"
+            >
+              <div className="grid gap-3 p-4 text-sm leading-relaxed text-muted sm:grid-cols-3 sm:p-5">
+                <div className="rounded-xl border border-border bg-surface/70 p-3">
+                  <strong className="block text-foreground">What we collect</strong>
+                  Contact details you submit, project requirements, and optional site analytics.
                 </div>
-
-                {/* Main content */}
-                <motion.div
-                  initial={{ y: 10, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.25, duration: 0.3 }}
-                  className="p-4 rounded-xl mb-6"
-                  style={{ 
-                    backgroundColor: 'rgba(var(--color-accent-rgb), 0.04)',
-                    border: '1px solid rgba(var(--color-accent-rgb), 0.1)' }}
-                >
-                  <p className="text-sm leading-relaxed text-center" style={{ color: 'var(--color-muted)' }}>
-                    We respect your privacy. We process data under the{' '}
-                    <strong style={{ color: 'var(--color-foreground)' }}>Digital Personal Data Protection Act, 2023</strong>{' '}
-                    (India). Learn more in our{' '}
-                    <a
-                      href="/legal/privacy-policy"
-                      className="underline hover:no-underline transition-all"
-                      style={{ color: 'var(--color-violet-light)' }}
-                    >
-                      Privacy Policy
-                    </a>.
-                  </p>
-                </motion.div>
-
-                {/* Quick info cards */}
-                <motion.div
-                  initial={{ y: 10, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.3, duration: 0.3 }}
-                  className="grid grid-cols-3 gap-3 mb-6"
-                >
-                  {[
-                    { icon: Eye, label: 'Analytics', desc: 'Usage data' },
-                    { icon: Lock, label: 'Secure', desc: 'Encrypted' },
-                    { icon: CheckCircle2, label: 'DPDP', desc: 'Aware' },
-                  ].map((item) => (
-                    <div
-                      key={item.label}
-                      className="flex flex-col items-center p-3 rounded-xl transition-all duration-200 hover:bg-white/5"
-                      style={{ border: '1px solid var(--color-border)' }}
-                    >
-                      <item.icon className="w-4 h-4 mb-2" style={{ color: 'var(--color-violet-light)' }} />
-                      <span className="text-xs font-semibold" style={{ color: 'var(--color-foreground)' }}>
-                        {item.label}
-                      </span>
-                      <span className="text-[10px]" style={{ color: 'var(--color-dead)' }}>
-                        {item.desc}
-                      </span>
-                    </div>
-                  ))}
-                </motion.div>
-
-                {/* Expanded details */}
-                <AnimatePresence>
-                  {isExpanded && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                      className="overflow-hidden mb-6"
-                    >
-                      <div
-                        className="p-4 rounded-xl text-sm space-y-3"
-                        style={{
-                          backgroundColor: 'rgba(var(--color-accent-rgb), 0.06)',
-                          border: '1px solid rgba(var(--color-accent-rgb), 0.15)' }}
-                      >
-                        <div>
-                          <strong style={{ color: 'var(--color-foreground)' }}>What we collect:</strong>{' '}
-                          <span style={{ color: 'var(--color-muted)' }}>
-                            Contact information, project requirements, and basic analytics to improve our services.
-                          </span>
-                        </div>
-                        <div>
-                          <strong style={{ color: 'var(--color-foreground)' }}>How we use it:</strong>{' '}
-                          <span style={{ color: 'var(--color-muted)' }}>
-                            To respond to your inquiries, deliver services, and improve our website.
-                          </span>
-                        </div>
-                        <div>
-                          <strong style={{ color: 'var(--color-foreground)' }}>Your rights:</strong>{' '}
-                          <span style={{ color: 'var(--color-muted)' }}>
-                            You can access, correct, or delete your data at any time. Withdrawal is as easy as giving consent.
-                          </span>
-                        </div>
-                        <div>
-                          <strong style={{ color: 'var(--color-foreground)' }}>Compliance:</strong>{' '}
-                          <span style={{ color: 'var(--color-muted)' }}>
-                            DPDP Act 2023 (India). Business registration details can be shared where relevant.
-                          </span>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* Actions */}
-                <motion.div
-                  initial={{ y: 10, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.35, duration: 0.3 }}
-                  className="flex flex-col gap-4"
-                >
-                  <div className="flex items-center justify-between">
-                    <button
-                      onClick={() => setIsExpanded(!isExpanded)}
-                      className="flex items-center gap-1.5 text-xs font-medium transition-colors hover:text-foreground"
-                      style={{ color: 'var(--color-muted)' }}
-                    >
-                      {isExpanded ? (
-                        <><ChevronUp className="w-4 h-4" /> Less details</>
-                      ) : (
-                        <><ChevronDown className="w-4 h-4" /> More details</>
-                      )}
-                    </button>
-
-                    <span className="text-[10px] font-mono" style={{ color: 'var(--color-dead)' }}>
-                      Secured by MTA
-                    </span>
-                  </div>
-
-                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-                    {/* Decline */}
-                    <button
-                      onClick={dismissBanner}
-                      className="flex-1 px-6 py-3.5 text-sm font-medium rounded-xl transition-all duration-200 hover:opacity-80"
-                      style={{ 
-                        color: 'var(--color-muted)',
-                        border: '1px solid var(--color-border)',
-                        backgroundColor: 'transparent' }}
-                    >
-                      Decline
-                    </button>
-
-                    {/* Accept */}
-                    <button
-                      onClick={() => grantConsent('analytics-and-communications')}
-                      className="flex-1 px-6 py-3.5 text-sm font-display font-bold rounded-xl transition-all duration-200 hover:opacity-90 hover:shadow-lg"
-                      style={{
-                        backgroundColor: 'var(--color-foreground)',
-                        color: 'var(--color-canvas)',
-                        boxShadow: '0 4px 14px rgba(var(--color-accent-rgb), 0.25)' }}
-                    >
-                      Accept & Continue
-                    </button>
-                  </div>
-                </motion.div>
+                <div className="rounded-xl border border-border bg-surface/70 p-3">
+                  <strong className="block text-foreground">How we use it</strong>
+                  To reply, quote, improve pages, and maintain a documented service record.
+                </div>
+                <div className="rounded-xl border border-border bg-surface/70 p-3">
+                  <strong className="block text-foreground">Your control</strong>
+                  Decline or withdraw anytime. Read the{' '}
+                  <a href="/legal/privacy-policy" className="text-violet underline underline-offset-2">
+                    Privacy Policy
+                  </a>.
+                </div>
               </div>
-            </div>
-          </motion.div>
-        </>
-      )}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.aside>
     </AnimatePresence>
   );
 }

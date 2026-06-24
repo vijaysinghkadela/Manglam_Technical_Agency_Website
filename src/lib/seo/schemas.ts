@@ -17,11 +17,11 @@ export function organizationSchema() {
     url: BASE_URL,
     logo: {
       '@type': 'ImageObject',
-      url: `${BASE_URL}/logo.png`,
+      url: `${BASE_URL}/images/mta-logo-dark.png`,
       width: 512,
       height: 512,
     },
-    image: `${BASE_URL}/og-image.png`,
+    image: `${BASE_URL}/opengraph-image.png`,
     description:
       'End-to-end technology services for Indian businesses — web development, AI automation, cybersecurity, social media, and digital operations. Based in Rajasthan and registered under Udyam in 2025.',
     email: 'manglamtechnicalagency@gmail.com',
@@ -30,6 +30,10 @@ export function organizationSchema() {
     areaServed: [
       { '@type': 'Country', name: 'India' },
       { '@type': 'State', name: 'Rajasthan' },
+      { '@type': 'City', name: 'Bikaner' },
+      { '@type': 'City', name: 'Nagaur' },
+      { '@type': 'City', name: 'Jodhpur' },
+      { '@type': 'City', name: 'Jaipur' },
     ],
     address: {
       '@type': 'PostalAddress',
@@ -79,6 +83,9 @@ export function organizationSchema() {
       'n8n Automation',
       'Next.js',
       'Rajasthan Technology Services',
+      'DPDP-aware contact forms',
+      'WhatsApp automation',
+      'Local business websites',
     ],
     slogan: 'Empowering Your Digital Future',
   }
@@ -153,20 +160,30 @@ export function serviceSchema({
   description,
   url,
   price,
+  category,
 }: {
   name: string
   description: string
   url: string
   price?: string
+  category?: string
 }) {
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
+    '@id': `${BASE_URL}${url}#service`,
     name,
     description,
     url: `${BASE_URL}${url}`,
     provider: { '@id': `${BASE_URL}/#organization` },
-    areaServed: { '@type': 'Country', name: 'India' },
+    serviceType: category ?? name,
+    areaServed: [
+      { '@type': 'Country', name: 'India' },
+      { '@type': 'State', name: 'Rajasthan' },
+      { '@type': 'City', name: 'Bikaner' },
+      { '@type': 'City', name: 'Nagaur' },
+      { '@type': 'City', name: 'Jodhpur' },
+    ],
     ...(price ? { offers: { '@type': 'Offer', price, priceCurrency: 'INR' } } : {}),
   }
 }

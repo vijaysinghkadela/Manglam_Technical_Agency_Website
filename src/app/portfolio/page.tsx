@@ -10,7 +10,7 @@ import { breadcrumbSchema } from '@/lib/seo/schemas'
 export const metadata: Metadata = {
   title: 'Our Work',
   description:
-    "Browse MTA's internal SaaS products, active builds, and project pipeline.",
+    "Browse MTA website, automation, clinic, NGO, coaching, and CRM projects with live builds, outcomes, and product work.",
   alternates: { canonical: 'https://manglamtechnicalagency.com/portfolio' },
 }
 

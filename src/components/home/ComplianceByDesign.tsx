@@ -31,8 +31,8 @@ export function ComplianceByDesign() {
       <div className="container-site">
         <motion.div
           className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-8 sm:gap-10 lg:gap-16 mb-16 lg:mb-24"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={false}
+          whileInView={{ y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
@@ -65,8 +65,8 @@ export function ComplianceByDesign() {
             <motion.article
               key={item.title}
               className="group relative overflow-hidden rounded-[24px] border border-border bg-card p-10 sm:p-12"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={false}
+              whileInView={{ y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.55, delay: (i % 2) * 0.08, ease: [0.16, 1, 0.3, 1] }}
             >

@@ -42,6 +42,13 @@ const expectations = [
   'Consent-aware handling for forms, automation, and data workflows',
 ]
 
+const trustFacts = [
+  { label: 'UDYAM', value: 'RJ-15-0094091' },
+  { label: 'Ecosystem', value: 'iStart Rajasthan registered' },
+  { label: 'Data posture', value: 'DPDP-aware consent and form handling' },
+  { label: 'Response', value: '2-4 hour enquiry window on business days' },
+]
+
 export function AboutContent() {
   return (
     <>
@@ -80,6 +87,23 @@ export function AboutContent() {
                   ))}
                 </div>
               </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-sm w-full border-t border-border bg-canvas">
+        <div className="container-site">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {trustFacts.map((fact) => (
+              <div key={fact.label} className="rounded-2xl border border-border bg-card p-6">
+                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-violet-light">
+                  {fact.label}
+                </p>
+                <p className="mt-3 text-sm font-semibold leading-relaxed text-foreground">
+                  {fact.value}
+                </p>
+              </div>
             ))}
           </div>
         </div>

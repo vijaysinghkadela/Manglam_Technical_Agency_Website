@@ -10,6 +10,39 @@ import Badge from '@/components/ui/Badge'
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
 
+const serviceSignals: Record<string, { fit: string; proof: string; cta: string }> = {
+  'ai-automation': {
+    fit: 'Missed enquiries, delayed replies, manual CRM updates.',
+    proof: 'WhatsApp + CRM + reminder loop.',
+    cta: 'Map automation loop',
+  },
+  'social-media-marketing': {
+    fit: 'Campaigns need cleaner tracking and weekly optimization.',
+    proof: 'Pixel, CAPI, creative, and reporting loop.',
+    cta: 'Plan growth loop',
+  },
+  cybersecurity: {
+    fit: 'Web app, API, staff, or compliance risk needs evidence.',
+    proof: 'RoE, test window, findings, retest loop.',
+    cta: 'Scope assessment',
+  },
+  'saas-products': {
+    fit: 'Website, app, portal, booking, CRM, or SaaS build.',
+    proof: 'Design, build, QA, launch, handover loop.',
+    cta: 'Start build scope',
+  },
+  branding: {
+    fit: 'Business needs sharper trust before ads or launch.',
+    proof: 'Identity, usage rules, asset handover loop.',
+    cta: 'Shape identity',
+  },
+  'content-creation': {
+    fit: 'Team needs publish-ready writing and social assets.',
+    proof: 'Research, draft, edit, schedule loop.',
+    cta: 'Plan content loop',
+  },
+}
+
 export function ServicesGrid() {
   const prefersReducedMotion = useReducedMotion()
   const isTouchDevice = useMediaQuery('(hover: none) and (pointer: coarse)')
@@ -53,11 +86,12 @@ export function ServicesGrid() {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
           {services.map((service, idx) => {
             const num = String(idx + 1).padStart(2, '0')
+            const signal = serviceSignals[service.slug]
             return (
               <motion.div
                 key={service.slug}
-                initial={animateCards ? { opacity: 0, y: 22 } : false}
-                whileInView={animateCards ? { opacity: 1, y: 0 } : undefined}
+                initial={false}
+                whileInView={animateCards ? { y: 0 } : undefined}
                 viewport={animateCards ? { once: true, margin: '-20px' } : undefined}
                 transition={animateCards ? { duration: 0.45, delay: (idx % 3) * 0.05, ease: EASE } : undefined}
                 className="relative"
@@ -108,6 +142,27 @@ export function ServicesGrid() {
                     {service.tagline}
                   </p>
 
+                  {signal && (
+                    <div className="relative mt-5 grid gap-3 border-y border-border py-5">
+                      <div>
+                        <p className="font-mono text-[10px] uppercase tracking-[0.16em]" style={{ color: 'var(--color-dead)' }}>
+                          Best for
+                        </p>
+                        <p className="mt-1 text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
+                          {signal.fit}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="font-mono text-[10px] uppercase tracking-[0.16em]" style={{ color: 'var(--color-dead)' }}>
+                          Delivery loop
+                        </p>
+                        <p className="mt-1 text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
+                          {signal.proof}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
                   <div className="relative mt-6 flex flex-wrap gap-2.5">
                     {service.features.slice(0, 3).map((feature) => (
                       <Badge key={feature} variant="subtle" size="sm">
@@ -118,7 +173,7 @@ export function ServicesGrid() {
 
                   <div className="relative mt-auto flex items-center justify-between gap-4 border-t border-border pt-6">
                     <span className="font-mono text-[11px] uppercase tracking-[0.18em]" style={{ color: 'var(--color-violet-light)' }}>
-                      View details
+                      {signal?.cta ?? 'View details'}
                     </span>
                     <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card transition-all duration-300 group-hover:border-violet group-hover:bg-violet">
                       <ArrowRight

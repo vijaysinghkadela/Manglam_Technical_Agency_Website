@@ -10,7 +10,7 @@ import { projects } from '@/lib/data/projects'
 import type { Variants } from 'framer-motion'
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 1, y: 0 },
   show:   { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
 }
 const stagger = {
@@ -44,8 +44,8 @@ export function PortfolioContent() {
         <div className="container-site">
 
           <motion.span
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={false}
+            whileInView={{ y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true }}
             className="font-mono uppercase block mb-10"
@@ -261,6 +261,32 @@ export function PortfolioContent() {
                     </div>
                   </div>
 
+                  {p.outcomes && p.outcomes.length > 0 && (
+                    <div className="mb-10">
+                      <span
+                        className="font-mono uppercase block mb-4"
+                        style={{ fontSize: '10px', color: 'var(--color-dead)', letterSpacing: '0.18em' }}
+                      >
+                        Outcomes
+                      </span>
+                      <div className="grid gap-3 sm:grid-cols-3">
+                        {p.outcomes.map((outcome) => (
+                          <div
+                            key={outcome}
+                            className="rounded-2xl border border-[rgba(var(--color-accent-rgb),0.18)] bg-[rgba(var(--color-accent-rgb),0.045)] px-4 py-3"
+                          >
+                            <p
+                              className="text-[13px] font-semibold leading-snug"
+                              style={{ color: 'var(--color-foreground)' }}
+                            >
+                              {outcome}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {/* Tech Stack */}
                   {p.stack.length > 0 && (
                     <div className="mb-10">
@@ -374,8 +400,8 @@ export function PortfolioContent() {
             {comingProjects.map((p, i) => (
               <motion.div
                 key={p.id}
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={false}
+                whileInView={{ x: 0 }}
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: i * 0.08 }}
                 viewport={{ once: true, margin: "-50px" }}
                 className="relative grid grid-cols-1 lg:grid-cols-[72px_1fr_auto] gap-4 lg:gap-8 items-center py-10 group overflow-hidden"
@@ -455,8 +481,8 @@ export function PortfolioContent() {
 
           {/* CTA callout */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={false}
+            whileInView={{ y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
             viewport={{ once: true, margin: "-50px" }}
             className="mt-24 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8"

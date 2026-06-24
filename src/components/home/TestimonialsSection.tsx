@@ -30,8 +30,8 @@ function TestimonialsSection() {
 
         <div className="w-full max-w-4xl mx-auto flex flex-col items-center">
           <motion.span
-            initial={{ opacity: 0, scale: 0.7 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={false}
+            whileInView={{ scale: 1 }}
             viewport={{ once: true }}
             transition={{ type: 'spring', stiffness: 200, damping: 18, delay: 0.15 }}
             className="font-display font-black leading-none select-none mb-4 sm:mb-6 lg:mb-8"
@@ -44,7 +44,7 @@ function TestimonialsSection() {
           <AnimatePresence mode="wait">
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4, ease: [0.33, 1, 0.68, 1] }}

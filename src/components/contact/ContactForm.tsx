@@ -387,24 +387,31 @@ export default function ContactForm() {
             </p>
           )}
 
-          <div className="mt-4 grid gap-3 border-t border-border pt-4">
-            <label className="grid gap-3 sm:grid-cols-[24px_1fr]">
-              <input
-                {...register("followUpConsent")}
-                id="followUpConsent"
-                type="checkbox"
-                className="mt-1 h-5 w-5 shrink-0 cursor-pointer rounded"
-                style={{ accentColor: "var(--color-violet)" }}
-              />
-              <span
-                className="text-sm leading-relaxed"
-                style={{ color: "var(--color-muted)" }}
-              >
-                I agree to receive project follow-up emails related to this
-                inquiry. This does not add me to a newsletter.
-              </span>
-            </label>
-          </div>
+          <details className="mt-4 border-t border-border pt-4">
+            <summary
+              className="cursor-pointer list-none font-mono text-[11px] uppercase tracking-[0.16em] text-muted transition-colors hover:text-foreground"
+            >
+              Optional contact preferences
+            </summary>
+            <div className="mt-4 grid gap-3">
+              <label className="grid gap-3 sm:grid-cols-[24px_1fr]">
+                <input
+                  {...register("followUpConsent")}
+                  id="followUpConsent"
+                  type="checkbox"
+                  className="mt-1 h-5 w-5 shrink-0 cursor-pointer rounded"
+                  style={{ accentColor: "var(--color-violet)" }}
+                />
+                <span
+                  className="text-sm leading-relaxed"
+                  style={{ color: "var(--color-muted)" }}
+                >
+                  I agree to receive project follow-up emails related to this
+                  inquiry. This does not add me to a newsletter.
+                </span>
+              </label>
+            </div>
+          </details>
 
           <p
             className="mt-4 text-xs font-mono"

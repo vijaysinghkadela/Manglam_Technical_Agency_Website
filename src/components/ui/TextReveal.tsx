@@ -22,13 +22,15 @@ export const TextReveal = memo(function TextReveal({
   const reducedMotion = useReducedMotion()
 
   return (
-    <div ref={ref} aria-label={text}>
+    <div ref={ref}>
       <Tag
         className={className}
+        aria-label={text}
         style={{ display: 'flex', flexWrap: 'wrap', gap: '0 0.25em', ...style }}
       >
+        <span className="sr-only">{text}</span>
         {words.map((word, i) => (
-          <span key={i} style={{ overflow: 'hidden', display: 'inline-block' }}>
+          <span key={i} aria-hidden="true" style={{ overflow: 'hidden', display: 'inline-block' }}>
             <motion.span
               style={{ display: 'inline-block' }}
               initial={reducedMotion ? { y: '0%', opacity: 1 } : { y: '115%', opacity: 0 }}

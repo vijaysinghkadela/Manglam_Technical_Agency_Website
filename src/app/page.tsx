@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbSchema } from '@/lib/seo/schemas'
 import { HomeHero } from '@/components/home/HomeHero'
+import { AudienceProofBand } from '@/components/home/AudienceProofBand'
 import { MarqueeTicker } from '@/components/home/MarqueeTicker'
 import { ServicesHorizontal } from '@/components/home/ServicesHorizontal'
 import { StatsSection } from '@/components/home/StatsSection'
@@ -34,6 +35,7 @@ export default function Home() {
       <JsonLd schema={breadcrumbSchema([{ name: 'Home', url: '/' }])} />
       <HomeHero />
       <MarqueeTicker />
+      <AudienceProofBand />
       <ServicesHorizontal />
       <Divider />
       <StatsSection />

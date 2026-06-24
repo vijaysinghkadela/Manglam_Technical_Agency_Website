@@ -25,6 +25,29 @@ const governanceChips = [
   "Low-motion defaults",
 ];
 
+const needRoutes = [
+  {
+    need: "Get more enquiries",
+    service: "Web & App Development",
+    href: "/services/saas-products",
+  },
+  {
+    need: "Automate admin work",
+    service: "AI Automation",
+    href: "/services/ai-automation",
+  },
+  {
+    need: "Secure a website or app",
+    service: "Cybersecurity",
+    href: "/services/cybersecurity",
+  },
+  {
+    need: "Refresh brand trust",
+    service: "Branding",
+    href: "/services/branding",
+  },
+];
+
 function buildContactHref() {
   const params = new URLSearchParams();
   params.set("service", "Other");
@@ -252,6 +275,47 @@ export default function ServicesPage() {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border bg-canvas py-12 sm:py-16">
+        <div className="container-site">
+          <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p
+                className="font-mono text-[11px] uppercase tracking-[0.22em]"
+                style={{ color: "var(--color-violet-light)" }}
+              >
+                Choose by need
+              </p>
+              <h2
+                className="mt-2 font-display text-[1.5rem] font-black leading-tight sm:text-[2rem]"
+                style={{ color: "var(--color-foreground)" }}
+              >
+                Start from the business problem.
+              </h2>
+            </div>
+            <p className="max-w-[44ch] text-sm leading-relaxed text-muted">
+              Not sure which department fits? These routes map common client goals to the right service page.
+            </p>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {needRoutes.map((item) => (
+              <Link
+                key={item.need}
+                href={item.href}
+                className="group rounded-2xl border border-border bg-card p-5 transition-colors hover:border-violet/35 hover:bg-accent-soft"
+              >
+                <p className="font-display text-base font-black leading-tight text-foreground">
+                  {item.need}
+                </p>
+                <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
+                  {item.service} →
+                </p>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

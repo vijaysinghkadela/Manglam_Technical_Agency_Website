@@ -22,17 +22,17 @@ const SERVICES = [
 
 // Trust badges with status colors - module level to prevent re-creation
 const TRUST_BADGES = [
-  { label: 'Rajasthan-based technical team', color: '#10b981' },
-  { label: 'MSME details available on request', color: '#3b82f6' },
-  { label: 'Small team, direct responsibility', color: 'var(--color-violet)' },
+  { label: 'Rajasthan businesses', color: '#10b981' },
+  { label: 'DPDP-aware forms', color: '#3b82f6' },
+  { label: 'Direct engineer contact', color: 'var(--color-violet)' },
 ]
 
 // Stats with status indicators - module level to prevent re-creation
 const STATS = [
-  { label: `${MTA_STATS.activeClients} Active Clients`, color: '#10b981' },
-  { label: `${MTA_STATS.internalSaaS} Internal SaaS`, color: '#3b82f6' },
-  { label: 'MSME profile', color: 'var(--color-violet)' },
-  { label: 'Bikaner, RJ', color: '#f59e0b' },
+  { label: `${MTA_STATS.activeClients} live client builds`, color: '#10b981' },
+  { label: `${MTA_STATS.internalSaaS} SaaS products`, color: '#3b82f6' },
+  { label: '2-4 hour reply window', color: 'var(--color-violet)' },
+  { label: 'Bikaner + Rajasthan', color: '#f59e0b' },
 ]
 
 // Pre-defined styles to prevent re-creation
@@ -149,7 +149,7 @@ export function HeroSection() {
                   color: 'var(--color-muted)',
                   letterSpacing: '0.16em' }}
               >
-                MTA · Rajasthan Technical Partner
+                MTA · websites · AI automation · cybersecurity
               </span>
             </motion.div>
 
@@ -178,7 +178,7 @@ export function HeroSection() {
 
             {/* Statement - three lines */}
             <h1
-              aria-label="We build digital infrastructure"
+              aria-label="Websites, AI workflows, and trust systems for Rajasthan businesses"
               className="flex max-w-full flex-col font-display font-black tracking-normal uppercase"
               style={{
                 gap: '0.55rem',
@@ -188,11 +188,11 @@ export function HeroSection() {
                 fontSize: 'clamp(2rem, 7.5vw, 5.1rem)',
                 color: 'var(--color-foreground)' }}
             >
-              <span>We build</span>
+              <span>Websites, AI</span>
               <span style={{ color: 'var(--color-violet)', paddingLeft: 'clamp(0px, 2vw, 20px)' }}>
-                digital
+                workflows
               </span>
-              <span style={{ fontSize: 'clamp(1.4rem, 5.5vw, 4.5rem)' }}>infrastructure</span>
+              <span style={{ fontSize: 'clamp(1.35rem, 5.2vw, 4.35rem)' }}>and trust systems</span>
             </h1>
 
             {/* Body */}
@@ -203,8 +203,8 @@ export function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
-              Practical web, automation, security, and content support for teams that want direct
-              communication with the people doing the work.
+              Practical technology support for clinics, gyms, NGOs, startups, and local service
+              businesses that need more enquiries, less manual work, and safer data handling.
             </motion.p>
 
             {/* CTAs - Enhanced */}
@@ -219,7 +219,7 @@ export function HeroSection() {
                 className="group inline-flex w-full sm:w-auto items-center justify-center gap-3 px-8 sm:px-10 lg:px-12 py-4 sm:py-5 lg:py-5 font-display font-black text-[14px] sm:text-[15px] transition-all duration-300 min-h-[56px] sm:min-h-[60px] rounded-full"
                 style={PRIMARY_BUTTON_STYLES}
               >
-                <span>Book Discovery Workshop</span>
+                <span>Start a Project</span>
                 <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
               </MagneticButton>
 
@@ -230,7 +230,7 @@ export function HeroSection() {
                   className="group inline-flex w-full sm:w-auto items-center justify-center sm:justify-start gap-2 rounded-full border-2 px-7 sm:px-9 lg:px-10 py-4 sm:py-5 lg:py-5 text-[14px] sm:text-[15px] font-semibold transition-all duration-300 min-h-[56px] sm:min-h-[60px] hover:bg-[rgba(var(--color-accent-rgb),0.08)] hover:shadow-[0_4px_20px_rgba(var(--color-accent-rgb),0.15)]"
                   style={SECONDARY_BUTTON_STYLES}
                 >
-                  See Our Work
+                  See Proof
                   <span className="group-hover:translate-x-1 transition-transform inline-block duration-300">→</span>
                 </Link>
               </motion.div>

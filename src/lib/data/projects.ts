@@ -7,6 +7,7 @@ export interface Project {
   stack:        string[]
   duration:     string
   value:        string
+  outcomes?:    string[]
   deliverables: string[]
   description:  string
   url?:         string
@@ -39,6 +40,11 @@ export const projects: Project[] = [
       'Remediation planning and task tracking',
       'Role-based access (admin, analyst, reviewer, client viewer)',
     ],
+    outcomes: [
+      'Cyber posture scoring for SMEs',
+      'DOCX reports for sales handoff',
+      'DPDP-aware remediation workflow',
+    ],
   },
   {
     id: 'mnss', slug: 'mnss-website', featured: true, status: 'live', type: 'client',
@@ -58,6 +64,11 @@ export const projects: Project[] = [
       'Programs showcase and progress report publishing',
       'Razorpay donation workflow with verification routes',
       'Admin dashboard for content and report management',
+    ],
+    outcomes: [
+      'Live donation and report publishing flow',
+      'Hindi/English public experience',
+      'Admin-managed NGO content',
     ],
   },
   {
@@ -82,6 +93,11 @@ export const projects: Project[] = [
       'Multi-doctor clinic settings, operating hours, QR payment setup, and WhatsApp notification config',
       'Supabase PostgreSQL backend with row-level security and consent-aware data handling',
     ],
+    outcomes: [
+      'WhatsApp-first appointment booking',
+      'Clinic dashboard for daily operations',
+      'Consent-aware patient data model',
+    ],
   },
   {
     id: 'coaching-os', slug: 'coaching-os-saas', featured: true, status: 'live', type: 'product',
@@ -100,6 +116,11 @@ export const projects: Project[] = [
       'Student enrollment, attendance, and fee management',
       'Dashboard for coaches to manage daily operations',
       'Parent communication and notification workflows',
+    ],
+    outcomes: [
+      'Attendance and fee workflows in one dashboard',
+      'Parent communication flow planned',
+      'Live beta for coaching centers',
     ],
   },
   {
@@ -124,6 +145,11 @@ export const projects: Project[] = [
       'Email and WhatsApp integrated communication channels',
       'Automated email sequence / drip campaign creator',
       'Sales performance, activity, and advanced reporting with charts',
+    ],
+    outcomes: [
+      'Pipeline, invoicing, and lead scoring demo',
+      'GST-ready sales operations',
+      'Email and WhatsApp communication flows',
     ],
   },
 ]

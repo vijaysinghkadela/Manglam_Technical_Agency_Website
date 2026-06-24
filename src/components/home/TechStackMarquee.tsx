@@ -47,8 +47,8 @@ export function TechStackMarquee() {
     >
       <motion.div
         className="container-site text-center mb-8"
-        initial={{ opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={false}
+        whileInView={{ y: 0 }}
         viewport={{ once: true, margin: '-40px' }}
         transition={{ duration: 0.6, ease: EASE }}
       >

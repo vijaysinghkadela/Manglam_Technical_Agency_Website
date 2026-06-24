@@ -78,8 +78,8 @@ export function CTABanner() {
         <motion.span
           className="font-mono uppercase"
           style={{ fontSize:'11px', letterSpacing:'0.28em', color:'rgba(255,255,255,0.55)' }}
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={false}
+          whileInView={{ y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
@@ -89,8 +89,8 @@ export function CTABanner() {
       <motion.h2
         className="font-display font-black leading-[0.90] tracking-normal text-white"
         style={{ fontSize:'clamp(42px, 8vw, 108px)' }}
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={false}
+          whileInView={{ y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.75, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
         >
@@ -99,8 +99,8 @@ export function CTABanner() {
 
         <motion.p
           style={{ fontSize:'17px', lineHeight:1.68, color:'rgba(255,255,255,0.62)', maxWidth:'28rem' }}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={false}
+          whileInView={{ y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.65, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
         >
@@ -110,8 +110,8 @@ export function CTABanner() {
 
       <motion.div
         className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-5 w-full sm:w-auto px-0 sm:px-0 max-w-[40rem]"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={false}
+        whileInView={{ y: 0 }}
         viewport={{ once: true, margin: '-60px' }}
         transition={{ duration: 0.6, delay: 0.24, ease: [0.16, 1, 0.3, 1] }}
       >
@@ -152,7 +152,7 @@ export function CTABanner() {
         <motion.p
           className="font-mono"
           style={{ fontSize:'12px', letterSpacing:'0.14em', color:'rgba(255,255,255,0.32)' }}
-          initial={{ opacity: 0 }}
+          initial={false}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.5 }}

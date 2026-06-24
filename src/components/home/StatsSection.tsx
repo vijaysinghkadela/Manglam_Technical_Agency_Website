@@ -44,8 +44,8 @@ export function StatsSection() {
       <div className="container-site">
         <motion.div
           className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between mb-12 lg:mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={false}
+          whileInView={{ y: 0 }}
           viewport={{ once: true, margin: '-40px' }}
           transition={{
             duration: 0.7,
@@ -88,8 +88,8 @@ export function StatsSection() {
             <motion.article
               key={s.label}
               className="group relative overflow-hidden rounded-[24px] border border-border bg-card"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={false}
+              whileInView={{ y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{
                 duration: 0.5,

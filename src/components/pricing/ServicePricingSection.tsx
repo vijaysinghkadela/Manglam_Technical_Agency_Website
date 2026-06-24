@@ -30,8 +30,8 @@ export function ServicePricingSection({
     >
       <div className="container-site">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={false}
+          whileInView={{ y: 0 }}
           viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.55, ease: EASE }}
           className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 mb-12 lg:mb-16"
@@ -78,8 +78,8 @@ export function ServicePricingSection({
             return (
               <motion.div
                 key={plan.name}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={false}
+                whileInView={{ y: 0 }}
                 viewport={{ once: true, margin: '-30px' }}
                 transition={{ delay: i * 0.06, duration: 0.4, ease: EASE }}
                 className="flex flex-col overflow-hidden rounded-[24px]"

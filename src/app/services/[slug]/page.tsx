@@ -6,6 +6,8 @@ import Link from "next/link";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import { ServicePricingSection } from "@/components/pricing/ServicePricingSection";
 import { departments as pricingDepartments } from "@/lib/data/pricing";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/seo/schemas";
 
 type Params = { slug: string };
 type ServiceData = NonNullable<ReturnType<typeof getService>>;
@@ -21,7 +23,7 @@ export async function generateMetadata({
   if (!service) return { title: "Service Not Found" };
   return {
     title: service.name,
-    description: service.description,
+    description: `${service.tagline}. Based in Rajasthan with clear scope, pricing, and handover.`,
     alternates: { canonical: `https://manglamtechnicalagency.com/services/${slug}` },
   };
 }
@@ -42,6 +44,11 @@ function inferBudgetRange(priceLabel: string): string {
   if (maxAmount <= 100000) return "₹50,000–₹1,00,000";
   if (maxAmount <= 500000) return "₹1,00,000–₹5,00,000";
   return "₹5,00,000+";
+}
+
+function schemaPrice(priceLabel: string): string | undefined {
+  const match = priceLabel.match(/\d[\d,]*/);
+  return match?.[0].replace(/,/g, "");
 }
 
 function inferTimeline(period?: string, subtext?: string): string {
@@ -131,6 +138,24 @@ export default async function ServicePage({
     <main
       style={{ backgroundColor: "var(--color-canvas)", minHeight: "100vh" }}
     >
+      <JsonLd
+        schema={breadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Services", url: "/services" },
+          { name: service.name, url: `/services/${service.slug}` },
+        ])}
+      />
+      <JsonLd
+        schema={serviceSchema({
+          name: service.name,
+          description: service.description,
+          url: `/services/${service.slug}`,
+          price: schemaPrice(service.priceLabel),
+          category: service.name,
+        })}
+      />
+      <JsonLd schema={faqSchema(service.faqs)} />
+
       {/* ── HERO — Full viewport ─────────────────────────── */}
       <section
         className="relative w-full min-h-[92svh] flex flex-col overflow-hidden grain"
