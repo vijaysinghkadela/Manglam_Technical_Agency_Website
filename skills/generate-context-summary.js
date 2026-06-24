@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable @typescript-eslint/no-require-imports */
 
 /**
  * Context Summary Generator for MTA Website Project
@@ -80,7 +81,7 @@ function getProjectStructure() {
           structure.push(`${prefix}${connector}${entry.name}`);
         }
       });
-    } catch (error) {
+    } catch {
       // Skip directories we can't read
     }
   }

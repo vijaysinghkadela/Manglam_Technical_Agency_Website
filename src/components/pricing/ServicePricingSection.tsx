@@ -4,11 +4,22 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { departments } from '@/lib/data/pricing';
+import { servicePricingData } from '@/lib/data/pricing';
 import { DurationToggle } from './DurationToggle';
 import { buildPlanContactHref } from '@/lib/pricing-contact';
+import type { DurationPrice } from '@/types';
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
+const RETAINER_DURATIONS: DurationPrice[] = [
+  { label: 'Monthly', price: '1mo', type: 'per-month' },
+  { label: '6 Months', price: '6mo', type: 'per-month' },
+  { label: '12 Months', price: '12mo', type: 'per-month' },
+];
+
+const PROJECT_DURATIONS: DurationPrice[] = [
+  { label: 'Project', price: 'project', type: 'one-time' },
+];
 
 interface ServicePricingSectionProps {
   departmentSlug: string;
@@ -19,8 +30,9 @@ export function ServicePricingSection({
 }: ServicePricingSectionProps) {
   const [durationIndex, setDurationIndex] = useState(0);
 
-  const dept = departments.find((d) => d.slug === departmentSlug);
+  const dept = servicePricingData[departmentSlug];
   if (!dept) return null;
+  const durations = dept.isRetainer ? RETAINER_DURATIONS : PROJECT_DURATIONS;
 
   return (
     <section
@@ -56,10 +68,10 @@ export function ServicePricingSection({
               Investment
             </h2>
           </div>
-          {dept.plans[0].durations.length > 1 && (
+          {durations.length > 1 && (
             <div className="flex flex-col items-end gap-3">
               <DurationToggle
-                durations={dept.plans[0].durations}
+                durations={durations}
                 activeIndex={durationIndex}
                 onChange={setDurationIndex}
               />
@@ -69,7 +81,25 @@ export function ServicePricingSection({
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {dept.plans.map((plan, i) => {
-            const dur = plan.durations[Math.min(durationIndex, plan.durations.length - 1)];
+            const dur = durations[Math.min(durationIndex, durations.length - 1)];
+            const price =
+              dur.price === '6mo' && plan.price6mo
+                ? plan.price6mo
+                : dur.price === '12mo' && plan.price12mo
+                  ? plan.price12mo
+                  : plan.price;
+            const savings =
+              dur.price === '6mo'
+                ? plan.savings6mo
+                : dur.price === '12mo'
+                  ? plan.savings12mo
+                  : undefined;
+            const totalPrice =
+              dur.price === '6mo'
+                ? plan.totalBilled6mo
+                : dur.price === '12mo'
+                  ? plan.totalBilled12mo
+                  : undefined;
             return (
               <motion.div
                 key={plan.name}
@@ -110,19 +140,6 @@ export function ServicePricingSection({
                         >
                           {plan.name}
                         </p>
-                        {plan.badge && (
-                          <span
-                            className="font-mono uppercase rounded-full"
-                            style={{
-                              border: '1px solid var(--color-violet)',
-                              color: 'var(--color-violet-light)',
-                              fontSize: '10px',
-                              letterSpacing: '0.12em',
-                              padding: '3px 8px' }}
-                          >
-                            {plan.badge}
-                          </span>
-                        )}
                       </div>
                       <p
                         style={{
@@ -132,21 +149,10 @@ export function ServicePricingSection({
                         {plan.tagline}
                       </p>
                     </div>
-                    <span style={{ fontSize: '22px' }}>{plan.icon}</span>
                   </div>
 
                   <div>
                     <div className="flex flex-wrap items-end gap-2">
-                      {dur.oldPrice && (
-                        <span
-                          className="font-display font-bold leading-none line-through"
-                          style={{
-                            fontSize: 'clamp(1rem, 1.7vw, 1.35rem)',
-                            color: 'var(--color-dead)' }}
-                        >
-                          {dur.oldPrice}
-                        </span>
-                      )}
                       <p
                         className="font-display font-black leading-none"
                         style={{
@@ -155,10 +161,16 @@ export function ServicePricingSection({
                             ? 'var(--color-violet-light)'
                             : 'var(--color-foreground)' }}
                       >
-                        {dur.price}
+                        {price}
                       </p>
+                      <span
+                        className="mb-1 font-mono text-xs"
+                        style={{ color: 'var(--color-dead)' }}
+                      >
+                        {plan.period}
+                      </span>
                     </div>
-                    {dur.badge && (
+                    {savings && (
                       <span
                         className="font-mono inline-flex mt-3 rounded-full"
                         style={{
@@ -167,15 +179,15 @@ export function ServicePricingSection({
                           fontSize: '10px',
                           padding: '4px 9px' }}
                       >
-                        {dur.badge}
+                        {savings}
                       </span>
                     )}
-                    {dur.totalPrice && (
+                    {totalPrice && (
                       <p
                         className="font-mono text-sm mt-1"
                         style={{ color: 'var(--color-muted)' }}
                       >
-                        Total: {dur.totalPrice}
+                        Total: {totalPrice}
                       </p>
                     )}
                   </div>
@@ -187,7 +199,7 @@ export function ServicePricingSection({
                   />
 
                   <ul className="flex flex-col gap-2.5 flex-1">
-                    {plan.features.map((f) => (
+                    {plan.deliverables.map((f) => (
                       <li
                         key={f}
                         className="flex items-start gap-2.5"
@@ -210,7 +222,7 @@ export function ServicePricingSection({
                   </ul>
 
                   <Link
-                    href={buildPlanContactHref(departmentSlug, plan.name, dept.department, dur.price, dur.label, dur.note)}
+                    href={buildPlanContactHref(departmentSlug, plan.name, dept.service, price, dur.label, plan.retainerNote)}
                     data-cursor="pointer"
                     className="mt-auto inline-flex items-center justify-center gap-2 py-3.5 px-5 font-display font-bold text-sm transition-all duration-300 hover:bg-violet-light hover:border-violet rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-card"
                     style={{

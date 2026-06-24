@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import { ServicePricingSection } from "@/components/pricing/ServicePricingSection";
-import { departments as pricingDepartments } from "@/lib/data/pricing";
+import { servicePricingData } from "@/lib/data/pricing";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema, serviceSchema } from "@/lib/seo/schemas";
 
@@ -613,7 +613,7 @@ export default async function ServicePage({
 
       {/* ── PRICING ─────────────────────────────────────── */}
       {service.pricing.length > 0 &&
-        (pricingDepartments.some((d) => d.slug === service.slug) ? (
+        (service.slug in servicePricingData ? (
           <div id="plans">
             <ServicePricingSection departmentSlug={service.slug} />
           </div>

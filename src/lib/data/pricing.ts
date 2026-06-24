@@ -490,3 +490,52 @@ export const servicePricingData: Record<string, ServicePricing> = {
     note: 'All prices excl. GST (18%). SAC 998363. Monthly retainer: 100% advance on 1st of month. 6/12-month contract: 50% advance + monthly thereafter. No content published until payment cleared.',
   },
 }
+
+export const departments = Object.values(servicePricingData).map((service) => ({
+  department: service.service,
+  slug: service.slug,
+  description: service.note ?? service.category,
+  note: service.note,
+  plans: service.plans.map((plan) => ({
+    name: plan.name,
+    tagline: plan.tagline,
+    target: plan.tagline,
+    popular: plan.highlight,
+    highlight: plan.highlight,
+    icon: '',
+    durations: [
+      {
+        label: service.isRetainer ? 'Monthly' : 'Project',
+        price: plan.price,
+        type: service.isRetainer ? 'per-month' as const : 'one-time' as const,
+      },
+      ...(service.isRetainer && plan.price6mo
+        ? [{
+            label: '6 Months',
+            price: plan.price6mo,
+            badge: plan.savings6mo,
+            totalPrice: plan.totalBilled6mo,
+            type: 'per-month' as const,
+          }]
+        : []),
+      ...(service.isRetainer && plan.price12mo
+        ? [{
+            label: '12 Months',
+            price: plan.price12mo,
+            badge: plan.savings12mo,
+            totalPrice: plan.totalBilled12mo,
+            type: 'per-month' as const,
+          }]
+        : []),
+    ],
+    deliverables: plan.deliverables,
+    features: plan.deliverables,
+  })),
+}))
+
+export const bundles: {
+  name: string
+  total: string
+  target: string
+  plans: { department: string; plan: string; price: string }[]
+}[] = []
