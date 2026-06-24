@@ -1,0 +1,420 @@
+[
+  {
+    "route": "/",
+    "viewport": "desktop",
+    "file": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\codex-ux-audit-2026-06-14-scrolled\\home-desktop.jpg",
+    "consoleMessages": [
+      {
+        "type": "error",
+        "text": "A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`."
+      }
+    ],
+    "overflowX": 0,
+    "height": 13764,
+    "visibleFixed": [
+      {
+        "tag": "NAV",
+        "cls": "fixed left-0 right-0 top-0 z-[100]",
+        "text": "MTAManglam Technical AgencyHomeAboutServicesPortfolioContactStart Project",
+        "w": 1440,
+        "h": 85,
+        "bottom": 915
+      },
+      {
+        "tag": "DIV",
+        "cls": "pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center px-3 pb-3 ",
+        "text": "Privacy choicesOptional analytics stays off unless you accept it.ManageAcceptDat",
+        "w": 1440,
+        "h": 270,
+        "bottom": 0
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "text": "",
+        "w": 1408,
+        "h": 968,
+        "bottom": 16
+      }
+    ]
+  },
+  {
+    "route": "/about",
+    "viewport": "desktop",
+    "file": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\codex-ux-audit-2026-06-14-scrolled\\about-desktop.jpg",
+    "consoleMessages": [],
+    "overflowX": 0,
+    "height": 5733,
+    "visibleFixed": [
+      {
+        "tag": "NAV",
+        "cls": "fixed left-0 right-0 top-0 z-[100]",
+        "text": "MTAManglam Technical AgencyHomeAboutServicesPortfolioContactStart Project",
+        "w": 1440,
+        "h": 85,
+        "bottom": 915
+      },
+      {
+        "tag": "DIV",
+        "cls": "pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center px-3 pb-3 ",
+        "text": "Privacy choicesOptional analytics stays off unless you accept it.ManageAcceptDat",
+        "w": 1440,
+        "h": 270,
+        "bottom": 0
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "text": "",
+        "w": 1408,
+        "h": 968,
+        "bottom": 16
+      }
+    ]
+  },
+  {
+    "route": "/services",
+    "viewport": "desktop",
+    "file": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\codex-ux-audit-2026-06-14-scrolled\\services-desktop.jpg",
+    "consoleMessages": [],
+    "overflowX": 0,
+    "height": 3760,
+    "visibleFixed": [
+      {
+        "tag": "NAV",
+        "cls": "fixed left-0 right-0 top-0 z-[100]",
+        "text": "MTAManglam Technical AgencyHomeAboutServicesPortfolioContactStart Project",
+        "w": 1440,
+        "h": 85,
+        "bottom": 915
+      },
+      {
+        "tag": "DIV",
+        "cls": "pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center px-3 pb-3 ",
+        "text": "Privacy choicesOptional analytics stays off unless you accept it.ManageAcceptDat",
+        "w": 1440,
+        "h": 270,
+        "bottom": 0
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "text": "",
+        "w": 1408,
+        "h": 968,
+        "bottom": 16
+      }
+    ]
+  },
+  {
+    "route": "/portfolio",
+    "viewport": "desktop",
+    "file": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\codex-ux-audit-2026-06-14-scrolled\\portfolio-desktop.jpg",
+    "consoleMessages": [],
+    "overflowX": 0,
+    "height": 6914,
+    "visibleFixed": [
+      {
+        "tag": "NAV",
+        "cls": "fixed left-0 right-0 top-0 z-[100]",
+        "text": "MTAManglam Technical AgencyHomeAboutServicesPortfolioContactStart Project",
+        "w": 1440,
+        "h": 85,
+        "bottom": 915
+      },
+      {
+        "tag": "DIV",
+        "cls": "pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center px-3 pb-3 ",
+        "text": "Privacy choicesOptional analytics stays off unless you accept it.ManageAcceptDat",
+        "w": 1440,
+        "h": 270,
+        "bottom": 0
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "text": "",
+        "w": 1408,
+        "h": 968,
+        "bottom": 16
+      }
+    ]
+  },
+  {
+    "route": "/contact",
+    "viewport": "desktop",
+    "file": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\codex-ux-audit-2026-06-14-scrolled\\contact-desktop.jpg",
+    "consoleMessages": [],
+    "overflowX": 0,
+    "height": 3470,
+    "visibleFixed": [
+      {
+        "tag": "NAV",
+        "cls": "fixed left-0 right-0 top-0 z-[100]",
+        "text": "MTAManglam Technical AgencyHomeAboutServicesPortfolioContactStart Project",
+        "w": 1440,
+        "h": 85,
+        "bottom": 915
+      },
+      {
+        "tag": "DIV",
+        "cls": "pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center px-3 pb-3 ",
+        "text": "Privacy choicesOptional analytics stays off unless you accept it.ManageAcceptDat",
+        "w": 1440,
+        "h": 270,
+        "bottom": 0
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "text": "",
+        "w": 1408,
+        "h": 968,
+        "bottom": 16
+      }
+    ]
+  },
+  {
+    "route": "/trust-center",
+    "viewport": "desktop",
+    "file": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\codex-ux-audit-2026-06-14-scrolled\\trust-center-desktop.jpg",
+    "consoleMessages": [],
+    "overflowX": 0,
+    "height": 2575,
+    "visibleFixed": [
+      {
+        "tag": "NAV",
+        "cls": "fixed left-0 right-0 top-0 z-[100]",
+        "text": "MTAManglam Technical AgencyHomeAboutServicesPortfolioContactStart Project",
+        "w": 1440,
+        "h": 85,
+        "bottom": 915
+      },
+      {
+        "tag": "DIV",
+        "cls": "pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center px-3 pb-3 ",
+        "text": "Privacy choicesOptional analytics stays off unless you accept it.ManageAcceptDat",
+        "w": 1440,
+        "h": 270,
+        "bottom": 0
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "text": "",
+        "w": 1408,
+        "h": 968,
+        "bottom": 16
+      }
+    ]
+  },
+  {
+    "route": "/",
+    "viewport": "mobile",
+    "file": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\codex-ux-audit-2026-06-14-scrolled\\home-mobile.jpg",
+    "consoleMessages": [
+      {
+        "type": "error",
+        "text": "A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`."
+      }
+    ],
+    "overflowX": 0,
+    "height": 24092,
+    "visibleFixed": [
+      {
+        "tag": "NAV",
+        "cls": "fixed left-0 right-0 top-0 z-[100]",
+        "text": "MTAManglam Technical AgencyHomeAboutServicesPortfolioContactStart Project",
+        "w": 390,
+        "h": 73,
+        "bottom": 827
+      },
+      {
+        "tag": "DIV",
+        "cls": "pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center px-3 pb-3 ",
+        "text": "Privacy choicesOptional analytics stays off unless you accept it.ManageAcceptDat",
+        "w": 390,
+        "h": 154,
+        "bottom": 0
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "text": "",
+        "w": 358,
+        "h": 868,
+        "bottom": 16
+      }
+    ]
+  },
+  {
+    "route": "/about",
+    "viewport": "mobile",
+    "file": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\codex-ux-audit-2026-06-14-scrolled\\about-mobile.jpg",
+    "consoleMessages": [],
+    "overflowX": 0,
+    "height": 9172,
+    "visibleFixed": [
+      {
+        "tag": "NAV",
+        "cls": "fixed left-0 right-0 top-0 z-[100]",
+        "text": "MTAManglam Technical AgencyHomeAboutServicesPortfolioContactStart Project",
+        "w": 390,
+        "h": 73,
+        "bottom": 827
+      },
+      {
+        "tag": "DIV",
+        "cls": "pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center px-3 pb-3 ",
+        "text": "Privacy choicesOptional analytics stays off unless you accept it.ManageAcceptDat",
+        "w": 390,
+        "h": 154,
+        "bottom": 0
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "text": "",
+        "w": 358,
+        "h": 868,
+        "bottom": 16
+      }
+    ]
+  },
+  {
+    "route": "/services",
+    "viewport": "mobile",
+    "file": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\codex-ux-audit-2026-06-14-scrolled\\services-mobile.jpg",
+    "consoleMessages": [],
+    "overflowX": 0,
+    "height": 6585,
+    "visibleFixed": [
+      {
+        "tag": "NAV",
+        "cls": "fixed left-0 right-0 top-0 z-[100]",
+        "text": "MTAManglam Technical AgencyHomeAboutServicesPortfolioContactStart Project",
+        "w": 390,
+        "h": 73,
+        "bottom": 827
+      },
+      {
+        "tag": "DIV",
+        "cls": "pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center px-3 pb-3 ",
+        "text": "Privacy choicesOptional analytics stays off unless you accept it.ManageAcceptDat",
+        "w": 390,
+        "h": 154,
+        "bottom": 0
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "text": "",
+        "w": 358,
+        "h": 868,
+        "bottom": 16
+      }
+    ]
+  },
+  {
+    "route": "/portfolio",
+    "viewport": "mobile",
+    "file": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\codex-ux-audit-2026-06-14-scrolled\\portfolio-mobile.jpg",
+    "consoleMessages": [],
+    "overflowX": 0,
+    "height": 9991,
+    "visibleFixed": [
+      {
+        "tag": "NAV",
+        "cls": "fixed left-0 right-0 top-0 z-[100]",
+        "text": "MTAManglam Technical AgencyHomeAboutServicesPortfolioContactStart Project",
+        "w": 390,
+        "h": 73,
+        "bottom": 827
+      },
+      {
+        "tag": "DIV",
+        "cls": "pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center px-3 pb-3 ",
+        "text": "Privacy choicesOptional analytics stays off unless you accept it.ManageAcceptDat",
+        "w": 390,
+        "h": 154,
+        "bottom": 0
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "text": "",
+        "w": 358,
+        "h": 868,
+        "bottom": 16
+      }
+    ]
+  },
+  {
+    "route": "/contact",
+    "viewport": "mobile",
+    "file": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\codex-ux-audit-2026-06-14-scrolled\\contact-mobile.jpg",
+    "consoleMessages": [],
+    "overflowX": 0,
+    "height": 5659,
+    "visibleFixed": [
+      {
+        "tag": "NAV",
+        "cls": "fixed left-0 right-0 top-0 z-[100]",
+        "text": "MTAManglam Technical AgencyHomeAboutServicesPortfolioContactStart Project",
+        "w": 390,
+        "h": 73,
+        "bottom": 827
+      },
+      {
+        "tag": "DIV",
+        "cls": "pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center px-3 pb-3 ",
+        "text": "Privacy choicesOptional analytics stays off unless you accept it.ManageAcceptDat",
+        "w": 390,
+        "h": 154,
+        "bottom": 0
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "text": "",
+        "w": 358,
+        "h": 868,
+        "bottom": 16
+      }
+    ]
+  },
+  {
+    "route": "/trust-center",
+    "viewport": "mobile",
+    "file": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\codex-ux-audit-2026-06-14-scrolled\\trust-center-mobile.jpg",
+    "consoleMessages": [],
+    "overflowX": 0,
+    "height": 3628,
+    "visibleFixed": [
+      {
+        "tag": "NAV",
+        "cls": "fixed left-0 right-0 top-0 z-[100]",
+        "text": "MTAManglam Technical AgencyHomeAboutServicesPortfolioContactStart Project",
+        "w": 390,
+        "h": 73,
+        "bottom": 827
+      },
+      {
+        "tag": "DIV",
+        "cls": "pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center px-3 pb-3 ",
+        "text": "Privacy choicesOptional analytics stays off unless you accept it.ManageAcceptDat",
+        "w": 390,
+        "h": 154,
+        "bottom": 0
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "text": "",
+        "w": 358,
+        "h": 868,
+        "bottom": 16
+      }
+    ]
+  }
+]

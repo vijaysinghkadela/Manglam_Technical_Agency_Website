@@ -56,20 +56,15 @@ export function ServicePricingSection({
               Investment
             </h2>
           </div>
-          <div className="flex flex-col items-end gap-3">
-            <DurationToggle
-              durations={dept.plans[0].durations}
-              activeIndex={durationIndex}
-              onChange={setDurationIndex}
-            />
-            <Link
-              href="/pricing"
-              className="font-mono text-xs transition-colors hover:text-violet"
-              style={{ color: 'var(--color-dead)' }}
-            >
-              Compare all departments →
-            </Link>
-          </div>
+          {dept.plans[0].durations.length > 1 && (
+            <div className="flex flex-col items-end gap-3">
+              <DurationToggle
+                durations={dept.plans[0].durations}
+                activeIndex={durationIndex}
+                onChange={setDurationIndex}
+              />
+            </div>
+          )}
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -104,16 +99,31 @@ export function ServicePricingSection({
                 )}
 
                 <div className="flex flex-col flex-1 p-8 gap-6">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between gap-4">
                     <div>
-                      <p
-                        className="font-display font-bold mb-1"
-                        style={{
-                          fontSize: '17px',
-                          color: 'var(--color-foreground)' }}
-                      >
-                        {plan.name}
-                      </p>
+                      <div className="flex flex-wrap items-center gap-2 mb-1">
+                        <p
+                          className="font-display font-bold"
+                          style={{
+                            fontSize: '17px',
+                            color: 'var(--color-foreground)' }}
+                        >
+                          {plan.name}
+                        </p>
+                        {plan.badge && (
+                          <span
+                            className="font-mono uppercase rounded-full"
+                            style={{
+                              border: '1px solid var(--color-violet)',
+                              color: 'var(--color-violet-light)',
+                              fontSize: '10px',
+                              letterSpacing: '0.12em',
+                              padding: '3px 8px' }}
+                          >
+                            {plan.badge}
+                          </span>
+                        )}
+                      </div>
                       <p
                         style={{
                           fontSize: '11px',
@@ -126,16 +136,40 @@ export function ServicePricingSection({
                   </div>
 
                   <div>
-                    <p
-                      className="font-display font-black leading-none"
-                      style={{
-                        fontSize: 'clamp(1.4rem, 2.5vw, 2rem)',
-                        color: plan.highlight
-                          ? 'var(--color-violet-light)'
-                          : 'var(--color-foreground)' }}
-                    >
-                      {dur.price}
-                    </p>
+                    <div className="flex flex-wrap items-end gap-2">
+                      {dur.oldPrice && (
+                        <span
+                          className="font-display font-bold leading-none line-through"
+                          style={{
+                            fontSize: 'clamp(1rem, 1.7vw, 1.35rem)',
+                            color: 'var(--color-dead)' }}
+                        >
+                          {dur.oldPrice}
+                        </span>
+                      )}
+                      <p
+                        className="font-display font-black leading-none"
+                        style={{
+                          fontSize: 'clamp(1.4rem, 2.5vw, 2rem)',
+                          color: plan.highlight
+                            ? 'var(--color-violet-light)'
+                            : 'var(--color-foreground)' }}
+                      >
+                        {dur.price}
+                      </p>
+                    </div>
+                    {dur.badge && (
+                      <span
+                        className="font-mono inline-flex mt-3 rounded-full"
+                        style={{
+                          border: '1px solid var(--color-border)',
+                          color: 'var(--color-muted)',
+                          fontSize: '10px',
+                          padding: '4px 9px' }}
+                      >
+                        {dur.badge}
+                      </span>
+                    )}
                     {dur.totalPrice && (
                       <p
                         className="font-mono text-sm mt-1"
@@ -178,14 +212,13 @@ export function ServicePricingSection({
                   <Link
                     href={buildPlanContactHref(departmentSlug, plan.name, dept.department, dur.price, dur.label, dur.note)}
                     data-cursor="pointer"
-                    className="mt-auto inline-flex items-center justify-center gap-2 py-3.5 px-5 font-display font-bold text-sm transition-all duration-300 hover:bg-violet hover:text-white hover:border-violet rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-card"
+                    className="mt-auto inline-flex items-center justify-center gap-2 py-3.5 px-5 font-display font-bold text-sm transition-all duration-300 hover:bg-violet-light hover:border-violet rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-card"
                     style={{
                       border: plan.highlight
                         ? '1px solid var(--color-violet)'
                         : '1px solid var(--color-border)',
-                      color: plan.highlight
-                        ? 'var(--color-violet-light)'
-                        : 'var(--color-muted)' }}
+                      backgroundColor: 'var(--color-violet)',
+                      color: '#fff' }}
                   >
                     Get Started
                     <ArrowRight className="w-4 h-4" />
@@ -203,14 +236,7 @@ export function ServicePricingSection({
             color: 'var(--color-dead)',
             letterSpacing: '0.1em' }}
         >
-          All prices in INR. See{' '}
-          <Link
-            href="/pricing"
-            className="underline hover:text-violet transition-colors"
-          >
-            full pricing page
-          </Link>{' '}
-          for contract terms and cross-department bundles.
+          All prices in INR. Platform subscriptions, ad spend, hosting, tools, and third-party costs stay separate unless scoped in writing.
         </p>
       </div>
     </section>

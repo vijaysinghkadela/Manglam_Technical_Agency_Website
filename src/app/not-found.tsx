@@ -83,8 +83,8 @@ export default function NotFound() {
             data-cursor="pointer"
             className="inline-flex items-center gap-2 text-sm font-mono transition-all duration-200"
             style={{
-              backgroundColor: 'var(--color-foreground)',
-              color: 'var(--color-canvas)',
+              backgroundColor: 'var(--color-violet)',
+              color: '#fff',
               padding: '12px 24px' }}
           >
             ← Back to Home
@@ -112,7 +112,6 @@ export default function NotFound() {
           {[
             { label: 'Portfolio', href: '/portfolio' },
             { label: 'Services', href: '/services' },
-            { label: 'Pricing', href: '/pricing' },
           ].map(l => (
             <Link
               key={l.href}
@@ -129,4 +128,3 @@ export default function NotFound() {
     </div>
   )
 }
-

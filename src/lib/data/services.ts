@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { PRICE_FROM } from "@/lib/data/priceConstants";
+import { departments } from "@/lib/data/pricing";
 
 export interface Service {
   slug: string;
@@ -38,143 +39,157 @@ export interface Service {
   faqs: { q: string; a: string }[];
 }
 
+function pricingSummary(slug: string): Service["pricing"] {
+  const department = departments.find((item) => item.slug === slug);
+  if (!department) return [];
+
+  return department.plans.map((plan) => ({
+    label: plan.name,
+    amount: plan.durations[0]?.price ?? "",
+    period: plan.durations[0]?.label,
+    highlight: plan.highlight,
+    features: plan.deliverables,
+    subtext: plan.target,
+  }));
+}
+
 export const services: Service[] = [
   {
     slug: "ai-automation",
     name: "AI Automation",
-    tagline: "Always-on lead follow-up, WhatsApp replies, CRM updates, and workflow automation",
+    tagline: "AI-powered workflow systems that reduce manual effort, remove bottlenecks, and scale operations",
     Icon: Bot,
     description:
-      "We build AI automation systems that keep routine business work moving without waiting for someone to be online. Leads are answered, qualified, saved, followed up, booked, reminded, and reported through workflows designed around your real process.",
+      "Manglam Technical Agency designs, builds, integrates, and deploys AI automation systems for real business operations. We are a development and implementation partner, not a software reseller: your platform accounts, API keys, data, and subscriptions stay under your ownership while we architect the workflows that connect them.",
     features: [
-      "24/7 WhatsApp AI reply and lead qualification",
-      "Automated follow-up, reminders, and appointment booking",
-      "CRM, email, invoice, and reporting workflows",
-      "RAG knowledge bases with human handoff controls",
+      "Lead capture, qualification, routing, and timed follow-up automation",
+      "WhatsApp, email, CRM, Google Workspace, calendar, and database integrations",
+      "Custom AI agents, RAG knowledge systems, memory, and smart document processing",
+      "Deployment, QA, handover documentation, and plan-based post-launch support",
     ],
     priceLabel: PRICE_FROM.aiAutomation,
     requiredAgreements: ["MTA-AI", "MTA-DPA", "MTA-NDA"],
     dpaTrigger:
-      "Required when personal data enters prompts, workflows, or storage layers.",
+      "Required when leads, customer records, CRM data, message history, API credentials, or AI knowledge systems process personal or confidential business data.",
     governingLaws: [
       "Indian Contract Act, 1872",
       "DPDPA, 2023",
       "IT Act, 2000",
       "Copyright Act, 1957",
     ],
-    deliveryStages: [2, 3, 5, 6, 7, 8, 9, 10],
-    pricing: [
-      {
-        label: "Spark",
-        amount: "₹85,000",
-        period: "1-month build",
-        highlight: true,
-        features: [
-          "3 production workflows",
-          "WhatsApp AI bot",
-          "Prompt engineering",
-          "API integrations",
-          "Testing + handover",
-        ],
-      },
-      {
-        label: "Neural",
-        amount: "₹28,000/mo",
-        period: "6-month retainer",
-        highlight: false,
-        features: [
-          "Agent performance monitoring",
-          "Prompt tuning",
-          "RAG knowledge base updates",
-          "Monthly analytics",
-          "Incident response",
-        ],
-      },
-      {
-        label: "Cortex",
-        amount: "₹38,000/mo",
-        period: "12-month partnership",
-        highlight: false,
-        features: [
-          "Multi-agent performance monitoring",
-          "Weekly QA",
-          "2 new workflows/month",
-          "Monthly ROI report",
-          "Priority support",
-        ],
-      },
-    ],
+    deliveryStages: [1, 2, 3, 4, 5, 6, 7, 8],
+    pricing: pricingSummary("ai-automation"),
     process: [
       {
         step: 1,
-        title: "Workflow Audit",
-        summary: "Find the repetitive work that is slowing sales and operations.",
+        title: "Initial Inquiry & Discovery",
+        summary: "Understand the business, current tools, goals, and automation needs.",
         detail:
-          "We map missed enquiries, manual follow-ups, data entry, reminders, and reporting work so automation starts with a clear business case.",
-        duration: "3 days",
+          "We learn how your operation actually works, identify repetitive tasks, and decide whether the right starting point is lead management, customer communication, internal operations, sales automation, or AI agent infrastructure.",
+        duration: "1-2 days",
       },
       {
         step: 2,
-        title: "Automation Blueprint",
-        summary: "Design the exact bot, CRM, and workflow logic before build.",
+        title: "Scope Document & Approval",
+        summary: "Every workflow, integration, AI component, and deliverable is written down.",
         detail:
-          "We define triggers, customer messages, escalation rules, CRM fields, dashboards, and data handling controls before anything goes live.",
-        duration: "2 days",
+          "The approved scope document becomes the single source of truth. Nothing is assumed: workflow counts, business logic, platforms, dashboards, support period, and handover expectations are confirmed before development begins.",
+        duration: "2-4 days",
       },
       {
         step: 3,
-        title: "Build & Test",
-        summary: "Automations are built, tested, and reviewed with your team.",
+        title: "Invoice & Advance Payment",
+        summary: "The project is commercially locked before build work starts.",
         detail:
-          "We test WhatsApp replies, lead qualification, bookings, reminders, and CRM updates with sample data before production use.",
-        duration: "2-3 weeks",
+          "Small and medium plans use a 50% advance and 50% final payment before deployment. Neural and Cortex engagements use milestone schedules defined during scoping.",
+        duration: "Before development",
       },
       {
         step: 4,
-        title: "Launch & Optimize",
-        summary: "Go live with monitoring, handover, and practical tuning.",
+        title: "Platform Setup & Access",
+        summary: "Client-owned APIs, tools, and credentials are connected securely.",
         detail:
-          "Your team gets handover notes, override steps, and performance checks so the system keeps improving after launch.",
-        duration: "Ongoing",
+          "You provide required API keys and platform access for OpenAI, Claude, Gemini, WhatsApp Business API, Twilio, CRM, Google Workspace, Make.com, n8n, databases, or hosting as needed. We configure connectivity without reselling those platforms.",
+        duration: "1-3 days",
+      },
+      {
+        step: 5,
+        title: "Development & Build",
+        summary: "Workflow logic, integrations, AI prompts, and system components are assembled.",
+        detail:
+          "We map triggers, conditions, actions, branching paths, error handling, fallbacks, AI routing, prompt behavior, dashboards, and data movement between systems.",
+        duration: "Plan-dependent",
+      },
+      {
+        step: 6,
+        title: "Internal Testing & QA",
+        summary: "All workflow paths and edge cases are tested before client review.",
+        detail:
+          "We test triggers, CRM writes, WhatsApp/email sends, calendar actions, AI responses, rate-limit behavior, fallback logic, and dashboard output before handover.",
+        duration: "2-5 days",
+      },
+      {
+        step: 7,
+        title: "Client Review & Revisions",
+        summary: "You test the staged system and give feedback inside the approved scope.",
+        detail:
+          "Revisions that match the approved scope are applied before launch. New workflows, new integrations, or changed business logic are handled through a change order or separate project.",
+        duration: "2-5 days",
+      },
+      {
+        step: 8,
+        title: "Deployment & Handover",
+        summary: "The system goes live with onboarding, documentation, and support.",
+        detail:
+          "Final payment clears the project for go-live. We deploy the workflows, provide system walkthroughs, deliver documentation, and begin the included post-launch support period.",
+        duration: "1-2 days",
       },
     ],
     faqs: [
       {
-        q: "Can AI handle enquiries after business hours?",
-        a: "Yes. We can set up WhatsApp and web chat flows that answer common questions, collect details, qualify the lead, save it in your CRM, and alert your team for the next step.",
+        q: "Do you sell OpenAI, WhatsApp, CRM, hosting, or automation platform subscriptions?",
+        a: "No. MTA charges only for workflow design, architecture, development, integration, testing, deployment support, documentation, and plan-based support. AI APIs, WhatsApp Business API, Twilio, cloud hosting, CRM tools, databases, Make.com, n8n cloud, and other software subscriptions are purchased and controlled directly by the client.",
       },
       {
-        q: "Will automation replace my staff?",
-        a: "The goal is to remove repetitive work, not remove judgment. Your team still handles relationships, decisions, and exceptions while AI manages replies, reminders, data entry, and routine follow-up.",
+        q: "Why are API and platform costs separate from your fees?",
+        a: "Every business uses platforms at a different scale. A solo coach sending 50 WhatsApp messages has different usage costs from a D2C brand sending 50,000. Keeping costs separate preserves billing transparency, platform ownership, usage visibility, and zero vendor lock-in.",
       },
       {
-        q: "Is my data used to train the AI?",
-        a: "No. We use API endpoints (like OpenAI Enterprise) that explicitly forbid training on customer data.",
+        q: "What do clients need to provide before development can move quickly?",
+        a: "Clients need to provide API keys, platform access, CRM or WhatsApp Business access, business workflow details, response templates, routing rules, team structure, timely feedback, and milestone approvals. Delays in access or approvals can delay delivery.",
       },
       {
-        q: "What happens when an API breaks?",
-        a: "Our workflow maintenance retainers include proactive error handling and rapid endpoint repair.",
+        q: "What does post-launch support include?",
+        a: "Support covers bug fixes, workflow monitoring, troubleshooting, and optimization for the workflows delivered inside the approved scope. It does not include new features, major redesigns, new integrations, or issues caused by third-party platform outages.",
+      },
+      {
+        q: "Can AI responses be guaranteed to be perfect?",
+        a: "No. AI language models can produce inaccurate, off-brand, or inconsistent responses. We reduce this risk through structured prompts, RAG knowledge systems, testing, monitoring, and tuning, but human oversight remains important.",
+      },
+      {
+        q: "How is data privacy handled?",
+        a: "Client information, workflow documents, CRM data, lead data, customer records, API keys, and credentials are treated as confidential. Credentials are used only for agreed integrations and are not shared externally. Clients remain responsible for account security, access control, platform billing, and applicable compliance obligations such as DPDPA.",
       },
     ],
   },
   {
-    slug: "social-media-marketing",
-    name: "Social Media Marketing",
+    slug: "performance-marketing",
+    name: "Performance Marketing",
     tagline:
-      "Meta Ads management, creative production, and growth campaigns",
+      "Lead generation, paid acquisition, retargeting, and measurable growth campaigns",
     Icon: Share2,
     description:
-      "We run Meta Ads and social growth campaigns for Indian businesses. Creative production, tracking setup, and ongoing optimization — with compliance-aware data handling built in.",
+      "Manglam Technical Agency plans, launches, monitors, and optimizes performance marketing systems for businesses that need measurable enquiries, WhatsApp conversations, calls, leads, traffic, and sales conversations. Management fees cover strategy, setup, copy direction, tracking, optimization, reporting, and recommendations; ad spend, ad accounts, landing pages, CRM tools, and creative production costs stay separate unless scoped in writing.",
     features: [
-      "Campaign strategy & objective setting",
-      "Meta Pixel / CAPI / custom event setup",
-      "Creative production for static, carousel, and short-form assets",
-      "Retargeting, lookalikes, and audience testing",
+      "Lead generation campaigns across forms, calls, websites, and click-to-WhatsApp flows",
+      "Meta Ads, Instagram, Facebook, Messenger, and WhatsApp placement planning",
+      "Google Search and YouTube intent campaigns with conversion-path recommendations",
+      "Retargeting, funnel sequencing, lead-quality review, and performance reporting",
     ],
     priceLabel: PRICE_FROM.socialMedia,
     requiredAgreements: ["MTA-DM", "MTA-DPA", "MTA-NDA", "MTA-AIE"],
     dpaTrigger:
-      "Required when audience data, lead forms, CRM sync, or social automation handles personal data.",
+      "Required when lead forms, click-to-WhatsApp flows, CRM exports, audience lists, conversion tracking, or campaign reporting process personal data.",
     governingLaws: [
       "Indian Contract Act, 1872",
       "ASCI Guidelines, 2021",
@@ -183,358 +198,274 @@ export const services: Service[] = [
       "IT Amendment Rules, 2026 (SGI Labeling)",
     ],
     deliveryStages: [2, 3, 5, 6, 7, 8, 9, 10],
-    pricing: [
-      {
-        label: "Starter",
-        amount: "₹18,000/mo",
-        period: "1-month entry",
-        highlight: false,
-        features: [
-          "Campaign strategy & objective setting",
-          "Facebook Pixel / CAPI setup",
-          "2 ad creatives/month (static)",
-          "1 active campaign with up to 2 ad sets",
-          "Audience research + targeting setup",
-          "Monthly performance report",
-          "1 revision round per creative",
-          "WhatsApp/email support (24 hr)",
-        ],
-      },
-      {
-        label: "Growth",
-        amount: "₹35,000/mo",
-        period: "1-month starting",
-        highlight: true,
-        features: [
-          "Full-funnel campaign strategy (awareness → conversion)",
-          "Pixel + conversion API setup + custom events",
-          "4-6 ad creatives/month (static + carousel)",
-          "Up to 3 campaigns and 6 ad sets",
-          "A/B testing for creatives and audiences",
-          "Lookalike + retargeting audience setup",
-          "Bi-weekly performance calls (30 min)",
-          "Weekly snapshot + monthly deep-dive report",
-          "Competitor ad audit (monthly)",
-          "2 revision rounds per creative",
-          "WhatsApp/email support (12 hr)",
-        ],
-      },
-      {
-        label: "Scale",
-        amount: "₹65,000/mo",
-        period: "1-month starting",
-        highlight: false,
-        features: [
-          "Comprehensive media strategy (FB + IG + Reels + Stories)",
-          "Full Pixel, CAPI, and GA4 integration",
-          "8-10 creatives/month (static + video + UGC-style reels)",
-          "Unlimited campaigns and ad sets within scope",
-          "Full-funnel A/B testing across creative, audience, and placement",
-          "Retargeting, lookalike, broad, and interest-based stacking",
-          "Dynamic product ads when catalog is available",
-          "Weekly performance calls (45 min)",
-          "Weekly detailed report + monthly strategy review",
-          "Dedicated account manager and priority support",
-        ],
-      },
-    ],
+    pricing: pricingSummary("performance-marketing"),
     process: [
       {
         step: 1,
-        title: "Discovery & Offer Mapping",
-        summary: "Budget, goals, and targeting review.",
+        title: "Market & Audience Review",
+        summary: "Clarify offer, audience, funnel, and lead-quality expectations.",
         detail:
-          "We map the client offer, audience, and ad spend boundaries before any account work begins.",
-        duration: "3 days",
+          "We review the product or service, target geography, customer intent, previous campaign performance, sales follow-up capacity, and the conversion action that matters most: lead form, call, website form, or WhatsApp conversation.",
+        duration: "2-3 days",
       },
       {
         step: 2,
-        title: "Tracking Stack Setup",
-        summary: "Pixel, CAPI, and event validation.",
+        title: "Campaign Architecture",
+        summary: "Build channel, objective, audience, and budget structure.",
         detail:
-          "We configure tracking, conversion events, and audience architecture so spend is measurable from day one.",
+          "We define campaign objectives, ad groups, audience layers, keyword or placement logic, budget split, exclusions, retargeting pools, and success metrics before launch.",
         duration: "2-4 days",
       },
       {
         step: 3,
-        title: "Creative Production & Launch",
-        summary: "Assets and campaigns go live.",
+        title: "Copy, Tracking & Launch",
+        summary: "Prepare ad copy, conversion paths, lead flow, and launch checks.",
         detail:
-          "We build the ad assets, launch campaigns, and keep a documented revision trail for every asset.",
-        duration: "Ongoing",
+          "We write or direct ad copy, recommend creative angles, verify lead flow, align tracking where access permits, and launch campaigns from client-owned ad accounts.",
+        duration: "3-5 days",
       },
       {
         step: 4,
-        title: "Optimize & Report",
-        summary: "Weekly optimization cadence.",
+        title: "Optimization & Reporting",
+        summary: "Improve CPL, lead quality, and campaign efficiency over time.",
         detail:
-          "We review performance, shift budget, and iterate creative based on actual conversion signals.",
+          "We monitor spend, results, CPL, conversion rate, lead quality, creative fatigue, and audience response, then provide recommendations for budget, copy, targeting, landing pages, and follow-up readiness.",
         duration: "Weekly / monthly",
       },
     ],
     faqs: [
       {
         q: "Do you handle ad spend?",
-        a: "No. Meta spend is paid directly by the client. We manage strategy, creatives, tracking, and optimization, while the ad account remains under client control.",
+        a: "No. Ad spend is paid directly by the client to Meta, Google, or any other platform. MTA charges management fees for planning, setup, optimization, reporting, and advisory work.",
       },
       {
-        q: "What does ASCI compliance mean here?",
-        a: "We avoid misleading claims, use proper sponsored-content disclosure, and keep ad copy aligned with Indian advertising standards.",
+        q: "Can you guarantee leads or sales?",
+        a: "No responsible agency can guarantee platform outcomes. We control strategy, campaign structure, testing, tracking discipline, reporting, and recommendations; final results also depend on offer, market demand, follow-up speed, budget, competition, landing pages, and platform behavior.",
       },
       {
-        q: "What about DPDP Act compliance?",
-        a: "Audience data, lead forms, and CRM sync are handled with consent-aware workflows, audit trails, and data minimization.",
+        q: "Which businesses are a good fit?",
+        a: "Performance marketing works well for local service providers, institutes, clinics, salons, real estate, e-commerce, startups, SMEs, and any business that can respond quickly to leads and measure enquiry quality.",
       },
       {
-        q: "Can I start with one month?",
-        a: "Yes. The Starter plan is available as a one-month entry point. Six- and twelve-month commitments reduce the monthly fee.",
+        q: "Are landing pages, CRM tools, or creatives included?",
+        a: "Only if scoped separately. Website pages, CRM subscriptions, WhatsApp tools, automation platforms, ad account costs, and creative production costs are separate from campaign management fees unless written into the proposal.",
       },
       {
-        q: "How do the discounts work?",
-        a: "The 6-month and 12-month commitments are pre-priced in the table. Longer terms lower the monthly fee while keeping the same scope envelope.",
+        q: "How is data privacy handled?",
+        a: "Lead data, audience lists, reports, and campaign access are treated as confidential. We use the minimum access needed, keep client accounts under client ownership, and map lead-handling flows to consent-aware DPDP practices where applicable.",
       },
     ],
   },
   {
     slug: "cybersecurity",
     name: "Cybersecurity",
-    tagline: "Ethical hacking, VAPT, and DPDP compliance for Indian businesses",
+    tagline: "Vulnerability assessment, penetration testing, compliance support, and incident response",
     Icon: Shield,
     description:
-      "Security assessments using PTES methodology. VAPT, compliance gap analysis, and incident response — with clear reporting and remediation paths.",
+      "Manglam Technical Agency helps organizations identify, prioritize, and remediate security weaknesses through structured vulnerability assessment, penetration testing, security audits, hardening, awareness training, and incident response. Engagements are scoped under clear Rules of Engagement and aligned with practical frameworks such as ISO 27001, SOC 2, NIST, DPDP, and CERT-In expectations where relevant.",
     features: [
-      "PTES methodology penetration testing",
-      "DPDP Act compliance assessment",
-      "Web application and API security testing",
-      "Social engineering simulation",
-      "Network vulnerability testing",
-      "Remediation roadmap and retesting",
+      "Vulnerability assessment for websites, networks, cloud assets, and business infrastructure",
+      "Web application, API, network, wireless, cloud, and Active Directory penetration testing",
+      "Cybersecurity audits, policy development, third-party risk, and compliance consulting",
+      "Incident response, digital forensics, hardening, and security awareness training",
     ],
     priceLabel: PRICE_FROM.cybersecurity,
     requiredAgreements: ["MTA-CS", "MTA-NDA", "MTA-DPA", "MTA-ROE"],
     dpaTrigger:
-      "Required for all engagements processing personal data under DPDP Act 2023.",
+      "Required when testing, audits, incident response, forensics, logs, access reviews, or compliance work involves personal data, employee records, customer records, credentials, or sensitive business systems.",
     governingLaws: [
-      "IT Act, 2000 (Sections 43, 66 & 70B)",
-      "DPDPA, 2023 (Sections 8, 12-15)",
+      "IT Act, 2000",
       "CERT-In Directions, 2022",
+      "DPDPA, 2023",
       "Indian Contract Act, 1872",
-      "GDPR (for EU data subjects)",
+      "ISO 27001 / SOC 2 / NIST alignment where scoped",
     ],
     deliveryStages: [2, 5, 6, 7, 8, 9, 10],
-    pricing: [
-      {
-        label: "Shield",
-        amount: "₹50,000",
-        period: "1-month assessment",
-        highlight: false,
-        features: [
-          "Email security audit",
-          "Basic VAPT (up to 5 pages/endpoints)",
-          "DPDP gap assessment",
-          "Phishing simulation",
-          "Executive summary",
-          "15-day support",
-        ],
-      },
-      {
-        label: "Guard",
-        amount: "₹1,30,000",
-        period: "1-month engagement",
-        highlight: true,
-        features: [
-          "Full VAPT web app + API",
-          "Network VAPT up to 10 IPs",
-          "Social engineering simulation",
-          "DPDP / RBI compliance assessment",
-          "Staff training session",
-          "Remediation roadmap",
-        ],
-      },
-      {
-        label: "Fortress",
-        amount: "₹2,50,000",
-        period: "1-month engagement",
-        highlight: false,
-        features: [
-          "Full-scope VAPT web + API + network + WiFi",
-          "Social engineering and onsite physical test",
-          "ISO 27001 gap assessment",
-          "DPDP + sector compliance mapping",
-          "Board-level report",
-          "2-day onsite engagement",
-        ],
-      },
-    ],
+    pricing: pricingSummary("cybersecurity"),
     process: [
       {
         step: 1,
-        title: "Discovery & Pre-engagement",
-        summary: "RoE + NDA + scope definition",
+        title: "Assessment & Authorization",
+        summary: "RoE, NDA, scope, assets, and testing boundaries are approved first.",
         detail:
-          "We define the Rules of Engagement, execute NDA/DPA, and establish precise testing scope boundaries. All stakeholders align on testing windows and emergency contacts.",
+          "We define Rules of Engagement, authorized assets, test windows, success criteria, contacts, exclusions, and evidence-handling expectations before any security work begins.",
         duration: "2-3 days",
       },
       {
         step: 2,
-        title: "Intelligence Gathering & Threat Modeling",
-        summary: "OSINT, DFD, LINDDUN/STRIDE analysis",
+        title: "Analysis & Testing",
+        summary: "Discovery, scanning, manual validation, and controlled exploitation.",
         detail:
-          "We gather open-source intelligence, create Data Flow Diagrams, and apply LINDDUN/STRIDE frameworks to identify privacy and security threat vectors affecting PII.",
-        duration: "3-5 days",
+          "We identify attack surface, enumerate services, review exposed technologies, run vulnerability analysis, manually validate findings, and perform controlled exploitation only inside the approved scope.",
+        duration: "3-10 days",
       },
       {
         step: 3,
-        title: "Vulnerability Analysis & Exploitation",
-        summary: "OWASP testing, controlled exploitation with proof-of-concept",
+        title: "Mitigation & Implementation",
+        summary: "Prioritized findings, remediation roadmap, and hardening guidance.",
         detail:
-          "We execute OWASP Top 10:2025 testing, perform controlled exploitation with documented proof-of-concept, and maintain detailed evidence chains for all findings.",
-        duration: "5-10 days",
+          "We deliver findings with severity, business impact, evidence, likely root cause, fix guidance, and a practical roadmap for remediation, hardening, and risk reduction.",
+        duration: "2-4 days",
       },
       {
         step: 4,
-        title: "Reporting & Remediation",
-        summary:
-          "Executive + technical reports, DPDP readiness notes, retest",
+        title: "Monitoring & Continuous Improvement",
+        summary: "Retesting, training, policy updates, and ongoing readiness where scoped.",
         detail:
-          "We deliver executive summaries and detailed technical reports with CVSS scoring, add DPDP readiness notes where applicable, and conduct remediation retests.",
-        duration: "2-3 days",
+          "Where included, we retest remediated issues, improve controls, support awareness training, update policies, and prepare teams for incident response and compliance evidence.",
+        duration: "Retainer or scoped follow-up",
       },
     ],
     faqs: [
       {
-        q: "What is PTES and why does MTA use it?",
-        a: "PTES (Penetration Testing Execution Standard) is the 7-phase methodology we follow for security assessments. It covers pre-engagement through reporting — each phase has clear deliverables. We use it because it produces thorough, documented results that clients can act on.",
+        q: "What cybersecurity services do you provide?",
+        a: "We provide vulnerability assessment, penetration testing, web app and API security testing, network/cloud/wireless assessment, policy development, cybersecurity audits, third-party risk review, hardening, awareness training, incident response, and digital forensics support.",
       },
       {
-        q: "What is the DPDP 24-hour breach notification requirement?",
-        a: "Under DPDP Act 2023, MTA (as Data Processor) notifies the client within 24 hours of detecting a breach. The client then has 72 hours to report to the Data Protection Board. Our contracts spell out these roles and timelines clearly.",
+        q: "Do you perform testing without written authorization?",
+        a: "No. Security testing starts only after scope, ownership, Rules of Engagement, testing windows, and approval are documented. We do not test assets the client is not authorized to assess.",
       },
       {
-        q: "What's the difference between Gray-box, White-box, and Black-box testing?",
-        a: "Gray-box (our default) gives testers limited credentials to simulate an insider threat. White-box provides full source code access for deeper analysis. Black-box starts from scratch like an external attacker. Gray-box gives the best balance of depth and cost for most engagements.",
+        q: "What frameworks can reports align with?",
+        a: "Depending on scope, reports can map recommendations to practical controls from ISO 27001, SOC 2, NIST, DPDP, CERT-In expectations, OWASP, and sector-specific requirements.",
       },
       {
-        q: "Do you provide proof-of-concept exploits without disrupting production?",
-        a: "Yes. All exploitation is conducted under strict controlled conditions with immediate cleanup. We never establish persistent backdoors, never execute denial-of-service attacks, and require explicit written approval for any action that could impact production availability. Test environments are preferred for high-risk exploits.",
+        q: "Do you help after the report is delivered?",
+        a: "Yes. Depending on the plan, we can provide remediation guidance, retesting, policy support, hardening, training, monthly reviews, or incident response readiness as a follow-up or retainer.",
       },
     ],
   },
   {
     slug: "saas-products",
-    name: "Web & App Development",
-    tagline: "Websites, mobile apps, and customer platforms built to earn trust and convert enquiries",
+    name: "App & Website Development",
+    tagline: "Professional websites, web apps, and custom digital platforms built for speed, credibility, and scale",
     Icon: Globe,
     description:
-      "We design and build professional websites, mobile apps, e-commerce stores, booking systems, portals, and SaaS platforms. Every build is planned around trust, speed, security, user experience, and the enquiries your business needs to convert.",
+      "Manglam Technical Agency designs, builds, integrates, and deploys modern websites and web applications that help businesses establish a professional digital presence. We are your development and implementation partner, not a platform reseller or template factory: hosting, domains, CMS tools, and third-party services stay owned and paid directly by you.",
     features: [
-      "Professional business websites and landing pages",
-      "E-commerce, booking, portal, and CRM platforms",
-      "Flutter mobile apps for Android and iOS",
-      "Speed, security, SEO, analytics, and handover",
+      "Custom websites, landing pages, portfolios, corporate sites, and event microsites",
+      "Full-stack web applications with auth, dashboards, APIs, databases, and admin panels",
+      "CMS, e-commerce, payment, analytics, email, CRM, and third-party API integrations",
+      "Deployment, performance optimization, SEO baseline, documentation, and post-launch support",
     ],
     priceLabel: PRICE_FROM.saasWeb,
     requiredAgreements: ["MTA-SL", "MTA-DPA", "MTA-NDA"],
     dpaTrigger:
-      "Required when platform includes user accounts, analytics, or personal data processing.",
+      "Required when the website or app includes user accounts, forms, analytics, payments, databases, customer portals, CMS workflows, or any personal data processing.",
     governingLaws: [
       "Indian Contract Act, 1872",
       "Copyright Act, 1957",
       "DPDPA, 2023",
       "IT Act, 2000",
     ],
-    deliveryStages: [2, 3, 5, 6, 7, 8, 9, 10],
-    pricing: [
-      {
-        label: "Sprint",
-        amount: "₹65,000",
-        period: "1-month delivery",
-        highlight: false,
-        features: [
-          "Landing pages",
-          "Portfolio / brochure sites",
-          "Mobile-first responsive design",
-          "Contact form + WhatsApp integration",
-          "Basic SEO + analytics",
-        ],
-      },
-      {
-        label: "Build",
-        amount: "₹2,80,000",
-        period: "3-4 month project",
-        highlight: true,
-        features: [
-          "E-commerce stores",
-          "Web apps and portals",
-          "Auth + DB design",
-          "Admin dashboard",
-          "API integrations",
-        ],
-      },
-      {
-        label: "Platform",
-        amount: "₹8,00,000",
-        period: "6-month platform",
-        highlight: false,
-        features: [
-          "SaaS products",
-          "Multi-tenant systems",
-          "Flutter apps",
-          "CI/CD and monitoring",
-          "Maintenance + handover",
-        ],
-      },
-    ],
+    deliveryStages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    pricing: pricingSummary("saas-products"),
     process: [
       {
         step: 1,
-        title: "Business & User Discovery",
-        summary: "Turn the idea into clear pages, screens, and conversion goals.",
+        title: "Initial Inquiry & Discovery",
+        summary: "Understand the business, audience, goals, and technical requirements.",
         detail:
-          "We map what customers need to see, what actions they should take, and what your team needs behind the scenes.",
-        duration: "1 week",
+          "We review what you want to build, who it serves, whether you need a website, web app, CMS, store, portal, or custom platform, and what success should look like.",
+        duration: "1-2 days",
       },
       {
         step: 2,
-        title: "Design & Architecture",
-        summary: "Plan the interface, flows, database, and integrations.",
+        title: "Proposal & Scope Document",
+        summary: "Pages, features, stack, timeline, and cost are documented before work starts.",
         detail:
-          "We create user journeys, UI direction, data models, and technical architecture before development begins.",
-        duration: "2 weeks",
+          "The approved scope document defines every page, feature, integration, design element, deliverable, support period, and out-of-scope boundary. Nothing is assumed.",
+        duration: "2-4 days",
       },
       {
         step: 3,
-        title: "Build Sprints",
-        summary: "Develop the website, app, or platform with reviewable previews.",
+        title: "Design Phase",
+        summary: "Wireframes and mockups establish the visual direction.",
         detail:
-          "You get staging links and sprint checkpoints so design, content, forms, dashboards, and integrations can be reviewed before launch.",
-        duration: "4-12 weeks",
+          "You review layouts, information hierarchy, visual direction, and key interface patterns before development begins. Revisions are applied inside the approved scope.",
+        duration: "Plan-dependent",
       },
       {
         step: 4,
-        title: "QA & Launch",
-        summary: "Test performance, mobile experience, forms, and handover.",
+        title: "Invoice & Advance Payment",
+        summary: "The project is commercially locked before development starts.",
         detail:
-          "We check responsiveness, speed, security basics, contact flows, analytics, deployment, and documentation before the site or app goes live.",
-        duration: "1 week",
+          "Starter Presence, Business Website, and Workflow Web App use a 50% advance and 50% final payment. Scale Platform and Custom Platform use milestone schedules agreed in writing.",
+        duration: "Before development",
+      },
+      {
+        step: 5,
+        title: "Development & Build",
+        summary: "Frontend, backend, integrations, content, and infrastructure are assembled.",
+        detail:
+          "We build responsive UI, APIs, database flows, CMS models, auth, payment, analytics, email, monitoring, and other scoped integrations using the agreed stack.",
+        duration: "Plan-dependent",
+      },
+      {
+        step: 6,
+        title: "Internal Testing & QA",
+        summary: "The site or app is tested across browsers, devices, and edge cases.",
+        detail:
+          "We verify layout, forms, navigation, API behavior, database queries, integrations, responsive states, performance, SEO basics, security headers, and deployment readiness.",
+        duration: "2-5 days",
+      },
+      {
+        step: 7,
+        title: "Client Review & Revisions",
+        summary: "You test the staged build and provide feedback inside scope.",
+        detail:
+          "Revisions matching the approved scope are applied before go-live. New pages, features, integrations, or redesign requests are handled through a change order or separate project.",
+        duration: "2-5 days",
+      },
+      {
+        step: 8,
+        title: "Deployment & Go-Live",
+        summary: "Production deployment, DNS, SSL, and launch checks are completed.",
+        detail:
+          "The site is deployed to your hosting account, DNS is configured, SSL is verified, final payment is collected, and the launch checklist is completed.",
+        duration: "1-2 days",
+      },
+      {
+        step: 9,
+        title: "Post-Launch Monitoring",
+        summary: "Initial support monitors performance, issues, and unexpected behavior.",
+        detail:
+          "During the plan-based support window we watch for rendering issues, form errors, API integration failures, degraded performance, and critical security updates.",
+        duration: "7-30 days",
+      },
+      {
+        step: 10,
+        title: "Handover & Documentation",
+        summary: "Credentials, documentation, and training are delivered.",
+        detail:
+          "We hand over admin access, code/documentation, CMS or dashboard walkthroughs, deployment notes, and operating guidance so your team can manage the system responsibly.",
+        duration: "At handover",
       },
     ],
     faqs: [
       {
-        q: "Can MTA build both the website and mobile app?",
-        a: "Yes. We can build a professional website, customer portal, admin dashboard, and Flutter mobile app as one connected system when the project needs it.",
+        q: "Do you sell hosting, domains, CMS licenses, or SaaS subscriptions?",
+        a: "No. MTA charges only for design, development, integration, deployment, support, and documentation. Hosting, domains, CMS plans, email tools, payment gateway fees, maps, analytics, monitoring, and other third-party services are purchased and controlled directly by the client.",
       },
       {
-        q: "Will the website be mobile-friendly and fast?",
-        a: "Yes. Mobile-first layout, page speed, clean forms, basic SEO, analytics, and handover documentation are part of the delivery approach.",
+        q: "Why are third-party costs separate?",
+        a: "Separate billing keeps ownership and pricing transparent. You control your hosting, domain, platform accounts, data, usage history, and invoices. There are no bundled hosting markups or vendor lock-in.",
       },
       {
-        q: "Can MTA build my entire SaaS product?",
-        a: "We contribute as a development partner. Full project ownership is available when you handle the legal and compliance side.",
+        q: "What do I need to provide before the project can move quickly?",
+        a: "You should provide logo and brand assets, final text content, images, hosting access, domain/DNS access, CMS or GitHub access if needed, analytics/search console access, payment or email API keys where applicable, and a single point of contact for approvals.",
       },
       {
-        q: "Do you build e-commerce stores?",
-        a: "Yes. We build e-commerce stores as part of Web & App Development, including catalog structure, checkout flows, payment integrations, admin views, and launch support.",
+        q: "What is included in post-launch support?",
+        a: "Support covers bug fixes, rendering issues, form problems, broken links, scoped integration issues, performance monitoring, troubleshooting, and critical security patches during the included support period. New pages, new features, redesigns, and content writing are separate work.",
+      },
+      {
+        q: "Can you guarantee rankings, traffic, conversion, or 100% uptime?",
+        a: "No. We build the technical foundation: fast pages, responsive UI, SEO metadata, structured data, security headers, monitoring, and clean implementation. Rankings, traffic, conversions, and uptime also depend on content, marketing, hosting providers, competition, and external platforms.",
+      },
+      {
+        q: "How is privacy and credential security handled?",
+        a: "Project requirements, API keys, hosting credentials, customer data, business information, mockups, and proprietary concepts are treated as confidential. Shared credentials are used only for agreed development and testing. Clients remain responsible for account security, 2FA, access control, legal compliance, and content accuracy.",
       },
     ],
   },
@@ -561,47 +492,7 @@ export const services: Service[] = [
       "Trade Marks Act, 1999",
     ],
     deliveryStages: [2, 3, 5, 6, 7, 8, 9, 10],
-    pricing: [
-      {
-        label: "Stamp",
-        amount: "₹35,000",
-        period: "1-month build",
-        highlight: false,
-        features: [
-          "Logo design",
-          "Business card",
-          "Letterhead",
-          "Social kit",
-          "Brand mini-guide",
-        ],
-      },
-      {
-        label: "Mark",
-        amount: "₹1,20,000",
-        period: "1-month build",
-        highlight: true,
-        features: [
-          "Brand discovery",
-          "Positioning statement",
-          "Logo system",
-          "Visual identity system",
-          "Brand guidelines",
-        ],
-      },
-      {
-        label: "Signature",
-        amount: "₹2,50,000",
-        period: "1-month build",
-        highlight: false,
-        features: [
-          "Brand audit",
-          "Brand architecture",
-          "Full visual identity",
-          "Brand book",
-          "Launch kit",
-        ],
-      },
-    ],
+    pricing: pricingSummary("branding"),
     process: [
       {
         step: 1,
@@ -643,110 +534,6 @@ export const services: Service[] = [
       {
         q: "Do you provide print materials?",
         a: "We provide the digital, print-ready source files. You can take these to any vendor for physical production.",
-      },
-    ],
-  },
-  {
-    slug: "content-creation",
-    name: "Content Creation",
-    tagline: "Blog posts, social content, and brand writing",
-    Icon: PenTool,
-    description:
-      "Content production for businesses that need regular blogs, social media posts, and long-form articles. Human-edited, SEO-aware, and delivered on schedule.",
-    features: [
-      "Blog posts and SEO articles",
-      "Social media graphics and captions",
-      "Reels and short-form video scripts",
-      "Newsletters and brand writing",
-    ],
-    priceLabel: PRICE_FROM.contentCreation,
-    requiredAgreements: ["MTA-NDA"],
-    dpaTrigger:
-      "Only required when content workflows process personal data from forms or CRM exports.",
-    governingLaws: [
-      "Indian Contract Act, 1872",
-      "Copyright Act, 1957",
-      "DPDPA, 2023",
-    ],
-    deliveryStages: [2, 3, 5, 6, 7, 8, 9, 10],
-    pricing: [
-      {
-        label: "Seed",
-        amount: "₹28,000",
-        period: "1-month package",
-        highlight: false,
-        features: [
-          "12 social graphics",
-          "12 captions + hashtags",
-          "2 blog posts",
-          "Scheduling setup",
-          "Monthly summary",
-        ],
-      },
-      {
-        label: "Grow",
-        amount: "₹80,000",
-        period: "1-month package",
-        highlight: true,
-        features: [
-          "20 graphics",
-          "20 captions",
-          "4 reels scripts / edits",
-          "4 SEO blog posts",
-          "1 newsletter",
-          "Monthly analytics",
-        ],
-      },
-      {
-        label: "Lead",
-        amount: "₹1,50,000",
-        period: "1-month package",
-        highlight: false,
-        features: [
-          "30 graphics",
-          "30 captions",
-          "8 reels / shorts",
-          "6 SEO blog posts",
-          "4 LinkedIn posts",
-          "2 newsletters",
-          "1 YouTube script",
-        ],
-      },
-    ],
-    process: [
-      {
-        step: 1,
-        title: "Strategy & Voice",
-        summary: "Define the content system.",
-        detail:
-          "We map audience, content pillars, and voice rules before writing begins.",
-        duration: "3 days",
-      },
-      {
-        step: 2,
-        title: "Production",
-        summary: "Write and design the assets.",
-        detail:
-          "We create blogs, graphics, and scripts with human editing and quality control throughout.",
-        duration: "1-2 weeks",
-      },
-      {
-        step: 3,
-        title: "Review & Schedule",
-        summary: "Refinement and publishing prep.",
-        detail:
-          "We collect feedback, revise, and prep assets for publication or handover.",
-        duration: "Ongoing",
-      },
-    ],
-    faqs: [
-      {
-        q: "Do you use AI for the writing?",
-        a: "Yes, but only as a research and structuring helper. Every final asset is human-edited and fact-checked before delivery.",
-      },
-      {
-        q: "Can you publish for us?",
-        a: "Yes. We can hand over ready-to-post assets or schedule them in your content calendar.",
       },
     ],
   },

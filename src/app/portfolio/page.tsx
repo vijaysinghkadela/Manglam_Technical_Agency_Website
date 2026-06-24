@@ -73,7 +73,7 @@ export default function PortfolioPage() {
             <h1
               aria-label="Digital products"
               className="flex flex-col font-display font-black leading-none tracking-normal uppercase"
-              style={{ gap: '0.5rem', fontSize: 'clamp(3.5rem, 10vw, 10rem)', color: 'var(--color-foreground)' }}
+              style={{ gap: '0.45rem', fontSize: 'var(--text-display-xl)', color: 'var(--color-foreground)' }}
             >
               <span>Digital</span>
               <span style={{ color: 'var(--color-violet)' }}>products.</span>

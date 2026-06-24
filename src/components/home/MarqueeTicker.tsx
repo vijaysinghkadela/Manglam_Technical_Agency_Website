@@ -1,8 +1,8 @@
 'use client'
-import { memo, useMemo } from 'react'
+import { memo } from 'react'
 
 const ITEMS = [
-  'WEB DEVELOPMENT', 'SOCIAL MEDIA MARKETING', 'CYBERSECURITY',
+  'WEB DEVELOPMENT', 'Performance Marketing', 'CYBERSECURITY',
   'AI AUTOMATION', 'SAAS DEVELOPMENT', 'DATA PROCESSING',
   'BRANDING & IDENTITY', 'CONTENT CREATION', 'MSME PROFILE',
 ]
@@ -16,7 +16,7 @@ const ITEM_STYLE: React.CSSProperties = {
 const MarqueeItem = memo(function MarqueeItem({ item }: { item: string }) {
   return (
     <span
-      className="flex items-center gap-3 font-mono uppercase mr-4 rounded-full border px-3.5 py-2.5 transition-all duration-300 hover:scale-105"
+      className="marquee-pill flex items-center gap-3 rounded-full border px-3.5 py-2.5 font-mono uppercase"
       style={{
         ...ITEM_STYLE,
         color: 'var(--color-muted)',
@@ -35,30 +35,32 @@ const MarqueeItem = memo(function MarqueeItem({ item }: { item: string }) {
 })
 
 export const MarqueeTicker = memo(function MarqueeTicker() {
-  const repeated = useMemo(() => [...ITEMS, ...ITEMS, ...ITEMS], [])
-
-  const containerStyle = useMemo(() => ({
-    backgroundColor: 'var(--color-card)',
-    borderTop: '1px solid var(--color-border)',
-    borderBottom: '1px solid var(--color-border)',
-    padding: '0.75rem 0',
-  }), [])
-
   return (
     <div
       className="w-full min-h-14 flex items-center overflow-hidden marquee-mask"
-      style={containerStyle}
+      style={{
+        backgroundColor: 'var(--color-card)',
+        borderTop: '1px solid var(--color-border)',
+        borderBottom: '1px solid var(--color-border)',
+        padding: '0.75rem 0',
+      }}
       role="region"
       aria-label="Services marquee"
     >
       <div
-        className="flex whitespace-nowrap animate-marquee-left gap-2 py-1"
-        style={{
-          willChange: 'transform' }}
+        className="marquee-track flex whitespace-nowrap py-1"
+        aria-hidden="true"
       >
-        {repeated.map((item, i) => (
-          <MarqueeItem key={`${item}-${i}`} item={item} />
-        ))}
+        <div className="marquee-group flex">
+          {ITEMS.map((item) => (
+            <MarqueeItem key={`a-${item}`} item={item} />
+          ))}
+        </div>
+        <div className="marquee-group flex">
+          {ITEMS.map((item) => (
+            <MarqueeItem key={`b-${item}`} item={item} />
+          ))}
+        </div>
       </div>
     </div>
   )

@@ -1,8 +1,7 @@
 export const PRICE_FROM = {
-  aiAutomation: 'From ₹85,000',
-  socialMedia: 'From ₹18,000/mo',
-  cybersecurity: 'From ₹50,000',
-  saasWeb: 'From ₹65,000',
-  branding: 'From ₹35,000',
-  contentCreation: 'From ₹28,000',
+  aiAutomation: 'From ₹25,000',
+  socialMedia: 'From ₹6,000 setup + ₹18,000/mo',
+  cybersecurity: 'From ₹40,000',
+  saasWeb: 'From ₹50,000',
+  branding: 'From ₹42,000',
 } as const

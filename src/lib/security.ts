@@ -119,7 +119,7 @@ export function sanitizeRichText(input: string): string {
 
   // Remove potentially dangerous HTML elements and attributes
   const dangerousTags = /<(script|iframe|object|embed|form|input|button|meta|link|base|xml|svg).*?>/gi;
-  const dangerousAttributes = /(on\\w+|on\\w+="[^"]*"|javascript:|vbscript:)/gi;
+  const dangerousAttributes = /(on\w+|on\w+="[^"]*"|javascript:|vbscript:)/gi;
 
   return input
     .replace(dangerousTags, '')
@@ -134,10 +134,10 @@ export function validatePhoneNumber(phone: string): string | null {
   if (!phone) return null;
 
   // Remove all non-digit characters except +
-  const cleaned = phone.replace(/[^\\d+]/g, '');
+  const cleaned = phone.replace(/[^\d+]/g, '');
 
   // Validate basic phone number format (India specific)
-  const indiaPhoneRegex = /^(\\+91|91|0)?[6-9]\\d{9}$/;
+  const indiaPhoneRegex = /^(\+91|91|0)?[6-9]\d{9}$/;
   if (!indiaPhoneRegex.test(cleaned)) {
     return null;
   }

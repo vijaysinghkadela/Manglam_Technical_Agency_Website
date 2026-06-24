@@ -1,38 +1,68 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { ZodError } from 'zod/v4'
+import { NextRequest } from 'next/server'
+import { ZodError } from 'zod'
 import { sendAdminEmail } from '@/lib/email'
 import { documentRequestSchema } from '@/lib/validations'
+import { sanitizeEmail, sanitizeInput } from '@/lib/security'
+import {
+  checkWriteRateLimit,
+  createApiResponse,
+  createJsonParseErrorResponse,
+  createRateLimitResponse,
+  parseJsonBody,
+} from '@/lib/api-security'
 
 export async function POST(request: NextRequest) {
   try {
-    const data = documentRequestSchema.parse(await request.json())
+    const rateLimit = await checkWriteRateLimit(request, 'document-request')
+    if (!rateLimit.allowed) return createRateLimitResponse(request, rateLimit)
+
+    const data = documentRequestSchema.parse(await parseJsonBody(request))
+    const safeName = sanitizeInput(data.name, 100)
+    const safeEmail = sanitizeEmail(data.email)
+    const safeCompany = data.company ? sanitizeInput(data.company, 120) : 'N/A'
+    const safeDocuments = data.requestedDocuments
+      .map((document) => sanitizeInput(document, 100))
+      .join(', ')
+    const safeUseCase = sanitizeInput(data.useCase, 2000)
 
     const { error } = await sendAdminEmail({
-      subject: `[MTA Document Request] ${data.name}`,
+      subject: `[MTA Document Request] ${safeName}`,
       text: [
-        `Name: ${data.name}`,
-        `Email: ${data.email}`,
-        `Company: ${data.company || 'N/A'}`,
-        `Requested Documents: ${data.requestedDocuments.join(', ')}`,
-        `Use Case: ${data.useCase}`,
+        `Name: ${safeName}`,
+        `Email: ${safeEmail}`,
+        `Company: ${safeCompany}`,
+        `Requested Documents: ${safeDocuments}`,
+        `Use Case: ${safeUseCase}`,
+        `Consent: explicit`,
+        `Consent timestamp: ${data.consentTimestamp ? sanitizeInput(data.consentTimestamp, 50) : 'not supplied'}`,
+        `Purpose: ${data.consentPurpose ? sanitizeInput(data.consentPurpose, 100) : 'document-request'}`,
       ].join('\n'),
-      replyTo: data.email,
+      replyTo: safeEmail,
     })
 
     if (error) {
-      return NextResponse.json(
+      return createApiResponse(
+        request,
         { success: false, message: 'Failed to submit request. Please try again.' },
         { status: 500 },
       )
     }
 
-    return NextResponse.json({
-      success: true,
-      message: 'Request submitted. Templates are shared after review.',
-    })
+    return createApiResponse(
+      request,
+      {
+        success: true,
+        message: 'Request submitted. Templates are shared after review.',
+      },
+      { status: 200 },
+    )
   } catch (error) {
+    const parseError = createJsonParseErrorResponse(request, error)
+    if (parseError) return parseError
+
     if (error instanceof ZodError) {
-      return NextResponse.json(
+      return createApiResponse(
+        request,
         {
           success: false,
           message: 'Invalid request payload',
@@ -42,7 +72,8 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    return NextResponse.json(
+    return createApiResponse(
+      request,
       { success: false, message: 'Unable to process request right now.' },
       { status: 500 },
     )

@@ -1,18 +1,22 @@
 import type { NextConfig } from "next";
 
 const isDevelopment = process.env.NODE_ENV === 'development'
+const enableStrictTransport =
+  process.env.VERCEL === '1' ||
+  process.env.ENABLE_STRICT_TRANSPORT_SECURITY === 'true'
 
+// Note: 'unsafe-inline' for scripts/styles needed by Next.js inline bundles. Nonce-based CSP requires server rendering of all JS.
 const contentSecurityPolicy = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline'${isDevelopment ? " 'unsafe-eval'" : ''} https://va.vercel-scripts.com https://vercel.live *.vercel.app`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https: blob:",
   "font-src 'self' data:",
-  "connect-src 'self' https://api.resend.dev https://*.vercel.app https://vitals.vercel-insights.com https://va.vercel-scripts.com",
+  "connect-src 'self' https://*.vercel.app https://vitals.vercel-insights.com https://va.vercel-scripts.com",
   "frame-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
-  'upgrade-insecure-requests',
+  ...(enableStrictTransport ? ['upgrade-insecure-requests'] : []),
 ].join('; ')
 
 const securityHeaders = [
@@ -25,10 +29,14 @@ const securityHeaders = [
     key: 'Permissions-Policy',
     value: 'camera=(), microphone=(), geolocation=(), interest-cohort=(), browsing-topics=(), payment=(), usb=(), midi=(), sync-xhr=()',
   },
-  {
-    key: 'Strict-Transport-Security',
-    value: 'max-age=63072000; includeSubDomains; preload',
-  },
+  ...(enableStrictTransport
+    ? [
+        {
+          key: 'Strict-Transport-Security',
+          value: 'max-age=63072000; includeSubDomains; preload',
+        },
+      ]
+    : []),
   {
     key: 'Content-Security-Policy',
     value: contentSecurityPolicy,
@@ -39,9 +47,11 @@ const securityHeaders = [
   },
   {
     key: 'Cross-Origin-Embedder-Policy',
-    value: 'require-corp',
+    value: 'credentialless',
   },
 ]
+
+
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
@@ -71,16 +81,9 @@ const nextConfig: NextConfig = {
     ]
   },
 
-  // Proxy rewrites for API routes
   async rewrites() {
     return {
-      beforeFiles: [
-        // Proxy external APIs through Next.js to avoid CORS and hide API keys
-        {
-          source: '/api/proxy/resend/:path*',
-          destination: 'https://api.resend.dev/:path*',
-        },
-      ],
+      beforeFiles: [],
       afterFiles: [
         // Handle trailing slashes
         {

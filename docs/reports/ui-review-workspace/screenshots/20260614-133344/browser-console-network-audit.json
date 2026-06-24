@@ -1,0 +1,694 @@
+[
+  {
+    "routeName": "home",
+    "route": "/",
+    "viewportName": "large-desktop",
+    "status": 200,
+    "layout": {
+      "title": "Manglam Technical Agency | Web, AI Automation & Cybersecurity in Rajasthan",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "home",
+    "route": "/",
+    "viewportName": "laptop",
+    "status": 200,
+    "layout": {
+      "title": "Manglam Technical Agency | Web, AI Automation & Cybersecurity in Rajasthan",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "home",
+    "route": "/",
+    "viewportName": "tablet",
+    "status": 200,
+    "layout": {
+      "title": "Manglam Technical Agency | Web, AI Automation & Cybersecurity in Rajasthan",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "home",
+    "route": "/",
+    "viewportName": "mobile",
+    "status": 200,
+    "layout": {
+      "title": "Manglam Technical Agency | Web, AI Automation & Cybersecurity in Rajasthan",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "about",
+    "route": "/about",
+    "viewportName": "large-desktop",
+    "status": 200,
+    "layout": {
+      "title": "About | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "about",
+    "route": "/about",
+    "viewportName": "laptop",
+    "status": 200,
+    "layout": {
+      "title": "About | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "about",
+    "route": "/about",
+    "viewportName": "tablet",
+    "status": 200,
+    "layout": {
+      "title": "About | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "about",
+    "route": "/about",
+    "viewportName": "mobile",
+    "status": 200,
+    "layout": {
+      "title": "About | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "contact",
+    "route": "/contact",
+    "viewportName": "large-desktop",
+    "status": 200,
+    "layout": {
+      "title": "Contact Us — Start a Project | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "contact",
+    "route": "/contact",
+    "viewportName": "laptop",
+    "status": 200,
+    "layout": {
+      "title": "Contact Us — Start a Project | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "contact",
+    "route": "/contact",
+    "viewportName": "tablet",
+    "status": 200,
+    "layout": {
+      "title": "Contact Us — Start a Project | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "contact",
+    "route": "/contact",
+    "viewportName": "mobile",
+    "status": 200,
+    "layout": {
+      "title": "Contact Us — Start a Project | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "portfolio",
+    "route": "/portfolio",
+    "viewportName": "large-desktop",
+    "status": 200,
+    "layout": {
+      "title": "Our Work | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "portfolio",
+    "route": "/portfolio",
+    "viewportName": "laptop",
+    "status": 200,
+    "layout": {
+      "title": "Our Work | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "portfolio",
+    "route": "/portfolio",
+    "viewportName": "tablet",
+    "status": 200,
+    "layout": {
+      "title": "Our Work | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "portfolio",
+    "route": "/portfolio",
+    "viewportName": "mobile",
+    "status": 200,
+    "layout": {
+      "title": "Our Work | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "services",
+    "route": "/services",
+    "viewportName": "large-desktop",
+    "status": 200,
+    "layout": {
+      "title": "Services | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "services",
+    "route": "/services",
+    "viewportName": "laptop",
+    "status": 200,
+    "layout": {
+      "title": "Services | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "services",
+    "route": "/services",
+    "viewportName": "tablet",
+    "status": 200,
+    "layout": {
+      "title": "Services | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "services",
+    "route": "/services",
+    "viewportName": "mobile",
+    "status": 200,
+    "layout": {
+      "title": "Services | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "services-ai-automation",
+    "route": "/services/ai-automation",
+    "viewportName": "large-desktop",
+    "status": 200,
+    "layout": {
+      "title": "AI Automation | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "services-ai-automation",
+    "route": "/services/ai-automation",
+    "viewportName": "laptop",
+    "status": 200,
+    "layout": {
+      "title": "AI Automation | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "services-ai-automation",
+    "route": "/services/ai-automation",
+    "viewportName": "tablet",
+    "status": 200,
+    "layout": {
+      "title": "AI Automation | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "services-ai-automation",
+    "route": "/services/ai-automation",
+    "viewportName": "mobile",
+    "status": 200,
+    "layout": {
+      "title": "AI Automation | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "services-performance-marketing",
+    "route": "/services/performance-marketing",
+    "viewportName": "large-desktop",
+    "status": 200,
+    "layout": {
+      "title": "Performance Marketing | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "services-performance-marketing",
+    "route": "/services/performance-marketing",
+    "viewportName": "laptop",
+    "status": 200,
+    "layout": {
+      "title": "Performance Marketing | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "services-performance-marketing",
+    "route": "/services/performance-marketing",
+    "viewportName": "tablet",
+    "status": 200,
+    "layout": {
+      "title": "Performance Marketing | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "services-performance-marketing",
+    "route": "/services/performance-marketing",
+    "viewportName": "mobile",
+    "status": 200,
+    "layout": {
+      "title": "Performance Marketing | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "services-cybersecurity",
+    "route": "/services/cybersecurity",
+    "viewportName": "large-desktop",
+    "status": 200,
+    "layout": {
+      "title": "Cybersecurity | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "services-cybersecurity",
+    "route": "/services/cybersecurity",
+    "viewportName": "laptop",
+    "status": 200,
+    "layout": {
+      "title": "Cybersecurity | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "services-cybersecurity",
+    "route": "/services/cybersecurity",
+    "viewportName": "tablet",
+    "status": 200,
+    "layout": {
+      "title": "Cybersecurity | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "services-cybersecurity",
+    "route": "/services/cybersecurity",
+    "viewportName": "mobile",
+    "status": 200,
+    "layout": {
+      "title": "Cybersecurity | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "services-saas-products",
+    "route": "/services/saas-products",
+    "viewportName": "large-desktop",
+    "status": 200,
+    "layout": {
+      "title": "App & Website Development | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "services-saas-products",
+    "route": "/services/saas-products",
+    "viewportName": "laptop",
+    "status": 200,
+    "layout": {
+      "title": "App & Website Development | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "services-saas-products",
+    "route": "/services/saas-products",
+    "viewportName": "tablet",
+    "status": 200,
+    "layout": {
+      "title": "App & Website Development | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "services-saas-products",
+    "route": "/services/saas-products",
+    "viewportName": "mobile",
+    "status": 200,
+    "layout": {
+      "title": "App & Website Development | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "services-branding",
+    "route": "/services/branding",
+    "viewportName": "large-desktop",
+    "status": 200,
+    "layout": {
+      "title": "Branding | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "services-branding",
+    "route": "/services/branding",
+    "viewportName": "laptop",
+    "status": 200,
+    "layout": {
+      "title": "Branding | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "services-branding",
+    "route": "/services/branding",
+    "viewportName": "tablet",
+    "status": 200,
+    "layout": {
+      "title": "Branding | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "services-branding",
+    "route": "/services/branding",
+    "viewportName": "mobile",
+    "status": 200,
+    "layout": {
+      "title": "Branding | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "trust-center",
+    "route": "/trust-center",
+    "viewportName": "large-desktop",
+    "status": 200,
+    "layout": {
+      "title": "Trust Center & AI Ethics | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "trust-center",
+    "route": "/trust-center",
+    "viewportName": "laptop",
+    "status": 200,
+    "layout": {
+      "title": "Trust Center & AI Ethics | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "trust-center",
+    "route": "/trust-center",
+    "viewportName": "tablet",
+    "status": 200,
+    "layout": {
+      "title": "Trust Center & AI Ethics | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "trust-center",
+    "route": "/trust-center",
+    "viewportName": "mobile",
+    "status": 200,
+    "layout": {
+      "title": "Trust Center & AI Ethics | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "cybersecurity-policy",
+    "route": "/cybersecurity-policy",
+    "viewportName": "large-desktop",
+    "status": 200,
+    "layout": {
+      "title": "Cybersecurity Trust Center & Policies | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "cybersecurity-policy",
+    "route": "/cybersecurity-policy",
+    "viewportName": "laptop",
+    "status": 200,
+    "layout": {
+      "title": "Cybersecurity Trust Center & Policies | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "cybersecurity-policy",
+    "route": "/cybersecurity-policy",
+    "viewportName": "tablet",
+    "status": 200,
+    "layout": {
+      "title": "Cybersecurity Trust Center & Policies | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "cybersecurity-policy",
+    "route": "/cybersecurity-policy",
+    "viewportName": "mobile",
+    "status": 200,
+    "layout": {
+      "title": "Cybersecurity Trust Center & Policies | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "cybersecurity-training",
+    "route": "/cybersecurity-training",
+    "viewportName": "large-desktop",
+    "status": 200,
+    "layout": {
+      "title": "Cybersecurity Training & Workshops | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "cybersecurity-training",
+    "route": "/cybersecurity-training",
+    "viewportName": "laptop",
+    "status": 200,
+    "layout": {
+      "title": "Cybersecurity Training & Workshops | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "cybersecurity-training",
+    "route": "/cybersecurity-training",
+    "viewportName": "tablet",
+    "status": 200,
+    "layout": {
+      "title": "Cybersecurity Training & Workshops | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "cybersecurity-training",
+    "route": "/cybersecurity-training",
+    "viewportName": "mobile",
+    "status": 200,
+    "layout": {
+      "title": "Cybersecurity Training & Workshops | Manglam Technical Agency",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [],
+    "failedRequests": []
+  },
+  {
+    "routeName": "not-found",
+    "route": "/__codex_missing_route__",
+    "viewportName": "large-desktop",
+    "status": 404,
+    "layout": {
+      "title": "Manglam Technical Agency | Web, AI Automation & Cybersecurity in Rajasthan",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      }
+    ],
+    "failedRequests": []
+  },
+  {
+    "routeName": "not-found",
+    "route": "/__codex_missing_route__",
+    "viewportName": "laptop",
+    "status": 404,
+    "layout": {
+      "title": "Manglam Technical Agency | Web, AI Automation & Cybersecurity in Rajasthan",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      }
+    ],
+    "failedRequests": []
+  },
+  {
+    "routeName": "not-found",
+    "route": "/__codex_missing_route__",
+    "viewportName": "tablet",
+    "status": 404,
+    "layout": {
+      "title": "Manglam Technical Agency | Web, AI Automation & Cybersecurity in Rajasthan",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      }
+    ],
+    "failedRequests": []
+  },
+  {
+    "routeName": "not-found",
+    "route": "/__codex_missing_route__",
+    "viewportName": "mobile",
+    "status": 404,
+    "layout": {
+      "title": "Manglam Technical Agency | Web, AI Automation & Cybersecurity in Rajasthan",
+      "scrollOverflow": 0
+    },
+    "consoleMessages": [
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      }
+    ],
+    "failedRequests": []
+  }
+]

@@ -1,7 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
 import { Lock, FileText, CreditCard, Package } from 'lucide-react'
-import Link from 'next/link'
 const highlights = [
   {
     Icon: Lock,
@@ -47,17 +46,7 @@ export function ComplianceByDesign() {
               Delivery that stands up<br />in a contract review.
             </h2>
           </div>
-          <div className="flex items-center gap-4 flex-wrap text-sm">
-            <Link
-              href="/legal"
-              className="font-mono text-sm transition-colors rounded-full border border-border px-5 py-2.5"
-              style={{ color: 'var(--color-violet)' }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-foreground)' }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-violet)' }}
-            >
-              Open Legal Hub →
-            </Link>
-          </div>
+
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">

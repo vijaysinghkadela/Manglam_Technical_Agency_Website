@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'
 
-const ADMIN_EMAIL = 'manglamtechnicalagency@gmail.com'
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'manglamtechnicalagency@gmail.com'
 
 function getTransport() {
   const host = process.env.SMTP_HOST

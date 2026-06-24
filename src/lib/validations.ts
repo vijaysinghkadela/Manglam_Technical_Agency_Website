@@ -39,16 +39,16 @@ export const newsletterSchema = z.object({
 export type NewsletterFormValues = z.infer<typeof newsletterSchema>;
 
 export const documentRequestSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.email('Please enter a valid email address'),
-  company: z.string().optional(),
-  requestedDocuments: z.array(z.string()).min(1, 'Select at least one document'),
-  useCase: z.string().min(20, 'Use case must be at least 20 characters'),
+  name: z.string().min(2, 'Name must be at least 2 characters').max(100),
+  email: z.email('Please enter a valid email address').max(120),
+  company: z.string().max(120).optional(),
+  requestedDocuments: z.array(z.string().min(1).max(100)).min(1, 'Select at least one document').max(10),
+  useCase: z.string().min(20, 'Use case must be at least 20 characters').max(2000),
   privacy: z.literal(true),
   retentionConsent: z.literal(true),
-  consentTimestamp: z.string().optional(),
-  consentPurpose: z.string().optional(),
-  consentUserAgent: z.string().optional(),
+  consentTimestamp: z.string().max(50).optional(),
+  consentPurpose: z.string().max(100).optional(),
+  consentUserAgent: z.string().max(500).optional(),
 });
 
 export type DocumentRequestValues = z.infer<typeof documentRequestSchema>;

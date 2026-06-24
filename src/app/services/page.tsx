@@ -9,12 +9,12 @@ import Badge from "@/components/ui/Badge";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Explore MTA's practical digital services: web development, cybersecurity, AI automation, content, branding, and digital operations.",
+    "Explore MTA's practical digital services: web development, cybersecurity, AI automation, performance marketing, branding, and digital operations.",
   alternates: { canonical: 'https://manglamtechnicalagency.com/services' },
 };
 
 const heroStats = [
-  { value: "6", label: "Service tracks" },
+  { value: "5", label: "Service tracks" },
   { value: "Mobile-first", label: "Layouts by default" },
   { value: "Clear", label: "Pricing & contracts" },
 ];
@@ -124,7 +124,7 @@ export default function ServicesPage() {
               className="flex flex-col font-display font-black leading-none tracking-normal uppercase"
               style={{
                 gap: "0.25rem",
-                fontSize: "clamp(2.9rem, 8.5vw, 8.8rem)",
+                fontSize: "var(--text-display-xl)",
                 color: "var(--color-foreground)" }}
             >
               <span>Services</span>
@@ -150,16 +150,6 @@ export default function ServicesPage() {
                 data-cursor="pointer"
               >
                 Start a Project <span>→</span>
-              </Link>
-              <Link
-                href="/pricing"
-                className="inline-flex items-center gap-2 rounded-full border px-7 py-4 min-h-[52px] font-display text-[14px] font-black transition-all duration-300"
-                style={{
-                  borderColor: "var(--color-border)",
-                  color: "var(--color-violet-light)" }}
-                data-cursor="pointer"
-              >
-                View Pricing <span>→</span>
               </Link>
             </div>
 
@@ -207,7 +197,7 @@ export default function ServicesPage() {
                 size="sm"
                 className="text-violet-light"
               >
-                6 tracks
+                5 tracks
               </Badge>
             </div>
 
@@ -364,27 +354,7 @@ export default function ServicesPage() {
               </div>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
-              <Link
-                href="/legal"
-                className="rounded-[28px] border border-border bg-card p-6 transition-colors hover:border-violet/40 hover:bg-[rgba(var(--color-accent-rgb),0.04)]"
-                data-cursor="pointer"
-              >
-                <p
-                  className="font-mono text-[11px] tracking-[0.18em] uppercase mb-2"
-                  style={{ color: "var(--color-violet-light)" }}
-                >
-                  Legal Hub →
-                </p>
-                <p
-                  className="text-sm leading-relaxed"
-                  style={{ color: "var(--color-muted)" }}
-                >
-                  Review agreements, privacy policy, and trust center
-                  documentation.
-                </p>
-              </Link>
-            </div>
+
           </div>
         </div>
       </section>

@@ -30,7 +30,7 @@ export const pricingFaqs: FAQItem[] = [
   },
   {
     q: "Do you offer monthly retainers?",
-    a: "Yes. Most services offer monthly retainer plans for ongoing work — content creation, social media management, ad campaigns, and technical maintenance. See each service page for retainer options.",
+    a: "Yes. Most services offer monthly retainer plans for ongoing work — performance marketing, brand systems, cybersecurity monitoring, automation support, and technical maintenance. See each service page for retainer options.",
   },
   {
     q: "What payment terms do you accept?",

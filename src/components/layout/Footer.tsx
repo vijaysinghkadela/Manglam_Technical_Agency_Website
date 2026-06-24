@@ -3,11 +3,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useTheme } from "next-themes";
 import { Linkedin, Instagram, Twitter, ArrowUpRight } from "lucide-react";
 import {
   AGENCY_NAME,
   AGENCY_EMAIL,
   AGENCY_LOCATION,
+  AGENCY_PHONE,
   AGENCY_WHATSAPP,
   AGENCY_X_URL,
   AGENCY_INSTAGRAM_URL,
@@ -15,27 +17,9 @@ import {
   OFFICE_HOURS,
 } from "@/lib/constants";
 import { services } from "@/lib/data/services";
+import { COMPANY_NAV_LINKS } from "@/config/navigation";
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
-
-const companyLinks = [
-  { label: "About", href: "/about" },
-  { label: "Portfolio", href: "/portfolio" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "Contact", href: "/contact" },
-];
-
-const legalLinks = [
-  { label: "Legal Hub", href: "/legal" },
-  { label: "DPDPA Privacy Policy", href: "/legal/privacy-policy" },
-  { label: "Terms", href: "/legal/terms-of-service" },
-  { label: "NDA", href: "/legal/nda" },
-  { label: "Trust Center & Ethics", href: "/trust-center" },
-  {
-    label: "Master Services Agreement",
-    href: "/legal/master-services-agreement",
-  },
-];
 
 function FooterLink({ href, label }: { href: string; label: string }) {
   return (
@@ -51,33 +35,61 @@ function FooterLink({ href, label }: { href: string; label: string }) {
   );
 }
 
-export function Footer() {
+function CookiePreferencesButton() {
   return (
-    <footer className="safe-area-bottom w-full border-t border-border bg-canvas">
+    <button
+      type="button"
+      onClick={() => window.dispatchEvent(new Event("mta:show-consent-banner"))}
+      className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-border px-4 font-mono text-[11px] uppercase tracking-[0.14em] text-muted transition-colors hover:border-violet/50 hover:text-violet focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+    >
+      Cookie Preferences
+    </button>
+  );
+}
+
+export function Footer() {
+  const { resolvedTheme } = useTheme();
+  const isLight = resolvedTheme !== "dark";
+  const logoSrc = isLight
+    ? "/images/mta-logo-transparent.png"
+    : "/images/mta-logo-transparent-white.png";
+
+  return (
+    <motion.footer
+      className="safe-area-bottom w-full border-t border-border bg-canvas"
+      initial={false}
+      whileInView={{ clipPath: "inset(0% 0 0 0)" }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.65, ease: EASE }}
+      suppressHydrationWarning
+    >
 
       <div className="container-site">
         <div className="border-t border-border" />
       </div>
 
       <div className="container-site py-12 sm:py-14 lg:py-16">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-12">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
           <motion.div
             className="flex flex-col gap-5 sm:col-span-2 lg:col-span-1"
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0, ease: EASE }}
+            suppressHydrationWarning
           >
             <div>
               <div className="mb-3 flex items-center gap-3">
-                <Image
-                  src="/images/mta-logo-transparent.png"
-                  alt="MTA Logo"
-                  width={40}
-                  height={40}
-                  sizes="40px"
-                  className="h-10 w-10 shrink-0 object-contain"
-                />
+                <div className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border/70 bg-canvas/70 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)]">
+                  <Image
+                    src={logoSrc}
+                    alt="Manglam Technical Agency logo"
+                    width={40}
+                    height={40}
+                    sizes="40px"
+                    className="h-9 w-9 shrink-0 object-contain"
+                  />
+                </div>
                 <span
                   className="font-display text-[15px] font-black tracking-normal"
                   style={{ color: "var(--color-foreground)" }}
@@ -110,7 +122,7 @@ export function Footer() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-border text-muted transition-colors hover:border-violet/50 hover-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+                    className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-border text-muted transition-all duration-300 hover:scale-110 hover:rotate-[8deg] hover:border-violet/50 hover:text-violet focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
                     aria-label={label}
                     data-cursor="pointer"
                     style={{ touchAction: "manipulation" }}
@@ -150,10 +162,11 @@ export function Footer() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0.07, ease: EASE }}
+            suppressHydrationWarning
           >
             <h4
               className="mb-5 font-mono uppercase tracking-[0.18em]"
@@ -171,27 +184,11 @@ export function Footer() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.55, delay: 0.14, ease: EASE }}
-          >
-            <h4
-              className="mb-5 font-mono uppercase tracking-[0.18em]"
-              style={{ fontSize: "11px", color: "var(--color-muted)" }}
-            >
-              Legal
-            </h4>
-            {legalLinks.map((link) => (
-              <FooterLink key={link.href} href={link.href} label={link.label} />
-            ))}
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0.21, ease: EASE }}
+            suppressHydrationWarning
           >
             <h4
               className="mb-5 font-mono uppercase tracking-[0.18em]"
@@ -199,16 +196,17 @@ export function Footer() {
             >
               Company
             </h4>
-            {companyLinks.map((link) => (
+            {COMPANY_NAV_LINKS.map((link) => (
               <FooterLink key={link.href} href={link.href} label={link.label} />
             ))}
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0.21, ease: EASE }}
+            suppressHydrationWarning
           >
             <h4
               className="mb-5 font-mono uppercase tracking-[0.18em]"
@@ -220,10 +218,25 @@ export function Footer() {
               className="flex flex-col gap-3 text-sm"
               style={{ color: "var(--color-muted)" }}
             >
-              <p>{AGENCY_LOCATION}</p>
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(AGENCY_LOCATION)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-[44px] items-center transition-colors hover:text-violet focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+                data-cursor="pointer"
+              >
+                {AGENCY_LOCATION}
+              </a>
+              <a
+                href={`tel:${AGENCY_PHONE.replace(/[^\d+]/g, "")}`}
+                className="inline-flex min-h-[44px] items-center transition-colors hover:text-violet focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+                data-cursor="pointer"
+              >
+                {AGENCY_PHONE}
+              </a>
               <a
                 href={`mailto:${AGENCY_EMAIL}`}
-                className="break-all transition-colors hover-foreground"
+                className="inline-flex min-h-[44px] items-center break-all transition-colors hover:text-violet"
                 data-cursor="pointer"
               >
                 {AGENCY_EMAIL}
@@ -232,7 +245,7 @@ export function Footer() {
                 href={AGENCY_WHATSAPP}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 transition-colors hover:text-[#25D366] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+                className="flex min-h-[44px] items-center gap-2 transition-colors hover:text-[#25D366] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
                 data-cursor="pointer"
               >
                 <svg
@@ -266,10 +279,11 @@ export function Footer() {
               © {new Date().getFullYear()} {AGENCY_NAME} — Classification: MTA
               Proprietary
             </p>
+            <CookiePreferencesButton />
           </div>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 }
 

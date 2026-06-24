@@ -11,6 +11,7 @@ import {
   OFFICE_HOURS,
 } from '@/lib/constants'
 import Badge from '@/components/ui/Badge'
+import { SplitWords } from '@/components/ui/SplitWords'
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
 
@@ -30,7 +31,15 @@ const contactItems = [
   { label: 'Office', value: AGENCY_LOCATION, href: null, note: 'Rajasthan, India', external: false },
 ]
 
-export function ContactContent({ formNode }: { formNode: ReactNode }) {
+export function ContactContent({
+  formNode,
+  headingLevel = 'h1',
+}: {
+  formNode: ReactNode
+  headingLevel?: 'h1' | 'h2'
+}) {
+  const Heading = headingLevel
+
   return (
     <section
       className="relative w-full overflow-hidden grain"
@@ -92,16 +101,16 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
                 Get in touch
               </span>
 
-              <h1
+              <Heading
                 aria-label="Start a conversation"
-                className="mb-12 flex flex-col font-display font-black leading-none tracking-normal uppercase"
-                style={{ gap: '0.25rem', fontSize: 'clamp(2.2rem, 4.8vw, 5.2rem)', color: 'var(--color-foreground)' }}
+                className="mb-12 flex flex-col font-display font-black leading-[1.08] tracking-normal uppercase"
+                style={{ gap: '0.25rem', fontSize: 'var(--text-display-lg)', color: 'var(--color-foreground)' }}
               >
-                <span>Start a</span>
-                <span style={{ fontSize: 'clamp(1.75rem, 3.5vw, 3.9rem)', color: 'var(--color-violet)' }}>
-                  conversation.
+                <SplitWords text="Start a" delay={0.1} />
+                <span style={{ fontSize: 'var(--text-display-md)', color: 'var(--color-violet)' }}>
+                  <SplitWords text="conversation." delay={0.24} wordClassName="inline-block pb-1" />
                 </span>
-              </h1>
+              </Heading>
 
               <p
                 className="mb-16 max-w-[420px]"
@@ -121,13 +130,14 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
 
               <motion.div
                 variants={stagger}
-                initial="hidden"
+                initial={false}
                 whileInView="show"
                 viewport={{ once: true, amount: 0.1 }}
                 className="grid gap-5"
+                suppressHydrationWarning
               >
                 {contactItems.map((item) => (
-                  <motion.div key={item.label} variants={fadeUp}>
+                  <motion.div key={item.label} variants={fadeUp} initial={false} suppressHydrationWarning>
                     {item.href ? (
                       <a
                         href={item.href}
@@ -184,11 +194,12 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, y: 12 }}
+                initial={false}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, ease: EASE, delay: 0.3 }}
                 className="mt-12 rounded-[22px] border border-[rgba(var(--color-accent-rgb),0.18)] bg-[rgba(var(--color-accent-rgb),0.06)] p-5 sm:p-6"
+                suppressHydrationWarning
               >
                 <a
                   href={AGENCY_WHATSAPP}
@@ -204,11 +215,12 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0 }}
+                initial={false}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.4 }}
                 className="mt-8 flex flex-wrap items-center gap-4"
+                suppressHydrationWarning
               >
                 <div className="flex items-center gap-2 rounded-full border border-border px-4 py-2">
                   <span className="block h-2 w-2 shrink-0 rounded-full animate-pulse" style={{ backgroundColor: 'var(--color-violet)' }} />
@@ -224,11 +236,12 @@ export function ContactContent({ formNode }: { formNode: ReactNode }) {
           </div>
 
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.05 }}
             transition={{ duration: 0.65, ease: EASE, delay: 0.15 }}
             className="order-2 flex flex-col"
+            suppressHydrationWarning
           >
             <div className="overflow-visible rounded-[28px] border border-border bg-card p-6 shadow-[0_24px_80px_rgba(0,0,0,0.10)] sm:p-10 lg:p-12">
               <span

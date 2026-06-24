@@ -45,18 +45,17 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
     }
 
     const lenis = new Lenis({
-      duration: 1.0,
+      duration: 0.85,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       smoothWheel: true,
-      touchMultiplier: 1.2,
       infinite: false,
       syncTouch: false,
     })
 
     lenisRef.current = lenis
 
-    let rafId: number
+    let rafId: number | null = null
     let isActive = true
 
     const raf = (time: number) => {
@@ -65,26 +64,38 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
       rafId = requestAnimationFrame(raf)
     }
 
-    rafId = requestAnimationFrame(raf)
+    const startLoop = () => {
+      if (rafId !== null) return
+      isActive = true
+      rafId = requestAnimationFrame(raf)
+    }
+
+    const stopLoop = () => {
+      isActive = false
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId)
+        rafId = null
+      }
+    }
+
+    startLoop()
 
     window.__lenis = lenis
 
     // Handle visibility change - pause when tab is hidden
     const handleVisibilityChange = () => {
       if (document.hidden) {
-        isActive = false
+        stopLoop()
       } else {
-        isActive = true
-        rafId = requestAnimationFrame(raf)
+        startLoop()
       }
     }
 
     document.addEventListener('visibilitychange', handleVisibilityChange)
 
     return () => {
-      isActive = false
+      stopLoop()
       document.removeEventListener('visibilitychange', handleVisibilityChange)
-      cancelAnimationFrame(rafId)
       lenis.destroy()
       lenisRef.current = null
       delete window.__lenis

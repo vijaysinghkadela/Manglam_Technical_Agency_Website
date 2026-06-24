@@ -1,338 +1,301 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import {
+  Bot,
+  BrainCircuit,
+  CalendarDays,
+  Check,
+  CheckCircle2,
+  FileCheck2,
+  Globe2,
+  MessageCircle,
+  PlugZap,
+  Radar,
+  ScanSearch,
+  ShieldCheck,
+  Sparkles,
+  Wallet,
+} from 'lucide-react'
 import { useRef } from 'react'
-import Link from 'next/link'
 
-import { useMediaQuery } from '@/hooks/useMediaQuery'
-import { MagneticButton } from '@/components/ui/MagneticButton'
-import OrbitalRing from '@/components/home/OrbitalRing'
-import { MTA_STATS } from '@/lib/data/stats'
-const SERVICES = [
-  'Cybersecurity',
-  'AI Automation',
-  'SaaS Products',
-  'Social Media Marketing',
-  'Content Creation',
-  'Branding',
-  'Web Development',
-  'Application Development',
-  'AI Agents',
+import {
+  FintechBadge,
+  FintechButton,
+  FintechFrame,
+  FintechPanel,
+} from '@/components/ui/FintechPrimitives'
+import { HERO_CTA_LINKS } from '@/config/navigation'
+
+const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
+
+const METRICS = [
+  { label: 'Lead capture', value: 'Consent-first', change: 'Form + WhatsApp', tone: 'text-emerald-600' },
+  { label: 'Follow-up', value: 'CRM-ready', change: 'Drafts + tasks', tone: 'text-[var(--color-violet-dark)]' },
+  { label: 'Risk checks', value: 'Reviewed', change: 'Security notes', tone: 'text-slate-500' },
 ]
 
-// Trust badges with status colors - module level to prevent re-creation
-const TRUST_BADGES = [
-  { label: 'Rajasthan businesses', color: '#10b981' },
-  { label: 'DPDP-aware forms', color: '#3b82f6' },
-  { label: 'Direct engineer contact', color: 'var(--color-violet)' },
+const PIPELINE = [
+  {
+    company: 'Website enquiry',
+    detail: 'Captured with consent and routed to CRM',
+    value: 'Intake',
+    active: true,
+  },
+  {
+    company: 'AI follow-up',
+    detail: 'Lead brief, reply draft, and task assigned',
+    value: 'Draft',
+    active: false,
+  },
+  {
+    company: 'Security review',
+    detail: 'Form, storage, and delivery checks logged',
+    value: 'Review',
+    active: false,
+  },
 ]
 
-// Stats with status indicators - module level to prevent re-creation
-const STATS = [
-  { label: `${MTA_STATS.activeClients} live client builds`, color: '#10b981' },
-  { label: `${MTA_STATS.internalSaaS} SaaS products`, color: '#3b82f6' },
-  { label: '2-4 hour reply window', color: 'var(--color-violet)' },
-  { label: 'Bikaner + Rajasthan', color: '#f59e0b' },
+const SUPPORT_CARDS = [
+  {
+    title: 'Web systems',
+    body: 'Fast pages, conversion paths, technical SEO, and maintenance built as one operating layer.',
+    Icon: Globe2,
+  },
+  {
+    title: 'AI automation',
+    body: 'Lead triage, content ops, reporting, and workflow agents tied to real business actions.',
+    Icon: Bot,
+  },
+  {
+    title: 'Compliance-aware data',
+    body: 'Granular consent, audit trails, security posture, and legal docs for sensitive workflows.',
+    Icon: ShieldCheck,
+  },
 ]
 
-// Pre-defined styles to prevent re-creation
-const GLOW_STYLES = {
-  position: 'absolute' as const,
-  right: '-5%',
-  top: '5%',
-  width: 'clamp(300px, 45vw, 900px)',
-  height: 'clamp(300px, 45vw, 900px)',
-  borderRadius: '9999px',
-  background: 'radial-gradient(circle, rgba(var(--color-accent-rgb),0.15) 0%, transparent 70%)',
-  filter: 'blur(60px)',
-}
+function OperationsConsole() {
+  return (
+    <motion.div
+      aria-label="Growth operations workflow preview showing lead capture, automation routing, risk review, and delivery readiness"
+      className="relative mx-auto w-full max-w-full overflow-hidden pb-2 lg:max-w-[760px]"
+      initial={false}
+      animate={{ opacity: 1, y: 0, rotateX: 0 }}
+      transition={{ duration: 0.9, delay: 0.18, ease: EASE }}
+      suppressHydrationWarning
+    >
+      <div className="absolute right-[2%] top-[17%] hidden h-[360px] w-[360px] rounded-full bg-[rgba(var(--color-accent-rgb),0.06)] blur-3xl lg:block" />
 
-const PRIMARY_BUTTON_STYLES = {
-  background: 'linear-gradient(135deg, var(--color-violet) 0%, color-mix(in srgb, var(--color-violet) 70%, #fff) 100%)',
-  color: 'white',
-  borderRadius: '9999px',
-  boxShadow: '0 8px 32px rgba(0,0,0,0.08), 0 0 0 1px rgba(255,255,255,0.1) inset',
-}
+      <FintechPanel className="relative w-full max-w-full overflow-hidden">
+        <div className="flex items-center justify-between border-b border-[var(--color-border)] px-5 py-4">
+          <div className="flex items-center gap-3">
+            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[rgba(var(--color-accent-rgb),0.08)] text-[var(--color-violet-dark)]">
+              <ScanSearch className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="text-sm font-semibold text-[var(--color-foreground)]">Growth operations workflow</p>
+              <p className="text-xs font-medium text-[var(--color-dead)]">Lead to delivery pipeline</p>
+            </div>
+          </div>
+          <span className="rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-600">
+            Workflow model
+          </span>
+        </div>
 
-const SECONDARY_BUTTON_STYLES = {
-  color: 'var(--color-violet)',
-  borderColor: 'var(--color-violet)',
-  background: 'transparent',
-  borderRadius: '9999px',
-}
+        <div className="grid min-w-0 lg:grid-cols-[180px_1fr]">
+          <aside className="hidden border-r border-[var(--color-border)] bg-[var(--color-surface)]/60 p-4 lg:block">
+            <div className="space-y-2 text-xs font-semibold text-[var(--color-muted)]">
+              {[
+                { label: 'Decisioning', Icon: BrainCircuit, active: true },
+                { label: 'Quotes', Icon: Wallet },
+                { label: 'Monitoring', Icon: Radar },
+                { label: 'Integrations', Icon: PlugZap },
+              ].map(({ label, Icon, active }) => (
+                <div
+                  key={label}
+                  className={`flex min-h-10 w-full items-center gap-2 rounded-lg border px-3 py-2 text-left transition-colors ${
+                    active ? 'border-[rgba(var(--color-accent-rgb),0.24)] bg-[var(--color-card)] text-[var(--color-violet-dark)]' : 'border-transparent hover:bg-[var(--color-card)] hover:text-[var(--color-foreground)]'
+                  }`}
+                >
+                  <Icon className="h-4 w-4" />
+                  {label}
+                </div>
+              ))}
+            </div>
+          </aside>
 
-const BADGE_BASE_STYLE = {
-  fontSize: '0.625rem',
-  color: 'var(--color-muted)',
-  letterSpacing: '0.16em',
-  borderColor: 'var(--color-border)',
-  background: 'linear-gradient(135deg, rgba(var(--color-accent-rgb),0.08) 0%, rgba(255,255,255,0.02) 100%)',
-  borderRadius: '9999px',
-  boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-}
+          <div className="min-w-0 p-4 sm:p-7">
+            <div className="grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-3">
+              {METRICS.map((metric) => (
+                <div key={metric.label} className="min-w-0 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-4">
+                  <p className="text-xs font-medium text-[var(--color-dead)]">{metric.label}</p>
+                  <p className="mt-2 text-2xl font-semibold tracking-tight text-[var(--color-foreground)]">{metric.value}</p>
+                  <p className={`mt-1 text-xs font-semibold ${metric.tone}`}>{metric.change}</p>
+                </div>
+              ))}
+            </div>
 
-const SCROLL_ANIMATION = {
-  duration: 0.5,
-  delay: 1.5,
+            <div className="mt-5 min-w-0 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-4">
+              <div className="mb-4 flex items-center justify-between">
+                <p className="text-sm font-semibold text-[var(--color-foreground)]">Automation queue</p>
+                <span className="text-xs font-semibold text-[var(--color-violet-dark)]">Configured checks</span>
+              </div>
+              <div className="space-y-3">
+                {PIPELINE.map((item) => (
+                  <div
+                    key={item.company}
+                    className={`flex min-w-0 items-center gap-3 rounded-lg px-3 py-3 ${item.active ? 'bg-[rgba(var(--color-accent-rgb),0.08)]' : 'bg-[var(--color-surface)]'}`}
+                  >
+                    <span className={`flex h-8 w-8 items-center justify-center rounded-lg ${item.active ? 'bg-[var(--color-violet-dark)] text-white' : 'bg-[var(--color-card)] text-[var(--color-muted)] shadow-sm'}`}>
+                      {item.active ? <Check className="h-4 w-4" /> : <FileCheck2 className="h-4 w-4" />}
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-semibold text-[var(--color-foreground)]">{item.company}</p>
+                      <p className="truncate text-xs font-medium text-[var(--color-muted)]">{item.detail}</p>
+                    </div>
+                    <p className="text-sm font-semibold text-[var(--color-foreground)]">{item.value}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </FintechPanel>
+
+      <div className="mt-4 grid gap-4 sm:grid-cols-[1fr_0.92fr]">
+        <FintechPanel className="relative w-full max-w-full overflow-hidden border-[rgba(var(--color-accent-rgb),0.24)] bg-[#171512] p-5 text-white shadow-[0_8px_24px_rgba(23,21,18,0.16),inset_0_1px_0_rgba(255,255,255,0.12)]">
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/20 to-transparent" />
+          <div className="relative flex items-start justify-between gap-6">
+            <div>
+              <p className="text-[0.72rem] font-bold uppercase tracking-[0.16em] text-white/90">Delivery readiness</p>
+              <p className="mt-3 text-4xl font-semibold tracking-normal text-white">Scoped</p>
+            </div>
+            <CheckCircle2 className="h-7 w-7 text-white/85" />
+          </div>
+          <div className="relative mt-6 grid grid-cols-7 items-end gap-2">
+            {[42, 58, 47, 73, 64, 88, 78].map((height, index) => (
+              <motion.span
+                key={`${height}-${index}`}
+                className="rounded-full bg-white/80"
+                initial={false}
+                whileInView={{ height }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.55, delay: index * 0.05, ease: EASE }}
+                style={{ height: 8 }}
+                suppressHydrationWarning
+              />
+            ))}
+          </div>
+        </FintechPanel>
+
+        <FintechPanel className="relative w-full max-w-full p-5">
+          <div className="flex items-center gap-3">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(var(--color-accent-rgb),0.08)] text-[var(--color-violet-dark)]">
+              <CalendarDays className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="text-sm font-semibold text-[var(--color-foreground)]">Discovery audit</p>
+              <p className="text-xs text-[var(--color-muted)]">Scope, automation, and risk map</p>
+            </div>
+          </div>
+        </FintechPanel>
+      </div>
+    </motion.div>
+  )
 }
 
 export function HeroSection() {
   const ref = useRef<HTMLElement>(null)
+  const prefersReducedMotion = useReducedMotion()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
-  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '22%'])
-  const txtY = useTransform(scrollYProgress, [0, 1], ['0%', '10%'])
-  const glowY = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
-  const isDesktop = useMediaQuery('(min-width: 1024px)') ?? false
+  const visualY = useTransform(scrollYProgress, [0, 1], ['0%', '-7%'])
 
   return (
-    <section
-      ref={ref}
-      id="hero-section"
-      className="relative w-full min-h-[92svh] flex items-center overflow-hidden grain"
-      style={{ backgroundColor: 'var(--color-canvas)' }}
-    >
-      {/* Line grid - parallax on desktop only */}
-      <motion.div
-        style={{ y: isDesktop ? bgY : '0%' }}
-        className="absolute inset-0 bg-line-grid pointer-events-none opacity-[0.18]"
-        aria-hidden
-      />
-
-      {/* Violet radial glow - right side */}
-      <motion.div
-        style={{ y: isDesktop ? glowY : '0%' }}
-        className="absolute pointer-events-none"
-        aria-hidden
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.9, delay: 0.3 }}
-      >
-        <div style={GLOW_STYLES} />
-      </motion.div>
-
-      {/* Subtle top-left accent glow */}
-      <div
-        className="absolute pointer-events-none"
-        aria-hidden
-        style={{
-          left: '-15%',
-          bottom: '10%',
-          width: 'clamp(300px, 35vw, 600px)',
-          height: 'clamp(300px, 35vw, 600px)',
-          borderRadius: '9999px',
-          background: 'radial-gradient(circle, rgba(var(--color-accent-rgb), 0.08) 0%, transparent 65%)' }}
-      />
-
-      {/* Content - parallax on desktop only */}
-      <motion.div
-        style={{ y: isDesktop ? txtY : '0%' }}
-        className="relative z-10 w-full container-site page-hero-safe pb-14 sm:pb-16 lg:pb-20"
-      >
-        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-center">
-          {/* Left Content */}
-          <div className="flex flex-col gap-6 sm:gap-8 max-w-[760px]">
-            {/* Micro label */}
-            <motion.div
-              className="flex min-w-0 items-center gap-3"
-              initial={{ opacity: 0, x: -16 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <span
-                className="h-px"
-                style={{ width: '24px', backgroundColor: 'var(--color-violet)', opacity: 0.72 }}
-              />
-              <span
-                className="min-w-0 font-mono uppercase leading-relaxed"
-                style={{
-                  fontSize: '0.6875rem',
-                  color: 'var(--color-muted)',
-                  letterSpacing: '0.16em' }}
-              >
-                MTA · websites · AI automation · cybersecurity
-              </span>
-            </motion.div>
-
-            {/* Trust Badges - Enhanced */}
-            <motion.div
-              className="hidden sm:flex sm:flex-wrap items-center gap-3"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-            >
-              {TRUST_BADGES.map((item) => (
-                <motion.span
-                  key={item.label}
-                  className="inline-flex items-center gap-2 rounded-full border px-4 py-2.5 font-mono uppercase transition-all duration-300 hover:border-violet hover:bg-[rgba(var(--color-accent-rgb),0.12)]"
-                  style={BADGE_BASE_STYLE}
-                  whileHover={{ scale: 1.02 }}
-                >
-                  <span
-                    className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: item.color }}
-                  />
-                  {item.label}
-                </motion.span>
-              ))}
-            </motion.div>
-
-            {/* Statement - three lines */}
-            <h1
-              aria-label="Websites, AI workflows, and trust systems for Rajasthan businesses"
-              className="flex max-w-full flex-col font-display font-black tracking-normal uppercase"
-              style={{
-                gap: '0.55rem',
-                overflowWrap: 'break-word',
-                hyphens: 'none',
-                lineHeight: 0.94,
-                fontSize: 'clamp(2rem, 7.5vw, 5.1rem)',
-                color: 'var(--color-foreground)' }}
-            >
-              <span>Websites, AI</span>
-              <span style={{ color: 'var(--color-violet)', paddingLeft: 'clamp(0px, 2vw, 20px)' }}>
-                workflows
-              </span>
-              <span style={{ fontSize: 'clamp(1.35rem, 5.2vw, 4.35rem)' }}>and trust systems</span>
-            </h1>
-
-            {/* Body */}
-            <motion.p
-              className="text-[15px] leading-relaxed max-w-[34rem]"
-              style={{ color: 'var(--color-muted)' }}
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            >
-              Practical technology support for clinics, gyms, NGOs, startups, and local service
-              businesses that need more enquiries, less manual work, and safer data handling.
-            </motion.p>
-
-            {/* CTAs - Enhanced */}
-            <motion.div
-              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-5 pt-2"
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.85, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <MagneticButton
-                href="/contact"
-                className="group inline-flex w-full sm:w-auto items-center justify-center gap-3 px-8 sm:px-10 lg:px-12 py-4 sm:py-5 lg:py-5 font-display font-black text-[14px] sm:text-[15px] transition-all duration-300 min-h-[56px] sm:min-h-[60px] rounded-full"
-                style={PRIMARY_BUTTON_STYLES}
-              >
-                <span>Start a Project</span>
-                <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
-              </MagneticButton>
-
-              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                <Link
-                  href="/portfolio"
-                  data-cursor="pointer"
-                  className="group inline-flex w-full sm:w-auto items-center justify-center sm:justify-start gap-2 rounded-full border-2 px-7 sm:px-9 lg:px-10 py-4 sm:py-5 lg:py-5 text-[14px] sm:text-[15px] font-semibold transition-all duration-300 min-h-[56px] sm:min-h-[60px] hover:bg-[rgba(var(--color-accent-rgb),0.08)] hover:shadow-[0_4px_20px_rgba(var(--color-accent-rgb),0.15)]"
-                  style={SECONDARY_BUTTON_STYLES}
-                >
-                  See Proof
-                  <span className="group-hover:translate-x-1 transition-transform inline-block duration-300">→</span>
-                </Link>
-              </motion.div>
-            </motion.div>
-
-            {/* Stats - Enhanced with colored indicators */}
-            <motion.div
-              className="flex flex-wrap items-center justify-start gap-2 sm:gap-3 pt-6"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 1.1 }}
-            >
-              {STATS.map((stat) => (
-                <motion.span
-                  key={stat.label}
-                  className="inline-flex items-center gap-2 rounded-full border px-3.5 py-2.5 text-center transition-all duration-300 hover:scale-[1.02]"
-                  style={BADGE_BASE_STYLE}
-                >
-                  <span
-                    className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: stat.color }}
-                  />
-                  <span className="font-mono uppercase whitespace-nowrap text-[10px]">{stat.label}</span>
-                </motion.span>
-              ))}
-            </motion.div>
-
-            {/* Mobile service badges */}
-            <div className="flex flex-wrap lg:hidden gap-2 pt-1">
-              {SERVICES.map((s) => (
-                <span
-                  key={s}
-                  className="rounded-full shrink-0 px-3 py-1.5 text-xs font-semibold whitespace-nowrap transition-all duration-200 hover:border-violet/30 bg-[rgba(var(--color-accent-rgb),0.08)] border border-[var(--color-border)] text-[var(--color-foreground)]"
-                >
-                  {s}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Right - orbital visual (desktop only) */}
+    <FintechFrame className="bg-[var(--color-canvas)]">
+      <section ref={ref} id="hero-section" className="relative z-10 grid min-w-0 gap-12 overflow-hidden px-0 pb-24 pt-[calc(var(--nav-offset,84px)+48px)] lg:grid-cols-[0.88fr_1.12fr] lg:items-center lg:overflow-visible lg:px-16 lg:pb-32 lg:pt-[calc(var(--nav-offset,104px)+64px)]">
+        <div className="min-w-0 max-w-3xl">
           <motion.div
-            className="hidden lg:flex items-center justify-center relative min-h-[500px]"
-            initial={{ opacity: 0, scale: 0.88 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: EASE }}
+            suppressHydrationWarning
           >
-            {/* Glow behind orbital */}
-            <div
-              className="absolute pointer-events-none"
-              style={{
-                width: '65%',
-                height: '65%',
-                borderRadius: '9999px',
-                background: 'radial-gradient(circle, rgba(var(--color-accent-rgb), 0.08) 0%, transparent 70%)',
-                filter: 'blur(20px)' }}
-            />
-            <OrbitalRing />
+            <FintechBadge icon={<Sparkles className="h-[18px] w-[18px]" />}>Growth operations studio</FintechBadge>
+          </motion.div>
+
+          <motion.h1
+            className="mt-7 max-w-[780px] text-[2.75rem] font-semibold leading-[1.03] tracking-normal text-[var(--color-foreground)] sm:text-6xl lg:text-[4.55rem] xl:text-[5.05rem]"
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.08, ease: EASE }}
+            suppressHydrationWarning
+          >
+            AI-powered websites, automation, and growth systems for <span className="font-editorial text-[var(--color-violet-dark)]">Indian businesses.</span>
+          </motion.h1>
+
+          <motion.p
+            className="section-copy mt-7 max-w-[610px] text-[var(--color-muted)]"
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.75, delay: 0.18, ease: EASE }}
+            suppressHydrationWarning
+          >
+            Manglam Technical Agency helps startups, SMEs, clinics, institutes, real estate teams, and
+            service businesses capture more enquiries, respond faster, and scale with less manual work
+            through fast web systems, AI-assisted workflows, and compliance-aware delivery.
+          </motion.p>
+
+          <motion.div
+            className="mt-9 flex min-w-0 flex-col gap-4 sm:flex-row sm:gap-5"
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.75, delay: 0.28, ease: EASE }}
+            suppressHydrationWarning
+          >
+            <FintechButton href={HERO_CTA_LINKS.primary.href} className="w-full sm:w-auto">
+              {HERO_CTA_LINKS.primary.label}
+            </FintechButton>
+            <FintechButton
+              href={HERO_CTA_LINKS.secondary.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="secondary"
+              icon={false}
+              className="w-full gap-2 px-5 sm:w-auto"
+            >
+              <MessageCircle className="h-4 w-4 text-[#25D366]" />
+              {HERO_CTA_LINKS.secondary.label}
+            </FintechButton>
+            <FintechButton href={HERO_CTA_LINKS.tertiary.href} variant="secondary" className="w-full sm:w-auto">
+              {HERO_CTA_LINKS.tertiary.label}
+            </FintechButton>
           </motion.div>
         </div>
-      </motion.div>
 
-      {/* Scroll indicator */}
-      <motion.button
-        className="absolute bottom-8 left-[clamp(1.5rem,4vw,3rem)] hidden lg:flex items-center gap-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={SCROLL_ANIMATION}
-        onClick={() => {
-          const hero = document.getElementById('hero-section')
-          if (hero) {
-            window.scrollTo({
-              top: hero.offsetHeight,
-              behavior: 'smooth',
-            })
-          }
-        }}
-        aria-label="Scroll to content"
-      >
-        <div
-          className="relative overflow-hidden"
-          style={{ width: '1px', height: '56px', backgroundColor: 'var(--color-border)' }}
-        >
-          <motion.div
-            className="absolute top-0 left-0 w-full"
-            style={{ backgroundColor: 'var(--color-violet)', opacity: 0.8 }}
-            animate={{ height: ['0%', '100%'], top: ['0%', '100%'] }}
-            transition={{ repeat: Infinity, duration: 2.2, ease: 'linear' }}
-          />
-        </div>
-        <span
-          className="font-mono uppercase"
-          style={{
-            fontSize: '0.625rem',
-            color: 'var(--color-dead)',
-            letterSpacing: '0.16em',
-            writingMode: 'vertical-rl',
-            transform: 'rotate(180deg)' }}
-        >
-          Scroll
-        </span>
-      </motion.button>
-    </section>
+        <motion.div className="min-w-0" style={{ y: prefersReducedMotion ? '0%' : visualY }}>
+          <OperationsConsole />
+        </motion.div>
+      </section>
+
+      <section className="relative z-10 grid gap-4 border-t border-[var(--color-border)] px-0 py-10 lg:grid-cols-3 lg:px-16">
+        {SUPPORT_CARDS.map((card, index) => (
+          <motion.article
+            key={card.title}
+            className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition duration-300 hover:-translate-y-1 hover:border-[rgba(var(--color-accent-rgb),0.32)] hover:shadow-[0_8px_24px_rgba(23,21,18,0.08)]"
+            initial={false}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.55, delay: index * 0.06, ease: EASE }}
+            suppressHydrationWarning
+          >
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[rgba(var(--color-accent-rgb),0.08)] text-[var(--color-violet-dark)]">
+              <card.Icon className="h-5 w-5" />
+            </span>
+            <h2 className="mt-5 text-lg font-semibold leading-snug tracking-normal text-[var(--color-foreground)] sm:text-xl lg:text-[1.35rem]">{card.title}</h2>
+            <p className="mt-3 text-sm leading-6 text-[var(--color-muted)]">{card.body}</p>
+          </motion.article>
+        ))}
+      </section>
+    </FintechFrame>
   )
 }

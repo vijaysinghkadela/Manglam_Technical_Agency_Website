@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { services } from '@/lib/data/services'
+import { TiltCard } from '@/components/ui/TiltCard'
 export function ServicesHorizontal() {
   return (
     <section
@@ -16,12 +17,13 @@ export function ServicesHorizontal() {
         <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <SectionLabel />
           <p
-            className="text-sm sm:text-base leading-relaxed max-w-md"
+            className="narrative-copy max-w-md"
             style={{
               color: 'var(--color-muted)',
               lineHeight: 1.72 }}
           >
-            Six practice areas, one delivery standard. Each service is scoped, priced, and documented before any work begins.
+            Web systems, automation, security checks, performance campaigns, and brand identity.
+            Every engagement starts with written scope, operating assumptions, ownership, and handover expectations.
           </p>
         </div>
 
@@ -30,21 +32,25 @@ export function ServicesHorizontal() {
             <motion.div
               key={s.slug}
               initial={false}
-              whileInView={{ y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-30px' }}
               transition={{
                 duration: 0.5,
                 delay: i * 0.06,
                 ease: [0.16, 1, 0.3, 1]
               }}
+              suppressHydrationWarning
             >
+              <TiltCard
+                className="group rounded-lg"
+                max={10}
+              >
               <Link
                 href={`/services/${s.slug}`}
                 data-cursor="link"
-                className="group flex flex-col rounded-[24px] border border-border bg-card p-6 sm:p-8 transition-all duration-300 active:scale-[0.98] touch-manipulation hover:shadow-md"
+                className="relative flex min-h-full flex-col overflow-hidden rounded-lg border border-border bg-card p-6 transition-all duration-300 active:scale-[0.98] touch-manipulation hover:shadow-md sm:p-8"
                 style={{
                   touchAction: 'manipulation',
-                  borderRadius: '24px',
                   transition: `all ${0.3}s cubic-bezier(${'0.16,1,0.3,1'})` }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--color-violet)' }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--color-border)' }}
@@ -67,11 +73,11 @@ export function ServicesHorizontal() {
                     />
                   </div>
                   <span
-                    className="font-display font-black text-2xl sm:text-3xl leading-none transition-colors duration-500 group-hover:text-violet"
+                    className="absolute right-4 top-3 font-display font-black leading-none transition-transform duration-500 group-hover:text-violet sm:right-6 sm:top-5"
                     style={{
                       color: 'var(--color-dead)',
                       opacity: 0.6,
-                      fontSize: 'clamp(2.5rem, 5vw, 5rem)' }}
+                      fontSize: 'clamp(4rem, 8vw, 8.75rem)' }}
                   >
                     {String(i + 1).padStart(2, '0')}
                   </span>
@@ -105,19 +111,21 @@ export function ServicesHorizontal() {
                     </li>
                   ))}
                 </ul>
-                <p
-                  className="font-mono text-[10px] sm:text-xs mt-2 sm:mt-3"
-                  style={{ color: 'var(--color-violet)' }}
-                >
-                  {s.priceLabel}
-                </p>
+                <div className="mt-3 h-7 overflow-hidden">
+                  <p
+                    className="translate-y-full font-mono text-[10px] text-violet transition-transform duration-300 group-hover:translate-y-0 sm:text-xs"
+                  >
+                    {s.priceLabel}
+                  </p>
+                </div>
                 <span
                   className="text-sm mt-3 inline-flex items-center gap-1 min-h-[44px] transition-colors duration-200 group-hover:text-violet"
                   style={{ color: 'var(--color-muted)' }}
                 >
-                  Explore <span className="transition-transform duration-300 inline-block group-hover:translate-x-1">→</span>
+                  Explore service <span className="transition-transform duration-300 inline-block group-hover:translate-x-2">→</span>
                 </span>
               </Link>
+              </TiltCard>
             </motion.div>
           ))}
         </div>
@@ -139,13 +147,13 @@ function SectionLabel() {
         WHAT WE DO
       </span>
       <h2
-        className="font-display font-black leading-[0.92] tracking-normal"
+        className="marketing-heading font-display font-black leading-[0.92] tracking-normal"
         style={{
           fontSize: 'clamp(1.75rem, 4vw, 3rem)',
           color: 'var(--color-foreground)',
           lineHeight: 0.92 }}
       >
-        Services That<br />Scale With You
+        Services for <br />real business work
       </h2>
     </div>
   )

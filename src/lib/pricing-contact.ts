@@ -1,19 +1,23 @@
+import { services } from '@/lib/data/services';
+
+const SERVICE_NAME_BY_SLUG = Object.fromEntries(
+  services.map((service) => [service.slug, service.name]),
+) as Record<string, string>;
+
 export const DEPARTMENT_SERVICE_MAP: Record<string, string> = {
-  'ai-automation': 'AI Automation',
-  branding: 'Branding',
-  'content-creation': 'Content Creation',
-  cybersecurity: 'Cybersecurity',
-  'social-media-marketing': 'Social Media Marketing',
-  'saas-products': 'Web & App Development',
+  'ai-automation': SERVICE_NAME_BY_SLUG['ai-automation'] || 'AI Automation',
+  branding: SERVICE_NAME_BY_SLUG.branding || 'Branding',
+  cybersecurity: SERVICE_NAME_BY_SLUG.cybersecurity || 'Cybersecurity',
+  'performance-marketing': SERVICE_NAME_BY_SLUG['performance-marketing'] || 'Performance Marketing',
+  'saas-products': SERVICE_NAME_BY_SLUG['saas-products'] || 'App & Website Development',
 };
 
 export const DEPARTMENT_NAME_MAP: Record<string, string> = {
   'ai-automation': 'AI & Automation',
   branding: 'Branding & Identity',
-  'content-creation': 'Content Creation',
   cybersecurity: 'Cybersecurity',
-  'social-media-marketing': 'Meta Ads Management',
-  'saas-products': 'Web & App Development',
+  'performance-marketing': 'Performance Marketing',
+  'saas-products': 'SaaS & Web Development',
 };
 
 const BUDGET_RANGES = [
@@ -24,10 +28,11 @@ const BUDGET_RANGES = [
 ] as const;
 
 export function inferBudget(price: string): string {
-  const num = parseInt(
-    price.replace(/[₹,]/g, '').replace(/\/.*$/, '').trim(),
-    10,
-  );
+  const amounts = price
+    .match(/\d[\d,]*/g)
+    ?.map((value) => Number(value.replace(/,/g, '')))
+    .filter((value) => Number.isFinite(value));
+  const num = amounts?.length ? Math.max(...amounts) : NaN;
   if (!num || isNaN(num)) return 'Not Sure';
   for (const r of BUDGET_RANGES) {
     if (num <= r.max) return r.label;

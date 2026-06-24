@@ -1,7 +1,7 @@
 'use client'
 
 import { useTheme } from 'next-themes'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useIsClient } from '@/hooks/useIsClient'
 
@@ -47,11 +47,16 @@ export default function ThemeToggle() {
   const [isHovered, setIsHovered] = useState(false)
   const [isPressed, setIsPressed] = useState(false)
 
+  useEffect(() => {
+    if (!resolvedTheme) return
+    document.documentElement.dataset.theme = resolvedTheme
+  }, [resolvedTheme])
+
   // Prevent flash during hydration
   if (!isClient) {
     return (
       <div 
-        className="h-9 w-9 sm:w-[88px] rounded-full flex items-center justify-center"
+        className="h-11 min-w-[92px] rounded-full flex items-center justify-center"
         style={{ 
           backgroundColor: 'var(--color-card)',
           border: '1px solid var(--color-border)' }}
@@ -75,7 +80,7 @@ export default function ThemeToggle() {
       }}
       onMouseDown={() => setIsPressed(true)}
       onMouseUp={() => setIsPressed(false)}
-      className="relative h-9 w-9 sm:w-auto sm:min-w-[88px] rounded-full flex items-center justify-center gap-2 overflow-hidden transition-all duration-300"
+      className="relative h-11 min-w-[92px] rounded-full flex items-center justify-center gap-2 overflow-hidden px-3 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
       style={{
         backgroundColor: isHovered
           ? isDark
@@ -113,25 +118,26 @@ export default function ThemeToggle() {
             exit={{ scale: 0.5, rotate: 90, opacity: 0 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
             className="flex items-center"
+            aria-hidden="true"
           >
             {isDark ? (
-              <SunIcon className="w-[14px] h-[14px] text-amber-400" />
-            ) : (
               <MoonIcon className="w-[14px] h-[14px] text-violet" />
+            ) : (
+              <SunIcon className="w-[14px] h-[14px] text-amber-400" />
             )}
           </motion.div>
         </AnimatePresence>
 
         {/* Label */}
         <motion.span
-          className="hidden sm:block text-[11px] font-medium tracking-wide"
+          className="block text-[11px] font-medium tracking-wide"
           style={{
-            color: isDark ? '#FBBF24' : 'var(--color-violet)' }}
+            color: isDark ? 'var(--color-violet)' : '#A07030' }}
           initial={false}
           animate={{
             opacity: isHovered ? 1 : 0.8 }}
         >
-          {isDark ? 'Light' : 'Dark'}
+          {isDark ? 'Dark' : 'Light'}
         </motion.span>
       </div>
 

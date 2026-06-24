@@ -3,7 +3,17 @@
  * Usage: import the schema you need and render via <JsonLd schema={...} />
  */
 
-const BASE_URL = 'https://manglamtechnicalagency.com'
+import {
+  AGENCY_EMAIL,
+  AGENCY_NAME,
+  AGENCY_PHONE,
+  AGENCY_TAGLINE,
+  AGENCY_URL,
+  AGENCY_WHATSAPP,
+  CONTACT_INFO,
+} from '@/lib/constants'
+
+const BASE_URL = AGENCY_URL
 
 // ── Organisation / Local Business ─────────────────────────────────────────
 
@@ -12,82 +22,74 @@ export function organizationSchema() {
     '@context': 'https://schema.org',
     '@type': ['Organization', 'LocalBusiness', 'ProfessionalService'],
     '@id': `${BASE_URL}/#organization`,
-    name: 'Manglam Technical Agency',
+    name: AGENCY_NAME,
     alternateName: 'MTA',
     url: BASE_URL,
     logo: {
       '@type': 'ImageObject',
-      url: `${BASE_URL}/images/mta-logo-dark.png`,
-      width: 512,
-      height: 512,
+      url: `${BASE_URL}/images/mta-logo-128.png`,
+      width: 128,
+      height: 128,
     },
     image: `${BASE_URL}/opengraph-image.png`,
     description:
-      'End-to-end technology services for Indian businesses — web development, AI automation, cybersecurity, social media, and digital operations. Based in Rajasthan and registered under Udyam in 2025.',
-    email: 'manglamtechnicalagency@gmail.com',
-    telephone: '+91-8003903572',
+      'End-to-end technology services for Indian businesses — web development, AI automation, cybersecurity, performance marketing, and digital operations. Based in Rajasthan and registered under Udyam in 2025.',
+    email: AGENCY_EMAIL,
+    telephone: AGENCY_PHONE,
     foundingDate: '2025',
     areaServed: [
       { '@type': 'Country', name: 'India' },
       { '@type': 'State', name: 'Rajasthan' },
-      { '@type': 'City', name: 'Bikaner' },
-      { '@type': 'City', name: 'Nagaur' },
-      { '@type': 'City', name: 'Jodhpur' },
-      { '@type': 'City', name: 'Jaipur' },
     ],
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'Rampole Choraha',
-      addressLocality: 'Bikaner',
-      addressRegion: 'Rajasthan',
-      postalCode: '341001',
+      streetAddress: CONTACT_INFO.address.street,
+      addressLocality: CONTACT_INFO.address.city,
+      addressRegion: CONTACT_INFO.address.state,
+      postalCode: CONTACT_INFO.address.pincode,
       addressCountry: 'IN',
     },
     contactPoint: [
       {
         '@type': 'ContactPoint',
-        telephone: '+91-8003903572',
+        telephone: AGENCY_PHONE,
         contactType: 'customer service',
         areaServed: 'IN',
         availableLanguage: ['English', 'Hindi'],
         hoursAvailable: {
           '@type': 'OpeningHoursSpecification',
           dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-          opens: '09:00',
+          opens: '10:00',
           closes: '19:00',
         },
       },
     ],
     sameAs: [
-      'https://wa.me/918003903572',
+      AGENCY_WHATSAPP,
     ],
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: 'Technology Services for Indian Businesses',
       itemListElement: [
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Web & App Development', url: `${BASE_URL}/services/saas-products` } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'SaaS & Web Development', url: `${BASE_URL}/services/saas-products` } },
         { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'AI Automation', url: `${BASE_URL}/services/ai-automation` } },
         { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Cybersecurity', url: `${BASE_URL}/services/cybersecurity` } },
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Social Media Marketing', url: `${BASE_URL}/services/social-media-marketing` } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Performance Marketing', url: `${BASE_URL}/services/performance-marketing` } },
         { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Branding', url: `${BASE_URL}/services/branding` } },
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Content Creation', url: `${BASE_URL}/services/content-creation` } },
       ],
     },
     knowsAbout: [
       'Web Development',
       'AI Automation',
       'Cybersecurity',
-      'Social Media Marketing',
+      'Performance Marketing',
       'SaaS Development',
       'IT Act Compliance',
       'n8n Automation',
       'Next.js',
       'Rajasthan Technology Services',
-      'DPDP-aware contact forms',
-      'WhatsApp automation',
-      'Local business websites',
     ],
-    slogan: 'Empowering Your Digital Future',
+    slogan: AGENCY_TAGLINE,
   }
 }
 
@@ -99,7 +101,7 @@ export function websiteSchema() {
     '@type': 'WebSite',
     '@id': `${BASE_URL}/#website`,
     url: BASE_URL,
-    name: 'Manglam Technical Agency',
+    name: AGENCY_NAME,
     description: 'End-to-end technology services for Indian businesses.',
     publisher: { '@id': `${BASE_URL}/#organization` },
     potentialAction: {
@@ -160,30 +162,20 @@ export function serviceSchema({
   description,
   url,
   price,
-  category,
 }: {
   name: string
   description: string
   url: string
   price?: string
-  category?: string
 }) {
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    '@id': `${BASE_URL}${url}#service`,
     name,
     description,
     url: `${BASE_URL}${url}`,
     provider: { '@id': `${BASE_URL}/#organization` },
-    serviceType: category ?? name,
-    areaServed: [
-      { '@type': 'Country', name: 'India' },
-      { '@type': 'State', name: 'Rajasthan' },
-      { '@type': 'City', name: 'Bikaner' },
-      { '@type': 'City', name: 'Nagaur' },
-      { '@type': 'City', name: 'Jodhpur' },
-    ],
+    areaServed: { '@type': 'Country', name: 'India' },
     ...(price ? { offers: { '@type': 'Offer', price, priceCurrency: 'INR' } } : {}),
   }
 }
@@ -233,7 +225,7 @@ export function articleSchema({
       name: author ?? 'Manglam Technical Agency',
       url: BASE_URL,
     },
-    image: `${BASE_URL}/og-image.png`,
+    image: `${BASE_URL}/opengraph-image.png`,
     inLanguage: 'en-IN',
     isPartOf: { '@id': `${BASE_URL}/#website` },
   }

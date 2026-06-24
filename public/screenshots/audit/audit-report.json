@@ -1,0 +1,507 @@
+[
+  {
+    "route": "home",
+    "viewport": "desktop",
+    "url": "http://localhost:3000/#home",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\audit\\home-desktop.png",
+    "consoleErrors": [
+      "A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\n%s%s https://react.dev/link/hydration-mismatch \n\n  ...\n    <SegmentViewNode type=\"page\" pagePath=\"page.tsx\">\n      <SegmentTrieNode>\n      <Home>\n        <script>\n        <div>\n        <MarqueeTicker>\n        <div>\n        <div>\n        <div>\n        <div>\n        <div>\n        <div>\n        <div id=\"contact\" className=\"scroll-mt-...\">\n          <ContactContent formNode={{...}}>\n            <section className=\"relative w...\" style={{...}}>\n              <div>\n              <div>\n              <div className=\"relative z...\">\n                <nav>\n                <div>\n                <div className=\"grid flex-...\">\n                  <div>\n                  <motion.div initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}} viewport={{once:true, ...}} ...>\n                    <div className=\"order-2 fl...\" style={{opacity:0, ...}} ref={function useMotionRef.useCallback}>\n                      <div className=\"overflow-v...\">\n                        <span>\n                        <h2>\n                        <ContactForm>\n                          <form onSubmit={function} className=\"flex flex-...\" noValidate={true}>\n                            <div aria-hidden=\"true\" style={{position:\"...\", ...}}>\n                              <label>\n                              <input\n                                id=\"honeypot\"\n                                name=\"honeypot\"\n                                onChange={function onChange}\n                                onBlur={function onChange}\n                                ref={function ref}\n                                tabIndex={-1}\n                                autoComplete=\"off\"\n-                               style={{caret-color:\"transparent\"}}\n                              >\n                            <div className=\"flex flex-...\">\n                              <SectionLabel>\n                              <Row>\n                                <div className=\"grid grid-...\">\n                                  <Field label=\"Full Name *\" error={undefined}>\n                                    <div className=\"relative\">\n                                      <label>\n                                      <Input name=\"name\" onChange={function onChange} onBlur={function onChange} ...>\n                                        <input\n                                          name=\"name\"\n                                          onChange={function onChange}\n                                          onBlur={function onBlur}\n                                          ref={function ref}\n                                          autoComplete=\"name\"\n                                          required={true}\n                                          placeholder=\"Your name\"\n                                          id=\"field-full-name\"\n                                          aria-required=\"true\"\n                                          aria-invalid=\"false\"\n                                          className=\"peer placeholder:text-transparent\"\n                                          style={{\n+                                           color: \"var(--color-foreground)\"\n-                                           color: \"var(--color-foreground)\"\n+                                           backgroundColor: \"var(--color-surface)\"\n+                                           border: \"1px solid var(--color-border)\"\n+                                           padding: \"15px 16px\"\n+                                           width: \"100%\"\n-                                           width: \"100%\"\n+                                           fontSize: \"16px\"\n+                                           minHeight: \"52px\"\n+                                           borderRadius: \"12px\"\n+                                           outline: \"none\"\n+                                           colorScheme: \"light dark\"\n+                                           transition: \"border-color 0.2s, box-shadow 0.2s, background-color 0.2s\"\n+                                           boxShadow: \"inset 0 1px 0 rgba(var(--color-accent-rgb), 0.04)\"\n-                                           background-color: \"var(--color-surface)\"\n-                                           border-top-color: \"\"\n-                                           border-top-style: \"\"\n-                                           border-top-width: \"\"\n-                                           border-right-color: \"\"\n-                                           border-right-style: \"\"\n-                                           border-right-width: \"\"\n-                                           border-bottom-color: \"\"\n-                                           border-bottom-style: \"\"\n-                                           border-bottom-width: \"\"\n-                                           border-left-color: \"\"\n-                                           border-left-style: \"\"\n-                                           border-left-width: \"\"\n-                                           border-image-source: \"\"\n-                                           border-image-slice: \"\"\n-                                           border-image-width: \"\"\n-                                           border-image-outset: \"\"\n-                                           border-image-repeat: \"\"\n-                                           padding-top: \"15px\"\n-                                           padding-right: \"16px\"\n-                                           padding-bottom: \"15px\"\n-                                           padding-left: \"16px\"\n-                                           font-size: \"16px\"\n-                                           min-height: \"52px\"\n-                                           border-top-left-radius: \"12px\"\n-                                           border-top-right-radius: \"12px\"\n-                                           border-bottom-right-radius: \"12px\"\n-                                           border-bottom-left-radius: \"12px\"\n-                                           outline-color: \"initial\"\n-                                           outline-style: \"none\"\n-                                           outline-width: \"initial\"\n-                                           color-scheme: \"light dark\"\n-                                           transition-behavior: \"normal, normal, normal\"\n-                                           transition-duration: \"0.2s, 0.2s, 0.2s\"\n-                                           transition-timing-function: \"ease, ease, ease\"\n-                                           transition-delay: \"0s, 0s, 0s\"\n-                                           transition-property: \"border-color, box-shadow, background-color\"\n-                                           box-shadow: \"inset 0 1px 0 rgba(var(--color-accent-rgb), 0.04)\"\n-                                           caret-color: \"transparent\"\n                                          }}\n                                          onFocus={function onFocus}\n                                        >\n                                  <Field label=\"Email Addr...\" error={undefined}>\n                                    <div className=\"relative\">\n                                      <label>\n                                      <Input name=\"email\" onChange={function onChange} onBlur={function onChange} ...>\n                                        <input\n                                          name=\"email\"\n                                          onChange={function onChange}\n                                          onBlur={function onBlur}\n                                          ref={function ref}\n                                          autoComplete=\"email\"\n                                          type=\"email\"\n                                          required={true}\n                                          placeholder=\"you@example.com\"\n                                          id=\"field-email-address\"\n                                          aria-required=\"true\"\n                                          aria-invalid=\"false\"\n                                          className=\"peer placeholder:text-transparent\"\n                                          style={{\n+                                           color: \"var(--color-foreground)\"\n-                                           color: \"var(--color-foreground)\"\n+                                           backgroundColor: \"var(--color-surface)\"\n+                                           border: \"1px solid var(--color-border)\"\n+                                           padding: \"15px 16px\"\n+                                           width: \"100%\"\n-                                           width: \"100%\"\n+                                           fontSize: \"16px\"\n+                                           minHeight: \"52px\"\n+                                           borderRadius: \"12px\"\n+                                           outline: \"none\"\n+                                           colorScheme: \"light dark\"\n+                                           transition: \"border-color 0.2s, box-shadow 0.2s, background-color 0.2s\"\n+                                           boxShadow: \"inset 0 1px 0 rgba(var(--color-accent-rgb), 0.04)\"\n-                                           background-color: \"var(--color-surface)\"\n-                                           border-top-color: \"\"\n-                                           border-top-style: \"\"\n-                                           border-top-width: \"\"\n-                                           border-right-color: \"\"\n-                                           border-right-style: \"\"\n-                                           border-right-width: \"\"\n-                                           border-bottom-color: \"\"\n-                                           border-bottom-style: \"\"\n-                                           border-bottom-width: \"\"\n-                                           border-left-color: \"\"\n-                                           border-left-style: \"\"\n-                                           border-left-width: \"\"\n-                                           border-image-source: \"\"\n-                                           border-image-slice: \"\"\n-                                           border-image-width: \"\"\n-                                           border-image-outset: \"\"\n-                                           border-image-repeat: \"\"\n-                                           padding-top: \"15px\"\n-                                           padding-right: \"16px\"\n-                                           padding-bottom: \"15px\"\n-                                           padding-left: \"16px\"\n-                                           font-size: \"16px\"\n-                                           min-height: \"52px\"\n-                                           border-top-left-radius: \"12px\"\n-                                           border-top-right-radius: \"12px\"\n-                                           border-bottom-right-radius: \"12px\"\n-                                           border-bottom-left-radius: \"12px\"\n-                                           outline-color: \"initial\"\n-                                           outline-style: \"none\"\n-                                           outline-width: \"initial\"\n-                                           color-scheme: \"light dark\"\n-                                           transition-behavior: \"normal, normal, normal\"\n-                                           transition-duration: \"0.2s, 0.2s, 0.2s\"\n-                                           transition-timing-function: \"ease, ease, ease\"\n-                                           transition-delay: \"0s, 0s, 0s\"\n-                                           transition-property: \"border-color, box-shadow, background-color\"\n-                                           box-shadow: \"inset 0 1px 0 rgba(var(--color-accent-rgb), 0.04)\"\n-                                           caret-color: \"transparent\"\n                                          }}\n                                          onFocus={function onFocus}\n                                        >\n                              <Field label=\"Phone Number\">\n                                <div className=\"relative\">\n                                  <label>\n                                  <Input name=\"phone\" onChange={function onChange} onBlur={function onChange} ...>\n                                    <input\n                                      name=\"phone\"\n                                      onChange={function onChange}\n                                      onBlur={function onBlur}\n                                      ref={function ref}\n                                      autoComplete=\"tel\"\n                                      type=\"tel\"\n                                      inputMode=\"tel\"\n                                      placeholder=\"Your phone number (10 digits)\"\n                                      id=\"field-phone-number\"\n                                      aria-invalid=\"false\"\n                                      className=\"peer placeholder:text-transparent\"\n                                      style={{\n+                                       color: \"var(--color-foreground)\"\n-                                       color: \"var(--color-foreground)\"\n+                                       backgroundColor: \"var(--color-surface)\"\n+                                       border: \"1px solid var(--color-border)\"\n+                                       padding: \"15px 16px\"\n+                                       width: \"100%\"\n-                                       width: \"100%\"\n+                                       fontSize: \"16px\"\n+                                       minHeight: \"52px\"\n+                                       borderRadius: \"12px\"\n+                                       outline: \"none\"\n+                                       colorScheme: \"light dark\"\n+                                       transition: \"border-color 0.2s, box-shadow 0.2s, background-color 0.2s\"\n+                                       boxShadow: \"inset 0 1px 0 rgba(var(--color-accent-rgb), 0.04)\"\n-                                       background-color: \"var(--color-surface)\"\n-                                       border-top-color: \"\"\n-                                       border-top-style: \"\"\n-                                       border-top-width: \"\"\n-                                       border-right-color: \"\"\n-                                       border-right-style: \"\"\n-                                       border-right-width: \"\"\n-                                       border-bottom-color: \"\"\n-                                       border-bottom-style: \"\"\n-                                       border-bottom-width: \"\"\n-                                       border-left-color: \"\"\n-                                       border-left-style: \"\"\n-                                       border-left-width: \"\"\n-                                       border-image-source: \"\"\n-                                       border-image-slice: \"\"\n-                                       border-image-width: \"\"\n-                                       border-image-outset: \"\"\n-                                       border-image-repeat: \"\"\n-                                       padding-top: \"15px\"\n-                                       padding-right: \"16px\"\n-                                       padding-bottom: \"15px\"\n-                                       padding-left: \"16px\"\n-                                       font-size: \"16px\"\n-                                       min-height: \"52px\"\n-                                       border-top-left-radius: \"12px\"\n-                                       border-top-right-radius: \"12px\"\n-                                       border-bottom-right-radius: \"12px\"\n-                                       border-bottom-left-radius: \"12px\"\n-                                       outline-color: \"initial\"\n-                                       outline-style: \"none\"\n-                                       outline-width: \"initial\"\n-                                       color-scheme: \"light dark\"\n-                                       transition-behavior: \"normal, normal, normal\"\n-                                       transition-duration: \"0.2s, 0.2s, 0.2s\"\n-                                       transition-timing-function: \"ease, ease, ease\"\n-                                       transition-delay: \"0s, 0s, 0s\"\n-                                       transition-property: \"border-color, box-shadow, background-color\"\n-                                       box-shadow: \"inset 0 1px 0 rgba(var(--color-accent-rgb), 0.04)\"\n-                                       caret-color: \"transparent\"\n                                      }}\n                                      onFocus={function onFocus}\n                                    >\n                              <Field label=\"Company\">\n                                <div className=\"relative\">\n                                  <label>\n                                  <Input name=\"company\" onChange={function onChange} onBlur={function onChange} ...>\n                                    <input\n                                      name=\"company\"\n                                      onChange={function onChange}\n                                      onBlur={function onBlur}\n                                      ref={function ref}\n                                      autoComplete=\"organization\"\n                                      placeholder=\"Your company or organisation\"\n                                      id=\"field-company\"\n                                      aria-invalid=\"false\"\n                                      className=\"peer placeholder:text-transparent\"\n                                      style={{\n+                                       color: \"var(--color-foreground)\"\n-                                       color: \"var(--color-foreground)\"\n+                                       backgroundColor: \"var(--color-surface)\"\n+                                       border: \"1px solid var(--color-border)\"\n+                                       padding: \"15px 16px\"\n+                                       width: \"100%\"\n-                                       width: \"100%\"\n+                                       fontSize: \"16px\"\n+                                       minHeight: \"52px\"\n+                                       borderRadius: \"12px\"\n+                                       outline: \"none\"\n+                                       colorScheme: \"light dark\"\n+                                       transition: \"border-color 0.2s, box-shadow 0.2s, background-color 0.2s\"\n+                                       boxShadow: \"inset 0 1px 0 rgba(var(--color-accent-rgb), 0.04)\"\n-                                       background-color: \"var(--color-surface)\"\n-                                       border-top-color: \"\"\n-                                       border-top-style: \"\"\n-                                       border-top-width: \"\"\n-                                       border-right-color: \"\"\n-                                       border-right-style: \"\"\n-                                       border-right-width: \"\"\n-                                       border-bottom-color: \"\"\n-                                       border-bottom-style: \"\"\n-                                       border-bottom-width: \"\"\n-                                       border-left-color: \"\"\n-                                       border-left-style: \"\"\n-                                       border-left-width: \"\"\n-                                       border-image-source: \"\"\n-                                       border-image-slice: \"\"\n-                                       border-image-width: \"\"\n-                                       border-image-outset: \"\"\n-                                       border-image-repeat: \"\"\n-                                       padding-top: \"15px\"\n-                                       padding-right: \"16px\"\n-                                       padding-bottom: \"15px\"\n-                                       padding-left: \"16px\"\n-                                       font-size: \"16px\"\n-                                       min-height: \"52px\"\n-                                       border-top-left-radius: \"12px\"\n-                                       border-top-right-radius: \"12px\"\n-                                       border-bottom-right-radius: \"12px\"\n-                                       border-bottom-left-radius: \"12px\"\n-                                       outline-color: \"initial\"\n-                                       outline-style: \"none\"\n-                                       outline-width: \"initial\"\n-                                       color-scheme: \"light dark\"\n-                                       transition-behavior: \"normal, normal, normal\"\n-                                       transition-duration: \"0.2s, 0.2s, 0.2s\"\n-                                       transition-timing-function: \"ease, ease, ease\"\n-                                       transition-delay: \"0s, 0s, 0s\"\n-                                       transition-property: \"border-color, box-shadow, background-color\"\n-                                       box-shadow: \"inset 0 1px 0 rgba(var(--color-accent-rgb), 0.04)\"\n-                                       caret-color: \"transparent\"\n                                      }}\n                                      onFocus={function onFocus}\n                                    >\n                            <div className=\"flex flex-...\">\n                              <SectionLabel>\n                              <Row>\n                              <Field>\n                              <Field label=\"Message *\" error={undefined}>\n                                <div className=\"relative\">\n                                  <label>\n                                  <Textarea name=\"message\" onChange={function onChange} onBlur={function onChange} ...>\n                                    <textarea\n                                      name=\"message\"\n                                      onChange={function onChange}\n                                      onBlur={function onBlur}\n                                      ref={function ref}\n                                      rows={6}\n                                      placeholder=\"Describe your project, goals, and any specific requirements...\"\n                                      id=\"field-message\"\n                                      aria-required=\"true\"\n                                      aria-invalid=\"false\"\n                                      className=\"peer resize-y placeholder:text-transparent\"\n                                      style={{\n+                                       color: \"var(--color-foreground)\"\n-                                       color: \"var(--color-foreground)\"\n+                                       backgroundColor: \"var(--color-surface)\"\n+                                       border: \"1px solid var(--color-border)\"\n+                                       padding: \"15px 16px\"\n+                                       width: \"100%\"\n-                                       width: \"100%\"\n+                                       fontSize: \"16px\"\n+                                       minHeight: \"144px\"\n+                                       borderRadius: \"12px\"\n+                                       outline: \"none\"\n+                                       colorScheme: \"light dark\"\n+                                       transition: \"border-color 0.2s, box-shadow 0.2s, background-color 0.2s\"\n+                                       boxShadow: \"inset 0 1px 0 rgba(var(--color-accent-rgb), 0.04)\"\n+                                       fontFamily: \"var(--font-body)\"\n+                                       resize: \"vertical\"\n-                                       resize: \"vertical\"\n-                                       background-color: \"var(--color-surface)\"\n-                                       border-top-color: \"\"\n-                                       border-top-style: \"\"\n-                                       border-top-width: \"\"\n-                                       border-right-color: \"\"\n-                                       border-right-style: \"\"\n-                                       border-right-width: \"\"\n-                                       border-bottom-color: \"\"\n-                                       border-bottom-style: \"\"\n-                                       border-bottom-width: \"\"\n-                                       border-left-color: \"\"\n-                                       border-left-style: \"\"\n-                                       border-left-width: \"\"\n-                                       border-image-source: \"\"\n-                                       border-image-slice: \"\"\n-                                       border-image-width: \"\"\n-                                       border-image-outset: \"\"\n-                                       border-image-repeat: \"\"\n-                                       padding-top: \"15px\"\n-                                       padding-right: \"16px\"\n-                                       padding-bottom: \"15px\"\n-                                       padding-left: \"16px\"\n-                                       font-size: \"16px\"\n-                                       min-height: \"144px\"\n-                                       border-top-left-radius: \"12px\"\n-                                       border-top-right-radius: \"12px\"\n-                                       border-bottom-right-radius: \"12px\"\n-                                       border-bottom-left-radius: \"12px\"\n-                                       outline-color: \"initial\"\n-                                       outline-style: \"none\"\n-                                       outline-width: \"initial\"\n-                                       color-scheme: \"light dark\"\n-                                       transition-behavior: \"normal, normal, normal\"\n-                                       transition-duration: \"0.2s, 0.2s, 0.2s\"\n-                                       transition-timing-function: \"ease, ease, ease\"\n-                                       transition-delay: \"0s, 0s, 0s\"\n-                                       transition-property: \"border-color, box-shadow, background-color\"\n-                                       box-shadow: \"inset 0 1px 0 rgba(var(--color-accent-rgb), 0.04)\"\n-                                       font-family: \"var(--font-body)\"\n-                                       caret-color: \"transparent\"\n                                      }}\n                                      onFocus={function onFocus}\n                                    >\n                            <div className=\"flex flex-...\">\n                              <div className=\"rounded-lg...\">\n                                <div className=\"grid gap-4...\">\n                                  <AnimatedCheckbox name=\"privacy\" onChange={function onChange} ...>\n                                    <span className=\"relative i...\">\n                                      <input\n                                        ref={function ref}\n                                        type=\"checkbox\"\n                                        className=\"peer absolute inset-0 h-11 w-11 cursor-pointer appearance-none roun...\"\n                                        name=\"privacy\"\n                                        onChange={function onChange}\n                                        onBlur={function onChange}\n                                        id=\"privacy\"\n                                        required={true}\n                                        aria-required=\"true\"\n                                        aria-invalid=\"false\"\n-                                       style={{caret-color:\"transparent\"}}\n                                      >\n                                      ...\n                                  ...\n                                <div className=\"mt-4 grid ...\">\n                                  <label className=\"grid gap-3...\">\n                                    <AnimatedCheckbox name=\"followUpCo...\" onChange={function onChange} ...>\n                                      <span className=\"relative i...\">\n                                        <input\n                                          ref={function ref}\n                                          type=\"checkbox\"\n                                          className=\"peer absolute inset-0 h-11 w-11 cursor-pointer appearance-none ro...\"\n                                          name=\"followUpConsent\"\n                                          onChange={function onChange}\n                                          onBlur={function onChange}\n                                          id=\"followUpConsent\"\n-                                         style={{caret-color:\"transparent\"}}\n                                        >\n                                        ...\n                                    ...\n                                  <label className=\"grid gap-3...\">\n                                    <AnimatedCheckbox name=\"sensitiveD...\" onChange={function onChange} ...>\n                                      <span className=\"relative i...\">\n                                        <input\n                                          ref={function ref}\n                                          type=\"checkbox\"\n                                          className=\"peer absolute inset-0 h-11 w-11 cursor-pointer appearance-none ro...\"\n                                          name=\"sensitiveDataConsent\"\n                                          onChange={function onChange}\n                                          onBlur={function onChange}\n                                          id=\"sensitiveDataConsent\"\n-                                         style={{caret-color:\"transparent\"}}\n                                        >\n                                        ...\n                                    ...\n                                ...\n                              ...\n    ...\n"
+    ],
+    "failedRequests": [],
+    "title": "Manglam Technical Agency | Web, AI Automation & Cybersecurity in Rajasthan",
+    "overflowX": 0,
+    "checkPresence": [
+      {
+        "value": "Manglam Technical Agency",
+        "present": true
+      },
+      {
+        "value": "Start Project",
+        "present": true
+      }
+    ],
+    "brokenVisibleImages": [],
+    "visibleVideos": [],
+    "badTextBoxes": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "delta": 111
+      },
+      {
+        "tag": "A",
+        "text": "Start a project",
+        "delta": 48
+      }
+    ]
+  },
+  {
+    "route": "about",
+    "viewport": "desktop",
+    "url": "http://localhost:3000/#about",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\audit\\about-desktop.png",
+    "consoleErrors": [],
+    "failedRequests": [],
+    "title": "Manglam Technical Agency | Web, AI Automation & Cybersecurity in Rajasthan",
+    "overflowX": 0,
+    "checkPresence": [
+      {
+        "value": "About",
+        "present": true
+      }
+    ],
+    "brokenVisibleImages": [],
+    "visibleVideos": [],
+    "badTextBoxes": []
+  },
+  {
+    "route": "services",
+    "viewport": "desktop",
+    "url": "http://localhost:3000/#services",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\audit\\services-desktop.png",
+    "consoleErrors": [],
+    "failedRequests": [],
+    "title": "Manglam Technical Agency | Web, AI Automation & Cybersecurity in Rajasthan",
+    "overflowX": 0,
+    "checkPresence": [
+      {
+        "value": "Services",
+        "present": true
+      }
+    ],
+    "brokenVisibleImages": [],
+    "visibleVideos": [],
+    "badTextBoxes": []
+  },
+  {
+    "route": "portfolio",
+    "viewport": "desktop",
+    "url": "http://localhost:3000/#portfolio",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\audit\\portfolio-desktop.png",
+    "consoleErrors": [],
+    "failedRequests": [],
+    "title": "Manglam Technical Agency | Web, AI Automation & Cybersecurity in Rajasthan",
+    "overflowX": 0,
+    "checkPresence": [
+      {
+        "value": "Case studies",
+        "present": false
+      },
+      {
+        "value": "Social Media Handle Manager",
+        "present": false
+      }
+    ],
+    "brokenVisibleImages": [],
+    "visibleVideos": [
+      {
+        "src": "/media/case-studies/nashamukti/school-video-shoot.mp4",
+        "w": 153,
+        "h": 274
+      },
+      {
+        "src": "/media/case-studies/nashamukti/counseling-patient-short.mp4",
+        "w": 153,
+        "h": 272
+      },
+      {
+        "src": "/media/case-studies/nashamukti/school-awareness.mp4",
+        "w": 153,
+        "h": 274
+      }
+    ],
+    "badTextBoxes": []
+  },
+  {
+    "route": "contact",
+    "viewport": "desktop",
+    "url": "http://localhost:3000/#contact",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\audit\\contact-desktop.png",
+    "consoleErrors": [],
+    "failedRequests": [],
+    "title": "Manglam Technical Agency | Web, AI Automation & Cybersecurity in Rajasthan",
+    "overflowX": 0,
+    "checkPresence": [
+      {
+        "value": "Tell Us About",
+        "present": false
+      },
+      {
+        "value": "Service Needed",
+        "present": false
+      }
+    ],
+    "brokenVisibleImages": [],
+    "visibleVideos": [],
+    "badTextBoxes": []
+  },
+  {
+    "route": "services-ai",
+    "viewport": "desktop",
+    "url": "http://localhost:3000/services/ai-automation",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\audit\\services-ai-desktop.png",
+    "consoleErrors": [],
+    "failedRequests": [
+      "net::ERR_ABORTED http://localhost:3000/media/case-studies/nashamukti/school-video-shoot.mp4",
+      "net::ERR_ABORTED http://localhost:3000/media/case-studies/nashamukti/school-awareness.mp4",
+      "net::ERR_ABORTED http://localhost:3000/media/case-studies/nashamukti/counseling-patient-short.mp4"
+    ],
+    "title": "AI Automation | Manglam Technical Agency",
+    "overflowX": 0,
+    "checkPresence": [
+      {
+        "value": "AI Automation",
+        "present": true
+      }
+    ],
+    "brokenVisibleImages": [],
+    "visibleVideos": [],
+    "badTextBoxes": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "delta": 111
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "delta": 137
+      }
+    ]
+  },
+  {
+    "route": "services-performance",
+    "viewport": "desktop",
+    "url": "http://localhost:3000/services/performance-marketing",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\audit\\services-performance-desktop.png",
+    "consoleErrors": [],
+    "failedRequests": [],
+    "title": "Performance Marketing | Manglam Technical Agency",
+    "overflowX": 0,
+    "checkPresence": [
+      {
+        "value": "Performance Marketing",
+        "present": true
+      }
+    ],
+    "brokenVisibleImages": [],
+    "visibleVideos": [],
+    "badTextBoxes": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "delta": 111
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "delta": 173
+      }
+    ]
+  },
+  {
+    "route": "services-cybersecurity",
+    "viewport": "desktop",
+    "url": "http://localhost:3000/services/cybersecurity",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\audit\\services-cybersecurity-desktop.png",
+    "consoleErrors": [],
+    "failedRequests": [],
+    "title": "Cybersecurity | Manglam Technical Agency",
+    "overflowX": 0,
+    "checkPresence": [
+      {
+        "value": "Cybersecurity",
+        "present": true
+      }
+    ],
+    "brokenVisibleImages": [],
+    "visibleVideos": [],
+    "badTextBoxes": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "delta": 111
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "delta": 183
+      }
+    ]
+  },
+  {
+    "route": "portfolio-page",
+    "viewport": "desktop",
+    "url": "http://localhost:3000/portfolio",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\audit\\portfolio-page-desktop.png",
+    "consoleErrors": [],
+    "failedRequests": [],
+    "title": "Our Work | Manglam Technical Agency",
+    "overflowX": 0,
+    "checkPresence": [
+      {
+        "value": "Digital",
+        "present": false
+      },
+      {
+        "value": "Case studies",
+        "present": false
+      }
+    ],
+    "brokenVisibleImages": [],
+    "visibleVideos": [
+      {
+        "src": "/media/case-studies/nashamukti/school-video-shoot.mp4",
+        "w": 153,
+        "h": 274
+      },
+      {
+        "src": "/media/case-studies/nashamukti/counseling-patient-short.mp4",
+        "w": 153,
+        "h": 272
+      },
+      {
+        "src": "/media/case-studies/nashamukti/school-awareness.mp4",
+        "w": 153,
+        "h": 274
+      }
+    ],
+    "badTextBoxes": []
+  },
+  {
+    "route": "home",
+    "viewport": "mobile",
+    "url": "http://localhost:3000/#home",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\audit\\home-mobile.png",
+    "consoleErrors": [],
+    "failedRequests": [],
+    "title": "Manglam Technical Agency | Web, AI Automation & Cybersecurity in Rajasthan",
+    "overflowX": 0,
+    "checkPresence": [
+      {
+        "value": "Manglam Technical Agency",
+        "present": true
+      },
+      {
+        "value": "Start Project",
+        "present": false
+      }
+    ],
+    "brokenVisibleImages": [],
+    "visibleVideos": [],
+    "badTextBoxes": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "delta": 92
+      },
+      {
+        "tag": "A",
+        "text": "Start a project",
+        "delta": 48
+      }
+    ]
+  },
+  {
+    "route": "about",
+    "viewport": "mobile",
+    "url": "http://localhost:3000/#about",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\audit\\about-mobile.png",
+    "consoleErrors": [],
+    "failedRequests": [],
+    "title": "Manglam Technical Agency | Web, AI Automation & Cybersecurity in Rajasthan",
+    "overflowX": 0,
+    "checkPresence": [
+      {
+        "value": "About",
+        "present": true
+      }
+    ],
+    "brokenVisibleImages": [],
+    "visibleVideos": [],
+    "badTextBoxes": []
+  },
+  {
+    "route": "services",
+    "viewport": "mobile",
+    "url": "http://localhost:3000/#services",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\audit\\services-mobile.png",
+    "consoleErrors": [],
+    "failedRequests": [],
+    "title": "Manglam Technical Agency | Web, AI Automation & Cybersecurity in Rajasthan",
+    "overflowX": 0,
+    "checkPresence": [
+      {
+        "value": "Services",
+        "present": true
+      }
+    ],
+    "brokenVisibleImages": [],
+    "visibleVideos": [],
+    "badTextBoxes": []
+  },
+  {
+    "route": "portfolio",
+    "viewport": "mobile",
+    "url": "http://localhost:3000/#portfolio",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\audit\\portfolio-mobile.png",
+    "consoleErrors": [],
+    "failedRequests": [],
+    "title": "Manglam Technical Agency | Web, AI Automation & Cybersecurity in Rajasthan",
+    "overflowX": 0,
+    "checkPresence": [
+      {
+        "value": "Case studies",
+        "present": false
+      },
+      {
+        "value": "Social Media Handle Manager",
+        "present": false
+      }
+    ],
+    "brokenVisibleImages": [],
+    "visibleVideos": [],
+    "badTextBoxes": []
+  },
+  {
+    "route": "contact",
+    "viewport": "mobile",
+    "url": "http://localhost:3000/#contact",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\audit\\contact-mobile.png",
+    "consoleErrors": [],
+    "failedRequests": [],
+    "title": "Manglam Technical Agency | Web, AI Automation & Cybersecurity in Rajasthan",
+    "overflowX": 0,
+    "checkPresence": [
+      {
+        "value": "Tell Us About",
+        "present": false
+      },
+      {
+        "value": "Service Needed",
+        "present": false
+      }
+    ],
+    "brokenVisibleImages": [],
+    "visibleVideos": [],
+    "badTextBoxes": []
+  },
+  {
+    "route": "services-ai",
+    "viewport": "mobile",
+    "url": "http://localhost:3000/services/ai-automation",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\audit\\services-ai-mobile.png",
+    "consoleErrors": [],
+    "failedRequests": [
+      "net::ERR_ABORTED http://localhost:3000/media/case-studies/nashamukti/counseling-patient-short.mp4",
+      "net::ERR_ABORTED http://localhost:3000/media/case-studies/nashamukti/school-video-shoot.mp4",
+      "net::ERR_ABORTED http://localhost:3000/media/case-studies/nashamukti/school-awareness.mp4"
+    ],
+    "title": "AI Automation | Manglam Technical Agency",
+    "overflowX": 0,
+    "checkPresence": [
+      {
+        "value": "AI Automation",
+        "present": true
+      }
+    ],
+    "brokenVisibleImages": [],
+    "visibleVideos": [],
+    "badTextBoxes": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "delta": 92
+      }
+    ]
+  },
+  {
+    "route": "services-performance",
+    "viewport": "mobile",
+    "url": "http://localhost:3000/services/performance-marketing",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\audit\\services-performance-mobile.png",
+    "consoleErrors": [],
+    "failedRequests": [],
+    "title": "Performance Marketing | Manglam Technical Agency",
+    "overflowX": 0,
+    "checkPresence": [
+      {
+        "value": "Performance Marketing",
+        "present": true
+      }
+    ],
+    "brokenVisibleImages": [],
+    "visibleVideos": [],
+    "badTextBoxes": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "delta": 92
+      }
+    ]
+  },
+  {
+    "route": "services-cybersecurity",
+    "viewport": "mobile",
+    "url": "http://localhost:3000/services/cybersecurity",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\audit\\services-cybersecurity-mobile.png",
+    "consoleErrors": [],
+    "failedRequests": [],
+    "title": "Cybersecurity | Manglam Technical Agency",
+    "overflowX": 0,
+    "checkPresence": [
+      {
+        "value": "Cybersecurity",
+        "present": true
+      }
+    ],
+    "brokenVisibleImages": [],
+    "visibleVideos": [],
+    "badTextBoxes": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "delta": 92
+      }
+    ]
+  },
+  {
+    "route": "portfolio-page",
+    "viewport": "mobile",
+    "url": "http://localhost:3000/portfolio",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\audit\\portfolio-page-mobile.png",
+    "consoleErrors": [],
+    "failedRequests": [],
+    "title": "Our Work | Manglam Technical Agency",
+    "overflowX": 0,
+    "checkPresence": [
+      {
+        "value": "Digital",
+        "present": false
+      },
+      {
+        "value": "Case studies",
+        "present": false
+      }
+    ],
+    "brokenVisibleImages": [],
+    "visibleVideos": [
+      {
+        "src": "/media/case-studies/nashamukti/school-video-shoot.mp4",
+        "w": 85,
+        "h": 152
+      },
+      {
+        "src": "/media/case-studies/nashamukti/counseling-patient-short.mp4",
+        "w": 85,
+        "h": 151
+      },
+      {
+        "src": "/media/case-studies/nashamukti/school-awareness.mp4",
+        "w": 85,
+        "h": 152
+      }
+    ],
+    "badTextBoxes": []
+  }
+]

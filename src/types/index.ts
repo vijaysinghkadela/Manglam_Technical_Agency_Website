@@ -93,6 +93,7 @@ export interface TeamMember {
   x?: string | null;
   image?: string;
   imagePosition?: string;
+  mobileImageHeightClass?: string;
 }
 
 export interface BlogPost {
@@ -200,6 +201,8 @@ export interface RiskControl {
 export interface DurationPrice {
   label: string;
   price: string;
+  oldPrice?: string;
+  badge?: string;
   totalPrice?: string;
   type: 'one-time' | 'per-month' | 'per-sprint';
   note?: string;
@@ -211,6 +214,7 @@ export interface PricingPlanData {
   target: string;
   popular: boolean;
   highlight: boolean;
+  badge?: string;
   icon: string;
   durations: DurationPrice[];
   deliverables: string[];

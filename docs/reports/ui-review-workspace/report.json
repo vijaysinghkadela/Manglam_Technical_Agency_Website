@@ -1,0 +1,2625 @@
+[
+  {
+    "route": "/",
+    "viewport": "desktop",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\home-desktop.png",
+    "title": "Manglam Technical Agency — Practical Technology Support",
+    "overflowX": false,
+    "scrollWidth": 1440,
+    "viewportWidth": 1440,
+    "pageHeight": 10323,
+    "brokenImages": [],
+    "smallTargets": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "w": 68,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "About",
+        "w": 69,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Portfolio",
+        "w": 84,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Pricing",
+        "w": 73,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 78,
+        "h": 41
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Scroll",
+        "w": 34,
+        "h": 56
+      },
+      {
+        "tag": "A",
+        "text": "Open Legal Hub →",
+        "w": 158,
+        "h": 42
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Go to testimonial 1",
+        "w": 24,
+        "h": 48
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Go to testimonial 2",
+        "w": 6,
+        "h": 48
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Go to testimonial 3",
+        "w": 6,
+        "h": 48
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Go to testimonial 4",
+        "w": 6,
+        "h": 48
+      }
+    ],
+    "visibleH1": "We builddigitalinfrastructure",
+    "headingLabel": "We build digital infrastructure",
+    "landmarks": {
+      "main": 1,
+      "nav": 1,
+      "h1": 1
+    },
+    "fixedEls": [
+      {
+        "tag": "DIV",
+        "label": "fixed left-0 top-0 z-[150] h-px w-full origin-left bg-violet",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 1
+      },
+      {
+        "tag": "DIV",
+        "label": "fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block",
+        "x": -316,
+        "y": -316,
+        "w": 32,
+        "h": 32
+      },
+      {
+        "tag": "NAV",
+        "label": "Main navigation",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 85
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Open AI assistant",
+        "x": 1352,
+        "y": 912,
+        "w": 64,
+        "h": 64
+      },
+      {
+        "tag": "DIV",
+        "label": "Cookie and privacy consent",
+        "x": 0,
+        "y": 745,
+        "w": 1440,
+        "h": 256
+      },
+      {
+        "tag": "DIV",
+        "label": "",
+        "x": 16,
+        "y": 16,
+        "w": 1408,
+        "h": 968
+      }
+    ],
+    "consoleItems": [
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+      "warning: [.WebGL-0x1cdc05419c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "warning: [.WebGL-0x1cdc05419c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "warning: [.WebGL-0x1cdc05419c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "warning: [.WebGL-0x1cdc05419c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+    ],
+    "failedRequests": [
+      "GET https://va.vercel-scripts.com/v1/script.debug.js net::ERR_NETWORK_ACCESS_DENIED",
+      "GET https://va.vercel-scripts.com/v1/speed-insights/script.debug.js net::ERR_NETWORK_ACCESS_DENIED"
+    ]
+  },
+  {
+    "route": "/services",
+    "viewport": "desktop",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\services-desktop.png",
+    "title": "Services | Manglam Technical Agency",
+    "overflowX": false,
+    "scrollWidth": 1440,
+    "viewportWidth": 1440,
+    "pageHeight": 3678,
+    "brokenImages": [],
+    "smallTargets": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "w": 68,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "About",
+        "w": 69,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Portfolio",
+        "w": 84,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Pricing",
+        "w": 73,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 78,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "HOME",
+        "w": 39,
+        "h": 18
+      },
+      {
+        "tag": "A",
+        "text": "manglamtechnicalagency@gmail.com",
+        "w": 218,
+        "h": 40
+      },
+      {
+        "tag": "A",
+        "text": "WhatsApp",
+        "w": 218,
+        "h": 20
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Dismiss cookie notice",
+        "w": 36,
+        "h": 48
+      }
+    ],
+    "visibleH1": "Servicesbuilt to fit.",
+    "headingLabel": "Services built to fit",
+    "landmarks": {
+      "main": 2,
+      "nav": 2,
+      "h1": 1
+    },
+    "fixedEls": [
+      {
+        "tag": "DIV",
+        "label": "fixed left-0 top-0 z-[150] h-px w-full origin-left bg-violet",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 1
+      },
+      {
+        "tag": "DIV",
+        "label": "fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block",
+        "x": -316,
+        "y": -316,
+        "w": 32,
+        "h": 32
+      },
+      {
+        "tag": "NAV",
+        "label": "Main navigation",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 85
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Open AI assistant",
+        "x": 1352,
+        "y": 912,
+        "w": 64,
+        "h": 64
+      },
+      {
+        "tag": "DIV",
+        "label": "Cookie and privacy consent",
+        "x": 0,
+        "y": 745,
+        "w": 1440,
+        "h": 256
+      },
+      {
+        "tag": "DIV",
+        "label": "",
+        "x": 16,
+        "y": 16,
+        "w": 1408,
+        "h": 968
+      }
+    ],
+    "consoleItems": [
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED"
+    ],
+    "failedRequests": [
+      "GET http://localhost:3000/__nextjs_font/geist-latin.woff2 net::ERR_ABORTED",
+      "GET https://va.vercel-scripts.com/v1/script.debug.js net::ERR_NETWORK_ACCESS_DENIED",
+      "GET https://va.vercel-scripts.com/v1/speed-insights/script.debug.js net::ERR_NETWORK_ACCESS_DENIED"
+    ]
+  },
+  {
+    "route": "/services/ai-automation",
+    "viewport": "desktop",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\services-ai-automation-desktop.png",
+    "title": "AI Automation | Manglam Technical Agency",
+    "overflowX": false,
+    "scrollWidth": 1440,
+    "viewportWidth": 1440,
+    "pageHeight": 7354,
+    "brokenImages": [],
+    "smallTargets": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "w": 68,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "About",
+        "w": 69,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Portfolio",
+        "w": 84,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Pricing",
+        "w": 73,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 78,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "HOME",
+        "w": 39,
+        "h": 44
+      },
+      {
+        "tag": "A",
+        "text": "Compare all departments →",
+        "w": 148,
+        "h": 16
+      },
+      {
+        "tag": "A",
+        "text": "full pricing page",
+        "w": 115,
+        "h": 17
+      },
+      {
+        "tag": "A",
+        "text": "manglamtechnicalagency@gmail.com",
+        "w": 218,
+        "h": 40
+      },
+      {
+        "tag": "A",
+        "text": "WhatsApp",
+        "w": 218,
+        "h": 20
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Dismiss cookie notice",
+        "w": 36,
+        "h": 48
+      }
+    ],
+    "visibleH1": "AIAutomation",
+    "headingLabel": "AI Automation",
+    "landmarks": {
+      "main": 2,
+      "nav": 3,
+      "h1": 1
+    },
+    "fixedEls": [
+      {
+        "tag": "DIV",
+        "label": "fixed left-0 top-0 z-[150] h-px w-full origin-left bg-violet",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 1
+      },
+      {
+        "tag": "DIV",
+        "label": "fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block",
+        "x": -316,
+        "y": -316,
+        "w": 32,
+        "h": 32
+      },
+      {
+        "tag": "NAV",
+        "label": "Main navigation",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 85
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Open AI assistant",
+        "x": 1352,
+        "y": 912,
+        "w": 64,
+        "h": 64
+      },
+      {
+        "tag": "DIV",
+        "label": "Cookie and privacy consent",
+        "x": 0,
+        "y": 745,
+        "w": 1440,
+        "h": 256
+      },
+      {
+        "tag": "DIV",
+        "label": "",
+        "x": 16,
+        "y": 16,
+        "w": 1408,
+        "h": 968
+      }
+    ],
+    "consoleItems": [
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED"
+    ],
+    "failedRequests": [
+      "GET https://va.vercel-scripts.com/v1/script.debug.js net::ERR_NETWORK_ACCESS_DENIED",
+      "GET https://va.vercel-scripts.com/v1/speed-insights/script.debug.js net::ERR_NETWORK_ACCESS_DENIED"
+    ]
+  },
+  {
+    "route": "/services/saas-products",
+    "viewport": "desktop",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\services-saas-products-desktop.png",
+    "title": "App & Website Development | Manglam Technical Agency",
+    "overflowX": false,
+    "scrollWidth": 1440,
+    "viewportWidth": 1440,
+    "pageHeight": 7884,
+    "brokenImages": [],
+    "smallTargets": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "w": 68,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "About",
+        "w": 69,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Portfolio",
+        "w": 84,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Pricing",
+        "w": 73,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 78,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "HOME",
+        "w": 39,
+        "h": 44
+      },
+      {
+        "tag": "A",
+        "text": "Compare all departments →",
+        "w": 148,
+        "h": 16
+      },
+      {
+        "tag": "A",
+        "text": "full pricing page",
+        "w": 115,
+        "h": 17
+      },
+      {
+        "tag": "A",
+        "text": "manglamtechnicalagency@gmail.com",
+        "w": 218,
+        "h": 40
+      },
+      {
+        "tag": "A",
+        "text": "WhatsApp",
+        "w": 218,
+        "h": 20
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Dismiss cookie notice",
+        "w": 36,
+        "h": 48
+      }
+    ],
+    "visibleH1": "App&WebsiteDevelopment",
+    "headingLabel": "App & Website Development",
+    "landmarks": {
+      "main": 2,
+      "nav": 3,
+      "h1": 1
+    },
+    "fixedEls": [
+      {
+        "tag": "DIV",
+        "label": "fixed left-0 top-0 z-[150] h-px w-full origin-left bg-violet",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 1
+      },
+      {
+        "tag": "DIV",
+        "label": "fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block",
+        "x": -316,
+        "y": -316,
+        "w": 32,
+        "h": 32
+      },
+      {
+        "tag": "NAV",
+        "label": "Main navigation",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 85
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Open AI assistant",
+        "x": 1352,
+        "y": 912,
+        "w": 64,
+        "h": 64
+      },
+      {
+        "tag": "DIV",
+        "label": "Cookie and privacy consent",
+        "x": 0,
+        "y": 745,
+        "w": 1440,
+        "h": 256
+      },
+      {
+        "tag": "DIV",
+        "label": "",
+        "x": 16,
+        "y": 16,
+        "w": 1408,
+        "h": 968
+      }
+    ],
+    "consoleItems": [
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED"
+    ],
+    "failedRequests": [
+      "GET https://va.vercel-scripts.com/v1/script.debug.js net::ERR_NETWORK_ACCESS_DENIED",
+      "GET https://va.vercel-scripts.com/v1/speed-insights/script.debug.js net::ERR_NETWORK_ACCESS_DENIED"
+    ]
+  },
+  {
+    "route": "/pricing",
+    "viewport": "desktop",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\pricing-desktop.png",
+    "title": "Pricing | Manglam Technical Agency",
+    "overflowX": false,
+    "scrollWidth": 1440,
+    "viewportWidth": 1440,
+    "pageHeight": 5884,
+    "brokenImages": [],
+    "smallTargets": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "w": 68,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "About",
+        "w": 69,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Portfolio",
+        "w": 84,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Pricing",
+        "w": 73,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 78,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "HOME",
+        "w": 39,
+        "h": 18
+      },
+      {
+        "tag": "A",
+        "text": "manglamtechnicalagency@gmail.com",
+        "w": 218,
+        "h": 40
+      },
+      {
+        "tag": "A",
+        "text": "WhatsApp",
+        "w": 218,
+        "h": 20
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Dismiss cookie notice",
+        "w": 36,
+        "h": 48
+      }
+    ],
+    "visibleH1": "Clearpricing.",
+    "headingLabel": "Clear pricing",
+    "landmarks": {
+      "main": 2,
+      "nav": 2,
+      "h1": 1
+    },
+    "fixedEls": [
+      {
+        "tag": "DIV",
+        "label": "fixed left-0 top-0 z-[150] h-px w-full origin-left bg-violet",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 1
+      },
+      {
+        "tag": "DIV",
+        "label": "fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block",
+        "x": -316,
+        "y": -316,
+        "w": 32,
+        "h": 32
+      },
+      {
+        "tag": "NAV",
+        "label": "Main navigation",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 85
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Open AI assistant",
+        "x": 1352,
+        "y": 912,
+        "w": 64,
+        "h": 64
+      },
+      {
+        "tag": "DIV",
+        "label": "Cookie and privacy consent",
+        "x": 0,
+        "y": 745,
+        "w": 1440,
+        "h": 256
+      },
+      {
+        "tag": "DIV",
+        "label": "",
+        "x": 16,
+        "y": 16,
+        "w": 1408,
+        "h": 968
+      }
+    ],
+    "consoleItems": [
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED"
+    ],
+    "failedRequests": [
+      "GET https://va.vercel-scripts.com/v1/script.debug.js net::ERR_NETWORK_ACCESS_DENIED",
+      "GET https://va.vercel-scripts.com/v1/speed-insights/script.debug.js net::ERR_NETWORK_ACCESS_DENIED"
+    ]
+  },
+  {
+    "route": "/portfolio",
+    "viewport": "desktop",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\portfolio-desktop.png",
+    "title": "Our Work | Manglam Technical Agency",
+    "overflowX": false,
+    "scrollWidth": 1440,
+    "viewportWidth": 1440,
+    "pageHeight": 7934,
+    "brokenImages": [],
+    "smallTargets": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "w": 68,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "About",
+        "w": 69,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Portfolio",
+        "w": 84,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Pricing",
+        "w": 73,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 78,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "HOME",
+        "w": 39,
+        "h": 18
+      },
+      {
+        "tag": "A",
+        "text": "manglamtechnicalagency@gmail.com",
+        "w": 218,
+        "h": 40
+      },
+      {
+        "tag": "A",
+        "text": "WhatsApp",
+        "w": 218,
+        "h": 20
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Dismiss cookie notice",
+        "w": 36,
+        "h": 48
+      }
+    ],
+    "visibleH1": "Digitalproducts.",
+    "headingLabel": "Digital products",
+    "landmarks": {
+      "main": 2,
+      "nav": 2,
+      "h1": 1
+    },
+    "fixedEls": [
+      {
+        "tag": "DIV",
+        "label": "fixed left-0 top-0 z-[150] h-px w-full origin-left bg-violet",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 1
+      },
+      {
+        "tag": "DIV",
+        "label": "fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block",
+        "x": -316,
+        "y": -316,
+        "w": 32,
+        "h": 32
+      },
+      {
+        "tag": "NAV",
+        "label": "Main navigation",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 85
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Open AI assistant",
+        "x": 1352,
+        "y": 912,
+        "w": 64,
+        "h": 64
+      },
+      {
+        "tag": "DIV",
+        "label": "Cookie and privacy consent",
+        "x": 0,
+        "y": 745,
+        "w": 1440,
+        "h": 256
+      },
+      {
+        "tag": "DIV",
+        "label": "",
+        "x": 16,
+        "y": 16,
+        "w": 1408,
+        "h": 968
+      }
+    ],
+    "consoleItems": [
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED"
+    ],
+    "failedRequests": [
+      "GET https://va.vercel-scripts.com/v1/script.debug.js net::ERR_NETWORK_ACCESS_DENIED",
+      "GET https://va.vercel-scripts.com/v1/speed-insights/script.debug.js net::ERR_NETWORK_ACCESS_DENIED"
+    ]
+  },
+  {
+    "route": "/about",
+    "viewport": "desktop",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\about-desktop.png",
+    "title": "About | Manglam Technical Agency",
+    "overflowX": false,
+    "scrollWidth": 1440,
+    "viewportWidth": 1440,
+    "pageHeight": 5177,
+    "brokenImages": [],
+    "smallTargets": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "w": 68,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "About",
+        "w": 69,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Portfolio",
+        "w": 84,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Pricing",
+        "w": 73,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 78,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "HOME",
+        "w": 39,
+        "h": 18
+      },
+      {
+        "tag": "A",
+        "text": "manglamtechnicalagency@gmail.com",
+        "w": 218,
+        "h": 40
+      },
+      {
+        "tag": "A",
+        "text": "WhatsApp",
+        "w": 218,
+        "h": 20
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Dismiss cookie notice",
+        "w": 36,
+        "h": 48
+      }
+    ],
+    "visibleH1": "Technical workwith a human line.Built by people clients can actually reach.",
+    "headingLabel": "Technical work with a human line. Built by people clients can actually reach.",
+    "landmarks": {
+      "main": 2,
+      "nav": 2,
+      "h1": 1
+    },
+    "fixedEls": [
+      {
+        "tag": "DIV",
+        "label": "fixed left-0 top-0 z-[150] h-px w-full origin-left bg-violet",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 1
+      },
+      {
+        "tag": "DIV",
+        "label": "fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block",
+        "x": -316,
+        "y": -316,
+        "w": 32,
+        "h": 32
+      },
+      {
+        "tag": "NAV",
+        "label": "Main navigation",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 85
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Open AI assistant",
+        "x": 1352,
+        "y": 912,
+        "w": 64,
+        "h": 64
+      },
+      {
+        "tag": "DIV",
+        "label": "Cookie and privacy consent",
+        "x": 0,
+        "y": 745,
+        "w": 1440,
+        "h": 256
+      },
+      {
+        "tag": "DIV",
+        "label": "",
+        "x": 16,
+        "y": 16,
+        "w": 1408,
+        "h": 968
+      }
+    ],
+    "consoleItems": [
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED"
+    ],
+    "failedRequests": [
+      "GET https://va.vercel-scripts.com/v1/script.debug.js net::ERR_NETWORK_ACCESS_DENIED",
+      "GET https://va.vercel-scripts.com/v1/speed-insights/script.debug.js net::ERR_NETWORK_ACCESS_DENIED"
+    ]
+  },
+  {
+    "route": "/contact",
+    "viewport": "desktop",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\contact-desktop.png",
+    "title": "Contact Us — Start a Project | Manglam Technical Agency",
+    "overflowX": false,
+    "scrollWidth": 1440,
+    "viewportWidth": 1440,
+    "pageHeight": 3465,
+    "brokenImages": [],
+    "smallTargets": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "w": 68,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "About",
+        "w": 69,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Portfolio",
+        "w": 84,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Pricing",
+        "w": 73,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 78,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "w": 39,
+        "h": 18
+      },
+      {
+        "tag": "INPUT",
+        "text": "",
+        "w": 24,
+        "h": 48
+      },
+      {
+        "tag": "A",
+        "text": "Privacy Policy",
+        "w": 83,
+        "h": 19
+      },
+      {
+        "tag": "A",
+        "text": "manglamtechnicalagency@gmail.com",
+        "w": 234,
+        "h": 19
+      },
+      {
+        "tag": "INPUT",
+        "text": "",
+        "w": 24,
+        "h": 48
+      },
+      {
+        "tag": "A",
+        "text": "manglamtechnicalagency@gmail.com",
+        "w": 218,
+        "h": 40
+      }
+    ],
+    "visibleH1": "Start aconversation.",
+    "headingLabel": "Start a conversation",
+    "landmarks": {
+      "main": 2,
+      "nav": 2,
+      "h1": 1
+    },
+    "fixedEls": [
+      {
+        "tag": "DIV",
+        "label": "fixed left-0 top-0 z-[150] h-px w-full origin-left bg-violet",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 1
+      },
+      {
+        "tag": "DIV",
+        "label": "fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block",
+        "x": -316,
+        "y": -316,
+        "w": 32,
+        "h": 32
+      },
+      {
+        "tag": "NAV",
+        "label": "Main navigation",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 85
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Open AI assistant",
+        "x": 1352,
+        "y": 912,
+        "w": 64,
+        "h": 64
+      },
+      {
+        "tag": "DIV",
+        "label": "Cookie and privacy consent",
+        "x": 0,
+        "y": 745,
+        "w": 1440,
+        "h": 256
+      },
+      {
+        "tag": "DIV",
+        "label": "",
+        "x": 16,
+        "y": 16,
+        "w": 1408,
+        "h": 968
+      }
+    ],
+    "consoleItems": [
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED"
+    ],
+    "failedRequests": [
+      "GET http://localhost:3000/__nextjs_font/geist-latin.woff2 net::ERR_ABORTED",
+      "GET https://va.vercel-scripts.com/v1/script.debug.js net::ERR_NETWORK_ACCESS_DENIED",
+      "GET https://va.vercel-scripts.com/v1/speed-insights/script.debug.js net::ERR_NETWORK_ACCESS_DENIED"
+    ]
+  },
+  {
+    "route": "/legal",
+    "viewport": "desktop",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\legal-desktop.png",
+    "title": "Legal Hub | Manglam Technical Agency",
+    "overflowX": false,
+    "scrollWidth": 1440,
+    "viewportWidth": 1440,
+    "pageHeight": 4458,
+    "brokenImages": [],
+    "smallTargets": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "w": 68,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "About",
+        "w": 69,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Portfolio",
+        "w": 84,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Pricing",
+        "w": 73,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 78,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "HOME",
+        "w": 39,
+        "h": 18
+      },
+      {
+        "tag": "A",
+        "text": "01Agreements",
+        "w": 220,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "02Service Matrix",
+        "w": 220,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "03Policies",
+        "w": 220,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Request Template →",
+        "w": 220,
+        "h": 17
+      },
+      {
+        "tag": "INPUT",
+        "text": "",
+        "w": 20,
+        "h": 48
+      }
+    ],
+    "visibleH1": "Legalhub.",
+    "headingLabel": "Legal hub",
+    "landmarks": {
+      "main": 2,
+      "nav": 3,
+      "h1": 1
+    },
+    "fixedEls": [
+      {
+        "tag": "DIV",
+        "label": "fixed left-0 top-0 z-[150] h-px w-full origin-left bg-violet",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 1
+      },
+      {
+        "tag": "DIV",
+        "label": "fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block",
+        "x": -316,
+        "y": -316,
+        "w": 32,
+        "h": 32
+      },
+      {
+        "tag": "NAV",
+        "label": "Main navigation",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 85
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Open AI assistant",
+        "x": 1352,
+        "y": 912,
+        "w": 64,
+        "h": 64
+      },
+      {
+        "tag": "DIV",
+        "label": "Cookie and privacy consent",
+        "x": 0,
+        "y": 745,
+        "w": 1440,
+        "h": 256
+      },
+      {
+        "tag": "DIV",
+        "label": "",
+        "x": 16,
+        "y": 16,
+        "w": 1408,
+        "h": 968
+      }
+    ],
+    "consoleItems": [
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED"
+    ],
+    "failedRequests": [
+      "GET http://localhost:3000/__nextjs_font/geist-latin.woff2 net::ERR_ABORTED",
+      "GET https://va.vercel-scripts.com/v1/script.debug.js net::ERR_NETWORK_ACCESS_DENIED",
+      "GET https://va.vercel-scripts.com/v1/speed-insights/script.debug.js net::ERR_NETWORK_ACCESS_DENIED"
+    ]
+  },
+  {
+    "route": "/trust-center",
+    "viewport": "desktop",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\trust-center-desktop.png",
+    "title": "Trust Center & AI Ethics | Manglam Technical Agency",
+    "overflowX": false,
+    "scrollWidth": 1440,
+    "viewportWidth": 1440,
+    "pageHeight": 2557,
+    "brokenImages": [],
+    "smallTargets": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "w": 68,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "About",
+        "w": 69,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Portfolio",
+        "w": 84,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Pricing",
+        "w": 73,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 78,
+        "h": 41
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "w": 32,
+        "h": 20
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "w": 32,
+        "h": 20
+      },
+      {
+        "tag": "A",
+        "text": "manglamtechnicalagency@gmail.com",
+        "w": 218,
+        "h": 40
+      },
+      {
+        "tag": "A",
+        "text": "WhatsApp",
+        "w": 218,
+        "h": 20
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Dismiss cookie notice",
+        "w": 36,
+        "h": 48
+      }
+    ],
+    "visibleH1": "Trust Is an Operating System",
+    "headingLabel": "Trust Is an Operating System",
+    "landmarks": {
+      "main": 2,
+      "nav": 2,
+      "h1": 1
+    },
+    "fixedEls": [
+      {
+        "tag": "DIV",
+        "label": "fixed left-0 top-0 z-[150] h-px w-full origin-left bg-violet",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 1
+      },
+      {
+        "tag": "DIV",
+        "label": "fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block",
+        "x": -316,
+        "y": -316,
+        "w": 32,
+        "h": 32
+      },
+      {
+        "tag": "NAV",
+        "label": "Main navigation",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 85
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Open AI assistant",
+        "x": 1352,
+        "y": 912,
+        "w": 64,
+        "h": 64
+      },
+      {
+        "tag": "DIV",
+        "label": "Cookie and privacy consent",
+        "x": 0,
+        "y": 745,
+        "w": 1440,
+        "h": 256
+      },
+      {
+        "tag": "DIV",
+        "label": "",
+        "x": 16,
+        "y": 16,
+        "w": 1408,
+        "h": 968
+      }
+    ],
+    "consoleItems": [
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED"
+    ],
+    "failedRequests": [
+      "GET https://va.vercel-scripts.com/v1/script.debug.js net::ERR_NETWORK_ACCESS_DENIED",
+      "GET https://va.vercel-scripts.com/v1/speed-insights/script.debug.js net::ERR_NETWORK_ACCESS_DENIED"
+    ]
+  },
+  {
+    "route": "/",
+    "viewport": "mobile",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\home-mobile.png",
+    "title": "Manglam Technical Agency — Practical Technology Support",
+    "overflowX": false,
+    "scrollWidth": 390,
+    "viewportWidth": 390,
+    "pageHeight": 14722,
+    "brokenImages": [],
+    "smallTargets": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "A",
+        "text": "Open Legal Hub →",
+        "w": 158,
+        "h": 42
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Go to testimonial 1",
+        "w": 24,
+        "h": 48
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Go to testimonial 2",
+        "w": 6,
+        "h": 48
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Go to testimonial 3",
+        "w": 6,
+        "h": 48
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Go to testimonial 4",
+        "w": 6,
+        "h": 48
+      },
+      {
+        "tag": "A",
+        "text": "manglamtechnicalagency@gmail.com",
+        "w": 351,
+        "h": 20
+      },
+      {
+        "tag": "A",
+        "text": "WhatsApp",
+        "w": 351,
+        "h": 20
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Dismiss cookie notice",
+        "w": 36,
+        "h": 48
+      }
+    ],
+    "visibleH1": "We builddigitalinfrastructure",
+    "headingLabel": "We build digital infrastructure",
+    "landmarks": {
+      "main": 1,
+      "nav": 1,
+      "h1": 1
+    },
+    "fixedEls": [
+      {
+        "tag": "DIV",
+        "label": "fixed left-0 top-0 z-[150] h-px w-full origin-left bg-violet",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 1
+      },
+      {
+        "tag": "DIV",
+        "label": "fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      {
+        "tag": "NAV",
+        "label": "Main navigation",
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 73
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Open AI assistant",
+        "x": 314,
+        "y": 768,
+        "w": 56,
+        "h": 56
+      },
+      {
+        "tag": "DIV",
+        "label": "Cookie and privacy consent",
+        "x": 0,
+        "y": 532,
+        "w": 390,
+        "h": 313
+      },
+      {
+        "tag": "DIV",
+        "label": "",
+        "x": 16,
+        "y": 16,
+        "w": 358,
+        "h": 812
+      }
+    ],
+    "consoleItems": [
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED"
+    ],
+    "failedRequests": [
+      "GET https://va.vercel-scripts.com/v1/speed-insights/script.debug.js net::ERR_NETWORK_ACCESS_DENIED",
+      "GET https://va.vercel-scripts.com/v1/script.debug.js net::ERR_NETWORK_ACCESS_DENIED"
+    ]
+  },
+  {
+    "route": "/services",
+    "viewport": "mobile",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\services-mobile.png",
+    "title": "Services | Manglam Technical Agency",
+    "overflowX": false,
+    "scrollWidth": 390,
+    "viewportWidth": 390,
+    "pageHeight": 6977,
+    "brokenImages": [],
+    "smallTargets": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "A",
+        "text": "HOME",
+        "w": 39,
+        "h": 18
+      },
+      {
+        "tag": "A",
+        "text": "manglamtechnicalagency@gmail.com",
+        "w": 351,
+        "h": 20
+      },
+      {
+        "tag": "A",
+        "text": "WhatsApp",
+        "w": 351,
+        "h": 20
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Dismiss cookie notice",
+        "w": 36,
+        "h": 48
+      }
+    ],
+    "visibleH1": "Servicesbuilt to fit.",
+    "headingLabel": "Services built to fit",
+    "landmarks": {
+      "main": 2,
+      "nav": 2,
+      "h1": 1
+    },
+    "fixedEls": [
+      {
+        "tag": "DIV",
+        "label": "fixed left-0 top-0 z-[150] h-px w-full origin-left bg-violet",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 1
+      },
+      {
+        "tag": "DIV",
+        "label": "fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      {
+        "tag": "NAV",
+        "label": "Main navigation",
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 73
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Open AI assistant",
+        "x": 314,
+        "y": 768,
+        "w": 56,
+        "h": 56
+      },
+      {
+        "tag": "DIV",
+        "label": "Cookie and privacy consent",
+        "x": 0,
+        "y": 532,
+        "w": 390,
+        "h": 313
+      },
+      {
+        "tag": "DIV",
+        "label": "",
+        "x": 16,
+        "y": 16,
+        "w": 358,
+        "h": 812
+      }
+    ],
+    "consoleItems": [
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED"
+    ],
+    "failedRequests": [
+      "GET https://va.vercel-scripts.com/v1/script.debug.js net::ERR_NETWORK_ACCESS_DENIED",
+      "GET https://va.vercel-scripts.com/v1/speed-insights/script.debug.js net::ERR_NETWORK_ACCESS_DENIED"
+    ]
+  },
+  {
+    "route": "/services/ai-automation",
+    "viewport": "mobile",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\services-ai-automation-mobile.png",
+    "title": "AI Automation | Manglam Technical Agency",
+    "overflowX": false,
+    "scrollWidth": 390,
+    "viewportWidth": 390,
+    "pageHeight": 12495,
+    "brokenImages": [],
+    "smallTargets": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "A",
+        "text": "HOME",
+        "w": 39,
+        "h": 44
+      },
+      {
+        "tag": "A",
+        "text": "Compare all departments →",
+        "w": 148,
+        "h": 16
+      },
+      {
+        "tag": "A",
+        "text": "full pricing page",
+        "w": 115,
+        "h": 17
+      },
+      {
+        "tag": "A",
+        "text": "manglamtechnicalagency@gmail.com",
+        "w": 351,
+        "h": 20
+      },
+      {
+        "tag": "A",
+        "text": "WhatsApp",
+        "w": 351,
+        "h": 20
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Dismiss cookie notice",
+        "w": 36,
+        "h": 48
+      }
+    ],
+    "visibleH1": "AIAutomation",
+    "headingLabel": "AI Automation",
+    "landmarks": {
+      "main": 2,
+      "nav": 3,
+      "h1": 1
+    },
+    "fixedEls": [
+      {
+        "tag": "DIV",
+        "label": "fixed left-0 top-0 z-[150] h-px w-full origin-left bg-violet",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 1
+      },
+      {
+        "tag": "DIV",
+        "label": "fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      {
+        "tag": "NAV",
+        "label": "Main navigation",
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 73
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Open AI assistant",
+        "x": 314,
+        "y": 768,
+        "w": 56,
+        "h": 56
+      },
+      {
+        "tag": "DIV",
+        "label": "Cookie and privacy consent",
+        "x": 0,
+        "y": 532,
+        "w": 390,
+        "h": 313
+      },
+      {
+        "tag": "DIV",
+        "label": "",
+        "x": 16,
+        "y": 16,
+        "w": 358,
+        "h": 812
+      }
+    ],
+    "consoleItems": [
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED"
+    ],
+    "failedRequests": [
+      "GET https://va.vercel-scripts.com/v1/script.debug.js net::ERR_NETWORK_ACCESS_DENIED",
+      "GET https://va.vercel-scripts.com/v1/speed-insights/script.debug.js net::ERR_NETWORK_ACCESS_DENIED"
+    ]
+  },
+  {
+    "route": "/services/saas-products",
+    "viewport": "mobile",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\services-saas-products-mobile.png",
+    "title": "App & Website Development | Manglam Technical Agency",
+    "overflowX": false,
+    "scrollWidth": 390,
+    "viewportWidth": 390,
+    "pageHeight": 12529,
+    "brokenImages": [],
+    "smallTargets": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "A",
+        "text": "HOME",
+        "w": 39,
+        "h": 44
+      },
+      {
+        "tag": "A",
+        "text": "Compare all departments →",
+        "w": 148,
+        "h": 16
+      },
+      {
+        "tag": "A",
+        "text": "full pricing page",
+        "w": 115,
+        "h": 17
+      },
+      {
+        "tag": "A",
+        "text": "manglamtechnicalagency@gmail.com",
+        "w": 351,
+        "h": 20
+      },
+      {
+        "tag": "A",
+        "text": "WhatsApp",
+        "w": 351,
+        "h": 20
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Dismiss cookie notice",
+        "w": 36,
+        "h": 48
+      }
+    ],
+    "visibleH1": "App&WebsiteDevelopment",
+    "headingLabel": "App & Website Development",
+    "landmarks": {
+      "main": 2,
+      "nav": 3,
+      "h1": 1
+    },
+    "fixedEls": [
+      {
+        "tag": "DIV",
+        "label": "fixed left-0 top-0 z-[150] h-px w-full origin-left bg-violet",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 1
+      },
+      {
+        "tag": "DIV",
+        "label": "fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      {
+        "tag": "NAV",
+        "label": "Main navigation",
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 73
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Open AI assistant",
+        "x": 314,
+        "y": 768,
+        "w": 56,
+        "h": 56
+      },
+      {
+        "tag": "DIV",
+        "label": "Cookie and privacy consent",
+        "x": 0,
+        "y": 532,
+        "w": 390,
+        "h": 313
+      },
+      {
+        "tag": "DIV",
+        "label": "",
+        "x": 16,
+        "y": 16,
+        "w": 358,
+        "h": 812
+      }
+    ],
+    "consoleItems": [
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED"
+    ],
+    "failedRequests": [
+      "GET https://va.vercel-scripts.com/v1/script.debug.js net::ERR_NETWORK_ACCESS_DENIED",
+      "GET https://va.vercel-scripts.com/v1/speed-insights/script.debug.js net::ERR_NETWORK_ACCESS_DENIED"
+    ]
+  },
+  {
+    "route": "/pricing",
+    "viewport": "mobile",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\pricing-mobile.png",
+    "title": "Pricing | Manglam Technical Agency",
+    "overflowX": false,
+    "scrollWidth": 390,
+    "viewportWidth": 390,
+    "pageHeight": 7668,
+    "brokenImages": [],
+    "smallTargets": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "A",
+        "text": "HOME",
+        "w": 39,
+        "h": 18
+      },
+      {
+        "tag": "A",
+        "text": "manglamtechnicalagency@gmail.com",
+        "w": 351,
+        "h": 20
+      },
+      {
+        "tag": "A",
+        "text": "WhatsApp",
+        "w": 351,
+        "h": 20
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Dismiss cookie notice",
+        "w": 36,
+        "h": 48
+      }
+    ],
+    "visibleH1": "Clearpricing.",
+    "headingLabel": "Clear pricing",
+    "landmarks": {
+      "main": 2,
+      "nav": 2,
+      "h1": 1
+    },
+    "fixedEls": [
+      {
+        "tag": "DIV",
+        "label": "fixed left-0 top-0 z-[150] h-px w-full origin-left bg-violet",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 1
+      },
+      {
+        "tag": "DIV",
+        "label": "fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      {
+        "tag": "NAV",
+        "label": "Main navigation",
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 73
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Open AI assistant",
+        "x": 314,
+        "y": 768,
+        "w": 56,
+        "h": 56
+      },
+      {
+        "tag": "DIV",
+        "label": "Cookie and privacy consent",
+        "x": 0,
+        "y": 532,
+        "w": 390,
+        "h": 313
+      },
+      {
+        "tag": "DIV",
+        "label": "",
+        "x": 16,
+        "y": 16,
+        "w": 358,
+        "h": 812
+      }
+    ],
+    "consoleItems": [
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED"
+    ],
+    "failedRequests": [
+      "GET https://va.vercel-scripts.com/v1/script.debug.js net::ERR_NETWORK_ACCESS_DENIED",
+      "GET https://va.vercel-scripts.com/v1/speed-insights/script.debug.js net::ERR_NETWORK_ACCESS_DENIED"
+    ]
+  },
+  {
+    "route": "/portfolio",
+    "viewport": "mobile",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\portfolio-mobile.png",
+    "title": "Our Work | Manglam Technical Agency",
+    "overflowX": false,
+    "scrollWidth": 390,
+    "viewportWidth": 390,
+    "pageHeight": 10181,
+    "brokenImages": [],
+    "smallTargets": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "A",
+        "text": "HOME",
+        "w": 39,
+        "h": 18
+      },
+      {
+        "tag": "A",
+        "text": "manglamtechnicalagency@gmail.com",
+        "w": 351,
+        "h": 20
+      },
+      {
+        "tag": "A",
+        "text": "WhatsApp",
+        "w": 351,
+        "h": 20
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Dismiss cookie notice",
+        "w": 36,
+        "h": 48
+      }
+    ],
+    "visibleH1": "Digitalproducts.",
+    "headingLabel": "Digital products",
+    "landmarks": {
+      "main": 2,
+      "nav": 2,
+      "h1": 1
+    },
+    "fixedEls": [
+      {
+        "tag": "DIV",
+        "label": "fixed left-0 top-0 z-[150] h-px w-full origin-left bg-violet",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 1
+      },
+      {
+        "tag": "DIV",
+        "label": "fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      {
+        "tag": "NAV",
+        "label": "Main navigation",
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 73
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Open AI assistant",
+        "x": 314,
+        "y": 768,
+        "w": 56,
+        "h": 56
+      },
+      {
+        "tag": "DIV",
+        "label": "Cookie and privacy consent",
+        "x": 0,
+        "y": 532,
+        "w": 390,
+        "h": 313
+      },
+      {
+        "tag": "DIV",
+        "label": "",
+        "x": 16,
+        "y": 16,
+        "w": 358,
+        "h": 812
+      }
+    ],
+    "consoleItems": [
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED"
+    ],
+    "failedRequests": [
+      "GET https://va.vercel-scripts.com/v1/script.debug.js net::ERR_NETWORK_ACCESS_DENIED",
+      "GET https://va.vercel-scripts.com/v1/speed-insights/script.debug.js net::ERR_NETWORK_ACCESS_DENIED"
+    ]
+  },
+  {
+    "route": "/about",
+    "viewport": "mobile",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\about-mobile.png",
+    "title": "About | Manglam Technical Agency",
+    "overflowX": false,
+    "scrollWidth": 390,
+    "viewportWidth": 390,
+    "pageHeight": 8082,
+    "brokenImages": [],
+    "smallTargets": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "A",
+        "text": "HOME",
+        "w": 39,
+        "h": 18
+      },
+      {
+        "tag": "A",
+        "text": "manglamtechnicalagency@gmail.com",
+        "w": 351,
+        "h": 20
+      },
+      {
+        "tag": "A",
+        "text": "WhatsApp",
+        "w": 351,
+        "h": 20
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Dismiss cookie notice",
+        "w": 36,
+        "h": 48
+      }
+    ],
+    "visibleH1": "Technical workwith a human line.Built by people clients can actually reach.",
+    "headingLabel": "Technical work with a human line. Built by people clients can actually reach.",
+    "landmarks": {
+      "main": 2,
+      "nav": 2,
+      "h1": 1
+    },
+    "fixedEls": [
+      {
+        "tag": "DIV",
+        "label": "fixed left-0 top-0 z-[150] h-px w-full origin-left bg-violet",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 1
+      },
+      {
+        "tag": "DIV",
+        "label": "fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      {
+        "tag": "NAV",
+        "label": "Main navigation",
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 73
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Open AI assistant",
+        "x": 314,
+        "y": 768,
+        "w": 56,
+        "h": 56
+      },
+      {
+        "tag": "DIV",
+        "label": "Cookie and privacy consent",
+        "x": 0,
+        "y": 532,
+        "w": 390,
+        "h": 313
+      },
+      {
+        "tag": "DIV",
+        "label": "",
+        "x": 16,
+        "y": 16,
+        "w": 358,
+        "h": 812
+      }
+    ],
+    "consoleItems": [
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED"
+    ],
+    "failedRequests": [
+      "GET https://va.vercel-scripts.com/v1/script.debug.js net::ERR_NETWORK_ACCESS_DENIED",
+      "GET https://va.vercel-scripts.com/v1/speed-insights/script.debug.js net::ERR_NETWORK_ACCESS_DENIED"
+    ]
+  },
+  {
+    "route": "/contact",
+    "viewport": "mobile",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\contact-mobile.png",
+    "title": "Contact Us — Start a Project | Manglam Technical Agency",
+    "overflowX": false,
+    "scrollWidth": 390,
+    "viewportWidth": 390,
+    "pageHeight": 5782,
+    "brokenImages": [],
+    "smallTargets": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "w": 39,
+        "h": 18
+      },
+      {
+        "tag": "INPUT",
+        "text": "",
+        "w": 24,
+        "h": 48
+      },
+      {
+        "tag": "A",
+        "text": "Privacy Policy",
+        "w": 83,
+        "h": 19
+      },
+      {
+        "tag": "A",
+        "text": "manglamtechnicalagency@gmail.com",
+        "w": 234,
+        "h": 19
+      },
+      {
+        "tag": "INPUT",
+        "text": "",
+        "w": 24,
+        "h": 48
+      },
+      {
+        "tag": "A",
+        "text": "manglamtechnicalagency@gmail.com",
+        "w": 351,
+        "h": 20
+      },
+      {
+        "tag": "A",
+        "text": "WhatsApp",
+        "w": 351,
+        "h": 20
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Dismiss cookie notice",
+        "w": 36,
+        "h": 48
+      }
+    ],
+    "visibleH1": "Start aconversation.",
+    "headingLabel": "Start a conversation",
+    "landmarks": {
+      "main": 2,
+      "nav": 2,
+      "h1": 1
+    },
+    "fixedEls": [
+      {
+        "tag": "DIV",
+        "label": "fixed left-0 top-0 z-[150] h-px w-full origin-left bg-violet",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 1
+      },
+      {
+        "tag": "DIV",
+        "label": "fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      {
+        "tag": "NAV",
+        "label": "Main navigation",
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 73
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Open AI assistant",
+        "x": 314,
+        "y": 768,
+        "w": 56,
+        "h": 56
+      },
+      {
+        "tag": "DIV",
+        "label": "Cookie and privacy consent",
+        "x": 0,
+        "y": 532,
+        "w": 390,
+        "h": 313
+      },
+      {
+        "tag": "DIV",
+        "label": "",
+        "x": 16,
+        "y": 16,
+        "w": 358,
+        "h": 812
+      }
+    ],
+    "consoleItems": [
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED"
+    ],
+    "failedRequests": [
+      "GET https://va.vercel-scripts.com/v1/script.debug.js net::ERR_NETWORK_ACCESS_DENIED",
+      "GET https://va.vercel-scripts.com/v1/speed-insights/script.debug.js net::ERR_NETWORK_ACCESS_DENIED"
+    ]
+  },
+  {
+    "route": "/legal",
+    "viewport": "mobile",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\legal-mobile.png",
+    "title": "Legal Hub | Manglam Technical Agency",
+    "overflowX": false,
+    "scrollWidth": 390,
+    "viewportWidth": 390,
+    "pageHeight": 8124,
+    "brokenImages": [],
+    "smallTargets": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "A",
+        "text": "HOME",
+        "w": 39,
+        "h": 18
+      },
+      {
+        "tag": "INPUT",
+        "text": "",
+        "w": 20,
+        "h": 48
+      },
+      {
+        "tag": "INPUT",
+        "text": "",
+        "w": 20,
+        "h": 48
+      },
+      {
+        "tag": "A",
+        "text": "manglamtechnicalagency@gmail.com",
+        "w": 351,
+        "h": 20
+      },
+      {
+        "tag": "A",
+        "text": "WhatsApp",
+        "w": 351,
+        "h": 20
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Dismiss cookie notice",
+        "w": 36,
+        "h": 48
+      }
+    ],
+    "visibleH1": "Legalhub.",
+    "headingLabel": "Legal hub",
+    "landmarks": {
+      "main": 2,
+      "nav": 3,
+      "h1": 1
+    },
+    "fixedEls": [
+      {
+        "tag": "DIV",
+        "label": "fixed left-0 top-0 z-[150] h-px w-full origin-left bg-violet",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 1
+      },
+      {
+        "tag": "DIV",
+        "label": "fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      {
+        "tag": "NAV",
+        "label": "Main navigation",
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 73
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Open AI assistant",
+        "x": 314,
+        "y": 768,
+        "w": 56,
+        "h": 56
+      },
+      {
+        "tag": "DIV",
+        "label": "Cookie and privacy consent",
+        "x": 0,
+        "y": 532,
+        "w": 390,
+        "h": 313
+      },
+      {
+        "tag": "DIV",
+        "label": "",
+        "x": 16,
+        "y": 16,
+        "w": 358,
+        "h": 812
+      }
+    ],
+    "consoleItems": [
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED"
+    ],
+    "failedRequests": [
+      "GET https://va.vercel-scripts.com/v1/script.debug.js net::ERR_NETWORK_ACCESS_DENIED",
+      "GET https://va.vercel-scripts.com/v1/speed-insights/script.debug.js net::ERR_NETWORK_ACCESS_DENIED"
+    ]
+  },
+  {
+    "route": "/trust-center",
+    "viewport": "mobile",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\docs/reports/ui-review-workspace\\trust-center-mobile.png",
+    "title": "Trust Center & AI Ethics | Manglam Technical Agency",
+    "overflowX": false,
+    "scrollWidth": 390,
+    "viewportWidth": 390,
+    "pageHeight": 4354,
+    "brokenImages": [],
+    "smallTargets": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "w": 1,
+        "h": 1
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "w": 32,
+        "h": 20
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "w": 32,
+        "h": 20
+      },
+      {
+        "tag": "A",
+        "text": "manglamtechnicalagency@gmail.com",
+        "w": 351,
+        "h": 20
+      },
+      {
+        "tag": "A",
+        "text": "WhatsApp",
+        "w": 351,
+        "h": 20
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Dismiss cookie notice",
+        "w": 36,
+        "h": 48
+      }
+    ],
+    "visibleH1": "Trust Is an Operating System",
+    "headingLabel": "Trust Is an Operating System",
+    "landmarks": {
+      "main": 2,
+      "nav": 2,
+      "h1": 1
+    },
+    "fixedEls": [
+      {
+        "tag": "DIV",
+        "label": "fixed left-0 top-0 z-[150] h-px w-full origin-left bg-violet",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 1
+      },
+      {
+        "tag": "DIV",
+        "label": "fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      {
+        "tag": "NAV",
+        "label": "Main navigation",
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 73
+      },
+      {
+        "tag": "BUTTON",
+        "label": "Open AI assistant",
+        "x": 314,
+        "y": 768,
+        "w": 56,
+        "h": 56
+      },
+      {
+        "tag": "DIV",
+        "label": "Cookie and privacy consent",
+        "x": 0,
+        "y": 532,
+        "w": 390,
+        "h": 313
+      },
+      {
+        "tag": "DIV",
+        "label": "",
+        "x": 16,
+        "y": 16,
+        "w": 358,
+        "h": 812
+      }
+    ],
+    "consoleItems": [
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+      "error: Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED"
+    ],
+    "failedRequests": [
+      "GET https://va.vercel-scripts.com/v1/script.debug.js net::ERR_NETWORK_ACCESS_DENIED",
+      "GET https://va.vercel-scripts.com/v1/speed-insights/script.debug.js net::ERR_NETWORK_ACCESS_DENIED"
+    ]
+  }
+]

@@ -21,5 +21,18 @@ export const teamMembers: TeamMember[] = [
     linkedin: null,
     x: null,
     image: '/images/team/bhavy-tak.jpeg',
+    imagePosition: '50% 18%',
+    mobileImageHeightClass: 'h-[24rem]',
+  },
+  {
+    name: 'Dhanpat Soni',
+    role: 'Performance Marketing Expert',
+    initials: 'DS',
+    bio: 'Leads video production and social media strategy at MTA. Plans and executes every visual asset with a performance-oriented approach — from shoot direction and post-production to platform-specific distribution. Ensures content is built for engagement metrics, not just visibility, and aligns with each client\'s broader acquisition goals.',
+    expertise: ['Video Production', 'Social Media Strategy', 'Content Distribution', 'Performance Analytics'],
+    linkedin: null,
+    x: null,
+    image: '/images/team/dhanpat-soni.jpeg',
+    imagePosition: '50% 30%',
   },
 ];

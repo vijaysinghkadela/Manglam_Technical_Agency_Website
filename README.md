@@ -1,6 +1,6 @@
 # Manglam Technical Agency Website
 
-A scalable, production-ready website for Manglam Technical Agency built as a single root-level Next.js 16 App Router application with React 19, compliance-first forms, legal/trust pages, and an AI site assistant.
+A scalable, production-ready website for Manglam Technical Agency built with Next.js 16 and React 19.
 
 > **Entity:** Manglam Technical Agency, UDYAM-RJ-15-0094091  
 > **Locations:** Bikaner/Nagaur/Jodhpur, Rajasthan, India  
@@ -39,54 +39,21 @@ npm run start
 **Note:** This is a single Next.js 16 app in the root directory, NOT a monorepo.
 
 ```
-src/
-├── app/                 # Next.js App Router pages
-│   ├── page.tsx        # Home
-│   ├── about/
-│   ├── contact/
-│   ├── cybersecurity-policy/
-│   ├── cybersecurity-training/
-│   ├── portfolio/
-│   ├── pricing/
-│   ├── services/
-│   ├── trust-center/
-│   ├── legal/
-│   │   ├── privacy-policy/
-│   │   ├── terms-of-service/
-│   │   ├── cybersecurity/
-│   │   ├── ai-ethics-policy/
-│   │   ├── dpdp-implementation-checklist/
-│   │   └── agreements/[slug]/
-│   ├── api/            # API routes (chat, contact, document-request, newsletter, quote)
-│   ├── manifest.ts     # Web app manifest
-│   ├── robots.ts       # robots.txt
-│   └── sitemap.ts      # sitemap.xml
-├── components/
-│   ├── home/           # Home page sections
-│   ├── layout/         # Navbar, Footer
-│   ├── ui/             # Reusable UI components
-│   ├── chat/
-│   ├── contact/
-│   ├── legal/
-│   ├── portfolio/
-│   ├── pricing/
-│   ├── seo/
-│   ├── services/
-│   └── ...
-├── lib/
-│   ├── data/           # Static content (TypeScript files)
-│   ├── chatbot/        # Local site assistant context/fallbacks
-│   ├── email.ts        # Nodemailer transport
-│   ├── seo/            # Structured data schemas
-│   ├── validations.ts  # Zod schemas
-│   ├── constants.ts
-│   ├── design-system.ts
-│   └── security.ts
-├── providers/          # React context providers (Lenis)
-├── stores/             # Zustand stores
-├── hooks/              # Custom React hooks
-└── proxy.ts            # Request security, CORS, and API rate limiting
+src/app/           # Next.js App Router pages and API route handlers
+src/components/    # Feature components and reusable UI primitives
+src/lib/           # Utilities, security, email, SEO, and static data
+src/hooks/         # Custom React hooks
+src/providers/     # React providers
+src/stores/        # Zustand stores
+src/styles/        # Global CSS and theme tokens
+src/types/         # Shared TypeScript types
+public/            # App-visible static assets
+docs/              # Project, compliance, deployment, and report docs
+tests/             # Playwright e2e tests
 ```
+
+See [`docs/PROJECT_STRUCTURE.md`](docs/PROJECT_STRUCTURE.md) for the full file
+and folder placement guide.
 
 ---
 
@@ -94,15 +61,13 @@ src/
 
 | Layer | Technology |
 |-------|------------|
-| Framework | Next.js 16.2.6 (App Router) |
+| Framework | Next.js 16.2.2 (App Router) |
 | React | 19.2.3 |
 | Styling | Tailwind CSS v4 |
 | Animation | Framer Motion + Lenis smooth scroll |
 | State | Zustand |
 | Forms | React Hook Form + Zod |
-| Email | Nodemailer (contact, quote, document request API routes) |
-| Chat | OpenRouter-backed site assistant with local fallback context |
-| Analytics | Vercel Analytics + Speed Insights |
+| Email | Nodemailer (API routes) |
 
 ---
 
@@ -114,7 +79,6 @@ src/
 | `npm run build` | Build for production |
 | `npm run start` | Start production server |
 | `npm run lint` | Run ESLint (zero warnings policy) |
-| `npm run context` | Regenerate `CONTEXT-SUMMARY.md` |
 
 ---
 
@@ -125,38 +89,17 @@ src/
 - **Compliance:** DPDP Act 2023, LGPD (Brazil), GDPR (EU) - Privacy-first design
 - **Security Headers:** CSP, HSTS, X-Frame-Options, Referrer-Policy
 - **Rate Limiting:** 5 requests/minute per IP for API routes
-- **Trust Center:** Legal, cybersecurity, AI ethics, DPDP checklist, and document request workflows
-- **SEO:** Metadata, Open Graph image generation, JSON-LD, sitemap, robots, and web manifest
 
 ### Content Management
 All content in static TypeScript files at `src/lib/data/`:
 - `services.ts` - Service offerings
 - `projects.ts` - Portfolio items
+- `blog.ts` - Blog posts
 - `research.ts` - Research articles
 - `testimonials.ts` - Client testimonials
 - `legal.ts` - Privacy policy, terms, agreements
-- `pricing.ts` - Service plans, bundles, and pricing data
-- `faq.ts` - FAQ content
 
 **No CMS, no database.** Edit files directly.
-
-### API Routes
-- `src/app/api/chat/route.ts` - Site assistant via OpenRouter with local fallback
-- `src/app/api/contact/route.ts` - Contact form with granular consent audit trail
-- `src/app/api/document-request/route.ts` - Legal/template document request form
-- `src/app/api/newsletter/route.ts` - Newsletter signup endpoint
-- `src/app/api/quote/route.ts` - Quote request endpoint
-
-### Public Routes
-- `/` - Home
-- `/about` - Company overview
-- `/services` and `/services/[slug]` - Services and detail pages
-- `/portfolio` - Portfolio
-- `/pricing` - Pricing and packages
-- `/contact` - Contact form
-- `/trust-center` - Compliance and trust overview
-- `/cybersecurity-policy` and `/cybersecurity-training` - Cybersecurity service pages
-- `/legal` and `/legal/*` - Legal policies, agreements, AI ethics, cybersecurity, and DPDP checklist
 
 ### Animations
 - Smooth scroll via Lenis
@@ -173,34 +116,17 @@ All content in static TypeScript files at `src/lib/data/`:
 ```
 
 ### Fonts
-Configured in `src/app/layout.tsx` and `src/styles/globals.css`:
-- **Body:** Outfit with Inter fallback (`--font-body`)
-- **Display:** Outfit with Inter fallback (`--font-display`)
-- **Mono:** system monospace stack (`--font-mono`)
-
-### Environment Variables
-Copy `.env.local.example` to `.env.local` and configure:
-
-```env
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USER=your_email@gmail.com
-SMTP_PASS=your_app_password
-SMTP_FROM="MTA Website <your_email@gmail.com>"
-
-OPENROUTER_API_KEY=your_openrouter_key
-OPENROUTER_MODEL=openai/gpt-oss-20b:free
-NEXT_PUBLIC_SITE_URL=https://manglamtechnicalagency.com
-ALLOWED_ORIGINS=https://manglamtechnicalagency.com,https://www.manglamtechnicalagency.com
-```
-
-If `OPENROUTER_API_KEY` is not set, the chatbot uses local fallback responses from `src/lib/chatbot/site-context.ts`.
+Configured in `src/app/layout.tsx`:
+- **Body:** Inter (`--font-body`)
+- **Display:** Syne (`--font-display`)
+- **Mono:** JetBrains Mono (`--font-mono`)
 
 ---
 
 ## Documentation
 
 - `/docs/AGENTS.md` - Comprehensive agent guidance
+- `/docs/PROJECT_STRUCTURE.md` - File and folder placement guide
 - `/docs/COMPLIANCE.md` - DPDP/LGPD/GDPR implementation
 - `/docs/PIPELINE.md` - 10-stage client workflow
 - `/docs/ECOSYSTEM.md` - Rajasthan/iStart context
@@ -214,5 +140,5 @@ Private - Manglam Technical Agency
 ---
 
 **Manglam Technical Agency**  
-*Empowering Your Digital Future*  
+*Web, automation, and security delivery from Bikaner*  
 [manglamtechnicalagency.com](https://manglamtechnicalagency.com)

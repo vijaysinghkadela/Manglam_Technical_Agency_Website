@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import PageHero from '@/components/ui/PageHero'
 import { legalFrameworks } from '@/lib/data/research'
 import { JsonLd } from '@/components/seo/JsonLd'
@@ -58,21 +57,7 @@ export default function TrustCenterPage() {
             </div>
           </article>
 
-          <aside className="border border-border bg-card p-8 sm:p-10">
-            <p className="font-mono text-label tracking-[0.18em] uppercase text-violet-light mb-3">Explore Depth</p>
-            <h3 className="font-display font-black text-2xl text-foreground mb-4">Documentation Layers</h3>
-            <div className="flex flex-col gap-3 text-sm">
-              <Link href="/legal" className="text-violet-light hover:text-foreground transition-colors py-2 min-h-[44px] flex items-center">
-                Legal Hub: agreements, applicability matrix, request workflow →
-              </Link>
-              <Link href="/legal/privacy-policy" className="text-violet-light hover:text-foreground transition-colors py-2 min-h-[44px] flex items-center">
-                Privacy Policy →
-              </Link>
-              <Link href="/legal/terms-of-service" className="text-violet-light hover:text-foreground transition-colors py-2 min-h-[44px] flex items-center">
-                Terms of Service →
-              </Link>
-            </div>
-          </aside>
+
         </div>
       </section>
 

@@ -1,13 +1,12 @@
 import { notFound } from "next/navigation";
 import { services, getService } from "@/lib/data/services";
-import { getAgreementByCode } from "@/lib/data/legal";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import { ServicePricingSection } from "@/components/pricing/ServicePricingSection";
 import { departments as pricingDepartments } from "@/lib/data/pricing";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/seo/schemas";
+import { faqSchema, serviceSchema } from "@/lib/seo/schemas";
 
 type Params = { slug: string };
 type ServiceData = NonNullable<ReturnType<typeof getService>>;
@@ -23,7 +22,7 @@ export async function generateMetadata({
   if (!service) return { title: "Service Not Found" };
   return {
     title: service.name,
-    description: `${service.tagline}. Based in Rajasthan with clear scope, pricing, and handover.`,
+    description: service.description,
     alternates: { canonical: `https://manglamtechnicalagency.com/services/${slug}` },
   };
 }
@@ -44,11 +43,6 @@ function inferBudgetRange(priceLabel: string): string {
   if (maxAmount <= 100000) return "₹50,000–₹1,00,000";
   if (maxAmount <= 500000) return "₹1,00,000–₹5,00,000";
   return "₹5,00,000+";
-}
-
-function schemaPrice(priceLabel: string): string | undefined {
-  const match = priceLabel.match(/\d[\d,]*/);
-  return match?.[0].replace(/,/g, "");
 }
 
 function inferTimeline(period?: string, subtext?: string): string {
@@ -125,6 +119,13 @@ function buildContactHref(service: ServiceData, plan?: ServicePlan) {
   return `/contact?${params.toString()}`;
 }
 
+const servicePageNav = [
+  { href: "#overview", label: "Overview" },
+  { href: "#plans", label: "Plans" },
+  { href: "#compliance", label: "Compliance" },
+  { href: "#faq", label: "FAQ" },
+] as const;
+
 export default async function ServicePage({
   params,
 }: {
@@ -135,27 +136,18 @@ export default async function ServicePage({
   if (!service) notFound();
 
   return (
-    <main
-      style={{ backgroundColor: "var(--color-canvas)", minHeight: "100vh" }}
-    >
-      <JsonLd
-        schema={breadcrumbSchema([
-          { name: "Home", url: "/" },
-          { name: "Services", url: "/services" },
-          { name: service.name, url: `/services/${service.slug}` },
-        ])}
-      />
+    <>
       <JsonLd
         schema={serviceSchema({
           name: service.name,
           description: service.description,
           url: `/services/${service.slug}`,
-          price: schemaPrice(service.priceLabel),
-          category: service.name,
         })}
       />
-      <JsonLd schema={faqSchema(service.faqs)} />
-
+      {service.faqs.length > 0 ? <JsonLd schema={faqSchema(service.faqs)} /> : null}
+      <main
+        style={{ backgroundColor: "var(--color-canvas)", minHeight: "100vh" }}
+      >
       {/* ── HERO — Full viewport ─────────────────────────── */}
       <section
         className="relative w-full min-h-[92svh] flex flex-col overflow-hidden grain"
@@ -184,13 +176,13 @@ export default async function ServicePage({
                 color: "var(--color-dead)",
                 letterSpacing: "0.18em" }}
             >
-              <Link href="/" className="hover-foreground transition-colors">
+              <Link href="/" className="inline-flex min-h-[44px] items-center hover-foreground transition-colors">
                 HOME
               </Link>
               <span>/</span>
               <Link
                 href="/services"
-                className="hover-foreground transition-colors"
+                className="inline-flex min-h-[44px] items-center hover-foreground transition-colors"
               >
                 SERVICES
               </Link>
@@ -239,9 +231,10 @@ export default async function ServicePage({
             {/* Service name — massive */}
             <h1
               aria-label={service.name}
-              className="font-display font-black leading-none tracking-normal"
+              className="max-w-[min(100%,920px)] break-words font-display font-black leading-none tracking-normal"
               style={{
-                fontSize: "clamp(3rem, 8vw, 8rem)",
+                fontSize: "var(--text-display-xl)",
+                lineHeight: 0.92,
                 color: "var(--color-foreground)" }}
             >
               {service.name.split(" ").map((word, i, arr) => (
@@ -298,10 +291,10 @@ export default async function ServicePage({
           <div className="flex items-end justify-between mt-12 lg:mt-16">
             <Link
               href={buildContactHref(service)}
-              className="inline-flex items-center gap-2 px-8 py-5 font-display font-black text-[15px] hover:bg-violet hover:text-white transition-all duration-300"
+              className="inline-flex items-center gap-2 px-8 py-5 font-display font-black text-[15px] hover:bg-violet-light transition-all duration-300"
               style={{
-                backgroundColor: "var(--color-foreground)",
-                color: "var(--color-canvas)" }}
+                backgroundColor: "var(--color-violet)",
+                color: "#fff" }}
               data-cursor="pointer"
             >
               Book Discovery Workshop →
@@ -374,8 +367,26 @@ export default async function ServicePage({
         </div>
       </section>
 
+      <nav
+        aria-label={`${service.name} page sections`}
+        className="border-t border-b border-border bg-canvas"
+      >
+        <div className="container-site flex gap-2 overflow-x-auto py-3">
+          {servicePageNav.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="inline-flex min-h-[44px] shrink-0 items-center rounded-full border border-border px-4 font-mono text-xs uppercase tracking-[0.14em] text-muted transition-colors hover:border-violet/50 hover:text-violet-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </nav>
+
       {/* ── OVERVIEW + PROCESS ──────────────────────────── */}
       <section
+        id="overview"
         className="border-t border-border"
         style={{
           backgroundColor: "var(--color-canvas)",
@@ -465,33 +476,7 @@ export default async function ServicePage({
                   {service.dpaTrigger}
                 </p>
 
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {service.requiredAgreements.map((code) => {
-                    const agreement = getAgreementByCode(code);
-                    return agreement ? (
-                      <Link
-                        key={code}
-                        href={`/legal/agreements/${agreement.slug}`}
-                        className="font-mono text-xs px-2 py-1 transition-colors hover:text-white"
-                        style={{
-                          border: "1px solid rgba(var(--color-accent-rgb),0.35)",
-                          color: "var(--color-violet-light)" }}
-                      >
-                        {code}
-                      </Link>
-                    ) : (
-                      <span
-                        key={code}
-                        className="font-mono text-xs px-2 py-1"
-                        style={{
-                          border: "1px solid var(--color-border)",
-                          color: "var(--color-muted)" }}
-                      >
-                        {code}
-                      </span>
-                    );
-                  })}
-                </div>
+
 
                 <ul className="flex flex-col gap-1.5">
                   {service.governingLaws.map((law) => (
@@ -536,10 +521,10 @@ export default async function ServicePage({
               {/* CTA */}
               <Link
                 href={buildContactHref(service)}
-                className="inline-flex items-center gap-2 w-fit px-8 py-5 font-display font-black text-[15px] hover:bg-violet hover:text-white transition-all duration-300"
+                className="inline-flex items-center gap-2 w-fit px-8 py-5 font-display font-black text-[15px] hover:bg-violet-light transition-all duration-300"
                 style={{
-                  backgroundColor: "var(--color-foreground)",
-                  color: "var(--color-canvas)" }}
+                  backgroundColor: "var(--color-violet)",
+                  color: "#fff" }}
                 data-cursor="pointer"
               >
                 Get a Quote →
@@ -629,13 +614,18 @@ export default async function ServicePage({
       {/* ── PRICING ─────────────────────────────────────── */}
       {service.pricing.length > 0 &&
         (pricingDepartments.some((d) => d.slug === service.slug) ? (
-          <ServicePricingSection departmentSlug={service.slug} />
+          <div id="plans">
+            <ServicePricingSection departmentSlug={service.slug} />
+          </div>
         ) : (
-          <OldPricingSectionInline service={service} />
+          <div id="plans">
+            <OldPricingSectionInline service={service} />
+          </div>
         ))}
 
       {/* ── COMPLIANCE BANNER ───────────────────────────── */}
       <section
+        id="compliance"
         className="border-t border-border"
         style={{
           backgroundColor: "var(--color-canvas)",
@@ -668,7 +658,7 @@ export default async function ServicePage({
               >
                 This service is mapped to MTA&apos;s
                 <br />
-                9-stage delivery pipeline.
+                documented delivery pipeline.
               </h2>
               <p
                 style={{
@@ -682,21 +672,14 @@ export default async function ServicePage({
                 payment-linked transitions, and documented handover controls.
               </p>
             </div>
-            <div className="flex items-center gap-6">
-              <Link
-                href="/legal"
-                className="hover-foreground transition-colors font-mono text-sm"
-                style={{ color: "var(--color-violet-light)" }}
-              >
-                Open Legal Hub →
-              </Link>
-            </div>
+
           </div>
         </div>
       </section>
 
       {/* ── FAQ ─────────────────────────────────────────── */}
       <section
+        id="faq"
         className="border-t border-border"
         style={{
           backgroundColor: "var(--color-canvas)",
@@ -838,7 +821,8 @@ export default async function ServicePage({
           </div>
         </div>
       </section>
-    </main>
+      </main>
+    </>
   );
 }
 
@@ -974,14 +958,13 @@ function OldPricingSectionInline({ service }: { service: ServiceData }) {
 
                 <Link
                   href={buildContactHref(service, plan)}
-                  className="mt-auto inline-flex items-center justify-center gap-2 py-3 font-display font-bold text-sm transition-all duration-300 hover:bg-violet hover:text-white hover:border-violet rounded-xl"
+                  className="mt-auto inline-flex items-center justify-center gap-2 py-3 font-display font-bold text-sm transition-all duration-300 hover:bg-violet-light hover:border-violet rounded-xl"
                   style={{
                     border: plan.highlight
                       ? "1px solid var(--color-violet)"
                       : "1px solid var(--color-border)",
-                    color: plan.highlight
-                      ? "var(--color-violet-light)"
-                      : "var(--color-muted)" }}
+                    backgroundColor: "var(--color-violet)",
+                    color: "#fff" }}
                 >
                   {plan.amount === "Custom"
                     ? "Request Quote"
@@ -993,7 +976,7 @@ function OldPricingSectionInline({ service }: { service: ServiceData }) {
           ))}
         </div>
 
-        {slug === "social-media-marketing" && (
+        {slug === "performance-marketing" && (
           <p
             className="font-mono text-center mt-8"
             style={{

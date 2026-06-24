@@ -1,7 +1,6 @@
 import { ImageResponse } from 'next/og'
 
-export const runtime = 'edge'
-export const alt = 'Manglam Technical Agency — Practical Technology Support'
+export const alt = 'Manglam Technical Agency — Web, AI Automation & Cybersecurity in Rajasthan'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -42,7 +41,7 @@ export default function OgImage() {
         />
 
         {/* Content */}
-        <div style={{ display: 'flex', flexDirection: 'column', flex: 1, position: 'relative', zIndex: 10 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', flex: 1, position: 'relative' }}>
 
           {/* Logo / name mark */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '48px' }}>
@@ -76,7 +75,7 @@ export default function OgImage() {
                 textTransform: 'uppercase',
                 marginBottom: '20px' }}
             >
-              ✦ EMPOWERING YOUR DIGITAL FUTURE
+              EMPOWERING YOUR DIGITAL FUTURE
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
@@ -126,7 +125,7 @@ export default function OgImage() {
               borderTop: '1px solid rgba(255,255,255,0.08)' }}
           >
             <div style={{ display: 'flex', gap: '32px' }}>
-              {['Web Dev', 'AI Automation', 'Cybersecurity', 'Social Media'].map(s => (
+              {['Web Dev', 'AI Automation', 'Cybersecurity', 'Performance'].map(s => (
                 <span key={s} style={{ fontSize: '12px', color: '#555', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
                   {s}
                 </span>
@@ -142,4 +141,3 @@ export default function OgImage() {
     { ...size },
   )
 }
-

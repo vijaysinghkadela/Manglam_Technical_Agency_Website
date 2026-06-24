@@ -1,28 +1,21 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest } from 'next/server'
 import { z } from 'zod'
 import { sendAdminEmail } from '@/lib/email'
 import { sanitizeEmail, sanitizeInput } from '@/lib/security'
-
-const rateLimit = new Map<string, { count: number; resetAt: number }>()
-const RATE_LIMIT_WINDOW = 60_000
-const RATE_LIMIT_MAX = 5
-
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now()
-  const entry = rateLimit.get(ip)
-  if (!entry || now > entry.resetAt) {
-    rateLimit.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW })
-    return true
-  }
-  if (entry.count >= RATE_LIMIT_MAX) return false
-  entry.count++
-  return true
-}
+import {
+  checkWriteRateLimit,
+  createApiResponse,
+  createJsonParseErrorResponse,
+  createRateLimitResponse,
+  getClientIp,
+  parseJsonBody,
+} from '@/lib/api-security'
 
 const schema = z.object({
   name: z.string().min(2).max(100),
   email: z.string().email().max(100),
   phone: z.string().max(20).optional(),
+  company: z.string().max(100).optional(),
   service: z.string().min(1).max(50),
   budget: z.string().min(1).max(50),
   timeline: z.string().min(1).max(50),
@@ -46,10 +39,16 @@ function buildHtml(data: ContactData): string {
   const safeName = sanitizeInput(data.name, 100)
   const safeEmail = sanitizeInput(data.email, 100)
   const safePhone = data.phone ? sanitizeInput(data.phone, 20) : ''
+  const safeCompany = data.company ? sanitizeInput(data.company, 100) : ''
   const safeService = sanitizeInput(data.service, 50)
   const safeBudget = sanitizeInput(data.budget, 50)
   const safeTimeline = sanitizeInput(data.timeline, 50)
   const safeMessage = sanitizeInput(data.message, 2000).replace(/\n/g, '<br>')
+  const safeConsentTimestamp = data.consentTimestamp ? sanitizeInput(data.consentTimestamp, 50) : 'Not supplied'
+  const safeServerConsentTimestamp = sanitizeInput(data.serverConsentTimestamp, 50)
+  const safeConsentPurpose = data.consentPurpose ? sanitizeInput(data.consentPurpose, 100) : 'contact-form-submission'
+  const safeServerConsentIP = sanitizeInput(data.serverConsentIP, 80)
+  const safeUserAgent = sanitizeInput(data.serverUserAgent, 500)
 
   return `
 <!DOCTYPE html>
@@ -99,6 +98,13 @@ ${safePhone ? `
 <span style="font-size:15px;color:#fafafa;">${safePhone}</span>
 </td>
 </tr>` : ''}
+${safeCompany ? `
+<tr>
+<td style="padding-bottom:10px;">
+<span style="font-size:11px;color:#71717a;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;">Company</span><br/>
+<span style="font-size:15px;color:#fafafa;">${safeCompany}</span>
+</td>
+</tr>` : ''}
 </table>
 </td>
 </tr>
@@ -142,11 +148,11 @@ ${safePhone ? `
 <tr><td style="padding:3px 0;color:#71717a;">Inquiry processing</td><td style="padding:3px 0;color:#fafafa;">Explicit consent granted</td></tr>
 <tr><td style="padding:3px 0;color:#71717a;">Project follow-up</td><td style="padding:3px 0;color:#fafafa;">${data.followUpConsent ? 'Consented' : 'Not consented'}</td></tr>
 <tr><td style="padding:3px 0;color:#71717a;">Sensitive FitNexora data</td><td style="padding:3px 0;color:#fafafa;">${data.sensitiveDataConsent ? 'Explicitly consented if included' : 'Not consented'}</td></tr>
-<tr><td style="padding:3px 0;color:#71717a;">Client timestamp</td><td style="padding:3px 0;">${data.consentTimestamp ?? 'Not supplied'}</td></tr>
-<tr><td style="padding:3px 0;color:#71717a;">Server timestamp</td><td style="padding:3px 0;">${data.serverConsentTimestamp}</td></tr>
-<tr><td style="padding:3px 0;color:#71717a;">Purpose</td><td style="padding:3px 0;">${data.consentPurpose ?? 'contact-form-submission'}</td></tr>
-<tr><td style="padding:3px 0;color:#71717a;">IP</td><td style="padding:3px 0;">${data.serverConsentIP}</td></tr>
-<tr><td style="padding:3px 0;color:#71717a;">User agent</td><td style="padding:3px 0;">${data.consentUserAgent ?? data.serverUserAgent}</td></tr>
+<tr><td style="padding:3px 0;color:#71717a;">Client timestamp</td><td style="padding:3px 0;">${safeConsentTimestamp}</td></tr>
+<tr><td style="padding:3px 0;color:#71717a;">Server timestamp</td><td style="padding:3px 0;">${safeServerConsentTimestamp}</td></tr>
+<tr><td style="padding:3px 0;color:#71717a;">Purpose</td><td style="padding:3px 0;">${safeConsentPurpose}</td></tr>
+<tr><td style="padding:3px 0;color:#71717a;">IP</td><td style="padding:3px 0;">${safeServerConsentIP}</td></tr>
+<tr><td style="padding:3px 0;color:#71717a;">User agent</td><td style="padding:3px 0;">${safeUserAgent}</td></tr>
 </table>
 </td>
 </tr>
@@ -174,6 +180,11 @@ function buildTextFallback(data: ContactData): string {
   const ts = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
   const safeName = sanitizeInput(data.name, 100)
   const safeEmail = sanitizeInput(data.email, 100)
+  const safeConsentTimestamp = data.consentTimestamp ? sanitizeInput(data.consentTimestamp, 50) : 'not supplied'
+  const safeServerConsentTimestamp = sanitizeInput(data.serverConsentTimestamp, 50)
+  const safeConsentPurpose = data.consentPurpose ? sanitizeInput(data.consentPurpose, 100) : 'contact-form-submission'
+  const safeServerConsentIP = sanitizeInput(data.serverConsentIP, 80)
+  const safeUserAgent = sanitizeInput(data.serverUserAgent, 500)
 
   return [
     `NEW ENQUIRY — Manglam Technical Agency`,
@@ -183,6 +194,7 @@ function buildTextFallback(data: ContactData): string {
     `Name: ${safeName}`,
     `Email: ${safeEmail}`,
     ...(data.phone ? [`Phone: ${sanitizeInput(data.phone, 20)}`] : []),
+    ...(data.company ? [`Company: ${sanitizeInput(data.company, 100)}`] : []),
     ``,
     `--- PROJECT ---`,
     `Service: ${sanitizeInput(data.service, 50)}`,
@@ -196,43 +208,25 @@ function buildTextFallback(data: ContactData): string {
     `Inquiry processing: explicit consent granted`,
     `Project follow-up: ${data.followUpConsent ? 'consented' : 'not consented'}`,
     `Sensitive data: ${data.sensitiveDataConsent ? 'explicitly consented if included' : 'not consented'}`,
-    `Client timestamp: ${data.consentTimestamp ?? 'not supplied'}`,
-    `Server timestamp: ${data.serverConsentTimestamp}`,
-    `Purpose: ${data.consentPurpose ?? 'contact-form-submission'}`,
-    `IP: ${data.serverConsentIP}`,
-    `User agent: ${data.consentUserAgent ?? data.serverUserAgent}`,
+    `Client timestamp: ${safeConsentTimestamp}`,
+    `Server timestamp: ${safeServerConsentTimestamp}`,
+    `Purpose: ${safeConsentPurpose}`,
+    `IP: ${safeServerConsentIP}`,
+    `User agent: ${safeUserAgent}`,
   ].join('\n')
 }
 
 export async function POST(req: NextRequest) {
   try {
-    const getClientIP = (): string => {
-      const cfConnectingIp = req.headers.get('cf-connecting-ip')
-      if (cfConnectingIp) return cfConnectingIp
-      const forwardedFor = req.headers.get('x-forwarded-for')
-      if (forwardedFor) {
-        const firstIp = forwardedFor.split(',')[0]?.trim()
-        if (firstIp && firstIp !== '127.0.0.1' && firstIp !== '::1') return firstIp
-      }
-      const realIp = req.headers.get('x-real-ip')
-      if (realIp && realIp !== '127.0.0.1' && realIp !== '::1') return realIp
-      return 'unavailable'
-    }
+    const rateLimit = await checkWriteRateLimit(req, 'contact')
+    if (!rateLimit.allowed) return createRateLimitResponse(req, rateLimit)
 
-    const clientIP = getClientIP()
-    if (!checkRateLimit(clientIP)) {
-      return NextResponse.json(
-        { success: false, message: 'Too many requests. Please try again later.' },
-        { status: 429 },
-      )
-    }
-
-    const parsed = schema.parse(await req.json())
+    const parsed = schema.parse(await parseJsonBody(req))
 
     const data: ContactData = {
       ...parsed,
       serverConsentTimestamp: new Date().toISOString(),
-      serverConsentIP: getClientIP(),
+      serverConsentIP: getClientIp(req),
       serverUserAgent: sanitizeInput(req.headers.get('user-agent') || 'unavailable', 500),
     }
 
@@ -244,20 +238,24 @@ export async function POST(req: NextRequest) {
     })
 
     if (error) {
-      return NextResponse.json(
+      return createApiResponse(
+        req,
         { success: false, message: 'Failed to send email.' },
         { status: 500 },
       )
     }
 
-    return NextResponse.json({ success: true })
+    return createApiResponse(req, { success: true }, { status: 200 })
   } catch (e) {
+    const parseError = createJsonParseErrorResponse(req, e)
+    if (parseError) return parseError
+
     if (e instanceof z.ZodError) {
-      return NextResponse.json({ success: false, errors: e.flatten().fieldErrors }, { status: 400 })
+      return createApiResponse(req, { success: false, errors: e.flatten().fieldErrors }, { status: 400 })
     }
     if (process.env.NODE_ENV === 'development') {
       console.error('[MTA Contact] Error:', e instanceof Error ? e.message : 'Unknown')
     }
-    return NextResponse.json({ success: false, message: 'Server error. Please try again.' }, { status: 500 })
+    return createApiResponse(req, { success: false, message: 'Server error. Please try again.' }, { status: 500 })
   }
 }

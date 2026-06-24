@@ -1,6 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { agreementSummaries, policyDocuments } from '@/lib/data/legal'
-import { services }                             from '@/lib/data/services'
+import { services } from '@/lib/data/services'
 
 const BASE_URL = 'https://manglamtechnicalagency.com'
 
@@ -8,7 +7,6 @@ const DATES = {
   home:     '2025-01-15',
   core:     '2025-01-10',
   services: '2025-01-10',
-  legal:    '2025-01-05',
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -18,12 +16,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/contact`,              lastModified: DATES.core,     changeFrequency: 'monthly', priority: 0.9 },
     { url: `${BASE_URL}/about`,               lastModified: DATES.core,     changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/portfolio`,            lastModified: DATES.core,     changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE_URL}/pricing`,              lastModified: DATES.core,     changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE_URL}/legal`,               lastModified: DATES.legal,    changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${BASE_URL}/trust-center`,         lastModified: DATES.legal,    changeFrequency: 'monthly', priority: 0.5 },
-    { url: `${BASE_URL}/cybersecurity-policy`, lastModified: DATES.legal,    changeFrequency: 'monthly', priority: 0.5 },
-    { url: `${BASE_URL}/cybersecurity-training`,lastModified: DATES.legal,    changeFrequency: 'monthly', priority: 0.5 },
-    { url: `${BASE_URL}/legal/cybersecurity`,    lastModified: DATES.legal,    changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE_URL}/trust-center`,         lastModified: DATES.core,    changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE_URL}/cybersecurity-policy`, lastModified: DATES.core,     changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE_URL}/cybersecurity-training`, lastModified: DATES.core,   changeFrequency: 'monthly', priority: 0.5 },
   ]
 
   const servicePages: MetadataRoute.Sitemap = services.map(s => ({
@@ -33,21 +28,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority:        0.8,
   }))
 
-  const legalPolicyPages: MetadataRoute.Sitemap = policyDocuments.map(p => ({
-    url:             `${BASE_URL}/legal/${p.slug}`,
-    lastModified:    DATES.legal,
-    changeFrequency: 'monthly' as const,
-    priority:        0.5,
-  }))
-
-  const agreementPages: MetadataRoute.Sitemap = agreementSummaries
-    .filter(a => a.visibility !== 'internal')
-    .map(a => ({
-      url:             `${BASE_URL}/legal/agreements/${a.slug}`,
-      lastModified:    DATES.legal,
-      changeFrequency: 'monthly' as const,
-      priority:        0.4,
-    }))
-
-  return [...staticPages, ...servicePages, ...legalPolicyPages, ...agreementPages]
+  return [...staticPages, ...servicePages]
 }

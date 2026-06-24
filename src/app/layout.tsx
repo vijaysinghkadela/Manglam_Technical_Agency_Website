@@ -1,25 +1,40 @@
 import type { Metadata } from "next";
+import { Instrument_Serif, Inter, Source_Serif_4 } from "next/font/google";
 import { LenisProvider } from "@/providers/LenisProvider";
 import { MagneticCursor } from "@/components/ui/MagneticCursor";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "next-themes";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/next";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { SiteChatbot } from "@/components/chat/SiteChatbot";
 import { ConsentBanner } from "@/components/ui/ConsentBanner";
+import { ConsentControlledAnalytics } from "@/components/ui/ConsentControlledAnalytics";
 import { organizationSchema, websiteSchema } from "@/lib/seo/schemas";
-import "@fontsource/outfit/400.css";
-import "@fontsource/outfit/500.css";
-import "@fontsource/outfit/600.css";
-import "@fontsource/outfit/700.css";
-import "@fontsource/outfit/800.css";
 import "@/styles/globals.css";
 
 const SITE_URL = "https://manglamtechnicalagency.com";
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-instrument-serif",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const sourceSerif = Source_Serif_4({
+  subsets: ["latin"],
+  variable: "--font-source-serif",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
 
 export const viewport: import("next").Viewport = {
   width: "device-width",
@@ -35,11 +50,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
   title: {
-    default: "Manglam Technical Agency — Practical Technology Support",
+    default: "Manglam Technical Agency | Web, AI Automation & Cybersecurity in Rajasthan",
     template: "%s | Manglam Technical Agency",
   },
   description:
-    "Practical technology services for Indian businesses: web development, AI automation, cybersecurity, social media, and digital operations. Based in Rajasthan.",
+    "Bikaner-based technical team for websites, AI workflows, cybersecurity, digital campaigns, and business automation.",
 
   keywords: [
     "web development Rajasthan",
@@ -48,7 +63,7 @@ export const metadata: Metadata = {
     "cybersecurity Rajasthan",
     "digital agency Rajasthan",
     "NGO website development India",
-    "social media marketing Jaipur",
+    "Performance Marketing Jaipur",
     "SaaS development India",
     "n8n automation India",
     "IT services Rajasthan",
@@ -65,15 +80,15 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: SITE_URL,
     siteName: "Manglam Technical Agency",
-    title: "Manglam Technical Agency — Practical Technology Support",
+    title: "Manglam Technical Agency | Web, AI Automation & Cybersecurity in Rajasthan",
     description:
-      "End-to-end technology services for Indian businesses — web development, AI automation, cybersecurity, and more. Based in Rajasthan.",
+      "Websites, AI workflows, cybersecurity, and digital growth for Rajasthan businesses.",
     images: [
       {
         url: "/opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: "Manglam Technical Agency — Practical Technology Support",
+        alt: "Manglam Technical Agency — Web, AI Automation & Cybersecurity in Rajasthan",
         type: "image/png",
       },
     ],
@@ -81,9 +96,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Manglam Technical Agency — Practical Technology Support",
+    title: "Manglam Technical Agency | Web, AI Automation & Cybersecurity in Rajasthan",
     description:
-      "End-to-end technology services for Indian businesses — web development, AI automation, cybersecurity, and more.",
+      "Bikaner-based technical team for websites, AI workflows, cybersecurity, and digital growth.",
     images: ["/opengraph-image.png"],
   },
 
@@ -106,12 +121,13 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/images/mta-logo-dark.png", sizes: "512x512", type: "image/png" },
+      { url: "/images/mta-logo-192.png", sizes: "192x192", type: "image/png" },
       { url: "/images/mta-logo-64.png", sizes: "64x64", type: "image/png" },
       { url: "/images/mta-logo-32.png", sizes: "32x32", type: "image/png" },
       { url: "/favicon.ico", sizes: "any" },
     ],
     apple: [
-      { url: "/images/mta-logo-128.png", sizes: "128x128", type: "image/png" },
+      { url: "/images/mta-logo-180.png", sizes: "180x180", type: "image/png" },
     ],
     shortcut: "/images/mta-logo-dark.png",
   },
@@ -127,7 +143,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="bg-canvas text-foreground" suppressHydrationWarning>
+      <body
+        className={`${instrumentSerif.variable} ${inter.variable} ${sourceSerif.variable} bg-canvas text-foreground`}
+        suppressHydrationWarning
+      >
         {/* Global structured data — Organisation + Website */}
         <JsonLd schema={organizationSchema()} />
         <JsonLd schema={websiteSchema()} />
@@ -135,10 +154,12 @@ export default function RootLayout({
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange={false}
+          forcedTheme="light"
+          enableSystem={false}
+          disableTransitionOnChange
         >
           <LenisProvider>
+            <ScrollProgress />
             <MagneticCursor />
             <a
               href="#main-content"
@@ -150,10 +171,8 @@ export default function RootLayout({
             <Navbar />
             <main id="main-content" className="relative w-full overflow-x-clip">{children}</main>
             <Footer />
-            <SiteChatbot />
             <ConsentBanner />
-            <Analytics />
-            <SpeedInsights />
+            <ConsentControlledAnalytics />
             <ScrollToTop />
             <Toaster
               position="bottom-left"

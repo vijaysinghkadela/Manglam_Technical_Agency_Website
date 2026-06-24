@@ -1,0 +1,65 @@
+[
+  {
+    "name": "home",
+    "viewport": "desktop",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\core-home-desktop.png",
+    "consoleMessages": [],
+    "overflowX": 0,
+    "brokenVisibleImages": [],
+    "visibleVideos": [],
+    "nextIssue": false
+  },
+  {
+    "name": "portfolio",
+    "viewport": "desktop",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\core-portfolio-desktop.png",
+    "consoleMessages": [],
+    "overflowX": 0,
+    "brokenVisibleImages": [],
+    "visibleVideos": [
+      "/media/case-studies/nashamukti/counseling-patient-short.mp4",
+      "/media/case-studies/nashamukti/school-awareness.mp4"
+    ],
+    "nextIssue": false
+  },
+  {
+    "name": "contact",
+    "viewport": "desktop",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\core-contact-desktop.png",
+    "consoleMessages": [],
+    "overflowX": 0,
+    "brokenVisibleImages": [],
+    "visibleVideos": [],
+    "nextIssue": false
+  },
+  {
+    "name": "home",
+    "viewport": "mobile",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\core-home-mobile.png",
+    "consoleMessages": [],
+    "overflowX": 0,
+    "brokenVisibleImages": [],
+    "visibleVideos": [],
+    "nextIssue": false
+  },
+  {
+    "name": "portfolio",
+    "viewport": "mobile",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\core-portfolio-mobile.png",
+    "consoleMessages": [],
+    "overflowX": 0,
+    "brokenVisibleImages": [],
+    "visibleVideos": [],
+    "nextIssue": false
+  },
+  {
+    "name": "contact",
+    "viewport": "mobile",
+    "screenshot": "C:\\Users\\Vinay Pal\\Documents\\brain-ai\\brain-ai\\01 - Clients\\MTA Website\\public\\screenshots\\review\\core-contact-mobile.png",
+    "consoleMessages": [],
+    "overflowX": 0,
+    "brokenVisibleImages": [],
+    "visibleVideos": [],
+    "nextIssue": false
+  }
+]

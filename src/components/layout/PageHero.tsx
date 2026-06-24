@@ -29,7 +29,7 @@ export function PageHero({ label, title, subtitle, breadcrumb }: Props) {
         </span>
         <TextReveal text={title} as="h1"
           className="font-display font-black text-foreground tracking-normal leading-[0.92]"
-          style={{ fontSize:'clamp(40px, 6vw, 88px)' } as CSSProperties}
+          style={{ fontSize:'var(--text-display-lg)' } as CSSProperties}
         />
         {subtitle && (
           <p className="text-muted text-[17px] leading-[1.65] mt-6 max-w-2xl">{subtitle}</p>
