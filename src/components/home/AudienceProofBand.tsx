@@ -5,7 +5,7 @@ const audiences = [
   {
     title: 'Clinics & gyms',
     need: 'Bookings, WhatsApp enquiries, member data, consent-aware forms.',
-    route: '/services/saas-products',
+    route: '/services/ai-automation',
   },
   {
     title: 'NGOs & education teams',

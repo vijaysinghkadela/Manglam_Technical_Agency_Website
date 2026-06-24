@@ -9,12 +9,12 @@ import Badge from "@/components/ui/Badge";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Explore MTA's practical digital services: web development, cybersecurity, AI automation, performance marketing, branding, and digital operations.",
+    "Explore MTA's practical digital services: AI automation, social media marketing, cybersecurity, and digital operations.",
   alternates: { canonical: 'https://manglamtechnicalagency.com/services' },
 };
 
 const heroStats = [
-  { value: "5", label: "Service tracks" },
+  { value: "3", label: "Service tracks" },
   { value: "Mobile-first", label: "Layouts by default" },
   { value: "Clear", label: "Pricing & contracts" },
 ];
@@ -28,8 +28,8 @@ const governanceChips = [
 const needRoutes = [
   {
     need: "Get more enquiries",
-    service: "Web & App Development",
-    href: "/services/saas-products",
+    service: "Social Media Marketing",
+    href: "/services/social-media-marketing",
   },
   {
     need: "Automate admin work",
@@ -43,8 +43,8 @@ const needRoutes = [
   },
   {
     need: "Refresh brand trust",
-    service: "Branding",
-    href: "/services/branding",
+    service: "Social Media Marketing",
+    href: "/services/social-media-marketing",
   },
 ];
 
@@ -197,7 +197,7 @@ export default function ServicesPage() {
                 size="sm"
                 className="text-violet-light"
               >
-                5 tracks
+                3 tracks
               </Badge>
             </div>
 
